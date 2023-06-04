@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_7xtti"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_l2oix"]
+
+[sub_resource type="Animation" id="Animation_b6ji5"]
+length = 0.0666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bt0d7"]
+_data = {
+"Default": SubResource("Animation_b6ji5")
+}
+
+[node name="  Course Clips 9 - Secret Stars 9-08 Kamek (Lava Battle)9-08 Cam Edge" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_bt0d7")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@41504" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0.2, 0.2, 0.2, 1)
+polygon = PackedVector2Array(-1152.95, -687.8, 1374.35, -687.8, 1374.35, -433.85, -1152.95, -433.85, -1152.95, -433.85, -825.05, -433.85, -825.05, 139.95, -1152.95, 139.95, 1110.4, -433.85, 1374.35, -433.85, 1374.35, 139.95, 1110.4, 139.95, -1152.95, 139.95, 1374.35, 139.95, 1374.35, 339.95, -1152.95, 339.95)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15)])
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 2"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_7xtti")]
+position = Vector2(-1039.15, -435.9)
+script = ExtResource("2_l2oix")
+path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-08 Kamek (Lava Battle)/9-08 CamEdge Wall.tscn"
+
+[node name="@DOMSymbolInstance@41503" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_7xtti")]
+position = Vector2(-353.15, -435.9)
+script = ExtResource("2_l2oix")
+path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-08 Kamek (Lava Battle)/9-08 CamEdge Wall.tscn"

@@ -1,10 +1,61 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_16m2s"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_le2cl"]
+
+[sub_resource type="Animation" id="Animation_b52te"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vrvru"]
+_data = {
+"Default": SubResource("Animation_b52te")
+}
 
 [node name="Star Select Shine Effect 2" type="Node2D"]
-script = ExtResource("1_16m2s")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_vrvru")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@13889" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+polygon = PackedVector2Array(0, -19.75, 0, -19.75, 13.95, -13.975, 19.75, 0, 13.95, 13.95, 0, 19.75, 0, 19.75, -13.975, 13.95, -19.75, 0, -13.975, -13.975)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_le2cl")
+matrix = Transform2D(0.0245667, 0, 0, 0.0245667, 0, 0)
+entries_color = PackedColorArray(0.988235, 0.988235, 0.345098, 1, 0.996078, 0.921569, 0.639216, 1, 0.996078, 0.996078, 0.470588, 0)
+entries_ratio = PackedFloat32Array(0.207843, 0.380392, 1)
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

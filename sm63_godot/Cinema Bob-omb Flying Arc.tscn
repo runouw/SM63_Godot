@@ -1,8 +1,110 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_2oc8y"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Tumbling.png" id="1_ur4kk"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Fuse - 2.png" id="2_rvmkp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder - 1.png" id="3_r6kxh"]
+
+[sub_resource type="Animation" id="Animation_leqw3"]
+length = 1.16667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.13333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 34:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.13333, 1.16667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vetdh"]
+_data = {
+"Default": SubResource("Animation_leqw3")
+}
 
 [node name="Cinema Bob-omb Flying Arc" type="Node2D"]
-script = ExtResource("1_2oc8y")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_vetdh")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(73.95, -136.2)
+rotation = -0.555125
+scale = Vector2(0.998532, 0.998532)
+
+[node name="@@4321" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
+texture_filter = 1
+position = Vector2(1.25, -10.4)
+rotation = 2.58647
+scale = Vector2(0.998532, -0.998532)
+texture = ExtResource("1_ur4kk")
+centered = false
+
+[node name="@@4322" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
+texture_filter = 1
+position = Vector2(-10.85, -8.2)
+rotation = -0.555125
+scale = Vector2(0.998532, 0.998532)
+texture = ExtResource("2_rvmkp")
+centered = false
+
+[node name="@@4323" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
+texture_filter = 1
+position = Vector2(8.7, -12.65)
+rotation = 2.58647
+scale = Vector2(0.998532, -0.998532)
+texture = ExtResource("3_r6kxh")
+centered = false
+
+[node name="Frame 34" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 34"]
+position = Vector2(213.95, -136.2)
+rotation = -0.555125
+scale = Vector2(0.998532, 0.998532)
+
+[node name="@@4324" type="Sprite2D" parent="Layer 1/Frame 34/Group"]
+texture_filter = 1
+position = Vector2(141.25, -10.4)
+rotation = 2.58647
+scale = Vector2(0.998532, -0.998532)
+texture = ExtResource("1_ur4kk")
+centered = false
+
+[node name="@@4325" type="Sprite2D" parent="Layer 1/Frame 34/Group"]
+texture_filter = 1
+position = Vector2(129.15, -8.2)
+rotation = -0.555125
+scale = Vector2(0.998532, 0.998532)
+texture = ExtResource("2_rvmkp")
+centered = false
+
+[node name="@@4326" type="Sprite2D" parent="Layer 1/Frame 34/Group"]
+texture_filter = 1
+position = Vector2(148.7, -12.65)
+rotation = 2.58647
+scale = Vector2(0.998532, -0.998532)
+texture = ExtResource("3_r6kxh")
+centered = false

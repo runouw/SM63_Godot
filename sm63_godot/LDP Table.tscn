@@ -1,12 +1,152 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_xidj7"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_5pcua"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_ndp77"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_ux6j2"]
+
+[sub_resource type="Animation" id="Animation_pckhc"]
+length = 0.0666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 4/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 2/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8pnfq"]
+_data = {
+"Default": SubResource("Animation_pckhc")
+}
 
 [node name="LDP Table" type="Node2D"]
-script = ExtResource("1_xidj7")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_8pnfq")
+}
 
 [node name="Layer 2" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
 [node name="Layer 4" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="Shape" type="Node2D" parent="Layer 4/Frame 0"]
+
+[node name="@@8905" type="Polygon2D" parent="Layer 4/Frame 0/Shape"]
+polygon = PackedVector2Array(-220.975, -30, -183, -30, -183, -10, -220.975, -10, -183, -30, -22, -30, -22, -10, -183, -10, -22, -30, 81, -30, 81, -10, -22, -10, 81, -30, 123.975, -30, 123.975, -10, 81, -10, 123.975, -30, 220.925, -30, 220.925, -10, 123.975, -10)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19)])
+script = ExtResource("1_5pcua")
+matrix = Transform2D(0.269714, 0, 0, 0.012207, -0.05, -20)
+entries_color = PackedColorArray(0.258824, 0.47451, 0.976471, 0.701961, 0.00392157, 0.262745, 0.427451, 0.682353)
+entries_ratio = PackedFloat32Array(0, 1)
+
+[node name="@@8906" type="Line2D" parent="Layer 4/Frame 0/Shape"]
+points = PackedVector2Array(81, -30, 81, -10, nan, nan, 81, -10, 123.975, -10, nan, nan, 123.975, -30, 123.975, -10, nan, nan, 123.975, -30, 81, -30, nan, nan, 81, -30, -22, -30, nan, nan, -22, -30, -22, -10, nan, nan, -22, -10, 81, -10, nan, nan, 123.975, -30, 220.925, -30, nan, nan, 220.925, -30, 220.925, -10, nan, nan, 220.925, -10, 123.975, -10, nan, nan, -183, -10, -220.975, -10, nan, nan, -220.975, -30, -220.975, -10, nan, nan, -220.975, -30, -183, -30, nan, nan, -183, -30, -22, -30, nan, nan, -183, -30, -183, -10, nan, nan, -22, -10, -183, -10, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_ndp77")]
+position = Vector2(-155.25, -20.25)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LDP Nme.tscn"
+
+[node name="@DOMSymbolInstance@8907" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_ndp77")]
+position = Vector2(8.15, -19.8)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LDP Authur.tscn"
+
+[node name="@DOMSymbolInstance@8908" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_ndp77")]
+position = Vector2(100.9, -18.8)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LDP RAitn.tscn"
+
+[node name="@DOMSymbolInstance@8909" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_ndp77")]
+position = Vector2(167, -19.05)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LDP Fififutlilyttyt.tscn"
+
+[node name="@DOMSymbolInstance@8910" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_ndp77")]
+position = Vector2(-209.3, -19.75)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LDP \"IDD\".tscn"
+
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_ndp77")]
+position = Vector2(0, -110)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LDP Row.tscn"
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_ndp77")]
+position = Vector2(113.75, 161.8)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LDP  Benseut.tscn"
+
+[node name="@DOMSymbolInstance@8902" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_ndp77")]
+position = Vector2(-99.9, 161.7)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LDP Be tejhruehtuehtuehruehrueyhru.tscn"
+
+[node name="@DOMSymbolInstance@8903" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_ndp77")]
+position = Vector2(165.45, 159)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LD Nxtpage fast.tscn"
+
+[node name="@DOMSymbolInstance@8904" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_ndp77")]
+position = Vector2(-166.7, 161.65)
+script = ExtResource("3_ux6j2")
+path = "res://sm63_godot/LD prev page fast.tscn"

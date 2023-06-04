@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Small PF.png" id="1_y0xc4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Med PL.png" id="2_6knq6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Large PL.png" id="3_pgjj4"]
+
+[sub_resource type="Animation" id="Animation_5od4c"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_am3v7"]
+_data = {
+"Default": SubResource("Animation_5od4c")
+}
+
+[node name="  Course Items-PL Various Platforms Common Coded PL Green PLGreen PL Clip" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_am3v7")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@47966" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-16, -8)
+texture = ExtResource("1_y0xc4")
+centered = false
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@47967" type="Sprite2D" parent="Layer 1/Frame 1"]
+texture_filter = 1
+position = Vector2(-24, -8)
+texture = ExtResource("2_6knq6")
+centered = false
+
+[node name="Frame 2" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@47968" type="Sprite2D" parent="Layer 1/Frame 2"]
+texture_filter = 1
+position = Vector2(-32, -8)
+texture = ExtResource("3_pgjj4")
+centered = false

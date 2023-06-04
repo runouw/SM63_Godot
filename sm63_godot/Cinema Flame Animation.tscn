@@ -1,8 +1,107 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_bga64"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 1.png" id="1_uxd1a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 2.png" id="2_wt62d"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 3.png" id="3_mp38k"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 4.png" id="4_k15u7"]
+
+[sub_resource type="Animation" id="Animation_xsnb5"]
+length = 0.666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 4:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 9:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.466667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 14:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.466667, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e5v4g"]
+_data = {
+"Default": SubResource("Animation_xsnb5")
+}
 
 [node name="Cinema Flame Animation" type="Node2D"]
-script = ExtResource("1_bga64")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_e5v4g")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@5355" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-24, -32)
+texture = ExtResource("1_uxd1a")
+centered = false
+
+[node name="Frame 4" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@5356" type="Sprite2D" parent="Layer 1/Frame 4"]
+texture_filter = 1
+position = Vector2(-24, -32)
+texture = ExtResource("2_wt62d")
+centered = false
+
+[node name="Frame 9" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@5357" type="Sprite2D" parent="Layer 1/Frame 9"]
+texture_filter = 1
+position = Vector2(-24, -32)
+texture = ExtResource("3_mp38k")
+centered = false
+
+[node name="Frame 14" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@5358" type="Sprite2D" parent="Layer 1/Frame 14"]
+texture_filter = 1
+position = Vector2(-24, -32)
+texture = ExtResource("4_k15u7")
+centered = false

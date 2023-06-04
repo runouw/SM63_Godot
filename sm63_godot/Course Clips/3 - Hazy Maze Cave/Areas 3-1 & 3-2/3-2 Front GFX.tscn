@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_kehm1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Abstract/Cave Spore (Large).png" id="2_wyv63"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Abstract/Cave Spore (Small).png" id="3_f4kji"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="4_j4sl8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="5_ws1sr"]
+
+[sub_resource type="Animation" id="Animation_4a0oq"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iyidj"]
+_data = {
+"Default": SubResource("Animation_4a0oq")
+}
+
+[node name="  Course Clips 3 - Hazy Maze Cave Areas 3-1 & 3-23-2 Front GFX" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_iyidj")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@26196" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+polygon = PackedVector2Array(684.175, 333, 2126.6, 333, 2126.6, 1009.5, 2126.6, 1009.5, 684.2, 989.5, 684.2, 817.45)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
+script = ExtResource("1_kehm1")
+matrix = Transform2D(0, -0.295685, 0.781677, 0, 1322.05, 575.25)
+entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+entries_ratio = PackedFloat32Array(0, 0.219608, 1)
+
+[node name="@@26197" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+
+[node name="@@26198" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(83.5, -26.75)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_wyv63")
+centered = false
+
+[node name="@@26199" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(1643.4, -242)
+rotation = 3.14159
+scale = Vector2(0.5, -0.5)
+texture = ExtResource("3_f4kji")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("4_j4sl8")]
+modulate = Color(1, 1, 1, 0.699219)
+position = Vector2(2103.35, 36.9)
+script = ExtResource("5_ws1sr")
+path = "res://sm63_godot/Course Clips/3 - Hazy Maze Cave/Areas 3-1 & 3-2/3-2 Alpha Ground.tscn"

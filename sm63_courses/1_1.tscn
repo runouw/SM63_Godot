@@ -1,0 +1,122 @@
+[gd_scene load_steps=12 format=3 uid="uid://ci2jsgt4v8f5g"]
+
+[ext_resource type="PackedScene" uid="uid://b8yjwvcqaw5cw" path="res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Areas 1-1 & 1-2/1-1 Back Graphics.tscn" id="1_1fo6k"]
+[ext_resource type="PackedScene" uid="uid://bhc22lof4tj61" path="res://sm63_godot/Course Items-PL/Backgrounds/1-FarBG.tscn" id="1_f117c"]
+[ext_resource type="PackedScene" uid="uid://bg7vbmahv5w07" path="res://sm63_godot/Course Items-PL/Backgrounds/6-Hills+Ground Background .tscn" id="2_co6xo"]
+[ext_resource type="PackedScene" uid="uid://sg776ggev2ck" path="res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Areas 1-1 & 1-2/1-1 Front Graphics.tscn" id="2_mj0ia"]
+[ext_resource type="PackedScene" path="res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Areas 1-1 & 1-2/1-1 Camera Edge.tscn" id="3_e0goa"]
+[ext_resource type="PackedScene" path="res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Areas 1-1 & 1-2/1-1 Platforms.tscn" id="4_b8etk"]
+[ext_resource type="Script" path="res://sm63_courses/r_parallax.gd" id="4_xnmlw"]
+[ext_resource type="PackedScene" path="res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Areas 1-1 & 1-2/1-1 Bplatforms.tscn" id="5_18ipp"]
+
+[sub_resource type="Animation" id="Animation_5gxdg"]
+resource_name = "CameraMotion"
+length = 16.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0),
+"points": PackedFloat32Array(86.0001, 0, 0, 0.433333, 13.6666, 168, -0.433333, -48.6417, 2.23333, 250.692, 1882, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.6, 16)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2),
+"points": PackedFloat32Array(-69, 0, 0, 0.416667, 28.5, 92, -0.413572, -1.03393, 4.4, 11, -55, -2.25, 26.1667, 0, 0),
+"times": PackedFloat32Array(0, 4, 16)
+}
+
+[sub_resource type="Animation" id="Animation_w3ga6"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(86.0001, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-69, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7we0t"]
+_data = {
+"CameraMotion": SubResource("Animation_5gxdg"),
+"RESET": SubResource("Animation_w3ga6")
+}
+
+[node name="1_1" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBG" type="Node2D" parent="Background"]
+position = Vector2(175.795, 38.4491)
+scale = Vector2(1.93354, 1.93354)
+script = ExtResource("4_xnmlw")
+move_scale = 0.0
+
+[node name="Course Items-PL Backgrounds1-FarBG" parent="Background/FarBG" instance=ExtResource("1_f117c")]
+position = Vector2(-148.6, 0)
+
+[node name="Course Items-PL Backgrounds1-FarBG2" parent="Background/FarBG" instance=ExtResource("1_f117c")]
+position = Vector2(342.924, 0)
+scale = Vector2(-1, 1)
+
+[node name="MountainsBG" type="Node2D" parent="Background"]
+position = Vector2(122.821, 26.8629)
+scale = Vector2(2.00893, 2.00893)
+script = ExtResource("4_xnmlw")
+move_scale = 0.15
+zoom_strength = 0.15
+
+[node name="Course Items-PL Backgrounds6-Hills+Ground Background" parent="Background/MountainsBG" instance=ExtResource("2_co6xo")]
+position = Vector2(0, -80)
+
+[node name="Course Items-PL Backgrounds6-Hills+Ground Background2" parent="Background/MountainsBG" instance=ExtResource("2_co6xo")]
+position = Vector2(880, -80)
+
+[node name="BackGFX" parent="." instance=ExtResource("1_1fo6k")]
+
+[node name="FrontGFX" parent="." instance=ExtResource("2_mj0ia")]
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.372549)
+
+[node name="CameraEdge" parent="Collisions" instance=ExtResource("3_e0goa")]
+
+[node name="Platforms" parent="Collisions" instance=ExtResource("4_b8etk")]
+
+[node name="Bplatforms" parent="Collisions" instance=ExtResource("5_18ipp")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(86.0001, -69)
+ignore_rotation = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "CameraMotion"
+libraries = {
+"": SubResource("AnimationLibrary_7we0t")
+}

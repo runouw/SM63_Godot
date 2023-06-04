@@ -1,10 +1,80 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_tkf5f"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Hat Wing - 2.png" id="1_nmiwh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Hat Wing - 1.png" id="2_agrvw"]
+
+[sub_resource type="Animation" id="Animation_w81ul"]
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pbmba"]
+_data = {
+"Default": SubResource("Animation_w81ul")
+}
 
 [node name="Wing Clip" type="Node2D"]
-script = ExtResource("1_tkf5f")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_pbmba")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@14234" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-7, -9.15)
+scale = Vector2(0.846161, 0.6875)
+texture = ExtResource("1_nmiwh")
+centered = false
+
+[node name="Frame 3" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@14235" type="Sprite2D" parent="Layer 1/Frame 3"]
+texture_filter = 1
+position = Vector2(-4, -4)
+texture = ExtResource("2_agrvw")
+centered = false
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

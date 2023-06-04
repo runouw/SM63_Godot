@@ -1,12 +1,91 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_28ty1"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_iexot"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_72fej"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_31oth"]
+
+[sub_resource type="Animation" id="Animation_427l7"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 3/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 2/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tvyl2"]
+_data = {
+"Default": SubResource("Animation_427l7")
+}
 
 [node name="Pause New Exit Buton vfsh" type="Node2D"]
-script = ExtResource("1_28ty1")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_tvyl2")
+}
 
 [node name="Layer 2" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Shape" type="Node2D" parent="Layer 2/Frame 0"]
+
+[node name="@@13367" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
+polygon = PackedVector2Array(-60.075, -17.975, 59.9, -17.975, 59.9, 17.025, -60.075, 17.025)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+script = ExtResource("1_iexot")
+matrix = Transform2D(0.0766296, 0, 0, 0.0731049, -0.1, -0.5)
+entries_color = PackedColorArray(1, 1, 1, 1, 0.890196, 0.00784314, 0.00784314, 1)
+entries_ratio = PackedFloat32Array(0, 1)
+
+[node name="@@13368" type="Line2D" parent="Layer 2/Frame 0/Shape"]
+points = PackedVector2Array(-60.075, -17.975, 59.9, -17.975, nan, nan, 59.9, -17.975, 59.9, 17.025, nan, nan, 59.9, 17.025, -60.075, 17.025, nan, nan, -60.075, -17.975, -60.075, 17.025, nan, nan)
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_72fej")]
+script = ExtResource("3_31oth")
+path = "res://sm63_godot/Pause New \"Exit\".tscn"
+
 [node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]

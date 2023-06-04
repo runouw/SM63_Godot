@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://e04sjhh3g0yn"]
+
+[ext_resource type="Script" path="res://sm63_courses/r_parallax.gd" id="1_nujh7"]
+[ext_resource type="PackedScene" path="res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 BG.tscn" id="2_mppjn"]
+[ext_resource type="PackedScene" path="res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 Back GFX.tscn" id="3_14cv6"]
+[ext_resource type="PackedScene" path="res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 Front GFX.tscn" id="4_ctwug"]
+[ext_resource type="PackedScene" path="res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 CamEdge.tscn" id="5_57vbf"]
+[ext_resource type="PackedScene" path="res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 B platforms.tscn" id="6_561s4"]
+[ext_resource type="PackedScene" path="res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 Ground.tscn" id="7_42oex"]
+
+[node name="2_1" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FixedBG" type="Node2D" parent="Background"]
+position = Vector2(-690.849, -504.674)
+scale = Vector2(3.02241, 3.02241)
+script = ExtResource("1_nujh7")
+move_scale = 0.0
+
+[node name="  Course Clips 2 - Snowman\'s Land2-1 BG" parent="Background/FixedBG" instance=ExtResource("2_mppjn")]
+
+[node name="BackGFX" parent="." instance=ExtResource("3_14cv6")]
+
+[node name="FrontGFX" parent="." instance=ExtResource("4_ctwug")]
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+
+[node name="CamEdge" parent="Collisions" instance=ExtResource("5_57vbf")]
+
+[node name="BPlatforms" parent="Collisions" instance=ExtResource("6_561s4")]
+
+[node name="Ground" parent="Collisions" instance=ExtResource("7_42oex")]

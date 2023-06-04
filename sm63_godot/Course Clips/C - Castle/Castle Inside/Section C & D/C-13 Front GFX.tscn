@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_82yh3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_kenam"]
+
+[sub_resource type="Animation" id="Animation_jawh2"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 4/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 4/Frame 2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 1:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 3/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4a5sb"]
+_data = {
+"Default": SubResource("Animation_jawh2")
+}
+
+[node name="  Course Clips C - CastleCastle Inside Section C & DC-13 Front GFX" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_4a5sb")
+}
+
+[node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_82yh3")]
+position = Vector2(1130.25, -248.15)
+scale = Vector2(0.787338, 0.769272)
+script = ExtResource("2_kenam")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star FrontGFX.tscn"
+
+[node name="@DOMSymbolInstance@44620" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_82yh3")]
+position = Vector2(1067.45, -181.5)
+script = ExtResource("2_kenam")
+path = "res://sm63_godot/C-13 WarpPipe.tscn"
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_82yh3")]
+position = Vector2(746.7, -334.45)
+script = ExtResource("2_kenam")
+path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 Front GFX Clip.tscn"
+
+[node name="Layer 4" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="Frame 2" type="Node2D" parent="Layer 4"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2" instance=ExtResource("1_82yh3")]
+position = Vector2(1066.45, -215.1)
+scale = Vector2(1.3887, 1)
+script = ExtResource("2_kenam")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Invisible Door.tscn"

@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Bomb-Omb Battlefield Background copy.png" id="1_xyb0i"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Bomb-omb Battle Field BG (Optimized).png" id="2_ndcdc"]
+
+[sub_resource type="Animation" id="Animation_cfi3b"]
+length = 0.133333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_15iha"]
+_data = {
+"Default": SubResource("Animation_cfi3b")
+}
+
+[node name="  Course Items-PL Backgrounds1-FarBG" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_15iha")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@46424" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-249, -296)
+scale = Vector2(2, 2)
+texture = ExtResource("1_xyb0i")
+centered = false
+
+[node name="Frame 2" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@46425" type="Sprite2D" parent="Layer 1/Frame 2"]
+texture_filter = 1
+position = Vector2(-225, -150)
+scale = Vector2(2.25, 2.39999)
+texture = ExtResource("2_ndcdc")
+centered = false
+
+[node name="Frame 3" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 3"]
+
+[node name="@@46426" type="Polygon2D" parent="Layer 1/Frame 3/Shape"]
+color = Color(0, 0.4, 1, 1)
+polygon = PackedVector2Array(-225, -175, 225, -175, 225, 175, -225, 175)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

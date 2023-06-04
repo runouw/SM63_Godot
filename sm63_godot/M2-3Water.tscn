@@ -1,10 +1,79 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_0lcqc"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_m5nqv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4bslr"]
+
+[sub_resource type="Animation" id="Animation_c4040"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Water(Mask)/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 3/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4xuys"]
+_data = {
+"Default": SubResource("Animation_c4040")
+}
 
 [node name="M2-3Water" type="Node2D"]
-script = ExtResource("1_0lcqc")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_4xuys")
+}
 
 [node name="Layer 3" type="Node2D" parent="."]
 
-[node name="Water" type="Node2D" parent="."]
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_m5nqv")]
+position = Vector2(-1389.2, 187)
+script = ExtResource("2_4bslr")
+path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
+
+[node name="@DOMSymbolInstance@13129" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_m5nqv")]
+position = Vector2(-1389.2, 1149)
+script = ExtResource("2_4bslr")
+path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
+
+[node name="@DOMSymbolInstance@13130" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_m5nqv")]
+position = Vector2(280.8, 1149)
+script = ExtResource("2_4bslr")
+path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
+
+[node name="@DOMSymbolInstance@13131" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_m5nqv")]
+position = Vector2(279.9, 187)
+script = ExtResource("2_4bslr")
+path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
+
+[node name="Water(Mask)" type="Node2D" parent="."]
+visible = false
+
+[node name="Frame 0" type="Node2D" parent="Water(Mask)"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Water(Mask)/Frame 0" instance=ExtResource("1_m5nqv")]
+position = Vector2(-2152, 50)
+scale = Vector2(1, 1.00139)
+script = ExtResource("2_4bslr")
+path = "res://sm63_godot/Effects/Water/Water Code.tscn"

@@ -1,16 +1,273 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_qcvln"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_budsg"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_2cywp"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_6qcuy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_xdkkb"]
+
+[sub_resource type="Animation" id="Animation_iavql"]
+length = 0.0666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 4/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 4/Frame 1:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 3/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Layer 3/Frame 1:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Layer 5/Frame 0:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Layer 1/Frame 0:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Layer 1/Frame 1:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i4ufb"]
+_data = {
+"Default": SubResource("Animation_iavql")
+}
 
 [node name="LDP Page 2" type="Node2D"]
-script = ExtResource("1_qcvln")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_i4ufb")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 1"]
+
+[node name="@@8869" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
+polygon = PackedVector2Array(-213.9, -58.2, -48.9, -58.2, -48.9, 12.4, -213.9, 12.4)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+script = ExtResource("1_budsg")
+matrix = Transform2D(-0.037735, 0.0509491, -0.0527802, -0.0134888, -89.75, -35.4)
+entries_color = PackedColorArray(1, 1, 1, 0, 0.956863, 0.913725, 0.509804, 0.25098, 0.94902, 0.854902, 0.482353, 1, 0.933333, 0.772549, 0.4, 0.313726, 0.862745, 0.709804, 0.105882, 0.501961)
+entries_ratio = PackedFloat32Array(0, 0.4, 0.494118, 0.596078, 1)
+
+[node name="@@8870" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
+polygon = PackedVector2Array(-236.525, -158.325, 243.475, -158.325, 243.475, -68.575, -236.525, -68.575)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+script = ExtResource("1_budsg")
+matrix = Transform2D(0, -0.0519104, 0.0381927, 0, 3.45, -113.5)
+entries_color = PackedColorArray(1, 1, 1, 0, 0, 0.101961, 0.968627, 0.501961)
+entries_ratio = PackedFloat32Array(0, 1)
+
+[node name="@@8871" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
+polygon = PackedVector2Array(-213.9, 18.65, -48.9, 18.65, -48.9, 134.6, -213.9, 134.6)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+script = ExtResource("1_budsg")
+matrix = Transform2D(-0.0634766, 0.0700989, -0.0453186, -0.0500488, -132.2, 66.15)
+entries_color = PackedColorArray(1, 1, 1, 0, 0.466667, 1, 1, 0.25098, 0.435294, 0.776471, 1, 1, 0.333333, 1, 1, 0.313726, 0, 0.968627, 0.968627, 0.501961)
+entries_ratio = PackedFloat32Array(0, 0.4, 0.494118, 0.596078, 1)
+
+[node name="@@8872" type="Line2D" parent="Layer 1/Frame 1/Shape"]
+points = PackedVector2Array(-48.9, 134.6, -213.9, 134.6, nan, nan, -213.9, 18.65, -213.9, 134.6, nan, nan, -213.9, 18.65, -48.9, 18.65, nan, nan, -48.9, 18.65, -48.9, 134.6, nan, nan)
+width = 1.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="@@8873" type="Line2D" parent="Layer 1/Frame 1/Shape"]
+points = PackedVector2Array(-48.9, -58.2, -48.9, 12.4, nan, nan, -48.9, 12.4, -213.9, 12.4, nan, nan, -213.9, -58.2, -213.9, 12.4, nan, nan, -213.9, -58.2, -48.9, -58.2, nan, nan)
+width = 1.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 1/Group"]
+
+[node name="@@8874" type="Polygon2D" parent="Layer 1/Frame 1/Group/Shape"]
+polygon = PackedVector2Array(-39.45, -57.35, 216.55, -57.35, 216.55, 79.65, -39.45, 79.65)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+script = ExtResource("2_2cywp")
+matrix = Transform2D(0.0907288, -0.0770569, 0.187943, 0.221298, 38, 7)
+entries_color = PackedColorArray(1, 1, 1, 0.611765, 0.717647, 0.717647, 0.717647, 0.101961)
+entries_ratio = PackedFloat32Array(0, 0.956863)
+
+[node name="@@8875" type="Line2D" parent="Layer 1/Frame 1/Group/Shape"]
+points = PackedVector2Array(216.55, -57.35, 216.55, 79.65, nan, nan, 216.55, 79.65, -39.45, 79.65, nan, nan, -39.45, -57.35, -39.45, 79.65, nan, nan, -39.45, -57.35, 216.55, -57.35, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("3_6qcuy")]
+position = Vector2(-70.55, 29.2)
+script = ExtResource("4_xdkkb")
+path = "res://sm63_godot/LDP Diffi.tscn"
+
+[node name="@DOMSymbolInstance@8876" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("3_6qcuy")]
+position = Vector2(-119.4, -2.8)
+script = ExtResource("4_xdkkb")
+path = "res://sm63_godot/LDP Score.tscn"
+
+[node name="@DOMSymbolInstance@8877" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("3_6qcuy")]
+position = Vector2(-116.35, 70.95)
+script = ExtResource("4_xdkkb")
+path = "res://sm63_godot/LDP Score Diffi.tscn"
+
+[node name="@DOMSymbolInstance@8878" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("3_6qcuy")]
+position = Vector2(184.2, 108.8)
+script = ExtResource("4_xdkkb")
+path = "res://sm63_godot/LDP Play Button.tscn"
+
+[node name="@DOMSymbolInstance@8879" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("3_6qcuy")]
+position = Vector2(50.05, 110.65)
+script = ExtResource("4_xdkkb")
+path = "res://sm63_godot/LD view on site button.tscn"
+
 [node name="Layer 5" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 5"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("3_6qcuy")]
+position = Vector2(176.05, -133.85)
+script = ExtResource("4_xdkkb")
+path = "res://sm63_godot/LDP Back87ug8i.tscn"
 
 [node name="Layer 3" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 3"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("3_6qcuy")]
+position = Vector2(-133, -4)
+script = ExtResource("4_xdkkb")
+path = "res://sm63_godot/LDP Vote Anu.tscn"
+
+[node name="@DOMSymbolInstance@8868" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("3_6qcuy")]
+position = Vector2(-132, 65)
+scale = Vector2(1, 1.00085)
+script = ExtResource("4_xdkkb")
+path = "res://sm63_godot/LDP Diffi Anu.tscn"
+
 [node name="Layer 4" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 4"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 4/Frame 1"]
+
+[node name="@@8867" type="Polygon2D" parent="Layer 4/Frame 1/Shape"]
+polygon = PackedVector2Array(-213.75, 19, -48.75, 19, -48.75, 134.95, -213.75, 134.95)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+script = ExtResource("1_budsg")
+matrix = Transform2D(-0.0634766, 0.0700989, -0.0453186, -0.0500488, -148.45, 52.75)
+entries_color = PackedColorArray(1, 1, 1, 0, 0.466667, 1, 1, 0, 0.435294, 0.776471, 1, 0.101961, 0.333333, 1, 1, 0, 0, 0.968627, 0.968627, 0.301961)
+entries_ratio = PackedFloat32Array(0, 0.321569, 0.494118, 0.666667, 1)
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 2"]
+visible = false

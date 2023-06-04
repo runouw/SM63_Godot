@@ -1,0 +1,122 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 1.png" id="1_t8s36"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 2.png" id="2_wjopw"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_pb3f8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_aqyub"]
+
+[sub_resource type="Animation" id="Animation_laufc"]
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 3/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head/Frame 59:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.96667, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Body/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Body/Frame 59:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.96667, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dibwh"]
+_data = {
+"Default": SubResource("Animation_laufc")
+}
+
+[node name="   EnemiesNormal G-ZToad StuffToad - Idle Body" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_dibwh")
+}
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Body"]
+
+[node name="@@50768" type="Sprite2D" parent="Body/Frame 0"]
+texture_filter = 1
+position = Vector2(-6.5, -10)
+texture = ExtResource("1_t8s36")
+centered = false
+
+[node name="Frame 59" type="Node2D" parent="Body"]
+visible = false
+
+[node name="@@50769" type="Sprite2D" parent="Body/Frame 59"]
+texture_filter = 1
+position = Vector2(-6.5, -11)
+texture = ExtResource("2_wjopw")
+centered = false
+
+[node name="Head" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Head"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 0" instance=ExtResource("3_pb3f8")]
+position = Vector2(-0.5, -18.4)
+script = ExtResource("4_aqyub")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad - MAIN Head.tscn"
+
+[node name="Frame 59" type="Node2D" parent="Head"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 59" instance=ExtResource("3_pb3f8")]
+position = Vector2(-0.5, -19.4)
+script = ExtResource("4_aqyub")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad - MAIN Head.tscn"
+
+[node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]

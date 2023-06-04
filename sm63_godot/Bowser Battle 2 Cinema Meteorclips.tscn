@@ -1,10 +1,170 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_51820"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_vj03u"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ciinb"]
+
+[sub_resource type="Animation" id="Animation_wfucn"]
+length = 3.66667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 2/Frame 24:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 3.66667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 1/Frame 24:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Layer 1/Frame 25:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.833333, 1.46667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Layer 1/Frame 44:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.46667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Layer 1/Frame 45:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.66667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6nb8u"]
+_data = {
+"Default": SubResource("Animation_wfucn")
+}
 
 [node name="Bowser Battle 2 Cinema Meteorclips" type="Node2D"]
-script = ExtResource("1_51820")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_6nb8u")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vj03u")]
+position = Vector2(-113.9, -413.8)
+rotation = -1.8326
+scale = Vector2(2, 2)
+script = ExtResource("2_ciinb")
+path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
+
+[node name="Frame 24" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24" instance=ExtResource("1_vj03u")]
+position = Vector2(0.05, 0.05)
+rotation = 3.14159
+scale = Vector2(2, 2)
+script = ExtResource("2_ciinb")
+path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
+
+[node name="Frame 25" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 25" instance=ExtResource("1_vj03u")]
+position = Vector2(86.1, -413.8)
+rotation = 2.09439
+scale = Vector2(2, 2)
+script = ExtResource("2_ciinb")
+path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
+
+[node name="Frame 44" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 44" instance=ExtResource("1_vj03u")]
+position = Vector2(0.05, 0.05)
+rotation = 3.14159
+scale = Vector2(2, 2)
+script = ExtResource("2_ciinb")
+path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
+
+[node name="Frame 45" type="Node2D" parent="Layer 1"]
+visible = false
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 2"]
+visible = false
+
+[node name="Frame 24" type="Node2D" parent="Layer 2"]
+visible = false

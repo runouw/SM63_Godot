@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Fly 1.png" id="1_u2cwn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Fly 2.png" id="2_hiu16"]
+
+[sub_resource type="Animation" id="Animation_bprbm"]
+length = 0.133333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kyfi6"]
+_data = {
+"Default": SubResource("Animation_bprbm")
+}
+
+[node name="   EnemiesNormal G-Z PenguinsPenguin Fly 1 Animation" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_kyfi6")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@50712" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(8.5, -9)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("1_u2cwn")
+centered = false
+
+[node name="Frame 2" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@50713" type="Sprite2D" parent="Layer 1/Frame 2"]
+texture_filter = 1
+position = Vector2(8.5, -9)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("2_hiu16")
+centered = false

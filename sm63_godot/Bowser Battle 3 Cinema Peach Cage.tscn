@@ -1,12 +1,178 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_igjj8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Peach SPP - Nervous 1.png" id="1_cam14"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Peach SPP - Nervous 2.png" id="2_n8sd4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Mesh Fence Large.png" id="3_kr0pu"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="4_kytqx"]
+
+[sub_resource type="Animation" id="Animation_k4onn"]
+length = 1.86667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 3/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 3/Frame 28:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.933333, 1.83333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 3/Frame 55:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.83333, 1.86667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 2/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.86667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 1/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Layer 1/Frame 28:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.933333, 1.86667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qgc0n"]
+_data = {
+"Default": SubResource("Animation_k4onn")
+}
 
 [node name="Bowser Battle 3 Cinema Peach Cage" type="Node2D"]
-script = ExtResource("1_igjj8")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_qgc0n")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@2744" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-10, -18.5)
+texture = ExtResource("1_cam14")
+centered = false
+
+[node name="Frame 28" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@2745" type="Sprite2D" parent="Layer 1/Frame 28"]
+texture_filter = 1
+position = Vector2(-10, -18.5)
+texture = ExtResource("2_n8sd4")
+centered = false
+
 [node name="Layer 2" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Group" type="Node2D" parent="Layer 2/Frame 0"]
+position = Vector2(-0.5, 0.5)
+
+[node name="Shape" type="Node2D" parent="Layer 2/Frame 0/Group"]
+
+[node name="@@2742" type="Polygon2D" parent="Layer 2/Frame 0/Group/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("3_kr0pu")
+texture_offset = Vector2(17, 6.5)
+polygon = PackedVector2Array(-17, -31.4, 15.65, -31.4, 15.65, 26.6, -17, 26.6)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@@2743" type="Line2D" parent="Layer 2/Frame 0/Group/Shape"]
+points = PackedVector2Array(15.65, -31.4, -17, -31.4, nan, nan, -17, -31.4, -17, 26.6, nan, nan, -17, 26.6, 15.65, 26.6, nan, nan, 15.65, -31.4, 15.65, 26.6, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="Shape" type="Node2D" parent="Layer 3/Frame 0"]
+
+[node name="@@2739" type="Polygon2D" parent="Layer 3/Frame 0/Shape"]
+polygon = PackedVector2Array(-1, 11.3, -1, 11.3, 16.575, 15.85, 23.9, 26.95, 16.575, 38, -1, 42.6, -1, 42.6, -18.65, 38, -25.9, 26.95, -18.65, 15.85)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("4_kytqx")
+matrix = Transform2D(0.0308838, 0, 0, 0.0194092, -1, 26.95)
+entries_color = PackedColorArray(1, 0.415686, 0.0352941, 0.8, 0.901961, 0, 0, 0)
+entries_ratio = PackedFloat32Array(0, 1)
+
+[node name="Frame 28" type="Node2D" parent="Layer 3"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 3/Frame 28"]
+
+[node name="@@2740" type="Polygon2D" parent="Layer 3/Frame 28/Shape"]
+polygon = PackedVector2Array(-1, 11.3, -1, 11.3, 16.575, 15.85, 23.9, 26.95, 16.575, 38, -1, 42.6, -1, 42.6, -18.65, 38, -25.9, 26.95, -18.65, 15.85)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("4_kytqx")
+matrix = Transform2D(0.0308838, 0, 0, 0.0194092, -1, 26.95)
+entries_color = PackedColorArray(1, 0.0352941, 0.0352941, 1, 0.901961, 0, 0, 0)
+entries_ratio = PackedFloat32Array(0.258824, 1)
+
+[node name="Frame 55" type="Node2D" parent="Layer 3"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 3/Frame 55"]
+
+[node name="@@2741" type="Polygon2D" parent="Layer 3/Frame 55/Shape"]
+polygon = PackedVector2Array(-1, 11.3, -1, 11.3, 16.575, 15.85, 23.9, 26.95, 16.575, 38, -1, 42.6, -1, 42.6, -18.65, 38, -25.9, 26.95, -18.65, 15.85)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("4_kytqx")
+matrix = Transform2D(0.0308838, 0, 0, 0.0194092, -1, 26.95)
+entries_color = PackedColorArray(1, 0.415686, 0.0352941, 0.8, 0.901961, 0, 0, 0)
+entries_ratio = PackedFloat32Array(0, 1)

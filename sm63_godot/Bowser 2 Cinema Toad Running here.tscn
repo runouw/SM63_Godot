@@ -1,10 +1,140 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_m6awl"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_dxp6s"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ecpxk"]
+
+[sub_resource type="Animation" id="Animation_hakv0"]
+length = 1.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.86667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 56:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.86667, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 42:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.4, 1.83333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 1/Frame 55:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.83333, 1.86667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Layer 1/Frame 56:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.86667, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qwnpr"]
+_data = {
+"Default": SubResource("Animation_hakv0")
+}
 
 [node name="Bowser 2 Cinema Toad Running here" type="Node2D"]
-script = ExtResource("1_m6awl")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_qwnpr")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_dxp6s")]
+position = Vector2(1.15, 8.45)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_ecpxk")
+path = "res://sm63_godot/Cinema Toad Walk Sad.tscn"
+
+[node name="Frame 42" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 42" instance=ExtResource("1_dxp6s")]
+position = Vector2(-181.4, -42.1)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_ecpxk")
+path = "res://sm63_godot/Cinema Toad Walk Sad.tscn"
+
+[node name="Frame 55" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 55" instance=ExtResource("1_dxp6s")]
+position = Vector2(-211.85, -50.55)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_ecpxk")
+path = "res://sm63_godot/Cinema Toad Walk Sad.tscn"
+
+[node name="Frame 56" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 56" instance=ExtResource("1_dxp6s")]
+position = Vector2(-212.4, -45.05)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_ecpxk")
+path = "res://sm63_godot/Cinema Toad Mad.tscn"
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Frame 56" type="Node2D" parent="Layer 2"]
+visible = false

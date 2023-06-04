@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_absfk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_53s5x"]
+
+[sub_resource type="Animation" id="Animation_4w11i"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kf1sv"]
+_data = {
+"Default": SubResource("Animation_4w11i")
+}
+
+[node name="  Course Clips 5 - Lethal Lava LandVolcano (5,6)5-6CamEdge" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_kf1sv")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@32124" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0.4, 0.4, 0.4, 1)
+polygon = PackedVector2Array(-529.2, -1576.35, 643.1, -1576.35, 643.1, -1436.32, -529.2, -1436.32, -529.2, -1436.32, -345.15, -1436.32, -345.15, 53.05, -529.2, 53.05, -529.2, -1436.3, -345.15, -1436.32, 643.1, -1436.32, 643.1, 53.05, 403.05, 53.05, 403.05, -1436.3, -529.2, 53.05, 643.1, 53.05, 643.1, 176.05, -529.2, 176.05)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17)])
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_absfk")]
+position = Vector2(0, 34.1)
+script = ExtResource("2_53s5x")
+path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-6CamLava.tscn"

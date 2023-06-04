@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 1 - Air - 1.png" id="1_2hwc5"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_eiaqs"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_qsdcn"]
+
+[sub_resource type="Animation" id="Animation_lv1il"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ee22v"]
+_data = {
+"Default": SubResource("Animation_lv1il")
+}
+
+[node name="      Char  Mario CLIPSMario (none) Airborn" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_ee22v")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@15399" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-7, -6)
+texture = ExtResource("1_2hwc5")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_eiaqs")]
+position = Vector2(2, 10.35)
+script = ExtResource("3_qsdcn")
+path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Backwards.tscn"

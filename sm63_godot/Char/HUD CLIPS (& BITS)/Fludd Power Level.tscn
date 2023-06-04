@@ -1,0 +1,117 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="Animation" id="Animation_lnbr1"]
+length = 3.33333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.33333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.33333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 3/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 3/Frame 99:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.3, 3.33333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 4/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3.33333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vq1oi"]
+_data = {
+"Default": SubResource("Animation_lnbr1")
+}
+
+[node name="      Char   HUD CLIPS (& BITS)Fludd Power Level" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_vq1oi")
+}
+
+[node name="Layer 4" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="Shape" type="Node2D" parent="Layer 4/Frame 0"]
+
+[node name="@@14593" type="Polygon2D" parent="Layer 4/Frame 0/Shape"]
+color = Color(0.741176, 0.0235294, 0.0235294, 1)
+polygon = PackedVector2Array(0, -18, 100, -18, 100, 18, 0, 18)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="Shape" type="Node2D" parent="Layer 3/Frame 0"]
+
+[node name="@@14591" type="Polygon2D" parent="Layer 3/Frame 0/Shape"]
+color = Color(0.192157, 0.0745098, 0.0784314, 1)
+polygon = PackedVector2Array(-0.5, -18, 0.5, -18, 0.5, 18, -0.5, 18)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="Frame 99" type="Node2D" parent="Layer 3"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 3/Frame 99"]
+
+[node name="@@14592" type="Polygon2D" parent="Layer 3/Frame 99/Shape"]
+color = Color(0, 1, 0.101961, 1)
+polygon = PackedVector2Array(0, -18, 100, -18, 100, 18, 0, 18)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]

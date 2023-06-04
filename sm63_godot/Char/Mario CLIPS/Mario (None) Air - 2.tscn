@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 2.png" id="1_ko1ru"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_oh1vs"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_oywrl"]
+
+[sub_resource type="Animation" id="Animation_3x5a0"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fuw4e"]
+_data = {
+"Default": SubResource("Animation_3x5a0")
+}
+
+[node name="      Char  Mario CLIPSMario (None) Air - 2" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_fuw4e")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@15317" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-9.5, -16)
+texture = ExtResource("1_ko1ru")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_oh1vs")]
+position = Vector2(5.1, -9.4)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("3_oywrl")
+path = "res://sm63_godot/Wing Code.tscn"

@@ -11,18 +11,21 @@ func _init(
 ):
 	name = p_name
 
-func first_child_with_tag(tag: String):
+
+func first_child_with_tag(tag: String) -> XMLNode:
 	for child in children:
 		if child.name == tag:
 			return child
 	return null
 
-func all_children_with_tag(tag: String):
+
+func all_children_with_tag(tag: String) -> Array[XMLNode]:
 	var ret: Array[XMLNode] = []
 	for child in children:
 		if child.name == tag:
 			ret.append(child)
 	return ret
+
 
 func recurse_callback_with_tag(tag: String, callback: Callable):
 	for child in children:

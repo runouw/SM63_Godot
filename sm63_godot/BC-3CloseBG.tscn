@@ -1,12 +1,195 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_ofj3f"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_wklyc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_bj64m"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="3_kabid"]
+
+[sub_resource type="Animation" id="Animation_7amgv"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lava/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xrsnc"]
+_data = {
+"Default": SubResource("Animation_7amgv")
+}
 
 [node name="BC-3CloseBG" type="Node2D"]
-script = ExtResource("1_ofj3f")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_xrsnc")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wklyc")]
+position = Vector2(-289.5, -80.45)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/BC-3CloseBG Falling Tower ghutsnj.tscn"
+
+[node name="@DOMSymbolInstance@1848" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wklyc")]
+position = Vector2(-1505.45, -80.45)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/BC-3CloseBG Falling Tower ghutsnj.tscn"
+
+[node name="@DOMSymbolInstance@1849" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wklyc")]
+position = Vector2(-650.8, -376)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/BC-2CloseBG RAndom Tower Falling.tscn"
+
+[node name="@DOMSymbolInstance@1850" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wklyc")]
+position = Vector2(99.95, -385.95)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/BC-2CloseBG RAndom Tower Falling.tscn"
+
+[node name="@DOMSymbolInstance@1851" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wklyc")]
+position = Vector2(-1005.95, -137.95)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/BC-2BG Tower Falling.tscn"
+
 [node name="Layer 2" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
 [node name="Lava" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Lava"]
+
+[node name="Group" type="Node2D" parent="Lava/Frame 0"]
+
+[node name="Group" type="Node2D" parent="Lava/Frame 0/Group"]
+
+[node name="Shape" type="Node2D" parent="Lava/Frame 0/Group/Group"]
+
+[node name="@@1835" type="Polygon2D" parent="Lava/Frame 0/Group/Group/Shape"]
+polygon = PackedVector2Array(-2181.4, 88.15, 304.875, 88.15, 304.9, 223.15, -2181.4, 223.15)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+script = ExtResource("3_kabid")
+matrix = Transform2D(0, -0.0288696, 0.0823975, 0, -838.95, 114)
+entries_color = PackedColorArray(0.494118, 0.00392157, 0.00392157, 1, 0.741176, 0, 0, 1)
+entries_ratio = PackedFloat32Array(0, 1)
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-1799.3, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1836" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-1416.05, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1837" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-1224.05, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1838" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-1608.05, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1839" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-1034.3, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1840" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-651.05, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1841" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-459.05, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1842" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-843.05, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1843" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-267.05, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1844" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-75.05, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1845" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(116.95, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1846" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-1986.8, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@1847" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_wklyc")]
+position = Vector2(-2176.8, 80.65)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Lava/Frame 0" instance=ExtResource("1_wklyc")]
+position = Vector2(-1333.15, 137.2)
+scale = Vector2(0.717651, 4.57318)
+script = ExtResource("2_bj64m")
+path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"

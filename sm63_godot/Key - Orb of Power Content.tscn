@@ -1,16 +1,138 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_a4iu3"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_qu470"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_5eck8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_6qa1t"]
+
+[sub_resource type="Animation" id="Animation_8jyu2"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Inside/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Text/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Base/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Glow/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0bai"]
+_data = {
+"Default": SubResource("Animation_8jyu2")
+}
 
 [node name="Key - Orb of Power Content" type="Node2D"]
-script = ExtResource("1_a4iu3")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_a0bai")
+}
 
 [node name="Glow" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Glow"]
+
 [node name="Base" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Base"]
+
+[node name="Shape" type="Node2D" parent="Base/Frame 0"]
+
+[node name="@@7319" type="Polygon2D" parent="Base/Frame 0/Shape"]
+polygon = PackedVector2Array(0, -16.3, 0, -16.3, 11.5, -11.6, 16.3, 0, 11.5, 11.5, 0, 16.3, 0, 16.3, -11.6, 11.5, -16.3, 0, -11.6, -11.6)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_qu470")
+matrix = Transform2D(0.0265503, 0, 0, 0.0219727, -2.65, -1.1)
+entries_color = PackedColorArray(0.588235, 0.0784314, 0.0784314, 1, 0.341176, 0.0901961, 0.0901961, 1)
+entries_ratio = PackedFloat32Array(0, 1)
 
 [node name="Text" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Text"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 0" instance=ExtResource("2_5eck8")]
+position = Vector2(0.2, 1)
+script = ExtResource("3_6qa1t")
+path = "res://sm63_godot/Key- Orb of (Text&#058) Power.tscn"
+
 [node name="Inside" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Inside"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Inside/Frame 0" instance=ExtResource("2_5eck8")]
+script = ExtResource("3_6qa1t")
+path = "res://sm63_godot/Key - Orb Inside.tscn"
+
 [node name="Line" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Line"]
+
+[node name="Shape" type="Node2D" parent="Line/Frame 0"]
+
+[node name="@@7317" type="Polygon2D" parent="Line/Frame 0/Shape"]
+polygon = PackedVector2Array(0, -16.3, 0, -16.3, 11.5, -11.6, 16.3, 0, 11.5, 11.5, 0, 16.3, 0, 16.3, -11.6, 11.5, -16.3, 0, -11.6, -11.6)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_qu470")
+matrix = Transform2D(0.0204468, 0, 0, 0.0204468, -3.4, -3.1)
+entries_color = PackedColorArray(0.901961, 0, 0, 0, 0.760784, 0.0705882, 0.0705882, 0.501961)
+entries_ratio = PackedFloat32Array(0, 1)
+
+[node name="@@7318" type="Line2D" parent="Line/Frame 0/Shape"]
+points = PackedVector2Array(11.5, -11.6, 16.3, 0, nan, nan, 16.3, 0, 11.5, 11.5, nan, nan, 11.5, 11.5, 0, 16.3, nan, nan, -11.6, 11.5, 0, 16.3, nan, nan, -16.3, 0, -11.6, 11.5, nan, nan, -11.6, -11.6, -16.3, 0, nan, nan, 0, -16.3, -11.6, -11.6, nan, nan, 0, -16.3, 11.5, -11.6, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

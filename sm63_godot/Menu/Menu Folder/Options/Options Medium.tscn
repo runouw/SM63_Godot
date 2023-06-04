@@ -1,0 +1,114 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_nq6u4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_enqrc"]
+
+[sub_resource type="Animation" id="Animation_1qmub"]
+length = 0.0666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 4/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 4/Frame 1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 3/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 1/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ljr5n"]
+_data = {
+"Default": SubResource("Animation_1qmub")
+}
+
+[node name=" MenuMenu Folder OptionsOptions Medium" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_ljr5n")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_nq6u4")]
+script = ExtResource("2_enqrc")
+path = "res://sm63_godot/Menu/Menu Folder/Options/Options Medium Text.tscn"
+
+[node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="Layer 4" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 4"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1" instance=ExtResource("1_nq6u4")]
+position = Vector2(0.05, 1.05)
+scale = Vector2(1.15085, 1)
+script = ExtResource("2_enqrc")
+path = "res://sm63_godot/Menu/Menu Folder/Options/Options Quality Bevel Box.tscn"
+
+[node name="BG" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="BG"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="BG/Frame 0" instance=ExtResource("1_nq6u4")]
+scale = Vector2(0.691376, 0.43103)
+script = ExtResource("2_enqrc")
+path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu Button (really).tscn"

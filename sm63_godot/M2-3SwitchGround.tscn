@@ -1,10 +1,86 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_1rkgf"]
+[sub_resource type="Animation" id="Animation_bawx4"]
+length = 0.0666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 2/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 2/Frame 1:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3iif1"]
+_data = {
+"Default": SubResource("Animation_bawx4")
+}
 
 [node name="M2-3SwitchGround" type="Node2D"]
-script = ExtResource("1_1rkgf")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_3iif1")
+}
 
 [node name="Layer 2" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Shape" type="Node2D" parent="Layer 2/Frame 0"]
+
+[node name="@@13128" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
+color = Color(0, 0.6, 0, 1)
+polygon = PackedVector2Array(641.05, 649.475, 672.1, 649.475, 672.1, 716, 641.05, 716, 641.05, 716, 737, 716, 737, 747.475, 641.05, 747.475, 778.95, 770.35, 810.95, 770.35, 810.95, 802.35, 778.95, 802.35, -26.05, 813.35, 5.95, 813.35, 5.95, 958.35, -26.05, 958.35, -26.05, 834.35, 227.95, 813.35, 259.95, 813.35, 259.95, 909.35, 227.95, 909.35, 227.95, 834.35, 417.95, 813.35, 449.95, 813.35, 449.95, 845.35, 417.95, 845.35, 417.95, 834.35, 514.95, 813.35, 546.95, 813.35, 546.95, 941.35, 514.95, 941.35, 514.95, 834.35, 712, 834.35, 777, 834.35, 777, 866.35, 712, 866.35, 712, 845.35, -152.05, 862.35, -120.05, 862.35, -120.05, 1022.35, -152.05, 1022.35, -152.05, 866.35, -305.95, 866.35, -273.95, 866.35, -273.95, 898.35, -305.95, 898.35, -305.95, 894.35, 417.95, 894.35, 449.95, 894.35, 449.95, 1022.35, 417.95, 1022.35, 417.95, 898.35, 667, 898.35, 699, 898.35, 699, 930.35, 667, 930.35, 667, 909.35, 102.5, 923.35, 134.5, 923.35, 134.5, 955.35, 102.5, 955.35, 102.5, 930.35, -433.95, 930.35, -401.95, 930.35, -401.95, 962.35, -433.95, 962.35, -433.95, 941.35, -273.95, 930.35, -241.95, 930.35, -241.95, 962.35, -273.95, 962.35, -273.95, 941.35, -26.05, 958.35, 5.95, 958.35, 5.95, 973.35, -26.05, 973.35, -26.05, 962.35, 227.95, 958.35, 259.95, 958.35, 259.95, 1054.35, 227.95, 1054.35, 227.95, 962.35, -465.95, 962.35, -401.95, 962.35, -401.95, 994.35, -465.95, 994.35, -465.95, 973.35, -305.95, 962.35, -273.95, 962.35, -273.95, 994.35, -305.95, 994.35, -305.95, 973.35, 623, 962.35, 655, 962.35, 655, 994.35, 623, 994.35, 623, 973.35, -152.05, 1022.35, -120.05, 1022.35, -120.05, 1054.35, -152.05, 1054.35, -152.05, 1035.95, -26.05, 1022.35, 5.95, 1022.35, 5.95, 1054.35, -26.05, 1054.35, -26.05, 1035.95, 417.95, 1022.35, 449.95, 1022.35, 449.95, 1054.35, 417.95, 1054.35, 417.95, 1035.95, -681.1, 1035.95, -569.1, 1035.95, -569.1, 1084.95, -681.1, 1084.95, -681.1, 1054.35)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26), PackedInt32Array(27, 28, 29, 30, 31), PackedInt32Array(32, 33, 34, 35, 36), PackedInt32Array(37, 38, 39, 40, 41), PackedInt32Array(42, 43, 44, 45, 46), PackedInt32Array(47, 48, 49, 50, 51), PackedInt32Array(52, 53, 54, 55, 56), PackedInt32Array(57, 58, 59, 60, 61), PackedInt32Array(62, 63, 64, 65, 66), PackedInt32Array(67, 68, 69, 70, 71), PackedInt32Array(72, 73, 74, 75, 76), PackedInt32Array(77, 78, 79, 80, 81), PackedInt32Array(82, 83, 84, 85, 86), PackedInt32Array(87, 88, 89, 90, 91), PackedInt32Array(92, 93, 94, 95, 96), PackedInt32Array(97, 98, 99, 100, 101), PackedInt32Array(102, 103, 104, 105, 106), PackedInt32Array(107, 108, 109, 110, 111), PackedInt32Array(112, 113, 114, 115, 116)])
+
+[node name="Frame 1" type="Node2D" parent="Layer 2"]
+visible = false
+
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false

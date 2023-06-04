@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Handle - Side.png" id="1_8hqs1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Base.png" id="2_qa6pr"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_4ca7g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_12n8n"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Rocket Nozzle.png" id="5_8ypdj"]
+
+[sub_resource type="Animation" id="Animation_lehhc"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fi787"]
+_data = {
+"Default": SubResource("Animation_lehhc")
+}
+
+[node name="      Char  Mario CLIPSMario (Rocket) Floating" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_fi787")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@15342" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(8.4, 0.9)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("1_8hqs1")
+centered = false
+
+[node name="@@15343" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-2.35, -9.2)
+texture = ExtResource("2_qa6pr")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_4ca7g")]
+position = Vector2(-2.35, 7.9)
+script = ExtResource("4_12n8n")
+path = "res://sm63_godot/Char/Mario CLIPS/Mario Floating.tscn"
+
+[node name="@@15344" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(10.65, 7.4)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("1_8hqs1")
+centered = false
+
+[node name="@@15345" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-0.75, -22.45)
+texture = ExtResource("5_8ypdj")
+centered = false

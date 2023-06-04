@@ -46,7 +46,9 @@ func _init(parser: XMLParser):
 				
 				if not text.is_empty():
 					current_node.text = text
-					print("text: '", text, "'")
+					# print("text: '", text, "'")
+			XMLParser.NODE_CDATA:
+				pass
 			_:
 				print("unhandled node type: ", parser.get_node_type())
 

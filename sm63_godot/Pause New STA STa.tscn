@@ -1,8 +1,41 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_k4spj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Yellow Shine.png" id="1_uax4e"]
+
+[sub_resource type="Animation" id="Animation_8nm65"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vab4p"]
+_data = {
+"Default": SubResource("Animation_8nm65")
+}
 
 [node name="Pause New STA STa" type="Node2D"]
-script = ExtResource("1_k4spj")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_vab4p")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@13581" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-7, -7.5)
+texture = ExtResource("1_uax4e")
+centered = false

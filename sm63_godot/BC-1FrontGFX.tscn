@@ -1,10 +1,253 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_uhkfg"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_a5cmq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_vtxcj"]
+
+[sub_resource type="Animation" id="Animation_b6jr4"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ray/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sxvpa"]
+_data = {
+"Default": SubResource("Animation_b6jr4")
+}
 
 [node name="BC-1FrontGFX" type="Node2D"]
-script = ExtResource("1_uhkfg")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_sxvpa")
+}
 
 [node name="Layer 2" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-795.95, 298)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
+
+[node name="@DOMSymbolInstance@459" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-827.95, 171)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
+
+[node name="@DOMSymbolInstance@460" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-985, 535)
+rotation = -1.5708
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
+
+[node name="Group" type="Node2D" parent="Layer 2/Frame 0"]
+position = Vector2(-316.5, 331.25)
+
+[node name="Shape" type="Node2D" parent="Layer 2/Frame 0/Group"]
+
+[node name="@@461" type="Line2D" parent="Layer 2/Frame 0/Group/Shape"]
+width = 1.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="@DOMSymbolInstance@462" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-827.95, 272)
+rotation = 3.14159
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
+
+[node name="@DOMSymbolInstance@463" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-2072.85, 584)
+scale = Vector2(1, 0.75)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
+
+[node name="@Group@464" type="Node2D" parent="Layer 2/Frame 0"]
+position = Vector2(-678.5, 528.25)
+
+[node name="Shape" type="Node2D" parent="Layer 2/Frame 0/@Group@464"]
+
+[node name="@@465" type="Line2D" parent="Layer 2/Frame 0/@Group@464/Shape"]
+width = 1.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="@DOMSymbolInstance@466" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1601.45, 741.75)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@467" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1195.6, 647.75)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@468" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-835.95, 526.5)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@469" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-497.8, 265.5)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@470" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-365.85, 515.8)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@471" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-181.95, 191.9)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@472" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(103.95, -44.35)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@473" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-181.95, 5.8)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@474" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-323.85, 253.9)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@475" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-835.95, 741.75)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
+[node name="@DOMSymbolInstance@476" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1091.6, 475.8)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Code.tscn"
+
 [node name="Ray" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Ray"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-896.25, 719.3)
+rotation = -0.201666
+scale = Vector2(0.615298, 5.62423)
+skew = -2.47955e-05
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
+
+[node name="@DOMSymbolInstance@442" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-744.8, -181.95)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@443" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-689.8, -126.95)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@444" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-634.8, -181.95)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@445" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-689.8, -236.95)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@446" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-649.8, -141.95)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@447" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-649.8, -221.95)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@448" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-729.8, -141.95)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@449" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-729.8, -221.95)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@450" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1520.5, -27.45)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@451" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1465.5, 27.55)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@452" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1410.5, -27.45)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@453" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1465.5, -82.45)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@454" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1425.5, 12.55)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@455" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1425.5, -67.45)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@456" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1505.5, 12.55)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@457" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(-1505.5, -67.45)
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
+
+[node name="@DOMSymbolInstance@458" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_a5cmq")]
+position = Vector2(301.7, 492.35)
+rotation = -1.57092
+scale = Vector2(0.614899, 5.62059)
+skew = -3.33786e-05
+script = ExtResource("2_vtxcj")
+path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"

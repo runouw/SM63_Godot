@@ -1,0 +1,130 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_lc0l4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0374b"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1-Up Mushroom.png" id="3_kvgrn"]
+
+[sub_resource type="Animation" id="Animation_2loor"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Codster/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 4/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lighting/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lighting/Frame 2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Graphics/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Graphics/Frame 1:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kx6b"]
+_data = {
+"Default": SubResource("Animation_2loor")
+}
+
+[node name="  Course Items-PL In-course Items Collectables 1-Up Mushroom1-Up Animation" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_1kx6b")
+}
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Graphics"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 0" instance=ExtResource("1_lc0l4")]
+script = ExtResource("2_0374b")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1 up Glow.tscn"
+
+[node name="Frame 1" type="Node2D" parent="Graphics"]
+visible = false
+
+[node name="@@46924" type="Sprite2D" parent="Graphics/Frame 1"]
+texture_filter = 1
+position = Vector2(-7, -7)
+texture = ExtResource("3_kvgrn")
+centered = false
+
+[node name="Lighting" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Lighting"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Lighting/Frame 0" instance=ExtResource("1_lc0l4")]
+position = Vector2(0.05, -0.1)
+script = ExtResource("2_0374b")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1-Up Light Effect.tscn"
+
+[node name="Frame 2" type="Node2D" parent="Lighting"]
+visible = false
+
+[node name="Layer 4" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="Codster" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Codster"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_n3n1t"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_lyto7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="3_ctu0o"]
+
+[sub_resource type="Animation" id="Animation_rkleu"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3151n"]
+_data = {
+"Default": SubResource("Animation_rkleu")
+}
+
+[node name="      Char  Mario CLIPSMario Fludd Frontflipping" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_3151n")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_n3n1t")]
+position = Vector2(0.15, -2.25)
+script = ExtResource("2_lyto7")
+path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
+
+[node name="@@15550" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
+texture_filter = 1
+position = Vector2(3.15, -10.65)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("3_ctu0o")
+centered = false
+
+[node name="@DOMSymbolInstance@15551" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_n3n1t")]
+position = Vector2(-2.8, 9.8)
+script = ExtResource("2_lyto7")
+path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"

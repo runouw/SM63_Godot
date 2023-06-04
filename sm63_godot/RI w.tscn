@@ -1,8 +1,40 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_vjalx"]
+[sub_resource type="Animation" id="Animation_jd3vg"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cdnie"]
+_data = {
+"Default": SubResource("Animation_jd3vg")
+}
 
 [node name="RI w" type="Node2D"]
-script = ExtResource("1_vjalx")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_cdnie")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@13720" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0.0627451, 0.619608, 0.105882, 1)
+polygon = PackedVector2Array(-17.825, -17.3, -9.075, -17.3, -7.2, 6.4, -15.0831, 6.4, -16.509, -5.925, -4.7, -17.3, 4.625, -17.3, 5.625, -5.925, 6.00947, -0.85, -6.43523, -0.85, -5.89989, -5.925, 9.125, -17.3, 17.8, -17.3, 15.0102, 7.275, 6.625, 7.275, 7.96783, -5.925, -6.43523, -0.85, -0.125, -0.85, -1.125, 6.4, -7.2, 6.4, -0.125, -0.85, 6.00947, -0.85, 6.625, 7.275, 1.10776, 7.275, 0.975, 6.4, -15.0831, 6.4, -1.125, 6.4, -2.625, 17.275, -13.825, 17.275, -14.9819, 7.275, 1.10776, 7.275, 15.0102, 7.275, 13.875, 17.275, 2.625, 17.275)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(20, 21, 22, 23, 24), PackedInt32Array(25, 26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33)])

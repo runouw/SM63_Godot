@@ -1,10 +1,61 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_3a3fu"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_654eb"]
+
+[sub_resource type="Animation" id="Animation_mmim4"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bf1fa"]
+_data = {
+"Default": SubResource("Animation_mmim4")
+}
 
 [node name="Key - Orb of Power Glow Clip" type="Node2D"]
-script = ExtResource("1_3a3fu")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_bf1fa")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@7320" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+polygon = PackedVector2Array(0, -26.225, 0, -26.225, 18.525, -18.575, 26.225, -0.025, 18.525, 18.5, 0, 26.2, 0, 26.2, -18.55, 18.5, -26.2, -0.025, -18.55, -18.575)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_654eb")
+matrix = Transform2D(0.0328674, 0, 0, 0.0328674, 0, 0)
+entries_color = PackedColorArray(0.823529, 0.109804, 0.109804, 0, 0.823529, 0.109804, 0.109804, 0.501961, 0.376471, 0.0509804, 0.0509804, 0.301961, 1, 1, 1, 0)
+entries_ratio = PackedFloat32Array(0.368627, 0.439216, 0.745098, 1)
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

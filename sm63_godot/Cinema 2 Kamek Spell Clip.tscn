@@ -1,8 +1,72 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_85ywx"]
+[sub_resource type="Animation" id="Animation_obgtu"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rjnbv"]
+_data = {
+"Default": SubResource("Animation_obgtu")
+}
 
 [node name="Cinema 2 Kamek Spell Clip" type="Node2D"]
-script = ExtResource("1_85ywx")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_rjnbv")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(47.95, -92.95)
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0/Group"]
+position = Vector2(-0.05, 0.05)
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group/Group"]
+
+[node name="@@4140" type="Line2D" parent="Layer 1/Frame 0/Group/Group/Shape"]
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="@Group@4141" type="Node2D" parent="Layer 1/Frame 0/Group"]
+position = Vector2(-0.05, 0.05)
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group/@Group@4141"]
+
+[node name="@@4142" type="Line2D" parent="Layer 1/Frame 0/Group/@Group@4141/Shape"]
+width = 1.0
+default_color = Color(0, 0, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="@Group@4143" type="Node2D" parent="Layer 1/Frame 0/Group"]
+position = Vector2(-0.05, 0.05)
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group/@Group@4143"]
+
+[node name="@@4144" type="Line2D" parent="Layer 1/Frame 0/Group/@Group@4143/Shape"]
+width = 1.0
+default_color = Color(1, 1, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

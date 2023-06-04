@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ppqg6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0vet7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="3_78ovq"]
+
+[sub_resource type="Animation" id="Animation_vjbc1"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m13nn"]
+_data = {
+"Default": SubResource("Animation_vjbc1")
+}
+
+[node name=" MenuMenu Folder StoryMenu File Emblems Stars" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_m13nn")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ppqg6")]
+position = Vector2(-15, 8.55)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_0vet7")
+path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Star Text.tscn"
+
+[node name="@DOMSymbolInstance@51904" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ppqg6")]
+position = Vector2(-2.6, 8.55)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("2_0vet7")
+path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Star Text.tscn"
+
+[node name="@@51905" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-46.5, -8.4)
+texture = ExtResource("3_78ovq")
+centered = false
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

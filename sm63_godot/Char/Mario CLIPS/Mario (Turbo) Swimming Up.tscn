@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Handle - Side.png" id="1_pqmc5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Base.png" id="2_wn7ed"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_2k7pm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_sf2vy"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Turbo Nozzle.png" id="5_k2c6u"]
+
+[sub_resource type="Animation" id="Animation_8aj63"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kcb8w"]
+_data = {
+"Default": SubResource("Animation_8aj63")
+}
+
+[node name="      Char  Mario CLIPSMario (Turbo) Swimming Up" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_kcb8w")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@15374" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(2.75, 0)
+rotation = 2.87979
+scale = Vector2(1, -1)
+texture = ExtResource("1_pqmc5")
+centered = false
+
+[node name="@@15375" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-5.55, -11.2)
+texture = ExtResource("2_wn7ed")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_2k7pm")]
+position = Vector2(-4.2, 5.55)
+script = ExtResource("4_sf2vy")
+path = "res://sm63_godot/Char/Mario CLIPS/Mario Swimming Up.tscn"
+
+[node name="@@15376" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(6.6, 5.7)
+rotation = 2.87979
+scale = Vector2(1, -1)
+texture = ExtResource("1_pqmc5")
+centered = false
+
+[node name="@@15377" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(17.55, -20.85)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_k2c6u")
+centered = false

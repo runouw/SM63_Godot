@@ -1,16 +1,150 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_ec808"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_m7f1b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4ps45"]
+
+[sub_resource type="Animation" id="Animation_fxdsn"]
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 10:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 11:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.366667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 6/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 4/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Layer 5/Frame 0:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Layer 3/Frame 0:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54el0"]
+_data = {
+"Default": SubResource("Animation_fxdsn")
+}
 
 [node name="Bowser Battle 3 Cinema" type="Node2D"]
-script = ExtResource("1_ec808")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_54el0")
+}
 
 [node name="Layer 3" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_m7f1b")]
+position = Vector2(2.85, 7.15)
+script = ExtResource("2_4ps45")
+path = "res://sm63_godot/Course Items-PL/Backgrounds/Space Far BG.tscn"
+
 [node name="Layer 5" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 5"]
 
 [node name="Layer 4" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_m7f1b")]
+scale = Vector2(1, 0.999939)
+script = ExtResource("2_4ps45")
+path = "res://sm63_godot/Bowser Battle 3 Cinema Course.tscn"
+
 [node name="Layer 6" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 6"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("1_m7f1b")]
+position = Vector2(9, 101.95)
+script = ExtResource("2_4ps45")
+path = "res://sm63_godot/Cinema Message Clip (Press Z).tscn"
+
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_m7f1b")]
+position = Vector2(0.05, 0)
+script = ExtResource("2_4ps45")
+path = "res://sm63_godot/Effects/Transitions/transition from up.tscn"
+
+[node name="Frame 10" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Frame 11" type="Node2D" parent="Layer 1"]
+visible = false

@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_qw037"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_np3u7"]
+
+[sub_resource type="Animation" id="Animation_wjff6"]
+length = 0.333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 4/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 4/Frame 9:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 3/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 3/Frame 9:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_grqnf"]
+_data = {
+"Default": SubResource("Animation_wjff6")
+}
+
+[node name=" Menu Pre-LoaderLoading finished" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_grqnf")
+}
+
+[node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_qw037")]
+position = Vector2(0, -150.2)
+script = ExtResource("2_np3u7")
+path = "res://sm63_godot/Menu/Pre-Loader/Loading Bar Clip.tscn"
+
+[node name="Frame 9" type="Node2D" parent="Layer 3"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9" instance=ExtResource("1_qw037")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -150.2)
+script = ExtResource("2_np3u7")
+path = "res://sm63_godot/Menu/Pre-Loader/Loading Bar Clip.tscn"
+
+[node name="Layer 4" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="Shape" type="Node2D" parent="Layer 4/Frame 0"]
+
+[node name="@@52930" type="Line2D" parent="Layer 4/Frame 0/Shape"]
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Frame 9" type="Node2D" parent="Layer 4"]
+visible = false

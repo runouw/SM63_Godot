@@ -1,0 +1,111 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_80o31"]
+
+[sub_resource type="Animation" id="Animation_w57n4"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8ryt"]
+_data = {
+"Default": SubResource("Animation_w57n4")
+}
+
+[node name="      Char   HUD CLIPS (& BITS) Water Level FolderWater Level Bubble Clip" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_c8ryt")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@14755" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+polygon = PackedVector2Array(0, -15, 0, -15, 10.625, -10.625, 15, 0, 10.625, 10.625, 0, 15, 0, 15, -10.625, 10.625, -15, 0, -10.625, -10.625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_80o31")
+matrix = Transform2D(0.0190277, 0, 0, 0.0190277, 0, 0)
+entries_color = PackedColorArray(0.721569, 0.792157, 0.945098, 0.392157, 0.737255, 0.921569, 0.960784, 0.443137, 0.12549, 0.458824, 0.741176, 0, 0.117647, 0.415686, 0.717647, 0.262745, 0.313726, 0.545098, 0.886275, 0)
+entries_ratio = PackedFloat32Array(0, 0.443137, 0.831373, 0.898039, 1)
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 1"]
+
+[node name="@@14756" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
+polygon = PackedVector2Array(0, -15, 0, -15, 10.625, -10.625, 15, 0, 10.625, 10.625, 0, 15, 0, 15, -10.625, 10.625, -15, 0, -10.625, -10.625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_80o31")
+matrix = Transform2D(0.0190277, 0, 0, 0.0190277, 0, 0)
+entries_color = PackedColorArray(0.776471, 0.835294, 0.956863, 0.431373, 0.709804, 0.909804, 0.956863, 0.380392, 0.313726, 0.545098, 0.886275, 0)
+entries_ratio = PackedFloat32Array(0, 0.133333, 1)
+
+[node name="Frame 2" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 2"]
+
+[node name="@@14757" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
+polygon = PackedVector2Array(0, -15, 0, -15, 10.625, -10.625, 15, 0, 10.625, 10.625, 0, 15, 0, 15, -10.625, 10.625, -15, 0, -10.625, -10.625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_80o31")
+matrix = Transform2D(0.0190277, 0, 0, 0.0190277, 0, 0)
+entries_color = PackedColorArray(0.945098, 0.960784, 0.988235, 0.431373, 1, 1, 1, 0.321569, 0.686275, 0.847059, 0.945098, 0, 0.482353, 0.705882, 0.917647, 0.2, 0.313726, 0.545098, 0.886275, 0)
+entries_ratio = PackedFloat32Array(0, 0.443137, 0.831373, 0.917647, 1)
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

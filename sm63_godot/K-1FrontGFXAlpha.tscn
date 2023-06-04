@@ -1,10 +1,121 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_acw0a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Grass/YI Grassy Ground.png" id="1_isvwd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Rocket Nozzle Box.png" id="2_japuw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Grass/YI Grassy Slope 2.png" id="3_dkac4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Grass/YI Grassy Topsoil.png" id="4_b7eqt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Grass/YI Grassy Slope 1.png" id="5_qdp0a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Grass/YI Grassy Invert Corner.png" id="6_vgnvx"]
+
+[sub_resource type="Animation" id="Animation_j2sx7"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ua1xn"]
+_data = {
+"Default": SubResource("Animation_j2sx7")
+}
 
 [node name="K-1FrontGFXAlpha" type="Node2D"]
-script = ExtResource("1_acw0a")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_ua1xn")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group"]
+
+[node name="@@6840" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_isvwd")
+texture_offset = Vector2(90.05, -66.4)
+polygon = PackedVector2Array(-32, -31.975, -32, -31.975, -9.75, -30.8, 9.7, 45.2, -74, 45.2, -74, -31.95, -74, 45.2, 80, 45.2, 80, 141.55, -74, 141.55)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9)])
+
+[node name="@@6841" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(22.35, -8.65)
+texture = ExtResource("2_japuw")
+centered = false
+
+[node name="@@6842" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-52.5, -53.95)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("3_dkac4")
+centered = false
+
+[node name="@Group@6843" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(-783.7, -50.8)
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@6843"]
+
+[node name="@@6844" type="Polygon2D" parent="Layer 1/Frame 0/@Group@6843/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("4_b7eqt")
+texture_offset = Vector2(-731.2, -5.85)
+polygon = PackedVector2Array(731.2, 6.85, 759.85, 6.85, 759.85, 37.85, 731.2, 37.85)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@@6845" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-7.85, -58.2)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_qdp0a")
+centered = false
+
+[node name="@@6846" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(7.65, 20.2)
+texture = ExtResource("6_vgnvx")
+centered = false
+
+[node name="@Group@6847" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@6847"]
+
+[node name="@@6848" type="Polygon2D" parent="Layer 1/Frame 0/@Group@6847/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("4_b7eqt")
+texture_offset = Vector2(-22.85, -21.2)
+polygon = PackedVector2Array(22.85, 22.2, 70.5, 22.2, 70.5, 53.2, 22.85, 53.2)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

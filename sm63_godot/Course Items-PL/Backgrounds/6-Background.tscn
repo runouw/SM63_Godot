@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/tall Tall mountain () background.png" id="1_y3e21"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_kpy7u"]
+
+[sub_resource type="Animation" id="Animation_ewk2w"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_klmni"]
+_data = {
+"Default": SubResource("Animation_ewk2w")
+}
+
+[node name="  Course Items-PL Backgrounds6-Background" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_klmni")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group"]
+
+[node name="@@46471" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_y3e21")
+texture_offset = Vector2(230, 102.65)
+
+[node name="@@46472" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+polygon = PackedVector2Array(-225, -153.3, 225, -153.3, 225, 153.35, -225, 153.35, -225, -7.3)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+script = ExtResource("2_kpy7u")
+matrix = Transform2D(0, -0.0891113, 0.274658, 0, 0, -80.3)
+entries_color = PackedColorArray(0.0941176, 0.188235, 0.972549, 1, 0.0627451, 0.0627451, 0.670588, 1)
+entries_ratio = PackedFloat32Array(0, 1)

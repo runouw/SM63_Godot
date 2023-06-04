@@ -1,14 +1,300 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_3xp3t"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ahg5d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_frdlh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_rqccd"]
+
+[sub_resource type="Animation" id="Animation_mea88"]
+length = 45.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 3/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 45.2667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 3/Frame 1358:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 45.2667, 45.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meteore/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 45.2667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Meteore/Frame 1358:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 45.2667, 45.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 4/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Layer 4/Frame 89:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.96667, 4.73333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Layer 4/Frame 142:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4.73333, 20.2333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Layer 4/Frame 607:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 20.2333, 45.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Layer 1/Frame 0:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 45.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b7m6u"]
+_data = {
+"Default": SubResource("Animation_mea88")
+}
 
 [node name="BC-1BG" type="Node2D"]
-script = ExtResource("1_3xp3t")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_b7m6u")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-74.05, 128.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@337" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-74.05, 148.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@338" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-94.05, 148.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@339" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-94.05, 128.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@340" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-94.05, 108.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@341" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-74.05, 108.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@342" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-54.05, 108.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@343" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-54.05, 128.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@344" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-54.05, 148.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@345" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-6.55, 108.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor Falling.tscn"
+
+[node name="@DOMSymbolInstance@346" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(13.45, 108.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor Falling.tscn"
+
+[node name="@DOMSymbolInstance@347" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(13.45, 128.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor Falling.tscn"
+
+[node name="@DOMSymbolInstance@348" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-6.55, 128.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor Falling.tscn"
+
+[node name="@DOMSymbolInstance@349" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-94.05, 88.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@350" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-74.05, 88.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@351" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-54.05, 88.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@352" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-94.05, 68.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@353" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-74.05, 68.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
+[node name="@DOMSymbolInstance@354" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-54.05, 68.6)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Mini Meteor.tscn"
+
 [node name="Layer 4" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="Shape" type="Node2D" parent="Layer 4/Frame 0"]
+
+[node name="@@335" type="Polygon2D" parent="Layer 4/Frame 0/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("3_rqccd")
+texture_offset = Vector2(81.9, 0.9)
+texture_scale = Vector2(2, 2)
+polygon = PackedVector2Array(-92.925, -21.425, -29.425, -21.425, -29.4, 298.1, -92.9, 298.1)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@@336" type="Line2D" parent="Layer 4/Frame 0/Shape"]
+points = PackedVector2Array(-29.425, -21.425, -29.4, 298.1, nan, nan, -29.4, 298.1, -92.9, 298.1, nan, nan, -92.925, -21.425, -92.9, 298.1, nan, nan, -92.925, -21.425, -29.425, -21.425, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Frame 89" type="Node2D" parent="Layer 4"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 89" instance=ExtResource("1_ahg5d")]
+position = Vector2(-61.15, 138.35)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/BC Tower Crumble.tscn"
+
+[node name="Frame 142" type="Node2D" parent="Layer 4"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 142" instance=ExtResource("1_ahg5d")]
+modulate = Color(0.960938, 0.960938, 0.960938, 1)
+position = Vector2(-61.15, 138.35)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/BC Tower Crumble.tscn"
+
+[node name="Frame 607" type="Node2D" parent="Layer 4"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 607" instance=ExtResource("1_ahg5d")]
+position = Vector2(-61.15, 138.35)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/BC Tower Crumble.tscn"
 
 [node name="Meteore" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Meteore"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Meteore/Frame 0" instance=ExtResource("1_ahg5d")]
+position = Vector2(-104.85, -163.25)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Meteor Clip.tscn"
+
+[node name="Frame 1358" type="Node2D" parent="Meteore"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Meteore/Frame 1358" instance=ExtResource("1_ahg5d")]
+position = Vector2(3.15, 15.75)
+script = ExtResource("2_frdlh")
+path = "res://sm63_godot/Meteor Clip.tscn"
+
 [node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="Frame 1358" type="Node2D" parent="Layer 3"]
+visible = false

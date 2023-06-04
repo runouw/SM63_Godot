@@ -1,10 +1,199 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_x1h0j"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_m21hq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_i5i7o"]
+
+[sub_resource type="Animation" id="Animation_7mmfh"]
+length = 3.06667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 3.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 2/Frame 91:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.03333, 3.06667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 1/Frame 1:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Layer 1/Frame 22:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.733333, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Layer 1/Frame 45:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.5, 2.26667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Layer 1/Frame 68:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.26667, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Layer 1/Frame 90:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 3, 3.06667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vgv3q"]
+_data = {
+"Default": SubResource("Animation_7mmfh")
+}
 
 [node name="Heart Clip1" type="Node2D"]
-script = ExtResource("1_x1h0j")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_vgv3q")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_m21hq")]
+position = Vector2(-0.1, 0)
+script = ExtResource("2_i5i7o")
+path = "res://sm63_godot/Heart Clip GFX.tscn"
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_m21hq")]
+rotation = 0.018235
+scale = Vector2(1.00503, 1)
+skew = -0.0182351
+script = ExtResource("2_i5i7o")
+path = "res://sm63_godot/Heart Clip GFX.tscn"
+
+[node name="Frame 22" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 22" instance=ExtResource("1_m21hq")]
+rotation = 0.453082
+scale = Vector2(1.11222, 1)
+skew = -0.453082
+script = ExtResource("2_i5i7o")
+path = "res://sm63_godot/Heart Clip GFX.tscn"
+
+[node name="Frame 45" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 45" instance=ExtResource("1_m21hq")]
+script = ExtResource("2_i5i7o")
+path = "res://sm63_godot/Heart Clip GFX.tscn"
+
+[node name="Frame 68" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 68" instance=ExtResource("1_m21hq")]
+position = Vector2(0, 0.05)
+rotation = -0.476419
+scale = Vector2(1.12531, 1)
+skew = 0.476419
+script = ExtResource("2_i5i7o")
+path = "res://sm63_godot/Heart Clip GFX.tscn"
+
+[node name="Frame 90" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 90" instance=ExtResource("1_m21hq")]
+script = ExtResource("2_i5i7o")
+path = "res://sm63_godot/Heart Clip GFX.tscn"
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 2"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_m21hq")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 15)
+scale = Vector2(0.265381, 0.620743)
+script = ExtResource("2_i5i7o")
+path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
+
+[node name="Frame 91" type="Node2D" parent="Layer 2"]
+visible = false

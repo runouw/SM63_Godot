@@ -1,10 +1,69 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_pr8h4"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_idvtf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mdhb0"]
+
+[sub_resource type="Animation" id="Animation_plba1"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4f6n"]
+_data = {
+"Default": SubResource("Animation_plba1")
+}
 
 [node name="BC-1CamEdge" type="Node2D"]
-script = ExtResource("1_pr8h4")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_n4f6n")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_idvtf")]
+position = Vector2(-897.8, 720.45)
+script = ExtResource("2_mdhb0")
+path = "res://sm63_godot/BC1 CamEdge Rise.tscn"
+
+[node name="@DOMSymbolInstance@430" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_idvtf")]
+position = Vector2(331.05, -39.95)
+script = ExtResource("2_mdhb0")
+path = "res://sm63_godot/BC-Side Lava.tscn"
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Shape" type="Node2D" parent="Layer 2/Frame 0"]
+
+[node name="@@429" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
+color = Color(0.2, 0.2, 0.2, 1)
+polygon = PackedVector2Array(-2415.2, -663.8, 456.65, -663.8, 456.65, -485.9, -2415.2, -485.9, -2415.2, -485.9, -2217.3, -485.9, -2217.3, 1051.7, -2415.2, 1051.7, -2415.2, 591.7, 230.75, -485.9, 456.65, -485.9, 456.65, 591.7, 230.75, 591.7)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12)])

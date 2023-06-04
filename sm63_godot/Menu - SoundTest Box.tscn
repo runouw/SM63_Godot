@@ -1,12 +1,123 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_2ebm8"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_e7g1v"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_brwey"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_ct6sc"]
+
+[sub_resource type="Animation" id="Animation_mvwy1"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 3/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Back/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yqw7g"]
+_data = {
+"Default": SubResource("Animation_mvwy1")
+}
 
 [node name="Menu - SoundTest Box" type="Node2D"]
-script = ExtResource("1_2ebm8")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_yqw7g")
+}
 
 [node name="Back" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Back"]
+
+[node name="Shape" type="Node2D" parent="Back/Frame 0"]
+
+[node name="@@13238" type="Polygon2D" parent="Back/Frame 0/Shape"]
+polygon = PackedVector2Array(-125, -25.025, 125, -25.025, 125, 24.975, -125, 24.975)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+script = ExtResource("1_e7g1v")
+matrix = Transform2D(0.287552, 0, 0, 0.164795, -118.35, -25.7)
+entries_color = PackedColorArray(0.568627, 0.568627, 0.568627, 1, 0.34902, 0.34902, 0.34902, 1)
+entries_ratio = PackedFloat32Array(0.0392157, 1)
+
+[node name="@@13239" type="Line2D" parent="Back/Frame 0/Shape"]
+points = PackedVector2Array(125, -25.025, 125, 24.975, nan, nan, 125, 24.975, -125, 24.975, nan, nan, -125, -25.025, -125, 24.975, nan, nan)
+width = 1.0
+default_color = Color(0.2, 0.2, 0.2, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Back/Frame 0" instance=ExtResource("2_brwey")]
+position = Vector2(0, -0.05)
+script = ExtResource("3_ct6sc")
+path = "res://sm63_godot/Menu - \"Sound Test\".tscn"
+
+[node name="Group" type="Node2D" parent="Back/Frame 0"]
+
+[node name="Shape" type="Node2D" parent="Back/Frame 0/Group"]
+
+[node name="@@13240" type="Line2D" parent="Back/Frame 0/Group/Shape"]
+width = 1.0
+default_color = Color(0.2, 0.2, 0.2, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="Layer 2" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_brwey")]
+position = Vector2(112.5, -12.55)
+script = ExtResource("3_ct6sc")
+path = "res://sm63_godot/Menu - Sound Test Play.tscn"
+
+[node name="@DOMSymbolInstance@13235" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_brwey")]
+position = Vector2(112.5, 12.45)
+script = ExtResource("3_ct6sc")
+path = "res://sm63_godot/Menu - Sound Test Pause.tscn"
+
+[node name="@DOMSymbolInstance@13236" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_brwey")]
+position = Vector2(-112.5, -12.5)
+script = ExtResource("3_ct6sc")
+path = "res://sm63_godot/Menu - SoundTest Next-Back.tscn"
+
+[node name="@DOMSymbolInstance@13237" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_brwey")]
+position = Vector2(-87.5, -12.5)
+script = ExtResource("3_ct6sc")
+path = "res://sm63_godot/Menu - SoundTest Next-Back.tscn"
+
 [node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]

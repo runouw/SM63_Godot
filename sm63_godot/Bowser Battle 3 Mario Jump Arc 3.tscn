@@ -1,8 +1,84 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_uid7v"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 3.png" id="1_srqrq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Fall - 3.png" id="2_0k3sf"]
+
+[sub_resource type="Animation" id="Animation_7pckp"]
+length = 1.03333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 4:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 30:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p0ci7"]
+_data = {
+"Default": SubResource("Animation_7pckp")
+}
 
 [node name="Bowser Battle 3 Mario Jump Arc 3" type="Node2D"]
-script = ExtResource("1_uid7v")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_p0ci7")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@3130" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-9.5, -16)
+texture = ExtResource("1_srqrq")
+centered = false
+
+[node name="Frame 4" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@3131" type="Sprite2D" parent="Layer 1/Frame 4"]
+texture_filter = 1
+position = Vector2(-24.15, -15.15)
+texture = ExtResource("2_0k3sf")
+centered = false
+
+[node name="Frame 30" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@3132" type="Sprite2D" parent="Layer 1/Frame 30"]
+texture_filter = 1
+position = Vector2(-122.15, -15.15)
+texture = ExtResource("2_0k3sf")
+centered = false

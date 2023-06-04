@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Handle - Side.png" id="1_ohgw6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Base.png" id="2_jqiva"]
+
+[sub_resource type="Animation" id="Animation_i647k"]
+length = 0.0666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhl8d"]
+_data = {
+"Default": SubResource("Animation_i647k")
+}
+
+[node name="      Char  Fludd CLIPSFludd Side" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_xhl8d")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@14495" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(8.4, 0.2)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("1_ohgw6")
+centered = false
+
+[node name="@@14496" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-2.35, -9.9)
+texture = ExtResource("2_jqiva")
+centered = false
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(-1.25, 9.7)
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group"]
+
+[node name="@@14497" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_ohgw6")
+texture_offset = Vector2(11.9, -3)
+texture_scale = Vector2(1, -1)
+texture_rotation = 3.14159
+polygon = PackedVector2Array(4.75, -3, 11.9, -3, 11.9, 7, 4.75, 7)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false

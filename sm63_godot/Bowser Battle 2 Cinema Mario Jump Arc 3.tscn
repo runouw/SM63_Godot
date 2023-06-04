@@ -1,8 +1,111 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_r0vet"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Fall - 3.png" id="1_vmqtm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="2_puqas"]
+
+[sub_resource type="Animation" id="Animation_wm7h1"]
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 3:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 4:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333, 1.46667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 44:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.46667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ktjc"]
+_data = {
+"Default": SubResource("Animation_wm7h1")
+}
 
 [node name="Bowser Battle 2 Cinema Mario Jump Arc 3" type="Node2D"]
-script = ExtResource("1_r0vet")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_2ktjc")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@1956" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(9.5, -15.5)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("1_vmqtm")
+centered = false
+
+[node name="Frame 3" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@1957" type="Sprite2D" parent="Layer 1/Frame 3"]
+texture_filter = 1
+position = Vector2(36, -8.65)
+rotation = -2.618
+scale = Vector2(1, -1)
+texture = ExtResource("1_vmqtm")
+centered = false
+
+[node name="Frame 4" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@1958" type="Sprite2D" parent="Layer 1/Frame 4"]
+texture_filter = 1
+position = Vector2(24.6, -15.9)
+rotation = 0.785398
+scale = Vector2(1, 1)
+texture = ExtResource("2_puqas")
+centered = false
+
+[node name="Frame 44" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@1959" type="Sprite2D" parent="Layer 1/Frame 44"]
+texture_filter = 1
+position = Vector2(202, -14.5)
+texture = ExtResource("2_puqas")
+centered = false

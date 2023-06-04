@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 4.png" id="1_dhf4r"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Scared.png" id="2_hgq81"]
+
+[sub_resource type="Animation" id="Animation_770lv"]
+length = 0.0666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_noa2k"]
+_data = {
+"Default": SubResource("Animation_770lv")
+}
+
+[node name="   EnemiesNormal G-Z GoombaGoomba Tumble" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_noa2k")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0/Group"]
+position = Vector2(0.5, -1.25)
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group/Group"]
+
+[node name="@@50611" type="Polygon2D" parent="Layer 1/Frame 0/Group/Group/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_dhf4r")
+texture_offset = Vector2(9.15, 8.5)
+polygon = PackedVector2Array(-8.55, 0.9, 8.7, 0.9, 8.7, 9.4, -8.55, 9.4)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@Group@50612" type="Node2D" parent="Layer 1/Frame 0/Group"]
+position = Vector2(0.25, -1.25)
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group/@Group@50612"]
+
+[node name="@@50613" type="Polygon2D" parent="Layer 1/Frame 0/Group/@Group@50612/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("2_hgq81")
+texture_offset = Vector2(8.15, 8.5)
+polygon = PackedVector2Array(-7.55, -7.6, 7.7, -7.6, 7.7, 4.9, -7.55, 4.9)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@50614" type="Sprite2D" parent="Layer 1/Frame 1"]
+texture_filter = 1
+position = Vector2(-8.75, -9.75)
+texture = ExtResource("1_dhf4r")
+centered = false
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

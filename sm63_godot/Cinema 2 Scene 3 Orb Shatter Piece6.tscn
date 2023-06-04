@@ -1,10 +1,72 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_38i8w"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_g37yy"]
+
+[sub_resource type="Animation" id="Animation_r1e6r"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_apq3a"]
+_data = {
+"Default": SubResource("Animation_r1e6r")
+}
 
 [node name="Cinema 2 Scene 3 Orb Shatter Piece6" type="Node2D"]
-script = ExtResource("1_38i8w")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_apq3a")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(23.95, 19.15)
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group"]
+
+[node name="@@4219" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+polygon = PackedVector2Array(-22.575, -27.225, -22.575, -27.225, -14.25, -19.5, -15.9, -14.9, -28.95, -11.25, -33.625, -11.125, -33.625, -11.125, -25, -25)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
+script = ExtResource("1_g37yy")
+matrix = Transform2D(0.0443726, 0, 0, 0.0443726, 0, 0)
+entries_color = PackedColorArray(0.972549, 0.94902, 0.760784, 0.0823529, 0.996078, 0.968627, 0.737255, 0.623529)
+entries_ratio = PackedFloat32Array(0, 1)
+
+[node name="@@4220" type="Line2D" parent="Layer 1/Frame 0/Group/Shape"]
+points = PackedVector2Array(-22.575, -27.225, -25, -25, nan, nan, -25, -25, -33.625, -11.125, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

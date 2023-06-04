@@ -1,10 +1,141 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_awgr5"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_snayr"]
+
+[sub_resource type="Animation" id="Animation_ay7mj"]
+length = 1.03333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 1.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 9:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 1/Frame 21:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Layer 1/Frame 22:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.733333, 1.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2jnp"]
+_data = {
+"Default": SubResource("Animation_ay7mj")
+}
 
 [node name="Cinema 2 Sleep Invert 2" type="Node2D"]
-script = ExtResource("1_awgr5")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_n2jnp")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@4298" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+polygon = PackedVector2Array(-0.025, -7.525, -0.025, -7.525, 5.275, -5.375, 7.475, -0.025, 5.275, 5.275, -0.025, 7.475, -0.025, 7.475, -5.375, 5.275, -7.525, -0.025, -5.375, -5.375)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_snayr")
+matrix = Transform2D(0.00880432, 0, 0, 0.00880432, 0, 0)
+entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
+entries_ratio = PackedFloat32Array(0.321569, 1)
+
+[node name="Frame 9" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 9"]
+
+[node name="@@4299" type="Polygon2D" parent="Layer 1/Frame 9/Shape"]
+polygon = PackedVector2Array(-25.9, -7.5, -25.9, -7.5, -20.6, -5.35, -18.4, 0, -20.6, 5.3, -25.9, 7.5, -25.9, 7.5, -31.25, 5.3, -33.4, 0, -31.25, -5.35)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_snayr")
+matrix = Transform2D(0.00880432, 0, 0, 0.00880432, -25.9, 0)
+entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+entries_ratio = PackedFloat32Array(0.321569, 1)
+
+[node name="Frame 21" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 21"]
+
+[node name="@@4300" type="Polygon2D" parent="Layer 1/Frame 21/Shape"]
+polygon = PackedVector2Array(-65.025, -7.525, -65.025, -7.525, -59.725, -5.375, -57.525, -0.025, -59.725, 5.275, -65.025, 7.475, -65.025, 7.475, -70.375, 5.275, -72.525, -0.025, -70.375, -5.375)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_snayr")
+matrix = Transform2D(0.00880432, 0, 0, 0.00880432, -65, 0)
+entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
+entries_ratio = PackedFloat32Array(0.27451, 1)
+
+[node name="Frame 22" type="Node2D" parent="Layer 1"]
+visible = false
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Frame 1" type="Node2D" parent="Layer 2"]
+visible = false

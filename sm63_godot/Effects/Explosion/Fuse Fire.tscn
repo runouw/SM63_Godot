@@ -1,0 +1,132 @@
+[gd_scene load_steps=3 format=3]
+
+[sub_resource type="Animation" id="Animation_66dnk"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0trdb"]
+_data = {
+"Default": SubResource("Animation_66dnk")
+}
+
+[node name="   Effects ExplosionFuse Fire" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_0trdb")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@48581" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(1, 0.6, 0, 1)
+polygon = PackedVector2Array(-0.75, -6.15, -0.75, -6.15, -0.75, -0.15, -3.95833, -0.15, -3.8, -1.3, 4.75, -0.9, 5.5, -0.9, 4.56522, -0.15, 2.5, -0.15, -3.95833, -0.15, 4.56522, -0.15, 1.2, 2.55, -0.45, 4.625, -1.125, 4.975, -1.9, 5.85, -3.1, 6.1, -3.1, 6.1, -4.825, 5.725, -4.75, 5.6, -4.33007, 2.55)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)])
+
+[node name="@@48582" type="Line2D" parent="Layer 1/Frame 0/Shape"]
+points = PackedVector2Array(-3.8, -1.3, -4.75, 5.6, nan, nan, -0.75, -6.15, -3.8, -1.3, nan, nan, -0.75, -6.15, -0.75, -0.15, nan, nan, -0.75, -0.15, 2.5, -0.15, nan, nan, 4.75, -0.9, 2.5, -0.15, nan, nan, 4.75, -0.9, 5.5, -0.9, nan, nan, 5.5, -0.9, 1.2, 2.55, nan, nan, 1.2, 2.55, -0.45, 4.625, nan, nan, -0.45, 4.625, -1.125, 4.975, nan, nan, -4.75, 5.6, -5.025, 5.6, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="@@48583" type="Line2D" parent="Layer 1/Frame 0/Shape"]
+points = PackedVector2Array(-1.125, 4.975, -1.9, 5.85, nan, nan, -1.9, 5.85, -3.1, 6.1, nan, nan, -4.825, 5.725, -3.1, 6.1, nan, nan, -5.025, 5.6, -4.825, 5.725, nan, nan, -5.5, 5.1, -5.025, 5.6, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 1"]
+
+[node name="@@48584" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(3, -13, 3, -13, 2.5, -10, 2.5, -7.5, 0.602564, -7.5, 0.7, -7.975, 1.55, -10.2, -3.5, -9.5, -3.5, -9.5, 0.5, -7, -3.5, -7, -3.5, -8.75, 8, -8.75, 8, -8.75, 6.89706, -7.5, 2.5, -7.5, 4.59, -7.975, 0.602564, -7.5, 6.89706, -7.5, 6.45588, -7, 0.5, -7, -3.5, -7, 6.45588, -7, 0.5, -0.25, -0.25, 0.25, -0.25, 0.25, -3.5, -6.75)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25, 26)])
+
+[node name="@@48585" type="Line2D" parent="Layer 1/Frame 1/Shape"]
+points = PackedVector2Array(-3.5, -6.75, -0.25, 0.25, nan, nan, -3.5, -9.5, -3.5, -6.75, nan, nan, -3.5, -9.5, 0.5, -7, nan, nan, 0.7, -7.975, 0.5, -7, nan, nan, 1.55, -10.2, 0.7, -7.975, nan, nan, 3, -13, 1.55, -10.2, nan, nan, 3, -13, 2.5, -10, nan, nan, 2.5, -10, 2.5, -7.5, nan, nan, 8, -8.75, 2.5, -7.5, nan, nan, 8, -8.75, 0.5, -0.25, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Frame 2" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 2"]
+
+[node name="@@48586" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
+color = Color(1, 0.4, 0, 1)
+polygon = PackedVector2Array(-1.75, -11.15, -1.75, -11.15, 1.3, -6.3, 1.45833, -5.15, -1.75, -5.15, -1.75, -6.3, -8, -5.9, -7.25, -5.9, -5, -5.15, -7.06522, -5.15, -7.06522, -5.15, 1.45833, -5.15, 2.25, 0.6, 2.325, 0.725, 0.6, 1.1, 0.6, 1.1, -0.6, 0.85, -1.375, -0.025, -2.05, -0.375, -3.7, -2.45)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14, 15, 16, 17, 18, 19)])
+
+[node name="@@48587" type="Line2D" parent="Layer 1/Frame 2/Shape"]
+points = PackedVector2Array(2.325, 0.725, 0.6, 1.1, nan, nan, -0.6, 0.85, 0.6, 1.1, nan, nan, -1.375, -0.025, -0.6, 0.85, nan, nan, -2.05, -0.375, -1.375, -0.025, nan, nan, -3.7, -2.45, -2.05, -0.375, nan, nan, -8, -5.9, -3.7, -2.45, nan, nan, -8, -5.9, -7.25, -5.9, nan, nan, -7.25, -5.9, -5, -5.15, nan, nan, -5, -5.15, -1.75, -5.15, nan, nan, -1.75, -11.15, -1.75, -5.15, nan, nan, -1.75, -11.15, 1.3, -6.3, nan, nan, 1.3, -6.3, 2.25, 0.6, nan, nan, 2.25, 0.6, 2.525, 0.6, nan, nan, 3, 0.1, 2.525, 0.6, nan, nan, 2.525, 0.6, 2.325, 0.725, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

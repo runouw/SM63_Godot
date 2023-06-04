@@ -1,0 +1,474 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Volcano Rock 1.png" id="1_kgqof"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_jp3vy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_joerf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Stone PL x2.png" id="4_otm1f"]
+
+[sub_resource type="Animation" id="Animation_j64lq"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HL/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HL/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HL/Frame 2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Coins/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Ground/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jp54r"]
+_data = {
+"Default": SubResource("Animation_j64lq")
+}
+
+[node name="  Course Clips 5 - Lethal Lava LandVolcano (5,6)5-6BackGFX" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_jp54r")
+}
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Ground"]
+
+[node name="Group" type="Node2D" parent="Ground/Frame 0"]
+position = Vector2(0, -30)
+
+[node name="Shape" type="Node2D" parent="Ground/Frame 0/Group"]
+
+[node name="@@32122" type="Polygon2D" parent="Ground/Frame 0/Group/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_kgqof")
+texture_offset = Vector2(-412.5, -264.9)
+texture_scale = Vector2(1.3913, 1.3913)
+polygon = PackedVector2Array(149.25, -1383.65, 149.25, -1383.65, 191.775, -1313.55, 185.45, -1299.05, 184.4, -1295.75, 177.05, -1282.8, 171.85, -1279.1, 152, -1272.7, 145.85, -1271.3, 111.9, -1254.95, 97.7, -1243.2, 92.15, -1238.65, 72.25, -1224.55, 39, -1204.95, 4.9, -1192.25, -0.85, -1190.45, -7.05, -1189.2, -45.05, -1183.2, -54.9, -1180.6, -59.1, -1179.65, -63.25, -1177.1, -71.25, -1169.2, -78.275, -1162.35, -78.275, -1162.35, -70.9, -1238.53, -43.05, -1244.05, -37, -1247.9, -32.8, -1251.65, -26.3, -1258.15, -18.9, -1263.65, -6.8, -1269.55, 28.05, -1282.8, 32.85, -1284.25, 49, -1289.65, 53.75, -1291.4, 64, -1294.8, 74.9, -1298.05, 86.75, -1303.25, 93.1, -1306.65, 97.7, -1309.3, 101.2, -1311.5, 110.65, -1318.25, 120.85, -1330.95, 125.25, -1345.85, 131.6, -1367.05, 143.9, -1379.95, 146.7, -1382.15, -103.1, -1054.75, -99.1, -1054.75, -94.65, -1051, -92.55, -1047.25, -81.65, -1033.2, -78.15, -1028.8, -73.05, -1021.9, -72, -1008.95, -74.7, -985, -74.1, -981.9, -65.5, -965.5, -69.1, -946, -74.15, -939.15, -79.2, -932, -81.05, -920.95, -86.15, -908.25, -97.2, -902.3, -103.1, -902.3, -103.1, -1051, 241, -928.275, 241, -928.275, 252.625, -877.7, 249.6, -874.25, 238, -860.9, 213.9, -830, 196.65, -805.15, 193.9, -802, 176.2, -784.7, 160.7, -768.15, 137.15, -737.8, 134.6, -734.25, 128.75, -728.15, 115.2, -694, 113.65, -687.15, 108.4, -676.8, 110.85, -669.6, 117.8, -666.55, 124.95, -664, 133.576, -660.85, -24, -660.85, -5.9, -662.65, -1.05, -664.05, 12.4, -672.65, 18.35, -679.65, 30.3, -692.65, 33.8, -696.15, 58.65, -724.2, 64, -733.95, 70.05, -754.95, 73.35, -765.25, 75.1, -778.95, 75.6, -785.05, 75.9, -821.95, 77.5, -828.2, 79.3, -831.8, 89.65, -846.25, 92.2, -848.75, 119.2, -873.6, 123.95, -876.95, 157.75, -895.4, 170.75, -902.3, 178.75, -907.25, 188, -911.85, 195.85, -916.1, 199.9, -917.4, 209.85, -920.4, 221.95, -921.3, 232.9, -921.35, 239.1, -927.85, -108, -670.75, -108, -670.75, -72.8762, -669.55, -145, -669.55, -128.812, -670.075, -155.15, -670.075, -155.15, -670.075, -145, -669.55, -155.373, -669.55, -155.352, -669.6, -155.373, -669.55, -72.8762, -669.55, -69.95, -669.45, -63.05, -668.6, -60, -668, -24, -660.85, -159.069, -660.85, -155.416, -669.45, -159.069, -660.85, 133.576, -660.85, 133.85, -660.75, 140.95, -660, 145.15, -659.35, 181.85, -648.75, 202.8, -639.6, 210, -636, 226.7, -623.7, 234.172, -612.85, -179.461, -612.85, -159.112, -660.75, -179.461, -612.85, 109.95, -612.85, 85.6076, -612.4, -179.652, -612.4, 109.95, -612.85, 234.172, -612.85, 249.15, -591.1, 250.961, -587.65, 219.616, -587.65, 215.1, -593.15, 203, -599.2, 193.85, -601.45, 190.05, -602.4, 183.75, -604.45, 162.95, -606.95, 134.85, -611.45, 128.95, -612.1, 121.349, -612.4, -179.652, -612.4, 71, -612.4, 67.3, -611.5, 52.75, -605.35, 40.95, -602.45, 33, -601.85, 21.95, -600.15, 2.1, -594.55, -2, -592.95, -22.3211, -587.65, -190.167, -587.65, -179.674, -612.35, 71, -612.4, 85.6076, -612.4, 82.9, -612.35, 82.9, -612.35, -190.167, -587.65, -157, -587.65, -161.25, -586.35, -165.406, -584.95, -191.314, -584.95, -190.38, -587.15, -157, -587.65, -22.3211, -587.65, -39, -583.3, -53, -582.75, -53, -582.75, -77.1, -584.35, -84, -584.85, -112.05, -586.5, -118, -587.15, 219.616, -587.65, 250.961, -587.65, 253.35, -583.1, 258.275, -572.9, 248, -545.1, 248, -545.1, 242.95, -549.95, 230.5, -565.8, 227.7, -575.9, 226.8, -578.9, 220.026, -587.15, -191.314, -584.95, -188.1, -584.95, -193.05, -578.525, -194.15, -578.275, -194.15, -578.275, -191.357, -584.85, -188.1, -584.95, -165.406, -584.95, -166, -584.75, -170.25, -583.4, -175.5, -581.65, -178.4, -580.6, -179.4, -555.95, -176.5, -545.95, -175.6, -522.15, -173.9, -516.95, -173.2, -510.95, -173, -471.95, -172.6, -466, -172.15, -451.95, -170.3, -423.95, -170.3, -423.95, -193.575, -427.725, -191.45, -434.95, -190.55, -454.95, -192.1, -467.9, -196.95, -478, -200.6, -484.15, -202.2, -487.85, -203.25, -492.05, -204.45, -503.9, -205.05, -532.95, -205.4, -536.85, -208.8, -546.05, -210.45, -548.6, -213.575, -551.825, -193.05, -578.525, -188.177, -584.85, 260.95, -509.475, 260.95, -509.475, 300.975, -462.525, 301.1, -460.95, 299.9, -449.95, 297.85, -433.95, 297.6, -430, 291.3, -410.9, 290.45, -406.05, 282.55, -390.75, 280.95, -376.95, 279.95, -365.95, 275.95, -360.95, 275.95, -360.95, 274.35, -364.05, 273.65, -367.9, 271.45, -376.95, 271.25, -396.95, 269.6, -419.8, 262.8, -440.9, 262.4, -443.95, 261.4, -484.95, 261.052, -503.9, -144.8, -328.7, -144.8, -328.7, -126.85, -310.15, -120, -303.95, -106.2, -294.55, -96.05, -293.25, -91.6, -292.75, -88.05, -291.65, -84.95, -291.35, -73, -290.75, -52, -289.75, -150.216, -289.75, -147.38, -310.15, 226.95, -306.35, 226.95, -306.35, 242.8, -303.5, 246.1, -302.35, 250.95, -300.95, 262.2, -297.5, 274.95, -293.95, 284.05, -291.3, 289.2, -289.5, 310.9, -284.8, 348.95, -280.75, 139.246, -280.75, 150.05, -284.75, 167.9, -289.4, 176, -290.5, 181.95, -290.95, 203.95, -291.4, 206.4, -298.2, 210.9, -304.3, 213.95, -304.85, -10.05, -295.25, -10.05, -295.25, 19.95, -293.65, 29.4214, -289.75, -52, -289.75, -13.8, -294.35, -12.9667, -294.55, -150.216, -289.75, 29.4214, -289.75, 31.85, -288.75, 36.05, -286, 48.95, -271.95, 51.3, -269.4, -153.046, -269.4, -150.251, -289.5, 352.625, -280.9, 352.625, -280.9, 352.659, -280.75, 348.95, -280.75, 139.246, -280.75, 352.659, -280.75, 355.26, -269.4, 51.3, -269.4, 78.8, -271.4, 86.95, -272.5, 90, -272.6, 98.95, -273.05, 113.1, -275.5, 118.95, -276.55, 136.95, -279.9, -153.046, -269.4, 355.26, -269.4, 365.662, -224, -159.36, -224, -159.36, -224, 281.95, -224, 250.9, -222.4, 250.128, -222.35, -159.589, -222.35, -159.415, -223.6, 281.95, -224, 365.662, -224, 368.75, -210.525, 368.75, -210.525, 357.95, -211.4, 354.9, -211.8, 327.85, -217.35, 320.95, -218.2, 314.95, -219, 286.9, -223.6, -159.589, -222.35, 204.95, -222.35, 179, -220.65, 155.95, -216.05, 143, -213.6, 134.689, -210.2, -161.279, -210.2, -159.645, -221.95, 204.95, -222.35, 250.128, -222.35, 243.95, -221.95, 243.95, -221.95, -161.279, -210.2, -83.9, -210.2, -88.1, -209.35, -117.05, -206.25, -132.1, -203.35, -135.95, -202.65, -143, -200.4, -153.95, -196.75, -163.149, -196.75, -161.307, -210, -83.9, -210.2, 134.689, -210.2, 129.8, -208.2, 122, -204.75, 86.5359, -199.95, 34, -199.95, -2, -200.3, -9.1, -201.6, -14, -202.95, -28.95, -204.8, -34.1, -205.45, -38.9, -206.4, -62, -210, 71.95, -199.95, 86.5359, -199.95, 83.95, -199.6, 83.95, -199.6, -163.149, -196.75, -153.95, -196.75, -159.1, -195.45, -159.1, -195.45, -163.25, -196.025, -279, -126.625, -279, -126.625, -273.5, -117.25, -270.95, -114, -255.15, -100.7, -251.7, -98.35, -246.1, -94.75, -230.9, -84.05, -227.2, -80.75, -216, -63.95, -214.8, -56, -218.65, -31.95, -218.995, -21.7, -315.1, -21.7, -315.1, -92, -288.774, -117.25, -50, -101, -50, -101, -42.7, -92.1, -41.2, -88.9, -32.7, -73.2, -15.85, -59.35, -11.95, -58.25, 27, -54.85, -74.4162, -54.85, -74.2, -55.15, -54.65, -88.85, -53.25, -92.1, -50.1096, -100.7, 206.35, -73.8, 206.35, -73.8, 221.6, -48.8, 223.25, -45.1, 233.3, -32.35, 239.2, -28.35, 246, -26.7, 262, -26.6, 264.518, -25.55, 145.05, -25.55, 165.2, -36.85, 167.95, -40.05, 182.85, -55.15, 202.05, -65.8, 205, -67, 206.231, -73.2, 84, -68.2, 84, -68.2, 92.4, -64.25, 94.85, -60.9, 99.1055, -54.85, 27, -54.85, 55.15, -58.55, 67.1, -62.75, 70.85, -64.3, 74.15, -65.7, 79.272, -67, -74.4162, -54.85, 99.1055, -54.85, 107.3, -43.2, 119.9, -29.75, 145.05, -25.55, -94.9364, -25.55, -82.65, -43.75, -78.4, -49.3, -76.65, -51.75, -94.9364, -25.55, 264.518, -25.55, 273.75, -21.7, 278.8, -17.7, 279.8, -14.05, 278.9, -10, 280.35, 8.85, 288.7, 19.3, 294.1, 23.85, 312.3, 46.8, 314.75, 51.1, 320.575, 61.95, -120.75, 61.95, -121.35, 40.9, -117.95, 34.95, -107.35, 8, -105.4, -8.85, -104.05, -12.05, -97.5355, -21.7, -315.1, -21.7, -218.995, -21.7, -219.25, -14.1, -217.6, -9.2, -206.65, 9.85, -204.2, 14.15, -199.95, 30, -202.65, 49.1, -207.075, 68, -315.1, 68, -315.1, -17.7)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46), PackedInt32Array(47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65), PackedInt32Array(66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115), PackedInt32Array(116, 117, 118, 119, 120), PackedInt32Array(121, 122, 123, 124, 125), PackedInt32Array(126, 127, 128, 129, 130, 131, 132, 133), PackedInt32Array(134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145), PackedInt32Array(146, 147, 148, 149), PackedInt32Array(150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163), PackedInt32Array(164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175), PackedInt32Array(176, 177, 178, 179), PackedInt32Array(180, 181, 182, 183, 184, 185), PackedInt32Array(186, 187, 188, 189, 190, 191, 192, 193, 194), PackedInt32Array(195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205), PackedInt32Array(206, 207, 208, 209, 210, 211), PackedInt32Array(212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243), PackedInt32Array(244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266), PackedInt32Array(267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279), PackedInt32Array(280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299), PackedInt32Array(300, 301, 302, 303, 304, 305, 306), PackedInt32Array(307, 308, 309, 310, 311, 312, 313, 314), PackedInt32Array(315, 316, 317, 318), PackedInt32Array(319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329), PackedInt32Array(330, 331, 332, 333), PackedInt32Array(334, 335, 336, 337, 338, 339), PackedInt32Array(340, 341, 342, 343, 344, 345, 346, 347, 348, 349), PackedInt32Array(350, 351, 352, 353, 354, 355, 356, 357), PackedInt32Array(358, 359, 360, 361), PackedInt32Array(362, 363, 364, 365, 366, 367, 368, 369, 370, 371), PackedInt32Array(372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384), PackedInt32Array(385, 386, 387, 388), PackedInt32Array(389, 390, 391, 392, 393), PackedInt32Array(394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409), PackedInt32Array(410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422), PackedInt32Array(423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438), PackedInt32Array(439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449), PackedInt32Array(450, 451, 452, 453, 454, 455, 456, 457, 458), PackedInt32Array(459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477), PackedInt32Array(478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488)])
+
+[node name="@@32123" type="Line2D" parent="Ground/Frame 0/Group/Shape"]
+points = PackedVector2Array(125.25, -1345.85, 120.85, -1330.95, nan, nan, 120.85, -1330.95, 110.65, -1318.25, nan, nan, 110.65, -1318.25, 101.2, -1311.5, nan, nan, 101.2, -1311.5, 97.7, -1309.3, nan, nan, 97.7, -1309.3, 93.1, -1306.65, nan, nan, 93.1, -1306.65, 86.75, -1303.25, nan, nan, 86.75, -1303.25, 74.9, -1298.05, nan, nan, 74.9, -1298.05, 64, -1294.8, nan, nan, 64, -1294.8, 53.75, -1291.4, nan, nan, 53.75, -1291.4, 49, -1289.65, nan, nan, 49, -1289.65, 32.85, -1284.25, nan, nan, 32.85, -1284.25, 28.05, -1282.8, nan, nan, 28.05, -1282.8, -6.8, -1269.55, nan, nan, -6.8, -1269.55, -18.9, -1263.65, nan, nan, -18.9, -1263.65, -26.3, -1258.15, nan, nan, -26.3, -1258.15, -32.8, -1251.65, nan, nan, -32.8, -1251.65, -37, -1247.9, nan, nan, -37, -1247.9, -43.05, -1244.05, nan, nan, -43.05, -1244.05, -70.9, -1238.53, nan, nan, -70.9, -1238.53, -78.275, -1162.35, nan, nan, -71.25, -1169.2, -78.275, -1162.35, nan, nan, -63.25, -1177.1, -71.25, -1169.2, nan, nan, -59.1, -1179.65, -63.25, -1177.1, nan, nan, -54.9, -1180.6, -59.1, -1179.65, nan, nan, -45.05, -1183.2, -54.9, -1180.6, nan, nan, -7.05, -1189.2, -45.05, -1183.2, nan, nan, -0.85, -1190.45, -7.05, -1189.2, nan, nan, 4.9, -1192.25, -0.85, -1190.45, nan, nan, 39, -1204.95, 4.9, -1192.25, nan, nan, 72.25, -1224.55, 39, -1204.95, nan, nan, 75.85, -1227.1, 72.25, -1224.55, nan, nan, 92.15, -1238.65, 75.85, -1227.1, nan, nan, 97.7, -1243.2, 92.15, -1238.65, nan, nan, 111.9, -1254.95, 97.7, -1243.2, nan, nan, 145.85, -1271.3, 111.9, -1254.95, nan, nan, 152, -1272.7, 145.85, -1271.3, nan, nan, 171.85, -1279.1, 152, -1272.7, nan, nan, 177.05, -1282.8, 171.85, -1279.1, nan, nan, 184.4, -1295.75, 177.05, -1282.8, nan, nan, 185.45, -1299.05, 184.4, -1295.75, nan, nan, 191.775, -1313.55, 185.45, -1299.05, nan, nan, 149.25, -1383.65, 191.775, -1313.55, nan, nan, 149.25, -1383.65, 146.7, -1382.15, nan, nan, 146.7, -1382.15, 143.9, -1379.95, nan, nan, 143.9, -1379.95, 131.6, -1367.05, nan, nan, 131.6, -1367.05, 125.25, -1345.85, nan, nan, 151.95, -1383.9, 149.25, -1383.65, nan, nan, 192.65, -1315.05, 191.775, -1313.55, nan, nan, 194.3, -1317.7, 192.65, -1315.05, nan, nan, 199.95, -1326.9, 194.3, -1317.7, nan, nan, 191.775, -1313.55, 198.85, -1301.9, nan, nan, 144.85, -1390.9, 149.25, -1383.65, nan, nan, -193.05, -578.525, -213.575, -551.825, nan, nan, -193.05, -578.525, -194.15, -578.275, nan, nan, -155.15, -670.075, -194.15, -578.275, nan, nan, -155.15, -670.075, -145, -669.55, nan, nan, -108, -670.75, -145, -669.55, nan, nan, -108, -670.75, -69.95, -669.45, nan, nan, -69.95, -669.45, -63.05, -668.6, nan, nan, -63.05, -668.6, -60, -668, nan, nan, -60, -668, -24, -660.85, nan, nan, -5.9, -662.65, -24, -660.85, nan, nan, -1.05, -664.05, -5.9, -662.65, nan, nan, 12.4, -672.65, -1.05, -664.05, nan, nan, 18.35, -679.65, 12.4, -672.65, nan, nan, 30.3, -692.65, 18.35, -679.65, nan, nan, 33.8, -696.15, 30.3, -692.65, nan, nan, 58.65, -724.2, 33.8, -696.15, nan, nan, 64, -733.95, 58.65, -724.2, nan, nan, 70.05, -754.95, 64, -733.95, nan, nan, 73.35, -765.25, 70.05, -754.95, nan, nan, 75.1, -778.95, 73.35, -765.25, nan, nan, 75.6, -785.05, 75.1, -778.95, nan, nan, 75.9, -821.95, 75.6, -785.05, nan, nan, 77.5, -828.2, 75.9, -821.95, nan, nan, 79.3, -831.8, 77.5, -828.2, nan, nan, 89.65, -846.25, 79.3, -831.8, nan, nan, 92.2, -848.75, 89.65, -846.25, nan, nan, 119.2, -873.6, 92.2, -848.75, nan, nan, 123.95, -876.95, 119.2, -873.6, nan, nan, 157.75, -895.4, 123.95, -876.95, nan, nan, 170.75, -902.3, 157.75, -895.4, nan, nan, 178.75, -907.25, 170.75, -902.3, nan, nan, 188, -911.85, 178.75, -907.25, nan, nan, 195.85, -916.1, 188, -911.85, nan, nan, 199.9, -917.4, 195.85, -916.1, nan, nan, 209.85, -920.4, 199.9, -917.4, nan, nan, 221.95, -921.3, 209.85, -920.4, nan, nan, 232.9, -921.35, 221.95, -921.3, nan, nan, 239.1, -927.85, 232.9, -921.35, nan, nan, 241, -928.275, 239.1, -927.85, nan, nan, 241, -928.275, 252.625, -877.7, nan, nan, 252.625, -877.7, 249.6, -874.25, nan, nan, 249.6, -874.25, 238, -860.9, nan, nan, 238, -860.9, 213.9, -830, nan, nan, 213.9, -830, 196.65, -805.15, nan, nan, 196.65, -805.15, 193.9, -802, nan, nan, 193.9, -802, 176.2, -784.7, nan, nan, 176.2, -784.7, 160.7, -768.15, nan, nan, 160.7, -768.15, 137.15, -737.8, nan, nan, 137.15, -737.8, 134.6, -734.25, nan, nan, 134.6, -734.25, 128.75, -728.15, nan, nan, 128.75, -728.15, 115.2, -694, nan, nan, 115.2, -694, 113.65, -687.15, nan, nan, 113.65, -687.15, 108.4, -676.8, nan, nan, 108.4, -676.8, 110.85, -669.6, nan, nan, 110.85, -669.6, 117.8, -666.55, nan, nan, 117.8, -666.55, 124.95, -664, nan, nan, 124.95, -664, 133.85, -660.75, nan, nan, 133.85, -660.75, 140.95, -660, nan, nan, 140.95, -660, 145.15, -659.35, nan, nan, 145.15, -659.35, 181.85, -648.75, nan, nan, 181.85, -648.75, 202.8, -639.6, nan, nan, 202.8, -639.6, 210, -636, nan, nan, 210, -636, 226.7, -623.7, nan, nan, 226.7, -623.7, 249.15, -591.1, nan, nan, 249.15, -591.1, 253.35, -583.1, nan, nan, 253.35, -583.1, 258.275, -572.9, nan, nan, 258.275, -572.9, 248, -545.1, nan, nan, 242.95, -549.95, 248, -545.1, nan, nan, 230.5, -565.8, 242.95, -549.95, nan, nan, 227.7, -575.9, 230.5, -565.8, nan, nan, 226.8, -578.9, 227.7, -575.9, nan, nan, 215.1, -593.15, 226.8, -578.9, nan, nan, 203, -599.2, 215.1, -593.15, nan, nan, 193.85, -601.45, 203, -599.2, nan, nan, 190.05, -602.4, 193.85, -601.45, nan, nan, 183.75, -604.45, 190.05, -602.4, nan, nan, 162.95, -606.95, 183.75, -604.45, nan, nan, 134.85, -611.45, 162.95, -606.95, nan, nan, 128.95, -612.1, 134.85, -611.45, nan, nan, 109.95, -612.85, 128.95, -612.1, nan, nan, 109.95, -612.85, 82.9, -612.35, nan, nan, 71, -612.4, 82.9, -612.35, nan, nan, 71, -612.4, 67.3, -611.5, nan, nan, 67.3, -611.5, 52.75, -605.35, nan, nan, 52.75, -605.35, 40.95, -602.45, nan, nan, 40.95, -602.45, 33, -601.85, nan, nan, 33, -601.85, 21.95, -600.15, nan, nan, 21.95, -600.15, 2.1, -594.55, nan, nan, 2.1, -594.55, -2, -592.95, nan, nan, -2, -592.95, -39, -583.3, nan, nan, -39, -583.3, -53, -582.75, nan, nan, -77.1, -584.35, -53, -582.75, nan, nan, -84, -584.85, -77.1, -584.35, nan, nan, -112.05, -586.5, -84, -584.85, nan, nan, -118, -587.15, -112.05, -586.5, nan, nan, -157, -587.65, -118, -587.15, nan, nan, -157, -587.65, -161.25, -586.35, nan, nan, -161.25, -586.35, -166, -584.75, nan, nan, -166, -584.75, -170.25, -583.4, nan, nan, -170.25, -583.4, -175.5, -581.65, nan, nan, -175.5, -581.65, -178.4, -580.6, nan, nan, -178.4, -580.6, -179.4, -555.95, nan, nan, -179.4, -555.95, -176.5, -545.95, nan, nan, -176.5, -545.95, -175.6, -522.15, nan, nan, -175.6, -522.15, -173.9, -516.95, nan, nan, -173.9, -516.95, -173.2, -510.95, nan, nan, -173.2, -510.95, -173, -471.95, nan, nan, -173, -471.95, -172.6, -466, nan, nan, -172.6, -466, -172.15, -451.95, nan, nan, -172.15, -451.95, -170.3, -423.95, nan, nan, -170.3, -423.95, -164.1, -422.95, nan, nan, 258.85, -511.95, 260.95, -509.475, nan, nan, 300.975, -462.525, 310.85, -450.95, nan, nan, 300.975, -462.525, 301.1, -460.95, nan, nan, 301.1, -460.95, 299.9, -449.95, nan, nan, 299.9, -449.95, 297.85, -433.95, nan, nan, 297.85, -433.95, 297.6, -430, nan, nan, 297.6, -430, 291.3, -410.9, nan, nan, 291.3, -410.9, 290.45, -406.05, nan, nan, 290.45, -406.05, 282.55, -390.75, nan, nan, 282.55, -390.75, 280.95, -376.95, nan, nan, 280.95, -376.95, 279.95, -365.95, nan, nan, 279.95, -365.95, 275.95, -360.95, nan, nan, 274.35, -364.05, 275.95, -360.95, nan, nan, 273.65, -367.9, 274.35, -364.05, nan, nan, 271.45, -376.95, 273.65, -367.9, nan, nan, 271.25, -396.95, 271.45, -376.95, nan, nan, 269.6, -419.8, 271.25, -396.95, nan, nan, 262.8, -440.9, 269.6, -419.8, nan, nan, 262.4, -443.95, 262.8, -440.9, nan, nan, 261.4, -484.95, 262.4, -443.95, nan, nan, 260.95, -509.475, 261.4, -484.95, nan, nan, 300.95, -463.95, 300.975, -462.525, nan, nan, 260.95, -509.475, 300.975, -462.525, nan, nan, -144.8, -328.7, -126.85, -310.15, nan, nan, -126.85, -310.15, -120, -303.95, nan, nan, -120, -303.95, -106.2, -294.55, nan, nan, -106.2, -294.55, -96.05, -293.25, nan, nan, -96.05, -293.25, -91.6, -292.75, nan, nan, -91.6, -292.75, -88.05, -291.65, nan, nan, -88.05, -291.65, -84.95, -291.35, nan, nan, -84.95, -291.35, -73, -290.75, nan, nan, -73, -290.75, -52, -289.75, nan, nan, -13.8, -294.35, -52, -289.75, nan, nan, -10.05, -295.25, -13.8, -294.35, nan, nan, -10.05, -295.25, 19.95, -293.65, nan, nan, 19.95, -293.65, 31.85, -288.75, nan, nan, 31.85, -288.75, 36.05, -286, nan, nan, 36.05, -286, 48.95, -271.95, nan, nan, 48.95, -271.95, 51.3, -269.4, nan, nan, 78.8, -271.4, 51.3, -269.4, nan, nan, 86.95, -272.5, 78.8, -271.4, nan, nan, 90, -272.6, 86.95, -272.5, nan, nan, 98.95, -273.05, 90, -272.6, nan, nan, 113.1, -275.5, 98.95, -273.05, nan, nan, 118.95, -276.55, 113.1, -275.5, nan, nan, 136.95, -279.9, 118.95, -276.55, nan, nan, 150.05, -284.75, 136.95, -279.9, nan, nan, 167.9, -289.4, 150.05, -284.75, nan, nan, 176, -290.5, 167.9, -289.4, nan, nan, 181.95, -290.95, 176, -290.5, nan, nan, 203.95, -291.4, 181.95, -290.95, nan, nan, 206.4, -298.2, 203.95, -291.4, nan, nan, 210.9, -304.3, 206.4, -298.2, nan, nan, 213.95, -304.85, 210.9, -304.3, nan, nan, 226.95, -306.35, 213.95, -304.85, nan, nan, 226.95, -306.35, 242.8, -303.5, nan, nan, 242.8, -303.5, 246.1, -302.35, nan, nan, 246.1, -302.35, 250.95, -300.95, nan, nan, 250.95, -300.95, 262.2, -297.5, nan, nan, 262.2, -297.5, 274.95, -293.95, nan, nan, 274.95, -293.95, 284.05, -291.3, nan, nan, 284.05, -291.3, 289.2, -289.5, nan, nan, 289.2, -289.5, 310.9, -284.8, nan, nan, 310.9, -284.8, 348.95, -280.75, nan, nan, 352.625, -280.9, 348.95, -280.75, nan, nan, 349.85, -292.95, 352.625, -280.9, nan, nan, 357.95, -211.4, 368.75, -210.525, nan, nan, 354.9, -211.8, 357.95, -211.4, nan, nan, 327.85, -217.35, 354.9, -211.8, nan, nan, 320.95, -218.2, 327.85, -217.35, nan, nan, 314.95, -219, 320.95, -218.2, nan, nan, 286.9, -223.6, 314.95, -219, nan, nan, 281.95, -224, 286.9, -223.6, nan, nan, 281.95, -224, 250.9, -222.4, nan, nan, 250.9, -222.4, 243.95, -221.95, nan, nan, 204.95, -222.35, 243.95, -221.95, nan, nan, 204.95, -222.35, 179, -220.65, nan, nan, 179, -220.65, 155.95, -216.05, nan, nan, 155.95, -216.05, 143, -213.6, nan, nan, 143, -213.6, 129.8, -208.2, nan, nan, 129.8, -208.2, 122, -204.75, nan, nan, 122, -204.75, 83.95, -199.6, nan, nan, 71.95, -199.95, 83.95, -199.6, nan, nan, 71.95, -199.95, 34, -199.95, nan, nan, -2, -200.3, 34, -199.95, nan, nan, -9.1, -201.6, -2, -200.3, nan, nan, -14, -202.95, -9.1, -201.6, nan, nan, -28.95, -204.8, -14, -202.95, nan, nan, -34.1, -205.45, -28.95, -204.8, nan, nan, -38.9, -206.4, -34.1, -205.45, nan, nan, -62, -210, -38.9, -206.4, nan, nan, -83.9, -210.2, -62, -210, nan, nan, -83.9, -210.2, -88.1, -209.35, nan, nan, -88.1, -209.35, -117.05, -206.25, nan, nan, -117.05, -206.25, -132.1, -203.35, nan, nan, -132.1, -203.35, -135.95, -202.65, nan, nan, -135.95, -202.65, -143, -200.4, nan, nan, -143, -200.4, -153.95, -196.75, nan, nan, -153.95, -196.75, -159.1, -195.45, nan, nan, -159.1, -195.45, -163.4, -194.95, nan, nan, -163.4, -194.95, -164.1, -189.95, nan, nan, -121.35, 40.9, -120.75, 61.95, nan, nan, -117.95, 34.95, -121.35, 40.9, nan, nan, -107.35, 8, -117.95, 34.95, nan, nan, -105.4, -8.85, -107.35, 8, nan, nan, -104.05, -12.05, -105.4, -8.85, nan, nan, -82.65, -43.75, -104.05, -12.05, nan, nan, -78.4, -49.3, -82.65, -43.75, nan, nan, -76.65, -51.75, -78.4, -49.3, nan, nan, -74.2, -55.15, -76.65, -51.75, nan, nan, -54.65, -88.85, -74.2, -55.15, nan, nan, -53.25, -92.1, -54.65, -88.85, nan, nan, -50, -101, -53.25, -92.1, nan, nan, -50, -101, -42.7, -92.1, nan, nan, -42.7, -92.1, -41.2, -88.9, nan, nan, -41.2, -88.9, -32.7, -73.2, nan, nan, -32.7, -73.2, -15.85, -59.35, nan, nan, -15.85, -59.35, -11.95, -58.25, nan, nan, -11.95, -58.25, 27, -54.85, nan, nan, 55.15, -58.55, 27, -54.85, nan, nan, 67.1, -62.75, 55.15, -58.55, nan, nan, 70.85, -64.3, 67.1, -62.75, nan, nan, 74.15, -65.7, 70.85, -64.3, nan, nan, 84, -68.2, 74.15, -65.7, nan, nan, 84, -68.2, 92.4, -64.25, nan, nan, 92.4, -64.25, 94.85, -60.9, nan, nan, 94.85, -60.9, 107.3, -43.2, nan, nan, 107.3, -43.2, 119.9, -29.75, nan, nan, 119.9, -29.75, 145.05, -25.55, nan, nan, 165.2, -36.85, 145.05, -25.55, nan, nan, 167.95, -40.05, 165.2, -36.85, nan, nan, 182.85, -55.15, 167.95, -40.05, nan, nan, 202.05, -65.8, 182.85, -55.15, nan, nan, 205, -67, 202.05, -65.8, nan, nan, 206.35, -73.8, 205, -67, nan, nan, 206.35, -73.8, 221.6, -48.8, nan, nan, 221.6, -48.8, 223.25, -45.1, nan, nan, 223.25, -45.1, 233.3, -32.35, nan, nan, 233.3, -32.35, 239.2, -28.35, nan, nan, 239.2, -28.35, 246, -26.7, nan, nan, 246, -26.7, 262, -26.6, nan, nan, 262, -26.6, 273.75, -21.7, nan, nan, 273.75, -21.7, 278.8, -17.7, nan, nan, 278.8, -17.7, 279.8, -14.05, nan, nan, 279.8, -14.05, 278.9, -10, nan, nan, 278.9, -10, 280.35, 8.85, nan, nan, 280.35, 8.85, 288.7, 19.3, nan, nan, 288.7, 19.3, 294.1, 23.85, nan, nan, 294.1, 23.85, 312.3, 46.8, nan, nan, 312.3, 46.8, 314.75, 51.1, nan, nan, 314.75, 51.1, 320.575, 61.95, nan, nan, 320.575, 61.95, 333.85, 61.95, nan, nan, 356.95, -280.95, 352.625, -280.9, nan, nan, 368.75, -210.525, 376.95, -208.95, nan, nan, 352.625, -280.9, 368.75, -210.525, nan, nan, 368.75, -210.525, 371.85, -196.95, nan, nan, 320.575, 61.95, 330.9, 85, nan, nan, 330.9, 85, 331.9, 88, nan, nan, -81, -1238.8, -70.9, -1238.53, nan, nan, -70.1, -1246.9, -70.9, -1238.53, nan, nan, -78.275, -1162.35, -79.1, -1153.9, nan, nan, -99.1, -1054.75, -94.65, -1051, nan, nan, -94.65, -1051, -92.55, -1047.25, nan, nan, -92.55, -1047.25, -81.65, -1033.2, nan, nan, -81.65, -1033.2, -78.15, -1028.8, nan, nan, -78.15, -1028.8, -73.05, -1021.9, nan, nan, -73.05, -1021.9, -72, -1008.95, nan, nan, -72, -1008.95, -74.7, -985, nan, nan, -74.7, -985, -74.1, -981.9, nan, nan, -74.1, -981.9, -65.5, -965.5, nan, nan, -65.5, -965.5, -69.1, -946, nan, nan, -69.1, -946, -74.15, -939.15, nan, nan, -74.15, -939.15, -79.2, -932, nan, nan, -79.2, -932, -81.05, -920.95, nan, nan, -81.05, -920.95, -86.15, -908.25, nan, nan, -86.15, -908.25, -97.2, -902.3, nan, nan, -97.2, -902.3, -103.1, -900.275, nan, nan, -103.1, -900.275, -103.1, -891.95, nan, nan, -103.1, -1055.88, -99.1, -1054.75, nan, nan, -103.1, -1055.88, -103.1, -1054.75, nan, nan, -105, -1055.95, -103.1, -1055.88, nan, nan, -103.1, -1076.95, -103.1, -1055.88, nan, nan, -78.275, -1162.35, -83, -1153.9, nan, nan, -103.1, -900.275, -107, -899.95, nan, nan, -103.1, -902.3, -103.1, -900.275, nan, nan, -103.1, -1054.75, -103.1, -902.3, nan, nan, -188.1, -584.95, -193.05, -578.525, nan, nan, -213.575, -551.825, -218.1, -545.95, nan, nan, -215, -552.95, -213.575, -551.825, nan, nan, -213.575, -551.825, -210.45, -548.6, nan, nan, -210.45, -548.6, -208.8, -546.05, nan, nan, -208.8, -546.05, -205.4, -536.85, nan, nan, -205.4, -536.85, -205.05, -532.95, nan, nan, -205.05, -532.95, -204.45, -503.9, nan, nan, -204.45, -503.9, -203.25, -492.05, nan, nan, -203.25, -492.05, -202.2, -487.85, nan, nan, -202.2, -487.85, -200.6, -484.15, nan, nan, -200.6, -484.15, -196.95, -478, nan, nan, -196.95, -478, -192.1, -467.9, nan, nan, -192.1, -467.9, -190.55, -454.95, nan, nan, -190.55, -454.95, -191.45, -434.95, nan, nan, -191.45, -434.95, -193.575, -427.725, nan, nan, -193.575, -427.725, -170.3, -423.95, nan, nan, -193.575, -427.725, -197, -417.95, nan, nan, -201.1, -428.95, -193.575, -427.725, nan, nan, -170.3, -423.95, -168, -414.95, nan, nan, -143.1, -340.95, -144.8, -328.7, nan, nan, -163.4, -194.95, -164, -194.95, nan, nan, -164, -194.95, -168, -194.95, nan, nan, -163.25, -196.025, -163.4, -194.95, nan, nan, -273.5, -117.25, -270.95, -114, nan, nan, -270.95, -114, -255.15, -100.7, nan, nan, -255.15, -100.7, -251.7, -98.35, nan, nan, -251.7, -98.35, -246.1, -94.75, nan, nan, -246.1, -94.75, -230.9, -84.05, nan, nan, -230.9, -84.05, -227.2, -80.75, nan, nan, -227.2, -80.75, -216, -63.95, nan, nan, -216, -63.95, -214.8, -56, nan, nan, -214.8, -56, -218.65, -31.95, nan, nan, -218.65, -31.95, -219.25, -14.1, nan, nan, -219.25, -14.1, -217.6, -9.2, nan, nan, -217.6, -9.2, -206.65, 9.85, nan, nan, -206.65, 9.85, -204.2, 14.15, nan, nan, -204.2, 14.15, -199.95, 30, nan, nan, -199.95, 30, -202.65, 49.1, nan, nan, -202.65, 49.1, -207.075, 68, nan, nan, -207.075, 68, -315.1, 68, nan, nan, -315.1, -92, -315.1, 68, nan, nan, -279, -126.625, -315.1, -92, nan, nan, -279, -126.625, -273.5, -117.25, nan, nan, -144.8, -328.7, -163.25, -196.025, nan, nan, -120.75, 61.95, -120.95, 68.95, nan, nan, -120.75, 61.95, -131.1, 61.95, nan, nan, 320.575, 61.95, -120.75, 61.95, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Coins"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(183.45, -273)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Coded Wooden PL/Tipping Log.tscn"
+
+[node name="Group" type="Node2D" parent="Coins/Frame 0"]
+position = Vector2(2, -33)
+
+[node name="Shape" type="Node2D" parent="Coins/Frame 0/Group"]
+
+[node name="@@32060" type="Polygon2D" parent="Coins/Frame 0/Group/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("4_otm1f")
+texture_offset = Vector2(4.7, 3.8)
+polygon = PackedVector2Array(-29.15, -3.8, 28.3, -3.8, 28.3, 4.7, -29.15, 4.7)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@DOMSymbolInstance@32061" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(123.45, -67.3)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Touch-Move Green Platforms.tscn"
+
+[node name="@DOMSymbolInstance@32062" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(303.45, -127.3)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Touch-Move Green Platforms.tscn"
+
+[node name="@DOMSymbolInstance@32063" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-129.5, -512.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Touch-Move Green Platforms.tscn"
+
+[node name="@DOMSymbolInstance@32064" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(132.5, -607.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32065" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(3.5, -708.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32066" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(3.5, -708.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32067" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(3.5, -708.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32068" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(183.45, -87.3)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Touch-Move Green Platforms.tscn"
+
+[node name="@DOMSymbolInstance@32069" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(243.45, -107.3)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Touch-Move Green Platforms.tscn"
+
+[node name="@DOMSymbolInstance@32070" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-51.15, -804.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Moving Green Platform.tscn"
+
+[node name="@DOMSymbolInstance@32071" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(68.85, -804.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Moving Green Platform.tscn"
+
+[node name="@DOMSymbolInstance@32072" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(38.85, -866.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Moving Green Platform.tscn"
+
+[node name="@DOMSymbolInstance@32073" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-1.15, -980.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Moving Green Platform.tscn"
+
+[node name="@DOMSymbolInstance@32074" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(78.85, -1038.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Moving Green Platform.tscn"
+
+[node name="@DOMSymbolInstance@32075" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(158.85, -1103.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Moving Green Platform.tscn"
+
+[node name="@DOMSymbolInstance@32076" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(46.55, -1198)
+rotation = -0.00157731
+scale = Vector2(0.957719, 1.26459)
+skew = 0.00125146
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star BackGFX.tscn"
+
+[node name="@DOMSymbolInstance@32077" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(125.4, -98.75)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32078" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(233.4, -596.2)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32079" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(155.4, -108.75)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32080" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(185.4, -118.75)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32081" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(215.4, -128.75)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32082" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(245.4, -138.75)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32083" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(275.4, -148.75)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32084" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(305.4, -157.75)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32085" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(155.75, -307.75)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32086" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(205.75, -307.75)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32087" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(63.85, -831.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32088" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(103.85, -831.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32089" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(53.85, -899.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32090" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(93.85, -899.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32091" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(33.85, -1000.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32092" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(73.85, -1000.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32093" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(113.85, -1000.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32094" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(32.45, -1125.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32095" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(72.45, -1125.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32096" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(112.45, -1125.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@Group@32097" type="Node2D" parent="Coins/Frame 0"]
+position = Vector2(5, -10)
+
+[node name="Shape" type="Node2D" parent="Coins/Frame 0/@Group@32097"]
+
+[node name="@@32098" type="Polygon2D" parent="Coins/Frame 0/@Group@32097/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("4_otm1f")
+texture_offset = Vector2(-242.25, 566.75)
+polygon = PackedVector2Array(217.8, -566.75, 241.85, -566.75, 241.85, -558.25, 217.8, -558.25)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@Group@32099" type="Node2D" parent="Coins/Frame 0"]
+position = Vector2(50, -1155.9)
+
+[node name="Shape" type="Node2D" parent="Coins/Frame 0/@Group@32099"]
+
+[node name="@@32100" type="Polygon2D" parent="Coins/Frame 0/@Group@32099/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("4_otm1f")
+texture_offset = Vector2(4.7, 3.8)
+polygon = PackedVector2Array(-29.15, -3.8, 28.3, -3.8, 28.3, 4.7, -29.15, 4.7)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@DOMSymbolInstance@32101" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-29.7, -340.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32102" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-29.7, -340.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32103" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-29.7, -340.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32104" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-29.7, -340.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32105" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-29.7, -340.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32106" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-29.7, -340.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32107" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(23.85, -831.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
+
+[node name="@DOMSymbolInstance@32108" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(181.65, -312.9)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Goomba/Goomba.tscn"
+
+[node name="@DOMSymbolInstance@32109" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(142.85, -726.35)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Code.tscn"
+
+[node name="@DOMSymbolInstance@32110" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(235.4, -3.45)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Koopa Code.tscn"
+
+[node name="@DOMSymbolInstance@32111" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(33.45, -1065.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Code.tscn"
+
+[node name="@Group@32112" type="Node2D" parent="Coins/Frame 0"]
+position = Vector2(74.55, -930.9)
+
+[node name="Shape" type="Node2D" parent="Coins/Frame 0/@Group@32112"]
+
+[node name="@@32113" type="Polygon2D" parent="Coins/Frame 0/@Group@32112/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("4_otm1f")
+texture_offset = Vector2(4.7, 3.8)
+polygon = PackedVector2Array(-29.15, -3.8, 28.3, -3.8, 28.3, 4.7, -29.15, 4.7)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@DOMSymbolInstance@32114" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(132.5, -607.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32115" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(132.5, -607.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32116" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(132.5, -607.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32117" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(132.5, -607.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.tscn"
+
+[node name="@DOMSymbolInstance@32118" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(73.85, -959.5)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Code.tscn"
+
+[node name="@Group@32119" type="Node2D" parent="Coins/Frame 0"]
+position = Vector2(-363.3, 145)
+
+[node name="Shape" type="Node2D" parent="Coins/Frame 0/@Group@32119"]
+
+[node name="@@32120" type="Polygon2D" parent="Coins/Frame 0/@Group@32119/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("4_otm1f")
+texture_offset = Vector2(-242.25, 566.75)
+polygon = PackedVector2Array(217.8, -566.75, 241.85, -566.75, 241.85, -558.25, 217.8, -558.25)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@DOMSymbolInstance@32121" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("2_jp3vy")]
+position = Vector2(-29.85, -340.85)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin Code.tscn"
+
+[node name="HL" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="HL"]
+
+[node name="Frame 1" type="Node2D" parent="HL"]
+visible = false
+
+[node name="Frame 2" type="Node2D" parent="HL"]
+visible = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="HL/Frame 2" instance=ExtResource("2_jp3vy")]
+position = Vector2(48.4, -1472.3)
+rotation = 1.5708
+scale = Vector2(0.943481, 12.4988)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
+
+[node name="@DOMSymbolInstance@32059" type="Node2D" parent="HL/Frame 2" instance=ExtResource("2_jp3vy")]
+position = Vector2(46.5, -1219.9)
+rotation = -1.5708
+scale = Vector2(0.447006, -1.56235)
+script = ExtResource("3_joerf")
+path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"

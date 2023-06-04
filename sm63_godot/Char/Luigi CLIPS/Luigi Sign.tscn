@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 5 - 5.png" id="1_1nmxb"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_hcu5r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_jyx8t"]
+
+[sub_resource type="Animation" id="Animation_o524l"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kcsj7"]
+_data = {
+"Default": SubResource("Animation_o524l")
+}
+
+[node name="      Char  Luigi CLIPSLuigi Sign" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_kcsj7")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@15203" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-7, -20)
+texture = ExtResource("1_1nmxb")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_hcu5r")]
+position = Vector2(0, 0.7)
+script = ExtResource("3_jyx8t")
+path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Backwards.tscn"

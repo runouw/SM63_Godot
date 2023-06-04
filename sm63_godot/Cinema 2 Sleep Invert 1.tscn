@@ -1,8 +1,45 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_02mon"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_vtgxp"]
+
+[sub_resource type="Animation" id="Animation_1jdk2"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k7di5"]
+_data = {
+"Default": SubResource("Animation_1jdk2")
+}
 
 [node name="Cinema 2 Sleep Invert 1" type="Node2D"]
-script = ExtResource("1_02mon")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_k7di5")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@4297" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+polygon = PackedVector2Array(0, -28.9, 0, -28.9, 20.4, -20.45, 28.9, 0, 20.4, 20.4, 0, 28.9, 0, 28.9, -20.45, 20.4, -28.9, 0, -20.45, -20.45)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_vtgxp")
+matrix = Transform2D(0.0344086, 0, 0, 0.0344086, 0, 0)
+entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+entries_ratio = PackedFloat32Array(0, 0.819608, 1)

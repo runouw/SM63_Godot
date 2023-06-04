@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Yelling - 1.png" id="1_ftciq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Yelling - 2.png" id="2_0iuft"]
+
+[sub_resource type="Animation" id="Animation_pvn8m"]
+length = 0.233333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 3:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vc5qb"]
+_data = {
+"Default": SubResource("Animation_pvn8m")
+}
+
+[node name="  Course Clips9-08 Kamek Talking 5" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_vc5qb")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@20705" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(19.5, -30)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("1_ftciq")
+centered = false
+
+[node name="Frame 3" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@20706" type="Sprite2D" parent="Layer 1/Frame 3"]
+texture_filter = 1
+position = Vector2(19.5, -31)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("2_0iuft")
+centered = false

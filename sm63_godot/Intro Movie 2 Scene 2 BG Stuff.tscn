@@ -1,8 +1,47 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_0um5d"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Hills Background 1 Bit.png" id="1_esqvy"]
+
+[sub_resource type="Animation" id="Animation_wgcgb"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03jhs"]
+_data = {
+"Default": SubResource("Animation_wgcgb")
+}
 
 [node name="Intro Movie 2 Scene 2 BG Stuff" type="Node2D"]
-script = ExtResource("1_0um5d")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_03jhs")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group"]
+
+[node name="@@6301" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_esqvy")
+texture_offset = Vector2(348.55, 133.75)
+polygon = PackedVector2Array(-716.5, -132.75, 716.45, -132.75, 716.45, 192.75, -716.5, 192.75)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])

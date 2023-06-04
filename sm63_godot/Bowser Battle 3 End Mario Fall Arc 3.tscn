@@ -1,8 +1,66 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_6q8vs"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Hurt Fall Back -2.png" id="1_26exy"]
+
+[sub_resource type="Animation" id="Animation_5yhqv"]
+length = 0.833333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 24:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ua2uo"]
+_data = {
+"Default": SubResource("Animation_5yhqv")
+}
 
 [node name="Bowser Battle 3 End Mario Fall Arc 3" type="Node2D"]
-script = ExtResource("1_6q8vs")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_ua2uo")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="@@2795" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(-19.8, 5.3)
+rotation = -1.0472
+scale = Vector2(1, 1)
+texture = ExtResource("1_26exy")
+centered = false
+
+[node name="Frame 24" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@2796" type="Sprite2D" parent="Layer 1/Frame 24"]
+texture_filter = 1
+position = Vector2(-84.5, 14.5)
+rotation = -1.5708
+scale = Vector2(1, 1.00002)
+texture = ExtResource("1_26exy")
+centered = false

@@ -1,10 +1,89 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_j5tea"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_2pn0d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_tbs7p"]
+
+[sub_resource type="Animation" id="Animation_gxq12"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2(Mask)/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0404j"]
+_data = {
+"Default": SubResource("Animation_gxq12")
+}
 
 [node name="Message Picture - Pictures Lava" type="Node2D"]
-script = ExtResource("1_j5tea")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_0404j")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
-[node name="Layer 2" type="Node2D" parent="."]
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(-315.4, -38.95)
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_2pn0d")]
+position = Vector2(0, -8.35)
+script = ExtResource("2_tbs7p")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="@DOMSymbolInstance@13274" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_2pn0d")]
+position = Vector2(-256, -8.35)
+script = ExtResource("2_tbs7p")
+path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0/Group"]
+position = Vector2(-315.4, -38.95)
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group/Group"]
+
+[node name="@@13275" type="Polygon2D" parent="Layer 1/Frame 0/Group/Group/Shape"]
+color = Color(0.741176, 0, 0, 1)
+polygon = PackedVector2Array(59.6, 39.6, 493.9, 39.6, 493.9, 88.6, 59.6, 88.6)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_2pn0d")]
+position = Vector2(-31.85, 48)
+scale = Vector2(0.0882111, 1.93578)
+script = ExtResource("2_tbs7p")
+path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
+
+[node name="Layer 2(Mask)" type="Node2D" parent="."]
+visible = false
+
+[node name="Frame 0" type="Node2D" parent="Layer 2(Mask)"]
+
+[node name="Shape" type="Node2D" parent="Layer 2(Mask)/Frame 0"]
+
+[node name="@@13273" type="Polygon2D" parent="Layer 2(Mask)/Frame 0/Shape"]
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(-65.5, -67, 55.45, -67, 55.45, 29, -65.5, 29)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])

@@ -7,7 +7,7 @@ extends Node2D
 func _ready():
 	_explore_dir(root_folder)
 	
-	
+	print("DONE!")
 
 
 func _explore_dir(path: String):
@@ -47,11 +47,19 @@ func _parse_DOMSymbolItem(path: String, DOMSymbolItem: XMLNode):
 	var output_path = path.replace(root_folder, output_folder)
 	output_path = output_path.trim_suffix(".xml") + ".tscn"
 	
-	print(root_folder)
-	print("  ", output_path)
+	var containing_folder = output_path.trim_suffix(output_path.get_file())
+	
+	if not DirAccess.dir_exists_absolute(containing_folder):
+		DirAccess.make_dir_recursive_absolute(containing_folder)
+	
+	print("-> ", output_path)
 	
 	var new_node := Process_DOMSymbolItem.new(path)
 	
+	new_node.set_script(null)
+	
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(new_node)
-	ResourceSaver.save(packed_scene, output_path)
+	var error := ResourceSaver.save(packed_scene, output_path)
+	if error != OK:
+		print("Error saving ", error)

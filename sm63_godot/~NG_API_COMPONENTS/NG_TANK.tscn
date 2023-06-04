@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_sxhyn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_qcjnp"]
+
+[sub_resource type="Animation" id="Animation_e3vmr"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Default Image/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3o2p"]
+_data = {
+"Default": SubResource("Animation_e3vmr")
+}
+
+[node name="~NG_API_COMPONENTSNG_TANK" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_w3o2p")
+}
+
+[node name="Default Image" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Default Image"]
+
+[node name="Shape" type="Node2D" parent="Default Image/Frame 0"]
+
+[node name="@@52972" type="Polygon2D" parent="Default Image/Frame 0/Shape"]
+polygon = PackedVector2Array(0.05, 0.05, 300.225, 0.05, 300.225, 251.975, 0.05, 251.975)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Default Image/Frame 0" instance=ExtResource("1_sxhyn")]
+script = ExtResource("2_qcjnp")
+path = "res://sm63_godot/~NG_API_COMPONENTS/NG_TANK_BUTTON.tscn"

@@ -1,8 +1,95 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_uyp8u"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_qdnev"]
+
+[sub_resource type="Animation" id="Animation_8q22e"]
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 11:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.366667, 1.36667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 41:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.36667, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lgrrj"]
+_data = {
+"Default": SubResource("Animation_8q22e")
+}
 
 [node name="Cinema End Exploson gifd" type="Node2D"]
-script = ExtResource("1_uyp8u")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_lgrrj")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@4904" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+polygon = PackedVector2Array(0, -39, 0, -39, 27.55, -27.6, 39, 0, 27.55, 27.55, 0, 39, 0, 39, -27.6, 27.55, -39, 0, -27.6, -27.6)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_qdnev")
+matrix = Transform2D(0.0483398, 0, 0, 0.0483398, 0, 0)
+entries_color = PackedColorArray(1, 0.901961, 0.501961, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+entries_ratio = PackedFloat32Array(0, 0.25098, 1)
+
+[node name="Frame 11" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 11"]
+
+[node name="@@4905" type="Polygon2D" parent="Layer 1/Frame 11/Shape"]
+polygon = PackedVector2Array(0, -78, 0, -78, 55.1, -55.2, 78, 0, 55.1, 55.1, 0, 78, 0, 78, -55.2, 55.1, -78, 0, -55.2, -55.2)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_qdnev")
+matrix = Transform2D(0.0966797, 0, 0, 0.0966797, 0, 0)
+entries_color = PackedColorArray(1, 0.901961, 0.501961, 1, 1, 0, 0, 1, 1, 0, 0, 0)
+entries_ratio = PackedFloat32Array(0, 0.580392, 1)
+
+[node name="Frame 41" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 41"]
+
+[node name="@@4906" type="Polygon2D" parent="Layer 1/Frame 41/Shape"]
+polygon = PackedVector2Array(0, -117, 0, -117, 82.65, -82.8, 117, 0, 82.65, 82.65, 0, 117, 0, 117, -82.8, 82.65, -117, 0, -82.8, -82.8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
+script = ExtResource("1_qdnev")
+matrix = Transform2D(0.14502, 0, 0, 0.14502, 0, 0)
+entries_color = PackedColorArray(1, 1, 1, 1, 1, 0.4, 0, 1, 1, 0, 0, 0)
+entries_ratio = PackedFloat32Array(0, 0.894118, 1)

@@ -1,14 +1,156 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_6r8nn"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_fji7g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_dumir"]
+
+[sub_resource type="Animation" id="Animation_lk6kn"]
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 4/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 3/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 1/Frame 0:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 1/Frame 2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhm5c"]
+_data = {
+"Default": SubResource("Animation_lk6kn")
+}
 
 [node name="LD - Arrow Tool" type="Node2D"]
-script = ExtResource("1_6r8nn")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_rhm5c")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@7327" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+polygon = PackedVector2Array(-16.025, -16.025, 15.975, -16.025, 15.975, 15.975, -16.025, 15.975)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@@7328" type="Line2D" parent="Layer 1/Frame 0/Shape"]
+points = PackedVector2Array(-16.025, -16.025, 15.975, -16.025, nan, nan, 15.975, -16.025, 15.975, 15.975, nan, nan, 15.975, 15.975, -16.025, 15.975, nan, nan, -16.025, -16.025, -16.025, 15.975, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Frame 2" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 2"]
+
+[node name="@@7329" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
+color = Color(0.266667, 0.341176, 1, 1)
+polygon = PackedVector2Array(-16.025, -16.025, 15.975, -16.025, 15.975, 15.975, -16.025, 15.975)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
+[node name="@@7330" type="Line2D" parent="Layer 1/Frame 2/Shape"]
+points = PackedVector2Array(-16.025, -16.025, 15.975, -16.025, nan, nan, 15.975, -16.025, 15.975, 15.975, nan, nan, 15.975, 15.975, -16.025, 15.975, nan, nan, -16.025, -16.025, -16.025, 15.975, nan, nan)
+width = 1.0
+default_color = Color(0.0627451, 0, 0.635294, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="Group" type="Node2D" parent="Layer 3/Frame 0"]
+
+[node name="Shape" type="Node2D" parent="Layer 3/Frame 0/Group"]
+
+[node name="@@7324" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
+polygon = PackedVector2Array(-7.15, -12, -6.8, -12, 7.125, -1.7, 1.175, 1.475, 2.1518, 3.1, -7.15, 3.1, -7.15, -1.7, -7.15, 3.1, -1.9, 3.1, -7.15, 5.85, -7.15, 5.85, -1.9, 3.1, 2.1518, 3.1, 6.6, 10.5, 3.35, 12, 3.35, 12, -0.277809, 5.85)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15, 16)])
+
+[node name="@@7325" type="Line2D" parent="Layer 3/Frame 0/Group/Shape"]
+points = PackedVector2Array(-1.9, 3.1, -7.15, 5.85, nan, nan, -1.9, 3.1, 3.35, 12, nan, nan, 6.6, 10.5, 3.35, 12, nan, nan, 1.175, 1.475, 6.6, 10.5, nan, nan, 7.125, -1.7, 1.175, 1.475, nan, nan, -6.8, -12, 7.125, -1.7, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="@@7326" type="Line2D" parent="Layer 3/Frame 0/Group/Shape"]
+points = PackedVector2Array(-7.15, -12, -7.15, 5.85, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Layer 4" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_fji7g")]
+script = ExtResource("2_dumir")
+path = "res://sm63_godot/LD - Arrow Tool Deselect.tscn"
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

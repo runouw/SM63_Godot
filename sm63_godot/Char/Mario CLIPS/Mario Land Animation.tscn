@@ -1,0 +1,243 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ssnta"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_he850"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Falling - 1.png" id="3_b1yep"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Battle Stance - 3.png" id="4_yiv8o"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Battle Stance - 4.png" id="5_ctig5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Jumping - 1.png" id="6_48mlx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Jumping - 2.png" id="7_rhp4b"]
+
+[sub_resource type="Animation" id="Animation_mliai"]
+length = 0.266667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 2/Frame 4:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 2/Frame 5:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Layer 2/Frame 7:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Layer 1/Frame 0:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Layer 1/Frame 2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Layer 1/Frame 3:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Layer 1/Frame 5:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Layer 1/Frame 6:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1cuov"]
+_data = {
+"Default": SubResource("Animation_mliai")
+}
+
+[node name="      Char  Mario CLIPSMario Land Animation" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_1cuov")
+}
+
+[node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ssnta")]
+position = Vector2(-8.25, -9.15)
+scale = Vector2(0.799988, 0.799988)
+script = ExtResource("2_he850")
+path = "res://sm63_godot/Wing Code.tscn"
+
+[node name="@@15753" type="Sprite2D" parent="Layer 1/Frame 0"]
+texture_filter = 1
+position = Vector2(12, -16)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("3_b1yep")
+centered = false
+
+[node name="@DOMSymbolInstance@15754" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ssnta")]
+position = Vector2(0.75, -10.65)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_he850")
+path = "res://sm63_godot/Wing Code.tscn"
+
+[node name="Frame 2" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@15755" type="Sprite2D" parent="Layer 1/Frame 2"]
+texture_filter = 1
+position = Vector2(11.85, -15.65)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("4_yiv8o")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_ssnta")]
+position = Vector2(1.25, -11.15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_he850")
+path = "res://sm63_godot/Wing Code.tscn"
+
+[node name="Frame 3" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@15756" type="Sprite2D" parent="Layer 1/Frame 3"]
+texture_filter = 1
+position = Vector2(11.35, -16.5)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("5_ctig5")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_ssnta")]
+position = Vector2(1.75, -11.65)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_he850")
+path = "res://sm63_godot/Wing Code.tscn"
+
+[node name="Frame 5" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@15757" type="Sprite2D" parent="Layer 1/Frame 5"]
+texture_filter = 1
+position = Vector2(11.5, -15.5)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("6_48mlx")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_ssnta")]
+position = Vector2(0.75, -11.15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_he850")
+path = "res://sm63_godot/Wing Code.tscn"
+
+[node name="Frame 6" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="@@15758" type="Sprite2D" parent="Layer 1/Frame 6"]
+texture_filter = 1
+position = Vector2(11.5, -15)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("7_rhp4b")
+centered = false
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("1_ssnta")]
+position = Vector2(0.75, -10.65)
+rotation = 3.14159
+scale = Vector2(1, -1)
+script = ExtResource("2_he850")
+path = "res://sm63_godot/Wing Code.tscn"
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="Frame 4" type="Node2D" parent="Layer 2"]
+visible = false
+
+[node name="Frame 5" type="Node2D" parent="Layer 2"]
+visible = false
+
+[node name="Frame 7" type="Node2D" parent="Layer 2"]
+visible = false

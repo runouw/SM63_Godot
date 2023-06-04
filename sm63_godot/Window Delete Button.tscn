@@ -1,12 +1,122 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_0jd2f"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_rjou6"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_cqkxo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_urcmh"]
+
+[sub_resource type="Animation" id="Animation_kjogr"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 3/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gq5ve"]
+_data = {
+"Default": SubResource("Animation_kjogr")
+}
 
 [node name="Window Delete Button" type="Node2D"]
-script = ExtResource("1_0jd2f")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_gq5ve")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group"]
+
+[node name="@@14229" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+polygon = PackedVector2Array(-9.5, -12.425, -9.5, -12.425, -6.75, -8.6, -5.5, -8, -5.5, 11.9, -9.5, 11.9, -9.5, -11.8, 9.425, -11.8, 9.425, -11.8, 9.45, 11.9, 6.68448, 11.9, 6.5, -8.475, 6.7, -8.6, 6.5, -8.475, 6.5, -8.475, 6.68856, 12.35, 2.03894, 12.35, 2, -7.1, 4.94545, -8, -5.5, -8, -5.5, -8, 0, -7, -5.5, -7, -5.5, -7.1, 2, -7.1, 2, -7.1, 2.0002, -7, 0, -7, -5.5, -7, 2.0002, -7, 2.04705, 16.4, -5.5, 16.4, -5.5, 11.9, -9.5, 11.9, -5.5, 11.9, -5.5, 17, -5.5, 17, -6.75, 16.4, -9.5, 12.575, -9.5, 12.35, 6.68448, 11.9, 9.45, 11.9, 9.45, 13.075, 9.425, 13.2, 6.725, 16.375, 6.725, 16.375, 6.68856, 12.35, 2.03894, 12.35, 6.68856, 12.35, 6.725, 16.375, 6.7, 16.4, 2.05, 17.875, 2.05, 17.875, 2.03924, 12.5, -5.5, 16.4, 2.04705, 16.4, 2.05, 17.875, 0, 18, 0, 18, -5.5, 17)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17, 18), PackedInt32Array(19, 20, 21, 22, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(28, 29, 30, 31, 32), PackedInt32Array(33, 34, 35, 36, 37, 38, 39), PackedInt32Array(40, 41, 42, 43, 44, 45, 46), PackedInt32Array(47, 48, 49, 50, 51, 52, 53), PackedInt32Array(54, 55, 56, 57, 58, 59)])
+script = ExtResource("1_rjou6")
+matrix = Transform2D(0.0221558, 0, 0, 0.0267639, -6.85, -2.75)
+entries_color = PackedColorArray(0.666667, 0.666667, 0.666667, 1, 0.435294, 0.435294, 0.435294, 1)
+entries_ratio = PackedFloat32Array(0, 1)
+
+[node name="@@14230" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+polygon = PackedVector2Array(0, -18, 0, -18, 6.7, -16.4, 9.5, -12.5, 9.425, -11.8, 6.7, -8.6, 6.5, -8.475, 2, -7.1, 0, -7, 0, -7, -5.5, -8, -6.75, -8.6, -9.5, -12.425, -9.5, -12.65, -6.75, -16.4)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)])
+script = ExtResource("1_rjou6")
+matrix = Transform2D(0.0184021, 0, 0, 0.0184021, 0.4, -8.5)
+entries_color = PackedColorArray(0.14902, 0.14902, 0.14902, 1, 0.333333, 0.333333, 0.333333, 1)
+entries_ratio = PackedFloat32Array(0, 1)
+
+[node name="@@14231" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+color = Color(0.6, 0.6, 0.6, 1)
+polygon = PackedVector2Array(9.45, 11.9, 9.45, 11.9, 9.5, 12.5, 9.45, 13.075, 9.45, 13.075, 9.45, 12.35)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
+
+[node name="@@14232" type="Line2D" parent="Layer 1/Frame 0/Group/Shape"]
+points = PackedVector2Array(-9.5, -12.5, -9.5, -12.425, nan, nan, -9.5, -12.65, -9.5, -12.5, nan, nan, -6.75, -16.4, -9.5, -12.65, nan, nan, 0, -18, -6.75, -16.4, nan, nan, 0, -18, 6.7, -16.4, nan, nan, 6.7, -16.4, 9.5, -12.5, nan, nan, 9.5, -12.5, 9.425, -11.8, nan, nan, 9.45, 11.9, 9.5, 12.5, nan, nan, 9.5, 12.5, 9.45, 13.075, nan, nan, 9.45, 13.075, 9.425, 13.2, nan, nan, 9.425, 13.2, 6.725, 16.375, nan, nan, 6.725, 16.375, 6.7, 16.4, nan, nan, 6.7, 16.4, 2.05, 17.875, nan, nan, 2.05, 17.875, 0, 18, nan, nan, -5.5, 17, 0, 18, nan, nan, -6.75, 16.4, -5.5, 17, nan, nan, -9.5, 12.575, -6.75, 16.4, nan, nan, -9.5, 12.5, -9.5, 12.575, nan, nan, -9.5, 12.35, -9.5, 12.5, nan, nan, -9.5, -12.425, -6.75, -8.6, nan, nan, -6.75, -8.6, -5.5, -8, nan, nan, -5.5, -8, 0, -7, nan, nan, 2, -7.1, 0, -7, nan, nan, 6.5, -8.475, 2, -7.1, nan, nan, 6.7, -8.6, 6.5, -8.475, nan, nan, 9.425, -11.8, 6.7, -8.6, nan, nan)
+width = 1.0
+default_color = Color(0.2, 0.2, 0.2, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="@@14233" type="Line2D" parent="Layer 1/Frame 0/Group/Shape"]
+points = PackedVector2Array(9.425, -11.8, 9.45, 11.9, nan, nan, -9.5, -12.425, -9.5, 12.35, nan, nan, -5.5, -8, -5.5, 17, nan, nan, 6.5, -8.475, 6.725, 16.375, nan, nan, 9.45, 11.9, 9.45, 13.075, nan, nan, 2, -7.1, 2.05, 17.875, nan, nan)
+width = 1.0
+default_color = Color(0.2, 0.2, 0.2, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_cqkxo")]
+position = Vector2(0.1, 1.2)
+script = ExtResource("3_urcmh")
+path = "res://sm63_godot/Window Delete \"Delete\".tscn"
+
 [node name="Layer 3" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="Shape" type="Node2D" parent="Layer 3/Frame 0"]
+
+[node name="@@14228" type="Polygon2D" parent="Layer 3/Frame 0/Shape"]
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(-23.9, -17.75, 23.35, -17.75, 23.35, 18.5, -23.9, 18.5)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]

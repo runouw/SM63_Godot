@@ -1,8 +1,40 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_wfc4v"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_27c52"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_n7wic"]
+
+[sub_resource type="Animation" id="Animation_vjh44"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rs3uu"]
+_data = {
+"Default": SubResource("Animation_vjh44")
+}
 
 [node name="Bowser Battle 2 Cinema Dark BG" type="Node2D"]
-script = ExtResource("1_wfc4v")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_rs3uu")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_27c52")]
+script = ExtResource("2_n7wic")
+path = "res://sm63_godot/Intro Movie Scene 2 Background.tscn"

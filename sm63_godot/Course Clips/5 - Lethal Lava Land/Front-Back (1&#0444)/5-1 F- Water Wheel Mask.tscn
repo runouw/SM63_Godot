@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_uuxob"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_284tp"]
+
+[sub_resource type="Animation" id="Animation_oo8a1"]
+length = 0.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 3/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1(Mask)/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 2/Frame 0:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d6pym"]
+_data = {
+"Default": SubResource("Animation_oo8a1")
+}
+
+[node name="  Course Clips 5 - Lethal Lava Land Front-Back (1,4)5-1 F- Water Wheel Mask" type="Node2D"]
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_d6pym")
+}
+
+[node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_uuxob")]
+modulate = Color(1, 1, 1, 0.25)
+position = Vector2(-10, -3)
+script = ExtResource("2_284tp")
+path = "res://sm63_godot/Effects/Water/Water Blocks/Water Block Small.tscn"
+
+[node name="@DOMSymbolInstance@31253" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_uuxob")]
+modulate = Color(1, 1, 1, 0.351563)
+position = Vector2(10, 4)
+script = ExtResource("2_284tp")
+path = "res://sm63_godot/Effects/Water/Water Blocks/Water Block Small.tscn"
+
+[node name="Layer 1(Mask)" type="Node2D" parent="."]
+visible = false
+
+[node name="Frame 0" type="Node2D" parent="Layer 1(Mask)"]
+
+[node name="Group" type="Node2D" parent="Layer 1(Mask)/Frame 0"]
+
+[node name="Shape" type="Node2D" parent="Layer 1(Mask)/Frame 0/Group"]
+
+[node name="@@31251" type="Polygon2D" parent="Layer 1(Mask)/Frame 0/Group/Shape"]
+polygon = PackedVector2Array(0, -47.3, 0, -47.3, 59.3646, -22.725, -59.4074, -22.725, -59.4074, -22.725, 0.025, -22.725, -52.1, -1.175, -73.6, 47.3, -98.2, 47.3, -69.5, -18.55, 0.025, -22.725, 59.3646, -22.725, 69.45, -18.55, 98.2, 47.3, 73.625, 47.3, 52.1, -1.175, 10.1138, -18.55)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14, 15, 16)])
+
+[node name="@@31252" type="Line2D" parent="Layer 1(Mask)/Frame 0/Group/Shape"]
+points = PackedVector2Array(0.025, -22.725, -52.1, -1.175, nan, nan, -52.1, -1.175, -73.6, 47.3, nan, nan, -73.6, 47.3, -98.2, 47.3, nan, nan, -69.5, -18.55, -98.2, 47.3, nan, nan, 0, -47.3, -69.5, -18.55, nan, nan, 0, -47.3, 69.45, -18.55, nan, nan, 69.45, -18.55, 98.2, 47.3, nan, nan, 98.2, 47.3, 73.625, 47.3, nan, nan, 52.1, -1.175, 73.625, 47.3, nan, nan, 0.025, -22.725, 52.1, -1.175, nan, nan)
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Layer 3" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="Group" type="Node2D" parent="Layer 3/Frame 0"]
+
+[node name="Shape" type="Node2D" parent="Layer 3/Frame 0/Group"]
+
+[node name="@@31250" type="Line2D" parent="Layer 3/Frame 0/Group/Shape"]
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

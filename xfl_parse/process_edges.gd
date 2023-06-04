@@ -35,12 +35,14 @@ func _init(p_edges: String):
 				_line_to()
 			"[":
 				_curve_to()
+			"S":
+				_select_style()
 			_:
 				pass
 
 
 func _next_number():
-	if _edges[at] == " ": # at most one space is used to separate params
+	while _edges[at] in [" ", "\n", "\r", "\t"]: # at most one space is used to separate params
 		at += 1
 	
 	if _edges[at] == "#":
@@ -57,6 +59,16 @@ func _next_number():
 			break
 	
 	return float(buf) / 20.0
+
+
+func _next_style() -> String:
+	while _edges[at] in [" ", "\n", "\r", "\t"]: # at most one space is used to separate params
+		at += 1
+	
+	if _edges[at] == "S":
+		at += 1
+	
+	return _edges[at]
 
 
 func _parse_hex_number():
@@ -103,3 +115,9 @@ func _curve_to():
 	var ey = _next_number()
 	
 	commands.append(["curve", x1, y1, ex, ey])
+
+
+func _select_style():
+	var s = _next_style()
+	
+	commands.append(["style", s])

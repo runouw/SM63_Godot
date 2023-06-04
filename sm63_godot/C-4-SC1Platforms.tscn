@@ -1,10 +1,78 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/process_DOMSymbolItem.gd" id="1_pkbl2"]
+[sub_resource type="Animation" id="Animation_efr7u"]
+length = 0.0666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer 2/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer 1/Frame 0:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer 1/Frame 1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ly7cp"]
+_data = {
+"Default": SubResource("Animation_efr7u")
+}
 
 [node name="C-4-SC1Platforms" type="Node2D"]
-script = ExtResource("1_pkbl2")
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_ly7cp")
+}
 
 [node name="Layer 1" type="Node2D" parent="."]
 
+[node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+
+[node name="@@3369" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(-159.1, -447, 464.85, -447, 464.85, -411, -159.1, -411, -159.1, -411, -65.1, -411, -65.1, -258, -159.1, -258, -159.1, -358, 296.9, -411, 436.85, -411, 436.85, -258, 296.9, -258, 296.9, -358, -1291.05, -358, -504.1, -358, -504.1, -355, -1291.05, -355, -1291.05, -355, -487.1, -355, -487.1, -331, -1291.05, -331, -1257.05, -331, -1221.05, -331, -1221.05, -159.5, -1257.05, -159.5, -1257.05, -258, -518.1, -331, -487.1, -331, -487.1, -159.5, -518.1, -159.5, -518.1, -258, -224.1, -258, 451.85, -258, 451.85, -231, -224.1, -231, -224.1, -244, -808.05, -244, -742.2, -244, -742.2, -227, -808.05, -227, -808.05, -240.5, -615.05, -244, -549.1, -244, -549.1, -227, -615.05, -227, -615.05, -240.5, -947.35, -240.5, -881.5, -240.5, -881.5, -223.5, -947.35, -223.5, -947.35, -231, -224.1, -231, -195.1, -231, -195.1, -170, -224.1, -170, -224.1, -227, 415.85, -231, 451.85, -231, 451.85, -170, 415.85, -170, 415.85, -227, -224.1, -170, 451.85, -170, 451.85, -154, -224.1, -154, -224.1, -159.5, -1257.05, -159.5, -1221.05, -159.5, -1221.05, -54, -1257.05, -54, -1257.05, -154, -947.35, -159.5, -881.5, -159.5, -881.5, -142.5, -947.35, -142.5, -947.35, -154, -518.1, -159.5, -487.1, -159.5, -487.1, -54, -518.1, -54, -518.1, -154, -63.1, -154, -35.1, -154, -35.1, -17, -63.1, -17, -63.1, -150, 259.85, -154, 277.85, -154, 277.85, -26, 259.85, -26, 259.85, -150, -710.05, -150, -649.05, -150, -649.05, -130, -710.05, -130, -710.05, -142.5, -1270.07, -54, -479.1, -54, -479.1, -38, -1270.07, -38, -1257.05, -38, -1243, -38, -1243, -17, -1257.05, -17, -1257.05, -26, -518.1, -38, -487.1, -38, -487.1, -26, -518.1, -26, 197.85, -26, 277.85, -26, 277.85, -12, 197.85, -12, 197.85, -17, -63.1, -17, -35.1, -17, -35.1, 6, -63.1, 6, -63.1, -12, 197.85, -12, 213.85, -12, 213.85, 55, 197.85, 55, 197.85, 6, -81.1, 6, 58.9, 6, 58.9, 20, -81.1, 20, 34.9, 20, 58.9, 20, 58.9, 55, 34.9, 55, 34.9, 55, 213.85, 55, 213.85, 76, 34.9, 76)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26), PackedInt32Array(27, 28, 29, 30, 31), PackedInt32Array(32, 33, 34, 35, 36), PackedInt32Array(37, 38, 39, 40, 41), PackedInt32Array(42, 43, 44, 45, 46), PackedInt32Array(47, 48, 49, 50, 51), PackedInt32Array(52, 53, 54, 55, 56), PackedInt32Array(57, 58, 59, 60, 61), PackedInt32Array(62, 63, 64, 65, 66), PackedInt32Array(67, 68, 69, 70, 71), PackedInt32Array(72, 73, 74, 75, 76), PackedInt32Array(77, 78, 79, 80, 81), PackedInt32Array(82, 83, 84, 85, 86), PackedInt32Array(87, 88, 89, 90, 91), PackedInt32Array(92, 93, 94, 95, 96), PackedInt32Array(97, 98, 99, 100), PackedInt32Array(101, 102, 103, 104, 105), PackedInt32Array(106, 107, 108, 109), PackedInt32Array(110, 111, 112, 113, 114), PackedInt32Array(115, 116, 117, 118, 119), PackedInt32Array(120, 121, 122, 123, 124), PackedInt32Array(125, 126, 127, 128), PackedInt32Array(129, 130, 131, 132), PackedInt32Array(133, 134, 135, 136)])
+
+[node name="Frame 1" type="Node2D" parent="Layer 1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer 1/Frame 1"]
+
+[node name="@@3370" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(-159.1, -447, 464.85, -447, 464.85, -411, -159.1, -411, -159.1, -411, -109.1, -411, -109.1, -258, -159.1, -258, 388.85, -411, 436.85, -411, 436.85, -258, 388.85, -258, -224.1, -258, 67.9, -258, 67.9, -231, -224.1, -231, 124.85, -258, 451.85, -258, 451.85, -231, 124.85, -231, -224.1, -231, -195.1, -231, -195.1, -170, -224.1, -170, 415.85, -231, 451.85, -231, 451.85, -170, 415.85, -170, -224.1, -170, 67.9, -170, 67.9, -154, -224.1, -154, 124.85, -170, 451.85, -170, 451.85, -154, 124.85, -154, -63.1, -154, -35.1, -154, -35.1, 6, -63.1, 6, -63.1, -26, 259.85, -154, 277.85, -154, 277.85, -26, 259.85, -26, 204.85, -26, 277.85, -26, 277.85, -12, 189.538, -12, 189.538, -12, 213.85, -12, 213.85, 6, 169.85, 6, -81.1, 6, 213.85, 6, 213.85, 20, -81.1, 20, 34.9, 20, 213.85, 20, 213.85, 76, 34.9, 76)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(20, 21, 22, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(28, 29, 30, 31), PackedInt32Array(32, 33, 34, 35), PackedInt32Array(36, 37, 38, 39, 40), PackedInt32Array(41, 42, 43, 44), PackedInt32Array(45, 46, 47, 48), PackedInt32Array(49, 50, 51, 52), PackedInt32Array(53, 54, 55, 56), PackedInt32Array(57, 58, 59, 60)])
+
 [node name="Layer 2" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer 2"]
