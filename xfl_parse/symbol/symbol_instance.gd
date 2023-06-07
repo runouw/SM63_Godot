@@ -14,3 +14,4 @@ func _ready():
 		if packed_scene:
 			var instance = packed_scene.instantiate()
 			add_child(instance)
+			instance.owner = owner
