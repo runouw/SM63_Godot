@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="1_hm5vb"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_6wasl"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_a0idc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="1_eehya"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_oe8s2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_b3hjh"]
 
-[sub_resource type="Animation" id="Animation_8pdcv"]
+[sub_resource type="Animation" id="Animation_ifpxn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,16 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_unqjm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6scm"]
 _data = {
-"Default": SubResource("Animation_8pdcv")
+"Default": SubResource("Animation_ifpxn")
 }
 
-[node name="  Course Items-PL Various Platforms Coded Wooden PLFalling Block" type="Node2D"]
+[node name="Falling Block" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_unqjm")
+"Timeline": SubResource("AnimationLibrary_f6scm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,7 +53,7 @@ libraries = {
 [node name="@@47744" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_hm5vb")
+texture = ExtResource("1_eehya")
 texture_offset = Vector2(61.1, 65.65)
 polygon = PackedVector2Array(-12, -12.025, 12, -12.025, 12, 4.95, 4.975, 11.975, -5.025, 11.975, -12, 5, -12, 4.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
@@ -66,10 +66,19 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_6wasl")]
-modulate = Color(0.671875, 0.671875, 0.671875, 0.5)
-script = ExtResource("3_a0idc")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_oe8s2")]
+script = ExtResource("3_b3hjh")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Coded Wooden PL/Falling Block Alpha.tscn"
+red_multiplier = 0.671875
+green_multiplier = 0.671875
+blue_multiplier = 0.671875
+alpha_multiplier = 0.5
+red_offset = 75.0
+green_offset = 69.0
+blue_offset = 45.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 2" type="Node2D" parent="."]
 

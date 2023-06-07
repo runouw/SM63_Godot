@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_ut8gy"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_02fdr"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_rcj6q"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_o6htx"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_nsur4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_mldjj"]
 
-[sub_resource type="Animation" id="Animation_hqf7v"]
+[sub_resource type="Animation" id="Animation_nqtfc"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,16 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vvcuv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mx6gs"]
 _data = {
-"Default": SubResource("Animation_hqf7v")
+"Default": SubResource("Animation_nqtfc")
 }
 
 [node name="LDP Play Button" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vvcuv")
+"Timeline": SubResource("AnimationLibrary_mx6gs")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -65,7 +65,7 @@ libraries = {
 [node name="@@8880" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-35.6, -25.05, 35.575, -25.05, 35.575, 25.05, -35.6, 25.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_ut8gy")
+script = ExtResource("1_o6htx")
 matrix = Transform2D(0.0207977, 0.0207977, -0.0216064, 0.0216064, 0, 0)
 entries_color = PackedColorArray(1, 1, 1, 1, 0.235294, 0.8, 0.741176, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -83,10 +83,20 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_02fdr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_nsur4")]
 position = Vector2(-0.05, 0.1)
-script = ExtResource("3_rcj6q")
+script = ExtResource("3_mldjj")
 path = "res://sm63_godot/LDP Play.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 3" type="Node2D" parent="."]
 

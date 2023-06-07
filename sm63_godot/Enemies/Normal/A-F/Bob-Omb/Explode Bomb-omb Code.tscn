@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_l2ve1"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2u3ew"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_j0bgh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_v4eal"]
 
-[sub_resource type="Animation" id="Animation_f4jmb"]
+[sub_resource type="Animation" id="Animation_b60dq"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,34 +31,53 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkrj4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nkgwu"]
 _data = {
-"Default": SubResource("Animation_f4jmb")
+"Default": SubResource("Animation_b60dq")
 }
 
-[node name="   EnemiesNormal A-F Bob-OmbExplode Bomb-omb Code" type="Node2D"]
+[node name="Explode Bomb-omb Code" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jkrj4")
+"Timeline": SubResource("AnimationLibrary_nkgwu")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_l2ve1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_j0bgh")]
 position = Vector2(-2.75, 1.25)
-script = ExtResource("2_2u3ew")
+script = ExtResource("2_v4eal")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/Explode Bomb-omb.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_l2ve1")]
-modulate = Color(1, 1, 1, 0)
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_j0bgh")]
 position = Vector2(0, 2.9)
 scale = Vector2(0.265381, 0.212067)
-script = ExtResource("2_2u3ew")
+script = ExtResource("2_v4eal")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 0.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_lw6n7"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_fgme8"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_bwo43"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_amnke"]
 
-[sub_resource type="Animation" id="Animation_3tp5e"]
+[sub_resource type="Animation" id="Animation_280py"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,16 +67,16 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_godly"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7w4ep"]
 _data = {
-"Default": SubResource("Animation_3tp5e")
+"Default": SubResource("Animation_280py")
 }
 
-[node name="      Char   HUD CLIPS (& BITS) Water Level FolderWater Level Bubble" type="Node2D"]
+[node name="Water Level Bubble" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_godly")
+"Timeline": SubResource("AnimationLibrary_7w4ep")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -86,9 +86,19 @@ libraries = {
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_lw6n7")]
-script = ExtResource("2_fgme8")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_bwo43")]
+script = ExtResource("2_amnke")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Bubble Clip.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 2" type="Node2D" parent="."]
 

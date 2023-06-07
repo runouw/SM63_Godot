@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_pdccb"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_llbrg"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_hyjt5"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_7ol24"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_teh76"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_lmxic"]
 
-[sub_resource type="Animation" id="Animation_4ltex"]
+[sub_resource type="Animation" id="Animation_h83ss"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,16 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6gyq5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lsqtp"]
 _data = {
-"Default": SubResource("Animation_4ltex")
+"Default": SubResource("Animation_h83ss")
 }
 
 [node name="Pause New Fludd Button" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6gyq5")
+"Timeline": SubResource("AnimationLibrary_lsqtp")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -65,10 +65,11 @@ libraries = {
 [node name="@@13373" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-61.4, -16.175, 58.6, -16.175, 58.6, 18.825, -61.4, 18.825)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_pdccb")
+script = ExtResource("1_7ol24")
 matrix = Transform2D(0.059082, 0, 0, 0.059082, -1.4, 1.3)
 entries_color = PackedColorArray(1, 1, 1, 1, 0.533333, 1, 1, 1)
 entries_ratio = PackedFloat32Array(0, 1)
+focal_point_ratio = 0.0
 
 [node name="@@13374" type="Line2D" parent="Layer 2/Frame 0/Shape"]
 points = PackedVector2Array(-61.4, -16.175, 58.6, -16.175, nan, nan, 58.6, -16.175, 58.6, 18.825, nan, nan, 58.6, 18.825, -61.4, 18.825, nan, nan, -61.4, -16.175, -61.4, 18.825, nan, nan)
@@ -82,10 +83,20 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_llbrg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_teh76")]
 position = Vector2(0, -0.05)
-script = ExtResource("3_hyjt5")
+script = ExtResource("3_lmxic")
 path = "res://sm63_godot/Pause New &#034Fludd&#034.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 3" type="Node2D" parent="."]
 

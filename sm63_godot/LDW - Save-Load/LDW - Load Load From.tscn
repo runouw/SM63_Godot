@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_22fex"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_imidy"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_nspmg"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_4as5o"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_uc5i2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_21fgy"]
 
-[sub_resource type="Animation" id="Animation_ufnbu"]
+[sub_resource type="Animation" id="Animation_dbr5a"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,16 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mj7ax"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bi1j2"]
 _data = {
-"Default": SubResource("Animation_ufnbu")
+"Default": SubResource("Animation_dbr5a")
 }
 
-[node name="LDW - Save-LoadLDW - Load Load From" type="Node2D"]
+[node name="LDW - Load Load From" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_mj7ax")
+"Timeline": SubResource("AnimationLibrary_bi1j2")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -65,10 +65,11 @@ libraries = {
 [node name="@@50836" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-21.15, -9.375, 21.075, -9.375, 21.075, 9.275, -21.15, 9.275)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_22fex")
+script = ExtResource("1_4as5o")
 matrix = Transform2D(0, 0.0570679, -0.0274963, 0, -1, -22)
 entries_color = PackedColorArray(0.447059, 0.992157, 0.443137, 1, 0.0196078, 0.882353, 0.0156863, 1, 0.00392157, 0.494118, 0.00392157, 1)
 entries_ratio = PackedFloat32Array(0, 0.321569, 1)
+focal_point_ratio = 0.0
 
 [node name="@@50837" type="Line2D" parent="Layer 1/Frame 0/Shape"]
 points = PackedVector2Array(-21.15, -9.375, 21.075, -9.375, nan, nan, 21.075, -9.375, 21.075, 9.275, nan, nan, 21.075, 9.275, -21.15, 9.275, nan, nan, -21.15, -9.375, -21.15, 9.275, nan, nan)
@@ -82,9 +83,19 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_imidy")]
-script = ExtResource("3_nspmg")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_uc5i2")]
+script = ExtResource("3_21fgy")
 path = "res://sm63_godot/LDW - Load &#034Load From&#034.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 3" type="Node2D" parent="."]
 

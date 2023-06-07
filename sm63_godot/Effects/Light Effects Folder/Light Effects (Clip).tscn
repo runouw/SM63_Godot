@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_cxl2a"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_a4emw"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_xgocd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_q3adx"]
 
-[sub_resource type="Animation" id="Animation_nkm31"]
+[sub_resource type="Animation" id="Animation_xism1"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,34 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_go2il"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_einx7"]
 _data = {
-"Default": SubResource("Animation_nkm31")
+"Default": SubResource("Animation_xism1")
 }
 
-[node name="   Effects Light Effects FolderLight Effects (Clip)" type="Node2D"]
+[node name="Light Effects (Clip)" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_go2il")
+"Timeline": SubResource("AnimationLibrary_einx7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_cxl2a")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_xgocd")]
 position = Vector2(1.55, 3.7)
 scale = Vector2(1.89651, 1.89651)
-script = ExtResource("2_a4emw")
+script = ExtResource("2_q3adx")
 path = "res://sm63_godot/Effects/Light Effects Folder/Light Effects.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0

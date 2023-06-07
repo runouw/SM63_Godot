@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_00jw4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mn8jx"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_27p35"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3chjt"]
 
-[sub_resource type="Animation" id="Animation_p5yej"]
+[sub_resource type="Animation" id="Animation_jh4hv"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,26 +43,36 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r2thf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b2ckk"]
 _data = {
-"Default": SubResource("Animation_p5yej")
+"Default": SubResource("Animation_jh4hv")
 }
 
-[node name=" MenuMenu FolderMenu - Transition Clip" type="Node2D"]
+[node name="Menu - Transition Clip" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_r2thf")
+"Timeline": SubResource("AnimationLibrary_b2ckk")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_00jw4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_27p35")]
 position = Vector2(0, 146)
-script = ExtResource("2_mn8jx")
+script = ExtResource("2_3chjt")
 path = "res://sm63_godot/Menu/Menu Folder/Menu Transition Object.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false

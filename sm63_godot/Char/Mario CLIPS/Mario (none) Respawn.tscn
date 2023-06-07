@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_tbej5"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_jx3bp"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_tj01e"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_h2jqe"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_gvhyy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_5ihfc"]
 
-[sub_resource type="Animation" id="Animation_7q70g"]
+[sub_resource type="Animation" id="Animation_da4ph"]
 length = 1.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -140,16 +140,16 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jla2b"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7hrg5"]
 _data = {
-"Default": SubResource("Animation_7q70g")
+"Default": SubResource("Animation_da4ph")
 }
 
-[node name="      Char  Mario CLIPSMario (none) Respawn" type="Node2D"]
+[node name="Mario (none) Respawn" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jla2b")
+"Timeline": SubResource("AnimationLibrary_7hrg5")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -162,9 +162,9 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 14"]
 
 [node name="@@15416" type="Polygon2D" parent="Layer 2/Frame 14/Shape"]
-polygon = PackedVector2Array(2.2, -4.35, 2.2, -4.35, 16.7, -2.75, 22.7, 1.15, 16.7, 5.05, 2.2, 6.65, 2.2, 6.65, -12.3, 5.05, -18.3, 1.15, -12.3, -2.75)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
-script = ExtResource("1_tbej5")
+polygon = PackedVector2Array(2.2, -4.35, 2.2, -4.35, 16.7, -2.75, 22.7, 1.15, 22.7, 1.15, 16.7, 5.05, 2.2, 6.65, 2.2, 6.65, -12.3, 5.05, -18.3, 1.15, -18.3, 1.15, -12.3, -2.75, -18.3, 1.15, -18.3, 1.15, -18.3, 1.15, -18.3, 1.15)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15)])
+script = ExtResource("1_h2jqe")
 matrix = Transform2D(0, 0.00671387, -0.0250244, 0, 2.2, 1.15)
 entries_color = PackedColorArray(0.913725, 0.956863, 0.47451, 0, 0.968627, 1, 0.835294, 0)
 entries_ratio = PackedFloat32Array(0, 0.0784314)
@@ -176,9 +176,9 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 29"]
 
 [node name="@@15417" type="Polygon2D" parent="Layer 2/Frame 29/Shape"]
-polygon = PackedVector2Array(2.2, -4.35, 2.2, -4.35, 16.7, -2.75, 22.7, 1.15, 16.7, 5.05, 2.2, 6.65, 2.2, 6.65, -12.3, 5.05, -18.3, 1.15, -12.3, -2.75)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
-script = ExtResource("1_tbej5")
+polygon = PackedVector2Array(2.2, -4.35, 2.2, -4.35, 16.7, -2.75, 22.7, 1.15, 22.7, 1.15, 16.7, 5.05, 2.2, 6.65, 2.2, 6.65, -12.3, 5.05, -18.3, 1.15, -18.3, 1.15, -12.3, -2.75, -18.3, 1.15, -18.3, 1.15, -18.3, 1.15, -18.3, 1.15)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15)])
+script = ExtResource("1_h2jqe")
 matrix = Transform2D(0, 0.00671387, -0.0250244, 0, 2.2, 1.15)
 entries_color = PackedColorArray(0.913725, 0.956863, 0.47451, 1, 0.968627, 1, 0.835294, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -191,19 +191,38 @@ spread_method_reflect = false
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14" instance=ExtResource("2_jx3bp")]
-modulate = Color(1, 1, 1, 0)
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14" instance=ExtResource("2_gvhyy")]
 position = Vector2(0, -100.05)
-script = ExtResource("3_tj01e")
+script = ExtResource("3_5ihfc")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 0.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29" instance=ExtResource("2_jx3bp")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29" instance=ExtResource("2_gvhyy")]
 position = Vector2(0, -0.05)
-script = ExtResource("3_tj01e")
+script = ExtResource("3_5ihfc")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 3" type="Node2D" parent="."]
 

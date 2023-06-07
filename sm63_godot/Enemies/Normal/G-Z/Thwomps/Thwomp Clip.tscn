@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Thwomps/MPA Thwomp.png" id="1_a64f3"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_phqc1"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_med28"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Thwomps/MPA Thwomp.png" id="1_qw430"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_0qre6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_2a1lm"]
 
-[sub_resource type="Animation" id="Animation_pscv1"]
+[sub_resource type="Animation" id="Animation_45sqd"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -56,16 +56,16 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jf846"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_drgwc"]
 _data = {
-"Default": SubResource("Animation_pscv1")
+"Default": SubResource("Animation_45sqd")
 }
 
-[node name="   EnemiesNormal G-Z ThwompsThwomp Clip" type="Node2D"]
+[node name="Thwomp Clip" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jf846")
+"Timeline": SubResource("AnimationLibrary_drgwc")
 }
 
 [node name="Face" type="Node2D" parent="."]
@@ -75,7 +75,7 @@ libraries = {
 [node name="@@50766" type="Sprite2D" parent="Face/Frame 0"]
 texture_filter = 1
 position = Vector2(-24, -48)
-texture = ExtResource("1_a64f3")
+texture = ExtResource("1_qw430")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -85,16 +85,34 @@ centered = false
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("2_phqc1")]
-modulate = Color(1, 1, 1, 0.5)
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("2_0qre6")]
 position = Vector2(-0.35, -0.85)
-script = ExtResource("3_med28")
+script = ExtResource("3_2a1lm")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Thwomps/Thwomp Ground.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 0.5
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
-[node name="@DOMSymbolInstance@50765" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("2_phqc1")]
-modulate = Color(1, 1, 1, 0.5)
-script = ExtResource("3_med28")
+[node name="@DOMSymbolInstance@50765" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("2_0qre6")]
+script = ExtResource("3_2a1lm")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Thwomps/Thwomp Bplatforms.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 0.5
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false

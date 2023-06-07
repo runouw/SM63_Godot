@@ -77,12 +77,16 @@ func _parse_hex_number():
 	var allowed = "0123456789ABCDEF-."
 	
 	var buf = ""
+	var buf_raw = ""
 	while _edges[at] in allowed:
 		if _edges[at] == ".":
-			buf.pad_zeros(6)
+			while buf.length() < 6:
+				buf = "0" + buf
+			buf_raw += "."
 			at += 1
 		
 		buf += _edges[at]
+		buf_raw += _edges[at]
 		
 		at += 1
 		if at >= end:
@@ -91,7 +95,15 @@ func _parse_hex_number():
 	while buf.length() < 8:
 		buf += "0"
 	
-	return float(buf.hex_to_int()) / 256.0
+	# looks like this is 64 bit int...
+	var bits: int = buf.hex_to_int()
+	
+	# weird way to force two's compliment to work...
+	if (bits & 0x80000000) == 0x80000000: # bit 31 means it's actually a negative number
+		bits = (~bits) & 0xFFFFFFFF
+		bits = -bits + 1
+	
+	return float(bits) / 256.0
 
 
 func _move_to():

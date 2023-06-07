@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_v4qa7"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_i2yjs"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_glao3"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_u314k"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_owqip"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_sjsin"]
 
-[sub_resource type="Animation" id="Animation_d67aj"]
+[sub_resource type="Animation" id="Animation_30mbn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,16 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sseqa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_drxfa"]
 _data = {
-"Default": SubResource("Animation_d67aj")
+"Default": SubResource("Animation_30mbn")
 }
 
 [node name="LDP Share Button" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sseqa")
+"Timeline": SubResource("AnimationLibrary_drxfa")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -65,7 +65,7 @@ libraries = {
 [node name="@@8900" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-77.075, -13.6, 77.05, -13.6, 77.05, 13.6, -77.075, 13.6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_v4qa7")
+script = ExtResource("1_u314k")
 matrix = Transform2D(0.0940704, 0, 0, 0.0165863, 0, 0)
 entries_color = PackedColorArray(0.701961, 1, 0.756863, 1, 0.117647, 0.615686, 0.117647, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -83,9 +83,19 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_i2yjs")]
-script = ExtResource("3_glao3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_owqip")]
+script = ExtResource("3_sjsin")
 path = "res://sm63_godot/LDP &#034Share.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 3" type="Node2D" parent="."]
 

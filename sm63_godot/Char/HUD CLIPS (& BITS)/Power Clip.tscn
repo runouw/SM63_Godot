@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_0an8y"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_au5mr"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_we7vo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_42xrh"]
 
-[sub_resource type="Animation" id="Animation_ext53"]
+[sub_resource type="Animation" id="Animation_ytgun"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,26 +103,36 @@ tracks/7/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jjeaa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmg8f"]
 _data = {
-"Default": SubResource("Animation_ext53")
+"Default": SubResource("Animation_ytgun")
 }
 
-[node name="      Char   HUD CLIPS (& BITS)Power Clip" type="Node2D"]
+[node name="Power Clip" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jjeaa")
+"Timeline": SubResource("AnimationLibrary_wmg8f")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_0an8y")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_we7vo")]
 position = Vector2(-1, 0)
-script = ExtResource("2_au5mr")
+script = ExtResource("2_42xrh")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Power GFX.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.5
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 2" type="Node2D" parent="."]
 

@@ -4,6 +4,8 @@ extends Node2D
 var SymbolInstance := preload("res://xfl_parse/symbol/symbol_instance.tscn")
 
 var DEBUG_separate_polygons: bool = false
+var max_bezier_subdivide_cuts: int = 5
+var bezier_pixels_per_cut: float = 5.0
 
 var linkage: String = ""
 var linkage_export: bool = false
@@ -24,15 +26,14 @@ func _init(path: String):
 		print("NOT DOMSymbolItem!")
 		return
 	
-	name = model.root.attributes.get("name", "")
+	# name = model.root.attributes.get("name", "")
 	linkage_export = model.root.attributes.get("linkageExportForAS", "false") == "true"
 	linkage = model.root.attributes.get("linkageIdentifier", "")
 	
-#	var timeline_tag = model.root.first_child_with_tag("timeline")
-#	if timeline_tag:
-#		var DOMTimeline_tag = timeline_tag.first_child_with_tag("DOMTimeline")
-#
-#		var layers_tag = DOMTimeline_tag.first_child_with_tag("layers")
+	var timeline_tag = model.root.first_child_with_tag("timeline")
+	if timeline_tag:
+		var DOMTimeline_tag = timeline_tag.first_child_with_tag("DOMTimeline")
+		name = DOMTimeline_tag.attributes.get("name", "")
 	
 	var animation_lib = AnimationLibrary.new()
 	animation = Animation.new()
@@ -144,33 +145,18 @@ func _process_DOMSymbolInstance(DOMSymbolInstance: XMLNode, parent_node: Node2D)
 		_handle_color(color.first_child_with_tag("Color"), symbol_node)
 
 
-
 func _handle_color(color: XMLNode, node: Node2D):
-	var redMultiplier = float(color.attributes.get("redMultiplier", "1"))
-	var greenMultiplier = float(color.attributes.get("greenMultiplier", "1"))
-	var blueMultiplier = float(color.attributes.get("blueMultiplier", "1"))
-	var alphaMultiplier = float(color.attributes.get("alphaMultiplier", "1"))
+	node.red_multiplier = float(color.attributes.get("redMultiplier", "1"))
+	node.green_multiplier = float(color.attributes.get("greenMultiplier", "1"))
+	node.blue_multiplier = float(color.attributes.get("blueMultiplier", "1"))
+	node.alpha_multiplier = float(color.attributes.get("alphaMultiplier", "1"))
 	
-	var redOffset = float(color.attributes.get("redOffset", "0"))
-	var greenOffset = float(color.attributes.get("greenOffset", "0"))
-	var blueOffset = float(color.attributes.get("blueOffset", "0"))
+	node.red_offset = float(color.attributes.get("redOffset", "0"))
+	node.green_offset = float(color.attributes.get("greenOffset", "0"))
+	node.blue_offset = float(color.attributes.get("blueOffset", "0"))
 	
-	var tintMultiplier = float(color.attributes.get("tintMultipler", "0"))
-	
-	if redOffset > 0 or greenOffset > 0 or blueOffset > 0:
-		# TODO: apply color offset...
-		pass
-		
-	
-	if tintMultiplier > 0:
-		var tintColor = Color.from_string(color.attributes.get("tintColor", "#FFFFFF"), Color.WHITE)
-		# TODO: apply tint. Godot can't really do that...
-		node.modulate = lerp(tintColor, Color.WHITE, tintMultiplier)
-	
-	node.modulate.r *= redMultiplier
-	node.modulate.g *= greenMultiplier
-	node.modulate.b *= blueMultiplier
-	node.modulate.a *= alphaMultiplier
+	node.tint_multiplier = float(color.attributes.get("tintMultiplier", "0"))
+	node.brightness = float(color.attributes.get("brightness", "0"))
 
 
 func _matrix_to_Transform2D_Fills(matrix_node: XMLNode) -> Transform2D:
@@ -297,6 +283,8 @@ func _apply_fillStyle(fills_node: XMLNode, target: Polygon2D):
 		target.set_script(load("res://xfl_parse/gradient/radial_gradient.gd"))
 		target.matrix = _matrix_to_Transform2D_Instances(radial_gradient.first_child_with_tag("matrix"))
 		
+		target.focal_point_ratio = float(radial_gradient.attributes.get("focalPointRatio", "0.0"))
+		
 		var entries_color := PackedColorArray()
 		var entries_ratio := PackedFloat32Array()
 		
@@ -361,7 +349,6 @@ func _read_edge_commands(edge_node: XMLNode, layer_node: Node2D) -> Array[DOMSha
 	var strokeStyle_index = int(edge_node.attributes.get("strokeStyle", "0"))
 	
 	var styleCode: String = "1"
-	# if # 
 	
 	var raw_edges: Array[DOMShape_Edge] = []
 	
@@ -389,15 +376,33 @@ func _read_edge_commands(edge_node: XMLNode, layer_node: Node2D) -> Array[DOMSha
 			var p2 = Vector2(command[1], command[2])
 			var p3 = Vector2(command[3], command[4])
 			
-			# TODO: subdivide bezier curve a few times
-			var edge := DOMShape_Edge.new()
-			edge.a = p
-			edge.b = p3
-			edge.fillStyle0 = fillStyle0_index
-			edge.fillStyle1 = fillStyle1_index
-			edge.strokeStyle = strokeStyle_index
+			var l: Vector2 = p
 			
-			raw_edges.append(edge)
+			var desired_cuts: int = 1
+			
+			if not _mostly_same((p2 - p).normalized(), (p3 - p2).normalized()):
+				var length_estimate: float = (p2 - p).length() + (p3 - p2).length()
+				
+				desired_cuts = clamp(int(sqrt(length_estimate / bezier_pixels_per_cut)), 1, max_bezier_subdivide_cuts)
+			
+			for z in range(1, desired_cuts + 1):
+				var t: float = float(z) / desired_cuts
+				
+				var s1: Vector2 = p.lerp(p2, t)
+				var s2: Vector2 = p2.lerp(p3, t)
+				var s: Vector2 = s1.lerp(s2, t)
+				
+				var edge := DOMShape_Edge.new()
+				
+				edge.a = l
+				edge.b = s
+				edge.fillStyle0 = fillStyle0_index
+				edge.fillStyle1 = fillStyle1_index
+				edge.strokeStyle = strokeStyle_index
+				
+				raw_edges.append(edge)
+				
+				l = s
 			
 			p = p3
 		

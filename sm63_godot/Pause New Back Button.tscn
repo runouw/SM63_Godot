@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_yux3d"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_e12by"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_1gf45"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_mgc10"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_5mka7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_8sh28"]
 
-[sub_resource type="Animation" id="Animation_bv56d"]
+[sub_resource type="Animation" id="Animation_npppl"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,16 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m10ya"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jwpu6"]
 _data = {
-"Default": SubResource("Animation_bv56d")
+"Default": SubResource("Animation_npppl")
 }
 
 [node name="Pause New Back Button" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_m10ya")
+"Timeline": SubResource("AnimationLibrary_jwpu6")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -65,10 +65,11 @@ libraries = {
 [node name="@@13310" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-60.075, -17.975, 59.9, -17.975, 59.9, 17.025, -60.075, 17.025)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_yux3d")
+script = ExtResource("1_mgc10")
 matrix = Transform2D(0.0766296, 0, 0, 0.0731049, -0.1, -0.5)
 entries_color = PackedColorArray(1, 1, 1, 1, 0.45098, 0.45098, 0.45098, 1)
 entries_ratio = PackedFloat32Array(0, 1)
+focal_point_ratio = 0.0
 
 [node name="@@13311" type="Line2D" parent="Layer 2/Frame 0/Shape"]
 points = PackedVector2Array(59.9, 17.025, -60.075, 17.025, nan, nan, -60.075, -17.975, -60.075, 17.025, nan, nan, -60.075, -17.975, 59.9, -17.975, nan, nan, 59.9, -17.975, 59.9, 17.025, nan, nan)
@@ -82,9 +83,19 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_e12by")]
-script = ExtResource("3_1gf45")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_5mka7")]
+script = ExtResource("3_8sh28")
 path = "res://sm63_godot/Pause New &#034Back&#034.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 3" type="Node2D" parent="."]
 

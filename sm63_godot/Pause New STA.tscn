@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Blue Shine.png" id="1_3kyhl"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Yellow Shine.png" id="2_sx7gh"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_uojt8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_1732e"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Blue Shine.png" id="1_l0jbi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Yellow Shine.png" id="2_wwblu"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_h80fo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_vgmd4"]
 
-[sub_resource type="Animation" id="Animation_1uset"]
+[sub_resource type="Animation" id="Animation_6p5fq"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -57,16 +57,16 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1adal"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jg0l5"]
 _data = {
-"Default": SubResource("Animation_1uset")
+"Default": SubResource("Animation_6p5fq")
 }
 
 [node name="Pause New STA" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1adal")
+"Timeline": SubResource("AnimationLibrary_jg0l5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -76,7 +76,7 @@ libraries = {
 [node name="@@13582" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-7, -7.5)
-texture = ExtResource("1_3kyhl")
+texture = ExtResource("1_l0jbi")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -85,15 +85,25 @@ visible = false
 [node name="@@13583" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-7, -7.5)
-texture = ExtResource("2_sx7gh")
+texture = ExtResource("2_wwblu")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("3_uojt8")]
-script = ExtResource("4_1732e")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("3_h80fo")]
+script = ExtResource("4_vgmd4")
 path = "res://sm63_godot/Pause New STA STa.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 2" type="Node2D" parent="."]
 

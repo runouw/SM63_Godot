@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_kf1bg"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7itd6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 4 (Walk 2).png" id="3_0tlik"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 5 (Walk 3).png" id="4_n5x8j"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 6 (Walk 4).png" id="5_iddi7"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 3 (Walk 1).png" id="6_1cioy"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ss6by"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8rp4b"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 4 (Walk 2).png" id="3_dk2wa"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 5 (Walk 3).png" id="4_la2jf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 6 (Walk 4).png" id="5_6a3pr"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 3 (Walk 1).png" id="6_jby8c"]
 
-[sub_resource type="Animation" id="Animation_vamyw"]
+[sub_resource type="Animation" id="Animation_67ww6"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -143,16 +143,16 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gmugh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cpcwc"]
 _data = {
-"Default": SubResource("Animation_vamyw")
+"Default": SubResource("Animation_67ww6")
 }
 
-[node name="   EnemiesNormal G-ZToad StuffToad - Walk Clip" type="Node2D"]
+[node name="Toad - Walk Clip" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gmugh")
+"Timeline": SubResource("AnimationLibrary_cpcwc")
 }
 
 [node name="Head 2" type="Node2D" parent="."]
@@ -162,10 +162,20 @@ libraries = {
 [node name="Frame 15" type="Node2D" parent="Head 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head 2/Frame 15" instance=ExtResource("1_kf1bg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head 2/Frame 15" instance=ExtResource("1_ss6by")]
 position = Vector2(0, -15.45)
-script = ExtResource("2_7itd6")
+script = ExtResource("2_8rp4b")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad - MAIN Head.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 1" type="Node2D" parent="."]
 
@@ -174,7 +184,7 @@ path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad - MAIN Head.tscn"
 [node name="@@50811" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-6.5, -5.5)
-texture = ExtResource("3_0tlik")
+texture = ExtResource("3_dk2wa")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -183,7 +193,7 @@ visible = false
 [node name="@@50812" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-9, -8.5)
-texture = ExtResource("4_n5x8j")
+texture = ExtResource("4_la2jf")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
@@ -192,7 +202,7 @@ visible = false
 [node name="@@50813" type="Sprite2D" parent="Layer 1/Frame 10"]
 texture_filter = 1
 position = Vector2(-6.5, -5.5)
-texture = ExtResource("5_iddi7")
+texture = ExtResource("5_6a3pr")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
@@ -201,33 +211,63 @@ visible = false
 [node name="@@50814" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-7, -8)
-texture = ExtResource("6_1cioy")
+texture = ExtResource("6_jby8c")
 centered = false
 
 [node name="Head" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Head"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 0" instance=ExtResource("1_kf1bg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 0" instance=ExtResource("1_ss6by")]
 position = Vector2(0.5, -12.95)
-script = ExtResource("2_7itd6")
+script = ExtResource("2_8rp4b")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad - MAIN Head.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Frame 5" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 5" instance=ExtResource("1_kf1bg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 5" instance=ExtResource("1_ss6by")]
 position = Vector2(0, -14.95)
-script = ExtResource("2_7itd6")
+script = ExtResource("2_8rp4b")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad - MAIN Head.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Frame 10" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 10" instance=ExtResource("1_kf1bg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 10" instance=ExtResource("1_ss6by")]
 position = Vector2(0.5, -12.95)
-script = ExtResource("2_7itd6")
+script = ExtResource("2_8rp4b")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad - MAIN Head.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Frame 15" type="Node2D" parent="Head"]
 visible = false

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_lojpj"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_3xaaf"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_rg1o2"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_0dsfb"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_dq6mm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_gn54p"]
 
-[sub_resource type="Animation" id="Animation_hvt4v"]
+[sub_resource type="Animation" id="Animation_vrf3g"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,16 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fpvt6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x6hrt"]
 _data = {
-"Default": SubResource("Animation_hvt4v")
+"Default": SubResource("Animation_vrf3g")
 }
 
 [node name="LD Play Level Button" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fpvt6")
+"Timeline": SubResource("AnimationLibrary_x6hrt")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -65,7 +65,7 @@ libraries = {
 [node name="@@8752" type="Polygon2D" parent="Layer 4/Frame 0/Shape"]
 polygon = PackedVector2Array(-50.525, -13.475, 51, -13.475, 51, 15.5, -50.525, 15.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_lojpj")
+script = ExtResource("1_0dsfb")
 matrix = Transform2D(-0.0619659, 0, 0, -0.0176544, 0, -10.9)
 entries_color = PackedColorArray(1, 1, 1, 1, 0.0352941, 1, 0.0352941, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -83,9 +83,19 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("2_3xaaf")]
-script = ExtResource("3_rg1o2")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("2_dq6mm")]
+script = ExtResource("3_gn54p")
 path = "res://sm63_godot/LD Play Level Text.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 0.0
+tint_color = Color(0, 0, 0, 1)
+brightness = 0.0
 
 [node name="Layer 2" type="Node2D" parent="."]
 
