@@ -6,7 +6,7 @@ extends Polygon2D
 @export var entries_ratio: PackedFloat32Array
 
 func _ready():
-	material = load("res://xfl_parse/gradient/radial_gradient_material.tres")
+	material = load("res://xfl_parse/gradient/radial_gradient_material.tres").duplicate()
 
 	material.set_shader_parameter("transformMatrix", matrix)
 

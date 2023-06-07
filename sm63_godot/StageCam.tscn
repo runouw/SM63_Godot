@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_2davo"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_vvq4l"]
 
-[sub_resource type="Animation" id="Animation_g30to"]
+[sub_resource type="Animation" id="Animation_so0o8"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -54,16 +54,16 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yassl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gss0a"]
 _data = {
-"Default": SubResource("Animation_g30to")
+"Default": SubResource("Animation_so0o8")
 }
 
 [node name="StageCam" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_yassl")
+"Timeline": SubResource("AnimationLibrary_gss0a")
 }
 
 [node name="frame" type="Node2D" parent="."]
@@ -73,6 +73,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="frame/Frame 0"]
 
 [node name="@@13884" type="Polygon2D" parent="frame/Frame 0/Shape"]
+color = Color(1, 1, 1, 0.2)
 polygon = PackedVector2Array(-360, -240, 360, -240, 360, 240, -360, 240)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -91,6 +92,7 @@ end_cap_mode = 2
 [node name="Shape" type="Node2D" parent="viewfinder/Frame 0"]
 
 [node name="@@13881" type="Polygon2D" parent="viewfinder/Frame 0/Shape"]
+color = Color(1, 1, 1, 0.0627451)
 polygon = PackedVector2Array(0, -25.7, 0.1, -25.7, 18.3, -18.2, 25.85, 0, 18.3, 18.15, 0.1, 25.7, 0, 25.7, -18.05, 18.15, -25.6, 0, -25.6, -0.05, -18.05, -18.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)])
 
@@ -157,10 +159,11 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@13880" type="Polygon2D" parent="color/Frame 0/Shape"]
 polygon = PackedVector2Array(242.75, 226.225, 349.8, 226.225, 349.8, 232.6, 242.75, 232.6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_2davo")
+script = ExtResource("1_vvq4l")
 matrix = Transform2D(0.0653687, 0, 0, 0.00387573, 296.25, 229.4)
 entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 entries_ratio = PackedFloat32Array(0, 1)
+spread_method_reflect = false
 
 [node name="actions" type="Node2D" parent="."]
 

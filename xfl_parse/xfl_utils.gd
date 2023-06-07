@@ -21,4 +21,5 @@ static func _fix_dir_name(str) -> String:
 	str = str.strip_edges()
 	str = str.replace(",", "&#044")
 	str = str.replace(":", "&#058")
+	str = str.replace("\"", "&#034")
 	return str

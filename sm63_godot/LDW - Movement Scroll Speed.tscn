@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_hy6x8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_g420g"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_m2fup"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_rqsgy"]
 
-[sub_resource type="Animation" id="Animation_5om36"]
+[sub_resource type="Animation" id="Animation_ehqi6"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +55,16 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ym7hm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y14aa"]
 _data = {
-"Default": SubResource("Animation_5om36")
+"Default": SubResource("Animation_ehqi6")
 }
 
 [node name="LDW - Movement Scroll Speed" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ym7hm")
+"Timeline": SubResource("AnimationLibrary_y14aa")
 }
 
 [node name="Bar" type="Node2D" parent="."]
@@ -74,6 +74,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Bar/Frame 0"]
 
 [node name="@@12095" type="Polygon2D" parent="Bar/Frame 0/Shape"]
+color = Color(1, 1, 1, 0.498039)
 polygon = PackedVector2Array(-80.1, -8, 79.9, -8, 79.9, 8, -80.1, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -89,17 +90,17 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_hy6x8")]
-script = ExtResource("2_g420g")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_m2fup")]
+script = ExtResource("2_rqsgy")
 path = "res://sm63_godot/LDW - Movement Scroll Dragger.tscn"
 
 [node name="TXT" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="TXT"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="TXT/Frame 0" instance=ExtResource("1_hy6x8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="TXT/Frame 0" instance=ExtResource("1_m2fup")]
 scale = Vector2(1, 0.99614)
-script = ExtResource("2_g420g")
+script = ExtResource("2_rqsgy")
 path = "res://sm63_godot/LDW - Movement Scroll Text.tscn"
 
 [node name="Layer 2" type="Node2D" parent="."]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_wip83"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_ou4f7"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_uva3g"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_ut8gy"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_02fdr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_rcj6q"]
 
-[sub_resource type="Animation" id="Animation_b8ylv"]
+[sub_resource type="Animation" id="Animation_hqf7v"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,16 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jaki8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vvcuv"]
 _data = {
-"Default": SubResource("Animation_b8ylv")
+"Default": SubResource("Animation_hqf7v")
 }
 
 [node name="LDP Play Button" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jaki8")
+"Timeline": SubResource("AnimationLibrary_vvcuv")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -65,10 +65,11 @@ libraries = {
 [node name="@@8880" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-35.6, -25.05, 35.575, -25.05, 35.575, 25.05, -35.6, 25.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_wip83")
+script = ExtResource("1_ut8gy")
 matrix = Transform2D(0.0207977, 0.0207977, -0.0216064, 0.0216064, 0, 0)
 entries_color = PackedColorArray(1, 1, 1, 1, 0.235294, 0.8, 0.741176, 1)
 entries_ratio = PackedFloat32Array(0, 1)
+spread_method_reflect = false
 
 [node name="@@8881" type="Line2D" parent="Layer 2/Frame 0/Shape"]
 points = PackedVector2Array(-35.6, -25.05, 35.575, -25.05, nan, nan, 35.575, -25.05, 35.575, 25.05, nan, nan, 35.575, 25.05, -35.6, 25.05, nan, nan, -35.6, -25.05, -35.6, 25.05, nan, nan)
@@ -82,9 +83,9 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_ou4f7")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_02fdr")]
 position = Vector2(-0.05, 0.1)
-script = ExtResource("3_uva3g")
+script = ExtResource("3_rcj6q")
 path = "res://sm63_godot/LDP Play.tscn"
 
 [node name="Layer 3" type="Node2D" parent="."]

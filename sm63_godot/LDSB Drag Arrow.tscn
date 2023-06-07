@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_g0qfp"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_er5n7"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_rmmea"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_clcn5"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_ls6py"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_ut31l"]
 
-[sub_resource type="Animation" id="Animation_e62yl"]
+[sub_resource type="Animation" id="Animation_50ixd"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,16 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_y5nbn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4ox4"]
 _data = {
-"Default": SubResource("Animation_e62yl")
+"Default": SubResource("Animation_50ixd")
 }
 
 [node name="LDSB Drag Arrow" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_y5nbn")
+"Timeline": SubResource("AnimationLibrary_n4ox4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,7 +53,7 @@ libraries = {
 [node name="@@8927" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-6.025, -6, 5.975, -6, 5.975, 6, -6.025, 6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_g0qfp")
+script = ExtResource("1_clcn5")
 matrix = Transform2D(0.0103455, 0, 0, 0.0103455, 0, 0)
 entries_color = PackedColorArray(0.866667, 0.839216, 0.733333, 1, 0.933333, 0.917647, 0.866667, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -66,9 +66,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_er5n7")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_ls6py")]
 modulate = Color(1, 1, 1, 0.5)
-script = ExtResource("3_rmmea")
+script = ExtResource("3_ut31l")
 path = "res://sm63_godot/LDSB Drag Arrow Arrow.tscn"
 
 [node name="Layer 2" type="Node2D" parent="."]

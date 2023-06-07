@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_fji7g"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_dumir"]
+[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_rvxrj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_o65n2"]
 
-[sub_resource type="Animation" id="Animation_lk6kn"]
+[sub_resource type="Animation" id="Animation_ygt83"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,16 +67,16 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhm5c"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ng8io"]
 _data = {
-"Default": SubResource("Animation_lk6kn")
+"Default": SubResource("Animation_ygt83")
 }
 
 [node name="LD - Arrow Tool" type="Node2D"]
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rhm5c")
+"Timeline": SubResource("AnimationLibrary_ng8io")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -86,6 +86,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@7327" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(1, 1, 1, 0.498039)
 polygon = PackedVector2Array(-16.025, -16.025, 15.975, -16.025, 15.975, 15.975, -16.025, 15.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -103,7 +104,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 2"]
 
 [node name="@@7329" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
-color = Color(0.266667, 0.341176, 1, 1)
+color = Color(0.266667, 0.341176, 1, 0.501961)
 polygon = PackedVector2Array(-16.025, -16.025, 15.975, -16.025, 15.975, 15.975, -16.025, 15.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -147,8 +148,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_fji7g")]
-script = ExtResource("2_dumir")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_rvxrj")]
+script = ExtResource("2_o65n2")
 path = "res://sm63_godot/LD - Arrow Tool Deselect.tscn"
 
 [node name="Layer 2" type="Node2D" parent="."]
