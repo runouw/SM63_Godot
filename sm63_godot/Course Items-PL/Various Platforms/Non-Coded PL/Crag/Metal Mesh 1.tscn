@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_tdarv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ykowx"]
+
+[sub_resource type="Animation" id="Animation_urxmk"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,32 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n6iwk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s6poq"]
 _data = {
-"Default": SubResource("Animation_tdarv")
+"Default": SubResource("Animation_urxmk")
 }
 
+[sub_resource type="GDScript" id="GDScript_di5e0"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root._quality == \"HIGH\" || _root._quality == \"BEST\") {
+# 		gotoAndStop(1);
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# };
+# "
+
 [node name="Metal Mesh 1" type="Node2D"]
+script = ExtResource("1_ykowx")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Metal Mesh 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_n6iwk")
+"Timeline": SubResource("AnimationLibrary_s6poq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -160,3 +178,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_di5e0")

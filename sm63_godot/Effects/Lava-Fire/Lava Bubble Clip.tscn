@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_rfr8p"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_iok3g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4islr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_x6wuk"]
 
-[sub_resource type="Animation" id="Animation_yaxog"]
+[sub_resource type="Animation" id="Animation_35uxa"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +55,79 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gxl1h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0c0sw"]
 _data = {
-"Default": SubResource("Animation_yaxog")
+"Default": SubResource("Animation_35uxa")
 }
 
+[sub_resource type="GDScript" id="GDScript_ynonh"]
+script/source = "extends Node
+# if (size == undefined) {
+# 	size = 100;
+# }
+# if (rate == undefined) {
+# 	//rate = 10000/size;
+# 	rate = 50;
+# }
+# if (Yheight == undefined) {
+# 	Yheight = 100;
+# }
+# if (speed == undefined) {
+# 	speed = 1
+# }
+# //        
+# //
+# /*DrawCircle = function (mc, X, Y, Width, red, green, blue):Void {
+# //clr = (red1 << 16 | green1 << 8 | blue1);
+# clr = (red << 16 | green << 8 | blue);
+# mc.lineStyle(0, 0, 0);
+# mc.beginFill(clr);
+# mc.moveTo(X+Width, Y);
+# mc.curveTo(Width+X, Math.tan(Math.PI/8)*Width+Y, Math.sin(Math.PI/4)*Width+X, Math.sin(Math.PI/4)*Width+Y);
+# mc.curveTo(Math.tan(Math.PI/8)*Width+X, Width+Y, X, Width+Y);
+# mc.curveTo(-Math.tan(Math.PI/8)*Width+X, Width+Y, -Math.sin(Math.PI/4)*Width+X, Math.sin(Math.PI/4)*Width+Y);
+# mc.curveTo(-Width+X, Math.tan(Math.PI/8)*Width+Y, -Width+X, Y);
+# mc.curveTo(-Width+X, -Math.tan(Math.PI/8)*Width+Y, -Math.sin(Math.PI/4)*Width+X, -Math.sin(Math.PI/4)*Width+Y);
+# mc.curveTo(-Math.tan(Math.PI/8)*Width+X, -Width+Y, X, -Width+Y);
+# mc.curveTo(Math.tan(Math.PI/8)*Width+X, -Width+Y, Math.sin(Math.PI/4)*Width+X, -Math.sin(Math.PI/4)*Width+Y);
+# mc.curveTo(Width+X, -Math.tan(Math.PI/8)*Width+Y, Width+X, Y);
+# mc.endFill();
+# };*/
+# "
+
+[sub_resource type="GDScript" id="GDScript_q8gx8"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# bubblecount = 0;
+# onEnterFrame = function () {
+# 	count++;
+# 	if (count>rate) {
+# 		if (th == false) {
+# 			th = true;
+# 			X = random(size/2)+1;
+# 		} else {
+# 			X = random(size/2)+(size/2)-1;
+# 			th = false;
+# 		}
+# 		speedith = Math.random()*speed+1;
+# 		bubblecount++;
+# 		this.attachMovie(\"LavaBubble\", \"B\"+bubblecount, this.getNextHighestDepth(), {_x:X, _y:0, _xscale:20, _yscale:20, speed:speedith, Yheight:Yheight});
+# 		count = 0;
+# 	}
+# };
+# "
+
 [node name="Lava Bubble Clip" type="Node2D"]
+script = ExtResource("1_4islr")
+source_xml = "res://sm63/LIBRARY/Effects/Lava-Fire/Lava Bubble Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gxl1h")
+"Timeline": SubResource("AnimationLibrary_0c0sw")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -74,6 +137,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@48659" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-17.5, -1.5, 17.5, -1.5, 18.55, -1.075, 18.575, -1.05, 19, 0, 18.575, 1.05, 18.55, 1.075, 17.5, 1.5, -17.5, 1.5, -18.55, 1.075, -18.575, 1.05, -19, 0, -18.575, -1.05, -18.55, -1.075)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)])
 
@@ -92,10 +156,13 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_rfr8p")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ynonh")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(8.3, -29.5)
 scale = Vector2(0.199997, 0.199997)
-script = ExtResource("2_iok3g")
+script = ExtResource("2_x6wuk")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Bubble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -110,3 +177,6 @@ brightness = 0.0
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_q8gx8")

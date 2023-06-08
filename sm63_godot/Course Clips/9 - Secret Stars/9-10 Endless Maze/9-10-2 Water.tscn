@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_qc4bo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_r62w4"]
+
+[sub_resource type="Animation" id="Animation_ue3kp"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,26 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ex8bb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_re5yj"]
 _data = {
-"Default": SubResource("Animation_qc4bo")
+"Default": SubResource("Animation_ue3kp")
 }
 
+[sub_resource type="GDScript" id="GDScript_bqtgv"]
+script/source = "extends Node
+# _visible = false;
+# "
+
 [node name="9-10-2 Water" type="Node2D"]
+script = ExtResource("1_r62w4")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Water.xml"
+linkage = "9-10-2Water"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ex8bb")
+"Timeline": SubResource("AnimationLibrary_re5yj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +66,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_bqtgv")

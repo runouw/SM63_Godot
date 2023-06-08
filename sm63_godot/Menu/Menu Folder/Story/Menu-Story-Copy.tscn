@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_xiwf8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_yak2h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_j3q5q"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_f7o4c"]
 
-[sub_resource type="Animation" id="Animation_cjm07"]
+[sub_resource type="Animation" id="Animation_87ggc"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,25 +55,108 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7pf8q"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xusi3"]
 _data = {
-"Default": SubResource("Animation_cjm07")
+"Default": SubResource("Animation_87ggc")
 }
 
+[sub_resource type="GDScript" id="GDScript_4rk68"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(39)+1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_40xbr"]
+script/source = "extends Node
+# ywave = 0;
+# rwave = random(90);
+# Y = this._y;
+# R = _rotation;
+# r = 0;
+# onEnterFrame = function () {
+# 	if (_parent._currentframe>=20 && _root.m.MenuRedTrans._x == undefined) {
+# 		if (_parent.Mode == \"copying\") {
+# 			gotoAndStop(3);
+# 		} else {
+# 			gotoAndStop(2);
+# 		}
+# 		if (bg.hitTest(_root._xmouse, _root._ymouse, true) && _parent.clicked !== true) {
+# 			hl = true;
+# 		} else {
+# 			hl = false;
+# 		}
+# 		if (cl == true) {
+# 			rspeed += 1;
+# 			r -= rspeed;
+# 			rspeed *= 0.95;
+# 			this._xscale += scalespeed;
+# 			scalespeed -= 1;
+# 			if (this._xscale<60) {
+# 				scalespeed += 1;
+# 				scalespeed *= 0.7;
+# 			}
+# 		}
+# 		if (hl == true && cl !== true) {
+# 			this._xscale += (125-this._xscale)/4;
+# 			r -= (125-this._xscale)/10;
+# 			txt._xscale += (125-this._xscale)/5;
+# 			txt._yscale += (125-this._yscale)/4;
+# 			ywave -= 0.035;
+# 		} else if (cl !== true) {
+# 			this._xscale += (100-this._xscale)/4;
+# 			r -= (100-this._xscale)/10;
+# 			txt._xscale += (100-this._xscale)/5;
+# 			txt._yscale += (100-this._yscale)/4;
+# 		}
+# 		//                     
+# 		this._yscale = this._xscale;
+# 		//
+# 		//ywave += 0.035;
+# 		//rwave += 0.025;
+# 		this._y = Y+Math.sin(ywave)*3;
+# 		//this._rotation = R+r+Math.sin(rwave)*_xscale/50;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (_parent._currentframe>=20 && _root.m.MenuRedTrans._x == undefined) {
+# 		if (hl == true && cl !== true && _parent.clicked !== true) {
+# 			if (_root[\"File\"+_parent.HL+\"TotalStars\"]>0) {
+# 				_parent.Mode = \"copying\";
+# 			} else if (_root[\"File\"+_parent.HL+\"TotalStars\"] == 0) {
+# 				_parent._parent.Message(\"Can't Copy an Empty File!\", \"red\", false);
+# 			} else {
+# 				_parent._parent.Message(\"Can't Copy nothing!\", \"red\", false);
+# 			}
+# 			//_parent._parent.clicked = true;       
+# 			//_parent._parent.TransitionF(\"Start\");
+# 			//Special Transition Effect for \"Play\"
+# 			//_root[\"File thingy\"] = _parent.HL
+# 		}
+# 	}
+# };
+# gotoAndStop(2);
+# "
+
 [node name="Menu-Story-Copy" type="Node2D"]
+script = ExtResource("1_j3q5q")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Story/Menu-Story-Copy.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7pf8q")
+"Timeline": SubResource("AnimationLibrary_xusi3")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_xiwf8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 scale = Vector2(0.787598, 0.749573)
-script = ExtResource("2_yak2h")
+script = ExtResource("2_f7o4c")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu Button BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -86,13 +169,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_4rk68")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_xiwf8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(1, 1.15)
-script = ExtResource("2_yak2h")
+script = ExtResource("2_f7o4c")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Story Copy Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -108,9 +194,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("1_xiwf8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2"]
 scale = Vector2(1.07878, 1)
-script = ExtResource("2_yak2h")
+script = ExtResource("2_f7o4c")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Select Box.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -126,3 +212,6 @@ brightness = 0.0
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_40xbr")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_pk6yj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_iire6"]
+
+[sub_resource type="Animation" id="Animation_d70dc"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m620u"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sy52a"]
 _data = {
-"Default": SubResource("Animation_pk6yj")
+"Default": SubResource("Animation_d70dc")
 }
 
 [node name="Goonie PL" type="Node2D"]
+script = ExtResource("1_iire6")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie PL.xml"
+linkage = "GooniePL"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_m620u")
+"Timeline": SubResource("AnimationLibrary_sy52a")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

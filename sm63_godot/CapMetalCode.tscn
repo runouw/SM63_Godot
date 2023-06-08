@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_62xro"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7mhv6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7gbji"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5wnw6"]
 
-[sub_resource type="Animation" id="Animation_23lun"]
+[sub_resource type="Animation" id="Animation_f4g6s"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,43 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vuod1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ngvin"]
 _data = {
-"Default": SubResource("Animation_23lun")
+"Default": SubResource("Animation_f4g6s")
 }
 
+[sub_resource type="GDScript" id="GDScript_uqbvw"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	starfunction = function () {
+# 		_root.StartNewMusicAndIntroNoVar(\"MetalCap - Intro\", \"MetalCap - Repeat\");
+# 		if (isNaN(_parent.Time)) {
+# 			_parent.Time = 30;
+# 		}
+# 		_root.PowerTimer = _parent.Time*32;
+# 		_root.Metal = true;
+# 	};
+# }
+# "
+
 [node name="CapMetalCode" type="Node2D"]
+script = ExtResource("1_7gbji")
+source_xml = "res://sm63/LIBRARY/CapMetalCode.xml"
+linkage = "CapMetalCode"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vuod1")
+"Timeline": SubResource("AnimationLibrary_ngvin")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_62xro")]
-script = ExtResource("2_7mhv6")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_5wnw6")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Power-Ups/Rainbow Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -48,3 +67,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_uqbvw")

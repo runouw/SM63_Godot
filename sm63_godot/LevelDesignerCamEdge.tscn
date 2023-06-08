@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_23ctw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hdv8a"]
+
+[sub_resource type="Animation" id="Animation_h8vs4"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,25 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f4beh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xm0uy"]
 _data = {
-"Default": SubResource("Animation_23ctw")
+"Default": SubResource("Animation_h8vs4")
 }
 
+[sub_resource type="GDScript" id="GDScript_au8s7"]
+script/source = "extends Node
+# stop();"
+
 [node name="LevelDesignerCamEdge" type="Node2D"]
+script = ExtResource("1_hdv8a")
+source_xml = "res://sm63/LIBRARY/LevelDesignerCamEdge.xml"
+linkage = "LevelDesignerCamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_f4beh")
+"Timeline": SubResource("AnimationLibrary_xm0uy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,3 +64,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_au8s7")

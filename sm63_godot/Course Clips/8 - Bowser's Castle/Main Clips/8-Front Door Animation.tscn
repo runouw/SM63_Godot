@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Bowser Door Super Large.png" id="1_0x5as"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_st1mi"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_hhnik"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_yf6k3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Bowser Door Super Large.png" id="2_15pwc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_a6y18"]
 
-[sub_resource type="Animation" id="Animation_5dmpx"]
+[sub_resource type="Animation" id="Animation_3dwec"]
 length = 3.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -608,16 +608,71 @@ tracks/49/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h5cpy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mavof"]
 _data = {
-"Default": SubResource("Animation_5dmpx")
+"Default": SubResource("Animation_3dwec")
 }
 
+[sub_resource type="GDScript" id="GDScript_04mqf"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false) {
+# 		// Key unlock animation code here 
+# 		//
+# 		if (_root.KeyUP() && !_root.KeyRIGHT() && !_root.KeyLEFT()) {
+# 			_root.Course.Char.attack = true;
+# 			_root.Course.Char.xspeed = 0;
+# 			_root.Course.Char.attackFrame = \"BigDoor\";
+# 			_root.door = doorplace;
+# 			play();
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_7jlr3"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_bnfd5"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	X = _x+_parent._x;
+# 	_root.Course.Char._x += (X-_root.Course.Char._x)/10;
+# };
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"Door - Creak\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_w43gy"]
+script/source = "extends Node
+# onEnterFrame = null
+# "
+
+[sub_resource type="GDScript" id="GDScript_de01u"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"BowserStep\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# "
+
 [node name="8-Front Door Animation" type="Node2D"]
+script = ExtResource("1_yf6k3")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Bowser's Castle/Main Clips/8-Front Door Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_h5cpy")
+"Timeline": SubResource("AnimationLibrary_mavof")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -638,7 +693,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@36452" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-60.5, -61.5)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -647,7 +702,7 @@ visible = false
 [node name="@@36453" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-60.5, -61.5)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 26" type="Node2D" parent="Layer 1"]
@@ -657,7 +712,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-58.25, -61.5)
 scale = Vector2(0.0949097, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 31" type="Node2D" parent="Layer 1"]
@@ -668,7 +723,7 @@ texture_filter = 1
 position = Vector2(-57.75, -61.5)
 rotation = 3.14159
 scale = Vector2(0.0931244, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
@@ -679,7 +734,7 @@ texture_filter = 1
 position = Vector2(-57.3, -61.5)
 rotation = 3.14159
 scale = Vector2(0.280121, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 62" type="Node2D" parent="Layer 1"]
@@ -690,7 +745,7 @@ texture_filter = 1
 position = Vector2(-57.3, -61.5)
 rotation = 3.14159
 scale = Vector2(0.280121, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 63" type="Node2D" parent="Layer 1"]
@@ -701,7 +756,7 @@ texture_filter = 1
 position = Vector2(-57.3, -61.5)
 rotation = 3.14159
 scale = Vector2(0.272644, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 64" type="Node2D" parent="Layer 1"]
@@ -712,7 +767,7 @@ texture_filter = 1
 position = Vector2(-57.35, -61.5)
 rotation = 3.14159
 scale = Vector2(0.250198, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 65" type="Node2D" parent="Layer 1"]
@@ -723,7 +778,7 @@ texture_filter = 1
 position = Vector2(-57.4, -61.5)
 rotation = 3.14159
 scale = Vector2(0.212799, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 66" type="Node2D" parent="Layer 1"]
@@ -734,7 +789,7 @@ texture_filter = 1
 position = Vector2(-57.55, -61.5)
 rotation = 3.14159
 scale = Vector2(0.160446, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 67" type="Node2D" parent="Layer 1"]
@@ -745,7 +800,7 @@ texture_filter = 1
 position = Vector2(-57.75, -61.5)
 rotation = 3.14159
 scale = Vector2(0.0931244, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 68" type="Node2D" parent="Layer 1"]
@@ -754,6 +809,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 68"]
 
 [node name="@@36463" type="Polygon2D" parent="Layer 1/Frame 68/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(59.575, -61.5, 61.575, -61.5, 61.575, 61.5, 59.575, 61.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -764,7 +820,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-58.25, -61.5)
 scale = Vector2(0.0949097, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 70" type="Node2D" parent="Layer 1"]
@@ -774,7 +830,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-58.5, -61.5)
 scale = Vector2(0.19548, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 71" type="Node2D" parent="Layer 1"]
@@ -784,7 +840,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-58.75, -61.5)
 scale = Vector2(0.296051, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 72" type="Node2D" parent="Layer 1"]
@@ -794,7 +850,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-59, -61.5)
 scale = Vector2(0.396606, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 73" type="Node2D" parent="Layer 1"]
@@ -804,7 +860,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-59.25, -61.5)
 scale = Vector2(0.497177, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 74" type="Node2D" parent="Layer 1"]
@@ -814,7 +870,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-59.5, -61.5)
 scale = Vector2(0.597733, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 75" type="Node2D" parent="Layer 1"]
@@ -824,7 +880,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-59.75, -61.5)
 scale = Vector2(0.698303, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 76" type="Node2D" parent="Layer 1"]
@@ -834,7 +890,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-60, -61.5)
 scale = Vector2(0.798859, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 77" type="Node2D" parent="Layer 1"]
@@ -844,7 +900,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-60.25, -61.5)
 scale = Vector2(0.899429, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 78" type="Node2D" parent="Layer 1"]
@@ -853,7 +909,7 @@ visible = false
 [node name="@@36473" type="Sprite2D" parent="Layer 1/Frame 78"]
 texture_filter = 1
 position = Vector2(-60.5, -61.5)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -865,7 +921,7 @@ texture_filter = 1
 position = Vector2(60.5, -61.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
@@ -876,7 +932,7 @@ texture_filter = 1
 position = Vector2(60.5, -61.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 26" type="Node2D" parent="Layer 2"]
@@ -887,7 +943,7 @@ texture_filter = 1
 position = Vector2(58.3, -61.5)
 rotation = 3.14159
 scale = Vector2(0.0949097, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 31" type="Node2D" parent="Layer 2"]
@@ -897,7 +953,7 @@ visible = false
 texture_filter = 1
 position = Vector2(57.8, -61.5)
 scale = Vector2(0.0931244, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 49" type="Node2D" parent="Layer 2"]
@@ -907,7 +963,7 @@ visible = false
 texture_filter = 1
 position = Vector2(57.35, -61.5)
 scale = Vector2(0.280945, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 62" type="Node2D" parent="Layer 2"]
@@ -917,7 +973,7 @@ visible = false
 texture_filter = 1
 position = Vector2(57.35, -61.5)
 scale = Vector2(0.280945, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 63" type="Node2D" parent="Layer 2"]
@@ -927,7 +983,7 @@ visible = false
 texture_filter = 1
 position = Vector2(57.3, -61.5)
 scale = Vector2(0.273438, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 64" type="Node2D" parent="Layer 2"]
@@ -937,7 +993,7 @@ visible = false
 texture_filter = 1
 position = Vector2(57.4, -61.5)
 scale = Vector2(0.2509, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 65" type="Node2D" parent="Layer 2"]
@@ -947,7 +1003,7 @@ visible = false
 texture_filter = 1
 position = Vector2(57.45, -61.5)
 scale = Vector2(0.213333, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 66" type="Node2D" parent="Layer 2"]
@@ -957,7 +1013,7 @@ visible = false
 texture_filter = 1
 position = Vector2(57.6, -61.5)
 scale = Vector2(0.160736, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 67" type="Node2D" parent="Layer 2"]
@@ -967,7 +1023,7 @@ visible = false
 texture_filter = 1
 position = Vector2(57.8, -61.5)
 scale = Vector2(0.0931244, 1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 68" type="Node2D" parent="Layer 2"]
@@ -976,6 +1032,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 68"]
 
 [node name="@@36441" type="Polygon2D" parent="Layer 2/Frame 68/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-61.6, -61.5, -59.6, -61.5, -59.6, 61.5, -61.6, 61.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -987,7 +1044,7 @@ texture_filter = 1
 position = Vector2(58.3, -61.5)
 rotation = 3.14159
 scale = Vector2(0.0949097, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 70" type="Node2D" parent="Layer 2"]
@@ -998,7 +1055,7 @@ texture_filter = 1
 position = Vector2(58.55, -61.5)
 rotation = 3.14159
 scale = Vector2(0.19548, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 71" type="Node2D" parent="Layer 2"]
@@ -1009,7 +1066,7 @@ texture_filter = 1
 position = Vector2(58.8, -61.5)
 rotation = 3.14159
 scale = Vector2(0.296051, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 72" type="Node2D" parent="Layer 2"]
@@ -1020,7 +1077,7 @@ texture_filter = 1
 position = Vector2(59.05, -61.5)
 rotation = 3.14159
 scale = Vector2(0.396606, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 73" type="Node2D" parent="Layer 2"]
@@ -1031,7 +1088,7 @@ texture_filter = 1
 position = Vector2(59.3, -61.5)
 rotation = 3.14159
 scale = Vector2(0.497177, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 74" type="Node2D" parent="Layer 2"]
@@ -1042,7 +1099,7 @@ texture_filter = 1
 position = Vector2(59.5, -61.5)
 rotation = 3.14159
 scale = Vector2(0.597733, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 75" type="Node2D" parent="Layer 2"]
@@ -1053,7 +1110,7 @@ texture_filter = 1
 position = Vector2(59.75, -61.5)
 rotation = 3.14159
 scale = Vector2(0.698303, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 76" type="Node2D" parent="Layer 2"]
@@ -1064,7 +1121,7 @@ texture_filter = 1
 position = Vector2(60, -61.5)
 rotation = 3.14159
 scale = Vector2(0.798859, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 77" type="Node2D" parent="Layer 2"]
@@ -1075,7 +1132,7 @@ texture_filter = 1
 position = Vector2(60.25, -61.5)
 rotation = 3.14159
 scale = Vector2(0.899429, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Frame 78" type="Node2D" parent="Layer 2"]
@@ -1086,7 +1143,7 @@ texture_filter = 1
 position = Vector2(60.5, -61.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_0x5as")
+texture = ExtResource("2_15pwc")
 centered = false
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -1096,10 +1153,13 @@ centered = false
 [node name="Frame 2" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2" instance=ExtResource("2_st1mi")]
+[node name="AS2" type="Node" parent="Layer 4/Frame 2"]
+script = SubResource("GDScript_04mqf")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2"]
 position = Vector2(0.5, 60.5)
 scale = Vector2(1.46651, 1.01202)
-script = ExtResource("3_hhnik")
+script = ExtResource("3_a6y18")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1112,11 +1172,23 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_7jlr3")
+
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 3"]
+script = SubResource("GDScript_bnfd5")
 
 [node name="Frame 19" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 19"]
+script = SubResource("GDScript_w43gy")
+
 [node name="Frame 78" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 78"]
+script = SubResource("GDScript_de01u")

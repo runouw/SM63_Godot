@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ccdf0"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5k0bc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xa1h0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4gpb0"]
 
-[sub_resource type="Animation" id="Animation_ee6k5"]
+[sub_resource type="Animation" id="Animation_8ybr1"]
 length = 9.03333
 loop_mode = 1
 tracks/0/type = "value"
@@ -1651,16 +1651,37 @@ tracks/136/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1mfpy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x1g5f"]
 _data = {
-"Default": SubResource("Animation_ee6k5")
+"Default": SubResource("Animation_8ybr1")
 }
 
+[sub_resource type="GDScript" id="GDScript_7kij4"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_p24lp"]
+script/source = "extends Node
+# gotoAndPlay(\"repeat\");
+# "
+
 [node name="3- Bolwing Ball Animation" type="Node2D"]
+script = ExtResource("1_xa1h0")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-1 & 3-2/3- Bolwing Ball Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1mfpy")
+"Timeline": SubResource("AnimationLibrary_x1g5f")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -1677,10 +1698,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21"]
 position = Vector2(0, 21.1)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1696,10 +1717,10 @@ brightness = 0.0
 [node name="Frame 45" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 45" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 45"]
 position = Vector2(0, 470)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1715,10 +1736,10 @@ brightness = 0.0
 [node name="Frame 46" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 46" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 46"]
 position = Vector2(-5, 463)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1734,10 +1755,10 @@ brightness = 0.0
 [node name="Frame 47" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 47" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 47"]
 position = Vector2(-10, 457)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1753,10 +1774,10 @@ brightness = 0.0
 [node name="Frame 48" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 48" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 48"]
 position = Vector2(-15, 452)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1772,10 +1793,10 @@ brightness = 0.0
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49"]
 position = Vector2(-20, 448)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1791,10 +1812,10 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 50" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 50"]
 position = Vector2(-25, 445)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1810,10 +1831,10 @@ brightness = 0.0
 [node name="Frame 51" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 51" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 51"]
 position = Vector2(-30, 443)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1829,10 +1850,10 @@ brightness = 0.0
 [node name="Frame 52" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 52" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 52"]
 position = Vector2(-35, 442)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1848,10 +1869,10 @@ brightness = 0.0
 [node name="Frame 53" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 53" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 53"]
 position = Vector2(-40, 442)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1867,10 +1888,10 @@ brightness = 0.0
 [node name="Frame 54" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 54" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 54"]
 position = Vector2(-45, 443)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1886,10 +1907,10 @@ brightness = 0.0
 [node name="Frame 55" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 55" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 55"]
 position = Vector2(-50, 445)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1905,10 +1926,10 @@ brightness = 0.0
 [node name="Frame 56" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 56" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 56"]
 position = Vector2(-55, 448)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1924,10 +1945,10 @@ brightness = 0.0
 [node name="Frame 57" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 57" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 57"]
 position = Vector2(-60, 452)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1943,10 +1964,10 @@ brightness = 0.0
 [node name="Frame 58" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 58" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 58"]
 position = Vector2(-64, 457)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1962,10 +1983,10 @@ brightness = 0.0
 [node name="Frame 59" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 59" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 59"]
 position = Vector2(-69, 463)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1981,10 +2002,10 @@ brightness = 0.0
 [node name="Frame 60" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 60" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 60"]
 position = Vector2(-74, 470)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2000,10 +2021,10 @@ brightness = 0.0
 [node name="Frame 61" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 61" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 61"]
 position = Vector2(-79, 478)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2019,10 +2040,10 @@ brightness = 0.0
 [node name="Frame 62" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 62" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 62"]
 position = Vector2(-84, 487)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2038,10 +2059,10 @@ brightness = 0.0
 [node name="Frame 63" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 63" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 63"]
 position = Vector2(-87, 490)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2057,10 +2078,10 @@ brightness = 0.0
 [node name="Frame 64" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 64" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 64"]
 position = Vector2(-90, 488)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2076,10 +2097,10 @@ brightness = 0.0
 [node name="Frame 65" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 65" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 65"]
 position = Vector2(-93, 487)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2095,10 +2116,10 @@ brightness = 0.0
 [node name="Frame 66" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 66" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 66"]
 position = Vector2(-96, 487)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2114,10 +2135,10 @@ brightness = 0.0
 [node name="Frame 67" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 67" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 67"]
 position = Vector2(-99, 488)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2133,10 +2154,10 @@ brightness = 0.0
 [node name="Frame 68" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 68" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 68"]
 position = Vector2(-102, 490)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2152,10 +2173,10 @@ brightness = 0.0
 [node name="Frame 69" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 69" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 69"]
 position = Vector2(-105, 490)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2171,10 +2192,10 @@ brightness = 0.0
 [node name="Frame 70" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 70" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 70"]
 position = Vector2(-108, 490)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2190,10 +2211,10 @@ brightness = 0.0
 [node name="Frame 71" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 71" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 71"]
 position = Vector2(-111, 490)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2209,10 +2230,10 @@ brightness = 0.0
 [node name="Frame 72" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 72" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 72"]
 position = Vector2(-114, 490)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2228,10 +2249,10 @@ brightness = 0.0
 [node name="Frame 73" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 73" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 73"]
 position = Vector2(-117, 490)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2247,10 +2268,10 @@ brightness = 0.0
 [node name="Frame 74" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 74" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 74"]
 position = Vector2(-121, 491)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2266,10 +2287,10 @@ brightness = 0.0
 [node name="Frame 75" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 75" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 75"]
 position = Vector2(-125, 492)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2285,10 +2306,10 @@ brightness = 0.0
 [node name="Frame 76" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 76" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 76"]
 position = Vector2(-129, 493)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2304,10 +2325,10 @@ brightness = 0.0
 [node name="Frame 77" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 77" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 77"]
 position = Vector2(-133, 494)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2323,10 +2344,10 @@ brightness = 0.0
 [node name="Frame 78" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 78" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 78"]
 position = Vector2(-137, 496)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2342,10 +2363,10 @@ brightness = 0.0
 [node name="Frame 79" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 79" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 79"]
 position = Vector2(-141, 498)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2361,10 +2382,10 @@ brightness = 0.0
 [node name="Frame 80" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 80" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 80"]
 position = Vector2(-145, 501)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2380,10 +2401,10 @@ brightness = 0.0
 [node name="Frame 81" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 81" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 81"]
 position = Vector2(-149, 505)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2399,10 +2420,10 @@ brightness = 0.0
 [node name="Frame 82" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 82" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 82"]
 position = Vector2(-153, 509)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2418,10 +2439,10 @@ brightness = 0.0
 [node name="Frame 83" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 83" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 83"]
 position = Vector2(-158, 510)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2437,10 +2458,10 @@ brightness = 0.0
 [node name="Frame 84" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 84" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 84"]
 position = Vector2(-163, 509)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2456,10 +2477,10 @@ brightness = 0.0
 [node name="Frame 85" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 85" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 85"]
 position = Vector2(-168, 508)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2475,10 +2496,10 @@ brightness = 0.0
 [node name="Frame 86" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 86" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 86"]
 position = Vector2(-173, 508)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2494,10 +2515,10 @@ brightness = 0.0
 [node name="Frame 87" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 87" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 87"]
 position = Vector2(-178, 509)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2513,10 +2534,10 @@ brightness = 0.0
 [node name="Frame 88" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 88" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 88"]
 position = Vector2(-183, 511)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2532,10 +2553,10 @@ brightness = 0.0
 [node name="Frame 89" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 89" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 89"]
 position = Vector2(-188, 514)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2551,10 +2572,10 @@ brightness = 0.0
 [node name="Frame 90" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 90" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 90"]
 position = Vector2(-193, 518)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2570,10 +2591,10 @@ brightness = 0.0
 [node name="Frame 91" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 91" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 91"]
 position = Vector2(-198, 521)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2589,10 +2610,10 @@ brightness = 0.0
 [node name="Frame 92" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 92" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 92"]
 position = Vector2(-204, 521)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2608,10 +2629,10 @@ brightness = 0.0
 [node name="Frame 93" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 93" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 93"]
 position = Vector2(-210, 522)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2627,10 +2648,10 @@ brightness = 0.0
 [node name="Frame 94" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 94" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 94"]
 position = Vector2(-216, 524)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2646,10 +2667,10 @@ brightness = 0.0
 [node name="Frame 95" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 95" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 95"]
 position = Vector2(-221, 526)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2665,10 +2686,10 @@ brightness = 0.0
 [node name="Frame 96" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 96" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 96"]
 position = Vector2(-226, 529)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2684,10 +2705,10 @@ brightness = 0.0
 [node name="Frame 97" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 97" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 97"]
 position = Vector2(-232, 531)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2703,10 +2724,10 @@ brightness = 0.0
 [node name="Frame 98" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 98" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 98"]
 position = Vector2(-238, 533)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2722,10 +2743,10 @@ brightness = 0.0
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 99" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 99"]
 position = Vector2(-244, 534)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2741,10 +2762,10 @@ brightness = 0.0
 [node name="Frame 100" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 100" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 100"]
 position = Vector2(-250, 535)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2760,10 +2781,10 @@ brightness = 0.0
 [node name="Frame 101" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 101" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 101"]
 position = Vector2(-256, 535)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2779,10 +2800,10 @@ brightness = 0.0
 [node name="Frame 102" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 102" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 102"]
 position = Vector2(-262, 536)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2798,10 +2819,10 @@ brightness = 0.0
 [node name="Frame 103" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 103" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 103"]
 position = Vector2(-268, 538)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2817,10 +2838,10 @@ brightness = 0.0
 [node name="Frame 104" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 104" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 104"]
 position = Vector2(-274, 541)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2836,10 +2857,10 @@ brightness = 0.0
 [node name="Frame 105" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 105" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 105"]
 position = Vector2(-280, 544)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2855,10 +2876,10 @@ brightness = 0.0
 [node name="Frame 106" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 106" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 106"]
 position = Vector2(-286, 548)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2874,10 +2895,10 @@ brightness = 0.0
 [node name="Frame 107" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 107" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 107"]
 position = Vector2(-292, 553)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2893,10 +2914,10 @@ brightness = 0.0
 [node name="Frame 108" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 108" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 108"]
 position = Vector2(-298, 556)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2912,10 +2933,10 @@ brightness = 0.0
 [node name="Frame 109" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 109" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 109"]
 position = Vector2(-305, 557)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2931,10 +2952,10 @@ brightness = 0.0
 [node name="Frame 110" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 110" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 110"]
 position = Vector2(-312, 559)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2950,10 +2971,10 @@ brightness = 0.0
 [node name="Frame 111" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 111" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 111"]
 position = Vector2(-319, 562)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2969,10 +2990,10 @@ brightness = 0.0
 [node name="Frame 112" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 112" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 112"]
 position = Vector2(-333, 567)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2988,10 +3009,10 @@ brightness = 0.0
 [node name="Frame 113" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 113" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 113"]
 position = Vector2(-340, 570)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3007,10 +3028,10 @@ brightness = 0.0
 [node name="Frame 114" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 114" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 114"]
 position = Vector2(-347, 573)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3026,10 +3047,10 @@ brightness = 0.0
 [node name="Frame 115" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 115" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 115"]
 position = Vector2(-354, 577)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3045,10 +3066,10 @@ brightness = 0.0
 [node name="Frame 116" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 116" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 116"]
 position = Vector2(-361, 582)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3064,10 +3085,10 @@ brightness = 0.0
 [node name="Frame 117" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 117" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 117"]
 position = Vector2(-368, 585)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3083,10 +3104,10 @@ brightness = 0.0
 [node name="Frame 118" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 118" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 118"]
 position = Vector2(-375, 586)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3102,10 +3123,10 @@ brightness = 0.0
 [node name="Frame 119" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 119" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 119"]
 position = Vector2(-382, 586)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3121,10 +3142,10 @@ brightness = 0.0
 [node name="Frame 120" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 120" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 120"]
 position = Vector2(-389, 587)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3140,10 +3161,10 @@ brightness = 0.0
 [node name="Frame 121" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 121" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 121"]
 position = Vector2(-396, 589)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3159,10 +3180,10 @@ brightness = 0.0
 [node name="Frame 122" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 122" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 122"]
 position = Vector2(-403, 591)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3178,10 +3199,10 @@ brightness = 0.0
 [node name="Frame 123" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 123" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 123"]
 position = Vector2(-410, 594)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3197,10 +3218,10 @@ brightness = 0.0
 [node name="Frame 124" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 124" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 124"]
 position = Vector2(-417, 598)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3216,10 +3237,10 @@ brightness = 0.0
 [node name="Frame 125" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 125" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 125"]
 position = Vector2(-424, 602)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3235,10 +3256,10 @@ brightness = 0.0
 [node name="Frame 126" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 126" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 126"]
 position = Vector2(-431, 606)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3254,10 +3275,10 @@ brightness = 0.0
 [node name="Frame 127" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 127" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 127"]
 position = Vector2(-438, 605)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3273,10 +3294,10 @@ brightness = 0.0
 [node name="Frame 128" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 128" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 128"]
 position = Vector2(-445, 605)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3292,10 +3313,10 @@ brightness = 0.0
 [node name="Frame 129" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 129" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 129"]
 position = Vector2(-452, 606)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3311,10 +3332,10 @@ brightness = 0.0
 [node name="Frame 130" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 130" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 130"]
 position = Vector2(-459, 607)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3330,10 +3351,10 @@ brightness = 0.0
 [node name="Frame 131" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 131" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 131"]
 position = Vector2(-466, 609)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3349,10 +3370,10 @@ brightness = 0.0
 [node name="Frame 132" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 132" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 132"]
 position = Vector2(-473, 612)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3368,10 +3389,10 @@ brightness = 0.0
 [node name="Frame 133" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 133" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 133"]
 position = Vector2(-480, 616)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3387,10 +3408,10 @@ brightness = 0.0
 [node name="Frame 134" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 134" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 134"]
 position = Vector2(-487, 621)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3406,10 +3427,10 @@ brightness = 0.0
 [node name="Frame 135" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 135" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 135"]
 position = Vector2(-494, 627)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3425,10 +3446,10 @@ brightness = 0.0
 [node name="Frame 136" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 136" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 136"]
 position = Vector2(-501, 634)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3444,10 +3465,10 @@ brightness = 0.0
 [node name="Frame 137" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 137" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 137"]
 position = Vector2(-508, 639)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3463,10 +3484,10 @@ brightness = 0.0
 [node name="Frame 138" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 138" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 138"]
 position = Vector2(-515, 638)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3482,10 +3503,10 @@ brightness = 0.0
 [node name="Frame 139" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 139" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 139"]
 position = Vector2(-522, 637)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3501,10 +3522,10 @@ brightness = 0.0
 [node name="Frame 140" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 140" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 140"]
 position = Vector2(-529, 637)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3520,10 +3541,10 @@ brightness = 0.0
 [node name="Frame 141" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 141" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 141"]
 position = Vector2(-535, 638)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3539,10 +3560,10 @@ brightness = 0.0
 [node name="Frame 142" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 142" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 142"]
 position = Vector2(-541, 639)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3558,10 +3579,10 @@ brightness = 0.0
 [node name="Frame 143" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 143" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 143"]
 position = Vector2(-547, 639)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3577,10 +3598,10 @@ brightness = 0.0
 [node name="Frame 163" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 163" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 163"]
 position = Vector2(-643, 639)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3596,10 +3617,10 @@ brightness = 0.0
 [node name="Frame 164" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 164" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 164"]
 position = Vector2(-647, 640)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3615,10 +3636,10 @@ brightness = 0.0
 [node name="Frame 165" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 165" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 165"]
 position = Vector2(-652, 642)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3634,10 +3655,10 @@ brightness = 0.0
 [node name="Frame 166" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 166" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 166"]
 position = Vector2(-657, 644)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3653,10 +3674,10 @@ brightness = 0.0
 [node name="Frame 167" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 167" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 167"]
 position = Vector2(-662, 644)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3672,10 +3693,10 @@ brightness = 0.0
 [node name="Frame 168" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 168" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 168"]
 position = Vector2(-667, 644)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3691,10 +3712,10 @@ brightness = 0.0
 [node name="Frame 169" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 169" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 169"]
 position = Vector2(-672, 644)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3710,10 +3731,10 @@ brightness = 0.0
 [node name="Frame 170" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 170" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 170"]
 position = Vector2(-676, 644)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3729,10 +3750,10 @@ brightness = 0.0
 [node name="Frame 171" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 171" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 171"]
 position = Vector2(-680, 644)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3748,10 +3769,10 @@ brightness = 0.0
 [node name="Frame 172" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 172" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 172"]
 position = Vector2(-685, 644)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3767,10 +3788,10 @@ brightness = 0.0
 [node name="Frame 173" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 173" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 173"]
 position = Vector2(-690, 644)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3786,10 +3807,10 @@ brightness = 0.0
 [node name="Frame 174" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 174" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 174"]
 position = Vector2(-696, 646)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3805,10 +3826,10 @@ brightness = 0.0
 [node name="Frame 175" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 175" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 175"]
 position = Vector2(-702, 648)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3824,10 +3845,10 @@ brightness = 0.0
 [node name="Frame 176" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 176" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 176"]
 position = Vector2(-708, 651)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3843,10 +3864,10 @@ brightness = 0.0
 [node name="Frame 177" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 177" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 177"]
 position = Vector2(-714, 656)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3862,10 +3883,10 @@ brightness = 0.0
 [node name="Frame 178" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 178" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 178"]
 position = Vector2(-720, 662)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3881,10 +3902,10 @@ brightness = 0.0
 [node name="Frame 179" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 179" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 179"]
 position = Vector2(-726, 669)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3900,10 +3921,10 @@ brightness = 0.0
 [node name="Frame 180" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 180" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 180"]
 position = Vector2(-732, 676)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3919,10 +3940,10 @@ brightness = 0.0
 [node name="Frame 181" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 181" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 181"]
 position = Vector2(-738, 684)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3938,10 +3959,10 @@ brightness = 0.0
 [node name="Frame 182" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 182" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 182"]
 position = Vector2(-744, 693)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3957,10 +3978,10 @@ brightness = 0.0
 [node name="Frame 183" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 183" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 183"]
 position = Vector2(-750, 703)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3976,10 +3997,10 @@ brightness = 0.0
 [node name="Frame 184" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 184" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 184"]
 position = Vector2(-756, 714)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3995,10 +4016,10 @@ brightness = 0.0
 [node name="Frame 185" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 185" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 185"]
 position = Vector2(-762, 726)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4014,10 +4035,10 @@ brightness = 0.0
 [node name="Frame 186" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 186" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 186"]
 position = Vector2(-768, 738)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4033,10 +4054,10 @@ brightness = 0.0
 [node name="Frame 187" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 187" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 187"]
 position = Vector2(-774, 752)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4052,10 +4073,10 @@ brightness = 0.0
 [node name="Frame 188" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 188" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 188"]
 position = Vector2(-780, 767)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4071,10 +4092,10 @@ brightness = 0.0
 [node name="Frame 189" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 189" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 189"]
 position = Vector2(-786, 784)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4090,10 +4111,10 @@ brightness = 0.0
 [node name="Frame 215" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 215" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 215"]
 position = Vector2(-933, 1305.95)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4109,10 +4130,10 @@ brightness = 0.0
 [node name="Frame 225" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 225" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 225"]
 position = Vector2(-973, 1425.95)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4131,10 +4152,10 @@ visible = false
 [node name="Frame 262" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 262" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 262"]
 position = Vector2(0, -60)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4150,10 +4171,10 @@ brightness = 0.0
 [node name="Frame 266" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 266" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 266"]
 position = Vector2(0, -30)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4169,10 +4190,10 @@ brightness = 0.0
 [node name="Frame 269" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 269" instance=ExtResource("1_ccdf0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 269"]
 position = Vector2(0, 5.45)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_5k0bc")
+script = ExtResource("2_4gpb0")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Area 1-4/Bowling Ball.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4189,8 +4210,14 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_7kij4")
+
 [node name="Frame 21" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 270" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 270"]
+script = SubResource("GDScript_p24lp")

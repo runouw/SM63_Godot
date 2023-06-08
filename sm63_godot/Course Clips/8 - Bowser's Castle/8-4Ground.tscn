@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_risjm"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_i8htq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_djq5c"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_u1tar"]
 
-[sub_resource type="Animation" id="Animation_r46vt"]
+[sub_resource type="Animation" id="Animation_fjow2"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ft7dq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d6ew7"]
 _data = {
-"Default": SubResource("Animation_r46vt")
+"Default": SubResource("Animation_fjow2")
 }
 
 [node name="8-4Ground" type="Node2D"]
+script = ExtResource("1_djq5c")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Bowser's Castle/8-4Ground.xml"
+linkage = "8-4Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ft7dq")
+"Timeline": SubResource("AnimationLibrary_d6ew7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,9 +58,9 @@ color = Color(0, 0.6, 0, 1)
 polygon = PackedVector2Array(972.85, 85.95, 1226.85, 85.95, 1226.85, 103.95, 972.85, 103.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_risjm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(1073.95, -218)
-script = ExtResource("2_i8htq")
+script = ExtResource("2_u1tar")
 path = "res://sm63_godot/Course Clips/8-4InvisGround.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

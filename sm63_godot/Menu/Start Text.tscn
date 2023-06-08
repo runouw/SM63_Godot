@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_ejpts"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5pqdl"]
+
+[sub_resource type="Animation" id="Animation_gkx3v"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_16ybv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u72ms"]
 _data = {
-"Default": SubResource("Animation_ejpts")
+"Default": SubResource("Animation_gkx3v")
 }
 
 [node name="Start Text" type="Node2D"]
+script = ExtResource("1_5pqdl")
+source_xml = "res://sm63/LIBRARY/Menu/Start Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_16ybv")
+"Timeline": SubResource("AnimationLibrary_u72ms")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

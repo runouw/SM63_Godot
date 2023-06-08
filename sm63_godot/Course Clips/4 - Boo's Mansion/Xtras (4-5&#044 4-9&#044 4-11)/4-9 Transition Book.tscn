@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=11 format=3]
 
-[sub_resource type="Animation" id="Animation_kkf5v"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_omrcg"]
+
+[sub_resource type="Animation" id="Animation_l7kkr"]
 length = 1.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -556,16 +558,68 @@ tracks/45/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7aqaq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5oxui"]
 _data = {
-"Default": SubResource("Animation_kkf5v")
+"Default": SubResource("Animation_l7kkr")
 }
 
+[sub_resource type="GDScript" id="GDScript_rrme2"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_gqrwl"]
+script/source = "extends Node
+# _root.playpause = true;
+# onEnterFrame = function () {
+# 	X = _x+_parent._x;
+# 	_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_61ulf"]
+script/source = "extends Node
+# onEnterFrame = null;
+# "
+
+[sub_resource type="GDScript" id="GDScript_84yem"]
+script/source = "extends Node
+# _root.playpause = false;
+# _root.Course.Char.attack = true;
+# _root.Course.Char.attackFrame = \"none\";
+# "
+
+[sub_resource type="GDScript" id="GDScript_0bhh5"]
+script/source = "extends Node
+# _root.bgsong = new Sound(this);
+# _root.bgsong.attachSound(\"BowserStep\");
+# _root.bgsong.start(0, 1);
+# _root.bgsong.setVolume(_root.BgVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_gip2p"]
+script/source = "extends Node
+# _root.Blackout();
+# "
+
+[sub_resource type="GDScript" id="GDScript_joyw7"]
+script/source = "extends Node
+# _root.Fluddpow = \"R\";
+# _root.StopBGsong();
+# _root.changecourse(\"StarIn\", \"4-11\", 0, 0, 0, 0, true);
+# stop();
+# "
+
 [node name="4-9 Transition Book" type="Node2D"]
+script = ExtResource("1_omrcg")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Xtras (4-5&#044 4-9&#044 4-11)/4-9 Transition Book.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7aqaq")
+"Timeline": SubResource("AnimationLibrary_5oxui")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -1015,6 +1069,7 @@ rotation = -0.00513278
 scale = Vector2(0.998869, 0.998869)
 
 [node name="Shape" type="Node2D" parent="Left Pages/Frame 9/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@30015" type="Polygon2D" parent="Left Pages/Frame 9/Group/Shape"]
 color = Color(0.866667, 0.815686, 0.564706, 1)
@@ -1051,6 +1106,7 @@ rotation = 0.109234
 scale = Vector2(0.998382, 0.998382)
 
 [node name="Shape" type="Node2D" parent="Left Pages/Frame 10/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@30019" type="Polygon2D" parent="Left Pages/Frame 10/Group/Shape"]
 color = Color(0.866667, 0.815686, 0.564706, 1)
@@ -1192,6 +1248,7 @@ rotation = 0.331939
 scale = Vector2(0.998377, 0.998377)
 
 [node name="Shape" type="Node2D" parent="Left Pages/Frame 14/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@30035" type="Polygon2D" parent="Left Pages/Frame 14/Group/Shape"]
 color = Color(0.866667, 0.815686, 0.564706, 1)
@@ -1405,6 +1462,7 @@ rotation = 0.283907
 scale = Vector2(0.999118, 0.999118)
 
 [node name="Shape" type="Node2D" parent="Left Pages/Frame 20/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@30059" type="Polygon2D" parent="Left Pages/Frame 20/Group/Shape"]
 color = Color(0.866667, 0.815686, 0.564706, 1)
@@ -1550,6 +1608,7 @@ rotation = -0.239552
 scale = Vector2(0.999127, 0.999127)
 
 [node name="Shape" type="Node2D" parent="Right Pages/Frame 11/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@29964" type="Polygon2D" parent="Right Pages/Frame 11/Group/Shape"]
 color = Color(0.866667, 0.815686, 0.564706, 1)
@@ -1988,11 +2047,20 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_rrme2")
+
 [node name="Frame 1" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 1"]
+script = SubResource("GDScript_gqrwl")
+
 [node name="Frame 8" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 8"]
+script = SubResource("GDScript_61ulf")
 
 [node name="Frame 18" type="Node2D" parent="Layer 4"]
 visible = false
@@ -2000,11 +2068,23 @@ visible = false
 [node name="Frame 20" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 20"]
+script = SubResource("GDScript_84yem")
+
 [node name="Frame 21" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 21"]
+script = SubResource("GDScript_0bhh5")
 
 [node name="Frame 35" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 35"]
+script = SubResource("GDScript_gip2p")
+
 [node name="Frame 47" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 47"]
+script = SubResource("GDScript_joyw7")

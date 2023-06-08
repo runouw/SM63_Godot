@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_olcpl"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_61u1n"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4xhnx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_chlw1"]
 
-[sub_resource type="Animation" id="Animation_a7snc"]
+[sub_resource type="Animation" id="Animation_j7w65"]
 length = 4.86667
 loop_mode = 1
 tracks/0/type = "value"
@@ -115,16 +115,45 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxm5r"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_grr1b"]
 _data = {
-"Default": SubResource("Animation_a7snc")
+"Default": SubResource("Animation_j7w65")
 }
 
+[sub_resource type="GDScript" id="GDScript_hebjm"]
+script/source = "extends Node
+# _visible = false;
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_q71be"]
+script/source = "extends Node
+# //_root.Course.Char.attack = true
+# //_root.Course.Char.attackFrame = \"SlingStar\"
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ejoch"]
+script/source = "extends Node
+# onEnterFrame = null;
+# "
+
 [node name="3-3 Sling Star Path" type="Node2D"]
+script = ExtResource("1_4xhnx")
+source_xml = "res://sm63/LIBRARY/Course Clips/3-3 Sling Star Path.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bxm5r")
+"Timeline": SubResource("AnimationLibrary_grr1b")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -134,11 +163,11 @@ libraries = {
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_olcpl")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(-0.1, -0.1)
 rotation = -1.40286
 scale = Vector2(0.998451, 0.998451)
-script = ExtResource("2_61u1n")
+script = ExtResource("2_chlw1")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star Path Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -154,11 +183,11 @@ brightness = 0.0
 [node name="Frame 144" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 144" instance=ExtResource("1_olcpl")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 144"]
 position = Vector2(-22.95, -2289.95)
 rotation = 1.91682
 scale = Vector2(0.997606, 0.997592)
-script = ExtResource("2_61u1n")
+script = ExtResource("2_chlw1")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star Path Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -193,8 +222,17 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_hebjm")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_q71be")
+
 [node name="Frame 145" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 145"]
+script = SubResource("GDScript_ejoch")

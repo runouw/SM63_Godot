@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_kian6"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2wemh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_muf1d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_r7435"]
 
-[sub_resource type="Animation" id="Animation_6xs4t"]
+[sub_resource type="Animation" id="Animation_adtg1"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -91,16 +91,32 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_twcqc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cl8fb"]
 _data = {
-"Default": SubResource("Animation_6xs4t")
+"Default": SubResource("Animation_adtg1")
 }
 
+[sub_resource type="GDScript" id="GDScript_2exdg"]
+script/source = "extends Node
+# s._xscale = _root.TotalStars*100/64;
+# s._yscale = s._xscale;
+# s._alpha = _root.TotalStars*75/64+25;
+# st._xscale = (_root.TotalStars/2)+68;
+# st._yscale = st._xscale;
+# //Math.round(((_root.TotalStars*1.5)+25)-color)/7;
+# stop();
+# "
+
 [node name="C-S Front GFX" type="Node2D"]
+script = ExtResource("1_muf1d")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/C-S Stuff/C-S Front GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_twcqc")
+"Timeline": SubResource("AnimationLibrary_cl8fb")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -110,9 +126,9 @@ libraries = {
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_kian6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(0, -79)
-script = ExtResource("2_2wemh")
+script = ExtResource("2_r7435")
 path = "res://sm63_godot/Course Clips/C - Castle/C-S Stuff/C-S Front Shine.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -144,9 +160,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_kian6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(1, -85.05)
-script = ExtResource("2_2wemh")
+script = ExtResource("2_r7435")
 path = "res://sm63_godot/Course Clips/C - Castle/C-S Stuff/C-S Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -174,3 +190,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_2exdg")

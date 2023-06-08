@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_7yp2h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2gbnd"]
+
+[sub_resource type="Animation" id="Animation_qiwj4"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cwvwl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ylogg"]
 _data = {
-"Default": SubResource("Animation_7yp2h")
+"Default": SubResource("Animation_qiwj4")
 }
 
 [node name="Pendelum Ground" type="Node2D"]
+script = ExtResource("1_2gbnd")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Themed PL/Clock Themed/Pendelum Ground.xml"
+linkage = "Pendelum Ground"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_cwvwl")
+"Timeline": SubResource("AnimationLibrary_ylogg")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

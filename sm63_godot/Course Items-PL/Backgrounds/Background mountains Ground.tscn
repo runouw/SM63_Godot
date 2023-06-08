@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Grassy Ground/Light Ground Big.png" id="1_2ukr8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_iava3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Grassy Ground/Light Ground Big.png" id="2_7lrqy"]
 
-[sub_resource type="Animation" id="Animation_iva88"]
+[sub_resource type="Animation" id="Animation_epto4"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c5uik"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r20yt"]
 _data = {
-"Default": SubResource("Animation_iva88")
+"Default": SubResource("Animation_epto4")
 }
 
 [node name="Background mountains Ground" type="Node2D"]
+script = ExtResource("1_iava3")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Background mountains Ground.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_c5uik")
+"Timeline": SubResource("AnimationLibrary_r20yt")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@46491" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_2ukr8")
+texture = ExtResource("2_7lrqy")
 texture_offset = Vector2(-1279.35, 1437.2)
 texture_scale = Vector2(3.1408, 1.00023)
 polygon = PackedVector2Array(-514, -256.05, 514, -256.05, 513.7, -152, -514, -152)

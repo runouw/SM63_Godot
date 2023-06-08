@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_0v0w6"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_piv7s"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Hover) 2.png" id="3_opvfj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Slide (Hover).png" id="4_3gdu4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5jxaj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_53hvs"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Hover) 2.png" id="3_uogr1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Slide (Hover).png" id="4_70lrx"]
 
-[sub_resource type="Animation" id="Animation_x2hrq"]
+[sub_resource type="Animation" id="Animation_v3tii"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -261,26 +261,70 @@ tracks/20/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a27im"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_epem0"]
 _data = {
-"Default": SubResource("Animation_x2hrq")
+"Default": SubResource("Animation_v3tii")
 }
 
+[sub_resource type="GDScript" id="GDScript_1tncw"]
+script/source = "extends Node
+# rot = 0;
+# onEnterFrame = function () {
+# 	if (_root.Course.Char._xscale>0) {
+# 		rot = -_root.radiansToAngle(Math.atan2(_root.Course.Char.yspeed, -_root.Course.Char.xspeed));
+# 		rot += 10;
+# 	}
+# 	if (_root.Course.Char._xscale<0) {
+# 		rot = -_root.radiansToAngle(Math.atan2(_root.Course.Char.yspeed, _root.Course.Char.xspeed));
+# 		rot -= 10;
+# 	}
+# 	if (_root.Course.Char.air == true) {
+# 		_rotation += (rot-_rotation)/10;
+# 	} else {
+# 		_rotation = 0;
+# 	}
+# 	_root.DiveRot = _rotation;
+# 	if (!Key.isDown(Key.DOWN)) {
+# 		if ((_root.Course.Char.yspeed == 0 && _root.Course.Char.xspeed == 0)) {
+# 			play();
+# 		}
+# 	}
+# 	if (_root.Course.Char.Water == true) {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_xj6s3"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_p6p5k"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# "
+
 [node name="Luigi SLide Hover Clip" type="Node2D"]
+script = ExtResource("1_5jxaj")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi SLide Hover Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_a27im")
+"Timeline": SubResource("AnimationLibrary_epem0")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(4, -2.55)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -296,10 +340,10 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1"]
 position = Vector2(4, 4.45)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -315,10 +359,10 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2"]
 position = Vector2(2, 7.45)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -334,10 +378,10 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3"]
 position = Vector2(4, 4.45)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -353,10 +397,10 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4"]
 position = Vector2(4, -2.55)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -381,7 +425,7 @@ texture_filter = 1
 position = Vector2(-21.7, -2.35)
 rotation = -0.785398
 scale = Vector2(1, 1)
-texture = ExtResource("3_opvfj")
+texture = ExtResource("3_uogr1")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -392,7 +436,7 @@ texture_filter = 1
 position = Vector2(19.75, -1.15)
 rotation = -2.87979
 scale = Vector2(1, -1)
-texture = ExtResource("4_3gdu4")
+texture = ExtResource("4_70lrx")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -403,7 +447,7 @@ texture_filter = 1
 position = Vector2(17, -3)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_3gdu4")
+texture = ExtResource("4_70lrx")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -414,7 +458,7 @@ texture_filter = 1
 position = Vector2(19.75, -1.15)
 rotation = -2.87979
 scale = Vector2(1, -1)
-texture = ExtResource("4_3gdu4")
+texture = ExtResource("4_70lrx")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -425,7 +469,7 @@ texture_filter = 1
 position = Vector2(-21.7, -2.35)
 rotation = -0.785398
 scale = Vector2(1, 1)
-texture = ExtResource("3_opvfj")
+texture = ExtResource("3_uogr1")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -434,17 +478,17 @@ visible = false
 [node name="@@15202" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-11, -17.55)
-texture = ExtResource("3_opvfj")
+texture = ExtResource("3_uogr1")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, -6.55)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -460,10 +504,10 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(0, 0.45)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -479,10 +523,10 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2"]
 position = Vector2(-2, 3.45)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -498,10 +542,10 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 3" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 3"]
 position = Vector2(0, 0.45)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -517,10 +561,10 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4" instance=ExtResource("1_0v0w6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4"]
 position = Vector2(0, -6.55)
 scale = Vector2(1, -1)
-script = ExtResource("2_piv7s")
+script = ExtResource("2_53hvs")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -540,8 +584,17 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_1tncw")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_xj6s3")
+
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 5"]
+script = SubResource("GDScript_p6p5k")

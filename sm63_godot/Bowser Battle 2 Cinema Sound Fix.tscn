@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
-[sub_resource type="Animation" id="Animation_epwp8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kmbjx"]
+
+[sub_resource type="Animation" id="Animation_3o0c0"]
 length = 2.73333
 loop_mode = 1
 tracks/0/type = "value"
@@ -76,16 +78,33 @@ tracks/5/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wa8kl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yfxba"]
 _data = {
-"Default": SubResource("Animation_epwp8")
+"Default": SubResource("Animation_3o0c0")
 }
 
+[sub_resource type="GDScript" id="GDScript_guy75"]
+script/source = "extends Node
+# onEnterFrame = null;
+# _root.bgsong.onSoundComplete = null;
+# _root.bgsong.stop();
+# _root.QuakeX = Math.random()*12-6;
+# _root.QuakeY = Math.random()*12-6;"
+
+[sub_resource type="GDScript" id="GDScript_fm4gn"]
+script/source = "extends Node
+# stop();"
+
 [node name="Bowser Battle 2 Cinema Sound Fix" type="Node2D"]
+script = ExtResource("1_kmbjx")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 2 Cinema Sound Fix.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wa8kl")
+"Timeline": SubResource("AnimationLibrary_yfxba")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -93,8 +112,10 @@ libraries = {
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(-266.8, 251.45)
 
 [node name="@@2614" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(246.8, -269.45, 286.8, -269.45, 286.8, -233.5, 246.8, -233.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -110,6 +131,9 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_guy75")
+
 [node name="Frame 17" type="Node2D" parent="Layer 2"]
 visible = false
 
@@ -121,3 +145,6 @@ visible = false
 
 [node name="Frame 81" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 81"]
+script = SubResource("GDScript_fm4gn")

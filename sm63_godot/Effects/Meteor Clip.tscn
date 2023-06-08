@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Meteor (ToND2).png" id="1_ulspg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lp8x4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Meteor (ToND2).png" id="2_jsur7"]
 
-[sub_resource type="Animation" id="Animation_hswy1"]
+[sub_resource type="Animation" id="Animation_5kc70"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2c6v2"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bh57j"]
 _data = {
-"Default": SubResource("Animation_hswy1")
+"Default": SubResource("Animation_5kc70")
 }
 
 [node name="Meteor Clip" type="Node2D"]
+script = ExtResource("1_lp8x4")
+source_xml = "res://sm63/LIBRARY/Effects/Meteor Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2c6v2")
+"Timeline": SubResource("AnimationLibrary_bh57j")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@48569" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-44.5, -44.5)
-texture = ExtResource("1_ulspg")
+texture = ExtResource("2_jsur7")
 centered = false

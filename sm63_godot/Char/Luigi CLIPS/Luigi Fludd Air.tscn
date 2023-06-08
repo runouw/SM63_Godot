@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Handle - Side.png" id="1_513fw"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Base.png" id="2_31a4h"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi Jumping - 3.png" id="3_qovcy"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="4_cembo"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="5_t0ksp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8pj86"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Handle - Side.png" id="2_nd22u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Base.png" id="3_r1n6d"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi Jumping - 3.png" id="4_t26bn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="5_10oiw"]
 
-[sub_resource type="Animation" id="Animation_rrw54"]
+[sub_resource type="Animation" id="Animation_qjfmy"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -70,16 +70,21 @@ tracks/4/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h5wip"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_deq8o"]
 _data = {
-"Default": SubResource("Animation_rrw54")
+"Default": SubResource("Animation_qjfmy")
 }
 
 [node name="Luigi Fludd Air" type="Node2D"]
+script = ExtResource("1_8pj86")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Fludd Air.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_h5wip")
+"Timeline": SubResource("AnimationLibrary_deq8o")
 }
 
 [node name="Layer 6" type="Node2D" parent="."]
@@ -91,7 +96,7 @@ texture_filter = 1
 position = Vector2(8.5, -1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_513fw")
+texture = ExtResource("2_nd22u")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -101,7 +106,7 @@ centered = false
 [node name="@@14975" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(0, -16.3)
-texture = ExtResource("2_31a4h")
+texture = ExtResource("3_r1n6d")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -113,14 +118,14 @@ texture_filter = 1
 position = Vector2(10.5, -17.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_qovcy")
+texture = ExtResource("4_t26bn")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("4_cembo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(4, -11.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("5_t0ksp")
+script = ExtResource("5_10oiw")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -144,7 +149,7 @@ brightness = 0.0
 [node name="@@14972" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_513fw")
+texture = ExtResource("2_nd22u")
 texture_offset = Vector2(11.3, 0.999999)
 texture_scale = Vector2(1, -1)
 texture_rotation = 3.14159
@@ -154,7 +159,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@14973" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_513fw")
+texture = ExtResource("2_nd22u")
 texture_offset = Vector2(11.8, 0.799999)
 texture_scale = Vector2(1, -1)
 texture_rotation = 3.14159
@@ -165,9 +170,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("4_cembo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(7.5, -17.55)
-script = ExtResource("5_t0ksp")
+script = ExtResource("5_10oiw")
 path = "res://sm63_godot/Char/Fludd CLIPS/Dynamic Fludd Nozzle Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

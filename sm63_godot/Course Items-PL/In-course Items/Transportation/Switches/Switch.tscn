@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Switches/Question tile.png" id="1_xbc33"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Switches/Question tile 2.png" id="2_vp6ea"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_ag4wo"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_78we6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_m7jdg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Switches/Question tile.png" id="2_jgjix"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Switches/Question tile 2.png" id="3_cj87b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_v2yat"]
 
-[sub_resource type="Animation" id="Animation_8j546"]
+[sub_resource type="Animation" id="Animation_74ue8"]
 length = 0.9
 loop_mode = 1
 tracks/0/type = "value"
@@ -333,16 +333,89 @@ tracks/26/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iu0xl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qxpdd"]
 _data = {
-"Default": SubResource("Animation_8j546")
+"Default": SubResource("Animation_74ue8")
 }
 
+[sub_resource type="GDScript" id="GDScript_aalrt"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_acmqw"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"TimerEnd\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_otamq"]
+script/source = "extends Node
+# if (activated == true) {
+# 	gotoAndStop(\"end\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_f0k7y"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (this.box.hitTest(_root.Course.Char.charClip.feet) && _root.Course.Char.air == true && _root.Course.Char.yspeed>0) {
+# 			play();
+# 			onEnterFrame = function () {
+# 				_root.PauseGame = false;
+# 				_root.Course.Char.yspeed = 0;
+# 				_root.Course.Char.xspeed = 0;
+# 				Y = _y+_parent._y;
+# 				_root.Course.Char._y += (Y-_root.Course.Char._y)/5;
+# 				//
+# 				X = _x+_parent._x;
+# 				_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 			};
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_esyam"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# };
+# _root.Course.Char.yspeed = -12;
+# "
+
+[sub_resource type="GDScript" id="GDScript_fym1y"]
+script/source = "extends Node
+# onEnterFrame = null;
+# Switchfunction();
+# "
+
+[sub_resource type="GDScript" id="GDScript_ii1y6"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_fv71q"]
+script/source = "extends Node
+# gotoAndStop(3);
+# "
+
 [node name="Switch" type="Node2D"]
+script = ExtResource("1_m7jdg")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Switches/Switch.xml"
+linkage = "SwitchClip"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iu0xl")
+"Timeline": SubResource("AnimationLibrary_qxpdd")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -357,11 +430,12 @@ position = Vector2(0, 0.5)
 scale = Vector2(1, 0.879517)
 
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 16/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@47732" type="Polygon2D" parent="Layer 4/Frame 16/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 texture_offset = Vector2(10, 12.3)
 texture_scale = Vector2(1, 0.840712)
 polygon = PackedVector2Array(-10, -12.3, 10, -12.3, 10, 4.3, -10, 4.3)
@@ -375,11 +449,12 @@ position = Vector2(0, 4.85)
 scale = Vector2(1, 0.549347)
 
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 20/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@47733" type="Polygon2D" parent="Layer 4/Frame 20/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 texture_offset = Vector2(10, 12.3)
 texture_scale = Vector2(1, 0.840712)
 polygon = PackedVector2Array(-10, -12.3, 10, -12.3, 10, 4.3, -10, 4.3)
@@ -396,11 +471,12 @@ position = Vector2(0, 4.85)
 scale = Vector2(1, 0.549347)
 
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 22/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@47734" type="Polygon2D" parent="Layer 4/Frame 22/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 texture_offset = Vector2(10, 12.3)
 texture_scale = Vector2(1, 0.840712)
 polygon = PackedVector2Array(-10, -12.3, 10, -12.3, 10, 4.3, -10, 4.3)
@@ -414,7 +490,7 @@ visible = false
 [node name="@@47735" type="Sprite2D" parent="Layer 4/Frame 26/Group"]
 texture_filter = 1
 position = Vector2(-10, -9.5)
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -426,7 +502,7 @@ centered = false
 [node name="@@47723" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-10, -9.5)
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -437,7 +513,7 @@ visible = false
 [node name="@@47724" type="Sprite2D" parent="Layer 1/Frame 2/Group"]
 texture_filter = 1
 position = Vector2(-10, -9.5)
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -451,7 +527,7 @@ scale = Vector2(1, 0.436844)
 texture_filter = 1
 position = Vector2(-10, 1.45)
 scale = Vector2(1, 0.436844)
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 centered = false
 
 [node name="Frame 11" type="Node2D" parent="Layer 1"]
@@ -465,7 +541,7 @@ scale = Vector2(1, 0.436844)
 texture_filter = 1
 position = Vector2(-10, 1.45)
 scale = Vector2(1, 0.436844)
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
@@ -479,7 +555,7 @@ scale = Vector2(1, 1.18947)
 texture_filter = 1
 position = Vector2(-10, -12.3)
 scale = Vector2(1, 1.18947)
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
@@ -492,7 +568,7 @@ visible = false
 [node name="@@47728" type="Polygon2D" parent="Layer 1/Frame 16/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 texture_offset = Vector2(10, 12.3)
 texture_scale = Vector2(1, 0.840712)
 polygon = PackedVector2Array(-10, 4.3, 10, 4.3, 10, 10.3, -10, 10.3)
@@ -510,7 +586,7 @@ scale = Vector2(1, 0.705902)
 [node name="@@47729" type="Polygon2D" parent="Layer 1/Frame 20/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 texture_offset = Vector2(10, 12.3)
 texture_scale = Vector2(1, 0.840712)
 polygon = PackedVector2Array(-10, 4.3, 10, 4.3, 10, 10.3, -10, 10.3)
@@ -522,7 +598,7 @@ visible = false
 [node name="@@47730" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(-10, 0)
-texture = ExtResource("2_vp6ea")
+texture = ExtResource("3_cj87b")
 centered = false
 
 [node name="Frame 22" type="Node2D" parent="Layer 1"]
@@ -537,7 +613,7 @@ scale = Vector2(1, 0.705902)
 [node name="@@47731" type="Polygon2D" parent="Layer 1/Frame 22/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xbc33")
+texture = ExtResource("2_jgjix")
 texture_offset = Vector2(10, 12.3)
 texture_scale = Vector2(1, 0.840712)
 polygon = PackedVector2Array(-10, 4.3, 10, 4.3, 10, 10.3, -10, 10.3)
@@ -550,10 +626,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2" instance=ExtResource("3_ag4wo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2"]
 position = Vector2(0, -5)
 scale = Vector2(0.377365, 0.625)
-script = ExtResource("4_78we6")
+script = ExtResource("4_v2yat")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -566,6 +642,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_aalrt")
+
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
 visible = false
 
@@ -575,6 +654,9 @@ visible = false
 [node name="Frame 22" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 22"]
+script = SubResource("GDScript_acmqw")
+
 [node name="Frame 23" type="Node2D" parent="Layer 3"]
 visible = false
 
@@ -582,17 +664,35 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_otamq")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_f0k7y")
 
 [node name="Frame 11" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 11"]
+script = SubResource("GDScript_esyam")
+
 [node name="Frame 20" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 20"]
+script = SubResource("GDScript_fym1y")
 
 [node name="Frame 21" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 21"]
+script = SubResource("GDScript_ii1y6")
+
 [node name="Frame 26" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 26"]
+script = SubResource("GDScript_fv71q")

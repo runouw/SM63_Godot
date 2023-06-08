@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_fewyc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_duip2"]
+
+[sub_resource type="Animation" id="Animation_48eci"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_x860p"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d3lya"]
 _data = {
-"Default": SubResource("Animation_fewyc")
+"Default": SubResource("Animation_48eci")
 }
 
 [node name="C-O Camedge" type="Node2D"]
+script = ExtResource("1_duip2")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/C-O Camedge.xml"
+linkage = "C-OCamedge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_x860p")
+"Timeline": SubResource("AnimationLibrary_d3lya")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

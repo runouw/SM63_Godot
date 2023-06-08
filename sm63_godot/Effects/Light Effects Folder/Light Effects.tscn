@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_afpoh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_q6rk6"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_p7u74"]
 
-[sub_resource type="Animation" id="Animation_ceys6"]
+[sub_resource type="Animation" id="Animation_fdo7g"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,28 +19,43 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dufuf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qvn7f"]
 _data = {
-"Default": SubResource("Animation_ceys6")
+"Default": SubResource("Animation_fdo7g")
 }
 
+[sub_resource type="GDScript" id="GDScript_a2y8x"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_rotation += 3;
+# };
+# "
+
 [node name="Light Effects" type="Node2D"]
+script = ExtResource("1_q6rk6")
+source_xml = "res://sm63/LIBRARY/Effects/Light Effects Folder/Light Effects.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dufuf")
+"Timeline": SubResource("AnimationLibrary_qvn7f")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_a2y8x")
+
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@48668" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(150.225, -261.725, 150.225, -261.725, 155.575, -258.525, 176.813, -244.311, 196.151, -228.64, 213.588, -211.511, 229.125, -192.925, 0.534343, -0.325, 0.075, -0.325, 0.025, -0.45, 149.061, -259.7, 0.075, -0.325, 0.225, -0.325, 0.125, -0.2, 0.125, -0.2, 0.095, -0.275, 0.225, -0.325, 0.534343, -0.325, 0.475, -0.275, 0.25, -0.025, 0.25, -0.025, 0.175, -0.175, 0.208333, -0.275, -0.075, -0.275, -0.075, -0.275, -0.05, -0.025, -0.2, -0.025, -0.125, -0.2, -0.5, 0.5, -0.5, 0.5, -0.475, 0.525, -0.65, 0.625, -0.65, 0.625, -0.530002, 0.525002, -0.53, 0.525)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20, 21, 22), PackedInt32Array(23, 24, 25, 26, 27), PackedInt32Array(28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_afpoh")
+script = ExtResource("2_p7u74")
 matrix = Transform2D(0.0488434, 0.041153, -0.118271, 0.141602, 96.15, -115.45)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.92549, 1, 0.235294, 0.301961, 0.996078, 1, 0.960784, 0)
 entries_ratio = PackedFloat32Array(0.313726, 0.509804, 0.721569)
@@ -48,7 +64,7 @@ spread_method_reflect = false
 [node name="@@48669" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-0.175, -0.775, -0.175, -0.775, 0, -0.475, 0.025, -0.45, 0.125, -0.2, 0.0375, -0.025, -0.05, -0.025, -0.075, -0.275, -0.155, -0.675, 0.175, -0.175, 0.175, -0.175, 0.25, -0.025, 0.25, 0.025, 0.1, 0.025, 0.11875, -0.025, -0.05, -0.025, 0.0375, -0.025, 0.025, 0, 0.025, 0, 0.1, 0.025, 0.25, 0.025, 0.175, 0.1, 0.175, 0.1, 0.1, 0.5, 0.55, 0.5, 0.561667, 0.525, 0.561667, 0.525002, 0.725, 0.875, 111.986, 194.45, 34.0999, 194.45, 0.175, 1.05, 0.125, 0.925, 0.101471, 0.525002, 0.101471, 0.525, 34.0999, 194.45, 111.986, 194.45, 150.625, 261.675, 145.225, 264.75, 122.353, 276.117, 99.1754, 285.101, 75.6909, 291.704, 51.9, 295.925, 51.9, 295.925, 45.6948, 260.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(19, 20, 21, 22), PackedInt32Array(23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33), PackedInt32Array(34, 35, 36, 37, 38, 39, 40, 41, 42, 43)])
-script = ExtResource("1_afpoh")
+script = ExtResource("2_p7u74")
 matrix = Transform2D(-0.0599213, 0.0219269, -0.0629272, -0.173676, 51.55, 141.45)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.92549, 1, 0.235294, 0.301961, 0.996078, 1, 0.960784, 0)
 entries_ratio = PackedFloat32Array(0.313726, 0.509804, 0.721569)
@@ -57,7 +73,7 @@ spread_method_reflect = false
 [node name="@@48670" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(0.225, -0.325, 0.225, -0.325, 0.175, -0.175, 0.109375, 0, 0.025, 0, 0.125, -0.2, 0.185, -0.275, 0.025, 0, 0.109375, 0, 0.1, 0.025, 0.1, 0.125, 0.095, 0.15, -0.05, 0.15, 0.0125, 0.025, -0.05, 0.15, 0.095, 0.15, 0.025, 0.5, -0.25, 0.5, -0.0928571, 0.225, -0.25, 0.5, 0.025, 0.5, 0.025, 0.725, 0, 0.9, -33.9844, 194.45, -111.763, 194.45, -0.3, 0.625, -0.260001, 0.525002, -0.26, 0.525, -111.763, 194.45, -33.9844, 194.45, -52.175, 298.05, -52.175, 298.05, -58.35, 296.95, -83.1401, 290.884, -106.641, 282.795, -128.853, 272.684, -149.775, 260.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17, 18), PackedInt32Array(19, 20, 21, 22, 23, 24, 25, 26, 27), PackedInt32Array(28, 29, 30, 31, 32, 33, 34, 35, 36)])
-script = ExtResource("1_afpoh")
+script = ExtResource("2_p7u74")
 matrix = Transform2D(-0.0599213, -0.0219269, 0.0629272, -0.173676, -51.1, 142.05)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.92549, 1, 0.235294, 0.301961, 0.996078, 1, 0.960784, 0)
 entries_ratio = PackedFloat32Array(0.313726, 0.509804, 0.721569)
@@ -66,7 +82,7 @@ spread_method_reflect = false
 [node name="@@48671" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-0.65, -0.4, -0.65, -0.4, -0.475, -0.325, -0.125, -0.2, -0.2, -0.025, -0.2, -0.025, -0.5, -0.175, -0.6, -0.325, 0.25, -0.025, 0.4, -0.025, 0.25, 0.025, 0.25, 0.025, 0.25, 0, 0.55, 0.5, 1.825, 0.5, 1.8934, 0.525, 1.8934, 0.525002, 282.675, 103.15, 280.475, 109.025, 270.214, 132.509, 258.193, 154.366, 244.414, 174.596, 228.875, 193.2, 228.875, 193.2, 0.725, 0.875, 0.561667, 0.525002, 0.561667, 0.525)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26)])
-script = ExtResource("1_afpoh")
+script = ExtResource("2_p7u74")
 matrix = Transform2D(-0.0318756, 0.055481, -0.159332, -0.0924072, 129.85, 75.15)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.92549, 1, 0.235294, 0.301961, 0.996078, 1, 0.960784, 0)
 entries_ratio = PackedFloat32Array(0.313726, 0.509804, 0.721569)
@@ -75,7 +91,7 @@ spread_method_reflect = false
 [node name="@@48672" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(0.65, -0.325, 0.65, -0.325, 0.35, -0.025, 0.25, -0.025, 0.475, -0.275, -1.15, 0.3, -0.725, 0.3, -0.65, 0.4, -1.075, 0.5, -1.69674, 0.5, -1.42337, 0.4, -1.69674, 0.5, -0.5, 0.5, -0.53, 0.525, -0.530002, 0.525002, -0.65, 0.625, -2.03846, 0.625, -1.76509, 0.525002, -1.76508, 0.525, -0.475, 0.525, -0.475, 0.525, -0.474997, 0.525002, -0.475003, 0.525002, -0.475003, 0.525002, -0.474997, 0.525002, -0.375, 0.575, -0.434336, 0.625, -0.65, 0.625, -0.5625, 0.575, -2.03846, 0.625, -0.434336, 0.625, -230.45, 194.45, -230.45, 194.45, -234.45, 189.6, -249.548, 168.957, -262.364, 147.596, -272.898, 125.519, -281.15, 102.725, -2.31183, 0.725)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15, 16, 17, 18), PackedInt32Array(19, 20, 21, 22), PackedInt32Array(23, 24, 25, 26, 27, 28), PackedInt32Array(29, 30, 31, 32, 33, 34, 35, 36, 37, 38)])
-script = ExtResource("1_afpoh")
+script = ExtResource("2_p7u74")
 matrix = Transform2D(-0.0318756, -0.055481, 0.159332, -0.0924072, -129.8, 75.5)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.92549, 1, 0.235294, 0.301961, 0.996078, 1, 0.960784, 0)
 entries_ratio = PackedFloat32Array(0.313726, 0.509804, 0.721569)
@@ -84,7 +100,7 @@ spread_method_reflect = false
 [node name="@@48673" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(282.4, -103.175, 282.4, -103.175, 284.5, -97.225, 291.676, -72.6219, 296.464, -48.1292, 298.864, -23.7469, 298.875, -0.175, 0.810082, -0.175, 281.306, -102.775, 0.810082, -0.175, 298.875, -0.175, 298.875, 0.025, 0.25, 0.025, 0.4, -0.025, 0.25, 0.025, 298.875, 0.025, 298.875, 0.3, 0.065, 0.3, 0.1, 0.125, 0.175, 0.1, -0.05, 0.15, -0.05, 0.15, -0.25, 0.5, -1.075, 0.5, -0.65, 0.4, -0.275, 0.225, 0.065, 0.3, 298.875, 0.3, 298.875, 0.5, 0.025, 0.5, 0.045, 0.4, 1.825, 0.5, 298.875, 0.5, 298.875, 0.525, 298.875, 0.525)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17, 18, 19), PackedInt32Array(20, 21, 22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29, 30), PackedInt32Array(31, 32, 33, 34)])
-script = ExtResource("1_afpoh")
+script = ExtResource("2_p7u74")
 matrix = Transform2D(0.0110474, 0.0630951, -0.181198, 0.0320892, 147.4, -26)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.92549, 1, 0.235294, 0.301961, 0.996078, 1, 0.960784, 0)
 entries_ratio = PackedFloat32Array(0.313726, 0.509804, 0.721569)
@@ -93,7 +109,7 @@ spread_method_reflect = false
 [node name="@@48674" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(3.7582, -301.862, 3.7582, -301.862, 28.0905, -300.003, 51.9, -295.8, 0.0527216, -0.775, -0.554006, -0.775, -52.65, -297.5, -46.475, -298.55, -21.097, -301.378, -0.554006, -0.775, -0.175, -0.775, -0.075, -0.275, -0.125, -0.2, -0.125, -0.2, -0.475, -0.325, -0.536449, -0.675, -0.175, -0.775, 0.0527216, -0.775, 0, -0.475, 0, -0.475, -0.116667, -0.675)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20)])
-script = ExtResource("1_afpoh")
+script = ExtResource("2_p7u74")
 matrix = Transform2D(0.0637817, 0, 0, 0.184814, -0.45, -150.6)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.92549, 1, 0.235294, 0.301961, 0.996078, 1, 0.960784, 0)
 entries_ratio = PackedFloat32Array(0.313726, 0.509804, 0.721569)
@@ -102,7 +118,7 @@ spread_method_reflect = false
 [node name="@@48675" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-280.975, -102.775, -280.975, -102.775, -1.975, -0.675, -1.14167, -0.025, -300.825, -0.025, -300.825, -5.975, -299.173, -31.5614, -295.314, -56.2235, -289.248, -79.9614, -282.988, -97.225, -0.5, -0.175, -0.5, -0.175, -0.2, -0.025, -0.415625, -0.025, -300.825, -0.025, -1.14167, -0.025, -0.98141, 0.1, -300.825, 0.1, -300.825, 0, -0.415625, -0.025, -0.05, -0.025, 0.025, 0, -0.025, 0.1, -0.345313, 0.1, -0.401563, 0, 0.1, 0.025, 0.1, 0.025, 0.175, 0.1, 0.1, 0.125, 0.1, 0.125, 0.1, 0.1, -300.825, 0.1, -0.98141, 0.1, -0.725, 0.3, -300.825, 0.3, -300.825, 0.125, -0.345313, 0.1, -0.025, 0.1, -0.05, 0.15, -0.275, 0.225, -0.275, 0.225, -0.33125, 0.125)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17, 18), PackedInt32Array(19, 20, 21, 22, 23, 24), PackedInt32Array(25, 26, 27, 28, 29, 30), PackedInt32Array(31, 32, 33, 34, 35), PackedInt32Array(36, 37, 38, 39, 40, 41)])
-script = ExtResource("1_afpoh")
+script = ExtResource("2_p7u74")
 matrix = Transform2D(0.0110474, -0.0630798, 0.181198, 0.0320892, -147.65, -25.75)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.92549, 1, 0.235294, 0.301961, 0.996078, 1, 0.960784, 0)
 entries_ratio = PackedFloat32Array(0.313726, 0.509804, 0.721569)
@@ -111,7 +127,7 @@ spread_method_reflect = false
 [node name="@@48676" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-149.675, -259.7, -149.675, -259.7, -0.65, -0.4, -0.5, -0.175, -1.33397, -0.175, -1.975, -0.675, -230.85, -193.625, -226.775, -198.35, -209.149, -216.887, -190.423, -233.291, -170.599, -247.562, -151.701, -258.525, -1.33397, -0.175, -0.5, -0.175, -0.3875, 0.025, -1.07756, 0.025, -1.14167, -0.025, -1.07756, 0.025, -0.3875, 0.025, -0.275, 0.225, -0.821154, 0.225, -0.98141, 0.1, -0.821154, 0.225, -0.275, 0.225, -0.65, 0.4, -0.65, 0.4, -0.725, 0.3, -0.5, 0.5, -0.25, 0.5, -0.26, 0.525, -0.260001, 0.525002, -0.3, 0.625, -0.3, 0.625, -0.375, 0.575, -0.475, 0.525, 0.025, 0.725, 0.025, 0.725, 0.125, 0.925, 0.175, 1.05, 0.175, 1.05, 0, 0.9, 0.00357143, 0.875)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26), PackedInt32Array(27, 28, 29, 30, 31, 32, 33, 34), PackedInt32Array(35, 36, 37, 38, 39, 40, 41)])
-script = ExtResource("1_afpoh")
+script = ExtResource("2_p7u74")
 matrix = Transform2D(0.0488434, -0.041153, 0.118271, 0.141602, -96.8, -114.75)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.92549, 1, 0.235294, 0.301961, 0.996078, 1, 0.960784, 0)
 entries_ratio = PackedFloat32Array(0.313726, 0.509804, 0.721569)

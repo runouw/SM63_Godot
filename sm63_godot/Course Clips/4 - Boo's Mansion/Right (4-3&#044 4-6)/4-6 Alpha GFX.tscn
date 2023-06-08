@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Haunted Brick Tile 2.png" id="1_7elw0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5envc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Haunted Brick Tile 2.png" id="2_nnjik"]
 
-[sub_resource type="Animation" id="Animation_imgbr"]
+[sub_resource type="Animation" id="Animation_vs78m"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c1au3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5hiv"]
 _data = {
-"Default": SubResource("Animation_imgbr")
+"Default": SubResource("Animation_vs78m")
 }
 
 [node name="4-6 Alpha GFX" type="Node2D"]
+script = ExtResource("1_5envc")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Right (4-3&#044 4-6)/4-6 Alpha GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_c1au3")
+"Timeline": SubResource("AnimationLibrary_l5hiv")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@29639" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_7elw0")
+texture = ExtResource("2_nnjik")
 texture_offset = Vector2(220, -208.45)
 polygon = PackedVector2Array(79.2, -312.5, 173.4, -312.5, 173.4, 402.775, 173.4, 402.775, 79.2, 306.45)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])

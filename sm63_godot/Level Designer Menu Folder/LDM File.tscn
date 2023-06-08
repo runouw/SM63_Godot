@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_vqx23"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_blfug"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3cbst"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_durx1"]
 
-[sub_resource type="Animation" id="Animation_xyqed"]
+[sub_resource type="Animation" id="Animation_kp8vo"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -127,26 +127,73 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2iu3k"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qa1lj"]
 _data = {
-"Default": SubResource("Animation_xyqed")
+"Default": SubResource("Animation_kp8vo")
 }
 
+[sub_resource type="GDScript" id="GDScript_67ige"]
+script/source = "extends Node
+# stop();
+# txt = \"File\";
+# rev = false;
+# onEnterFrame = function () {
+# 	if (((this.hitTest(_root._xmouse, _root._ymouse, false) && !_root.M.Window1.hitTest(_root._xmouse, _root._ymouse, false)) || _parent.cl == txt) && rev == false) {
+# 		if (_currentframe<3) {
+# 			nextFrame();
+# 			if (_parent.cl !== \"\") {
+# 				_parent.cl = txt;
+# 			}
+# 		}
+# 		if (_parent.cl == txt) {
+# 			if (_root.M.Bar.getDepth() !== _root.M.frontwindow) {
+# 				_root.M.Bar.swapDepths(_root.M.frontwindow);
+# 			}
+# 			if (_currentframe<8) {
+# 				nextFrame();
+# 			}
+# 		}
+# 	} else {
+# 		if (_currentframe>1) {
+# 			prevFrame();
+# 		}
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false) && !_root.M.Window1.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		_parent.cl = txt;
+# 	} else {
+# 		if (_parent.cl == txt) {
+# 			_parent.cl = \"\";
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_648c1"]
+script/source = "extends Node
+# onMouseDown = null"
+
 [node name="LDM File" type="Node2D"]
+script = ExtResource("1_3cbst")
+source_xml = "res://sm63/LIBRARY/Level Designer Menu Folder/LDM File.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2iu3k")
+"Timeline": SubResource("AnimationLibrary_qa1lj")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_vqx23")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-0.75, -0.5)
 scale = Vector2(0.959656, 0.959656)
-script = ExtResource("2_blfug")
+script = ExtResource("2_durx1")
 path = "res://sm63_godot/Level Designer Menu Folder/LDMB Bevel BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -162,10 +209,10 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2" instance=ExtResource("1_vqx23")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2"]
 position = Vector2(-0.75, -0.5)
 scale = Vector2(1.09999, 1.09999)
-script = ExtResource("2_blfug")
+script = ExtResource("2_durx1")
 path = "res://sm63_godot/Level Designer Menu Folder/LDMB Bevel BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -181,10 +228,10 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 5" instance=ExtResource("1_vqx23")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 5"]
 position = Vector2(-0.75, -0.5)
 scale = Vector2(1.09999, 1.09999)
-script = ExtResource("2_blfug")
+script = ExtResource("2_durx1")
 path = "res://sm63_godot/Level Designer Menu Folder/LDMB Bevel BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -211,10 +258,10 @@ visible = false
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3" instance=ExtResource("1_vqx23")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3"]
 position = Vector2(-15.95, 11.25)
 scale = Vector2(0.385971, 0.385971)
-script = ExtResource("2_blfug")
+script = ExtResource("2_durx1")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Bar DD File.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -230,9 +277,9 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 7" instance=ExtResource("1_vqx23")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 7"]
 position = Vector2(-16.95, 11)
-script = ExtResource("2_blfug")
+script = ExtResource("2_durx1")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Bar DD File.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -249,5 +296,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_67ige")
+
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 4"]
+script = SubResource("GDScript_648c1")

@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=18 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 1.png" id="1_pu14m"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="2_yftn5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Star (none) - 1.png" id="3_ovt5s"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Star (none) - 2.png" id="4_jlwk7"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="5_p62cx"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_kshrx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7dp8a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 1.png" id="2_b2jom"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="3_qutgs"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Star (none) - 1.png" id="4_68cd3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Star (none) - 2.png" id="5_yar57"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_np6cq"]
 
-[sub_resource type="Animation" id="Animation_ay7ci"]
+[sub_resource type="Animation" id="Animation_6bhmp"]
 length = 2.16667
 loop_mode = 1
 tracks/0/type = "value"
@@ -227,16 +227,93 @@ tracks/17/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0mbq8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0dhqt"]
 _data = {
-"Default": SubResource("Animation_ay7ci")
+"Default": SubResource("Animation_6bhmp")
 }
 
+[sub_resource type="GDScript" id="GDScript_h5lck"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	if (_root.Course.Char.air == false) {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_yywjx"]
+script/source = "extends Node
+# onEnterFrame = null"
+
+[sub_resource type="GDScript" id="GDScript_e3drw"]
+script/source = "extends Node
+# _root.GetStarMusic1();
+# "
+
+[sub_resource type="GDScript" id="GDScript_hp1lp"]
+script/source = "extends Node
+# _root.newstar = false;
+# _root.CalculateStars();
+# "
+
+[sub_resource type="GDScript" id="GDScript_55eff"]
+script/source = "extends Node
+# if (_root[\"StarMessage\"+_root.TotalStars] !== undefined) {
+# 	_root.Mariosound = new Sound(this);
+# 	_root.Mariosound.attachSound(\"mario-goodnews\");
+# 	_root.Mariosound.start(0, 1);
+# 	_root.Mariosound.setVolume(_root.MarioVolume);
+# 	//_root.PlayMessage(\"You have \"+_root.TotalStars+\" Shine Sprites\"+newline+_root[\"StarMessage\"+_root.TotalStars]);
+# 	_root.PlayMessage(_root[\"StarMessage\"+_root.TotalStars]);
+# 	//   
+# } else {
+# 	gotoAndPlay(\"end\");
+# }
+# _root.SaveFile();
+# onEnterFrame = function () {
+# 	_root.playpause = true;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_6qj4x"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	_root.playpause = true;
+# 	if (_root.KeySPACE()) {
+# 		play();
+# 		_root.StopMessage();
+# 		onEnterFrame = null;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_jw3lr"]
+script/source = "extends Node
+# _root.playpause = false;
+# onEnterFrame = null"
+
+[sub_resource type="GDScript" id="GDScript_lcb1n"]
+script/source = "extends Node
+# onEnterFrame = null"
+
+[sub_resource type="GDScript" id="GDScript_s2h1m"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# "
+
 [node name="Mario (none) NewStar" type="Node2D"]
+script = ExtResource("1_7dp8a")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (none) NewStar.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_0mbq8")
+"Timeline": SubResource("AnimationLibrary_0dhqt")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -246,7 +323,7 @@ libraries = {
 [node name="@@15410" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-9.15, -28.15)
-texture = ExtResource("1_pu14m")
+texture = ExtResource("2_b2jom")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
@@ -256,13 +333,13 @@ visible = false
 texture_filter = 1
 position = Vector2(-0.25, -26.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_yftn5")
+texture = ExtResource("3_qutgs")
 centered = false
 
 [node name="@@15412" type="Sprite2D" parent="Layer 2/Frame 1"]
 texture_filter = 1
 position = Vector2(-13, -28.15)
-texture = ExtResource("3_ovt5s")
+texture = ExtResource("4_68cd3")
 centered = false
 
 [node name="Frame 14" type="Node2D" parent="Layer 2"]
@@ -271,7 +348,7 @@ visible = false
 [node name="@@15413" type="Sprite2D" parent="Layer 2/Frame 14"]
 texture_filter = 1
 position = Vector2(-11.15, -35.65)
-texture = ExtResource("4_jlwk7")
+texture = ExtResource("5_yar57")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -282,7 +359,7 @@ centered = false
 texture_filter = 1
 position = Vector2(-16.25, -29.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_yftn5")
+texture = ExtResource("3_qutgs")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -292,16 +369,16 @@ visible = false
 texture_filter = 1
 position = Vector2(-0.25, -26.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_yftn5")
+texture = ExtResource("3_qutgs")
 centered = false
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14" instance=ExtResource("5_p62cx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14"]
 position = Vector2(7.35, -32.65)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("6_kshrx")
+script = ExtResource("6_np6cq")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (Blank).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -317,9 +394,9 @@ brightness = 0.0
 [node name="Frame 39" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 39" instance=ExtResource("5_p62cx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 39"]
 position = Vector2(2.35, -172.65)
-script = ExtResource("6_kshrx")
+script = ExtResource("6_np6cq")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (Blank).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -335,9 +412,9 @@ brightness = 0.0
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49" instance=ExtResource("5_p62cx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49"]
 position = Vector2(2.35, -172.65)
-script = ExtResource("6_kshrx")
+script = ExtResource("6_np6cq")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (Blank).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -357,26 +434,53 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_h5lck")
+
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 1"]
+script = SubResource("GDScript_yywjx")
 
 [node name="Frame 14" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 14"]
+script = SubResource("GDScript_e3drw")
+
 [node name="Frame 39" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 39"]
+script = SubResource("GDScript_hp1lp")
 
 [node name="Frame 51" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 51"]
+script = SubResource("GDScript_55eff")
+
 [node name="Frame 56" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 56"]
+script = SubResource("GDScript_6qj4x")
 
 [node name="Frame 61" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 61"]
+script = SubResource("GDScript_jw3lr")
+
 [node name="Frame 62" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 62"]
+script = SubResource("GDScript_lcb1n")
+
 [node name="Frame 64" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 64"]
+script = SubResource("GDScript_s2h1m")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Hover Nozzle copy.png" id="1_qj7vf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ixyfr"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Hover Nozzle copy.png" id="2_t6ypo"]
 
-[sub_resource type="Animation" id="Animation_mmqmh"]
+[sub_resource type="Animation" id="Animation_aloby"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,26 +31,71 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7ea3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mqu4o"]
 _data = {
-"Default": SubResource("Animation_mmqmh")
+"Default": SubResource("Animation_aloby")
 }
 
+[sub_resource type="GDScript" id="GDScript_1k3tp"]
+script/source = "extends Node
+# yspeed = -3;
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_root.Fluddpow = \"H\";
+# 			_root.WaterAmount = _root.TotalWater;
+# 			//
+# 			_root.Mariosound = new Sound(this);
+# 			_root.Mariosound.attachSound(\"Fludd Nozzle\");
+# 			_root.Mariosound.start(0, 1);
+# 			_root.Mariosound.setVolume(_root.MarioVolume);
+# 			//
+# 			this.removeMovieClip(this);
+# 		}
+# 		if (!_root.Course.Platforms.hitTest(((_x+_parent._x)*_root.coursescale/100)+_root.Course._x, ((_y+_parent._y+7)*_root.coursescale/100)+_root.Course._y, true) && !_root.Course.BPlatforms.hitTest(((_x+_parent._x)*_root.coursescale/100)+_root.Course._x, ((_y+_parent._y+7)*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_y += yspeed;
+# 			yspeed += 0.5;
+# 			yspeed *= 0.95;
+# 		}
+# 		while (_root.Course.Platforms.hitTest(((_x+_parent._x)*_root.coursescale/100)+_root.Course._x, ((_y+_parent._y+5)*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x+_parent._x)*_root.coursescale/100)+_root.Course._x, ((_y+_parent._y+5)*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_y--;
+# 			yspeed = Math.min(0, yspeed);
+# 		}
+# 		count++;
+# 		if (count>900) {
+# 			_alpha = random(100);
+# 		}
+# 		if (count>1000) {
+# 			this.removeMovieClip(this);
+# 		}
+# 	}
+# };
+# "
+
 [node name="Hover Nozzle Clip" type="Node2D"]
+script = ExtResource("1_ixyfr")
+source_xml = "res://sm63/LIBRARY/Char/Fludd CLIPS/Hover Nozzle Clip.xml"
+linkage = "Hnozzle"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_l7ea3")
+"Timeline": SubResource("AnimationLibrary_mqu4o")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_1k3tp")
+
 [node name="@@14542" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-15.5, -12)
-texture = ExtResource("1_qj7vf")
+texture = ExtResource("2_t6ypo")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]

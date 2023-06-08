@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_p5n3v"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4c26u"]
+
+[sub_resource type="Animation" id="Animation_b0ly7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsyot"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tva4w"]
 _data = {
-"Default": SubResource("Animation_p5n3v")
+"Default": SubResource("Animation_b0ly7")
 }
 
 [node name="C-10 BPlatforms" type="Node2D"]
+script = ExtResource("1_4c26u")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section C & D/C-10 BPlatforms.xml"
+linkage = "C-10BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vsyot")
+"Timeline": SubResource("AnimationLibrary_tva4w")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

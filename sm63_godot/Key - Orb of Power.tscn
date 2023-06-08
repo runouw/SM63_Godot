@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_feayy"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_11a4e"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4edlo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_r2yfb"]
 
-[sub_resource type="Animation" id="Animation_mxte4"]
+[sub_resource type="Animation" id="Animation_rxn34"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +55,21 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sxpbm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f8rve"]
 _data = {
-"Default": SubResource("Animation_mxte4")
+"Default": SubResource("Animation_rxn34")
 }
 
 [node name="Key - Orb of Power" type="Node2D"]
+script = ExtResource("1_4edlo")
+source_xml = "res://sm63/LIBRARY/Key - Orb of Power.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sxpbm")
+"Timeline": SubResource("AnimationLibrary_f8rve")
 }
 
 [node name="Shine2" type="Node2D" parent="."]
@@ -75,8 +80,8 @@ libraries = {
 
 [node name="Frame 0" type="Node2D" parent="Orb"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Orb/Frame 0" instance=ExtResource("1_feayy")]
-script = ExtResource("2_11a4e")
+[node name="DOMSymbolInstance" type="Node2D" parent="Orb/Frame 0"]
+script = ExtResource("2_r2yfb")
 path = "res://sm63_godot/Key - Orb of Power&#058 Glow Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -89,8 +94,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@7321" type="Node2D" parent="Orb/Frame 0" instance=ExtResource("1_feayy")]
-script = ExtResource("2_11a4e")
+[node name="@DOMSymbolInstance@7321" type="Node2D" parent="Orb/Frame 0"]
+script = ExtResource("2_r2yfb")
 path = "res://sm63_godot/Key - Orb of Power Content.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

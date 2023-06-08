@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 1.png" id="1_ydgdl"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 2.png" id="2_6tbbf"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 3.png" id="3_tp84q"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 4.png" id="4_w1npx"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 5.png" id="5_i0eal"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 6.png" id="6_d8v4y"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 7.png" id="7_7cmii"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 8.png" id="8_nnwte"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gtvy3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 1.png" id="2_6xoo6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 2.png" id="3_i3a3t"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 3.png" id="4_eth0y"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 4.png" id="5_wg452"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 5.png" id="6_81smx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 6.png" id="7_g2bpu"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 7.png" id="8_a71r3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba Walking - 8.png" id="9_7ad5a"]
 
-[sub_resource type="Animation" id="Animation_75uxv"]
+[sub_resource type="Animation" id="Animation_1gopq"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -133,16 +134,59 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7vsaq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ioq6v"]
 _data = {
-"Default": SubResource("Animation_75uxv")
+"Default": SubResource("Animation_1gopq")
 }
 
+[sub_resource type="GDScript" id="GDScript_rmqb1"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_x7el8"]
+script/source = "extends Node
+# if (number == undefined) {
+# 	number = 1;
+# } else {
+# 	number++;
+# 	if (number>3) {
+# 		number = 0;
+# 	}
+# }
+# if (_root.CreditsQuiet !== true) {
+# 	if (_parent._parent.distancevolume>60) {
+# 		this[\"walksound\"+number] = new Sound(this);
+# 		this[\"walksound\"+number].attachSound(\"Goomba-Walk\");
+# 		this[\"walksound\"+number].start(0, 1);
+# 		this[\"walksound\"+number].setVolume((_root.MarioVolume/100)*_parent._parent.distancevolume);
+# 		this[\"walksound\"+number].setPan(_parent._parent.panX);
+# 	} else if (_parent._parent.distancevolume>30) {
+# 		this[\"walksound\"+number] = new Sound(this);
+# 		this[\"walksound\"+number].attachSound(\"Goomba-Walk2\");
+# 		this[\"walksound\"+number].start(0, 1);
+# 		this[\"walksound\"+number].setVolume((_root.MarioVolume/100)*_parent._parent.distancevolume);
+# 		this[\"walksound\"+number].setPan(_parent._parent.panX);
+# 	}
+# }
+# "
+
 [node name="Goomba Walking" type="Node2D"]
+script = ExtResource("1_gtvy3")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/Goomba Walking.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7vsaq")
+"Timeline": SubResource("AnimationLibrary_ioq6v")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -152,7 +196,7 @@ libraries = {
 [node name="@@50639" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -9.5)
-texture = ExtResource("1_ydgdl")
+texture = ExtResource("2_6xoo6")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -161,7 +205,7 @@ visible = false
 [node name="@@50640" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-8.5, -11)
-texture = ExtResource("2_6tbbf")
+texture = ExtResource("3_i3a3t")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -170,7 +214,7 @@ visible = false
 [node name="@@50641" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-9, -10.5)
-texture = ExtResource("3_tp84q")
+texture = ExtResource("4_eth0y")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -179,7 +223,7 @@ visible = false
 [node name="@@50642" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-10, -9)
-texture = ExtResource("4_w1npx")
+texture = ExtResource("5_wg452")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -188,7 +232,7 @@ visible = false
 [node name="@@50643" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-10, -9.5)
-texture = ExtResource("5_i0eal")
+texture = ExtResource("6_81smx")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -197,7 +241,7 @@ visible = false
 [node name="@@50644" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-10, -10)
-texture = ExtResource("6_d8v4y")
+texture = ExtResource("7_g2bpu")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -206,7 +250,7 @@ visible = false
 [node name="@@50645" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-8, -9.5)
-texture = ExtResource("7_7cmii")
+texture = ExtResource("8_a71r3")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
@@ -215,12 +259,18 @@ visible = false
 [node name="@@50646" type="Sprite2D" parent="Layer 1/Frame 7"]
 texture_filter = 1
 position = Vector2(-7, -9)
-texture = ExtResource("8_nnwte")
+texture = ExtResource("9_7ad5a")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_rmqb1")
+
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 3"]
+script = SubResource("GDScript_x7el8")

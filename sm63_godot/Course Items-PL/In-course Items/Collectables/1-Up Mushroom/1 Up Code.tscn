@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_twlxn"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_22xci"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u8cue"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_nrb35"]
 
-[sub_resource type="Animation" id="Animation_soy3c"]
+[sub_resource type="Animation" id="Animation_s0a04"]
 length = 0.7
 loop_mode = 1
 tracks/0/type = "value"
@@ -211,25 +211,85 @@ tracks/16/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jgqwc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7x8ec"]
 _data = {
-"Default": SubResource("Animation_soy3c")
+"Default": SubResource("Animation_s0a04")
 }
 
+[sub_resource type="GDScript" id="GDScript_fd8vg"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_bfjg0"]
+script/source = "extends Node
+# if (_root.Course.coincountnum == undefined) {
+# 	_root.Course.coincountnum = 0;
+# } else {
+# 	_root.Course.coincountnum++;
+# }
+# if (_root[\"coindata\"+_root.playingcourse][0] == undefined) {
+# 	_root[\"coindata\"+_root.playingcourse] = [\"\"];
+# }
+# coinnum = _root.Course.coincountnum;
+# if (_root[\"coindata\"+_root.playingcourse][coinnum] == 1 && _root[\"coindata\"+_root.playingcourse][coinnum] !== undefined) {
+# 	gotoAndStop(\"end\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_v88vp"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (Math.abs((_root.currentCamX)-(_x+_parent._x))<1000 && Math.abs((_root.currentCamY)-(_y+_parent._y))<1000) {
+# 		_visible = true;
+# 		if (this.box.hitTest(_root.Course.Char.charClip.body) || this.box.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y-15)*_root.coursescale/100)+_root.Course._y, true)) {
+# 			gotoAndPlay(\"collect\");
+# 			_root.CharLives += 1;
+# 			onEnterFrame = null;
+# 		}
+# 	} else {
+# 		_visible = false;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_a2sqe"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"1up\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# //
+# _root[\"coindata\"+_root.playingcourse][coinnum] = 1;
+# "
+
+[sub_resource type="GDScript" id="GDScript_dfinc"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="1 Up Code" type="Node2D"]
+script = ExtResource("1_u8cue")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1 Up Code.xml"
+linkage = "1UpCode"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jgqwc")
+"Timeline": SubResource("AnimationLibrary_7x8ec")
 }
 
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Graphics"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 0" instance=ExtResource("1_twlxn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 0"]
 position = Vector2(-0.45, 0)
-script = ExtResource("2_22xci")
+script = ExtResource("2_nrb35")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1-Up Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -245,8 +305,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Graphics"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 3" instance=ExtResource("1_twlxn")]
-script = ExtResource("2_22xci")
+[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 3"]
+script = ExtResource("2_nrb35")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1 up Glow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -262,9 +322,9 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Graphics"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 19" instance=ExtResource("1_twlxn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 19"]
 position = Vector2(0, -10)
-script = ExtResource("2_22xci")
+script = ExtResource("2_nrb35")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1 up Glow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -287,8 +347,8 @@ visible = false
 [node name="Frame 3" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3" instance=ExtResource("1_twlxn")]
-script = ExtResource("2_22xci")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3"]
+script = ExtResource("2_nrb35")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1-Up Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -304,9 +364,9 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 19" instance=ExtResource("1_twlxn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 19"]
 position = Vector2(0, -10)
-script = ExtResource("2_22xci")
+script = ExtResource("2_nrb35")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1-Up Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -329,9 +389,9 @@ visible = false
 [node name="Frame 1" type="Node2D" parent="Text"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 1" instance=ExtResource("1_twlxn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 1"]
 scale = Vector2(0.283218, 0.937485)
-script = ExtResource("2_22xci")
+script = ExtResource("2_nrb35")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -343,6 +403,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Text/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_fd8vg")
 
 [node name="Frame 3" type="Node2D" parent="Text"]
 visible = false
@@ -402,11 +465,23 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_bfjg0")
+
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 2"]
+script = SubResource("GDScript_v88vp")
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 3"]
+script = SubResource("GDScript_a2sqe")
+
 [node name="Frame 20" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 20"]
+script = SubResource("GDScript_dfinc")

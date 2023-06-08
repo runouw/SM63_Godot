@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_wbxfe"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hrnlh"]
+
+[sub_resource type="Animation" id="Animation_gk8ru"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2hhjs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7fhbl"]
 _data = {
-"Default": SubResource("Animation_wbxfe")
+"Default": SubResource("Animation_gk8ru")
 }
 
 [node name="Falling Log Code (PL)" type="Node2D"]
+script = ExtResource("1_hrnlh")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Coded Wooden PL/Falling Log Code (PL).xml"
+linkage = "FallinglogCode"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2hhjs")
+"Timeline": SubResource("AnimationLibrary_7fhbl")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=24 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_gewmm"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_41gal"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_awfki"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mm6e8"]
 
-[sub_resource type="Animation" id="Animation_d2ld2"]
+[sub_resource type="Animation" id="Animation_ku8am"]
 length = 2.76667
 loop_mode = 1
 tracks/0/type = "value"
@@ -1807,25 +1807,159 @@ tracks/149/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7j4d8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xnpwq"]
 _data = {
-"Default": SubResource("Animation_d2ld2")
+"Default": SubResource("Animation_ku8am")
 }
 
+[sub_resource type="GDScript" id="GDScript_txirw"]
+script/source = "extends Node
+# speed = 15;
+# if (_root.Course.Char.air == true && _root.Course.Char.yspeed>-3 && _root.Metal == false) {
+# 	_root.Course.Char.yspeed *= 0.5;
+# 	_root.Course.Char.yspeed -= 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_cxi5n"]
+script/source = "extends Node
+# speed = 15;
+# if (_root.Course.Char.air == true && _root.Course.Char.yspeed>-3 && _root.Metal == false) {
+# 	_root.Course.Char.yspeed *= 0.5;
+# 	_root.Course.Char.yspeed -= 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_2yqg8"]
+script/source = "extends Node
+# speed = 15;
+# if (_root.Course.Char.air == true && _root.Course.Char.yspeed>-3 && _root.Metal == false) {
+# 	_root.Course.Char.yspeed *= 0.5;
+# 	_root.Course.Char.yspeed -= 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_6v5l6"]
+script/source = "extends Node
+# speed = 15;
+# if (_root.Course.Char.air == true && _root.Course.Char.yspeed>-3 && _root.Metal == false) {
+# 	_root.Course.Char.yspeed *= 0.5;
+# 	_root.Course.Char.yspeed -= 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_w7jby"]
+script/source = "extends Node
+# speed = 0;
+# "
+
+[sub_resource type="GDScript" id="GDScript_7bhbg"]
+script/source = "extends Node
+# speed = 10;
+# "
+
+[sub_resource type="GDScript" id="GDScript_ddqxk"]
+script/source = "extends Node
+# _root.StopBGsong();
+# //
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Mario-Fall\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# _root.Mariosound.onSoundComplete = function() {
+# 	onEnterFrame = null;
+# 	_root.LifeLost();
+# };
+# count = 0;
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	count++;
+# 	if (count>32*5) {
+# 		onEnterFrame = null;
+# 		_root.LifeLost();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_wbgue"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	// stuff
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_uw18w"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	// stuff
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_rq110"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	// stuff
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_rfd5u"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	// stuff
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_n12t1"]
+script/source = "extends Node
+# ////"
+
+[sub_resource type="GDScript" id="GDScript_01qav"]
+script/source = "extends Node
+# ////"
+
+[sub_resource type="GDScript" id="GDScript_v8pc4"]
+script/source = "extends Node
+# ////"
+
+[sub_resource type="GDScript" id="GDScript_jurvn"]
+script/source = "extends Node
+# ////"
+
+[sub_resource type="GDScript" id="GDScript_rqre3"]
+script/source = "extends Node
+# ////"
+
+[sub_resource type="GDScript" id="GDScript_gsinf"]
+script/source = "extends Node
+# ////"
+
+[sub_resource type="GDScript" id="GDScript_778rv"]
+script/source = "extends Node
+# ////"
+
+[sub_resource type="GDScript" id="GDScript_0rcpv"]
+script/source = "extends Node
+# ////"
+
 [node name="Luigi Main" type="Node2D"]
+script = ExtResource("1_awfki")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Main.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7j4d8")
+"Timeline": SubResource("AnimationLibrary_xnpwq")
 }
 
 [node name="Layer 5" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(2, -13)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (None) Walk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1841,9 +1975,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 1" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 1"]
 position = Vector2(2, -13)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (None) Walk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1859,9 +1993,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 2" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 2"]
 position = Vector2(0.35, -14.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (none) air 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1877,9 +2011,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3"]
 position = Vector2(0.35, -14.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (none) air 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1895,9 +2029,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 4" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 4"]
 position = Vector2(1.5, -13.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (None) Dive.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1913,9 +2047,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5"]
 position = Vector2(-1, -10.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi DiveFlip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1931,9 +2065,9 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 6" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 6"]
 position = Vector2(-1.15, -13.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Backflip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1949,9 +2083,9 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 7" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 7"]
 position = Vector2(-1.1, -15.1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (none) frontflip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1967,9 +2101,12 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 8" instance=ExtResource("1_gewmm")]
+[node name="AS2" type="Node" parent="Layer 5/Frame 8"]
+script = SubResource("GDScript_txirw")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 8"]
 position = Vector2(-0.1, -2)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (None) Spin Attack.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1985,9 +2122,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 9" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 9"]
 position = Vector2(-1, -15.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Floating.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2003,9 +2140,9 @@ brightness = 0.0
 [node name="Frame 10" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 10" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 10"]
 position = Vector2(0.35, -16)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Swimming Up.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2021,8 +2158,8 @@ brightness = 0.0
 [node name="Frame 11" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 11" instance=ExtResource("1_gewmm")]
-script = ExtResource("2_41gal")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 11"]
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (none) Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2038,8 +2175,8 @@ brightness = 0.0
 [node name="Frame 12" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 12" instance=ExtResource("1_gewmm")]
-script = ExtResource("2_41gal")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 12"]
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (none) Newstar.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2055,11 +2192,11 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 13" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 13"]
 position = Vector2(3, -28.05)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2072,9 +2209,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15152" type="Node2D" parent="Layer 5/Frame 13" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15152" type="Node2D" parent="Layer 5/Frame 13"]
 position = Vector2(1, -12)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Walk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2087,11 +2224,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15153" type="Node2D" parent="Layer 5/Frame 13" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15153" type="Node2D" parent="Layer 5/Frame 13"]
 position = Vector2(7, -26.05)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2107,11 +2244,11 @@ brightness = 0.0
 [node name="Frame 14" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 14" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 14"]
 position = Vector2(3, -28.05)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2124,9 +2261,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15154" type="Node2D" parent="Layer 5/Frame 14" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15154" type="Node2D" parent="Layer 5/Frame 14"]
 position = Vector2(1, -12)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Walk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2139,11 +2276,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15155" type="Node2D" parent="Layer 5/Frame 14" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15155" type="Node2D" parent="Layer 5/Frame 14"]
 position = Vector2(7, -26.05)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2159,11 +2296,11 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 15" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 15"]
 position = Vector2(3, -30.2)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2176,9 +2313,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15156" type="Node2D" parent="Layer 5/Frame 15" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15156" type="Node2D" parent="Layer 5/Frame 15"]
 position = Vector2(-1.75, -19.75)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Air.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2191,11 +2328,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15157" type="Node2D" parent="Layer 5/Frame 15" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15157" type="Node2D" parent="Layer 5/Frame 15"]
 position = Vector2(7, -28.2)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2211,11 +2348,11 @@ brightness = 0.0
 [node name="Frame 16" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 16" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 16"]
 position = Vector2(3, -30.2)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2228,9 +2365,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15158" type="Node2D" parent="Layer 5/Frame 16" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15158" type="Node2D" parent="Layer 5/Frame 16"]
 position = Vector2(-0.65, -19.15)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Falling.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2243,11 +2380,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15159" type="Node2D" parent="Layer 5/Frame 16" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15159" type="Node2D" parent="Layer 5/Frame 16"]
 position = Vector2(7, -28.2)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2263,10 +2400,10 @@ brightness = 0.0
 [node name="Frame 17" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 17" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 17"]
 position = Vector2(1.5, -14)
 scale = Vector2(1, 0.998856)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (Hover) Diving.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2282,9 +2419,9 @@ brightness = 0.0
 [node name="Frame 18" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 18" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 18"]
 position = Vector2(-1, -10.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi DiveFlip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2300,9 +2437,9 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 19" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 19"]
 position = Vector2(-1.15, -13.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Backflip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2318,9 +2455,9 @@ brightness = 0.0
 [node name="Frame 20" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 20" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 20"]
 position = Vector2(1, -15)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Frontflip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2336,9 +2473,12 @@ brightness = 0.0
 [node name="Frame 21" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 21" instance=ExtResource("1_gewmm")]
+[node name="AS2" type="Node" parent="Layer 5/Frame 21"]
+script = SubResource("GDScript_cxi5n")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 21"]
 position = Vector2(-0.1, -2)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (None) Spin Attack.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2354,11 +2494,11 @@ brightness = 0.0
 [node name="Frame 22" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 22" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 22"]
 position = Vector2(4, -29.05)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2371,9 +2511,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15160" type="Node2D" parent="Layer 5/Frame 22" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15160" type="Node2D" parent="Layer 5/Frame 22"]
 position = Vector2(-1, -15.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Floating.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2386,11 +2526,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15161" type="Node2D" parent="Layer 5/Frame 22" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15161" type="Node2D" parent="Layer 5/Frame 22"]
 position = Vector2(6.5, -26.05)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2406,11 +2546,11 @@ brightness = 0.0
 [node name="Frame 23" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 23" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 23"]
 position = Vector2(6, -29.05)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2423,9 +2563,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15162" type="Node2D" parent="Layer 5/Frame 23" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15162" type="Node2D" parent="Layer 5/Frame 23"]
 position = Vector2(0.35, -16)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Swimming Up.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2438,11 +2578,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15163" type="Node2D" parent="Layer 5/Frame 23" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15163" type="Node2D" parent="Layer 5/Frame 23"]
 position = Vector2(8.5, -26.05)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2458,8 +2598,8 @@ brightness = 0.0
 [node name="Frame 24" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 24" instance=ExtResource("1_gewmm")]
-script = ExtResource("2_41gal")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 24"]
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (none) Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2475,9 +2615,9 @@ brightness = 0.0
 [node name="Frame 25" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 25" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 25"]
 position = Vector2(1, -12)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Walk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2490,9 +2630,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15164" type="Node2D" parent="Layer 5/Frame 25" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15164" type="Node2D" parent="Layer 5/Frame 25"]
 position = Vector2(18.5, -35.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2508,9 +2648,9 @@ brightness = 0.0
 [node name="Frame 26" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 26" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 26"]
 position = Vector2(1, -12)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Walk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2523,9 +2663,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15165" type="Node2D" parent="Layer 5/Frame 26" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15165" type="Node2D" parent="Layer 5/Frame 26"]
 position = Vector2(18.5, -35.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2541,9 +2681,9 @@ brightness = 0.0
 [node name="Frame 27" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 27" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 27"]
 position = Vector2(-1.75, -19.75)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Air.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2556,9 +2696,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15166" type="Node2D" parent="Layer 5/Frame 27" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15166" type="Node2D" parent="Layer 5/Frame 27"]
 position = Vector2(18.5, -37.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2574,9 +2714,9 @@ brightness = 0.0
 [node name="Frame 28" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 28" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 28"]
 position = Vector2(-0.65, -19.15)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Falling.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2589,9 +2729,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15167" type="Node2D" parent="Layer 5/Frame 28" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15167" type="Node2D" parent="Layer 5/Frame 28"]
 position = Vector2(19.5, -36.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2607,9 +2747,9 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 29" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 29"]
 position = Vector2(1.5, -14)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (Turbo) Dive.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2625,9 +2765,9 @@ brightness = 0.0
 [node name="Frame 30" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 30" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 30"]
 position = Vector2(-1, -10.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi DiveFlip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2643,9 +2783,9 @@ brightness = 0.0
 [node name="Frame 31" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 31" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 31"]
 position = Vector2(-1.15, -13.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Backflip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2661,9 +2801,9 @@ brightness = 0.0
 [node name="Frame 32" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 32" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 32"]
 position = Vector2(1, -15)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Frontflip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2679,9 +2819,12 @@ brightness = 0.0
 [node name="Frame 33" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 33" instance=ExtResource("1_gewmm")]
+[node name="AS2" type="Node" parent="Layer 5/Frame 33"]
+script = SubResource("GDScript_2yqg8")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 33"]
 position = Vector2(-0.1, -2)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (None) Spin Attack.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2697,9 +2840,9 @@ brightness = 0.0
 [node name="Frame 34" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 34" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 34"]
 position = Vector2(-1, -15.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Floating.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2712,9 +2855,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15168" type="Node2D" parent="Layer 5/Frame 34" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15168" type="Node2D" parent="Layer 5/Frame 34"]
 position = Vector2(18.5, -37.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2730,9 +2873,9 @@ brightness = 0.0
 [node name="Frame 35" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 35" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 35"]
 position = Vector2(0.35, -16)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Swimming Up.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2745,9 +2888,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15169" type="Node2D" parent="Layer 5/Frame 35" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15169" type="Node2D" parent="Layer 5/Frame 35"]
 position = Vector2(19.5, -37.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2763,8 +2906,8 @@ brightness = 0.0
 [node name="Frame 36" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 36" instance=ExtResource("1_gewmm")]
-script = ExtResource("2_41gal")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 36"]
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (none) Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2780,9 +2923,9 @@ brightness = 0.0
 [node name="Frame 37" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 37" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 37"]
 position = Vector2(1, -12)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Walk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2795,9 +2938,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15170" type="Node2D" parent="Layer 5/Frame 37" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15170" type="Node2D" parent="Layer 5/Frame 37"]
 position = Vector2(6, -25)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Rocket WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2813,9 +2956,9 @@ brightness = 0.0
 [node name="Frame 38" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 38" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 38"]
 position = Vector2(1, -12)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Walk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2828,9 +2971,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15171" type="Node2D" parent="Layer 5/Frame 38" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15171" type="Node2D" parent="Layer 5/Frame 38"]
 position = Vector2(6, -25)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Rocket WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2846,9 +2989,9 @@ brightness = 0.0
 [node name="Frame 39" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 39" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 39"]
 position = Vector2(-1.75, -19.75)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Air.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2861,9 +3004,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15172" type="Node2D" parent="Layer 5/Frame 39" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15172" type="Node2D" parent="Layer 5/Frame 39"]
 position = Vector2(6, -28)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Rocket WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2879,9 +3022,9 @@ brightness = 0.0
 [node name="Frame 40" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 40" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 40"]
 position = Vector2(-0.65, -19.15)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Falling.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2894,9 +3037,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15173" type="Node2D" parent="Layer 5/Frame 40" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15173" type="Node2D" parent="Layer 5/Frame 40"]
 position = Vector2(7, -28)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Rocket WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2912,10 +3055,10 @@ brightness = 0.0
 [node name="Frame 41" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 41" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 41"]
 position = Vector2(1.5, -14)
 scale = Vector2(1, 0.998856)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (Rocket) Dive.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2931,9 +3074,9 @@ brightness = 0.0
 [node name="Frame 42" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 42" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 42"]
 position = Vector2(-1, -10.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi DiveFlip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2949,9 +3092,9 @@ brightness = 0.0
 [node name="Frame 43" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 43" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 43"]
 position = Vector2(-1.15, -13.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Backflip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2967,9 +3110,9 @@ brightness = 0.0
 [node name="Frame 44" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 44" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 44"]
 position = Vector2(1, -15)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Fludd Frontflip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2985,9 +3128,12 @@ brightness = 0.0
 [node name="Frame 45" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 45" instance=ExtResource("1_gewmm")]
+[node name="AS2" type="Node" parent="Layer 5/Frame 45"]
+script = SubResource("GDScript_6v5l6")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 45"]
 position = Vector2(-0.1, -2)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (None) Spin Attack.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3003,9 +3149,9 @@ brightness = 0.0
 [node name="Frame 46" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 46" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 46"]
 position = Vector2(-1, -15.65)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Floating.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3018,9 +3164,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15174" type="Node2D" parent="Layer 5/Frame 46" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15174" type="Node2D" parent="Layer 5/Frame 46"]
 position = Vector2(7.5, -28)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Rocket WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3036,9 +3182,9 @@ brightness = 0.0
 [node name="Frame 47" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 47" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 47"]
 position = Vector2(0.35, -16)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Swimming Up.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3051,9 +3197,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15175" type="Node2D" parent="Layer 5/Frame 47" instance=ExtResource("1_gewmm")]
+[node name="@DOMSymbolInstance@15175" type="Node2D" parent="Layer 5/Frame 47"]
 position = Vector2(7.5, -28)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Rocket WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3069,8 +3215,8 @@ brightness = 0.0
 [node name="Frame 48" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 48" instance=ExtResource("1_gewmm")]
-script = ExtResource("2_41gal")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 48"]
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (none) Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3086,9 +3232,9 @@ brightness = 0.0
 [node name="Frame 49" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 49" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 49"]
 position = Vector2(-0.7, -14.45)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi hurt - 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3104,10 +3250,10 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 50" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 50"]
 position = Vector2(0, 0.05)
 scale = Vector2(1, 0.998749)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Hurt 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3123,10 +3269,10 @@ brightness = 0.0
 [node name="Frame 51" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 51" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 51"]
 position = Vector2(0, 0.05)
 scale = Vector2(1, 0.998749)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Hurt 3.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3142,9 +3288,9 @@ brightness = 0.0
 [node name="Frame 52" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 52" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 52"]
 position = Vector2(1, -13)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Land.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3160,9 +3306,9 @@ brightness = 0.0
 [node name="Frame 53" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 53" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 53"]
 position = Vector2(0.75, -14.5)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Enemy Jump Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3178,9 +3324,9 @@ brightness = 0.0
 [node name="Frame 54" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 54" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 54"]
 position = Vector2(0.05, -15.75)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Sleep.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3196,9 +3342,9 @@ brightness = 0.0
 [node name="Frame 55" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 55" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 55"]
 position = Vector2(-3, -21.8)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Running.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3214,10 +3360,10 @@ brightness = 0.0
 [node name="Frame 56" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 56" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 56"]
 position = Vector2(3.95, 0)
 scale = Vector2(1.00378, 1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Ground Pound.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3233,10 +3379,10 @@ brightness = 0.0
 [node name="Frame 57" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 57" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 57"]
 position = Vector2(0, -2.95)
 scale = Vector2(1.00198, 0.998489)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3252,9 +3398,12 @@ brightness = 0.0
 [node name="Frame 58" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 58" instance=ExtResource("1_gewmm")]
+[node name="AS2" type="Node" parent="Layer 5/Frame 58"]
+script = SubResource("GDScript_w7jby")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 58"]
 position = Vector2(1.45, -17.2)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Slingstar.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3270,9 +3419,9 @@ brightness = 0.0
 [node name="Frame 59" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 59" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 59"]
 position = Vector2(1.5, -29.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Riding Shell.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3288,10 +3437,10 @@ brightness = 0.0
 [node name="Frame 60" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 60" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 60"]
 position = Vector2(0, -4)
 scale = Vector2(1.00198, 0.998688)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Luigi Flying.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3307,9 +3456,9 @@ brightness = 0.0
 [node name="Frame 61" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 61" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 61"]
 position = Vector2(0.5, -16)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Sign.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3325,10 +3474,10 @@ brightness = 0.0
 [node name="Frame 62" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 62" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 62"]
 position = Vector2(0, -17.95)
 scale = Vector2(1, 1.0013)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Lugi Talk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3344,9 +3493,9 @@ brightness = 0.0
 [node name="Frame 63" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 63" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 63"]
 position = Vector2(0.55, -18.5)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi Boss Cinema.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3362,9 +3511,9 @@ brightness = 0.0
 [node name="Frame 64" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 64" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 64"]
 position = Vector2(1.5, -16)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Door.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3380,9 +3529,9 @@ brightness = 0.0
 [node name="Frame 65" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 65" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 65"]
 position = Vector2(1.5, -17.2)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (None) Door Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3398,9 +3547,9 @@ brightness = 0.0
 [node name="Frame 66" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 66" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 66"]
 position = Vector2(1.5, -15)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi (None) Far Door.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3416,9 +3565,9 @@ brightness = 0.0
 [node name="Frame 67" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 67" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 67"]
 position = Vector2(1.5, -15)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Warp Pipe Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3434,9 +3583,9 @@ brightness = 0.0
 [node name="Frame 68" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 68" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 68"]
 position = Vector2(1, -15)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Big Door Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3452,9 +3601,9 @@ brightness = 0.0
 [node name="Frame 69" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 69" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 69"]
 position = Vector2(-0.5, 4)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Painting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3470,9 +3619,9 @@ brightness = 0.0
 [node name="Frame 70" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 70" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 70"]
 position = Vector2(3, -15.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Squish Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3488,9 +3637,9 @@ brightness = 0.0
 [node name="Frame 71" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 71" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 71"]
 position = Vector2(0.45, -16.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Grabbed.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3506,9 +3655,12 @@ brightness = 0.0
 [node name="Frame 72" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 72" instance=ExtResource("1_gewmm")]
+[node name="AS2" type="Node" parent="Layer 5/Frame 72"]
+script = SubResource("GDScript_7bhbg")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 72"]
 position = Vector2(0.05, -2)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Grab Spin.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3524,9 +3676,9 @@ brightness = 0.0
 [node name="Frame 73" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 73" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 73"]
 position = Vector2(1.5, -8.05)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Jump Spin.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3542,10 +3694,10 @@ brightness = 0.0
 [node name="Frame 74" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 74" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 74"]
 position = Vector2(2, -1)
 scale = Vector2(1.00032, 1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Item.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3561,10 +3713,10 @@ brightness = 0.0
 [node name="Frame 75" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 75" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 75"]
 position = Vector2(2, -1)
 scale = Vector2(1.00032, 1)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Got Key.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3580,9 +3732,9 @@ brightness = 0.0
 [node name="Frame 76" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 76" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 76"]
 position = Vector2(0.5, -13.25)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Mario Unlock Door.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3598,8 +3750,8 @@ brightness = 0.0
 [node name="Frame 77" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 77" instance=ExtResource("1_gewmm")]
-script = ExtResource("2_41gal")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 77"]
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Luigi Exit Painting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3615,12 +3767,15 @@ brightness = 0.0
 [node name="Frame 78" type="Node2D" parent="Layer 5"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 5/Frame 78"]
+script = SubResource("GDScript_ddqxk")
+
 [node name="Frame 79" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 79" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 79"]
 position = Vector2(1.35, -3)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Drown.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3636,8 +3791,8 @@ brightness = 0.0
 [node name="Frame 80" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 80" instance=ExtResource("1_gewmm")]
-script = ExtResource("2_41gal")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 80"]
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Faint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3653,8 +3808,8 @@ brightness = 0.0
 [node name="Frame 81" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 81" instance=ExtResource("1_gewmm")]
-script = ExtResource("2_41gal")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 81"]
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Respawn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3674,10 +3829,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Body"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 0" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 0"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3693,10 +3848,10 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 4" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 4"]
 position = Vector2(3.4, -1.2)
 scale = Vector2(0.483124, 0.265457)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3709,13 +3864,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Body/Frame 4/DOMSymbolInstance"]
+script = SubResource("GDScript_wbgue")
+
 [node name="Frame 5" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 5" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 5"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3734,10 +3892,10 @@ visible = false
 [node name="Frame 13" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 13" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 13"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3753,10 +3911,10 @@ brightness = 0.0
 [node name="Frame 17" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 17" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 17"]
 position = Vector2(3.4, -1.2)
 scale = Vector2(0.483124, 0.265457)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3769,13 +3927,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Body/Frame 17/DOMSymbolInstance"]
+script = SubResource("GDScript_uw18w")
+
 [node name="Frame 18" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 18" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 18"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3794,10 +3955,10 @@ visible = false
 [node name="Frame 25" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 25" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 25"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3813,10 +3974,10 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 29" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 29"]
 position = Vector2(3.4, -1.2)
 scale = Vector2(0.483124, 0.265457)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3829,13 +3990,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Body/Frame 29/DOMSymbolInstance"]
+script = SubResource("GDScript_rq110")
+
 [node name="Frame 30" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 30" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 30"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3854,10 +4018,10 @@ visible = false
 [node name="Frame 37" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 37" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 37"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3873,10 +4037,10 @@ brightness = 0.0
 [node name="Frame 41" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 41" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 41"]
 position = Vector2(3.4, -1.2)
 scale = Vector2(0.483124, 0.265457)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3889,13 +4053,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Body/Frame 41/DOMSymbolInstance"]
+script = SubResource("GDScript_rfd5u")
+
 [node name="Frame 42" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 42" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 42"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3914,10 +4081,10 @@ visible = false
 [node name="Frame 49" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 49" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 49"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3933,10 +4100,10 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 50" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 50"]
 position = Vector2(-3.65, -0.2)
 scale = Vector2(0.624222, 0.334641)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3949,13 +4116,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Body/Frame 50/DOMSymbolInstance"]
+script = SubResource("GDScript_n12t1")
+
 [node name="Frame 52" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 52" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 52"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3974,10 +4144,10 @@ visible = false
 [node name="Frame 54" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 54" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 54"]
 position = Vector2(-3.65, -0.2)
 scale = Vector2(0.624222, 0.334641)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3990,13 +4160,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Body/Frame 54/DOMSymbolInstance"]
+script = SubResource("GDScript_01qav")
+
 [node name="Frame 55" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 55" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 55"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4015,10 +4188,10 @@ visible = false
 [node name="Frame 77" type="Node2D" parent="Body"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 77" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Body/Frame 77"]
 position = Vector2(3.35, 6.75)
 scale = Vector2(0.483124, 0.615875)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4038,10 +4211,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Feet"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 0" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 0"]
 position = Vector2(1.35, 3.35)
 scale = Vector2(0.483124, 0.261856)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4060,10 +4233,10 @@ visible = false
 [node name="Frame 13" type="Node2D" parent="Feet"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 13" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 13"]
 position = Vector2(1.35, 3.35)
 scale = Vector2(0.483124, 0.261856)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4082,10 +4255,10 @@ visible = false
 [node name="Frame 25" type="Node2D" parent="Feet"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 25" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 25"]
 position = Vector2(1.35, 3.35)
 scale = Vector2(0.483124, 0.261856)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4104,10 +4277,10 @@ visible = false
 [node name="Frame 37" type="Node2D" parent="Feet"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 37" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 37"]
 position = Vector2(1.35, 3.35)
 scale = Vector2(0.483124, 0.261856)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4126,10 +4299,10 @@ visible = false
 [node name="Frame 49" type="Node2D" parent="Feet"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 49" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 49"]
 position = Vector2(1.35, 3.35)
 scale = Vector2(0.483124, 0.261856)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4145,10 +4318,10 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="Feet"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 50" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 50"]
 position = Vector2(-2.65, 3.55)
 scale = Vector2(0.589157, 0.233582)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4161,13 +4334,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Feet/Frame 50/DOMSymbolInstance"]
+script = SubResource("GDScript_v8pc4")
+
 [node name="Frame 52" type="Node2D" parent="Feet"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 52" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 52"]
 position = Vector2(1.35, 3.35)
 scale = Vector2(0.483124, 0.261856)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4183,10 +4359,10 @@ brightness = 0.0
 [node name="Frame 54" type="Node2D" parent="Feet"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 54" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 54"]
 position = Vector2(-2.65, 3.55)
 scale = Vector2(0.589157, 0.233582)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4199,13 +4375,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Feet/Frame 54/DOMSymbolInstance"]
+script = SubResource("GDScript_jurvn")
+
 [node name="Frame 55" type="Node2D" parent="Feet"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 55" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet/Frame 55"]
 position = Vector2(1.35, 3.35)
 scale = Vector2(0.483124, 0.261856)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4225,10 +4404,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Feet2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 0" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 0"]
 position = Vector2(1.25, 3.4)
 scale = Vector2(0.0938416, 0.190948)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4247,10 +4426,10 @@ visible = false
 [node name="Frame 13" type="Node2D" parent="Feet2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 13" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 13"]
 position = Vector2(1.25, 3.4)
 scale = Vector2(0.200089, 0.190948)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4269,10 +4448,10 @@ visible = false
 [node name="Frame 25" type="Node2D" parent="Feet2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 25" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 25"]
 position = Vector2(1.25, 3.4)
 scale = Vector2(0.200089, 0.190948)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4291,10 +4470,10 @@ visible = false
 [node name="Frame 37" type="Node2D" parent="Feet2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 37" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 37"]
 position = Vector2(1.25, 3.4)
 scale = Vector2(0.200089, 0.190948)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4313,10 +4492,10 @@ visible = false
 [node name="Frame 49" type="Node2D" parent="Feet2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 49" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 49"]
 position = Vector2(1.25, 3.4)
 scale = Vector2(0.200089, 0.190948)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4332,10 +4511,10 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="Feet2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 50" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 50"]
 position = Vector2(1.25, 1.4)
 scale = Vector2(0.200089, 0.190948)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4348,13 +4527,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Feet2/Frame 50/DOMSymbolInstance"]
+script = SubResource("GDScript_rqre3")
+
 [node name="Frame 52" type="Node2D" parent="Feet2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 52" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 52"]
 position = Vector2(1.25, 3.4)
 scale = Vector2(0.200089, 0.190948)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4370,10 +4552,10 @@ brightness = 0.0
 [node name="Frame 54" type="Node2D" parent="Feet2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 54" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 54"]
 position = Vector2(1.25, 1.4)
 scale = Vector2(0.200089, 0.190948)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4386,13 +4568,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Feet2/Frame 54/DOMSymbolInstance"]
+script = SubResource("GDScript_gsinf")
+
 [node name="Frame 55" type="Node2D" parent="Feet2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 55" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Feet2/Frame 55"]
 position = Vector2(1.25, 3.4)
 scale = Vector2(0.200089, 0.190948)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4412,10 +4597,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Head"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 0" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 0"]
 position = Vector2(1.4, -29.1)
 scale = Vector2(0.353943, 0.212311)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4434,10 +4619,10 @@ visible = false
 [node name="Frame 13" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 13" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 13"]
 position = Vector2(1.4, -29.1)
 scale = Vector2(0.353943, 0.212311)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4456,10 +4641,10 @@ visible = false
 [node name="Frame 25" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 25" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 25"]
 position = Vector2(1.4, -29.1)
 scale = Vector2(0.353943, 0.212311)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4478,10 +4663,10 @@ visible = false
 [node name="Frame 37" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 37" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 37"]
 position = Vector2(1.4, -29.1)
 scale = Vector2(0.353943, 0.212311)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4500,10 +4685,10 @@ visible = false
 [node name="Frame 49" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 49" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 49"]
 position = Vector2(1.4, -29.1)
 scale = Vector2(0.353943, 0.212311)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4519,10 +4704,10 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 50" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 50"]
 position = Vector2(-6.6, -19.1)
 scale = Vector2(0.353943, 0.212311)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4535,13 +4720,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Head/Frame 50/DOMSymbolInstance"]
+script = SubResource("GDScript_778rv")
+
 [node name="Frame 52" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 52" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 52"]
 position = Vector2(1.4, -29.1)
 scale = Vector2(0.353943, 0.212311)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4557,10 +4745,10 @@ brightness = 0.0
 [node name="Frame 54" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 54" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 54"]
 position = Vector2(-6.6, -19.1)
 scale = Vector2(0.353943, 0.212311)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4573,13 +4761,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Head/Frame 54/DOMSymbolInstance"]
+script = SubResource("GDScript_0rcpv")
+
 [node name="Frame 55" type="Node2D" parent="Head"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 55" instance=ExtResource("1_gewmm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Head/Frame 55"]
 position = Vector2(1.4, -29.1)
 scale = Vector2(0.353943, 0.212311)
-script = ExtResource("2_41gal")
+script = ExtResource("2_mm6e8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

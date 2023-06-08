@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/Peach Painting.png" id="1_ksp8b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_k6alv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/Peach Painting.png" id="2_0eqgw"]
 
-[sub_resource type="Animation" id="Animation_dj6oe"]
+[sub_resource type="Animation" id="Animation_7lo2q"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u6esd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xpcnn"]
 _data = {
-"Default": SubResource("Animation_dj6oe")
+"Default": SubResource("Animation_7lo2q")
 }
 
 [node name="Peach Picture" type="Node2D"]
+script = ExtResource("1_k6alv")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/Peach Picture.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_u6esd")
+"Timeline": SubResource("AnimationLibrary_xpcnn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@45140" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-31.5, -32)
-texture = ExtResource("1_ksp8b")
+texture = ExtResource("2_0eqgw")
 centered = false

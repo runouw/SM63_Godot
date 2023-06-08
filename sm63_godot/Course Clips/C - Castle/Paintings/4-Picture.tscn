@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/Boo's Mansion Painting.png" id="1_gcu1b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dnerx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/Boo's Mansion Painting.png" id="2_8mqa2"]
 
-[sub_resource type="Animation" id="Animation_txna3"]
+[sub_resource type="Animation" id="Animation_kvf72"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lu3tg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_khgjo"]
 _data = {
-"Default": SubResource("Animation_txna3")
+"Default": SubResource("Animation_kvf72")
 }
 
 [node name="4-Picture" type="Node2D"]
+script = ExtResource("1_dnerx")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/4-Picture.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lu3tg")
+"Timeline": SubResource("AnimationLibrary_khgjo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -38,5 +44,5 @@ libraries = {
 texture_filter = 1
 position = Vector2(-48.75, -46.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_gcu1b")
+texture = ExtResource("2_8mqa2")
 centered = false

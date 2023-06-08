@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_4fsvj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_f515a"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_gqnox"]
 
-[sub_resource type="Animation" id="Animation_wixwr"]
+[sub_resource type="Animation" id="Animation_74yf2"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,46 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_petr7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ti0i5"]
 _data = {
-"Default": SubResource("Animation_wixwr")
+"Default": SubResource("Animation_74yf2")
 }
 
+[sub_resource type="GDScript" id="GDScript_lq1ct"]
+script/source = "extends Node
+# _alpha = 0;
+# aa = 0;
+# onEnterFrame = function () {
+# 	if (_parent.greyness._alpha<50) {
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 			aa = 50;
+# 		} else {
+# 			aa = 0;
+# 		}
+# 		_alpha += (aa-_alpha)/3;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (_parent.greyness._alpha<50) {
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 			aa = 100;
+# 			_alpha = 100;
+# 			_parent.gotoAndStop(fr);
+# 		}
+# 	}
+# };
+# "
+
 [node name="LDW - Save BG Button" type="Node2D"]
+script = ExtResource("1_f515a")
+source_xml = "res://sm63/LIBRARY/LDW - Save-Load/LDW - Save BG Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_petr7")
+"Timeline": SubResource("AnimationLibrary_ti0i5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,7 +82,7 @@ libraries = {
 [node name="@@50840" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-62.35, -16.75, 62.375, -16.75, 62.375, 16.775, -62.35, 16.775)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_4fsvj")
+script = ExtResource("2_gqnox")
 matrix = Transform2D(0.169678, 0, 0, 0.0788574, -28, -5.5)
 entries_color = PackedColorArray(0.882353, 0.882353, 0.882353, 1, 0.8, 0.8, 0.8, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -68,3 +99,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_lq1ct")

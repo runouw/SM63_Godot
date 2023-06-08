@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Water/Water Blocks/Water Repeat Gradient.png" id="1_jifhy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_r88n3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Water/Water Blocks/Water Repeat Gradient.png" id="2_ars4g"]
 
-[sub_resource type="Animation" id="Animation_bfdrx"]
+[sub_resource type="Animation" id="Animation_02kts"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5uhgh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rs2ju"]
 _data = {
-"Default": SubResource("Animation_bfdrx")
+"Default": SubResource("Animation_02kts")
 }
 
 [node name="Water Block Clip Small" type="Node2D"]
+script = ExtResource("1_r88n3")
+source_xml = "res://sm63/LIBRARY/Effects/Water/Water Blocks/Water Block Clip Small.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5uhgh")
+"Timeline": SubResource("AnimationLibrary_rs2ju")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@48847" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_jifhy")
+texture = ExtResource("2_ars4g")
 texture_offset = Vector2(778.75, 372.85)
 texture_scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-400.075, -250.125, 399.925, -250.125, 399.925, 250, -400.075, 250)

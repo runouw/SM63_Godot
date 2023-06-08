@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 2.png" id="1_1a215"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Talking - 1.png" id="2_v2eh3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Talking - 2.png" id="3_qo0h8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 2 - Talking - 1.png" id="4_owif8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 2 - Talking - 2.png" id="5_ow0bl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6x2xn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 2.png" id="2_ns3au"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Talking - 1.png" id="3_mjan5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Talking - 2.png" id="4_owtpn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 2 - Talking - 1.png" id="5_en74e"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 2 - Talking - 2.png" id="6_qjq6u"]
 
-[sub_resource type="Animation" id="Animation_gmgn6"]
+[sub_resource type="Animation" id="Animation_jupe5"]
 length = 1.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -178,16 +179,26 @@ tracks/13/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n6ex7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ejc4"]
 _data = {
-"Default": SubResource("Animation_gmgn6")
+"Default": SubResource("Animation_jupe5")
 }
 
+[sub_resource type="GDScript" id="GDScript_rwp3n"]
+script/source = "extends Node
+# gotoAndPlay(\"repeat\");
+# "
+
 [node name="9-08 kamek Talking 1" type="Node2D"]
+script = ExtResource("1_6x2xn")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-08 kamek Talking 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_n6ex7")
+"Timeline": SubResource("AnimationLibrary_5ejc4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -197,7 +208,7 @@ libraries = {
 [node name="@@20707" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-17.6, -28)
-texture = ExtResource("1_1a215")
+texture = ExtResource("2_ns3au")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -206,7 +217,7 @@ visible = false
 [node name="@@20708" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-19, -29)
-texture = ExtResource("2_v2eh3")
+texture = ExtResource("3_mjan5")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -215,7 +226,7 @@ visible = false
 [node name="@@20709" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-20, -30)
-texture = ExtResource("3_qo0h8")
+texture = ExtResource("4_owtpn")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -224,7 +235,7 @@ visible = false
 [node name="@@20710" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-19, -29)
-texture = ExtResource("2_v2eh3")
+texture = ExtResource("3_mjan5")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -233,7 +244,7 @@ visible = false
 [node name="@@20711" type="Sprite2D" parent="Layer 1/Frame 12"]
 texture_filter = 1
 position = Vector2(-17.6, -28)
-texture = ExtResource("1_1a215")
+texture = ExtResource("2_ns3au")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
@@ -242,7 +253,7 @@ visible = false
 [node name="@@20712" type="Sprite2D" parent="Layer 1/Frame 16"]
 texture_filter = 1
 position = Vector2(-17.6, -28)
-texture = ExtResource("1_1a215")
+texture = ExtResource("2_ns3au")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
@@ -251,7 +262,7 @@ visible = false
 [node name="@@20713" type="Sprite2D" parent="Layer 1/Frame 19"]
 texture_filter = 1
 position = Vector2(-18.5, -29)
-texture = ExtResource("4_owif8")
+texture = ExtResource("5_en74e")
 centered = false
 
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
@@ -260,7 +271,7 @@ visible = false
 [node name="@@20714" type="Sprite2D" parent="Layer 1/Frame 23"]
 texture_filter = 1
 position = Vector2(-19.5, -30)
-texture = ExtResource("5_ow0bl")
+texture = ExtResource("6_qjq6u")
 centered = false
 
 [node name="Frame 27" type="Node2D" parent="Layer 1"]
@@ -269,7 +280,7 @@ visible = false
 [node name="@@20715" type="Sprite2D" parent="Layer 1/Frame 27"]
 texture_filter = 1
 position = Vector2(-18.5, -29)
-texture = ExtResource("4_owif8")
+texture = ExtResource("5_en74e")
 centered = false
 
 [node name="Frame 31" type="Node2D" parent="Layer 1"]
@@ -278,7 +289,7 @@ visible = false
 [node name="@@20716" type="Sprite2D" parent="Layer 1/Frame 31"]
 texture_filter = 1
 position = Vector2(-19.5, -30)
-texture = ExtResource("5_ow0bl")
+texture = ExtResource("6_qjq6u")
 centered = false
 
 [node name="Frame 35" type="Node2D" parent="Layer 1"]
@@ -287,7 +298,7 @@ visible = false
 [node name="@@20717" type="Sprite2D" parent="Layer 1/Frame 35"]
 texture_filter = 1
 position = Vector2(-18.5, -29)
-texture = ExtResource("4_owif8")
+texture = ExtResource("5_en74e")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -299,3 +310,6 @@ visible = false
 
 [node name="Frame 38" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 38"]
+script = SubResource("GDScript_rwp3n")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_invtx"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xvfoe"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xa0xk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_sbou0"]
 
-[sub_resource type="Animation" id="Animation_eyprj"]
+[sub_resource type="Animation" id="Animation_dito1"]
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -91,25 +91,58 @@ tracks/6/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ns42i"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rqgkm"]
 _data = {
-"Default": SubResource("Animation_eyprj")
+"Default": SubResource("Animation_dito1")
 }
 
+[sub_resource type="GDScript" id="GDScript_of7nu"]
+script/source = "extends Node
+# _root.CinemaMessageFrame = 1;
+# _root.CinemaMessage = \"\";"
+
+[sub_resource type="GDScript" id="GDScript_1kjem"]
+script/source = "extends Node
+# rex = 0
+# rey = -300"
+
+[sub_resource type="GDScript" id="GDScript_7whhi"]
+script/source = "extends Node
+# stop();
+# 
+# "
+
+[sub_resource type="GDScript" id="GDScript_mo1ov"]
+script/source = "extends Node
+# _root.Fluddpow = \"\";
+# _root.Fluddpow = \"\";
+# _root.CharHP = 8;
+# _root.StartChar(\"BC-1\", 0, 0, 0, 0, 100, _root.CurrentPlayer, _root.Fluddpow, \"Fromwhite\");
+# _root.onEnterFrame = function () {
+# 	CharCode();
+# };
+# _root.gotoAndStop(\"Courseframe\");
+# "
+
 [node name="Bowser Battle 3 Cinema End" type="Node2D"]
+script = ExtResource("1_xa0xk")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 3 Cinema End.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ns42i")
+"Timeline": SubResource("AnimationLibrary_rqgkm")
 }
 
 [node name="Layer 5" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_invtx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(2.85, 7.15)
-script = ExtResource("2_xvfoe")
+script = ExtResource("2_sbou0")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Space Far BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -126,9 +159,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_invtx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 scale = Vector2(1, 0.999969)
-script = ExtResource("2_xvfoe")
+script = ExtResource("2_sbou0")
 path = "res://sm63_godot/Bowser Battle 3 End Cinema Course.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -145,9 +178,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_invtx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(9, 101.95)
-script = ExtResource("2_xvfoe")
+script = ExtResource("2_sbou0")
 path = "res://sm63_godot/Cinema Message Clip (Press Z).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -164,13 +197,19 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_of7nu")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_invtx")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_1kjem")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0.05, 0)
-script = ExtResource("2_xvfoe")
+script = ExtResource("2_sbou0")
 path = "res://sm63_godot/Effects/Transitions/transition from up.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -186,5 +225,11 @@ brightness = 0.0
 [node name="Frame 10" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 10"]
+script = SubResource("GDScript_7whhi")
+
 [node name="Frame 11" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 11"]
+script = SubResource("GDScript_mo1ov")

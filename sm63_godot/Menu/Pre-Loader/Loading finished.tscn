@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_a4jmh"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_uyare"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nc5w8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_sa8q5"]
 
-[sub_resource type="Animation" id="Animation_st610"]
+[sub_resource type="Animation" id="Animation_ngm4n"]
 length = 0.333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,25 +55,35 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7weej"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bpdtp"]
 _data = {
-"Default": SubResource("Animation_st610")
+"Default": SubResource("Animation_ngm4n")
 }
 
+[sub_resource type="GDScript" id="GDScript_wjbwi"]
+script/source = "extends Node
+# _root.play();
+# "
+
 [node name="Loading finished" type="Node2D"]
+script = ExtResource("1_nc5w8")
+source_xml = "res://sm63/LIBRARY/Menu/Pre-Loader/Loading finished.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7weej")
+"Timeline": SubResource("AnimationLibrary_bpdtp")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_a4jmh")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, -150.2)
-script = ExtResource("2_uyare")
+script = ExtResource("2_sa8q5")
 path = "res://sm63_godot/Menu/Pre-Loader/Loading Bar Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -89,9 +99,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9" instance=ExtResource("1_a4jmh")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9"]
 position = Vector2(0, -150.2)
-script = ExtResource("2_uyare")
+script = ExtResource("2_sa8q5")
 path = "res://sm63_godot/Menu/Pre-Loader/Loading Bar Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -119,3 +129,6 @@ end_cap_mode = 2
 
 [node name="Frame 9" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 9"]
+script = SubResource("GDScript_wjbwi")

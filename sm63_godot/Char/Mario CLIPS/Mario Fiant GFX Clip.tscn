@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_8uta1"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_42ye2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 3.png" id="3_7arci"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 4.png" id="4_26dlg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 5.png" id="5_muuds"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 1.png" id="6_deo4h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_123n5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_caf7q"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 3.png" id="3_oqai2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 4.png" id="4_itnxd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 5.png" id="5_dp01i"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 1.png" id="6_iqdq5"]
 
-[sub_resource type="Animation" id="Animation_qx74p"]
+[sub_resource type="Animation" id="Animation_v8gcg"]
 length = 2.0
 loop_mode = 1
 tracks/0/type = "value"
@@ -239,25 +239,65 @@ tracks/18/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f4qak"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o46bh"]
 _data = {
-"Default": SubResource("Animation_qx74p")
+"Default": SubResource("Animation_v8gcg")
 }
 
+[sub_resource type="GDScript" id="GDScript_d6a1i"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	yspeed = -13;
+# }
+# onClipEvent (enterFrame) {
+# 	if (yspeed>0) {
+# 		_rotation += 15;
+# 	}
+# 	_y += yspeed += 0.7;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_v5vnb"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_77y7o"]
+script/source = "extends Node
+# _root.Blackout();
+# "
+
+[sub_resource type="GDScript" id="GDScript_us6gs"]
+script/source = "extends Node
+# //_root.Blackin();
+# //_root.Course.Char.attackFrame = \"Respawn\";
+# _root.LifeLost();
+# onEnterFrame = null;
+# this.removeMovieClip(this);
+# stop();
+# "
+
 [node name="Mario Fiant GFX Clip" type="Node2D"]
+script = ExtResource("1_123n5")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Fiant GFX Clip.xml"
+linkage = "MarioDeathGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_f4qak")
+"Timeline": SubResource("AnimationLibrary_o46bh")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_8uta1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, -15)
-script = ExtResource("2_42ye2")
+script = ExtResource("2_caf7q")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Front Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -280,7 +320,7 @@ visible = false
 [node name="@@15533" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-15, -31)
-texture = ExtResource("3_7arci")
+texture = ExtResource("3_oqai2")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
@@ -289,7 +329,7 @@ visible = false
 [node name="@@15534" type="Sprite2D" parent="Layer 2/Frame 1"]
 texture_filter = 1
 position = Vector2(-17, -29.5)
-texture = ExtResource("4_26dlg")
+texture = ExtResource("4_itnxd")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
@@ -298,7 +338,7 @@ visible = false
 [node name="@@15535" type="Sprite2D" parent="Layer 2/Frame 2"]
 texture_filter = 1
 position = Vector2(-15, -29)
-texture = ExtResource("5_muuds")
+texture = ExtResource("5_dp01i")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
@@ -307,7 +347,7 @@ visible = false
 [node name="@@15536" type="Sprite2D" parent="Layer 2/Frame 3"]
 texture_filter = 1
 position = Vector2(-15, -29)
-texture = ExtResource("5_muuds")
+texture = ExtResource("5_dp01i")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
@@ -316,7 +356,7 @@ visible = false
 [node name="@@15537" type="Sprite2D" parent="Layer 2/Frame 4"]
 texture_filter = 1
 position = Vector2(-17, -29.5)
-texture = ExtResource("4_26dlg")
+texture = ExtResource("4_itnxd")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
@@ -325,7 +365,7 @@ visible = false
 [node name="@@15538" type="Sprite2D" parent="Layer 2/Frame 5"]
 texture_filter = 1
 position = Vector2(-15, -31)
-texture = ExtResource("3_7arci")
+texture = ExtResource("3_oqai2")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
@@ -334,7 +374,7 @@ visible = false
 [node name="@@15539" type="Sprite2D" parent="Layer 2/Frame 6"]
 texture_filter = 1
 position = Vector2(-15, -31)
-texture = ExtResource("3_7arci")
+texture = ExtResource("3_oqai2")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
@@ -343,7 +383,7 @@ visible = false
 [node name="@@15540" type="Sprite2D" parent="Layer 2/Frame 7"]
 texture_filter = 1
 position = Vector2(-17, -29.5)
-texture = ExtResource("4_26dlg")
+texture = ExtResource("4_itnxd")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 2"]
@@ -352,7 +392,7 @@ visible = false
 [node name="@@15541" type="Sprite2D" parent="Layer 2/Frame 8"]
 texture_filter = 1
 position = Vector2(-15, -29)
-texture = ExtResource("5_muuds")
+texture = ExtResource("5_dp01i")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
@@ -361,7 +401,7 @@ visible = false
 [node name="@@15542" type="Sprite2D" parent="Layer 2/Frame 9"]
 texture_filter = 1
 position = Vector2(-15, -29)
-texture = ExtResource("5_muuds")
+texture = ExtResource("5_dp01i")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 2"]
@@ -370,7 +410,7 @@ visible = false
 [node name="@@15543" type="Sprite2D" parent="Layer 2/Frame 10"]
 texture_filter = 1
 position = Vector2(-17, -29.5)
-texture = ExtResource("4_26dlg")
+texture = ExtResource("4_itnxd")
 centered = false
 
 [node name="Frame 11" type="Node2D" parent="Layer 2"]
@@ -379,7 +419,7 @@ visible = false
 [node name="@@15544" type="Sprite2D" parent="Layer 2/Frame 11"]
 texture_filter = 1
 position = Vector2(-15, -31)
-texture = ExtResource("3_7arci")
+texture = ExtResource("3_oqai2")
 centered = false
 
 [node name="Frame 13" type="Node2D" parent="Layer 2"]
@@ -388,15 +428,15 @@ visible = false
 [node name="@@15545" type="Sprite2D" parent="Layer 2/Frame 13"]
 texture_filter = 1
 position = Vector2(-12, -31.05)
-texture = ExtResource("6_deo4h")
+texture = ExtResource("6_iqdq5")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 16" instance=ExtResource("1_8uta1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 16"]
 position = Vector2(0, -15)
-script = ExtResource("2_42ye2")
+script = ExtResource("2_caf7q")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Surprized Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -409,12 +449,24 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 16/DOMSymbolInstance"]
+script = SubResource("GDScript_d6a1i")
+
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_v5vnb")
+
 [node name="Frame 47" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 47"]
+script = SubResource("GDScript_77y7o")
+
 [node name="Frame 59" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 59"]
+script = SubResource("GDScript_us6gs")

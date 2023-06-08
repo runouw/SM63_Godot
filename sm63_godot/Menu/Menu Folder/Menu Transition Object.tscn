@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Ground 2.png" id="1_omtkh"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Ground.png" id="2_26bv4"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Wall.png" id="3_fdqxw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ndxkg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Ground 2.png" id="2_e4pan"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Ground.png" id="3_sk6w4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Wall.png" id="4_bjlpk"]
 
-[sub_resource type="Animation" id="Animation_vb62x"]
+[sub_resource type="Animation" id="Animation_g0fau"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +21,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kftif"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lrj0v"]
 _data = {
-"Default": SubResource("Animation_vb62x")
+"Default": SubResource("Animation_g0fau")
 }
 
 [node name="Menu Transition Object" type="Node2D"]
+script = ExtResource("1_ndxkg")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Menu Transition Object.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kftif")
+"Timeline": SubResource("AnimationLibrary_lrj0v")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -44,7 +50,7 @@ position = Vector2(0, -146)
 [node name="@@51846" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_omtkh")
+texture = ExtResource("2_e4pan")
 texture_offset = Vector2(10.5, -161.5)
 polygon = PackedVector2Array(-225, 0, 225, 0, 225, 300, -225, 300)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -57,7 +63,7 @@ position = Vector2(-5.3, -161.3)
 [node name="@@51848" type="Polygon2D" parent="Layer 1/Frame 0/@Group@51847/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_26bv4")
+texture = ExtResource("3_sk6w4")
 texture_offset = Vector2(10.65, 0.65)
 polygon = PackedVector2Array(-224.7, 0.05, 235.3, 0.05, 235.3, 30.55, -224.7, 30.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -70,7 +76,7 @@ position = Vector2(0, -146)
 [node name="@@51850" type="Polygon2D" parent="Layer 1/Frame 0/@Group@51849/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_fdqxw")
+texture = ExtResource("4_bjlpk")
 texture_offset = Vector2(-291.7, 20)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(-225, 292.75, 225, 292.75, 225, 307.25, -225, 307.25)

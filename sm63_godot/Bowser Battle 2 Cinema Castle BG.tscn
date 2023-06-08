@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_nifgc"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6xvnd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pn5gl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_x5p24"]
 
-[sub_resource type="Animation" id="Animation_e623d"]
+[sub_resource type="Animation" id="Animation_d0m24"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,30 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lt4dx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rlii0"]
 _data = {
-"Default": SubResource("Animation_e623d")
+"Default": SubResource("Animation_d0m24")
 }
 
 [node name="Bowser Battle 2 Cinema Castle BG" type="Node2D"]
+script = ExtResource("1_pn5gl")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 2 Cinema Castle BG.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lt4dx")
+"Timeline": SubResource("AnimationLibrary_rlii0")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_nifgc")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 9.25)
-script = ExtResource("2_6xvnd")
+script = ExtResource("2_x5p24")
 path = "res://sm63_godot/Bowser Battle 2 Cinema Castle Background.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

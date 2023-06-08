@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_yos53"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_loxfu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ly1ve"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_u7db7"]
 
-[sub_resource type="Animation" id="Animation_tn607"]
+[sub_resource type="Animation" id="Animation_nmriq"]
 length = 0.533333
 loop_mode = 1
 tracks/0/type = "value"
@@ -247,26 +247,87 @@ tracks/19/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_02fx3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ys8ov"]
 _data = {
-"Default": SubResource("Animation_tn607")
+"Default": SubResource("Animation_nmriq")
 }
 
+[sub_resource type="GDScript" id="GDScript_ugoog"]
+script/source = "extends Node
+# //BGarray = [\"Hills and Clouds\", \"Secret Course\", \"Sky\", \"Haunted\", \"Underground\", \"Snow\", \"Mechanical\", \"Fire Sky\", \"Volcano\", \"Desert\", \"Ocean\", \"Bowser's Castle\"];
+# //if (_root.LDCourseBG == undefined) {
+# _root.LDCourseBG = _root.LDCourseBG;
+# //}
+# gotoAndStop(_root.LDCourseBG+1);
+# min = 2;
+# max = 16;
+# onEnterFrame = function () {
+# 	if (_parent.greyness.aa == 0) {
+# 		_root.LDCourseBG = _currentframe-1;
+# 		if (_currentframe == min) {
+# 			tri1._alpha += (0-tri1._alpha)/3;
+# 		} else {
+# 			tri1._alpha += (100-tri1._alpha)/3;
+# 		}
+# 		if (_currentframe == max) {
+# 			tri2._alpha += (0-tri2._alpha)/3;
+# 		} else {
+# 			tri2._alpha += (100-tri2._alpha)/3;
+# 		}
+# 		//
+# 		if (tri1.hitTest(_root._xmouse, _root._ymouse, false) && tri1._alpha>=99) {
+# 			tri1.sc = 130;
+# 		} else {
+# 			tri1.sc = 100;
+# 		}
+# 		tri1._xscale += (tri1.sc-tri1._xscale)/3;
+# 		tri1._yscale = tri1._xscale;
+# 		//
+# 		if (tri2.hitTest(_root._xmouse, _root._ymouse, false) && tri2._alpha>=99) {
+# 			tri2.sc = 130;
+# 		} else {
+# 			tri2.sc = 100;
+# 		}
+# 		tri2._xscale += (tri2.sc-tri2._xscale)/3;
+# 		tri2._yscale = tri2._xscale;
+# 		//
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 			bg._alpha += (50-bg._alpha)/3;
+# 		} else {
+# 			bg._alpha += (0-bg._alpha)/3;
+# 		}
+# 	}
+# 	_root.LDCourseBG = _root.LDCourseBG;
+# };
+# onMouseDown = function () {
+# 	if (tri2.sc == 130 && _currentframe<max) {
+# 		nextFrame();
+# 	} else if (tri1.sc == 130 && _currentframe>min) {
+# 		prevFrame();
+# 	}
+# };
+# "
+
 [node name="LDW - Info Background" type="Node2D"]
+script = ExtResource("1_ly1ve")
+source_xml = "res://sm63/LIBRARY/Level Designer Windows/LDW - Info/LDW - Info Background.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_02fx3")
+"Timeline": SubResource("AnimationLibrary_ys8ov")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_yos53")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(0.85, -2.35)
 scale = Vector2(1.04396, 1)
-script = ExtResource("2_loxfu")
+script = ExtResource("2_u7db7")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info BG BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -332,9 +393,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_yos53")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(149.55, 10.9)
-script = ExtResource("2_loxfu")
+script = ExtResource("2_u7db7")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Arrow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -347,10 +408,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51249" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_yos53")]
+[node name="@DOMSymbolInstance@51249" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(149.55, 0.9)
 scale = Vector2(1, -1)
-script = ExtResource("2_loxfu")
+script = ExtResource("2_u7db7")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Arrow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -366,6 +427,9 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ugoog")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMW Bowser Clown Car Base.png" id="1_5tjb6"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_o3g0n"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_cks4s"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qh03a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMW Bowser Clown Car Base.png" id="2_sd0vy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_7rj7k"]
 
-[sub_resource type="Animation" id="Animation_bt1tl"]
+[sub_resource type="Animation" id="Animation_aijft"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ehp5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_riybh"]
 _data = {
-"Default": SubResource("Animation_bt1tl")
+"Default": SubResource("Animation_aijft")
 }
 
 [node name="8-12 Clown Car Base (Plus Expressions)" type="Node2D"]
+script = ExtResource("1_qh03a")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-12 Clown Car Base (Plus Expressions).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7ehp5")
+"Timeline": SubResource("AnimationLibrary_riybh")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,12 +44,12 @@ libraries = {
 [node name="@@18376" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-32, -31.75)
-texture = ExtResource("1_5tjb6")
+texture = ExtResource("2_sd0vy")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_o3g0n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-0.4, 26.25)
-script = ExtResource("3_cks4s")
+script = ExtResource("3_7rj7k")
 path = "res://sm63_godot/SMW Clown Car Fan.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

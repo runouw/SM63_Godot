@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi Jumping - 3.png" id="1_fpnrb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gdwdd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi Jumping - 3.png" id="2_tojmq"]
 
-[sub_resource type="Animation" id="Animation_x3nyj"]
+[sub_resource type="Animation" id="Animation_kamhd"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ag8l5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_smmrg"]
 _data = {
-"Default": SubResource("Animation_x3nyj")
+"Default": SubResource("Animation_kamhd")
 }
 
 [node name="Message Pictures Luigi Jump Frame" type="Node2D"]
+script = ExtResource("1_gdwdd")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Message Pictures Items/Message Pictures Luigi Jump Frame.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ag8l5")
+"Timeline": SubResource("AnimationLibrary_smmrg")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@47120" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-10.5, -17.5)
-texture = ExtResource("1_fpnrb")
+texture = ExtResource("2_tojmq")
 centered = false

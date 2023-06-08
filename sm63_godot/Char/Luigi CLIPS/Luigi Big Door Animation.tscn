@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_cuf5q"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_nrk7t"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 3 - 1.png" id="3_as6iq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 4 - 1.png" id="4_5gmiw"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 5 - 5.png" id="5_t16km"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_g0a3o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_46tbw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 3 - 1.png" id="3_yn0ks"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 4 - 1.png" id="4_s322b"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 5 - 5.png" id="5_d5ts5"]
 
-[sub_resource type="Animation" id="Animation_5gv6u"]
+[sub_resource type="Animation" id="Animation_07kpj"]
 length = 3.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -130,26 +130,57 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h4l5h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jwxsq"]
 _data = {
-"Default": SubResource("Animation_5gv6u")
+"Default": SubResource("Animation_07kpj")
 }
 
+[sub_resource type="GDScript" id="GDScript_tqcuy"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	_root.Course.Char.yspeed = Math.max(0, _root.Course.Char.yspeed);
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_dxagj"]
+script/source = "extends Node
+# if (_root.Fluddpow !== \"\") {
+# 	gotoAndPlay(_currentframe+3);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ojpol"]
+script/source = "extends Node
+# _root.Blackout();
+# "
+
+[sub_resource type="GDScript" id="GDScript_x7ua0"]
+script/source = "extends Node
+# _root.DoorTrasition(_root.door);
+# stop();
+# "
+
 [node name="Luigi Big Door Animation" type="Node2D"]
+script = ExtResource("1_g0a3o")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Big Door Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_h4l5h")
+"Timeline": SubResource("AnimationLibrary_jwxsq")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_cuf5q")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(2, -8.2)
 scale = Vector2(1.00198, 0.998489)
-script = ExtResource("2_nrk7t")
+script = ExtResource("2_46tbw")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -167,13 +198,13 @@ texture_filter = 1
 position = Vector2(8.5, -20)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_as6iq")
+texture = ExtResource("3_yn0ks")
 centered = false
 
-[node name="@DOMSymbolInstance@14927" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_cuf5q")]
+[node name="@DOMSymbolInstance@14927" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(-0.95, 6.1)
 scale = Vector2(1.00198, 0.998489)
-script = ExtResource("2_nrk7t")
+script = ExtResource("2_46tbw")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -194,7 +225,7 @@ texture_filter = 1
 position = Vector2(7.35, -20)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_5gmiw")
+texture = ExtResource("4_s322b")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 4"]
@@ -203,12 +234,12 @@ visible = false
 [node name="@@14929" type="Sprite2D" parent="Layer 4/Frame 4"]
 texture_filter = 1
 position = Vector2(-7.65, -18)
-texture = ExtResource("5_t16km")
+texture = ExtResource("5_d5ts5")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4" instance=ExtResource("1_cuf5q")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4"]
 position = Vector2(-1.5, 0.95)
-script = ExtResource("2_nrk7t")
+script = ExtResource("2_46tbw")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Backwards.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -224,9 +255,9 @@ brightness = 0.0
 [node name="Frame 30" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 30" instance=ExtResource("1_cuf5q")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 30"]
 position = Vector2(-1, 0.95)
-script = ExtResource("2_nrk7t")
+script = ExtResource("2_46tbw")
 path = "res://sm63_godot/Char/OVW Luigi - 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -242,10 +273,10 @@ brightness = 0.0
 [node name="Frame 69" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 69" instance=ExtResource("1_cuf5q")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 69"]
 position = Vector2(0, -13)
 scale = Vector2(0.585938, 0.585938)
-script = ExtResource("2_nrk7t")
+script = ExtResource("2_46tbw")
 path = "res://sm63_godot/Char/OVW Luigi - 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -265,11 +296,23 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_tqcuy")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_dxagj")
 
 [node name="Frame 87" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 87"]
+script = SubResource("GDScript_ojpol")
+
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 99"]
+script = SubResource("GDScript_x7ua0")

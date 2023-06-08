@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 1.png" id="1_olgy5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="2_j0qjh"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Star (none) - 1.png" id="3_t7qoo"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Star (none) - 2.png" id="4_rk0w2"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="5_sn0hq"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_2wmdn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_o7wug"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 1.png" id="2_pp077"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="3_em05q"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Star (none) - 1.png" id="4_ywusy"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Star (none) - 2.png" id="5_4fbqq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_kq301"]
 
-[sub_resource type="Animation" id="Animation_n1rom"]
+[sub_resource type="Animation" id="Animation_amrq8"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -131,16 +131,93 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4c66t"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o3hcb"]
 _data = {
-"Default": SubResource("Animation_n1rom")
+"Default": SubResource("Animation_amrq8")
 }
 
+[sub_resource type="GDScript" id="GDScript_o5bly"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 5;
+# }
+# onClipEvent (enterFrame) {
+# 	count *= 0.97;
+# 	_rotation += count;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_5iuin"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_2w1wn"]
+script/source = "extends Node
+# stop();
+# _root.GetStarMusic1();
+# onEnterFrame = function () {
+# 	if (_root.Course.Char.air == false) {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_odyfk"]
+script/source = "extends Node
+# stop();
+# _root.GetStarMusic2();
+# othertime = 0
+# onEnterFrame = function () {
+# 	othertime ++
+# 	_root.PauseGame = false;
+# 	timeinsong = _root.bgsong.position/1000;
+# 	if (timeinsong>2.2 || othertime > 96) {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_2h66e"]
+script/source = "extends Node
+# stop();
+# othertime = 0;
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	_root.ZoomoutCam();
+# 	timeinsong = _root.bgsong.position/1000;
+# 	lengthofsong = _root.bgsong.duration/1000;
+# 	othertime++;
+# 	if (timeinsong>lengthofsong-0.5 || othertime>92*3) {
+# 		_root.Blackout();
+# 		play();
+# 		onEnterFrame = function () {
+# 			_root.PauseGame = false;
+# 			_root.ZoomoutCam();
+# 		};
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_efcww"]
+script/source = "extends Node
+# _root.ReturnToCastle();
+# onEnterFrame = null;
+# stop();
+# "
+
 [node name="Mario (None) Star" type="Node2D"]
+script = ExtResource("1_o7wug")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (None) Star.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4c66t")
+"Timeline": SubResource("AnimationLibrary_o3hcb")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -150,7 +227,7 @@ libraries = {
 [node name="@@15330" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-9.15, -31.15)
-texture = ExtResource("1_olgy5")
+texture = ExtResource("2_pp077")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
@@ -160,13 +237,13 @@ visible = false
 texture_filter = 1
 position = Vector2(-0.25, -26.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_j0qjh")
+texture = ExtResource("3_em05q")
 centered = false
 
 [node name="@@15332" type="Sprite2D" parent="Layer 3/Frame 1"]
 texture_filter = 1
 position = Vector2(-13, -28.15)
-texture = ExtResource("3_t7qoo")
+texture = ExtResource("4_ywusy")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
@@ -175,7 +252,7 @@ visible = false
 [node name="@@15333" type="Sprite2D" parent="Layer 3/Frame 2"]
 texture_filter = 1
 position = Vector2(-11.15, -35.65)
-texture = ExtResource("4_rk0w2")
+texture = ExtResource("5_4fbqq")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -186,7 +263,7 @@ centered = false
 texture_filter = 1
 position = Vector2(-16.25, -32.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_j0qjh")
+texture = ExtResource("3_em05q")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
@@ -196,16 +273,16 @@ visible = false
 texture_filter = 1
 position = Vector2(-0.25, -26.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_j0qjh")
+texture = ExtResource("3_em05q")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("5_sn0hq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2"]
 position = Vector2(4.35, -34.65)
 scale = Vector2(1.59998, 1.59998)
-script = ExtResource("6_2wmdn")
+script = ExtResource("6_kq301")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -218,11 +295,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15328" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("5_sn0hq")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_o5bly")
+
+[node name="@DOMSymbolInstance@15328" type="Node2D" parent="Layer 2/Frame 2"]
 position = Vector2(4.35, -34.65)
 rotation = -0.785398
 scale = Vector2(1, 1)
-script = ExtResource("6_2wmdn")
+script = ExtResource("6_kq301")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -232,12 +312,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15329" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("5_sn0hq")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 2/@DOMSymbolInstance@15328"]
+script = SubResource("GDScript_5iuin")
+
+[node name="@DOMSymbolInstance@15329" type="Node2D" parent="Layer 2/Frame 2"]
 position = Vector2(4.35, -34.65)
-script = ExtResource("6_2wmdn")
+script = ExtResource("6_kq301")
 path = "res://sm63_godot/Menu/Shine Sprite Clip (Glow).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -254,11 +337,23 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_2w1wn")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_odyfk")
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 2"]
+script = SubResource("GDScript_2h66e")
+
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 14"]
+script = SubResource("GDScript_efcww")

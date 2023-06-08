@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_6o8ba"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0b54r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_v0a7w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6s7gf"]
 
-[sub_resource type="Animation" id="Animation_uv8ap"]
+[sub_resource type="Animation" id="Animation_yv8y2"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,29 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mguk8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxaun"]
 _data = {
-"Default": SubResource("Animation_uv8ap")
+"Default": SubResource("Animation_yv8y2")
 }
 
 [node name="Bowser Battle 2 Cinema Towers Stuffs" type="Node2D"]
+script = ExtResource("1_v0a7w")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 2 Cinema Towers Stuffs.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_mguk8")
+"Timeline": SubResource("AnimationLibrary_yxaun")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6o8ba")]
-script = ExtResource("2_0b54r")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_6s7gf")
 path = "res://sm63_godot/Bowser Battle 2 Cinema Towers BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

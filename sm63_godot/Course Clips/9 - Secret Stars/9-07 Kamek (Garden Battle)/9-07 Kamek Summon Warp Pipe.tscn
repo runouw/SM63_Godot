@@ -1,14 +1,14 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_kv0j1"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_jykhv"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 1.png" id="3_qaeik"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 2.png" id="4_7yjq3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Idle - 1.png" id="5_shpg5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 1.png" id="6_c8eqg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 2.png" id="7_lvvwa"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4rkir"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_63gf8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 1.png" id="3_qhjpv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 2.png" id="4_0oprg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Idle - 1.png" id="5_mrnx0"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 1.png" id="6_5b2ur"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 2.png" id="7_l4lxh"]
 
-[sub_resource type="Animation" id="Animation_q2kvp"]
+[sub_resource type="Animation" id="Animation_86tmu"]
 length = 4.03333
 loop_mode = 1
 tracks/0/type = "value"
@@ -396,27 +396,89 @@ tracks/31/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sij6w"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_muome"]
 _data = {
-"Default": SubResource("Animation_q2kvp")
+"Default": SubResource("Animation_86tmu")
 }
 
+[sub_resource type="GDScript" id="GDScript_xelsl"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_xscale>0) {
+# 		_root.Camcenter = _root.Course.BackGFX.Target2;
+# 	} else {
+# 		_root.Camcenter = _root.Course.BackGFX.Target3;
+# 	}
+# 	_root.PauseGame = false;
+# 	_root.playpause = true;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_vsrwx"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.Course.Char.air == false && _root.playpause == false) {
+# 		play();
+# 		//
+# 		_root.Course.Char.yspeed = 0;
+# 		_root.Course.Char.xspeed = 0;
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.attackFrame = \"bosscinema\";
+# 		onEnterFrame = function () {
+# 			_root.Camcenter = _root.Course.BackGFX.Target1;
+# 			_root.PauseGame = false;
+# 			_root.playpause = true;
+# 		};
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_thdqt"]
+script/source = "extends Node
+# _root.Course.FrontGFX.nextFrame();
+# "
+
+[sub_resource type="GDScript" id="GDScript_nyj5m"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# _root.Course.Char.attackFrame = \"\";
+# _root.playpause = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_4yyrr"]
+script/source = "extends Node
+# _parent.nextFrame();
+# "
+
 [node name="9-07 Kamek Summon Warp Pipe" type="Node2D"]
+script = ExtResource("1_4rkir")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Summon Warp Pipe.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sij6w")
+"Timeline": SubResource("AnimationLibrary_muome")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_kv0j1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-680.95, -164.35)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_jykhv")
+script = ExtResource("2_63gf8")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -432,11 +494,11 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_kv0j1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-663.15, -156)
 rotation = -2.618
 scale = Vector2(1, -1)
-script = ExtResource("2_jykhv")
+script = ExtResource("2_63gf8")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -452,11 +514,11 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29" instance=ExtResource("1_kv0j1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29"]
 position = Vector2(-207.2, -6)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_jykhv")
+script = ExtResource("2_63gf8")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -477,7 +539,7 @@ texture_filter = 1
 position = Vector2(-186, -22.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_qaeik")
+texture = ExtResource("3_qhjpv")
 centered = false
 
 [node name="Frame 31" type="Node2D" parent="Layer 1"]
@@ -488,7 +550,7 @@ texture_filter = 1
 position = Vector2(-184, -22.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_qaeik")
+texture = ExtResource("3_qhjpv")
 centered = false
 
 [node name="Frame 32" type="Node2D" parent="Layer 1"]
@@ -499,7 +561,7 @@ texture_filter = 1
 position = Vector2(-187.65, -24)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_7yjq3")
+texture = ExtResource("4_0oprg")
 centered = false
 
 [node name="Frame 34" type="Node2D" parent="Layer 1"]
@@ -510,7 +572,7 @@ texture_filter = 1
 position = Vector2(-186.65, -24)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_7yjq3")
+texture = ExtResource("4_0oprg")
 centered = false
 
 [node name="Frame 36" type="Node2D" parent="Layer 1"]
@@ -521,7 +583,7 @@ texture_filter = 1
 position = Vector2(-182, -22.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_qaeik")
+texture = ExtResource("3_qhjpv")
 centered = false
 
 [node name="Frame 40" type="Node2D" parent="Layer 1"]
@@ -532,7 +594,7 @@ texture_filter = 1
 position = Vector2(-181, -21.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_shpg5")
+texture = ExtResource("5_mrnx0")
 centered = false
 
 [node name="Frame 47" type="Node2D" parent="Layer 1"]
@@ -543,7 +605,7 @@ texture_filter = 1
 position = Vector2(-181, -20)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_c8eqg")
+texture = ExtResource("6_5b2ur")
 centered = false
 
 [node name="Frame 51" type="Node2D" parent="Layer 1"]
@@ -554,7 +616,7 @@ texture_filter = 1
 position = Vector2(-180.95, -21.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("7_lvvwa")
+texture = ExtResource("7_l4lxh")
 centered = false
 
 [node name="Frame 64" type="Node2D" parent="Layer 1"]
@@ -565,7 +627,7 @@ texture_filter = 1
 position = Vector2(-181, -20)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_c8eqg")
+texture = ExtResource("6_5b2ur")
 centered = false
 
 [node name="Frame 73" type="Node2D" parent="Layer 1"]
@@ -576,7 +638,7 @@ texture_filter = 1
 position = Vector2(-181, -21.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_shpg5")
+texture = ExtResource("5_mrnx0")
 centered = false
 
 [node name="Frame 80" type="Node2D" parent="Layer 1"]
@@ -587,7 +649,7 @@ texture_filter = 1
 position = Vector2(-184.5, -22.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_qaeik")
+texture = ExtResource("3_qhjpv")
 centered = false
 
 [node name="Frame 83" type="Node2D" parent="Layer 1"]
@@ -598,7 +660,7 @@ texture_filter = 1
 position = Vector2(-192.15, -22)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_7yjq3")
+texture = ExtResource("4_0oprg")
 centered = false
 
 [node name="Frame 89" type="Node2D" parent="Layer 1"]
@@ -610,7 +672,7 @@ position = Vector2(-196.65, -22)
 rotation = 3.14159
 scale = Vector2(1, -1.00615)
 skew = -0.110661
-texture = ExtResource("4_7yjq3")
+texture = ExtResource("4_0oprg")
 centered = false
 
 [node name="Frame 90" type="Node2D" parent="Layer 1"]
@@ -621,17 +683,17 @@ texture_filter = 1
 position = Vector2(-184.5, -22.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_qaeik")
+texture = ExtResource("3_qhjpv")
 centered = false
 
 [node name="Frame 92" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 92" instance=ExtResource("1_kv0j1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 92"]
 position = Vector2(-196.15, -2)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_jykhv")
+script = ExtResource("2_63gf8")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -647,11 +709,11 @@ brightness = 0.0
 [node name="Frame 119" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 119" instance=ExtResource("1_kv0j1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 119"]
 position = Vector2(194.85, -131)
 rotation = 2.618
 scale = Vector2(1, -1)
-script = ExtResource("2_jykhv")
+script = ExtResource("2_63gf8")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -689,6 +751,9 @@ visible = false
 [node name="Frame 54" type="Node2D" parent="Guide Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Guide Layer 1/Frame 54"]
+script = SubResource("GDScript_xelsl")
+
 [node name="Frame 91" type="Node2D" parent="Guide Layer 1"]
 visible = false
 
@@ -707,6 +772,9 @@ visible = false
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_vsrwx")
 
 [node name="Frame 49" type="Node2D" parent="Layer 3"]
 visible = false
@@ -763,6 +831,7 @@ rotation = 0.523598
 scale = Vector2(1, 1)
 
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 69/Group/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@41255" type="Line2D" parent="Layer 3/Frame 69/Group/Group/Shape"]
 width = 1.0
@@ -777,6 +846,7 @@ rotation = 0.523598
 scale = Vector2(1, 1)
 
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 69/Group/@Group@41256"]
+scale = Vector2(1, 1)
 
 [node name="@@41257" type="Line2D" parent="Layer 3/Frame 69/Group/@Group@41256/Shape"]
 width = 1.0
@@ -791,6 +861,7 @@ rotation = 0.523598
 scale = Vector2(1, 1)
 
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 69/Group/@Group@41258"]
+scale = Vector2(1, 1)
 
 [node name="@@41259" type="Line2D" parent="Layer 3/Frame 69/Group/@Group@41258/Shape"]
 width = 1.0
@@ -802,8 +873,17 @@ end_cap_mode = 2
 [node name="Frame 70" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 70"]
+script = SubResource("GDScript_thdqt")
+
 [node name="Frame 95" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 95"]
+script = SubResource("GDScript_nyj5m")
+
 [node name="Frame 120" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 120"]
+script = SubResource("GDScript_4yyrr")

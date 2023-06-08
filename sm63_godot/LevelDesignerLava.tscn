@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_erhax"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_s02il"]
+
+[sub_resource type="Animation" id="Animation_dok6s"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,25 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gllrt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3ypv"]
 _data = {
-"Default": SubResource("Animation_erhax")
+"Default": SubResource("Animation_dok6s")
 }
 
+[sub_resource type="GDScript" id="GDScript_tdc3v"]
+script/source = "extends Node
+# stop();"
+
 [node name="LevelDesignerLava" type="Node2D"]
+script = ExtResource("1_s02il")
+source_xml = "res://sm63/LIBRARY/LevelDesignerLava.xml"
+linkage = "LevelDesignerLava"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gllrt")
+"Timeline": SubResource("AnimationLibrary_w3ypv")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -46,3 +57,6 @@ libraries = {
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_tdc3v")

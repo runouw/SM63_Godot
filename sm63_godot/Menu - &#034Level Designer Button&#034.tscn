@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_cqjrj"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_lewhx"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_j4hmg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_m6utc"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_twwow"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_grmo8"]
 
-[sub_resource type="Animation" id="Animation_31jso"]
+[sub_resource type="Animation" id="Animation_p21sx"]
 length = 3.06667
 loop_mode = 1
 tracks/0/type = "value"
@@ -80,16 +80,21 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ihngm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qtd8i"]
 _data = {
-"Default": SubResource("Animation_31jso")
+"Default": SubResource("Animation_p21sx")
 }
 
 [node name="Menu - Level Designer Button" type="Node2D"]
+script = ExtResource("1_m6utc")
+source_xml = "res://sm63/LIBRARY/Menu - &#034Level Designer Button&#034.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ihngm")
+"Timeline": SubResource("AnimationLibrary_qtd8i")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -101,7 +106,7 @@ libraries = {
 [node name="@@13186" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_cqjrj")
+script = ExtResource("2_twwow")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, 36.5, -10)
 entries_color = PackedColorArray(0, 0.8, 0.156863, 1, 0.156863, 1, 0.156863, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -115,7 +120,7 @@ visible = false
 [node name="@@13187" type="Polygon2D" parent="Layer 1/Frame 21/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_cqjrj")
+script = ExtResource("2_twwow")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, -0.7, -4.85)
 entries_color = PackedColorArray(0, 0.8, 0.156863, 1, 0.156863, 1, 0.156863, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -129,7 +134,7 @@ visible = false
 [node name="@@13188" type="Polygon2D" parent="Layer 1/Frame 45/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_cqjrj")
+script = ExtResource("2_twwow")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, -43.25, 1)
 entries_color = PackedColorArray(0, 0.8, 0.156863, 1, 0.156863, 1, 0.156863, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -143,7 +148,7 @@ visible = false
 [node name="@@13189" type="Polygon2D" parent="Layer 1/Frame 70/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_cqjrj")
+script = ExtResource("2_twwow")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, 0.1, -5)
 entries_color = PackedColorArray(0, 0.8, 0.156863, 1, 0.156863, 1, 0.156863, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -157,7 +162,7 @@ visible = false
 [node name="@@13190" type="Polygon2D" parent="Layer 1/Frame 91/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_cqjrj")
+script = ExtResource("2_twwow")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, 36.5, -10)
 entries_color = PackedColorArray(0, 0.8, 0.156863, 1, 0.156863, 1, 0.156863, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -167,8 +172,8 @@ focal_point_ratio = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_lewhx")]
-script = ExtResource("3_j4hmg")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("3_grmo8")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu Button (really).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

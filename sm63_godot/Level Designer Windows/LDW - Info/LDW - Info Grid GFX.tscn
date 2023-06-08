@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_qb2mv"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_b7tcr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_c45kd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6fqsb"]
 
-[sub_resource type="Animation" id="Animation_8j43s"]
+[sub_resource type="Animation" id="Animation_mfhji"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,16 +43,28 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ero3i"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xhfe"]
 _data = {
-"Default": SubResource("Animation_8j43s")
+"Default": SubResource("Animation_mfhji")
 }
 
+[sub_resource type="GDScript" id="GDScript_ek4an"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	gotoAndStop(_parent.gridframe);
+# };
+# "
+
 [node name="LDW - Info Grid GFX" type="Node2D"]
+script = ExtResource("1_c45kd")
+source_xml = "res://sm63/LIBRARY/Level Designer Windows/LDW - Info/LDW - Info Grid GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ero3i")
+"Timeline": SubResource("AnimationLibrary_0xhfe")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -81,10 +93,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2(Mask)/Frame 0" instance=ExtResource("1_qb2mv")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2(Mask)/Frame 0"]
 position = Vector2(0, -0.05)
 scale = Vector2(0.999985, 1.01329)
-script = ExtResource("2_b7tcr")
+script = ExtResource("2_6fqsb")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid GFX Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,3 +112,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_ek4an")

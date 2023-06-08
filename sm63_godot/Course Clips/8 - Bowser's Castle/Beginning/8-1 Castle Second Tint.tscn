@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="1_3jqsa"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="2_14a7d"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Surface Tile.png" id="3_t0oo2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1rjt8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="2_trw7u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_jvhwg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Surface Tile.png" id="4_vbk85"]
 
-[sub_resource type="Animation" id="Animation_a1b14"]
+[sub_resource type="Animation" id="Animation_rb3aa"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +45,21 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m2vl0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8dgf4"]
 _data = {
-"Default": SubResource("Animation_a1b14")
+"Default": SubResource("Animation_rb3aa")
 }
 
 [node name="8-1 Castle Second Tint" type="Node2D"]
+script = ExtResource("1_1rjt8")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Bowser's Castle/Beginning/8-1 Castle Second Tint.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_m2vl0")
+"Timeline": SubResource("AnimationLibrary_8dgf4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -65,7 +71,7 @@ libraries = {
 [node name="@@35829" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_3jqsa")
+texture = ExtResource("2_trw7u")
 texture_offset = Vector2(4.65, 247.05)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(343.05, -863.8, 1231.95, -863.8, 1231.95, -410.8, 1232.55, -407.75, 343.05, -407.75, 343.05, -560.225, 1590.9, -863.8, 2016.85, -863.8, 2016.85, -390.8, 1609.32, -390.8, 1590.9, -409.525, 1590.9, -560.225, -79.775, -560.225, -79.775, -560.225, -35.525, -484.575, -124, -484.575, -123.975, -484.575, -35.525, -484.575, -35.5, -484.55, -35.5, -407.75, -123.05, -407.75, -123.975, -484.55, 1231.95, -410.8, 1233.2, -410.8, 1244.78, -390.8, 1235.89, -390.8, 1232.2, -409.525, 1589.65, -410.8, 1590.9, -410.8, 1590.9, -409.525, 1590.9, -409.525, -122.575, -407.75, -35.5, -407.75, -35.5, -390.25, -122.37, -390.25, -122.447, -396.8, 343.05, -407.75, 1231.95, -407.75, 1235.95, -390.3, 1235.95, -390.25, 343.047, -390.25, 343.05, -396.8, 1587.65, -392.2, 1587.65, -392.2, 1589.27, -390.375, 1589.3, -390.35, 1589.34, -390.3, 1589.39, -390.25, 1586.9, -390.25, 1586.9, -390.8, 1525.68, -391.225, 1235.89, -390.8, 1235.95, -390.8, 1235.95, -390.475, 1235.95, -390.475, 1235.91, -390.7, 1235.9, -390.75, 1235.95, -390.8, 1244.78, -390.8, 1244.81, -390.75, 1244.82, -390.725, 1244.7, -390.7, 1244.7, -390.7, 1243.47, -390.725, 1240.97, -390.75, 1609.32, -390.8, 2016.85, -390.8, 2016.85, -388.4, 1611.69, -388.4, 1609.96, -390.15, 1609.94, -390.175, 1609.77, -390.35, 1609.74, -390.375, 1609.42, -390.7, 1609.4, -390.725, 1609.37, -390.75, 1244.95, -390.75, 1244.95, -390.75, 1244.95, -390.725, 1244.93, -390.725, 1244.82, -390.725, 1244.82, -390.725, 1244.85, -390.7, 1242.82, -390.35, 1242.82, -390.35, 1244.7, -390.7, 1235.95, -390.3, 1235.95, -390.3, 1235.96, -390.25, 1235.97, -390.175, 1235.97, -390.15, 1235.98, -390.075, 1235.98, -390, 1236.03, -389.1, 1235.95, -389.05, 1235.95, -389.05, 1235.95, -390.25, -122.37, -390.25, -35.5, -390.25, -35.5, -343.8, -121.825, -343.8, -122.369, -390.175, 343.047, -390.25, 1235.95, -390.25, 1235.95, -389.05, 1169.25, -345.8, 343.025, -345.8, 343.047, -390.175, 1586.9, -390.25, 1589.39, -390.25, 1589.47, -390.15, 1644.15, -328.7, 1586.9, -328.7, 1586.9, -390.175, 1235.97, -390.15, 1235.97, -390.15, 1235.99, -390.075, 1236.2, -389.2, 1236.03, -389.1, 1236.03, -389.1, 1235.98, -390, 1235.98, -390.075, 1236.05, -388.4, 1236.05, -388.4, 1236.05, -328.2, 341.1, -328.2, 1182.2, -330.7, 1209.76, -360.225, 1611.69, -388.4, 2016.85, -388.4, 2016.85, -345.8, 1653.6, -345.8, 1639.41, -360.225, 1957.6, -345.8, 2016.85, -345.8, 2016.85, -328.7, 1957.6, -328.7, 1957.6, -343.8, -122, -343.8, -121.825, -343.8, -121.95, -334.425, -121.95, -334.425, -121.825, -343.8, 341.1, -343.8, 341.1, -328.2, -121.912, -328.2, -121.95, -334.425, 1586.9, -328.7, 2016.85, -328.7, 2016.85, -145.85, 1586.9, -145.85, 1586.9, -328.2, -121.912, -328.2, 1236.05, -328.2, 1236.05, -145.85, -120.789, -145.85, -121.527, -265.675, -120.789, -145.85, 2016.85, -145.85, 2016.85, -17.8, -120, -17.8, -120.554, -107.8, -120, -17.8, 2016.85, -17.8, 2016.85, 100.2, -514.9, 100.2, -938.85, 100.2, 2016.85, 100.2, 2016.85, 223.55, -938.85, 223.55, -122, 223.55, 2016.85, 223.55, 2016.85, 232.55, 2016.85, 232.55)
@@ -74,7 +80,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 [node name="@@35830" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_3jqsa")
+texture = ExtResource("2_trw7u")
 texture_offset = Vector2(60.7, -110.15)
 texture_scale = Vector2(1.00002, 1.00002)
 polygon = PackedVector2Array(-908.05, -265.675, -908.05, -265.675, -908.05, -265.65, -908.1, -265.65, -908.875, -107.8, -908.825, -107.8, -908.85, -103.825, -908.85, -103.8, -908.85, -103.8, -908.875, -103.825)
@@ -83,7 +89,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@35831" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_14a7d")
+texture = ExtResource("3_jvhwg")
 texture_offset = Vector2(981.55, 166.65)
 texture_scale = Vector2(1.45455, 1.45455)
 polygon = PackedVector2Array(-963.35, -360.225, -963.35, -360.225, -908.05, -265.675, -1018.64, -265.675, -971.785, -345.8, -1018.64, -265.675, -908.05, -265.675, -908.1, -265.65, -908.825, -107.8, -1018.65, -107.8, -1018.67, -265.625, -1018.65, -265.65, -1018.67, -107.8, -908.875, -107.8, -908.9, -18.85, -1018.65, -18.85, -1018.67, -103.825)
@@ -92,7 +98,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35832" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_14a7d")
+texture = ExtResource("3_jvhwg")
 texture_offset = Vector2(-1390.25, 641.6)
 texture_scale = Vector2(1.45455, 1.45455)
 polygon = PackedVector2Array(1231.95, -863.8, 1590.9, -863.8, 1590.9, -410.8, 1231.95, -410.8, 1231.95, -560.225, 1233.2, -410.8, 1589.65, -410.8, 1590.9, -409.525, 1587.65, -392.2, 1525.68, -391.225, 1413.11, -390.75, 1244.81, -390.75, 1233.94, -409.525, 1525.68, -391.225, 1525.68, -391.225, 1586.9, -390.8, 1586.9, -390.3, 1306.47, -390.3, 1424.96, -390.8, 1244.81, -390.75, 1244.95, -390.75, 1244.82, -390.725, 1244.82, -390.725, 1244.95, -390.75, 1413.11, -390.75, 1306.47, -390.3, 1306.47, -390.3, 1244.95, -390.725, 1244.82, -390.725, 1244.95, -390.725, 1306.47, -390.3, 1242.54, -390.3, 1242.82, -390.35, 1244.85, -390.7, 1242.54, -390.3, 1586.9, -390.3, 1586.9, -343.8, 1236.05, -343.8, 1236.05, -388.4, 1236.8, -389.2, 1240.93, -390, 1241.32, -390.075, 1241.85, -390.175, 1242.25, -390.25, 1236.05, -343.8, 1586.9, -343.8, 1586.9, -145.85, 1236.05, -145.85, 1236.05, -334.425)
@@ -127,7 +133,7 @@ end_cap_mode = 2
 [node name="@@35826" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_t0oo2")
+texture = ExtResource("4_vbk85")
 texture_offset = Vector2(-316.6, 344.4)
 polygon = PackedVector2Array(1233.2, -410.8, 1589.65, -410.8, 1607.95, -392.2, 1214.9, -392.2, 1214.9, -392.2, 1587.65, -392.2, 1236.2, -389.2, 1196.14, -345.8, 1169.25, -345.8, 1211.95, -389.2, 1587.65, -392.2, 1607.95, -392.2, 1653.6, -345.8, 1628.94, -345.8, 1590.32, -389.2, 341.1, -345.8, 1196.14, -345.8, 1182.2, -330.7, 341.1, -328.2, 341.1, -328.2, 341.1, -343.8, 1628.94, -345.8, 1957.6, -345.8, 1957.6, -328.7, 1644.15, -328.7, 1630.71, -343.8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25)])

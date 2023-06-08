@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_y1jmr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_l16w0"]
+
+[sub_resource type="Animation" id="Animation_v7510"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6m8e8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ewlc7"]
 _data = {
-"Default": SubResource("Animation_y1jmr")
+"Default": SubResource("Animation_v7510")
 }
 
 [node name="M1-2 BPlatforms" type="Node2D"]
+script = ExtResource("1_l16w0")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-2 BPlatforms.xml"
+linkage = "M1-2BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6m8e8")
+"Timeline": SubResource("AnimationLibrary_ewlc7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

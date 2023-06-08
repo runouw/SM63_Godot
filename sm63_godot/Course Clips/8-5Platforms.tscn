@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_5qdxr"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2l5re"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_t8g5q"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ru4ov"]
 
-[sub_resource type="Animation" id="Animation_xgxbt"]
+[sub_resource type="Animation" id="Animation_hlusu"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +19,37 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4g7ap"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i6fvg"]
 _data = {
-"Default": SubResource("Animation_xgxbt")
+"Default": SubResource("Animation_hlusu")
 }
 
+[sub_resource type="GDScript" id="GDScript_4v7us"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	rotspeed = 0.1;
+# }
+# onClipEvent (enterFrame) {
+# 	_rotation += rotspeed;
+# 	count += 1;
+# 	if (count>80) {
+# 		rotspeed *= -1;
+# 		count = 0;
+# 	}
+# }
+# "
+
 [node name="8-5Platforms" type="Node2D"]
+script = ExtResource("1_t8g5q")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-5Platforms.xml"
+linkage = "8-5Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4g7ap")
+"Timeline": SubResource("AnimationLibrary_i6fvg")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,11 +72,11 @@ color = Color(0, 0.6, 0, 1)
 polygon = PackedVector2Array(-1990.9, 102.95, -97.1, 102.95, -97.1, 129.95, -1990.9, 129.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_5qdxr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-644.45, 140.95)
 rotation = -0.122696
 scale = Vector2(0.799667, 0.799667)
-script = ExtResource("2_2l5re")
+script = ExtResource("2_ru4ov")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Bobbing Pole.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -65,8 +86,11 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_4v7us")
 
 [node name="@Group@19078" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-2109.05, -1872.15)

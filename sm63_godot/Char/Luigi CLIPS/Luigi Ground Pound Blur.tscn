@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Hurt 1 - 4.png" id="1_4pikh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rxjt8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Hurt 1 - 4.png" id="2_a0un1"]
 
-[sub_resource type="Animation" id="Animation_orefw"]
+[sub_resource type="Animation" id="Animation_wpnp6"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwlrj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jy1sw"]
 _data = {
-"Default": SubResource("Animation_orefw")
+"Default": SubResource("Animation_wpnp6")
 }
 
 [node name="Luigi Ground Pound Blur" type="Node2D"]
+script = ExtResource("1_rxjt8")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Ground Pound Blur.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wwlrj")
+"Timeline": SubResource("AnimationLibrary_jy1sw")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,5 +45,5 @@ texture_filter = 1
 position = Vector2(13, -15.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_4pikh")
+texture = ExtResource("2_a0un1")
 centered = false

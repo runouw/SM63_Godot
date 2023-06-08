@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_b3stc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pxhil"]
+
+[sub_resource type="Animation" id="Animation_ukup5"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wgcxu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qh5qo"]
 _data = {
-"Default": SubResource("Animation_b3stc")
+"Default": SubResource("Animation_ukup5")
 }
 
 [node name="8-E5-4 CamEdge" type="Node2D"]
+script = ExtResource("1_pxhil")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4 CamEdge.xml"
+linkage = "8-E5-4CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wgcxu")
+"Timeline": SubResource("AnimationLibrary_qh5qo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

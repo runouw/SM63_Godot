@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=8 format=3]
 
-[sub_resource type="Animation" id="Animation_nnwxv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ait4d"]
+
+[sub_resource type="Animation" id="Animation_bpy2h"]
 length = 0.433333
 loop_mode = 1
 tracks/0/type = "value"
@@ -100,16 +102,42 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_csr37"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_74s8y"]
 _data = {
-"Default": SubResource("Animation_nnwxv")
+"Default": SubResource("Animation_bpy2h")
 }
 
+[sub_resource type="GDScript" id="GDScript_l56bs"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_dxlbc"]
+script/source = "extends Node
+# _parent.gotoAndStop(\"refresh\");
+# "
+
+[sub_resource type="GDScript" id="GDScript_tuqco"]
+script/source = "extends Node
+# _parent.gotoAndStop(_parent.fr);
+# "
+
+[sub_resource type="GDScript" id="GDScript_2jiyv"]
+script/source = "extends Node
+# _parent.clicked = false;
+# gotoAndStop(1);
+# "
+
 [node name="Pause New - Transition" type="Node2D"]
+script = ExtResource("1_ait4d")
+source_xml = "res://sm63/LIBRARY/Pause New - Transition.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_csr37")
+"Timeline": SubResource("AnimationLibrary_74s8y")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -129,6 +157,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 6"]
 
 [node name="@@13307" type="Polygon2D" parent="Layer 1/Frame 6/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-225, -150, 225, -150, 225, 150, -225, 150)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -138,6 +167,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 7"]
 
 [node name="@@13308" type="Polygon2D" parent="Layer 1/Frame 7/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-225, -150, 225, -150, 225, 150, -225, 150)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -155,11 +185,23 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_l56bs")
+
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 6"]
+script = SubResource("GDScript_dxlbc")
 
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 7"]
+script = SubResource("GDScript_tuqco")
+
 [node name="Frame 12" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 12"]
+script = SubResource("GDScript_2jiyv")

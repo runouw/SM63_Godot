@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
-[sub_resource type="Animation" id="Animation_pjk7o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_b2w6b"]
+
+[sub_resource type="Animation" id="Animation_faewn"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -52,16 +54,31 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6bcnh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ihdbd"]
 _data = {
-"Default": SubResource("Animation_pjk7o")
+"Default": SubResource("Animation_faewn")
 }
 
+[sub_resource type="GDScript" id="GDScript_3pahs"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_1ckn1"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="3-3 Turbo Break Ground" type="Node2D"]
+script = ExtResource("1_b2w6b")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-3 Turbo Break Ground.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6bcnh")
+"Timeline": SubResource("AnimationLibrary_ihdbd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -82,5 +99,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_3pahs")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_1ckn1")

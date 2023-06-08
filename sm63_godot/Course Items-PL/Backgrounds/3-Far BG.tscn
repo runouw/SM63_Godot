@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/NSMB Cave BG (Back).png" id="1_46i65"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_sk7lc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/NSMB Cave BG (Back).png" id="2_1qig3"]
 
-[sub_resource type="Animation" id="Animation_ts4bi"]
+[sub_resource type="Animation" id="Animation_kh3vr"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -42,16 +43,34 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xpgde"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u6pf7"]
 _data = {
-"Default": SubResource("Animation_ts4bi")
+"Default": SubResource("Animation_kh3vr")
 }
 
+[sub_resource type="GDScript" id="GDScript_eowbk"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.BGquality == \"HIGH\") {
+# 		gotoAndStop(1);
+# 	} else if (_root.BGquality == \"MEDIUM\") {
+# 		gotoAndStop(2);
+# 	} else {
+# 		gotoAndStop(3);
+# 	}
+# };
+# "
+
 [node name="3-Far BG" type="Node2D"]
+script = ExtResource("1_sk7lc")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/3-Far BG.xml"
+linkage = "3-farBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xpgde")
+"Timeline": SubResource("AnimationLibrary_u6pf7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -65,7 +84,7 @@ libraries = {
 [node name="@@46444" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_46i65")
+texture = ExtResource("2_1qig3")
 texture_offset = Vector2(285.25, 153.1)
 texture_scale = Vector2(0.666667, 0.666667)
 polygon = PackedVector2Array(-255.5, -152.1, 255.5, -152.1, 255.5, 152.1, -255.5, 152.1, -255.5, 59.9)
@@ -74,7 +93,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@46445" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_46i65")
+texture = ExtResource("2_1qig3")
 texture_offset = Vector2(285.25, -275.9)
 texture_scale = Vector2(0.666667, -0.666667)
 
@@ -91,3 +110,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_eowbk")

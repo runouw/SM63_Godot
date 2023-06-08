@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_go07b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_srfed"]
+
+[sub_resource type="Animation" id="Animation_h40ir"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sw88h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iy3ev"]
 _data = {
-"Default": SubResource("Animation_go07b")
+"Default": SubResource("Animation_h40ir")
 }
 
 [node name="9-01 Camedge" type="Node2D"]
+script = ExtResource("1_srfed")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-01 Secret of the Mushroom/9-01 Camedge.xml"
+linkage = "9-01CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sw88h")
+"Timeline": SubResource("AnimationLibrary_iy3ev")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

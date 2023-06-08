@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_r7lrg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_0lt13"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_fb14i"]
 
-[sub_resource type="Animation" id="Animation_e7cqx"]
+[sub_resource type="Animation" id="Animation_hsk4n"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_aplqe"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8rf1"]
 _data = {
-"Default": SubResource("Animation_e7cqx")
+"Default": SubResource("Animation_hsk4n")
 }
 
 [node name="LDW - Help Button Boognoosh" type="Node2D"]
+script = ExtResource("1_0lt13")
+source_xml = "res://sm63/LIBRARY/LDW - Help Button Boognoosh.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_aplqe")
+"Timeline": SubResource("AnimationLibrary_y8rf1")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,7 +57,7 @@ libraries = {
 [node name="@@12057" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_r7lrg")
+script = ExtResource("2_fb14i")
 matrix = Transform2D(0.0226135, 0, 0, 0.0226135, -7.2, -8)
 entries_color = PackedColorArray(0.45098, 0.45098, 0.45098, 1, 0.717647, 0.717647, 0.717647, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -73,7 +79,7 @@ visible = false
 [node name="@@12059" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
 polygon = PackedVector2Array(-4.75, -21, 2.75, -21, 2.75, -10, -4.75, -10, -10, -10, 10, -10, 10, 10, -10, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
-script = ExtResource("1_r7lrg")
+script = ExtResource("2_fb14i")
 matrix = Transform2D(0.0226135, 0, 0, 0.0226135, -7.2, -8)
 entries_color = PackedColorArray(0.666667, 0.666667, 0.666667, 1, 0.815686, 0.815686, 0.815686, 1)
 entries_ratio = PackedFloat32Array(0, 1)

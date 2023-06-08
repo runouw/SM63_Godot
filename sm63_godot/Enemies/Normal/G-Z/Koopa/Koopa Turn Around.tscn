@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Stand.png" id="1_e5uu6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Start Walk - 1.png" id="2_5f3cu"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Start Walk - 2.png" id="3_oirf2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_v3pgf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Stand.png" id="2_ycb26"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Start Walk - 1.png" id="3_1tuxp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Start Walk - 2.png" id="4_n7fkj"]
 
-[sub_resource type="Animation" id="Animation_s1uuw"]
+[sub_resource type="Animation" id="Animation_jm1v5"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -104,16 +105,44 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bbf0x"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ywpk6"]
 _data = {
-"Default": SubResource("Animation_s1uuw")
+"Default": SubResource("Animation_jm1v5")
 }
 
+[sub_resource type="GDScript" id="GDScript_8h2m4"]
+script/source = "extends Node
+# _x = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		_x -= 12/14;
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_grnjm"]
+script/source = "extends Node
+# _parent._parent.frame = \"Walk\";
+# if (_parent._parent.movedirection == \"right\") {
+# 	_parent._parent.movedirection = \"left\";
+# } else {
+# 	_parent._parent.movedirection = \"right\";
+# }
+# "
+
 [node name="Koopa Turn Around" type="Node2D"]
+script = ExtResource("1_v3pgf")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa Turn Around.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bbf0x")
+"Timeline": SubResource("AnimationLibrary_ywpk6")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -123,7 +152,7 @@ libraries = {
 [node name="@@50687" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-13, -14)
-texture = ExtResource("1_e5uu6")
+texture = ExtResource("2_ycb26")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -132,7 +161,7 @@ visible = false
 [node name="@@50688" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-10.5, -15.5)
-texture = ExtResource("2_5f3cu")
+texture = ExtResource("3_1tuxp")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -141,7 +170,7 @@ visible = false
 [node name="@@50689" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-8.5, -16)
-texture = ExtResource("3_oirf2")
+texture = ExtResource("4_n7fkj")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
@@ -152,7 +181,7 @@ texture_filter = 1
 position = Vector2(16.5, -16)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_oirf2")
+texture = ExtResource("4_n7fkj")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
@@ -163,7 +192,7 @@ texture_filter = 1
 position = Vector2(18.5, -15.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_5f3cu")
+texture = ExtResource("3_1tuxp")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -174,12 +203,18 @@ texture_filter = 1
 position = Vector2(21, -14)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_e5uu6")
+texture = ExtResource("2_ycb26")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_8h2m4")
+
 [node name="Frame 14" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 14"]
+script = SubResource("GDScript_grnjm")

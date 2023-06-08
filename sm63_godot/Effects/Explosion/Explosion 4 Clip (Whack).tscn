@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/FX Hit - 1.png" id="1_jlm21"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/FX Hit - 2.png" id="2_u1qdt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/FX Hit - 3.png" id="3_3mkuk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3cr47"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/FX Hit - 1.png" id="2_rcmvh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/FX Hit - 2.png" id="3_n2ov5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/FX Hit - 3.png" id="4_bc384"]
 
-[sub_resource type="Animation" id="Animation_2uhmy"]
+[sub_resource type="Animation" id="Animation_ghxg3"]
 length = 0.233333
 loop_mode = 1
 tracks/0/type = "value"
@@ -92,16 +93,61 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwysk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jqed4"]
 _data = {
-"Default": SubResource("Animation_2uhmy")
+"Default": SubResource("Animation_ghxg3")
 }
 
+[sub_resource type="GDScript" id="GDScript_ldyo7"]
+script/source = "extends Node
+# this._alpha = 0;
+# this._xscale = 50;
+# this._yscale = 50;
+# rspeed = ((random(2)-0.5)*2)*(Math.random()*8+2);
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		this._rotation += rspeed*1.25;
+# 		this._xscale += 25;
+# 		this._yscale += 25;
+# 		this._alpha += 50;
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_byr0o"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 		this._rotation += rspeed*(_alpha/80);
+# 		this._xscale -= 3;
+# 		this._yscale -= 3;
+# 		this._alpha -= 100/4;
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_2ukcj"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# this.removeMovieClip(this);
+# "
+
 [node name="Explosion 4 Clip (Whack)" type="Node2D"]
+script = ExtResource("1_3cr47")
+source_xml = "res://sm63/LIBRARY/Effects/Explosion/Explosion 4 Clip (Whack).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bwysk")
+"Timeline": SubResource("AnimationLibrary_jqed4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -111,7 +157,7 @@ libraries = {
 [node name="@@48570" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-11, -9.5)
-texture = ExtResource("1_jlm21")
+texture = ExtResource("2_rcmvh")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -120,7 +166,7 @@ visible = false
 [node name="@@48571" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-7, -7.5)
-texture = ExtResource("2_u1qdt")
+texture = ExtResource("3_n2ov5")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -129,7 +175,7 @@ visible = false
 [node name="@@48572" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-5.5, -6)
-texture = ExtResource("3_3mkuk")
+texture = ExtResource("4_bc384")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -139,8 +185,17 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ldyo7")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_byr0o")
+
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 6"]
+script = SubResource("GDScript_2ukcj")

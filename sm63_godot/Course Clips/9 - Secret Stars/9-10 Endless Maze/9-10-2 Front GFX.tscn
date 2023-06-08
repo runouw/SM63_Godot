@@ -1,14 +1,14 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ba16c"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_anflf"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Cave Ground/Cave Ground x.1 (2).png" id="3_7pa58"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Cave Ground/Cave Ceiling x1.png" id="4_xw57r"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Cave Ground/Cave Ceiling Slant Sharp x1.png" id="5_77lh1"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Stone PL x2.png" id="6_vbclp"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Cave Ground/Cave Ceiling Slant x1.png" id="7_efnhj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fh5t5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_vs6i6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Cave Ground/Cave Ground x.1 (2).png" id="3_hqb6p"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Cave Ground/Cave Ceiling x1.png" id="4_81roi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Cave Ground/Cave Ceiling Slant Sharp x1.png" id="5_314en"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Stone PL x2.png" id="6_ccvg1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/Cave Ground/Cave Ceiling Slant x1.png" id="7_eyhri"]
 
-[sub_resource type="Animation" id="Animation_xpr58"]
+[sub_resource type="Animation" id="Animation_j780v"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -60,25 +60,66 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uu68l"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0376m"]
 _data = {
-"Default": SubResource("Animation_xpr58")
+"Default": SubResource("Animation_j780v")
 }
 
+[sub_resource type="GDScript" id="GDScript_w884r"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 660;
+# 	WaterDeepness = 100;
+# 	polygons = 60;
+# 	redcolor = 24;
+# 	greencolor = 78;
+# 	bluecolor = 129;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_erttq"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 100;
+# 	WaterDeepness = 100;
+# 	polygons = 9;
+# 	redcolor = 24;
+# 	greencolor = 78;
+# 	bluecolor = 129;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_cnnab"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 300;
+# 	WaterDeepness = 100;
+# 	polygons = 30;
+# 	redcolor = 24;
+# 	greencolor = 78;
+# 	bluecolor = 129;
+# }
+# "
+
 [node name="9-10-2 Front GFX" type="Node2D"]
+script = ExtResource("1_fh5t5")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Front GFX.xml"
+linkage = "9-10-2FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_uu68l")
+"Timeline": SubResource("AnimationLibrary_0376m")
 }
 
 [node name="Water Current" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Water Current"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Water Current/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Water Current/Frame 0"]
 position = Vector2(-829.4, 219.5)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Water Current.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -95,10 +136,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Water"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Water/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Water/Frame 0"]
 position = Vector2(-730, 41.05)
 scale = Vector2(1, 1.00415)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -110,6 +151,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Water/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_w884r")
 
 [node name="Group" type="Node2D" parent="Water/Frame 0"]
 
@@ -120,10 +164,10 @@ color = Color(0.0941176, 0.305882, 0.505882, 0.501961)
 polygon = PackedVector2Array(-1623.8, 141, -73.05, 141, -73.05, 329.95, -1623.8, 329.95, -1733.8, 329.95, -73.05, 329.95, -73.05, 350.15, -1733.8, 474.1, -1733.8, 474.1, -1733.8, 350.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9)])
 
-[node name="@DOMSymbolInstance@42754" type="Node2D" parent="Water/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="@DOMSymbolInstance@42754" type="Node2D" parent="Water/Frame 0"]
 position = Vector2(-1854.9, 371.6)
 scale = Vector2(1, 1.00415)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -136,10 +180,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@42755" type="Node2D" parent="Water/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="AS2" type="Node" parent="Water/Frame 0/@DOMSymbolInstance@42754"]
+script = SubResource("GDScript_erttq")
+
+[node name="@DOMSymbolInstance@42755" type="Node2D" parent="Water/Frame 0"]
 position = Vector2(-1160, 41.05)
 scale = Vector2(1, 1.00415)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -151,6 +198,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Water/Frame 0/@DOMSymbolInstance@42755"]
+script = SubResource("GDScript_cnnab")
 
 [node name="Back Wall" type="Node2D" parent="."]
 
@@ -173,7 +223,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@42732" type="Polygon2D" parent="Back Wall/Frame 0/@Group@42731/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_7pa58")
+texture = ExtResource("3_hqb6p")
 texture_offset = Vector2(293.25, 161.8)
 polygon = PackedVector2Array(-1114.65, -1074.1, -1114.65, -1074.1, -1113.9, -1073.25, -1115.63, -1073.25, -1115.63, -1073.25, -1068.9, -1073.25, -1053.9, -1013.25, -1031.4, -998.75, -1031.19, -998.25, -1122.53, -998.25, -1129.25, -1008.03, -1128.9, -1008.25, -1128.9, -1061.75, -1116.44, -1072.55, -1122.53, -998.25, -1081.9, -998.25, -1118.4, -992.25, -1118.4, -992.25, -1081.9, -998.25, -1031.19, -998.25, -1018.9, -969.25, -990.925, -960.7, -1061.75, -960.7, -1064.9, -963.75, -1078.94, -992.25, -978.9, -966.75, -553.1, -966.75, -553.1, -960.7, -990.925, -960.7, -990.9, -960.75, -984.9, -963.75, -1061.75, -960.7, -553.1, -960.7, -553.1, -588.8, -995.9, -588.8, -995.9, -847.25, -1028.9, -851.75, -1039.9, -864.25, -1048.4, -947.75, -993.9, -588.8, -553.1, -588.8, -553.1, -507.85, -973.9, -507.85, -993.9, -520.85, -835.95, -507.85, -553.1, -507.85, -553.1, -490.85, -821.783, -490.85, -821.783, -490.85, -820.95, -490.85, -821.45, -490.45, -821.45, -490.45, -781.95, -490.85, -553.1, -490.85, -553.1, -331, -738.9, -331, -747, -425.15, -747, -440.25, -746.9, -440.375, -768, -458.85, -781.776, -490.45, -974.9, -342, -974.9, -342, -938.9, -332, -993.8, -332, -993.8, -332, -827.95, -332, -827.95, -293.85, -793.95, -288.9, -793.95, -250.6, -764, -238, -993.8, -238, -993.8, -331, -993.8, -238, 164.45, -238, 164.45, -106.8, -993.8, -106.8, -993.8, -221.9, -993.8, -106.8, -437.6, -106.8, -458.02, -102.944, -478.577, -91.3501, -499.27, -72.0188, -520.1, -44.95, -988.836, -44.95, -993.8, -49.95, -993.8, -104.95, -437.6, -106.8, 164.45, -106.8, 164.45, -101, -123.65, -101, -123.65, -104.95, -123.65, -101, -91.2, -101, -110.2, -85.5, -110.2, -85.5, -123.65, -88.275, -123.65, -91.3501, -988.836, -44.95, -709.1, -44.95, -722.1, -28.5, -724.1, 41.5, -718.55, 50.95, -714.1, 70.95, -689.768, 74.4505, -673.6, 80.4, -665.6, 102.45, -483.1, 104.45, -486.3, 130.3, -514.1, 156.45, -862.709, 156.45, -882.275, 53.375, -914.85, 38, -927.15, 23.5, -969.4, 18.5, -979.9, -35.95, -862.709, 156.45, -615.65, 156.45, -671.55, 196.2, -671.55, 196.2, -771.025, 189, -859.15, 175.2, -860.906, 165.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21, 22, 23, 24), PackedInt32Array(25, 26, 27, 28, 29, 30), PackedInt32Array(31, 32, 33, 34, 35, 36, 37, 38), PackedInt32Array(39, 40, 41, 42, 43), PackedInt32Array(44, 45, 46, 47), PackedInt32Array(48, 49, 50, 51), PackedInt32Array(52, 53, 54, 55, 56, 57, 58, 59, 60), PackedInt32Array(61, 62, 63, 64), PackedInt32Array(65, 66, 67, 68, 69, 70, 71, 72), PackedInt32Array(73, 74, 75, 76, 77), PackedInt32Array(78, 79, 80, 81, 82, 83, 84, 85, 86), PackedInt32Array(87, 88, 89, 90, 91), PackedInt32Array(92, 93, 94, 95, 96, 97), PackedInt32Array(98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115), PackedInt32Array(116, 117, 118, 119, 120, 121, 122)])
@@ -181,7 +231,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@42733" type="Polygon2D" parent="Back Wall/Frame 0/@Group@42731/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_7pa58")
+texture = ExtResource("3_hqb6p")
 texture_offset = Vector2(-131.1, -186.55)
 polygon = PackedVector2Array(-1534.55, -1338.65, -737.15, -1338.65, -737.15, -1166.35, -1534.55, -1166.35, -1534.55, -1166.35, -1294.07, -1166.35, -1317.35, -1128.7, -1317.35, -1074.25, -1318.3, -1072.55, -1284.35, -1053.75, -1534.55, -1053.75, -1534.55, -1166.2, -1294.07, -1166.35, -737.15, -1166.35, -737.15, -1166.2, -1293.85, -1166.2, -1108.9, -1166.2, -737.15, -1166.2, -737.15, -1113, -1028.95, -1113, -1032.9, -1129.2, -1086.4, -1136.7, -1101.03, -1149.04, -1028.95, -1113, -913.25, -1113, -931.45, -1096.25, -945.95, -1067.25, -963.45, -1058.25, -963.45, -1058.25, -1018.4, -1069.75, -1024.86, -1096.25, -1534.55, -1053.75, -1284.35, -1053.75, -1232.85, -1048.75, -1230.85, -1045.15, -1230.85, -1038.75, -1534.55, -1038.75, -1534.55, -1048.75, -1534.55, -1038.75, -1227.3, -1038.75, -1225.63, -1035.75, -1534.55, -1035.75, -1534.55, -1035.75, -1231.6, -1035.75, -1221.16, -947.75, -1534.55, -947.75, -1534.55, -1013.25, -1534.55, -947.75, -1221.16, -947.75, -1220.8, -944.75, -1193.35, -936.25, -1184.85, -921.25, -1184.85, -458.85, -1534.55, -458.85, -1534.55, -944.75, -1534.55, -458.85, -1184.85, -458.85, -1184.85, -221.9, -1534.55, -221.9, -1534.55, -440.375, -2388.6, -221.9, -1184.85, -221.9, -1184.85, -35.95, -2388.6, -35.95, -2388.6, -106.8, -2388.6, -35.95, -1184.85, -35.95, -1184.85, 30.4, -2388.6, 30.4, -2388.6, -28.5, -1177.8, 25.25, -1166.8, 25.25, -1162.39, 30.4, -1184.85, 30.4, -2388.6, 30.4, -1162.39, 30.4, -1148.85, 46.2, -1140.95, 113, -1116.2, 127.5, -1106.45, 139, -1059.6, 147, -2388.6, 147, -2388.6, 36.05, -74.85, 36.05, 143.6, 36.05, 143.6, 78.4, -90.35, 78.4, -75, 61.3, -74.8616, 38, -169.35, 78.4, 143.6, 78.4, 143.6, 255.578, -211.8, 255.578, -193.05, 255.45, -188.55, 101.95, -170.981, 80.4, -358.15, 110.65, -319, 110.65, -316.343, 258.4, -411.3, 258.4, -399.3, 248.15, -358.15, 205.3, -358.15, 113, -272.95, 119, -233.25, 119, -230.55, 249.45, -211.8, 255.578, -276.697, 255.578, -273.183, 127.5, -2388.6, 147, -2297.55, 147, -2315.65, 180.95, -2315.65, 285.8, -2388.6, 285.8, -2388.6, 152.25, -1932.1, 147, -1059.6, 147, -1028.85, 152.25, -1028.85, 165.95, -1900.75, 165.95, -1923.41, 152.25, -1786.75, 165.95, -1028.85, 165.95, -1028.85, 175.5, -1069.35, 192.4, -1378.35, 199, -1381.85, 221, -1469.05, 231, -1492.25, 242.95, -1499.25, 277, -1518.01, 285.8, -1749.34, 285.8, -1752.1, 269.5, -1752.1, 214.6, -1769.1, 209, -1769.1, 173.95, -276.697, 255.578, 143.6, 255.578, 143.6, 277.45, -316, 277.45, -294.293, 275.554, -277.05, 268.45, -276.774, 258.4, -494.3, 258.4, -316.343, 258.4, -316, 277.45, -533.547, 277.45, -528.3, 266.3, -947.9, 271.45, -893.9, 271.45, -874.9, 283.3, -953.68, 283.3, -949.902, 275.554, -533.547, 277.45, 143.6, 277.45, 143.6, 283.3, -536.3, 283.3, -953.68, 283.3, 143.6, 283.3, 143.6, 285.8, -954.9, 285.8, -2388.6, 285.8, -2315.65, 285.8, -2315.65, 291.95, -2300.6, 322.95, -2278.6, 336.35, -2388.6, 336.35, -2388.6, 286.85, -1749.34, 285.8, -1518.01, 285.8, -1520.25, 286.85, -1553.55, 343.95, -1586.55, 366.95, -1735.6, 366.95, -1749.16, 286.85, -1057.2, 285.8, 143.6, 285.8, 143.6, 354.95, -1248.3, 354.95, -1219.85, 343.45, -1111.9, 321, -1090.4, 317, -1058.32, 286.85, -2388.6, 336.35, -2202.6, 336.35, -2172.15, 373.45, -1829.75, 382.95, -1819.25, 411.3, -1778.15, 423.4, -1778.15, 434.9, -1743.2, 451.4, -1517.65, 457.9, -2388.6, 457.9, -2388.6, 343.45, -1399.25, 354.95, 143.6, 354.95, 143.6, 457.9, -1517.65, 457.9, -1496.8, 440.9, -1493.3, 407.9, -1461.33, 388.91, -1443.24, 375.926, -1439.05, 368.95, -1433.36, 366.95, -2388.6, 457.9, 143.6, 457.9, 143.6, 567.35, -2388.6, 567.35, -1945.1, 567.35, 143.6, 567.35, 143.6, 569.35, -1525.6, 569.35)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20, 21, 22), PackedInt32Array(23, 24, 25, 26, 27, 28, 29, 30), PackedInt32Array(31, 32, 33, 34, 35, 36, 37), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 43, 44, 45, 46), PackedInt32Array(47, 48, 49, 50, 51, 52, 53, 54), PackedInt32Array(55, 56, 57, 58, 59), PackedInt32Array(60, 61, 62, 63, 64), PackedInt32Array(65, 66, 67, 68, 69), PackedInt32Array(70, 71, 72, 73), PackedInt32Array(74, 75, 76, 77, 78, 79, 80, 81, 82), PackedInt32Array(83, 84, 85, 86, 87, 88), PackedInt32Array(89, 90, 91, 92, 93, 94, 95), PackedInt32Array(96, 97, 98, 99, 100, 101, 102), PackedInt32Array(103, 104, 105, 106, 107, 108), PackedInt32Array(109, 110, 111, 112, 113, 114), PackedInt32Array(115, 116, 117, 118, 119, 120), PackedInt32Array(121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135), PackedInt32Array(136, 137, 138, 139, 140, 141, 142), PackedInt32Array(143, 144, 145, 146, 147), PackedInt32Array(148, 149, 150, 151, 152), PackedInt32Array(153, 154, 155, 156), PackedInt32Array(157, 158, 159, 160), PackedInt32Array(161, 162, 163, 164, 165, 166, 167), PackedInt32Array(168, 169, 170, 171, 172, 173, 174), PackedInt32Array(175, 176, 177, 178, 179, 180, 181, 182), PackedInt32Array(183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193), PackedInt32Array(194, 195, 196, 197, 198, 199, 200, 201, 202, 203), PackedInt32Array(204, 205, 206, 207), PackedInt32Array(208, 209, 210, 211)])
@@ -193,7 +243,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@42735" type="Polygon2D" parent="Back Wall/Frame 0/@Group@42734/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(675.9, 954.8)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-1016.3, -973.15, -526.45, -973.15, -526.45, -954.8, -1016.3, -954.8)
@@ -205,7 +255,7 @@ position = Vector2(-1102.7, -1063.3)
 rotation = -0.785377
 scale = Vector2(0.500001, -0.49999)
 skew = -2.16961e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42737" type="Sprite2D" parent="Back Wall/Frame 0"]
@@ -214,7 +264,7 @@ position = Vector2(-1114.9, -1057)
 rotation = -1.30896
 scale = Vector2(0.499997, -0.499993)
 skew = -2.95639e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42738" type="Sprite2D" parent="Back Wall/Frame 0"]
@@ -223,7 +273,7 @@ position = Vector2(-1118.1, -1053.3)
 rotation = 2.35611
 scale = Vector2(0.500011, 0.500001)
 skew = 6.47306e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42739" type="Node2D" parent="Back Wall/Frame 0"]
@@ -233,16 +283,16 @@ centered = false
 [node name="@@42740" type="Polygon2D" parent="Back Wall/Frame 0/@Group@42739/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-725.95, -1126.3)
 texture_scale = Vector2(2, -2)
 texture_rotation = 3.14159
 polygon = PackedVector2Array(-922.9, -1126.3, -433.5, -1126.3, -433.5, -1107.95, -922.9, -1107.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Back Wall/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Back Wall/Frame 0"]
 position = Vector2(-406.5, -1714.7)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -255,9 +305,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@42741" type="Node2D" parent="Back Wall/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="@DOMSymbolInstance@42741" type="Node2D" parent="Back Wall/Frame 0"]
 position = Vector2(-150.5, -1714.7)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -270,9 +320,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@42742" type="Node2D" parent="Back Wall/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="@DOMSymbolInstance@42742" type="Node2D" parent="Back Wall/Frame 0"]
 position = Vector2(-660.5, -1714.7)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -285,9 +335,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@42743" type="Node2D" parent="Back Wall/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="@DOMSymbolInstance@42743" type="Node2D" parent="Back Wall/Frame 0"]
 position = Vector2(99.5, -1714.7)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -300,10 +350,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@42744" type="Node2D" parent="Back Wall/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="@DOMSymbolInstance@42744" type="Node2D" parent="Back Wall/Frame 0"]
 position = Vector2(-175.05, -1672.1)
 scale = Vector2(0.231583, 2.26871)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -324,7 +374,7 @@ position = Vector2(2.5, -1)
 [node name="@@42746" type="Polygon2D" parent="Back Wall/Frame 0/@Group@42745/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(806.6, 1059.8)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-1099.05, -1078.15, -1070.9, -1078.15, -1070.9, -1059.8, -1099.05, -1059.8)
@@ -335,7 +385,7 @@ texture_filter = 1
 position = Vector2(-1038.2, -988.6)
 rotation = 0.261796
 scale = Vector2(0.500008, -0.499993)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42748" type="Sprite2D" parent="Back Wall/Frame 0"]
@@ -344,7 +394,7 @@ position = Vector2(-1049.75, -996)
 rotation = -0.261766
 scale = Vector2(0.500004, -0.499993)
 skew = -3.74317e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42749" type="Node2D" parent="Back Wall/Frame 0"]
@@ -354,7 +404,7 @@ centered = false
 [node name="@@42750" type="Polygon2D" parent="Back Wall/Frame 0/@Group@42749/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("6_vbclp")
+texture = ExtResource("6_ccvg1")
 texture_offset = Vector2(159.15, -26)
 polygon = PackedVector2Array(-248.8, 26, -70.15, 26, -70.15, 35, -248.8, 35)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -367,7 +417,7 @@ position = Vector2(-1424.25, -1099.25)
 [node name="@@42752" type="Polygon2D" parent="Back Wall/Frame 0/@Group@42751/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("6_vbclp")
+texture = ExtResource("6_ccvg1")
 texture_offset = Vector2(-315.5, -24)
 polygon = PackedVector2Array(355.85, 24, 404.5, 24, 404.5, 33, 355.85, 33)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -376,9 +426,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(7.95, -1772.75)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Bitmap Glitch Fix.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -388,7 +438,7 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.1
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="@@42531" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -396,7 +446,7 @@ texture_filter = 1
 position = Vector2(-1035.3, 177.7)
 rotation = 2.87979
 scale = Vector2(0.499993, -0.500008)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42532" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -404,7 +454,7 @@ texture_filter = 1
 position = Vector2(-1031.7, 180.2)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42533" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -412,7 +462,7 @@ texture_filter = 1
 position = Vector2(-71.05, 36.15)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42534" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -420,7 +470,7 @@ texture_filter = 1
 position = Vector2(-64.3, 42)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42535" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -428,7 +478,7 @@ texture_filter = 1
 position = Vector2(-71.05, 78.55)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
@@ -439,7 +489,7 @@ position = Vector2(-337.4, -370.65)
 [node name="@@42536" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-371.15, -465.95)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(174.45, 447.6, 252.45, 447.6, 252.45, 465.95, 174.45, 465.95)
@@ -450,7 +500,7 @@ texture_filter = 1
 position = Vector2(-162.95, 92.45)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42538" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -458,7 +508,7 @@ texture_filter = 1
 position = Vector2(-177.2, 107.05)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42539" type="Node2D" parent="Layer 1/Frame 0"]
@@ -468,7 +518,7 @@ centered = false
 [node name="@@42540" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42539/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(73.75, -119)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-356.95, 100.65, -321.05, 100.65, -321.05, 119, -356.95, 119)
@@ -479,7 +529,7 @@ texture_filter = 1
 position = Vector2(-356.95, 131.7)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42542" type="Node2D" parent="Layer 1/Frame 0"]
@@ -491,7 +541,7 @@ rotation = -1.5708
 [node name="@@42543" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42542/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(5.55, -527.95)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-206.55, 509.6, -124.25, 509.6, -124.25, 527.95, -206.55, 527.95)
@@ -502,7 +552,7 @@ texture_filter = 1
 position = Vector2(-365.15, 231.55)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42545" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -510,7 +560,7 @@ texture_filter = 1
 position = Vector2(-374.65, 240)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42546" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -518,7 +568,7 @@ texture_filter = 1
 position = Vector2(-378.65, 249.5)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42547" type="Node2D" parent="Layer 1/Frame 0"]
@@ -529,7 +579,7 @@ position = Vector2(-154.4, -380.95)
 [node name="@@42548" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42547/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(126.05, -646.8)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-355.55, 628.45, -244.75, 628.45, -244.75, 646.8, -355.55, 646.8)
@@ -540,7 +590,7 @@ texture_filter = 1
 position = Vector2(-509.95, 269.5)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42550" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -548,7 +598,7 @@ texture_filter = 1
 position = Vector2(-525.45, 293)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42551" type="Node2D" parent="Layer 1/Frame 0"]
@@ -558,7 +608,7 @@ centered = false
 [node name="@@42552" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42551/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(416.25, -297.45)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-883.75, 279.1, -534.95, 279.1, -534.95, 297.45, -883.75, 297.45)
@@ -573,7 +623,7 @@ rotation = 3.14159
 [node name="@@42554" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42553/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(126.05, -646.8)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-355.55, 628.45, -244.75, 628.45, -244.75, 646.8, -355.55, 646.8)
@@ -584,7 +634,7 @@ texture_filter = 1
 position = Vector2(-637.25, 159.2)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42556" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -592,7 +642,7 @@ texture_filter = 1
 position = Vector2(-646.75, 168.05)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42557" type="Node2D" parent="Layer 1/Frame 0"]
@@ -604,7 +654,7 @@ rotation = 3.14159
 [node name="@@42558" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42557/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(126.05, -646.8)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-355.55, 628.45, -244.75, 628.45, -244.75, 646.8, -355.55, 646.8)
@@ -615,7 +665,7 @@ texture_filter = 1
 position = Vector2(-510.95, 135.95)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42560" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -623,7 +673,7 @@ texture_filter = 1
 position = Vector2(-501.45, 130.15)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42561" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -631,14 +681,14 @@ texture_filter = 1
 position = Vector2(-485.95, 107.05)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42562" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-498.65, 107.05)
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42563" type="Node2D" parent="Layer 1/Frame 0"]
@@ -649,7 +699,7 @@ position = Vector2(-460.6, -390.05)
 [node name="@@42564" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42563/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-80.65, -499.95)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-202.55, 481.6, -38.05, 481.6, -38.05, 499.95, -202.55, 499.95)
@@ -660,14 +710,14 @@ texture_filter = 1
 position = Vector2(-672.65, 108.7)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42566" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-689.15, 81.5)
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42567" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -675,7 +725,7 @@ texture_filter = 1
 position = Vector2(-689.15, 75.5)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42568" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -683,7 +733,7 @@ texture_filter = 1
 position = Vector2(-719.15, 75.9)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42569" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -692,7 +742,7 @@ position = Vector2(-732.95, 35.65)
 rotation = 0.785398
 scale = Vector2(0.500011, -0.500001)
 skew = 2.15769e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42570" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -700,7 +750,7 @@ texture_filter = 1
 position = Vector2(-731.95, -30.7)
 rotation = -0.523598
 scale = Vector2(0.500001, 0.500001)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42571" type="Node2D" parent="Layer 1/Frame 0"]
@@ -711,7 +761,7 @@ position = Vector2(-153.4, -433.45)
 [node name="@@42572" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42571/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-672.1, 376.85)
 texture_scale = Vector2(2, -2)
 texture_rotation = 3.14159
@@ -723,7 +773,7 @@ texture_filter = 1
 position = Vector2(-517.5, -67.75)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42574" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -731,7 +781,7 @@ texture_filter = 1
 position = Vector2(-512.25, -67.9)
 rotation = -0.261796
 scale = Vector2(0.500008, 0.500008)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42575" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -739,7 +789,7 @@ texture_filter = 1
 position = Vector2(-485.4, -94.95)
 rotation = 2.09439
 scale = Vector2(0.500001, -0.500001)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42576" type="Node2D" parent="Layer 1/Frame 0"]
@@ -750,7 +800,7 @@ position = Vector2(-154.4, -380.95)
 [node name="@@42577" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42576/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-532.8, -581.1)
 texture_scale = Vector2(2, -2)
 texture_rotation = -1.5708
@@ -762,7 +812,7 @@ texture_filter = 1
 position = Vector2(-105.6, -107.1)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42579" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -770,7 +820,7 @@ texture_filter = 1
 position = Vector2(-105.6, -90.45)
 rotation = 3.14159
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42580" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -778,7 +828,7 @@ texture_filter = 1
 position = Vector2(-120.1, -114.95)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42581" type="Node2D" parent="Layer 1/Frame 0"]
@@ -789,7 +839,7 @@ position = Vector2(-154.4, -380.95)
 [node name="@@42582" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42581/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(24.8, 264.15)
 texture_scale = Vector2(2, -2)
 texture_rotation = 3.14159
@@ -800,14 +850,14 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 texture_filter = 1
 position = Vector2(-483.95, -99.85)
 scale = Vector2(0.500015, 0.500015)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42584" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-470.15, -105.9)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42585" type="Node2D" parent="Layer 1/Frame 0"]
@@ -818,7 +868,7 @@ position = Vector2(138.25, -459.9)
 [node name="@@42586" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42585/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-80.65, -499.95)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-202.55, 481.6, -38.05, 481.6, -38.05, 499.95, -202.55, 499.95)
@@ -832,7 +882,7 @@ position = Vector2(192.95, -378.9)
 [node name="@@42588" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42587/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(24.8, 264.15)
 texture_scale = Vector2(2, -2)
 texture_rotation = 3.14159
@@ -844,7 +894,7 @@ texture_filter = 1
 position = Vector2(-185.7, 127)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42590" type="Node2D" parent="Layer 1/Frame 0"]
@@ -854,7 +904,7 @@ centered = false
 [node name="@@42591" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42590/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-408.9, -178.2)
 texture_scale = Vector2(2, 2)
 texture_rotation = -1.5708
@@ -866,7 +916,7 @@ texture_filter = 1
 position = Vector2(-321.35, 130.65)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42593" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -874,7 +924,7 @@ texture_filter = 1
 position = Vector2(-270.05, 142)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42594" type="Node2D" parent="Layer 1/Frame 0"]
@@ -884,7 +934,7 @@ centered = false
 [node name="@@42595" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42594/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-410.7, -329.2)
 texture_scale = Vector2(2, -2)
 texture_rotation = -1.5708
@@ -898,7 +948,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@42597" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42596/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-410.4, -262.55)
 texture_scale = Vector2(2, 2)
 texture_rotation = -1.5708
@@ -913,7 +963,7 @@ position = Vector2(86.9, 10.35)
 [node name="@@42599" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42598/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(73.75, -119)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-356.95, 100.65, -321.05, 100.65, -321.05, 119, -356.95, 119)
@@ -924,7 +974,7 @@ texture_filter = 1
 position = Vector2(-235.5, 141.15)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42601" type="Node2D" parent="Layer 1/Frame 0"]
@@ -934,7 +984,7 @@ centered = false
 [node name="@@42602" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42601/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-408.2, -243.35)
 texture_scale = Vector2(2, -2)
 texture_rotation = -1.5708
@@ -946,7 +996,7 @@ texture_filter = 1
 position = Vector2(-188.7, 260.5)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42604" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -954,14 +1004,14 @@ texture_filter = 1
 position = Vector2(-234.5, 252.8)
 rotation = 0.261796
 scale = Vector2(0.500008, -0.499993)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42605" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-318.55, 280.6)
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42606" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -969,14 +1019,14 @@ texture_filter = 1
 position = Vector2(-272.75, 272.9)
 rotation = 2.8798
 scale = Vector2(0.500008, 0.499993)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42607" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-897.7, 280.55)
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42608" type="Node2D" parent="Layer 1/Frame 0"]
@@ -987,7 +1037,7 @@ position = Vector2(0.5, 0)
 [node name="@@42609" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42608/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(779, -283.4)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-951.9, 265.05, -897.7, 265.05, -897.7, 283.4, -951.9, 283.4)
@@ -998,7 +1048,7 @@ texture_filter = 1
 position = Vector2(-951.4, 295.35)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42611" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1008,7 +1058,7 @@ centered = false
 [node name="@@42612" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42611/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(842.2, -300.45)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-1037.1, 282.1, -960.9, 282.1, -960.9, 300.45, -1037.1, 300.45)
@@ -1019,7 +1069,7 @@ texture_filter = 1
 position = Vector2(-1037.1, 291.6)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42614" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1027,7 +1077,7 @@ texture_filter = 1
 position = Vector2(-1075.1, 321.1)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42615" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1035,7 +1085,7 @@ texture_filter = 1
 position = Vector2(-1060.5, 307.1)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42616" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1043,7 +1093,7 @@ texture_filter = 1
 position = Vector2(-1090.6, 323.9)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42617" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1054,7 +1104,7 @@ position = Vector2(-148.25, 40.8)
 [node name="@@42618" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42617/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(842.2, -300.45)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-1037.1, 282.1, -960.9, 282.1, -960.9, 300.45, -1037.1, 300.45)
@@ -1065,7 +1115,7 @@ texture_filter = 1
 position = Vector2(-1185.35, 344.4)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42620" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1073,7 +1123,7 @@ texture_filter = 1
 position = Vector2(-1200.85, 346.4)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42621" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1084,7 +1134,7 @@ position = Vector2(-1, -1.5)
 [node name="@@42622" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42621/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(1100.45, -364.75)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-1393.8, 346.4, -1219.15, 346.4, -1219.15, 364.75, -1393.8, 364.75)
@@ -1095,7 +1145,7 @@ texture_filter = 1
 position = Vector2(-757.55, 188.05)
 rotation = 3.14159
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42624" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1105,7 +1155,7 @@ centered = false
 [node name="@@42625" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42624/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-999.4, 171.2)
 texture_scale = Vector2(2, -2)
 texture_rotation = 3.14159
@@ -1117,7 +1167,7 @@ texture_filter = 1
 position = Vector2(-840.9, 174.05)
 rotation = 3.14159
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42627" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1125,7 +1175,7 @@ texture_filter = 1
 position = Vector2(-858.55, 147.45)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42628" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1133,7 +1183,7 @@ texture_filter = 1
 position = Vector2(-861.55, 132.2)
 rotation = 3.14159
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42629" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1145,7 +1195,7 @@ rotation = 1.5708
 [node name="@@42630" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42629/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-999.4, 171.2)
 texture_scale = Vector2(2, -2)
 texture_rotation = 3.14159
@@ -1157,7 +1207,7 @@ texture_filter = 1
 position = Vector2(-877.7, 45.7)
 rotation = 3.14159
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42632" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1165,7 +1215,7 @@ texture_filter = 1
 position = Vector2(-887.55, 36.65)
 rotation = 3.14159
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42633" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1173,14 +1223,14 @@ texture_filter = 1
 position = Vector2(-914.55, 20)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42634" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-957.05, 20)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42635" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1188,7 +1238,7 @@ texture_filter = 1
 position = Vector2(-956.55, 14)
 rotation = 3.14159
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42636" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1198,7 +1248,7 @@ centered = false
 [node name="@@42637" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42636/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-208, 960.2)
 texture_scale = Vector2(2, -2)
 texture_rotation = 1.5708
@@ -1210,7 +1260,7 @@ texture_filter = 1
 position = Vector2(-974.9, -48)
 rotation = 3.14159
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42639" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1218,7 +1268,7 @@ texture_filter = 1
 position = Vector2(-973.4, -33)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42640" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1226,7 +1276,7 @@ texture_filter = 1
 position = Vector2(-992.45, -74.85)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42641" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1236,7 +1286,7 @@ centered = false
 [node name="@@42642" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42641/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-1270, 188.05)
 texture_scale = Vector2(2, -2)
 texture_rotation = 3.14159
@@ -1248,7 +1298,7 @@ texture_filter = 1
 position = Vector2(-1075.1, 184.9)
 rotation = 1.5708
 scale = Vector2(0.500015, -0.500015)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42644" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1257,14 +1307,14 @@ position = Vector2(-1035.6, 172.05)
 rotation = 2.09438
 scale = Vector2(0.500014, -0.500022)
 skew = 2.63453e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42645" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1048.55, 153.05)
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42646" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1275,7 +1325,7 @@ position = Vector2(-150.85, -128.5)
 [node name="@@42647" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42646/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(779, -283.4)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-951.9, 265.05, -897.7, 265.05, -897.7, 283.4, -951.9, 283.4)
@@ -1285,7 +1335,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 texture_filter = 1
 position = Vector2(-1144.75, 127.25)
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42649" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1293,7 +1343,7 @@ texture_filter = 1
 position = Vector2(-1117.75, 143.9)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42650" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1305,7 +1355,7 @@ rotation = 1.5708
 [node name="@@42651" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42650/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(779, -283.4)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-951.9, 265.05, -897.7, 265.05, -897.7, 283.4, -951.9, 283.4)
@@ -1316,7 +1366,7 @@ texture_filter = 1
 position = Vector2(-1148.1, 63.8)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42653" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1326,7 +1376,7 @@ centered = false
 [node name="@@42654" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42653/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(1057.4, -36.5)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-1192.85, 18.15, -1176.1, 18.15, -1176.1, 36.5, -1192.85, 36.5)
@@ -1337,7 +1387,7 @@ texture_filter = 1
 position = Vector2(-1394.8, 366.4)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42656" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1345,7 +1395,7 @@ texture_filter = 1
 position = Vector2(-1408.8, 369.4)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42657" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1353,7 +1403,7 @@ texture_filter = 1
 position = Vector2(-1436.45, 386.9)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42658" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1361,7 +1411,7 @@ texture_filter = 1
 position = Vector2(-1448.7, 388.9)
 rotation = 2.87979
 scale = Vector2(0.499993, 0.499993)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42659" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1369,7 +1419,7 @@ texture_filter = 1
 position = Vector2(-1474.45, 408.9)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42660" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1377,7 +1427,7 @@ texture_filter = 1
 position = Vector2(-1491.4, 435.4)
 rotation = -1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42661" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1385,7 +1435,7 @@ texture_filter = 1
 position = Vector2(-1493.9, 450.9)
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42662" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1395,7 +1445,7 @@ centered = false
 [node name="@@42663" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42662/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(1386.1, -468.25)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-1746.95, 449.9, -1504.8, 449.9, -1504.8, 468.25, -1746.95, 468.25)
@@ -1406,14 +1456,14 @@ texture_filter = 1
 position = Vector2(-1384.75, 193)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42665" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1402.25, 220.65)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42666" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1424,7 +1474,7 @@ position = Vector2(106, -34.35)
 [node name="@@42667" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42666/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-1486, 255)
 texture_scale = Vector2(2, -2)
 texture_rotation = 3.14159
@@ -1435,7 +1485,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 texture_filter = 1
 position = Vector2(-1519.45, 278.65)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42669" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1443,14 +1493,14 @@ texture_filter = 1
 position = Vector2(-1502.5, 252.15)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42670" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1500, 236.65)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42671" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1458,7 +1508,7 @@ texture_filter = 1
 position = Vector2(-1530.7, 300.95)
 rotation = 2.09439
 scale = Vector2(0.500001, -0.500001)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42672" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1466,7 +1516,7 @@ texture_filter = 1
 position = Vector2(-1528.95, 281.65)
 rotation = 1.5708
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42673" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1474,7 +1524,7 @@ texture_filter = 1
 position = Vector2(-1555.85, 324.9)
 rotation = 1.5708
 scale = Vector2(0.500015, -0.500015)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42674" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1482,7 +1532,7 @@ texture_filter = 1
 position = Vector2(-1581.15, 348.9)
 rotation = -0.261796
 scale = Vector2(0.500008, 0.500008)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42675" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1490,12 +1540,12 @@ texture_filter = 1
 position = Vector2(-1591.05, 360.95)
 rotation = -0.261796
 scale = Vector2(0.500008, 0.500008)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
-[node name="@DOMSymbolInstance@42676" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ba16c")]
+[node name="@DOMSymbolInstance@42676" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-1958.4, 408.65)
-script = ExtResource("2_anflf")
+script = ExtResource("2_vs6i6")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Pamtib Glitch fix.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1514,14 +1564,14 @@ position = Vector2(-1171.1, 27.35)
 rotation = 0.785398
 scale = Vector2(0.500011, -0.500001)
 skew = 2.15769e-05
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42678" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1191.1, 28.15)
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42679" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1533,7 +1583,7 @@ scale = Vector2(1, -1)
 [node name="@@42680" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42679/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(511.15, 233.8)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-803.6, -252.15, -596.65, -252.15, -596.65, -233.8, -803.6, -233.8)
@@ -1546,7 +1596,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@42682" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42681/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-303.35, 985.1)
 texture_scale = Vector2(2, -2)
 texture_rotation = 1.5708
@@ -1560,7 +1610,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@42684" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42683/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(511.15, 233.8)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-788.95, -252.15, -535.65, -252.15, -535.65, -233.8, -788.95, -233.8)
@@ -1574,7 +1624,7 @@ position = Vector2(-1, 0)
 [node name="@@42686" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42685/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(112.4, -831.55)
 texture_scale = Vector2(2, -2)
 texture_rotation = -1.5708
@@ -1586,21 +1636,21 @@ texture_filter = 1
 position = Vector2(-797.45, -261.9)
 rotation = -1.5708
 scale = Vector2(0.500015, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42688" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-794.9, -246.4)
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42689" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-834.55, -331.1)
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42690" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1611,7 +1661,7 @@ position = Vector2(-232.6, -95.9)
 [node name="@@42691" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42690/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(441.15, 233.8)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-733.6, -252.15, -599.65, -252.15, -599.65, -233.8, -733.6, -233.8)
@@ -1623,7 +1673,7 @@ position = Vector2(-970.1, -332.1)
 rotation = -0.785377
 scale = Vector2(0.500001, -0.49999)
 skew = -2.16961e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42693" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1632,7 +1682,7 @@ position = Vector2(-982.3, -325.8)
 rotation = -1.30896
 scale = Vector2(0.499997, -0.499993)
 skew = -2.95639e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42694" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1641,7 +1691,7 @@ position = Vector2(-985.55, -318.7)
 rotation = 2.61797
 scale = Vector2(0.500009, 0.500001)
 skew = 2.63453e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@Group@42695" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1651,7 +1701,7 @@ centered = false
 [node name="@@42696" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42695/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-753.35, 985.1)
 texture_scale = Vector2(2, -2)
 texture_rotation = 1.5708
@@ -1664,7 +1714,7 @@ position = Vector2(-987.45, -531.1)
 rotation = 1.30897
 scale = Vector2(0.500012, 0.499993)
 skew = 2.15769e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42698" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1673,7 +1723,7 @@ position = Vector2(-958.35, -508.2)
 rotation = -2.8798
 scale = Vector2(0.500023, -0.499993)
 skew = 1.57356e-05
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42699" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1685,7 +1735,7 @@ scale = Vector2(1, -1)
 [node name="@@42700" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42699/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(441.15, 233.8)
 texture_scale = Vector2(2, -2)
 polygon = PackedVector2Array(-733.6, -252.15, -599.65, -252.15, -599.65, -233.8, -733.6, -233.8)
@@ -1696,7 +1746,7 @@ texture_filter = 1
 position = Vector2(-814.9, -497.5)
 rotation = -2.87979
 scale = Vector2(0.499993, -0.500008)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42702" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1705,14 +1755,14 @@ position = Vector2(-778.65, -496.5)
 rotation = 2.87979
 scale = Vector2(0.499993, -0.500023)
 skew = 1.57356e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42703" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-822.9, -491.5)
 scale = Vector2(0.500015, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42704" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1720,7 +1770,7 @@ texture_filter = 1
 position = Vector2(-773.7, -486.25)
 rotation = 1.309
 scale = Vector2(0.500008, 0.499993)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42705" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1730,7 +1780,7 @@ centered = false
 [node name="@@42706" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42705/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-503.25, 731.55)
 texture_scale = Vector2(2, -2)
 texture_rotation = 1.5708
@@ -1742,7 +1792,7 @@ texture_filter = 1
 position = Vector2(-749.9, -455.55)
 rotation = -2.87979
 scale = Vector2(0.499993, -0.500008)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42708" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1750,7 +1800,7 @@ texture_filter = 1
 position = Vector2(-745.35, -446.9)
 rotation = 1.5708
 scale = Vector2(0.500015, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42709" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1758,7 +1808,7 @@ texture_filter = 1
 position = Vector2(-733.85, -346.6)
 rotation = 1.5708
 scale = Vector2(0.5, 0.500015)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42710" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1766,21 +1816,21 @@ texture_filter = 1
 position = Vector2(-726.55, -339.9)
 rotation = 0.785398
 scale = Vector2(0.500011, 0.500011)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42711" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-718.15, -333.7)
 scale = Vector2(0.500015, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42712" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-822.45, -284.9)
 scale = Vector2(0.500015, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42713" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1791,7 +1841,7 @@ position = Vector2(-1, 0)
 [node name="@@42714" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42713/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(771.3, -1114.25)
 texture_scale = Vector2(2, 2)
 texture_rotation = -1.5708
@@ -1803,7 +1853,7 @@ texture_filter = 1
 position = Vector2(-1112.95, -1004.05)
 rotation = -2.87979
 scale = Vector2(0.499993, -0.500008)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42716" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1812,14 +1862,14 @@ position = Vector2(-1076.7, -1003.05)
 rotation = 2.87979
 scale = Vector2(0.499993, -0.500023)
 skew = 1.57356e-05
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42717" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1120.95, -998.05)
 scale = Vector2(0.500015, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42718" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1827,7 +1877,7 @@ texture_filter = 1
 position = Vector2(-1071.75, -992.8)
 rotation = 1.309
 scale = Vector2(0.500008, 0.499993)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@Group@42719" type="Node2D" parent="Layer 1/Frame 0"]
@@ -1837,7 +1887,7 @@ centered = false
 [node name="@@42720" type="Polygon2D" parent="Layer 1/Frame 0/@Group@42719/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_xw57r")
+texture = ExtResource("4_81roi")
 texture_offset = Vector2(-1026.8, 1029.6)
 texture_scale = Vector2(2, -2)
 texture_rotation = 1.5708
@@ -1849,7 +1899,7 @@ texture_filter = 1
 position = Vector2(-1047.95, -962.1)
 rotation = -2.87979
 scale = Vector2(0.499993, -0.500008)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42722" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1857,7 +1907,7 @@ texture_filter = 1
 position = Vector2(-1043.4, -953.45)
 rotation = 1.5708
 scale = Vector2(0.500015, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42723" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1865,7 +1915,7 @@ texture_filter = 1
 position = Vector2(-1031.9, -870.15)
 rotation = 1.5708
 scale = Vector2(0.5, 0.500015)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42724" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1873,7 +1923,7 @@ texture_filter = 1
 position = Vector2(-1024.6, -863.45)
 rotation = 0.785398
 scale = Vector2(0.500011, 0.500011)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42725" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1881,7 +1931,7 @@ texture_filter = 1
 position = Vector2(-987.2, -853.75)
 rotation = 3.14159
 scale = Vector2(0.500015, -0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42726" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1889,7 +1939,7 @@ texture_filter = 1
 position = Vector2(-1069.6, -1049.15)
 rotation = -1.5708
 scale = Vector2(0.500015, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42727" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1897,7 +1947,7 @@ texture_filter = 1
 position = Vector2(-1072.5, -1038.3)
 rotation = 0.517609
 scale = Vector2(0.498621, -0.498655)
-texture = ExtResource("5_77lh1")
+texture = ExtResource("5_314en")
 centered = false
 
 [node name="@@42728" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1905,7 +1955,7 @@ texture_filter = 1
 position = Vector2(-1059.8, -1005.2)
 rotation = -1.57676
 scale = Vector2(0.498651, 0.49862)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false
 
 [node name="@@42729" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -1913,5 +1963,5 @@ texture_filter = 1
 position = Vector2(-1024.2, -961.1)
 rotation = -1.5708
 scale = Vector2(0.500015, 0.5)
-texture = ExtResource("7_efnhj")
+texture = ExtResource("7_eyhri")
 centered = false

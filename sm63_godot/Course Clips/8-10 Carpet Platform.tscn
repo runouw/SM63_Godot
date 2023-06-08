@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_0d383"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_n8euc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_0rqrp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gieti"]
 
-[sub_resource type="Animation" id="Animation_7q83h"]
+[sub_resource type="Animation" id="Animation_xmxpc"]
 length = 13.9333
 loop_mode = 1
 tracks/0/type = "value"
@@ -151,24 +151,53 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qm2es"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wd8qn"]
 _data = {
-"Default": SubResource("Animation_7q83h")
+"Default": SubResource("Animation_xmxpc")
 }
 
+[sub_resource type="GDScript" id="GDScript_qokwn"]
+script/source = "extends Node
+# stop();
+# played = false;
+# landedon = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (played == true) {
+# 			play();
+# 		}
+# 		if (landedon == true && _root.Course.Char.yspeed>=-3) {
+# 			played = true;
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_jon62"]
+script/source = "extends Node
+# gotoAndStop(1);
+# "
+
 [node name="8-10 Carpet Platform" type="Node2D"]
+script = ExtResource("1_0rqrp")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-10 Carpet Platform.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qm2es")
+"Timeline": SubResource("AnimationLibrary_wd8qn")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_0d383")]
-script = ExtResource("2_n8euc")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
+script = ExtResource("2_gieti")
 path = "res://sm63_godot/Course Clips/8-10 Carpet Platform Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -184,9 +213,9 @@ brightness = 0.0
 [node name="Frame 44" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 44" instance=ExtResource("1_0d383")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 44"]
 position = Vector2(6.1, 82.25)
-script = ExtResource("2_n8euc")
+script = ExtResource("2_gieti")
 path = "res://sm63_godot/Course Clips/8-10 Carpet Platform Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -202,9 +231,9 @@ brightness = 0.0
 [node name="Frame 345" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 345" instance=ExtResource("1_0d383")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 345"]
 position = Vector2(908.15, -69.2)
-script = ExtResource("2_n8euc")
+script = ExtResource("2_gieti")
 path = "res://sm63_godot/Course Clips/8-10 Carpet Platform Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -220,9 +249,9 @@ brightness = 0.0
 [node name="Frame 384" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 384" instance=ExtResource("1_0d383")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 384"]
 position = Vector2(910.7, -149.95)
-script = ExtResource("2_n8euc")
+script = ExtResource("2_gieti")
 path = "res://sm63_godot/Course Clips/8-10 Carpet Platform Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -238,9 +267,9 @@ brightness = 0.0
 [node name="Frame 394" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 394" instance=ExtResource("1_0d383")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 394"]
 position = Vector2(910.7, -149.95)
-script = ExtResource("2_n8euc")
+script = ExtResource("2_gieti")
 path = "res://sm63_godot/Course Clips/8-10 Carpet Platform Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -256,9 +285,9 @@ brightness = 0.0
 [node name="Frame 404" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 404" instance=ExtResource("1_0d383")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 404"]
 position = Vector2(910.7, -149.95)
-script = ExtResource("2_n8euc")
+script = ExtResource("2_gieti")
 path = "res://sm63_godot/Course Clips/8-10 Carpet Platform Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -277,8 +306,8 @@ visible = false
 [node name="Frame 406" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 406" instance=ExtResource("1_0d383")]
-script = ExtResource("2_n8euc")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 406"]
+script = ExtResource("2_gieti")
 path = "res://sm63_godot/Course Clips/8-10 Carpet Platform Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -294,8 +323,8 @@ brightness = 0.0
 [node name="Frame 416" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 416" instance=ExtResource("1_0d383")]
-script = ExtResource("2_n8euc")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 416"]
+script = ExtResource("2_gieti")
 path = "res://sm63_godot/Course Clips/8-10 Carpet Platform Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -325,5 +354,11 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_qokwn")
+
 [node name="Frame 417" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 417"]
+script = SubResource("GDScript_jon62")

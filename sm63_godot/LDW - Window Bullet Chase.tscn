@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_ycgv8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qq8gm"]
+
+[sub_resource type="Animation" id="Animation_w66pw"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,61 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bhybh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0e5mh"]
 _data = {
-"Default": SubResource("Animation_ycgv8")
+"Default": SubResource("Animation_w66pw")
 }
 
+[sub_resource type="GDScript" id="GDScript_j7c1a"]
+script/source = "extends Node
+# al = 50;
+# //
+# _alpha = 50;
+# //
+# onEnterFrame = function () {
+# 	if (_parent.greyness.aa == 0) {
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 			sc = 120;
+# 			al = 100;
+# 		} else {
+# 			sc = 100;
+# 			al = 50;
+# 		}
+# 		_xscale += (sc-_xscale)/2;
+# 		_yscale = _xscale;
+# 		_alpha += (al-_alpha)/2;
+# 		//
+# 		if (_parent.chase == true) {
+# 			gotoAndStop(4);
+# 			_alpha = 100;
+# 		} else {
+# 			gotoAndStop(3);
+# 		}
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		_xscale = 140;
+# 		_yscale = 140;
+# 		_parent.chase = !_parent.chase;
+# 	}
+# };
+# if (_parent.chase == undefined) {
+# 	_parent.chase = false;
+# }
+# //_root.BGquality == \"LOW\"     
+# "
+
 [node name="LDW - Window Bullet Chase" type="Node2D"]
+script = ExtResource("1_qq8gm")
+source_xml = "res://sm63/LIBRARY/LDW - Window Bullet Chase.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bhybh")
+"Timeline": SubResource("AnimationLibrary_0e5mh")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -123,6 +170,9 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_j7c1a")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

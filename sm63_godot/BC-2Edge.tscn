@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_uklg5"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_h6fgw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tujs1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_kav0r"]
 
-[sub_resource type="Animation" id="Animation_8oav2"]
+[sub_resource type="Animation" id="Animation_ivgsh"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +31,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_crwbe"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y3y33"]
 _data = {
-"Default": SubResource("Animation_8oav2")
+"Default": SubResource("Animation_ivgsh")
 }
 
 [node name="BC-2Edge" type="Node2D"]
+script = ExtResource("1_tujs1")
+source_xml = "res://sm63/LIBRARY/BC-2Edge.xml"
+linkage = "BC-2Edge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_crwbe")
+"Timeline": SubResource("AnimationLibrary_y3y33")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,9 +56,9 @@ libraries = {
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_uklg5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(366.15, -262.15)
-script = ExtResource("2_h6fgw")
+script = ExtResource("2_kav0r")
 path = "res://sm63_godot/BC-Side Lava.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

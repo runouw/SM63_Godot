@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_aa6bw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tk4t4"]
+
+[sub_resource type="Animation" id="Animation_pih8p"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -52,16 +54,77 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ovxt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ximt5"]
 _data = {
-"Default": SubResource("Animation_aa6bw")
+"Default": SubResource("Animation_pih8p")
 }
 
+[sub_resource type="GDScript" id="GDScript_w2qg1"]
+script/source = "extends Node
+# num = 8;
+# if (_rotation == 180) {
+# 	num = -8;
+# }
+# y2 = _y;
+# al = 100;
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 		sc = 105;
+# 		gotoAndStop(3);
+# 	} else {
+# 		gotoAndStop(2);
+# 		sc = 100;
+# 	}
+# 	if (_rotation == 0) {
+# 		if (_parent.num>=0) {
+# 			al = 0;
+# 			sc = 100;
+# 		} else {
+# 			al = 100;
+# 		}
+# 	} else if (_rotation == 180) {
+# 		if (_parent.num<=-(_parent.txt._height-300)) {
+# 			al = 0;
+# 			sc = 100;
+# 		} else {
+# 			al = 100;
+# 		}
+# 	}
+# 	_alpha += (al-_alpha)/2;
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	_y += (y2-_y)/2;
+# 	if (hold == true && sc == 105) {
+# 		if (count == 0 || (count>6)) {
+# 			_parent.num += num;
+# 			_y += num/5;
+# 			_xscale = 130;
+# 			_yscale = 130;
+# 		}
+# 		count++;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (sc == 105) {
+# 		hold = true;
+# 		count = 0;
+# 	}
+# };
+# onMouseUp = function () {
+# 	hold = false;
+# };
+# "
+
 [node name="Credits Arrow Upfd" type="Node2D"]
+script = ExtResource("1_tk4t4")
+source_xml = "res://sm63/LIBRARY/Credits Arrow Upfd.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8ovxt")
+"Timeline": SubResource("AnimationLibrary_ximt5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -87,6 +150,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_w2qg1")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

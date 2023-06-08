@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="1_7206b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3nm27"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="2_2e0r0"]
 
-[sub_resource type="Animation" id="Animation_thfr6"]
+[sub_resource type="Animation" id="Animation_37mkp"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bv6k7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3fxoo"]
 _data = {
-"Default": SubResource("Animation_thfr6")
+"Default": SubResource("Animation_37mkp")
 }
 
 [node name="BC-1 Falling PL 1" type="Node2D"]
+script = ExtResource("1_3nm27")
+source_xml = "res://sm63/LIBRARY/BC-1 Falling PL 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bv6k7")
+"Timeline": SubResource("AnimationLibrary_3fxoo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@331" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_7206b")
+texture = ExtResource("2_2e0r0")
 texture_offset = Vector2(9.61501, 92.8465)
 texture_scale = Vector2(0.999998, 0.999998)
 texture_rotation = -1.0472

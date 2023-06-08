@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_jyv4j"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6672w"]
+
+[sub_resource type="Animation" id="Animation_m3gmv"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_06cyl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5p6t1"]
 _data = {
-"Default": SubResource("Animation_jyv4j")
+"Default": SubResource("Animation_m3gmv")
 }
 
 [node name="7-6CamEdge" type="Node2D"]
+script = ExtResource("1_6672w")
+source_xml = "res://sm63/LIBRARY/Course Clips/7-6CamEdge.xml"
+linkage = "7-6CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_06cyl")
+"Timeline": SubResource("AnimationLibrary_5p6t1")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -56,6 +63,7 @@ rotation = 1.5708
 scale = Vector2(1.76155, 1)
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@17619"]
+scale = Vector2(1, 1)
 
 [node name="@@17620" type="Polygon2D" parent="Layer 1/Frame 0/@Group@17619/Shape"]
 color = Color(0.4, 0.4, 0.4, 1)
@@ -68,6 +76,7 @@ rotation = 1.5708
 scale = Vector2(1.76155, 1)
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@17621"]
+scale = Vector2(1, 1)
 
 [node name="@@17622" type="Polygon2D" parent="Layer 1/Frame 0/@Group@17621/Shape"]
 color = Color(0.4, 0.4, 0.4, 1)

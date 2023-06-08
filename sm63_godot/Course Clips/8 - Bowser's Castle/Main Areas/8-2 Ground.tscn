@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_mmtkb"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6no7o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_k533p"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_siby5"]
 
-[sub_resource type="Animation" id="Animation_1vwv2"]
+[sub_resource type="Animation" id="Animation_g807v"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,16 +43,41 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kg3a6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qxdir"]
 _data = {
-"Default": SubResource("Animation_1vwv2")
+"Default": SubResource("Animation_g807v")
 }
 
+[sub_resource type="GDScript" id="GDScript_f6pvk"]
+script/source = "extends Node
+# keycount = 0;
+# if (_root.lvl8keyA == true) {
+# 	keycount++;
+# }
+# if (_root.lvl8keyB == true) {
+# 	keycount++;
+# }
+# if (_root.lvl8keyC == true) {
+# 	keycount++;
+# }
+# if (_root.lvl8keyD == true) {
+# 	keycount++;
+# }
+# if (keycount>=2) {
+# 	nextFrame();
+# }
+# stop();"
+
 [node name="8-2 Ground" type="Node2D"]
+script = ExtResource("1_k533p")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Bowser's Castle/Main Areas/8-2 Ground.xml"
+linkage = "8-2Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kg3a6")
+"Timeline": SubResource("AnimationLibrary_qxdir")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -86,9 +111,9 @@ color = Color(0, 1, 0, 1)
 polygon = PackedVector2Array(321.875, 65, 441.875, 65, 441.875, 78, 321.875, 78)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_mmtkb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-0.1, -200.1)
-script = ExtResource("2_6no7o")
+script = ExtResource("2_siby5")
 path = "res://sm63_godot/Course Clips/8-2InvisGround.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -104,6 +129,9 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_f6pvk")
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 0"]
 

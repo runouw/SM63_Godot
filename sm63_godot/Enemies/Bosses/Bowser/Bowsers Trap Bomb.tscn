@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_og2ad"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2otlx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2pb3d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2bp0e"]
 
-[sub_resource type="Animation" id="Animation_v86qb"]
+[sub_resource type="Animation" id="Animation_vxr6g"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -91,24 +91,81 @@ tracks/6/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n5v8g"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5k8y8"]
 _data = {
-"Default": SubResource("Animation_v86qb")
+"Default": SubResource("Animation_vxr6g")
 }
 
+[sub_resource type="GDScript" id="GDScript_4d8xo"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_5hf4x"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (count>3) {
+# 			if (this.body.hitTest(_root.Course.Char.charClip.body)) {
+# 				nextFrame();
+# 			}
+# 		} else {
+# 			count++;
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_do73c"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# bomb.Explode();
+# //
+# soundclip = new Sound(this);
+# soundclip.attachSound(\"Explosion\");
+# soundclip.start(0, 1);
+# soundclip.setVolume(_root.MarioVolume);
+# //
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.clip.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			if (scale>0) {
+# 				_root.MarioHit(2, 90, -9, 9, 7, \"Mario-Squish\", true);
+# 			} else {
+# 				_root.MarioHit(2, 90, -9, -9, 7, \"Mario-Squish\", true);
+# 			}
+# 		}
+# 		count++;
+# 		if (count>30) {
+# 			gotoAndStop(1);
+# 		}
+# 	}
+# };
+# "
+
 [node name="Bowsers Trap Bomb" type="Node2D"]
+script = ExtResource("1_2pb3d")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bowsers Trap Bomb.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_n5v8g")
+"Timeline": SubResource("AnimationLibrary_5k8y8")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_og2ad")]
-script = ExtResource("2_2otlx")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
+script = ExtResource("2_2bp0e")
 path = "res://sm63_godot/Bowser Bomb GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -128,9 +185,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_og2ad")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(0, 0.45)
-script = ExtResource("2_2otlx")
+script = ExtResource("2_2bp0e")
 path = "res://sm63_godot/Effects/Explosion/Nuke Explosion.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -147,10 +204,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_og2ad")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-0.6, -2.5)
 scale = Vector2(0.754272, 3.12421)
-script = ExtResource("2_2otlx")
+script = ExtResource("2_2bp0e")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -163,6 +220,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_4d8xo")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
@@ -170,5 +230,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_5hf4x")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_do73c")

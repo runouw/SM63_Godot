@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_gqm7j"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_cr8jg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_cqe4k"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_jjqke"]
 
-[sub_resource type="Animation" id="Animation_xe4y6"]
+[sub_resource type="Animation" id="Animation_edis1"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -163,16 +163,237 @@ tracks/12/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xprwm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gqdiy"]
 _data = {
-"Default": SubResource("Animation_xe4y6")
+"Default": SubResource("Animation_edis1")
 }
 
+[sub_resource type="GDScript" id="GDScript_lh2pd"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	speed = 3
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_mpqvo"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	speed = 6
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_q0tp2"]
+script/source = "extends Node
+# if (rotation == undefined) {
+# 	rotation = 0;
+# }
+# if (rotspeed == undefined) {
+# 	if (random(2) == 1) {
+# 		rotspeed = Math.random()*8+12;
+# 	} else {
+# 		rotspeed = Math.random()*-8-12;
+# 	}
+# }
+# if (yspeed == undefined) {
+# 	yspeed = -4;
+# }
+# if (xspeed == undefined) {
+# 	xspeed = -6;
+# }
+# if (explodetype == undefined) {
+# 	explodetype = \"small\";
+# }
+# if (explodetimer == undefined) {
+# 	explodetimer = _root.framerate*3;
+# }
+# if (color == undefined) {
+# 	if (explodetype == \"small\") {
+# 		color = {ra:0, rb:0, ga:100, gb:0, ba:100, bb:0, aa:100, ab:0};
+# 	} else {
+# 		color = {ra:100, rb:0, ga:100, gb:0, ba:100, bb:0, aa:100, ab:0};
+# 	}
+# }
+# if (explodecolor == undefined) {
+# 	explodecolor = {ra:100, rb:0, ga:100, gb:0, ba:100, bb:0, aa:100, ab:0};
+# }
+# bouncecount = 0;
+# count = 0;
+# //                   
+# myColor = new Color(this);
+# colorTrans = new Object();
+# colorTrans = color;
+# myColor.setTransform(colorTrans);
+# //
+# _rotation = rotation;
+# //
+# if (xspeed == 0 && yspeed == 0) {
+# 	speed = 4+Math.random()*3;
+# 	xdiff = _root.Course.Char._x-(_x+_parent._x);
+# 	ydiff = _root.Course.Char._y-(_y+_parent._y);
+# 	rot = Math.atan2(ydiff, xdiff);
+# 	xspeed = Math.cos(rot)*speed;
+# 	yspeed = Math.sin(rot)*speed;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_cmgoe"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		rotation += rotspeed;
+# 		_rotation = rotation;
+# 		_x += xspeed;
+# 		_y += yspeed;
+# 		if (this.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			rotation = 0;
+# 			_rotation = 0;
+# 			myColor = new Color(this);
+# 			colorTrans = new Object();
+# 			colorTrans = explodecolor;
+# 			myColor.setTransform(colorTrans);
+# 			gotoAndStop(explodetype);
+# 		}
+# 		while ((_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+5)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+5)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 			_y--;
+# 			explode = true;
+# 			rotation = 0;
+# 			_rotation = 0;
+# 		}
+# 		while (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-5)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_y++;
+# 			explode = true;
+# 			rotation = 180;
+# 			_rotation = 180;
+# 		}
+# 		while (_root.Course.Platforms.hitTest(((_x+5)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_x--;
+# 			explode = true;
+# 			rotation = -90;
+# 			_rotation = -90;
+# 		}
+# 		while (_root.Course.Platforms.hitTest(((_x-5)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_x++;
+# 			explode = true;
+# 			rotation = 90;
+# 			_rotation = 90;
+# 		}
+# 		count++;
+# 		if (count>explodetimer || explode == true) {
+# 			myColor = new Color(this);
+# 			colorTrans = new Object();
+# 			colorTrans = explodecolor;
+# 			myColor.setTransform(colorTrans);
+# 			if (explodetype == \"small\" && explode == true) {
+# 				explodetype = \"ground\";
+# 			}
+# 			gotoAndStop(explodetype);
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_0rk67"]
+script/source = "extends Node
+# count = 0;
+# _root.Course.Enemyhurt.attachMovie(\"EnemyHurtBox\", \"Box\"+_root.Course.Enemyhurt.getNextHighestDepth(), _root.Course.Enemyhurt.getNextHighestDepth(), {_x:_x, _y:_y, _yscale:35, _xscale:35, time:10});
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.clip.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			if (_root.Course.Char._x>_x+_parent._x) {
+# 				_root.MarioHit(1, 90, -3, 5, 7, \"\");
+# 			} else {
+# 				_root.MarioHit(1, 90, -3, -5, 7, \"\");
+# 			}
+# 		}
+# 		count++;
+# 		if (count>20) {
+# 			this.removeMovieClip(this);
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_x7ojc"]
+script/source = "extends Node
+# count = 0;
+# _root.Course.Enemyhurt.attachMovie(\"EnemyHurtBox\", \"Box\"+_root.Course.Enemyhurt.getNextHighestDepth(), _root.Course.Enemyhurt.getNextHighestDepth(), {_x:_x, _y:_y, _yscale:100, _xscale:100, time:12});
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.clip.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			if (_root.Course.Char._x>_x+_parent._x) {
+# 				_root.MarioHit(2, 90, -9, 9, 7, \"\");
+# 			} else {
+# 				_root.MarioHit(2, 90, -9, -9, 7, \"\");
+# 			}
+# 		}
+# 		count++;
+# 		if (count>20) {
+# 			this.removeMovieClip(this);
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_2m4ei"]
+script/source = "extends Node
+# count = 0;
+# _root.Course.Enemyhurt.attachMovie(\"EnemyHurtBox\", \"Box\"+_root.Course.Enemyhurt.getNextHighestDepth(), _root.Course.Enemyhurt.getNextHighestDepth(), {_x:_x, _y:_y-20, _yscale:50, _xscale:35, time:8, _rotation:_rotation});
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.clip.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			if (_root.Course.Char._x>_x+_parent._x) {
+# 				_root.MarioHit(2, 90, -7, 5, 10, \"Mario-Squish\", true);
+# 			} else {
+# 				_root.MarioHit(2, 90, -7, -5, 10, \"Mario-Squish\", true);
+# 			}
+# 		}
+# 		count++;
+# 		if (count>20) {
+# 			this.removeMovieClip(this);
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_sk1as"]
+script/source = "extends Node
+# _root.Course.BackGFX.attachMovie(\"GoombaCode\", \"Goomba\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:_x, _y:_y, battleArena:true, attached:true});
+# count = 0
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		count++;
+# 		if (count>37) {
+# 			this.removeMovieClip(this);
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_n068p"]
+script/source = "extends Node
+# _root.Course.BackGFX.attachMovie(\"BombombCode\", \"Bombomb\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:_x, _y:_y, battleArena:true, attached:true});
+# count = 0
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		count++;
+# 		if (count>37) {
+# 			this.removeMovieClip(this);
+# 		}
+# 	}
+# };
+# "
+
 [node name="Kamek Triangle Attack" type="Node2D"]
+script = ExtResource("1_cqe4k")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Triangle Attack.xml"
+linkage = "KamekTriangleAttack"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xprwm")
+"Timeline": SubResource("AnimationLibrary_gqdiy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -215,8 +436,8 @@ end_cap_mode = 2
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_gqm7j")]
-script = ExtResource("2_cr8jg")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
+script = ExtResource("2_jjqke")
 path = "res://sm63_godot/Effects/Explosion/Small Explosion.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -232,8 +453,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_gqm7j")]
-script = ExtResource("2_cr8jg")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
+script = ExtResource("2_jjqke")
 path = "res://sm63_godot/Effects/Explosion/Nuke Explosion.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -249,9 +470,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_gqm7j")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0, -8)
-script = ExtResource("2_cr8jg")
+script = ExtResource("2_jjqke")
 path = "res://sm63_godot/Effects/Explosion/Ground Explosion.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -267,9 +488,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_gqm7j")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(0.35, 0.35)
-script = ExtResource("2_cr8jg")
+script = ExtResource("2_jjqke")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -282,11 +503,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@49325" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_gqm7j")]
+[node name="@DOMSymbolInstance@49325" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(4.35, -1.65)
 rotation = -0.785398
 scale = Vector2(1, 1)
-script = ExtResource("2_cr8jg")
+script = ExtResource("2_jjqke")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -299,11 +520,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@49326" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_gqm7j")]
+[node name="@DOMSymbolInstance@49326" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(2.35, 1.35)
 rotation = 0.2618
 scale = Vector2(1, 1)
-script = ExtResource("2_cr8jg")
+script = ExtResource("2_jjqke")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -316,11 +537,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@49327" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_gqm7j")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 5/@DOMSymbolInstance@49326"]
+script = SubResource("GDScript_lh2pd")
+
+[node name="@DOMSymbolInstance@49327" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(2.4, 1.4)
 rotation = 0.785405
 scale = Vector2(1.58623, 1.58622)
-script = ExtResource("2_cr8jg")
+script = ExtResource("2_jjqke")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -333,17 +557,26 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 5/@DOMSymbolInstance@49327"]
+script = SubResource("GDScript_mpqvo")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_q0tp2")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_gqm7j")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_cmgoe")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
 position = Vector2(0, 3.05)
 scale = Vector2(0.106155, 0.106033)
-script = ExtResource("2_cr8jg")
+script = ExtResource("2_jjqke")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -359,17 +592,32 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_0rk67")
+
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 3"]
+script = SubResource("GDScript_x7ojc")
 
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 4"]
+script = SubResource("GDScript_2m4ei")
+
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 5"]
+script = SubResource("GDScript_sk1as")
+
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 6"]
+script = SubResource("GDScript_n068p")
 
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
 visible = false

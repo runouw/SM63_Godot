@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_v6r1j"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_1d572"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5011o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_o6ol7"]
 
-[sub_resource type="Animation" id="Animation_tcacb"]
+[sub_resource type="Animation" id="Animation_nw88t"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,25 +31,77 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_spggu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3l000"]
 _data = {
-"Default": SubResource("Animation_tcacb")
+"Default": SubResource("Animation_nw88t")
 }
 
+[sub_resource type="GDScript" id="GDScript_sruqt"]
+script/source = "extends Node
+# //BGarray = [\"Hills and Clouds\", \"Secret Course\", \"Sky\", \"Haunted\", \"Underground\", \"Snow\", \"Mechanical\", \"Fire Sky\", \"Volcano\", \"Desert\", \"Ocean\", \"Bowser's Castle\"];
+# //if (_root.M.CourseBG == undefined) {
+# //_parent.blocktype;
+# min = 1;
+# max = 31
+# onEnterFrame = function () {
+# 	if (_parent.greyness.aa == 0) {
+# 		if (_parent.blocktype == min) {
+# 			tri1._alpha += (0-tri1._alpha)/3;
+# 		} else {
+# 			tri1._alpha += (100-tri1._alpha)/3;
+# 		}
+# 		if (_parent.blocktype == max) {
+# 			tri2._alpha += (0-tri2._alpha)/3;
+# 		} else {
+# 			tri2._alpha += (100-tri2._alpha)/3;
+# 		}
+# 		//
+# 		if (tri1.hitTest(_root._xmouse, _root._ymouse, false) && tri1._alpha>=99) {
+# 			tri1.sc = 130;
+# 		} else {
+# 			tri1.sc = 100;
+# 		}
+# 		tri1._xscale += (tri1.sc-tri1._xscale)/3;
+# 		tri1._yscale = tri1._xscale;
+# 		//
+# 		if (tri2.hitTest(_root._xmouse, _root._ymouse, false) && tri2._alpha>=99) {
+# 			tri2.sc = 130;
+# 		} else {
+# 			tri2.sc = 100;
+# 		}
+# 		tri2._xscale += (tri2.sc-tri2._xscale)/3;
+# 		tri2._yscale = tri2._xscale;
+# 	}
+# 	//_root.LDCourseBG = _root.M.CourseBG;  
+# };
+# onMouseDown = function () {
+# 	if (tri2.sc == 130 && _parent.blocktype<max) {
+# 		_parent.blocktype++;
+# 	} else if (tri1.sc == 130 && _parent.blocktype>min) {
+# 		_parent.blocktype--;
+# 	}
+# };
+# "
+
 [node name="LDW - Window RotBlock Type Arrowsds" type="Node2D"]
+script = ExtResource("1_5011o")
+source_xml = "res://sm63/LIBRARY/LDW - Window RotBlock Type Arrowsds.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_spggu")
+"Timeline": SubResource("AnimationLibrary_3l000")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_v6r1j")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(14.85, 3.2)
-script = ExtResource("2_1d572")
+script = ExtResource("2_o6ol7")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Arrow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -62,10 +114,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@12434" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_v6r1j")]
+[node name="@DOMSymbolInstance@12434" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(14.85, -6.8)
 scale = Vector2(1, -1)
-script = ExtResource("2_1d572")
+script = ExtResource("2_o6ol7")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Arrow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -81,3 +133,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_sruqt")

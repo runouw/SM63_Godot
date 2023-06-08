@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="1_1btw3"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_s5gep"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_mw5mn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4weos"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="2_ee0ia"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_xvbmg"]
 
-[sub_resource type="Animation" id="Animation_tc15n"]
+[sub_resource type="Animation" id="Animation_kullq"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +20,53 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kiqba"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ei32u"]
 _data = {
-"Default": SubResource("Animation_tc15n")
+"Default": SubResource("Animation_kullq")
 }
 
+[sub_resource type="GDScript" id="GDScript_qivbr"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	rotspeed = 0.08;
+# }
+# onClipEvent (enterFrame) {
+# 	_rotation += rotspeed;
+# 	count += 1;
+# 	if (count>250) {
+# 		rotspeed *= -1;
+# 		count = 0;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ka8ie"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	rotspeed = 0.1;
+# }
+# onClipEvent (enterFrame) {
+# 	_rotation += rotspeed;
+# 	count += 1;
+# 	if (count>150) {
+# 		rotspeed *= -1;
+# 		count = 0;
+# 	}
+# }
+# "
+
 [node name="8-2MidBGTint" type="Node2D"]
+script = ExtResource("1_4weos")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-2MidBGTint.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kiqba")
+"Timeline": SubResource("AnimationLibrary_ei32u")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -41,7 +78,7 @@ libraries = {
 [node name="@@18870" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1btw3")
+texture = ExtResource("2_ee0ia")
 texture_offset = Vector2(806.542, -260.615)
 texture_scale = Vector2(1.43152, -1.43152)
 texture_rotation = 2.8866
@@ -56,10 +93,10 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_s5gep")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-273.9, -15.9)
 scale = Vector2(0.599991, 0.599991)
-script = ExtResource("3_mw5mn")
+script = ExtResource("3_xvbmg")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Bobbing Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -72,11 +109,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18872" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_s5gep")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_qivbr")
+
+[node name="@DOMSymbolInstance@18872" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(179.05, 30.5)
 rotation = 0.139091
 scale = Vector2(0.559758, 0.559758)
-script = ExtResource("3_mw5mn")
+script = ExtResource("3_xvbmg")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Bobbing Pole.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -89,10 +129,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18873" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_s5gep")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@18872"]
+script = SubResource("GDScript_ka8ie")
+
+[node name="@DOMSymbolInstance@18873" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-35, 38.45)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("3_mw5mn")
+script = ExtResource("3_xvbmg")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Bobbing PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -105,10 +148,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18874" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_s5gep")]
+[node name="@DOMSymbolInstance@18874" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-499.25, 22.6)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("3_mw5mn")
+script = ExtResource("3_xvbmg")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Bobbing PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

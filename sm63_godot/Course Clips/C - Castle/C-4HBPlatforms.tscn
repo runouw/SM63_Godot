@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_o4xic"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hxtcg"]
+
+[sub_resource type="Animation" id="Animation_o0wy5"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3x63t"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fgfmx"]
 _data = {
-"Default": SubResource("Animation_o4xic")
+"Default": SubResource("Animation_o0wy5")
 }
 
 [node name="C-4HBPlatforms" type="Node2D"]
+script = ExtResource("1_hxtcg")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/C-4HBPlatforms.xml"
+linkage = "C-4HBPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3x63t")
+"Timeline": SubResource("AnimationLibrary_fgfmx")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

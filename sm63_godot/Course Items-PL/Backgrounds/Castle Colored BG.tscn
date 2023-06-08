@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_o5l0o"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_k1ney"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_o3nhn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_kkdku"]
 
-[sub_resource type="Animation" id="Animation_4k4s0"]
+[sub_resource type="Animation" id="Animation_gk2xy"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,73 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5m7p"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t2i7d"]
 _data = {
-"Default": SubResource("Animation_4k4s0")
+"Default": SubResource("Animation_gk2xy")
 }
 
+[sub_resource type="GDScript" id="GDScript_ppamt"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	color = Math.round(_root.TotalStars*1.5)+25;
+# 	color2 = Math.abs(100-color);
+# 	myColor = new Color(this);
+# 	colorTrans = new Object();
+# 	colorTrans = {ra:100-(color2/2+Math.max(color2-50, 0))-color2/5, rb:0, ga:color, gb:0, ba:color, bb:0, aa:100, ab:0};
+# 	myColor.setTransform(colorTrans);
+# }
+# onClipEvent (enterFrame) {
+# 	color += Math.round(((_root.TotalStars*1.5)+25)-color)/7;
+# 	if (_root.CheatCastleRestore == true) {
+# 		color = 100;
+# 	}
+# 	//color = Math.max(color, 0);        
+# 	//color = Math.min(color, 100);
+# 	if (color>100) {
+# 		oldcolor = color;
+# 		color += Math.abs(100-color)*2.5;
+# 	}
+# 	color2 = Math.abs(100-color);
+# 	// color = percent of stars obained
+# 	// color 2  = percent of stars not yet obtained
+# 	colorTrans = {ra:(color*0.5)+50-(color2/3), rb:0, ga:(color*0.5)+50-(color2/3), gb:0, ba:(color*0.5)+50-(color2/3), bb:0, aa:100, ab:0};
+# 	myColor.setTransform(colorTrans);
+# 	if (color>100) {
+# 		color = oldcolor;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_bf1je"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.BGquality == \"LOW\") {
+# 		gotoAndStop(2);
+# 	} else {
+# 		gotoAndStop(1);
+# 	}
+# };
+# "
+
 [node name="Castle Colored BG" type="Node2D"]
+script = ExtResource("1_o3nhn")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Castle Colored BG.xml"
+linkage = "CastleColoredBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_l5m7p")
+"Timeline": SubResource("AnimationLibrary_t2i7d")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_o5l0o")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-1, 0)
-script = ExtResource("2_k1ney")
+script = ExtResource("2_kkdku")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -74,9 +122,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_ppamt")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_bf1je")

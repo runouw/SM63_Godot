@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_56pdo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_q7tjb"]
+
+[sub_resource type="Animation" id="Animation_5mif4"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2utsc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsawd"]
 _data = {
-"Default": SubResource("Animation_56pdo")
+"Default": SubResource("Animation_5mif4")
 }
 
 [node name="1-1 Camera Edge" type="Node2D"]
+script = ExtResource("1_q7tjb")
+source_xml = "res://sm63/LIBRARY/Course Clips/1 - Bob-omb Battlefield/Areas 1-1 & 1-2/1-1 Camera Edge.xml"
+linkage = "1-1CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2utsc")
+"Timeline": SubResource("AnimationLibrary_vsawd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -35,5 +42,6 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@22840" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-487.05, -367.8, 2424.85, -367.8, 2424.85, -243.8, -487.05, -243.8, -487.05, -243.8, -257.9, -243.8, -177.9, 276.45, -487.05, 276.45, -487.05, 205.45, 2178.85, -243.8, 2424.85, -243.8, 2424.85, 205.45, 2178.85, 205.45, 1882.85, 205.45, 2424.85, 205.45, 2424.85, 276.45, 1385.9, 276.45, -487.05, 276.45, 1374.88, 276.45, 1374.9, 277.55, -487.05, 277.55, 1374.9, 276.45, 2424.85, 276.45, 2424.85, 277.55, 1374.9, 277.55, -487.05, 277.55, 2424.85, 277.55, 2424.85, 381.4, -487.05, 381.4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 26, 27, 28)])

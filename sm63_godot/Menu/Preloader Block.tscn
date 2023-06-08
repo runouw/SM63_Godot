@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Mario Box 1.png" id="1_6dy6y"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Mario Box 2.png" id="2_eos2f"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_6nq12"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_ypv8s"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6v4lb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Mario Box 1.png" id="2_i82hi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Mario Box 2.png" id="3_yt143"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_kr71o"]
 
-[sub_resource type="Animation" id="Animation_0u1gx"]
+[sub_resource type="Animation" id="Animation_m45k1"]
 length = 0.533333
 loop_mode = 1
 tracks/0/type = "value"
@@ -153,16 +153,39 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dtbru"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmfp6"]
 _data = {
-"Default": SubResource("Animation_0u1gx")
+"Default": SubResource("Animation_m45k1")
 }
 
+[sub_resource type="GDScript" id="GDScript_86258"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_h6byg"]
+script/source = "extends Node
+# _root.TotalCoins += 1;"
+
+[sub_resource type="GDScript" id="GDScript_sr170"]
+script/source = "extends Node
+# if (block == true) {
+# 	gotoAndStop(\"end\");
+# } else {
+# 	gotoAndStop(1);
+# }
+# "
+
 [node name="Preloader Block" type="Node2D"]
+script = ExtResource("1_6v4lb")
+source_xml = "res://sm63/LIBRARY/Menu/Preloader Block.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dtbru")
+"Timeline": SubResource("AnimationLibrary_kmfp6")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -172,7 +195,7 @@ libraries = {
 [node name="@@51491" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("1_6dy6y")
+texture = ExtResource("2_i82hi")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -181,7 +204,7 @@ visible = false
 [node name="@@51492" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("1_6dy6y")
+texture = ExtResource("2_i82hi")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -190,7 +213,7 @@ visible = false
 [node name="@@51493" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-8, -18)
-texture = ExtResource("1_6dy6y")
+texture = ExtResource("2_i82hi")
 centered = false
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
@@ -199,7 +222,7 @@ visible = false
 [node name="@@51494" type="Sprite2D" parent="Layer 1/Frame 14"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("1_6dy6y")
+texture = ExtResource("2_i82hi")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
@@ -208,18 +231,27 @@ visible = false
 [node name="@@51495" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("2_eos2f")
+texture = ExtResource("3_yt143")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_86258")
+
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 9"]
+script = SubResource("GDScript_h6byg")
+
 [node name="Frame 14" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 14"]
+script = SubResource("GDScript_sr170")
 
 [node name="Layer 3" type="Node2D" parent="."]
 
@@ -228,9 +260,9 @@ visible = false
 [node name="Frame 9" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9" instance=ExtResource("3_6nq12")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9"]
 position = Vector2(0.35, -25)
-script = ExtResource("4_ypv8s")
+script = ExtResource("4_kr71o")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -246,9 +278,9 @@ brightness = 0.0
 [node name="Frame 14" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 14" instance=ExtResource("3_6nq12")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 14"]
 position = Vector2(0.35, -55)
-script = ExtResource("4_ypv8s")
+script = ExtResource("4_kr71o")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

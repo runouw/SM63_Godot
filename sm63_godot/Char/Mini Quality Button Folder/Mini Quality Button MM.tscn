@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_7rir0"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_1q7ow"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vahag"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_62oxa"]
 
-[sub_resource type="Animation" id="Animation_f3m5l"]
+[sub_resource type="Animation" id="Animation_ydjgv"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,25 +79,54 @@ tracks/5/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iqhyw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2tx1k"]
 _data = {
-"Default": SubResource("Animation_f3m5l")
+"Default": SubResource("Animation_ydjgv")
 }
 
+[sub_resource type="GDScript" id="GDScript_neqct"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndStop(22);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_phjab"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root._quality == \"LOW\") {
+# 		_parent.qnum = 0;
+# 	} else if (_root._quality == \"MEDIUM\") {
+# 		_parent.qnum = 1;
+# 	} else if (_root._quality == \"HIGH\") {
+# 		_parent.qnum = 2;
+# 	} else if (_root._quality == \"BEST\") {
+# 		_parent.qnum = 3;
+# 	}
+# 	gotoAndStop(_parent.qnum+1);
+# 	
+# };
+# "
+
 [node name="Mini Quality Button MM" type="Node2D"]
+script = ExtResource("1_vahag")
+source_xml = "res://sm63/LIBRARY/Char/Mini Quality Button Folder/Mini Quality Button MM.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iqhyw")
+"Timeline": SubResource("AnimationLibrary_2tx1k")
 }
 
 [node name="MM" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="MM"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="MM/Frame 0" instance=ExtResource("1_7rir0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="MM/Frame 0"]
 position = Vector2(38.85, -24.35)
-script = ExtResource("2_1q7ow")
+script = ExtResource("2_62oxa")
 path = "res://sm63_godot/Char/Mini Quality Button Folder/Mini Quality Button Mizer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -109,6 +138,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="MM/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_neqct")
 
 [node name="Layer 1" type="Node2D" parent="."]
 
@@ -162,3 +194,6 @@ end_cap_mode = 2
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_phjab")

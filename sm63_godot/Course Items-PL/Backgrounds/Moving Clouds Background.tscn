@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_lw0g6"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ehabv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rusb0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_wvo4h"]
 
-[sub_resource type="Animation" id="Animation_kstu0"]
+[sub_resource type="Animation" id="Animation_fpp3w"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,24 +31,42 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7dgil"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tnv00"]
 _data = {
-"Default": SubResource("Animation_kstu0")
+"Default": SubResource("Animation_fpp3w")
 }
 
+[sub_resource type="GDScript" id="GDScript_ihmsu"]
+script/source = "extends Node
+# X = 0;
+# onEnterFrame = function () {
+# 	X--;
+# 	bg1._x = X;
+# 	bg2._x = X+450;
+# 	if (X<=-450) {
+# 		X += 450;
+# 	}
+# };
+# "
+
 [node name="Moving Clouds Background" type="Node2D"]
+script = ExtResource("1_rusb0")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Moving Clouds Background.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7dgil")
+"Timeline": SubResource("AnimationLibrary_tnv00")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_lw0g6")]
-script = ExtResource("2_ehabv")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_wvo4h")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -61,9 +79,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@46528" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_lw0g6")]
+[node name="@DOMSymbolInstance@46528" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(450, 0)
-script = ExtResource("2_ehabv")
+script = ExtResource("2_wvo4h")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -79,3 +97,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ihmsu")

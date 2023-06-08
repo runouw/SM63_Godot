@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ku2wv"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_miivh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_45xt1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0yjro"]
 
-[sub_resource type="Animation" id="Animation_x5esg"]
+[sub_resource type="Animation" id="Animation_6apca"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,30 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mu4tj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_466wh"]
 _data = {
-"Default": SubResource("Animation_x5esg")
+"Default": SubResource("Animation_6apca")
 }
 
 [node name="Bowser Battle 2Cinema Main Closgebg" type="Node2D"]
+script = ExtResource("1_45xt1")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 2Cinema Main Closgebg.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_mu4tj")
+"Timeline": SubResource("AnimationLibrary_466wh")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ku2wv")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-14, -29.95)
-script = ExtResource("2_miivh")
+script = ExtResource("2_0yjro")
 path = "res://sm63_godot/Bowser Battle 2Cinema Main Closebg copy.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

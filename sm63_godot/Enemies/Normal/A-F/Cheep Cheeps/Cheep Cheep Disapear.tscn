@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 2.png" id="1_onjkj"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_a07wa"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_ukjvc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_e573w"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 2.png" id="2_20oeg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_kxdjw"]
 
-[sub_resource type="Animation" id="Animation_u360c"]
+[sub_resource type="Animation" id="Animation_uovpr"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -116,16 +116,48 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kravb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xptxk"]
 _data = {
-"Default": SubResource("Animation_u360c")
+"Default": SubResource("Animation_uovpr")
 }
 
+[sub_resource type="GDScript" id="GDScript_5ij7p"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_oufk7"]
+script/source = "extends Node
+# if (_root[\"coindata\"+_root.playingcourse][_parent._parent.coinnum] !== 1 || _parent._parent.battleArena == true) {
+# 	if (_parent._parent.battleArena !== true) {
+# 		_root[\"coindata\"+_root.playingcourse][_parent._parent.coinnum] = 1;
+# 	}
+# 	_root.Course.BackGFX.attachMovie(\"GoldCoin\", \"GoldCoin\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:_parent._parent._x, _y:_parent._parent._y-4, bounce:true});
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_kvrcc"]
+script/source = "extends Node
+# onEnterFrame = null;
+# stop();
+# "
+
 [node name="Cheep Cheep Disapear" type="Node2D"]
+script = ExtResource("1_e573w")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep Disapear.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kravb")
+"Timeline": SubResource("AnimationLibrary_xptxk")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -135,7 +167,7 @@ libraries = {
 [node name="@@50580" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-10, -8.5)
-texture = ExtResource("1_onjkj")
+texture = ExtResource("2_20oeg")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -145,15 +177,15 @@ visible = false
 texture_filter = 1
 position = Vector2(-0.75, -12.75)
 scale = Vector2(0.076004, 1.5)
-texture = ExtResource("1_onjkj")
+texture = ExtResource("2_20oeg")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_a07wa")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0.35, -0.65)
-script = ExtResource("3_ukjvc")
+script = ExtResource("3_kxdjw")
 path = "res://sm63_godot/Effects/Light Effects Folder/Sparkle Blue.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -169,9 +201,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_a07wa")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(0.35, -10.65)
-script = ExtResource("3_ukjvc")
+script = ExtResource("3_kxdjw")
 path = "res://sm63_godot/Effects/Light Effects Folder/Sparkle Blue.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -187,9 +219,9 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("2_a07wa")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6"]
 position = Vector2(0.35, 1.85)
-script = ExtResource("3_ukjvc")
+script = ExtResource("3_kxdjw")
 path = "res://sm63_godot/Effects/Light Effects Folder/Sparkle Blue.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -209,8 +241,17 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_5ij7p")
+
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 4"]
+script = SubResource("GDScript_oufk7")
+
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 7"]
+script = SubResource("GDScript_kvrcc")

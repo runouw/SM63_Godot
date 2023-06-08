@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ca1a7"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_at6sf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mmhce"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0bdtc"]
 
-[sub_resource type="Animation" id="Animation_da1ha"]
+[sub_resource type="Animation" id="Animation_ds54g"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,90 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_s422b"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ld8us"]
 _data = {
-"Default": SubResource("Animation_da1ha")
+"Default": SubResource("Animation_ds54g")
 }
 
+[sub_resource type="GDScript" id="GDScript_1i06g"]
+script/source = "extends Node
+# stop();
+# _alpha = 0;
+# count = 0;
+# wait = 64
+# //duration = 400;
+# duration = 640
+# onEnterFrame = function () {
+# 	if (_parent.SwitchPL == true) {
+# 		nextFrame();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_7lwdd"]
+script/source = "extends Node
+# // Activated Sound fx
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Tick\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# //
+# onEnterFrame = function () {
+# 	if (_root.playpause == false && _root.PauseGame == false) {
+# 		if (_alpha<=100 && count<duration) {
+# 			_alpha += 20;
+# 			_alpha = Math.min(_alpha, 100);
+# 		}
+# 		count++;
+# 		if ((count/wait) == Math.round(count/wait)) {
+# 			if (count>(1/2)*duration) {
+# 				wait = 16;
+# 				if (count>(3/4)*duration) {
+# 					wait = 8;
+# 					_alpha = 60;
+# 				}
+# 				if (count>(9/10)*duration) {
+# 					wait = 4;
+# 					_alpha = 40;
+# 				}
+# 			}
+# 			_root.Mariosound = new Sound(this);
+# 			_root.Mariosound.attachSound(\"Tick\");
+# 			_root.Mariosound.start(0, 1);
+# 			_root.Mariosound.setVolume(_root.MarioVolume);
+# 		}
+# 		if (count>duration) {
+# 			wait = duration;
+# 			_alpha -= 10;
+# 			if (_alpha<=0) {
+# 				count = 0;
+# 				_parent.SwitchPL = false;
+# 				prevFrame();
+# 			}
+# 		}
+# 	}
+# };
+# "
+
 [node name="5-5SwitchGFX" type="Node2D"]
+script = ExtResource("1_mmhce")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5SwitchGFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_s422b")
+"Timeline": SubResource("AnimationLibrary_ld8us")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ca1a7")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(621.9, -38.05)
-script = ExtResource("2_at6sf")
+script = ExtResource("2_0bdtc")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5SwitchGFXClip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -78,5 +143,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_1i06g")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_7lwdd")

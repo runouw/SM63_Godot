@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_dxnl4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fsjsq"]
+
+[sub_resource type="Animation" id="Animation_ini5c"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mpm1o"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fv7ss"]
 _data = {
-"Default": SubResource("Animation_dxnl4")
+"Default": SubResource("Animation_ini5c")
 }
 
 [node name="8-E5-1Lava" type="Node2D"]
+script = ExtResource("1_fsjsq")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-1Lava.xml"
+linkage = "8-E5-1Lava"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_mpm1o")
+"Timeline": SubResource("AnimationLibrary_fv7ss")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

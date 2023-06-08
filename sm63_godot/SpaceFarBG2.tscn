@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Galaxy BG.png" id="1_rx3eq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2no5l"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Galaxy BG.png" id="2_m2tw4"]
 
-[sub_resource type="Animation" id="Animation_loswv"]
+[sub_resource type="Animation" id="Animation_qmy4t"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_g1tlh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pp77b"]
 _data = {
-"Default": SubResource("Animation_loswv")
+"Default": SubResource("Animation_qmy4t")
 }
 
 [node name="SpaceFarBG2" type="Node2D"]
+script = ExtResource("1_2no5l")
+source_xml = "res://sm63/LIBRARY/SpaceFarBG2.xml"
+linkage = "SpaceFarBG2"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_g1tlh")
+"Timeline": SubResource("AnimationLibrary_pp77b")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -41,7 +47,7 @@ libraries = {
 [node name="@@13868" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rx3eq")
+texture = ExtResource("2_m2tw4")
 texture_offset = Vector2(302.85, -95.95)
 polygon = PackedVector2Array(-362.85, 95.95, 57.15, 95.95, 57.15, 149.6, -362.85, 149.6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -49,7 +55,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@13869" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rx3eq")
+texture = ExtResource("2_m2tw4")
 texture_offset = Vector2(62.85, -95.95)
 polygon = PackedVector2Array(57.15, 95.95, 357.15, 95.95, 357.15, 149.6, 57.15, 149.6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -58,12 +64,12 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 texture_filter = 1
 position = Vector2(-2.85, 95.95)
 rotation = 3.14159
-texture = ExtResource("1_rx3eq")
+texture = ExtResource("2_m2tw4")
 centered = false
 
 [node name="@@13871" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-2.85, 95.95)
 scale = Vector2(1, -1)
-texture = ExtResource("1_rx3eq")
+texture = ExtResource("2_m2tw4")
 centered = false

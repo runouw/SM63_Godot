@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Squirt Nozzle Box.png" id="1_u6bqn"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_e0k45"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_b8e3k"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_wcn0d"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Squirt Nozzle Box.png" id="2_5svmu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_q4qp2"]
 
-[sub_resource type="Animation" id="Animation_fx362"]
+[sub_resource type="Animation" id="Animation_7fgsi"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,51 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dlvqv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u3gjw"]
 _data = {
-"Default": SubResource("Animation_fx362")
+"Default": SubResource("Animation_7fgsi")
 }
 
+[sub_resource type="GDScript" id="GDScript_ijs2h"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.Fluddpow == \"H\" || (this.hitTest(_root._xmouse, _root._ymouse, true) && _root.FluddArray[_root.Playinglevel][1] == true)) {
+# 		sc = 115;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	if (Math.abs(sc-_xscale)<1) {
+# 		_xscale = sc;
+# 	}
+# 	//   
+# 	if (_root.FluddArray[_root.Playinglevel][1] == true) {
+# 		gotoAndStop(1);
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# };
+# //if (this.hitTest(_root._xmouse, _root._ymouse, true) && _root.FluddArray[_root.Playinglevel][1] == true) {
+# //_root.Fluddpow = \"R\";
+# //}
+# onMouseDown = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true) && (_root.FluddArray[_root.Playinglevel][1] == true || _root.SaveFluddH == true) && _root.CanSwitchFludd !== false) {
+# 		_root.Fluddpow = \"H\";
+# 	}
+# };
+# "
+
 [node name="Hover Fludd Code Box" type="Node2D"]
+script = ExtResource("1_wcn0d")
+source_xml = "res://sm63/LIBRARY/Char/Fludd CLIPS/Hover Fludd Code Box.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dlvqv")
+"Timeline": SubResource("AnimationLibrary_u3gjw")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -63,14 +98,14 @@ libraries = {
 [node name="@@14540" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-16, -20)
-texture = ExtResource("1_u6bqn")
+texture = ExtResource("2_5svmu")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_e0k45")]
-script = ExtResource("3_b8e3k")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("3_q4qp2")
 path = "res://sm63_godot/Char/Fludd CLIPS/Locked Fludd Box.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -86,3 +121,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ijs2h")

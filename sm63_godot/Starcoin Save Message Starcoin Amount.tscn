@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin.png" id="1_lynlm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xdwpp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin.png" id="2_0wwyw"]
 
-[sub_resource type="Animation" id="Animation_7o0na"]
+[sub_resource type="Animation" id="Animation_0t1di"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ykvwm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y4bea"]
 _data = {
-"Default": SubResource("Animation_7o0na")
+"Default": SubResource("Animation_0t1di")
 }
 
 [node name="Starcoin Save Message Starcoin Amount" type="Node2D"]
+script = ExtResource("1_xdwpp")
+source_xml = "res://sm63/LIBRARY/Starcoin Save Message Starcoin Amount.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ykvwm")
+"Timeline": SubResource("AnimationLibrary_y4bea")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,5 +45,5 @@ libraries = {
 [node name="@@13934" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-56.35, -15.05)
-texture = ExtResource("1_lynlm")
+texture = ExtResource("2_0wwyw")
 centered = false

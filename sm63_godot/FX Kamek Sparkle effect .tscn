@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_gb4nc"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_jwok2"]
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_yt0ok"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gny3t"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_h6sfo"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_n28mw"]
 
-[sub_resource type="Animation" id="Animation_yk8x5"]
+[sub_resource type="Animation" id="Animation_ogvik"]
 length = 0.9
 loop_mode = 1
 tracks/0/type = "value"
@@ -116,24 +116,29 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_757yj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mtegu"]
 _data = {
-"Default": SubResource("Animation_yk8x5")
+"Default": SubResource("Animation_ogvik")
 }
 
 [node name="FX Kamek Sparkle effect " type="Node2D"]
+script = ExtResource("1_gny3t")
+source_xml = "res://sm63/LIBRARY/FX Kamek Sparkle effect .xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_757yj")
+"Timeline": SubResource("AnimationLibrary_mtegu")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_gb4nc")]
-script = ExtResource("2_jwok2")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_h6sfo")
 path = "res://sm63_godot/FX kAmek Sparkle effec tlcip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -149,11 +154,11 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19" instance=ExtResource("1_gb4nc")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19"]
 position = Vector2(0, 119.4)
 rotation = -1.84653
 scale = Vector2(0.999137, 0.999137)
-script = ExtResource("2_jwok2")
+script = ExtResource("2_h6sfo")
 path = "res://sm63_godot/FX kAmek Sparkle effec tlcip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -169,9 +174,9 @@ brightness = 0.0
 [node name="Frame 22" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 22" instance=ExtResource("1_gb4nc")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 22"]
 position = Vector2(0, 140)
-script = ExtResource("2_jwok2")
+script = ExtResource("2_h6sfo")
 path = "res://sm63_godot/FX kAmek Sparkle effec tlcip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -199,7 +204,7 @@ visible = false
 [node name="@@6131" type="Polygon2D" parent="Layer 2/Frame 20/Shape"]
 polygon = PackedVector2Array(0.55, 120.65, 0.55, 120.65, 4.55, 122.3, 6.2, 126.3, 4.55, 130.3, 0.55, 131.95, 0.55, 131.95, -3.45, 130.3, -5.1, 126.3, -3.45, 122.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
-script = ExtResource("3_yt0ok")
+script = ExtResource("3_n28mw")
 matrix = Transform2D(0.00762939, 0, 0, 0.00762939, 0.55, 126.3)
 entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -213,7 +218,7 @@ visible = false
 [node name="@@6132" type="Polygon2D" parent="Layer 2/Frame 22/Shape"]
 polygon = PackedVector2Array(0.55, 130.65, 0.55, 130.65, 4.55, 132.3, 6.2, 136.3, 4.55, 140.3, 0.55, 141.95, 0.55, 141.95, -3.45, 140.3, -5.1, 136.3, -3.45, 132.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
-script = ExtResource("3_yt0ok")
+script = ExtResource("3_n28mw")
 matrix = Transform2D(0.00762939, 0, 0, 0.00762939, 0.55, 136.3)
 entries_color = PackedColorArray(1, 1, 1, 0.352941, 1, 1, 1, 0)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -223,11 +228,12 @@ focal_point_ratio = 0.0
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 25"]
+position = Vector2(0, -10)
 
 [node name="@@6133" type="Polygon2D" parent="Layer 2/Frame 25/Shape"]
 polygon = PackedVector2Array(0.55, 140.65, 0.55, 140.65, 4.55, 142.3, 6.2, 146.3, 4.55, 150.3, 0.55, 151.95, 0.55, 151.95, -3.45, 150.3, -5.1, 146.3, -3.45, 142.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
-script = ExtResource("3_yt0ok")
+script = ExtResource("3_n28mw")
 matrix = Transform2D(0.00762939, 0, 0, 0.00762939, 0.55, 146.3)
 entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
 entries_ratio = PackedFloat32Array(0, 1)

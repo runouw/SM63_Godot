@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/2 Mini Painting.png" id="1_r4pi3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ivsgj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/2 Mini Painting.png" id="2_0gyuf"]
 
-[sub_resource type="Animation" id="Animation_ggu6o"]
+[sub_resource type="Animation" id="Animation_h6jqn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_27qym"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_whi6o"]
 _data = {
-"Default": SubResource("Animation_ggu6o")
+"Default": SubResource("Animation_h6jqn")
 }
 
 [node name="M2-Picture" type="Node2D"]
+script = ExtResource("1_ivsgj")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-Picture.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_27qym")
+"Timeline": SubResource("AnimationLibrary_whi6o")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@45970" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_r4pi3")
+texture = ExtResource("2_0gyuf")
 texture_offset = Vector2(50.55, 59.25)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(-38, -48.5, 38, -48.5, 38, 28.5, -38, 28.5)

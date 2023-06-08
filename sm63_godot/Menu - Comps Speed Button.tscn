@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_hsha8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_67pfw"]
+
+[sub_resource type="Animation" id="Animation_50piw"]
 length = 0.233333
 loop_mode = 1
 tracks/0/type = "value"
@@ -184,16 +186,80 @@ tracks/14/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4xxux"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b6f52"]
 _data = {
-"Default": SubResource("Animation_hsha8")
+"Default": SubResource("Animation_50piw")
 }
 
+[sub_resource type="GDScript" id="GDScript_mg55p"]
+script/source = "extends Node
+# Y = _y;
+# ysin = Math.random()*10;
+# R = _rotation;
+# rsin = Math.random()*10;
+# al = 50;
+# //
+# _alpha = 50;
+# _y = Y+Math.sin(ysin)*5;
+# _rotation = R+Math.sin(rsin)*5;
+# //
+# onEnterFrame = function () {
+# 	if (_parent.sc == 100) {
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 			sc = 120;
+# 			al = 100;
+# 		} else {
+# 			sc = 100;
+# 			al = 50;
+# 		}
+# 		if (_root.BGquality == _name) {
+# 			gotoAndStop(_name+\"2\");
+# 			sc = 125;
+# 			al = 100;
+# 		} else {
+# 			gotoAndStop(_name);
+# 		}
+# 		_xscale += (sc-_xscale)/2;
+# 		_yscale = _xscale;
+# 		_alpha += (al-_alpha)/2;
+# 		//
+# 		ysin += 0.03;
+# 		_y = Y+Math.sin(ysin)*5;
+# 		rsin += 0.05;
+# 		_rotation = R+Math.sin(rsin)*5;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		_xscale = 140;
+# 		_yscale = 140;
+# 		_root.BGquality = _name;
+# 	}
+# };
+# if (_root.BGquality == undefined) {
+# 	_root.BGquality = \"MEDIUM\";
+# }
+# if (_root.BGquality == _name) {
+# 	gotoAndStop(_name+\"2\");
+# 	_alpha = 100;
+# 	_xscale = 120;
+# 	_yscale = 120;
+# } else {
+# 	gotoAndStop(_name);
+# }
+# //_root.BGquality == \"LOW\"
+# "
+
 [node name="Menu - Comps Speed Button" type="Node2D"]
+script = ExtResource("1_67pfw")
+source_xml = "res://sm63/LIBRARY/Menu - Comps Speed Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4xxux")
+"Timeline": SubResource("AnimationLibrary_b6f52")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -308,6 +374,9 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_mg55p")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

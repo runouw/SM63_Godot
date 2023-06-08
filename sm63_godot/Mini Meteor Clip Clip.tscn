@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Meteor (ToND2).png" id="1_ovjuw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_h6e0u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Meteor (ToND2).png" id="2_l0xyc"]
 
-[sub_resource type="Animation" id="Animation_u05x1"]
+[sub_resource type="Animation" id="Animation_1civw"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_73i5a"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qiqk8"]
 _data = {
-"Default": SubResource("Animation_u05x1")
+"Default": SubResource("Animation_1civw")
 }
 
 [node name="Mini Meteor Clip Clip" type="Node2D"]
+script = ExtResource("1_h6e0u")
+source_xml = "res://sm63/LIBRARY/Mini Meteor Clip Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_73i5a")
+"Timeline": SubResource("AnimationLibrary_qiqk8")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -38,5 +44,5 @@ libraries = {
 texture_filter = 1
 position = Vector2(-11.1, -11.1)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_ovjuw")
+texture = ExtResource("2_l0xyc")
 centered = false

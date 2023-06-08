@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Haunted mansion Background.png" id="1_aj8sp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lncob"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Haunted mansion Background.png" id="2_rur23"]
 
-[sub_resource type="Animation" id="Animation_sy78h"]
+[sub_resource type="Animation" id="Animation_0dg6d"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t12gk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvtoq"]
 _data = {
-"Default": SubResource("Animation_sy78h")
+"Default": SubResource("Animation_0dg6d")
 }
 
 [node name="4-1 Haunted Background" type="Node2D"]
+script = ExtResource("1_lncob")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/4-1 Haunted Background.xml"
+linkage = "4-1BG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_t12gk")
+"Timeline": SubResource("AnimationLibrary_bvtoq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -38,5 +44,5 @@ libraries = {
 texture_filter = 1
 position = Vector2(-310.95, -160)
 scale = Vector2(2.49744, 2)
-texture = ExtResource("1_aj8sp")
+texture = ExtResource("2_rur23")
 centered = false

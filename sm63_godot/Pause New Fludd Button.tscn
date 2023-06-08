@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_7ol24"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_teh76"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_lmxic"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_aieix"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_5xnjv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_kktu1"]
 
-[sub_resource type="Animation" id="Animation_h83ss"]
+[sub_resource type="Animation" id="Animation_lpi4s"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,42 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lsqtp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47snj"]
 _data = {
-"Default": SubResource("Animation_h83ss")
+"Default": SubResource("Animation_lpi4s")
 }
 
+[sub_resource type="GDScript" id="GDScript_qcjmb"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true) && _parent.clicked !== true) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120 && _parent.clicked !== true) {
+# 		_xscale = 140;
+# 		_yscale = 140;
+# 		_parent.clicked = true;
+# 		_parent.Trans(\"fludd\");
+# 	}
+# };
+# "
+
 [node name="Pause New Fludd Button" type="Node2D"]
+script = ExtResource("1_aieix")
+source_xml = "res://sm63/LIBRARY/Pause New Fludd Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lsqtp")
+"Timeline": SubResource("AnimationLibrary_47snj")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -65,7 +91,7 @@ libraries = {
 [node name="@@13373" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-61.4, -16.175, 58.6, -16.175, 58.6, 18.825, -61.4, 18.825)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_7ol24")
+script = ExtResource("2_5xnjv")
 matrix = Transform2D(0.059082, 0, 0, 0.059082, -1.4, 1.3)
 entries_color = PackedColorArray(1, 1, 1, 1, 0.533333, 1, 1, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -83,9 +109,9 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_teh76")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -0.05)
-script = ExtResource("3_lmxic")
+script = ExtResource("3_kktu1")
 path = "res://sm63_godot/Pause New &#034Fludd&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -101,3 +127,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_qcjmb")

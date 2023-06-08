@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_bbu5v"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6jldt"]
+
+[sub_resource type="Animation" id="Animation_sepp1"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cm5lu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqcaf"]
 _data = {
-"Default": SubResource("Animation_bbu5v")
+"Default": SubResource("Animation_sepp1")
 }
 
 [node name="7-1 Edge" type="Node2D"]
+script = ExtResource("1_6jldt")
+source_xml = "res://sm63/LIBRARY/Course Clips/7 - Rainbow Ride/7-1 Edge.xml"
+linkage = "7-1Edge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_cm5lu")
+"Timeline": SubResource("AnimationLibrary_tqcaf")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

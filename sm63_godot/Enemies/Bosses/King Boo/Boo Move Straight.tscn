@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (body) - 1.png" id="1_bgv61"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_rxwp3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_oo58e"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (crown) - 1.png" id="4_nkcer"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 7.png" id="5_34ei8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ce7pr"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (body) - 1.png" id="2_k7e8b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_oy6sp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (crown) - 1.png" id="4_nh8kv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 7.png" id="5_kppxp"]
 
-[sub_resource type="Animation" id="Animation_2e3pp"]
+[sub_resource type="Animation" id="Animation_s7sdx"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -46,16 +46,37 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_86rly"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5cxu0"]
 _data = {
-"Default": SubResource("Animation_2e3pp")
+"Default": SubResource("Animation_s7sdx")
 }
 
+[sub_resource type="GDScript" id="GDScript_4ji5c"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_parent._parent._parent.movedir !== \"none\") {
+# 		play();
+# 		onEnterFrame = null;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_vfvxf"]
+script/source = "extends Node
+# _parent.gotoAndStop(_parent._parent._parent.movedir);
+# "
+
 [node name="Boo Move Straight" type="Node2D"]
+script = ExtResource("1_ce7pr")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo Move Straight.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_86rly")
+"Timeline": SubResource("AnimationLibrary_5cxu0")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -65,12 +86,12 @@ libraries = {
 [node name="@@50413" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-58, -38.25)
-texture = ExtResource("1_bgv61")
+texture = ExtResource("2_k7e8b")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_rxwp3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-15.65, -12.95)
-script = ExtResource("3_oo58e")
+script = ExtResource("3_oy6sp")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/Boo Eyes 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -86,18 +107,24 @@ brightness = 0.0
 [node name="@@50414" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-14.15, -56.75)
-texture = ExtResource("4_nkcer")
+texture = ExtResource("4_nh8kv")
 centered = false
 
 [node name="@@50415" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-36.65, -0.65)
-texture = ExtResource("5_34ei8")
+texture = ExtResource("5_kppxp")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_4ji5c")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_vfvxf")

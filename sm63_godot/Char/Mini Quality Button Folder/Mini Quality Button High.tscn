@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_f0ysq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_g5l1u"]
+
+[sub_resource type="Animation" id="Animation_m7sn3"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ckp5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4over"]
 _data = {
-"Default": SubResource("Animation_f0ysq")
+"Default": SubResource("Animation_m7sn3")
 }
 
 [node name="Mini Quality Button High" type="Node2D"]
+script = ExtResource("1_g5l1u")
+source_xml = "res://sm63/LIBRARY/Char/Mini Quality Button Folder/Mini Quality Button High.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4ckp5")
+"Timeline": SubResource("AnimationLibrary_4over")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_reire"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_glfhf"]
+
+[sub_resource type="Animation" id="Animation_n5ud3"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,25 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yeoqw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_svpui"]
 _data = {
-"Default": SubResource("Animation_reire")
+"Default": SubResource("Animation_n5ud3")
 }
 
+[sub_resource type="GDScript" id="GDScript_crhiw"]
+script/source = "extends Node
+# stop();"
+
 [node name="8-12Platforms" type="Node2D"]
+script = ExtResource("1_glfhf")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-12Platforms.xml"
+linkage = "8-12Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_yeoqw")
+"Timeline": SubResource("AnimationLibrary_svpui")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -66,6 +77,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), Packe
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_crhiw")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

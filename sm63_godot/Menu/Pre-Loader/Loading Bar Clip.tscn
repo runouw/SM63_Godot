@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_vtfp1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6sd3a"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_7svo4"]
 
-[sub_resource type="Animation" id="Animation_5lkeh"]
+[sub_resource type="Animation" id="Animation_cy3su"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c14le"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a21tk"]
 _data = {
-"Default": SubResource("Animation_5lkeh")
+"Default": SubResource("Animation_cy3su")
 }
 
 [node name="Loading Bar Clip" type="Node2D"]
+script = ExtResource("1_6sd3a")
+source_xml = "res://sm63/LIBRARY/Menu/Pre-Loader/Loading Bar Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_c14le")
+"Timeline": SubResource("AnimationLibrary_a21tk")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@52929" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-20, -123.7, 20, -123.7, 19.975, 166.3, -20.025, 166.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_vtfp1")
+script = ExtResource("2_7svo4")
 matrix = Transform2D(1, 0, 0, 5.9296, 0, 47.85)
 entries_color = PackedColorArray(0.784314, 0.784314, 0.784314, 0.152941, 1, 1, 1, 0.2, 0.784314, 0.784314, 0.784314, 0.25098)
 entries_ratio = PackedFloat32Array(0, 0.505882, 1)

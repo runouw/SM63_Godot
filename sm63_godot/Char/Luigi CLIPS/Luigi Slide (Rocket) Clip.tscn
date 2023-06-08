@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Rocket) - 2.png" id="1_imdl8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Slide (Rocket).png" id="2_lax8a"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_fp1q3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_6t8xp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lvsq0"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Rocket) - 2.png" id="2_561wj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Slide (Rocket).png" id="3_5vmwo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_r22m3"]
 
-[sub_resource type="Animation" id="Animation_pc4m6"]
+[sub_resource type="Animation" id="Animation_h2x3n"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -153,16 +153,88 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vnv0h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_spxkr"]
 _data = {
-"Default": SubResource("Animation_pc4m6")
+"Default": SubResource("Animation_h2x3n")
 }
 
+[sub_resource type="GDScript" id="GDScript_6o3w2"]
+script/source = "extends Node
+# rotation = 0;
+# rotspeed = 0;
+# rot2 = 0;
+# onEnterFrame = function () {
+# 	if (_root.Course.Char._xscale>0) {
+# 		rot2 = -_root.radiansToAngle(Math.atan2(_root.Course.Char.yspeed, -_root.Course.Char.xspeed));
+# 		rot2 += 10;
+# 	}
+# 	if (_root.Course.Char._xscale<0) {
+# 		rot2 = -_root.radiansToAngle(Math.atan2(_root.Course.Char.yspeed, _root.Course.Char.xspeed));
+# 		rot2 -= 10;
+# 	}
+# 	if (_root.Course.Char.air == true) {
+# 		//
+# 		if (rot>0) {
+# 			rot = rot2;
+# 			if (rot<-90) {
+# 				rotation -= 360;
+# 			}
+# 			rotspeed = (rot-rotation)/10;
+# 		} else {
+# 			rot = rot2;
+# 			if (rot>90) {
+# 				rotation += 360;
+# 			}
+# 			rotspeed = (rot-rotation)/10;
+# 		}
+# 		if (rotation>520) {
+# 			rotation -= 360;
+# 		}
+# 		if (rotation<-520) {
+# 			rotation += 360;
+# 		}
+# 		rotspeed = _root.groundFriction(rotspeed, 0.1, 1.15);
+# 		rotspeed = Math.min(rotspeed, 15);
+# 		rotspeed = Math.max(rotspeed, -15);
+# 		rotation += rotspeed;
+# 		_rotation = rotation;
+# 		//
+# 	} else {
+# 		_rotation = 0;
+# 		rotation = 0;
+# 	}
+# 	_root.DiveRot = _rotation;
+# 	if (!_root.KeyDOWN) {
+# 		if ((_root.Course.Char.yspeed == 0 && _root.Course.Char.xspeed == 0)) {
+# 			play();
+# 		}
+# 	}
+# 	if (_root.Course.Char.Water == true) {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_l3tpa"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_8k0rf"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# "
+
 [node name="Luigi Slide (Rocket) Clip" type="Node2D"]
+script = ExtResource("1_lvsq0")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Slide (Rocket) Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vnv0h")
+"Timeline": SubResource("AnimationLibrary_spxkr")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -174,7 +246,7 @@ texture_filter = 1
 position = Vector2(-23.55, -13.95)
 rotation = -0.523598
 scale = Vector2(1, 1)
-texture = ExtResource("1_imdl8")
+texture = ExtResource("2_561wj")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -185,7 +257,7 @@ texture_filter = 1
 position = Vector2(20.2, -0.75)
 rotation = -2.87979
 scale = Vector2(1, -1)
-texture = ExtResource("2_lax8a")
+texture = ExtResource("3_5vmwo")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -196,7 +268,7 @@ texture_filter = 1
 position = Vector2(18.5, -3)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_lax8a")
+texture = ExtResource("3_5vmwo")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -207,7 +279,7 @@ texture_filter = 1
 position = Vector2(20.2, -0.75)
 rotation = -2.87979
 scale = Vector2(1, -1)
-texture = ExtResource("2_lax8a")
+texture = ExtResource("3_5vmwo")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -218,7 +290,7 @@ texture_filter = 1
 position = Vector2(-23.55, -13.95)
 rotation = -0.523598
 scale = Vector2(1, 1)
-texture = ExtResource("1_imdl8")
+texture = ExtResource("2_561wj")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -227,7 +299,7 @@ visible = false
 [node name="@@15221" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-11, -23.5)
-texture = ExtResource("1_imdl8")
+texture = ExtResource("2_561wj")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -237,11 +309,11 @@ centered = false
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("3_fp1q3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2"]
 position = Vector2(-2, 2)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("4_6t8xp")
+script = ExtResource("4_r22m3")
 path = "res://sm63_godot/Char/Fludd CLIPS/Diving Rocket Fludd Water.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -261,8 +333,17 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_6o3w2")
+
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 2"]
+script = SubResource("GDScript_l3tpa")
+
 [node name="Frame 5" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 5"]
+script = SubResource("GDScript_8k0rf")

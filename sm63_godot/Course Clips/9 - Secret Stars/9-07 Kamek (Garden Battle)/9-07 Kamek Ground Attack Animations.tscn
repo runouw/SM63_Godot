@@ -1,15 +1,15 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=32 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 3 - Talking - 1.png" id="1_v7gtj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 3 - Talking - 2.png" id="2_pvtln"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 3 - Talking - 4.png" id="3_cgxhx"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="4_sko7c"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="5_qd8b3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 2.png" id="6_2p2sn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 2.png" id="7_kjdk3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 1.png" id="8_7ne1m"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ep0uw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 3 - Talking - 1.png" id="2_5eura"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 3 - Talking - 2.png" id="3_kjrtj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 3 - Talking - 4.png" id="4_yyu5v"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="5_ewy7c"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 2.png" id="6_ksjmv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 2.png" id="7_7qhxn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 1.png" id="8_6yqi4"]
 
-[sub_resource type="Animation" id="Animation_gsk6w"]
+[sub_resource type="Animation" id="Animation_0nifn"]
 length = 8.16667
 loop_mode = 1
 tracks/0/type = "value"
@@ -877,16 +877,189 @@ tracks/71/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_48o2k"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ua4a"]
 _data = {
-"Default": SubResource("Animation_gsk6w")
+"Default": SubResource("Animation_0nifn")
 }
 
+[sub_resource type="GDScript" id="GDScript_j3bk2"]
+script/source = "extends Node
+# LF()
+# "
+
+[sub_resource type="GDScript" id="GDScript_qxpc7"]
+script/source = "extends Node
+# _parent.GoombaSummon(_parent._x-22, _parent._y-15, -4-Math.random()*5, 3+Math.random()*7);
+# "
+
+[sub_resource type="GDScript" id="GDScript_eaaxj"]
+script/source = "extends Node
+# RF()
+# "
+
+[sub_resource type="GDScript" id="GDScript_mgpmf"]
+script/source = "extends Node
+# _parent.BobombSummon(_parent._x-22, _parent._y-15, -4-Math.random()*5, 3+Math.random()*7);
+# "
+
+[sub_resource type="GDScript" id="GDScript_wntx1"]
+script/source = "extends Node
+# RF();
+# "
+
+[sub_resource type="GDScript" id="GDScript_lwm6u"]
+script/source = "extends Node
+# _parent.BombSummon(_parent._x-22, _parent._y-15, 0, 0);
+# "
+
+[sub_resource type="GDScript" id="GDScript_q58fa"]
+script/source = "extends Node
+# RF()
+# "
+
+[sub_resource type="GDScript" id="GDScript_fmu5x"]
+script/source = "extends Node
+# RF();
+# "
+
+[sub_resource type="GDScript" id="GDScript_3toe1"]
+script/source = "extends Node
+# _parent.GoombaSummon(_parent._x-395, _parent._y+50, 2+Math.random()*5, 3+Math.random()*7);
+# "
+
+[sub_resource type="GDScript" id="GDScript_p05km"]
+script/source = "extends Node
+# LF()
+# "
+
+[sub_resource type="GDScript" id="GDScript_ij843"]
+script/source = "extends Node
+# _parent.BobombSummon(_parent._x-395, _parent._y+50, 2+Math.random()*5, 3+Math.random()*7);
+# "
+
+[sub_resource type="GDScript" id="GDScript_jywsx"]
+script/source = "extends Node
+# LF()
+# "
+
+[sub_resource type="GDScript" id="GDScript_2qxuu"]
+script/source = "extends Node
+# _parent.BombSummon(_parent._x-395, _parent._y+50, 0, 0);
+# "
+
+[sub_resource type="GDScript" id="GDScript_40pgn"]
+script/source = "extends Node
+# LF();
+# "
+
+[sub_resource type="GDScript" id="GDScript_6xbn8"]
+script/source = "extends Node
+# _parent.side = \"R\"
+# _parent.NextMode();"
+
+[sub_resource type="GDScript" id="GDScript_ebcgr"]
+script/source = "extends Node
+# _parent.side = \"L\";
+# _parent.NextMode();
+# "
+
+[sub_resource type="GDScript" id="GDScript_q62og"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_umtsu"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_yhlxq"]
+script/source = "extends Node
+# RF = function () {
+# 	count = 0;
+# 	waitcount = random(5)+4+((_parent._parent.onscreencount-_parent._parent.defeatedcount)*4);
+# 	gotoAndPlay(\"Rwait\");
+# };
+# LF = function () {
+# 	count = 0;
+# 	waitcount = random(5)+4+((_parent._parent.onscreencount-_parent._parent.defeatedcount)*4);
+# 	gotoAndPlay(\"Lwait\");
+# };
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_s3o12"]
+script/source = "extends Node
+# prevFrame();
+# count++;
+# if (count>waitcount || this.Rbox.hitTest(_root.Course.Char.charClip.body)) {
+# 	// Right function
+# 	if (_parent.CheckNextMode() == false) {
+# 		num = random(6);
+# 		if (this.Rbox.hitTest(_root.Course.Char.charClip.body)) {
+# 			num = 5;
+# 		}
+# 		if (num == 0 || num == 1) {
+# 			gotoAndPlay(\"Rgoomba\");
+# 		} else if (num == 2 || num == 3) {
+# 			gotoAndPlay(\"Rbobomb\");
+# 		} else if (num == 4) {
+# 			gotoAndPlay(\"Rbomb\");
+# 		} else {
+# 			gotoAndPlay(\"Rwarp\");
+# 		}
+# 	} else {
+# 		gotoAndPlay(\"Rend\");
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_kns3x"]
+script/source = "extends Node
+# prevFrame();
+# count++;
+# if (count>waitcount || this.Lbox.hitTest(_root.Course.Char.charClip.body)) {
+# 	// Left Function
+# 	if (_parent.CheckNextMode() == false) {
+# 		num = random(6);
+# 		if (this.Lbox.hitTest(_root.Course.Char.charClip.body)) {
+# 			num = 5;
+# 		}
+# 		if (num == 0 || num == 1) {
+# 			gotoAndPlay(\"Lgoomba\");
+# 		} else if (num == 2 || num == 3) {
+# 			gotoAndPlay(\"Lbobomb\");
+# 		} else if (num == 4) {
+# 			gotoAndPlay(\"Lbomb\");
+# 		} else {
+# 			gotoAndPlay(\"Lwarp\");
+# 		}
+# 	} else {
+# 		gotoAndPlay(\"Lend\");
+# 	}
+# }
+# "
+
 [node name="9-07 Kamek Ground Attack Animations" type="Node2D"]
+script = ExtResource("1_ep0uw")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Ground Attack Animations.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_48o2k")
+"Timeline": SubResource("AnimationLibrary_2ua4a")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -896,7 +1069,7 @@ libraries = {
 [node name="@@41198" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-18, -14.5)
-texture = ExtResource("1_v7gtj")
+texture = ExtResource("2_5eura")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
@@ -905,7 +1078,7 @@ visible = false
 [node name="@@41199" type="Sprite2D" parent="Layer 1/Frame 7"]
 texture_filter = 1
 position = Vector2(-18, -14.5)
-texture = ExtResource("2_pvtln")
+texture = ExtResource("3_kjrtj")
 centered = false
 
 [node name="Frame 13" type="Node2D" parent="Layer 1"]
@@ -914,7 +1087,7 @@ visible = false
 [node name="@@41200" type="Sprite2D" parent="Layer 1/Frame 13"]
 texture_filter = 1
 position = Vector2(-19, -12.5)
-texture = ExtResource("3_cgxhx")
+texture = ExtResource("4_yyu5v")
 centered = false
 
 [node name="Frame 18" type="Node2D" parent="Layer 1"]
@@ -923,7 +1096,7 @@ visible = false
 [node name="@@41201" type="Sprite2D" parent="Layer 1/Frame 18"]
 texture_filter = 1
 position = Vector2(-18, -14.5)
-texture = ExtResource("1_v7gtj")
+texture = ExtResource("2_5eura")
 centered = false
 
 [node name="Frame 24" type="Node2D" parent="Layer 1"]
@@ -932,7 +1105,7 @@ visible = false
 [node name="@@41202" type="Sprite2D" parent="Layer 1/Frame 24"]
 texture_filter = 1
 position = Vector2(-18, -14.5)
-texture = ExtResource("2_pvtln")
+texture = ExtResource("3_kjrtj")
 centered = false
 
 [node name="Frame 30" type="Node2D" parent="Layer 1"]
@@ -941,7 +1114,7 @@ visible = false
 [node name="@@41203" type="Sprite2D" parent="Layer 1/Frame 30"]
 texture_filter = 1
 position = Vector2(-19, -12.5)
-texture = ExtResource("3_cgxhx")
+texture = ExtResource("4_yyu5v")
 centered = false
 
 [node name="Frame 36" type="Node2D" parent="Layer 1"]
@@ -950,7 +1123,7 @@ visible = false
 [node name="@@41204" type="Sprite2D" parent="Layer 1/Frame 36"]
 texture_filter = 1
 position = Vector2(-18, -14.5)
-texture = ExtResource("1_v7gtj")
+texture = ExtResource("2_5eura")
 centered = false
 
 [node name="Frame 47" type="Node2D" parent="Layer 1"]
@@ -959,7 +1132,7 @@ visible = false
 [node name="@@41205" type="Sprite2D" parent="Layer 1/Frame 47"]
 texture_filter = 1
 position = Vector2(-18, -14.5)
-texture = ExtResource("2_pvtln")
+texture = ExtResource("3_kjrtj")
 centered = false
 
 [node name="Frame 56" type="Node2D" parent="Layer 1"]
@@ -968,14 +1141,14 @@ visible = false
 [node name="@@41206" type="Sprite2D" parent="Layer 1/Frame 56"]
 texture_filter = 1
 position = Vector2(-19, -12.5)
-texture = ExtResource("3_cgxhx")
+texture = ExtResource("4_yyu5v")
 centered = false
 
 [node name="Frame 62" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 62" instance=ExtResource("4_sko7c")]
-script = ExtResource("5_qd8b3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 62"]
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Enemies/Bosses/Kamek/Kamek Teleporting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -991,8 +1164,8 @@ brightness = 0.0
 [node name="Frame 72" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 72" instance=ExtResource("4_sko7c")]
-script = ExtResource("5_qd8b3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 72"]
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Enemies/Bosses/Kamek/Kamek Teleporting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1011,14 +1184,17 @@ visible = false
 [node name="Frame 82" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 82"]
+script = SubResource("GDScript_j3bk2")
+
 [node name="Frame 83" type="Node2D" parent="Layer 1"]
 visible = false
 
 [node name="Frame 89" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 89" instance=ExtResource("4_sko7c")]
-script = ExtResource("5_qd8b3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 89"]
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Enemies/Bosses/Kamek/Kamek Teleporting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1034,8 +1210,8 @@ brightness = 0.0
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 99" instance=ExtResource("4_sko7c")]
-script = ExtResource("5_qd8b3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 99"]
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Enemies/Bosses/Kamek/Kamek Teleporting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1056,7 +1232,7 @@ texture_filter = 1
 position = Vector2(-390.45, 33)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_v7gtj")
+texture = ExtResource("2_5eura")
 centered = false
 
 [node name="Frame 111" type="Node2D" parent="Layer 1"]
@@ -1067,7 +1243,7 @@ texture_filter = 1
 position = Vector2(-390.5, 33)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_pvtln")
+texture = ExtResource("3_kjrtj")
 centered = false
 
 [node name="Frame 117" type="Node2D" parent="Layer 1"]
@@ -1078,7 +1254,7 @@ texture_filter = 1
 position = Vector2(-389.5, 35)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_cgxhx")
+texture = ExtResource("4_yyu5v")
 centered = false
 
 [node name="Frame 122" type="Node2D" parent="Layer 1"]
@@ -1089,7 +1265,7 @@ texture_filter = 1
 position = Vector2(-390.45, 33)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_v7gtj")
+texture = ExtResource("2_5eura")
 centered = false
 
 [node name="Frame 129" type="Node2D" parent="Layer 1"]
@@ -1100,7 +1276,7 @@ texture_filter = 1
 position = Vector2(-390.5, 33)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_pvtln")
+texture = ExtResource("3_kjrtj")
 centered = false
 
 [node name="Frame 135" type="Node2D" parent="Layer 1"]
@@ -1111,7 +1287,7 @@ texture_filter = 1
 position = Vector2(-389.5, 35)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_cgxhx")
+texture = ExtResource("4_yyu5v")
 centered = false
 
 [node name="Frame 140" type="Node2D" parent="Layer 1"]
@@ -1122,7 +1298,7 @@ texture_filter = 1
 position = Vector2(-390.45, 33)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_v7gtj")
+texture = ExtResource("2_5eura")
 centered = false
 
 [node name="Frame 150" type="Node2D" parent="Layer 1"]
@@ -1133,7 +1309,7 @@ texture_filter = 1
 position = Vector2(-390.5, 33)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_pvtln")
+texture = ExtResource("3_kjrtj")
 centered = false
 
 [node name="Frame 160" type="Node2D" parent="Layer 1"]
@@ -1144,7 +1320,7 @@ texture_filter = 1
 position = Vector2(-389.5, 35)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_cgxhx")
+texture = ExtResource("4_yyu5v")
 centered = false
 
 [node name="Frame 165" type="Node2D" parent="Layer 1"]
@@ -1162,7 +1338,7 @@ visible = false
 [node name="@@41216" type="Sprite2D" parent="Layer 1/Frame 237"]
 texture_filter = 1
 position = Vector2(-16, -13.65)
-texture = ExtResource("6_2p2sn")
+texture = ExtResource("6_ksjmv")
 centered = false
 
 [node name="Frame 241" type="Node2D" parent="Layer 1"]
@@ -1173,7 +1349,7 @@ texture_filter = 1
 position = Vector2(-393.45, 34.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_2p2sn")
+texture = ExtResource("6_ksjmv")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -1186,8 +1362,14 @@ visible = false
 [node name="Frame 13" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 13"]
+script = SubResource("GDScript_qxpc7")
+
 [node name="Frame 17" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 17"]
+script = SubResource("GDScript_eaaxj")
 
 [node name="Frame 18" type="Node2D" parent="Layer 2"]
 visible = false
@@ -1195,8 +1377,14 @@ visible = false
 [node name="Frame 30" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 30"]
+script = SubResource("GDScript_mgpmf")
+
 [node name="Frame 35" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 35"]
+script = SubResource("GDScript_wntx1")
 
 [node name="Frame 36" type="Node2D" parent="Layer 2"]
 visible = false
@@ -1204,8 +1392,14 @@ visible = false
 [node name="Frame 56" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 56"]
+script = SubResource("GDScript_lwm6u")
+
 [node name="Frame 61" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 61"]
+script = SubResource("GDScript_q58fa")
 
 [node name="Frame 62" type="Node2D" parent="Layer 2"]
 visible = false
@@ -1213,11 +1407,11 @@ visible = false
 [node name="Frame 67" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 67" instance=ExtResource("4_sko7c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 67"]
 position = Vector2(-408.45, 47.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Enemies/Bosses/Kamek/Kamek Teleporting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1233,11 +1427,11 @@ brightness = 0.0
 [node name="Frame 77" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 77" instance=ExtResource("4_sko7c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 77"]
 position = Vector2(-408.45, 47.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Enemies/Bosses/Kamek/Kamek Teleporting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1253,11 +1447,11 @@ brightness = 0.0
 [node name="Frame 83" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 83" instance=ExtResource("4_sko7c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 83"]
 position = Vector2(-408.45, 47.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Enemies/Bosses/Kamek/Kamek Teleporting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1273,11 +1467,11 @@ brightness = 0.0
 [node name="Frame 93" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 93" instance=ExtResource("4_sko7c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 93"]
 position = Vector2(-408.45, 47.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Enemies/Bosses/Kamek/Kamek Teleporting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1296,14 +1490,23 @@ visible = false
 [node name="Frame 103" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 103"]
+script = SubResource("GDScript_fmu5x")
+
 [node name="Frame 104" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 117" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 117"]
+script = SubResource("GDScript_3toe1")
+
 [node name="Frame 121" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 121"]
+script = SubResource("GDScript_p05km")
 
 [node name="Frame 122" type="Node2D" parent="Layer 2"]
 visible = false
@@ -1311,8 +1514,14 @@ visible = false
 [node name="Frame 135" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 135"]
+script = SubResource("GDScript_ij843")
+
 [node name="Frame 139" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 139"]
+script = SubResource("GDScript_jywsx")
 
 [node name="Frame 140" type="Node2D" parent="Layer 2"]
 visible = false
@@ -1320,8 +1529,14 @@ visible = false
 [node name="Frame 160" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 160"]
+script = SubResource("GDScript_2qxuu")
+
 [node name="Frame 164" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 164"]
+script = SubResource("GDScript_40pgn")
 
 [node name="Frame 165" type="Node2D" parent="Layer 2"]
 visible = false
@@ -1329,7 +1544,7 @@ visible = false
 [node name="@@41193" type="Sprite2D" parent="Layer 2/Frame 165"]
 texture_filter = 1
 position = Vector2(-12.65, -20)
-texture = ExtResource("7_kjdk3")
+texture = ExtResource("7_7qhxn")
 centered = false
 
 [node name="Frame 168" type="Node2D" parent="Layer 2"]
@@ -1338,15 +1553,15 @@ visible = false
 [node name="@@41194" type="Sprite2D" parent="Layer 2/Frame 168"]
 texture_filter = 1
 position = Vector2(-19, -18.65)
-texture = ExtResource("8_7ne1m")
+texture = ExtResource("8_6yqi4")
 centered = false
 
 [node name="Frame 171" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 171" instance=ExtResource("4_sko7c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 171"]
 position = Vector2(-2, -2.65)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1362,11 +1577,11 @@ brightness = 0.0
 [node name="Frame 197" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 197" instance=ExtResource("4_sko7c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 197"]
 position = Vector2(-630.9, -189.65)
 rotation = 0.2618
 scale = Vector2(1, 1)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1382,6 +1597,9 @@ brightness = 0.0
 [node name="Frame 198" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 198"]
+script = SubResource("GDScript_6xbn8")
+
 [node name="Frame 199" type="Node2D" parent="Layer 2"]
 visible = false
 
@@ -1390,7 +1608,7 @@ texture_filter = 1
 position = Vector2(-391.5, 23.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("7_kjdk3")
+texture = ExtResource("7_7qhxn")
 centered = false
 
 [node name="Frame 202" type="Node2D" parent="Layer 2"]
@@ -1401,17 +1619,17 @@ texture_filter = 1
 position = Vector2(-387.5, 25)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_7ne1m")
+texture = ExtResource("8_6yqi4")
 centered = false
 
 [node name="Frame 205" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 205" instance=ExtResource("4_sko7c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 205"]
 position = Vector2(-402.5, 40.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1427,11 +1645,11 @@ brightness = 0.0
 [node name="Frame 235" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 235" instance=ExtResource("4_sko7c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 235"]
 position = Vector2(172.5, -189.5)
 rotation = 2.87979
 scale = Vector2(1, -1)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1447,13 +1665,16 @@ brightness = 0.0
 [node name="Frame 236" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 236"]
+script = SubResource("GDScript_ebcgr")
+
 [node name="Frame 237" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 237" instance=ExtResource("4_sko7c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 237"]
 position = Vector2(47.5, 9.95)
 scale = Vector2(3.65154, 9.28111)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1466,10 +1687,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@41197" type="Node2D" parent="Layer 2/Frame 237" instance=ExtResource("4_sko7c")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 237/DOMSymbolInstance"]
+script = SubResource("GDScript_q62og")
+
+[node name="@DOMSymbolInstance@41197" type="Node2D" parent="Layer 2/Frame 237"]
 position = Vector2(-442.5, 37)
 scale = Vector2(3.34836, 9.28111)
-script = ExtResource("5_qd8b3")
+script = ExtResource("5_ewy7c")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1481,10 +1705,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 237/@DOMSymbolInstance@41197"]
+script = SubResource("GDScript_umtsu")
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_yhlxq")
 
 [node name="Frame 237" type="Node2D" parent="Layer 3"]
 visible = false
@@ -1492,8 +1722,14 @@ visible = false
 [node name="Frame 240" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 240"]
+script = SubResource("GDScript_s3o12")
+
 [node name="Frame 241" type="Node2D" parent="Layer 3"]
 visible = false
 
 [node name="Frame 244" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 244"]
+script = SubResource("GDScript_kns3x")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_cvvd8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_qgd8n"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mjfgc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_o8fro"]
 
-[sub_resource type="Animation" id="Animation_jgux5"]
+[sub_resource type="Animation" id="Animation_frd8p"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +55,72 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_g88mt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ttely"]
 _data = {
-"Default": SubResource("Animation_jgux5")
+"Default": SubResource("Animation_frd8p")
 }
 
+[sub_resource type="GDScript" id="GDScript_qpkbw"]
+script/source = "extends Node
+# th.stop();
+# scrollspeed = _root.ScrollSpeed;
+# ss = \"Scroll Speed: \"+scrollspeed;
+# //
+# //scrollspeed = Math.round((th._x+80)*(99/160))+1;
+# th._x = ((scrollspeed-1)/(99/160))-80;
+# //
+# onEnterFrame = function () {
+# 	if (_parent.greyness._alpha<50) {
+# 		if (th.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 			th._xscale += (110-th._xscale)/3;
+# 		} else {
+# 			th._xscale += (100-th._xscale)/3;
+# 		}
+# 		th._yscale = th._xscale;
+# 		//
+# 		/*if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		_xscale += (110-_xscale)/3;
+# 		} else {
+# 		_xscale += (100-_xscale)/3;
+# 		}
+# 		_yscale = _xscale;*/
+# 		//
+# 		if (th.drag == true) {
+# 			if (th._currentframe<5) {
+# 				th.nextFrame();
+# 			}
+# 			th._x = Math.min(Math.max(this._xmouse, -80), 80);
+# 		} else {
+# 			if (th._currentframe>1) {
+# 				th.prevFrame();
+# 			}
+# 		}
+# 		//
+# 		scrollspeed = Math.round((th._x+80)*(99/160))+1;
+# 		_root.ScrollSpeed = scrollspeed;
+# 		ss = \"Scroll Speed: \"+scrollspeed;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (th.hitTest(_root._xmouse, _root._ymouse, false) && _parent.greyness._alpha<50) {
+# 		th.drag = true;
+# 	}
+# };
+# onMouseUp = function () {
+# 	th.drag = false;
+# };
+# "
+
 [node name="LDW - Movement Scroll Speed" type="Node2D"]
+script = ExtResource("1_mjfgc")
+source_xml = "res://sm63/LIBRARY/LDW - Movement Scroll Speed.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_g88mt")
+"Timeline": SubResource("AnimationLibrary_ttely")
 }
 
 [node name="Bar" type="Node2D" parent="."]
@@ -90,8 +146,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_cvvd8")]
-script = ExtResource("2_qgd8n")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
+script = ExtResource("2_o8fro")
 path = "res://sm63_godot/LDW - Movement Scroll Dragger.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -108,9 +164,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="TXT"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="TXT/Frame 0" instance=ExtResource("1_cvvd8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="TXT/Frame 0"]
 scale = Vector2(1, 0.99614)
-script = ExtResource("2_qgd8n")
+script = ExtResource("2_o8fro")
 path = "res://sm63_godot/LDW - Movement Scroll Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -126,3 +182,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_qpkbw")

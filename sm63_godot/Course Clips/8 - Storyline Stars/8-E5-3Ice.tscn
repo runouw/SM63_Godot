@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_1avfh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2b6m0"]
+
+[sub_resource type="Animation" id="Animation_g3p32"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,26 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ksc7g"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8qcar"]
 _data = {
-"Default": SubResource("Animation_1avfh")
+"Default": SubResource("Animation_g3p32")
 }
 
+[sub_resource type="GDScript" id="GDScript_kdk5d"]
+script/source = "extends Node
+# _visible = false;
+# "
+
 [node name="8-E5-3Ice" type="Node2D"]
+script = ExtResource("1_2b6m0")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-3Ice.xml"
+linkage = "8-E5-3Ice"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ksc7g")
+"Timeline": SubResource("AnimationLibrary_8qcar")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +66,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_kdk5d")

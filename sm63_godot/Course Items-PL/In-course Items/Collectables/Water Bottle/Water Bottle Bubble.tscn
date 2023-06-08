@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_3n2gd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2gapn"]
+
+[sub_resource type="Animation" id="Animation_o8roh"]
 length = 4.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -88,16 +90,21 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rbkvu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ytjie"]
 _data = {
-"Default": SubResource("Animation_3n2gd")
+"Default": SubResource("Animation_o8roh")
 }
 
 [node name="Water Bottle Bubble" type="Node2D"]
+script = ExtResource("1_2gapn")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Water Bottle/Water Bottle Bubble.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rbkvu")
+"Timeline": SubResource("AnimationLibrary_ytjie")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Faded Brick.png" id="1_ahidg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Hide Fledge.png" id="2_j6l44"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dwoul"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Faded Brick.png" id="2_d2j5q"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Hide Fledge.png" id="3_espb1"]
 
-[sub_resource type="Animation" id="Animation_hfalt"]
+[sub_resource type="Animation" id="Animation_fr5rl"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7sxnn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_450s5"]
 _data = {
-"Default": SubResource("Animation_hfalt")
+"Default": SubResource("Animation_fr5rl")
 }
 
 [node name="M2-3MidBG" type="Node2D"]
+script = ExtResource("1_dwoul")
+source_xml = "res://sm63/LIBRARY/M2-3MidBG.xml"
+linkage = "M2-3MidBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7sxnn")
+"Timeline": SubResource("AnimationLibrary_450s5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -42,7 +48,7 @@ libraries = {
 [node name="@@13068" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_ahidg")
+texture = ExtResource("2_d2j5q")
 texture_offset = Vector2(274, -234)
 polygon = PackedVector2Array(-658, -150, 495.95, -150, 495.95, 650, -658, 650)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -54,7 +60,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@13070" type="Polygon2D" parent="Layer 1/Frame 0/@Group@13069/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_j6l44")
+texture = ExtResource("3_espb1")
 texture_offset = Vector2(676.6, -537.3)
 polygon = PackedVector2Array(-676.6, 537.3, 507.25, 537.3, 507.25, 569.3, -676.6, 569.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -74,7 +80,7 @@ end_cap_mode = 2
 [node name="@@13073" type="Polygon2D" parent="Layer 1/Frame 0/@Group@13072/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_j6l44")
+texture = ExtResource("3_espb1")
 texture_offset = Vector2(676.6, -537.3)
 polygon = PackedVector2Array(-676.6, 314.3, 510.25, 314.3, 510.25, 346.3, -676.6, 346.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -94,7 +100,7 @@ end_cap_mode = 2
 [node name="@@13076" type="Polygon2D" parent="Layer 1/Frame 0/@Group@13075/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_j6l44")
+texture = ExtResource("3_espb1")
 texture_offset = Vector2(676.6, -537.3)
 polygon = PackedVector2Array(-676.6, 91.3, 509.25, 91.3, 509.25, 123.3, -676.6, 123.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])

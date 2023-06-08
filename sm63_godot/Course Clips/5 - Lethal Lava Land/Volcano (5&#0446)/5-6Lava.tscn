@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_yfa1l"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_wq3tf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8lic2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_05s2r"]
 
-[sub_resource type="Animation" id="Animation_5laox"]
+[sub_resource type="Animation" id="Animation_wlwch"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,25 +31,34 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xobcf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_stign"]
 _data = {
-"Default": SubResource("Animation_5laox")
+"Default": SubResource("Animation_wlwch")
 }
 
+[sub_resource type="GDScript" id="GDScript_b2usy"]
+script/source = "extends Node
+# _visible = false"
+
 [node name="5-6Lava" type="Node2D"]
+script = ExtResource("1_8lic2")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-6Lava.xml"
+linkage = "5-6Lava"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xobcf")
+"Timeline": SubResource("AnimationLibrary_stign")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_yfa1l")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(50.5, 64)
-script = ExtResource("2_wq3tf")
+script = ExtResource("2_05s2r")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-6 Lava lava.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -65,3 +74,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_b2usy")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_mpubj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_j360p"]
+
+[sub_resource type="Animation" id="Animation_qwegn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,21 +18,34 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wadmr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qkl0w"]
 _data = {
-"Default": SubResource("Animation_mpubj")
+"Default": SubResource("Animation_qwegn")
 }
 
+[sub_resource type="GDScript" id="GDScript_u4hpb"]
+script/source = "extends Node
+# _visible = false;
+# "
+
 [node name="3-8 Water" type="Node2D"]
+script = ExtResource("1_j360p")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-6&#044 3-7 & 3-8/3-8 Water.xml"
+linkage = "3-8Water"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wadmr")
+"Timeline": SubResource("AnimationLibrary_qkl0w")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_u4hpb")
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 

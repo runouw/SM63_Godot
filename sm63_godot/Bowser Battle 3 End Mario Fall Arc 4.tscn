@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="1_o3wxq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 3.png" id="2_hglwh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qlggy"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="2_fbas1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 3.png" id="3_mncgu"]
 
-[sub_resource type="Animation" id="Animation_ciivw"]
+[sub_resource type="Animation" id="Animation_pwxo8"]
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -54,16 +55,21 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h40gm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk4cu"]
 _data = {
-"Default": SubResource("Animation_ciivw")
+"Default": SubResource("Animation_pwxo8")
 }
 
 [node name="Bowser Battle 3 End Mario Fall Arc 4" type="Node2D"]
+script = ExtResource("1_qlggy")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 3 End Mario Fall Arc 4.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_h40gm")
+"Timeline": SubResource("AnimationLibrary_jk4cu")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -75,7 +81,7 @@ texture_filter = 1
 position = Vector2(-11.95, 11.5)
 rotation = -1.8326
 scale = Vector2(1, 1)
-texture = ExtResource("1_o3wxq")
+texture = ExtResource("2_fbas1")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -87,7 +93,7 @@ position = Vector2(-4.25, -16)
 rotation = 0.24133
 scale = Vector2(0.999186, 0.999197)
 skew = -1.84774e-05
-texture = ExtResource("1_o3wxq")
+texture = ExtResource("2_fbas1")
 centered = false
 
 [node name="Frame 22" type="Node2D" parent="Layer 1"]
@@ -98,7 +104,7 @@ texture_filter = 1
 position = Vector2(13.65, -12.15)
 rotation = -2.87979
 scale = Vector2(1, -1)
-texture = ExtResource("2_hglwh")
+texture = ExtResource("3_mncgu")
 centered = false
 
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
@@ -109,5 +115,5 @@ texture_filter = 1
 position = Vector2(9.85, -14.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_hglwh")
+texture = ExtResource("3_mncgu")
 centered = false

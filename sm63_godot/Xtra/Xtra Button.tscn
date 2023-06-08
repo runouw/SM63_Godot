@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_glx1c"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dwx2q"]
+
+[sub_resource type="Animation" id="Animation_d4ue8"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3p372"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7uxr"]
 _data = {
-"Default": SubResource("Animation_glx1c")
+"Default": SubResource("Animation_d4ue8")
 }
 
 [node name="Xtra Button" type="Node2D"]
+script = ExtResource("1_dwx2q")
+source_xml = "res://sm63/LIBRARY/Xtra/Xtra Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3p372")
+"Timeline": SubResource("AnimationLibrary_y7uxr")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

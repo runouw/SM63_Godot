@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_u71yh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_00ccf"]
+
+[sub_resource type="Animation" id="Animation_viwsv"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,43 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4ui0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l751h"]
 _data = {
-"Default": SubResource("Animation_u71yh")
+"Default": SubResource("Animation_viwsv")
 }
 
+[sub_resource type="GDScript" id="GDScript_cye4j"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.Fluddpow == \"\" || this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 		sc = 115;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	if (Math.abs(sc-_xscale)<1) {
+# 		_xscale = sc;
+# 	}
+# 	// 
+# };
+# onMouseDown = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true) && _root.CanSwitchFludd !== false) {
+# 		_root.Fluddpow = \"\";
+# 	}
+# };
+# "
+
 [node name="No Fludd Code Box" type="Node2D"]
+script = ExtResource("1_00ccf")
+source_xml = "res://sm63/LIBRARY/No Fludd Code Box.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_n4ui0")
+"Timeline": SubResource("AnimationLibrary_l751h")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -72,3 +101,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_cye4j")

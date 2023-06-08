@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_5o8hv"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_yhus2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Stand.png" id="3_rjnpb"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Start Walk - 1.png" id="4_vqbel"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Start Walk - 2.png" id="5_qd618"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_bpddw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_nfnjq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Stand.png" id="3_6px8k"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Start Walk - 1.png" id="4_nxn6w"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Start Walk - 2.png" id="5_krpq8"]
 
-[sub_resource type="Animation" id="Animation_ec8st"]
+[sub_resource type="Animation" id="Animation_7bebg"]
 length = 3.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -214,25 +214,38 @@ tracks/16/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0wwlq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6tdaa"]
 _data = {
-"Default": SubResource("Animation_ec8st")
+"Default": SubResource("Animation_7bebg")
 }
 
+[sub_resource type="GDScript" id="GDScript_5hova"]
+script/source = "extends Node
+# if (firstloaded == undefined) {
+# 	firstloaded = true;
+# 	gotoAndPlay(random(101)+1);
+# }
+# "
+
 [node name="Cinema 2 Moving Koopa 1" type="Node2D"]
+script = ExtResource("1_bpddw")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Moving Koopa 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_0wwlq")
+"Timeline": SubResource("AnimationLibrary_6tdaa")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_5o8hv")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-10, -1)
-script = ExtResource("2_yhus2")
+script = ExtResource("2_nfnjq")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Koopa Walk Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -248,9 +261,9 @@ brightness = 0.0
 [node name="Frame 32" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 32" instance=ExtResource("1_5o8hv")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 32"]
 position = Vector2(-60, 1)
-script = ExtResource("2_yhus2")
+script = ExtResource("2_nfnjq")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Koopa Walk Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -269,7 +282,7 @@ visible = false
 [node name="@@4185" type="Sprite2D" parent="Layer 1/Frame 34"]
 texture_filter = 1
 position = Vector2(-71, -14)
-texture = ExtResource("3_rjnpb")
+texture = ExtResource("3_6px8k")
 centered = false
 
 [node name="Frame 39" type="Node2D" parent="Layer 1"]
@@ -278,7 +291,7 @@ visible = false
 [node name="@@4186" type="Sprite2D" parent="Layer 1/Frame 39"]
 texture_filter = 1
 position = Vector2(-71.5, -15.5)
-texture = ExtResource("4_vqbel")
+texture = ExtResource("4_nxn6w")
 centered = false
 
 [node name="Frame 42" type="Node2D" parent="Layer 1"]
@@ -287,7 +300,7 @@ visible = false
 [node name="@@4187" type="Sprite2D" parent="Layer 1/Frame 42"]
 texture_filter = 1
 position = Vector2(-68.5, -16)
-texture = ExtResource("5_qd618")
+texture = ExtResource("5_krpq8")
 centered = false
 
 [node name="Frame 44" type="Node2D" parent="Layer 1"]
@@ -298,7 +311,7 @@ texture_filter = 1
 position = Vector2(-43.5, -16)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_qd618")
+texture = ExtResource("5_krpq8")
 centered = false
 
 [node name="Frame 47" type="Node2D" parent="Layer 1"]
@@ -309,7 +322,7 @@ texture_filter = 1
 position = Vector2(-41.5, -15.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_vqbel")
+texture = ExtResource("4_nxn6w")
 centered = false
 
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
@@ -320,17 +333,17 @@ texture_filter = 1
 position = Vector2(-39, -14)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_rjnpb")
+texture = ExtResource("3_6px8k")
 centered = false
 
 [node name="Frame 52" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 52" instance=ExtResource("1_5o8hv")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 52"]
 position = Vector2(-48, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_yhus2")
+script = ExtResource("2_nfnjq")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Koopa Walk Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -346,11 +359,11 @@ brightness = 0.0
 [node name="Frame 86" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 86" instance=ExtResource("1_5o8hv")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 86"]
 position = Vector2(0, 1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_yhus2")
+script = ExtResource("2_nfnjq")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Koopa Walk Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -371,7 +384,7 @@ texture_filter = 1
 position = Vector2(13, -14)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_rjnpb")
+texture = ExtResource("3_6px8k")
 centered = false
 
 [node name="Frame 89" type="Node2D" parent="Layer 1"]
@@ -382,7 +395,7 @@ texture_filter = 1
 position = Vector2(10.5, -15.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_vqbel")
+texture = ExtResource("4_nxn6w")
 centered = false
 
 [node name="Frame 92" type="Node2D" parent="Layer 1"]
@@ -393,7 +406,7 @@ texture_filter = 1
 position = Vector2(8.5, -16)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_qd618")
+texture = ExtResource("5_krpq8")
 centered = false
 
 [node name="Frame 94" type="Node2D" parent="Layer 1"]
@@ -402,7 +415,7 @@ visible = false
 [node name="@@4194" type="Sprite2D" parent="Layer 1/Frame 94"]
 texture_filter = 1
 position = Vector2(-16.5, -16)
-texture = ExtResource("5_qd618")
+texture = ExtResource("5_krpq8")
 centered = false
 
 [node name="Frame 97" type="Node2D" parent="Layer 1"]
@@ -411,7 +424,7 @@ visible = false
 [node name="@@4195" type="Sprite2D" parent="Layer 1/Frame 97"]
 texture_filter = 1
 position = Vector2(-18.5, -15.5)
-texture = ExtResource("4_vqbel")
+texture = ExtResource("4_nxn6w")
 centered = false
 
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
@@ -420,9 +433,12 @@ visible = false
 [node name="@@4196" type="Sprite2D" parent="Layer 1/Frame 99"]
 texture_filter = 1
 position = Vector2(-21, -14)
-texture = ExtResource("3_rjnpb")
+texture = ExtResource("3_6px8k")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_5hova")

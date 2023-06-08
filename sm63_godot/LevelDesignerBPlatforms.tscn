@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_8h6nm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5q27u"]
+
+[sub_resource type="Animation" id="Animation_cr1o2"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,25 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lk7kl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n3igs"]
 _data = {
-"Default": SubResource("Animation_8h6nm")
+"Default": SubResource("Animation_cr1o2")
 }
 
+[sub_resource type="GDScript" id="GDScript_7uxjn"]
+script/source = "extends Node
+# stop();"
+
 [node name="LevelDesignerBPlatforms" type="Node2D"]
+script = ExtResource("1_5q27u")
+source_xml = "res://sm63/LIBRARY/LevelDesignerBPlatforms.xml"
+linkage = "LevelDesignerBPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lk7kl")
+"Timeline": SubResource("AnimationLibrary_n3igs")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,3 +64,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_7uxjn")

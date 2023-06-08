@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_8cfar"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_82jgy"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_tekt5"]
 
-[sub_resource type="Animation" id="Animation_6yuje"]
+[sub_resource type="Animation" id="Animation_u4my2"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,62 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_v0lqb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xy176"]
 _data = {
-"Default": SubResource("Animation_6yuje")
+"Default": SubResource("Animation_u4my2")
 }
 
+[sub_resource type="GDScript" id="GDScript_pmu1p"]
+script/source = "extends Node
+# played = false;
+# onEnterFrame = function () {
+# 	AL();
+# 	if (_root.Course.BackGFX.inroom == true && _alpha>0) {
+# 		//
+# 		if (played == false) {
+# 			_root.StartNewMusicAndIntroNoVar(\"BowserPlan-Intro\", \"BowserPlan-Repeat\");
+# 		}
+# 		played = true;
+# 		//
+# 		_root.Course.Platforms.gotoAndStop(2);
+# 		AL = function () {
+# 			if (_alpha<=0) {
+# 				_alpha = 0;
+# 				AL = null;
+# 			} else {
+# 				_alpha -= 2;
+# 			}
+# 		};
+# 	} else if (_root.Course.BackGFX.inroom !== true && _alpha<100) {
+# 		//
+# 		if (played == true) {
+# 			_root.StartNewMusicAndIntroNoVar(\"InsidetheCastleWalls\");
+# 		}
+# 		played = false;
+# 		//
+# 		_root.Course.Platforms.gotoAndStop(1);
+# 		AL = function () {
+# 			if (_alpha>=100) {
+# 				_alpha = 100;
+# 				AL = null;
+# 			} else {
+# 				_alpha += 2;
+# 			}
+# 		};
+# 	}
+# };
+# "
+
 [node name="C-13 Front GFX Clip" type="Node2D"]
+script = ExtResource("1_82jgy")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 Front GFX Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_v0lqb")
+"Timeline": SubResource("AnimationLibrary_xy176")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,9 +100,9 @@ libraries = {
 [node name="@@44617" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(499.4, -320.5, 499.4, -320.5, 499.4, 320.45, 64, 320.45, -499.35, 192.45, -326.4, 20.5, 80, -281.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
-script = ExtResource("1_8cfar")
+script = ExtResource("2_tekt5")
 matrix = Transform2D(0, 0.0817871, -0.391205, 0, 685.65, -199.5)
-entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+entries_color = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
@@ -66,12 +113,15 @@ spread_method_reflect = false
 [node name="@@44619" type="Polygon2D" parent="Layer 1/Frame 0/@Group@44618/Shape"]
 polygon = PackedVector2Array(499.4, -331.5, 499.4, -331.5, 499.4, 320.45, 64, 320.45, -499.35, 192.45, -326.4, 20.5, 80, -281.5, 162.9, -293.007, 246.29, -303.76, 330.17, -313.76, 414.54, -323.007)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)])
-script = ExtResource("1_8cfar")
+script = ExtResource("2_tekt5")
 matrix = Transform2D(0.0524597, 0.0626373, -0.299591, 0.250885, 1156.8, -884.95)
-entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.901961)
+entries_color = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.901961)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_pmu1p")

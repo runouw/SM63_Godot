@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_6gcgp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_yjoky"]
+
+[sub_resource type="Animation" id="Animation_78fpr"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qe38j"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uonkw"]
 _data = {
-"Default": SubResource("Animation_6gcgp")
+"Default": SubResource("Animation_78fpr")
 }
 
 [node name="4-11 Ground" type="Node2D"]
+script = ExtResource("1_yjoky")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Xtras (4-5&#044 4-9&#044 4-11)/4-11 Ground.xml"
+linkage = "4-11Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qe38j")
+"Timeline": SubResource("AnimationLibrary_uonkw")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

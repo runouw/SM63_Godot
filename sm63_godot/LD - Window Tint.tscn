@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_8ibxk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1rnqj"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_7tce2"]
 
-[sub_resource type="Animation" id="Animation_ojbsd"]
+[sub_resource type="Animation" id="Animation_8efdl"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eaua4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c6mcp"]
 _data = {
-"Default": SubResource("Animation_ojbsd")
+"Default": SubResource("Animation_8efdl")
 }
 
 [node name="LD - Window Tint" type="Node2D"]
+script = ExtResource("1_1rnqj")
+source_xml = "res://sm63/LIBRARY/LD - Window Tint.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_eaua4")
+"Timeline": SubResource("AnimationLibrary_c6mcp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@8733" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_8ibxk")
+script = ExtResource("2_7tce2")
 matrix = Transform2D(0.0958405, 0, 0, 0.0809326, 30.4, 29)
 entries_color = PackedColorArray(0.811765, 0.752941, 0.619608, 1, 0.933333, 0.917647, 0.866667, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -60,7 +66,7 @@ end_cap_mode = 2
 [node name="@@8735" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(74.45, 24.35, 74.45, 24.35, 87.8218, 25.5187, 100.05, 29.025, 100.05, 99.7, 20.925, 99.7, 15.8063, 88.2838, 14.1, 75.65, 18.5125, 55.95, 31.75, 39.35, 44.3611, 31.0167, 58.5944, 26.0167, 63.3313, 25.5187)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)])
-script = ExtResource("1_8ibxk")
+script = ExtResource("2_7tce2")
 matrix = Transform2D(0.0744019, 0, 0, 0.0744019, 74.4, 75.65)
 entries_color = PackedColorArray(0.882353, 0.827451, 0.784314, 0.980392, 0.870588, 0.843137, 0.745098, 0)
 entries_ratio = PackedFloat32Array(0, 1)

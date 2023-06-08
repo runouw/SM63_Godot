@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_v5ra3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_e8fm0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_y1sea"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_kc0xg"]
 
-[sub_resource type="Animation" id="Animation_2i1ur"]
+[sub_resource type="Animation" id="Animation_kh42s"]
 length = 2.03333
 loop_mode = 1
 tracks/0/type = "value"
@@ -127,24 +127,34 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_d7txx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dnpfn"]
 _data = {
-"Default": SubResource("Animation_2i1ur")
+"Default": SubResource("Animation_kh42s")
 }
 
+[sub_resource type="GDScript" id="GDScript_w0eyl"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Big Bully Defeated" type="Node2D"]
+script = ExtResource("1_y1sea")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Big Bully/Big Bully Defeated.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_d7txx")
+"Timeline": SubResource("AnimationLibrary_dnpfn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_v5ra3")]
-script = ExtResource("2_e8fm0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_kc0xg")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -160,9 +170,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9" instance=ExtResource("1_v5ra3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9"]
 position = Vector2(0, -10)
-script = ExtResource("2_e8fm0")
+script = ExtResource("2_kc0xg")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -178,8 +188,8 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19" instance=ExtResource("1_v5ra3")]
-script = ExtResource("2_e8fm0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19"]
+script = ExtResource("2_kc0xg")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -195,9 +205,9 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29" instance=ExtResource("1_v5ra3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29"]
 position = Vector2(0, -10)
-script = ExtResource("2_e8fm0")
+script = ExtResource("2_kc0xg")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -207,14 +217,14 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.3
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Frame 39" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 39" instance=ExtResource("1_v5ra3")]
-script = ExtResource("2_e8fm0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 39"]
+script = ExtResource("2_kc0xg")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -224,15 +234,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.5
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Frame 44" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 44" instance=ExtResource("1_v5ra3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 44"]
 position = Vector2(0, -5)
-script = ExtResource("2_e8fm0")
+script = ExtResource("2_kc0xg")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -242,15 +252,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.55
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Frame 59" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 59" instance=ExtResource("1_v5ra3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 59"]
 position = Vector2(0, 25)
-script = ExtResource("2_e8fm0")
+script = ExtResource("2_kc0xg")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -260,7 +270,7 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Frame 60" type="Node2D" parent="Layer 1"]
@@ -272,3 +282,6 @@ visible = false
 
 [node name="Frame 60" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 60"]
+script = SubResource("GDScript_w0eyl")

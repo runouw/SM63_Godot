@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Slide (Turbo).png" id="1_5ff4v"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Turbo) 2.png" id="2_l8837"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Turbo) 2.png" id="3_ekwng"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_r00fp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Slide (Turbo).png" id="2_3os3r"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Turbo) 2.png" id="3_id5g3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Turbo) 2.png" id="4_0eo8r"]
 
-[sub_resource type="Animation" id="Animation_n67yu"]
+[sub_resource type="Animation" id="Animation_m8mdf"]
 length = 0.733333
 loop_mode = 1
 tracks/0/type = "value"
@@ -116,16 +117,107 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_o8xv2"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_easct"]
 _data = {
-"Default": SubResource("Animation_n67yu")
+"Default": SubResource("Animation_m8mdf")
 }
 
+[sub_resource type="GDScript" id="GDScript_270ps"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_wvd23"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 		if (_root.KeyRIGHT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		if (_root.KeyLEFT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		//         
+# 		if (_root.KeyTapRIGHT()) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 		if (_root.KeyTapLEFT()) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ryond"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 		tellTarget (_root.Course.Char) {
+# 			if (_root.KeyDOWN() && Water == false) {
+# 				doublejump = 0;
+# 				attack = true;
+# 				attackFrame = \"Dive\";
+# 				yspeed += 3;
+# 				if (_xscale<0) {
+# 					xspeed -= (xspeed-_root.Divespeed)/5;
+# 				} else {
+# 					xspeed -= (xspeed+_root.Divespeed)/5;
+# 				}
+# 			}
+# 			if (_root.KeyZ() && (Water == false || _root.Metal == true)) {
+# 				attack = true;
+# 				attackFrame = \"Ground\";
+# 				xspeed = 0;
+# 				yspeed = 0;
+# 			}
+# 			if (air == false) {
+# 				attack = false;
+# 			}
+# 		}
+# 		if (_root.KeyRIGHT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		if (_root.KeyLEFT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		//         
+# 		if (_root.KeyTapRIGHT()) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 		if (_root.KeyTapLEFT()) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_dcx1d"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# "
+
 [node name="Mario (turbo) backflip" type="Node2D"]
+script = ExtResource("1_r00fp")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (turbo) backflip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_o8xv2")
+"Timeline": SubResource("AnimationLibrary_easct")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -137,7 +229,7 @@ texture_filter = 1
 position = Vector2(20.25, -18.55)
 rotation = -2.90212
 scale = Vector2(0.998054, -0.998054)
-texture = ExtResource("1_5ff4v")
+texture = ExtResource("2_3os3r")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
@@ -148,7 +240,7 @@ texture_filter = 1
 position = Vector2(22.9, -14.65)
 rotation = -2.70905
 scale = Vector2(0.997405, -0.997405)
-texture = ExtResource("1_5ff4v")
+texture = ExtResource("2_3os3r")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
@@ -159,7 +251,7 @@ texture_filter = 1
 position = Vector2(-18.55, -21.95)
 rotation = -0.477118
 scale = Vector2(0.998487, 0.998487)
-texture = ExtResource("2_l8837")
+texture = ExtResource("3_id5g3")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
@@ -171,7 +263,7 @@ position = Vector2(-13.2, -29.55)
 rotation = -0.201
 scale = Vector2(0.984699, 0.984726)
 skew = 2.13385e-05
-texture = ExtResource("3_ekwng")
+texture = ExtResource("4_0eo8r")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 2"]
@@ -183,18 +275,30 @@ position = Vector2(-8.8, -30)
 rotation = -0.0214294
 scale = Vector2(0.984128, 0.984158)
 skew = 1.60933e-05
-texture = ExtResource("3_ekwng")
+texture = ExtResource("4_0eo8r")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_270ps")
+
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 3"]
+script = SubResource("GDScript_wvd23")
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 14"]
+script = SubResource("GDScript_ryond")
+
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 21"]
+script = SubResource("GDScript_dcx1d")

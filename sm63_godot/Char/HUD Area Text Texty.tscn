@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=9 format=3]
 
-[sub_resource type="Animation" id="Animation_kg6jl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_wvrf0"]
+
+[sub_resource type="Animation" id="Animation_oljta"]
 length = 3.16667
 loop_mode = 1
 tracks/0/type = "value"
@@ -124,16 +126,61 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ddy5k"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ext2d"]
 _data = {
-"Default": SubResource("Animation_kg6jl")
+"Default": SubResource("Animation_oljta")
 }
 
+[sub_resource type="GDScript" id="GDScript_jaolx"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	count++;
+# 	if (count>8) {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ejrb4"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_parent.bg._alpha += 10;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_okp60"]
+script/source = "extends Node
+# onEnterFrame = null;
+# _parent.bg._alpha = 100;
+# "
+
+[sub_resource type="GDScript" id="GDScript_x4lhv"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_parent.bg._alpha -= 10;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_cqgci"]
+script/source = "extends Node
+# onEnterFrame = null;
+# _parent.bg._alpha = 0;
+# //_parent.swapDepths(0)
+# _parent.removeMovieClip();
+# "
+
 [node name="HUD Area Text Texty" type="Node2D"]
+script = ExtResource("1_wvrf0")
+source_xml = "res://sm63/LIBRARY/Char/HUD Area Text Texty.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ddy5k")
+"Timeline": SubResource("AnimationLibrary_ext2d")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -156,14 +203,29 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_jaolx")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_ejrb4")
 
 [node name="Frame 10" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 10"]
+script = SubResource("GDScript_okp60")
+
 [node name="Frame 84" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 84"]
+script = SubResource("GDScript_x4lhv")
+
 [node name="Frame 94" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 94"]
+script = SubResource("GDScript_cqgci")

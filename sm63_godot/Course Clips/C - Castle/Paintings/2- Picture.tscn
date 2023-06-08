@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/2 Painting.png" id="1_ju4jx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_f6yok"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/2 Painting.png" id="2_perqb"]
 
-[sub_resource type="Animation" id="Animation_m6wg8"]
+[sub_resource type="Animation" id="Animation_67mka"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_usq8x"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_353tl"]
 _data = {
-"Default": SubResource("Animation_m6wg8")
+"Default": SubResource("Animation_67mka")
 }
 
 [node name="2- Picture" type="Node2D"]
+script = ExtResource("1_f6yok")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/2- Picture.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_usq8x")
+"Timeline": SubResource("AnimationLibrary_353tl")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@45122" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_ju4jx")
+texture = ExtResource("2_perqb")
 texture_offset = Vector2(-46.3, 40.85)
 texture_scale = Vector2(2.74347, 2.74347)
 polygon = PackedVector2Array(-44.25, -33.25, 46.75, -33.25, 46.75, 32.75, -44.25, 32.75)

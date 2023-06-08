@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_bs10k"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7pap4"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_p5vkj"]
 
-[sub_resource type="Animation" id="Animation_l28kd"]
+[sub_resource type="Animation" id="Animation_htmid"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sl2dm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ilbrn"]
 _data = {
-"Default": SubResource("Animation_l28kd")
+"Default": SubResource("Animation_htmid")
 }
 
 [node name="Heart Clip GFX" type="Node2D"]
+script = ExtResource("1_7pap4")
+source_xml = "res://sm63/LIBRARY/Heart Clip GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sl2dm")
+"Timeline": SubResource("AnimationLibrary_ilbrn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@6177" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-0.2, -7.975, -0.2, -7.975, 9.5, -6.3, 7.79863, 1.8502, -0.1, 10.675, -0.1, 10.675, -7.81719, 1.8502, -9.45, -6.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-script = ExtResource("1_bs10k")
+script = ExtResource("2_p5vkj")
 matrix = Transform2D(0.015686, 0, 0, 0.015686, -4.5, -2.25)
 entries_color = PackedColorArray(0.937255, 0.129412, 0.615686, 1, 0.909804, 0.0588235, 0.4, 1)
 entries_ratio = PackedFloat32Array(0, 1)

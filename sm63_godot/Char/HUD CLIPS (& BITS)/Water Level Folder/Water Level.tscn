@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_6adnt"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2rabi"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_sptpv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_x1qa1"]
 
-[sub_resource type="Animation" id="Animation_nk182"]
+[sub_resource type="Animation" id="Animation_h0r3e"]
 length = 16.6667
 loop_mode = 1
 tracks/0/type = "value"
@@ -163,27 +163,32 @@ tracks/12/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c0qwj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0h4r0"]
 _data = {
-"Default": SubResource("Animation_nk182")
+"Default": SubResource("Animation_h0r3e")
 }
 
 [node name="Water Level" type="Node2D"]
+script = ExtResource("1_sptpv")
+source_xml = "res://sm63/LIBRARY/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_c0qwj")
+"Timeline": SubResource("AnimationLibrary_0h4r0")
 }
 
 [node name="Left" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Left"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Left/Frame 0" instance=ExtResource("1_6adnt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Left/Frame 0"]
 position = Vector2(7.65, -73.25)
 rotation = 0.0051881
 scale = Vector2(0.999983, 0.999983)
-script = ExtResource("2_2rabi")
+script = ExtResource("2_x1qa1")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -226,11 +231,11 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 
 [node name="Frame 0" type="Node2D" parent="Right"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Right/Frame 0" instance=ExtResource("1_6adnt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Right/Frame 0"]
 position = Vector2(7.65, -84.5)
 rotation = 3.07145
 scale = Vector2(0.999742, -0.999742)
-script = ExtResource("2_2rabi")
+script = ExtResource("2_x1qa1")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -273,10 +278,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 
 [node name="Frame 0" type="Node2D" parent="Bubbles"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Bubbles/Frame 0" instance=ExtResource("1_6adnt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Bubbles/Frame 0"]
 position = Vector2(-1.5, -25.5)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_2rabi")
+script = ExtResource("2_x1qa1")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Bubble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -289,10 +294,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@14779" type="Node2D" parent="Bubbles/Frame 0" instance=ExtResource("1_6adnt")]
+[node name="@DOMSymbolInstance@14779" type="Node2D" parent="Bubbles/Frame 0"]
 position = Vector2(-15.25, -18.85)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_2rabi")
+script = ExtResource("2_x1qa1")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Bubble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -305,10 +310,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@14780" type="Node2D" parent="Bubbles/Frame 0" instance=ExtResource("1_6adnt")]
+[node name="@DOMSymbolInstance@14780" type="Node2D" parent="Bubbles/Frame 0"]
 position = Vector2(14.85, -19.85)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_2rabi")
+script = ExtResource("2_x1qa1")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Bubble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -321,10 +326,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@14781" type="Node2D" parent="Bubbles/Frame 0" instance=ExtResource("1_6adnt")]
+[node name="@DOMSymbolInstance@14781" type="Node2D" parent="Bubbles/Frame 0"]
 position = Vector2(4, -13.5)
 scale = Vector2(0.799988, 0.799988)
-script = ExtResource("2_2rabi")
+script = ExtResource("2_x1qa1")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Bubble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -337,10 +342,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@14782" type="Node2D" parent="Bubbles/Frame 0" instance=ExtResource("1_6adnt")]
+[node name="@DOMSymbolInstance@14782" type="Node2D" parent="Bubbles/Frame 0"]
 position = Vector2(-4.55, -15.2)
 scale = Vector2(0.799988, 0.799988)
-script = ExtResource("2_2rabi")
+script = ExtResource("2_x1qa1")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Bubble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -384,9 +389,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 
 [node name="Frame 0" type="Node2D" parent="Top"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Top/Frame 0" instance=ExtResource("1_6adnt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Top/Frame 0"]
 position = Vector2(-2.5, -16.3)
-script = ExtResource("2_2rabi")
+script = ExtResource("2_x1qa1")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Top.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -402,9 +407,9 @@ brightness = 0.0
 [node name="Frame 499" type="Node2D" parent="Top"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Top/Frame 499" instance=ExtResource("1_6adnt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Top/Frame 499"]
 position = Vector2(-2.5, -138.8)
-script = ExtResource("2_2rabi")
+script = ExtResource("2_x1qa1")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Top.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

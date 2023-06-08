@@ -5,6 +5,7 @@ var attributes: Dictionary
 var children: Array[XMLNode]
 var parent: XMLNode = null
 var text: String = ""
+var c_data: String = ""
 
 func _init(
 	p_name: String

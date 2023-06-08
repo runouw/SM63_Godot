@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_0krre"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_t8iw4"]
+
+[sub_resource type="Animation" id="Animation_4yn67"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,78 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2l3ld"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_av7vv"]
 _data = {
-"Default": SubResource("Animation_0krre")
+"Default": SubResource("Animation_4yn67")
 }
 
+[sub_resource type="GDScript" id="GDScript_466cr"]
+script/source = "extends Node
+# stop();
+# _visible = false;
+# newx = _x;
+# newy = _y;
+# oldx = _x;
+# oldy = _y;
+# //
+# newerx = _x;
+# newery = _y;
+# olderx = _x;
+# oldery = _y;
+# onEnterFrame = function () {
+# 	_root.Course.Char.charClip.frame.followpath = true;
+# 	if (_root.PauseGame == false) {
+# 		
+# 		//
+# 		if (isNaN(accelx)) {
+# 			accelx = 0;
+# 		}
+# 		if (isNaN(accely)) {
+# 			accely = 0;
+# 		}
+# 		if (isNaN(diffx)) {
+# 			diffx = 0;
+# 		}
+# 		if (isNaN(diffy)) {
+# 			diffy = 0;
+# 		}
+# 		_root.Course.Char._rotation = _rotation;
+# 		_root.Course.Char.yspeed = this.diffy;
+# 		_root.Course.Char.xspeed = this.diffx;
+# 		distx = _parent._x+_parent._parent._x+_x;
+# 		disty = _parent._y+_parent._parent._y+_y;
+# 		_root.Course.Char._x -= (_root.Course.Char._x-distx)/10;
+# 		_root.Course.Char._y -= (_root.Course.Char._y-disty)/10;
+# 		//_root.Course.Char._x += this.diffx;
+# 		//_root.Course.Char._y += this.diffy;
+# 		//
+# 		newx = _x;
+# 		newy = _y;
+# 		diffy = newy-oldy;
+# 		diffx = newx-oldx;
+# 		oldx = newx;
+# 		oldy = newy;
+# 		//
+# 		newerx = diffx;
+# 		newery = diffy;
+# 		accely = newery-oldery;
+# 		accelx = newerx-olderx;
+# 		olderx = newerx;
+# 		oldery = newery;
+# 	}
+# };
+# "
+
 [node name="Sling Star Path Code" type="Node2D"]
+script = ExtResource("1_t8iw4")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Sling Star/Sling Star Path Code.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2l3ld")
+"Timeline": SubResource("AnimationLibrary_av7vv")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -63,3 +127,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_466cr")

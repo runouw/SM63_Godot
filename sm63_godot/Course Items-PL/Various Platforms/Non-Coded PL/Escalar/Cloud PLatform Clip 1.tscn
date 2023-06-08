@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/YI Cloud Large.png" id="1_wd7w1"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/YI Cloud Medium.png" id="2_27bet"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/YI Cloud Small.png" id="3_adbxj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lx282"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/YI Cloud Large.png" id="2_3pmy6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/YI Cloud Medium.png" id="3_7u4uq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/YI Cloud Small.png" id="4_4pjce"]
 
-[sub_resource type="Animation" id="Animation_34ahe"]
+[sub_resource type="Animation" id="Animation_ham00"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -56,16 +57,26 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1meh5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_20kfy"]
 _data = {
-"Default": SubResource("Animation_34ahe")
+"Default": SubResource("Animation_ham00")
 }
 
+[sub_resource type="GDScript" id="GDScript_ifm8d"]
+script/source = "extends Node
+# gotoAndStop(random(3)+1);
+# "
+
 [node name="Cloud PLatform Clip 1" type="Node2D"]
+script = ExtResource("1_lx282")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1meh5")
+"Timeline": SubResource("AnimationLibrary_20kfy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -75,7 +86,7 @@ libraries = {
 [node name="@@47991" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-32, -12)
-texture = ExtResource("1_wd7w1")
+texture = ExtResource("2_3pmy6")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -84,7 +95,7 @@ visible = false
 [node name="@@47992" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-24, -12)
-texture = ExtResource("2_27bet")
+texture = ExtResource("3_7u4uq")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -93,9 +104,12 @@ visible = false
 [node name="@@47993" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-16, -12)
-texture = ExtResource("3_adbxj")
+texture = ExtResource("4_4pjce")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ifm8d")

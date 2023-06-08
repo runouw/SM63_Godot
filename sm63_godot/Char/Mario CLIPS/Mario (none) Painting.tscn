@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_pakgy"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_jm0hp"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 2 - 7.png" id="3_tks1d"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 1 - 3.png" id="4_4k4ea"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_r8bco"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ufor0"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 2 - 7.png" id="3_r63bx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 1 - 3.png" id="4_tooqk"]
 
-[sub_resource type="Animation" id="Animation_bcvva"]
+[sub_resource type="Animation" id="Animation_rpulg"]
 length = 2.26667
 loop_mode = 1
 tracks/0/type = "value"
@@ -285,25 +285,83 @@ tracks/22/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_btk83"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1l403"]
 _data = {
-"Default": SubResource("Animation_bcvva")
+"Default": SubResource("Animation_rpulg")
 }
 
+[sub_resource type="GDScript" id="GDScript_3mfvf"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	_root.Course.Char.yspeed = Math.max(0, _root.Course.Char.yspeed);
+# };
+# _root.Maxzoomin = 200;
+# _root.CameraZoom = 100;"
+
+[sub_resource type="GDScript" id="GDScript_j060k"]
+script/source = "extends Node
+# if (_root.Fluddpow !== \"\") {
+# 	gotoAndPlay(_currentframe+2);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_6mqam"]
+script/source = "extends Node
+# _root.PaintingSound();
+# //
+# "
+
+[sub_resource type="GDScript" id="GDScript_5frhg"]
+script/source = "extends Node
+# count = 0;
+# onEnterFrame = function () {
+# 	count += 0.5;
+# 	count = Math.min(count, 7);
+# 	_root.PauseGame = false;
+# 	_root.Course.Char.yspeed = Math.max(0, _root.Course.Char.yspeed);
+# 	_root.CameraZoom += count;
+# 	_root.Maxzoomin = 200;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_pvn8b"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	count -= 0.5;
+# 	count = Math.max(count, 0);
+# 	_root.PauseGame = false;
+# 	_root.Course.Char.yspeed = Math.max(0, _root.Course.Char.yspeed);
+# 	_root.CameraZoom += count;
+# 	_root.Maxzoomin = 200;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_1ih03"]
+script/source = "extends Node
+# _root.Whiteout();
+# stop();
+# "
+
 [node name="Mario (none) Painting" type="Node2D"]
+script = ExtResource("1_r8bco")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (none) Painting.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_btk83")
+"Timeline": SubResource("AnimationLibrary_1l403")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.5, -8)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -324,7 +382,7 @@ texture_filter = 1
 position = Vector2(10.5, -36)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_tks1d")
+texture = ExtResource("3_r63bx")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -333,12 +391,12 @@ visible = false
 [node name="@@15415" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-5, -36)
-texture = ExtResource("4_4k4ea")
+texture = ExtResource("4_tooqk")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(3.5, -19.55)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Backwards.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -354,9 +412,9 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
 position = Vector2(0.85, -29.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -372,9 +430,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9"]
 position = Vector2(0.85, -33.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -390,9 +448,9 @@ brightness = 0.0
 [node name="Frame 11" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 11" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 11"]
 position = Vector2(0.85, -37.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -408,9 +466,9 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13"]
 position = Vector2(0.85, -43.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -426,9 +484,9 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 15" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 15"]
 position = Vector2(0.85, -49.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -444,9 +502,9 @@ brightness = 0.0
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 17" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 17"]
 position = Vector2(0.85, -55.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -462,9 +520,9 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19"]
 position = Vector2(0.85, -64.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -480,9 +538,9 @@ brightness = 0.0
 [node name="Frame 20" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 20" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 20"]
 position = Vector2(0.85, -67.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -498,9 +556,9 @@ brightness = 0.0
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21"]
 position = Vector2(3, -60.65)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -516,9 +574,9 @@ brightness = 0.0
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 23" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 23"]
 position = Vector2(3.5, -60.1)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -534,9 +592,9 @@ brightness = 0.0
 [node name="Frame 25" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 25" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 25"]
 position = Vector2(3.85, -60.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -552,9 +610,9 @@ brightness = 0.0
 [node name="Frame 27" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 27" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 27"]
 position = Vector2(3.85, -58.6)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -570,10 +628,10 @@ brightness = 0.0
 [node name="Frame 34" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 34" instance=ExtResource("1_pakgy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 34"]
 position = Vector2(0.1, -51.85)
 scale = Vector2(0.25, 0.25)
-script = ExtResource("2_jm0hp")
+script = ExtResource("2_ufor0")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Airborn 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -593,17 +651,35 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_3mfvf")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_j060k")
 
 [node name="Frame 23" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 23"]
+script = SubResource("GDScript_6mqam")
+
 [node name="Frame 29" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 29"]
+script = SubResource("GDScript_5frhg")
 
 [node name="Frame 54" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 54"]
+script = SubResource("GDScript_pvn8b")
+
 [node name="Frame 67" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 67"]
+script = SubResource("GDScript_1ih03")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ta1p8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2lo74"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_uf8w0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_uenmc"]
 
-[sub_resource type="Animation" id="Animation_dwux6"]
+[sub_resource type="Animation" id="Animation_ct0hm"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,25 +67,35 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7dsak"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_12lkp"]
 _data = {
-"Default": SubResource("Animation_dwux6")
+"Default": SubResource("Animation_ct0hm")
 }
 
+[sub_resource type="GDScript" id="GDScript_p3jn5"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Koopa Frames" type="Node2D"]
+script = ExtResource("1_uf8w0")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa Frames.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7dsak")
+"Timeline": SubResource("AnimationLibrary_12lkp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ta1p8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -1)
-script = ExtResource("2_2lo74")
+script = ExtResource("2_uenmc")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Koopa Walk Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -101,9 +111,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_ta1p8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(2, 0)
-script = ExtResource("2_2lo74")
+script = ExtResource("2_uenmc")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Koopa Turn Around.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -119,9 +129,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_ta1p8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(2, -5)
-script = ExtResource("2_2lo74")
+script = ExtResource("2_uenmc")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Flying Koopa Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -137,9 +147,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_ta1p8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(0, 7)
-script = ExtResource("2_2lo74")
+script = ExtResource("2_uenmc")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Shell Spin.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -155,3 +165,6 @@ brightness = 0.0
 [node name="Code" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Code"]
+
+[node name="AS2" type="Node" parent="Code/Frame 0"]
+script = SubResource("GDScript_p3jn5")

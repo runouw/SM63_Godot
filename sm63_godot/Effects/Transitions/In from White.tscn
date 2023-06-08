@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_42qjf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5hp3w"]
+
+[sub_resource type="Animation" id="Animation_vlfjb"]
 length = 0.366667
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,27 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_k4oun"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p04lf"]
 _data = {
-"Default": SubResource("Animation_42qjf")
+"Default": SubResource("Animation_vlfjb")
 }
 
+[sub_resource type="GDScript" id="GDScript_yfcsv"]
+script/source = "extends Node
+# stop();
+# this.removeMovieClip(this);
+# "
+
 [node name="In from White" type="Node2D"]
+script = ExtResource("1_5hp3w")
+source_xml = "res://sm63/LIBRARY/Effects/Transitions/In from White.xml"
+linkage = "Fromwhite"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_k4oun")
+"Timeline": SubResource("AnimationLibrary_p04lf")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -105,3 +118,6 @@ visible = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 10"]
+script = SubResource("GDScript_yfcsv")

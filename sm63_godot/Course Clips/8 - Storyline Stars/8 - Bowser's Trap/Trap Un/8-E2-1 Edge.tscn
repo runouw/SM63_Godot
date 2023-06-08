@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_ofmbx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6kx02"]
+
+[sub_resource type="Animation" id="Animation_mdh07"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhvbu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v4c00"]
 _data = {
-"Default": SubResource("Animation_ofmbx")
+"Default": SubResource("Animation_mdh07")
 }
 
 [node name="8-E2-1 Edge" type="Node2D"]
+script = ExtResource("1_6kx02")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Bowser's Trap/Trap Un/8-E2-1 Edge.xml"
+linkage = "8-E2-1Edge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rhvbu")
+"Timeline": SubResource("AnimationLibrary_v4c00")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

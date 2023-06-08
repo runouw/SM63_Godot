@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_70q77"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dfglt"]
+
+[sub_resource type="Animation" id="Animation_rnl0h"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8b3a"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5sbfv"]
 _data = {
-"Default": SubResource("Animation_70q77")
+"Default": SubResource("Animation_rnl0h")
 }
 
 [node name="9-01 Bplatforms" type="Node2D"]
+script = ExtResource("1_dfglt")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-01 Secret of the Mushroom/9-01 Bplatforms.xml"
+linkage = "9-01BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_c8b3a")
+"Timeline": SubResource("AnimationLibrary_5sbfv")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

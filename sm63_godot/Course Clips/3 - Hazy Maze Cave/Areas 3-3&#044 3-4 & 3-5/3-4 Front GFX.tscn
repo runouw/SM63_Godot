@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Abstract/Cave Spore (Large).png" id="1_8k0v7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_v757q"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Abstract/Cave Spore (Large).png" id="2_vfi7e"]
 
-[sub_resource type="Animation" id="Animation_55aar"]
+[sub_resource type="Animation" id="Animation_8wyo7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vx5ii"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2nfbp"]
 _data = {
-"Default": SubResource("Animation_55aar")
+"Default": SubResource("Animation_8wyo7")
 }
 
 [node name="3-4 Front GFX" type="Node2D"]
+script = ExtResource("1_v757q")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Front GFX.xml"
+linkage = "3-4FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vx5ii")
+"Timeline": SubResource("AnimationLibrary_2nfbp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -38,7 +44,7 @@ libraries = {
 texture_filter = 1
 position = Vector2(19.5, -10.75)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_8k0v7")
+texture = ExtResource("2_vfi7e")
 centered = false
 
 [node name="@@26776" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -46,5 +52,5 @@ texture_filter = 1
 position = Vector2(2372.7, 4.2)
 rotation = 3.14159
 scale = Vector2(0.5, -0.5)
-texture = ExtResource("1_8k0v7")
+texture = ExtResource("2_vfi7e")
 centered = false

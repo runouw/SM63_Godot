@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_gd3tc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_cxn5e"]
+
+[sub_resource type="Animation" id="Animation_yxa6b"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_80518"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nv80e"]
 _data = {
-"Default": SubResource("Animation_gd3tc")
+"Default": SubResource("Animation_yxa6b")
 }
 
 [node name="BC-3BPlatforms" type="Node2D"]
+script = ExtResource("1_cxn5e")
+source_xml = "res://sm63/LIBRARY/BC-3BPlatforms.xml"
+linkage = "BC-3BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_80518")
+"Timeline": SubResource("AnimationLibrary_nv80e")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_hg38i"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8j22a"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tvp0k"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_37usa"]
 
-[sub_resource type="Animation" id="Animation_nbmvh"]
+[sub_resource type="Animation" id="Animation_je8as"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,25 +67,43 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c5ld7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wav2l"]
 _data = {
-"Default": SubResource("Animation_nbmvh")
+"Default": SubResource("Animation_je8as")
 }
 
+[sub_resource type="GDScript" id="GDScript_0uk1j"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_24omh"]
+script/source = "extends Node
+# //
+# "
+
 [node name="Bomb omb frames" type="Node2D"]
+script = ExtResource("1_tvp0k")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/Bomb omb frames.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_c5ld7")
+"Timeline": SubResource("AnimationLibrary_wav2l")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_hg38i")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_0uk1j")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -6)
-script = ExtResource("2_8j22a")
+script = ExtResource("2_37usa")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/Bomb omb Walking.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -101,11 +119,11 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_hg38i")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(0, -6)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_8j22a")
+script = ExtResource("2_37usa")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/Bomb omb Walking.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -121,9 +139,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_hg38i")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(0, -4)
-script = ExtResource("2_8j22a")
+script = ExtResource("2_37usa")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/Bomb omb tumbling.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -136,12 +154,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_24omh")
+
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_hg38i")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(0, -10)
-script = ExtResource("2_8j22a")
+script = ExtResource("2_37usa")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/Bomb omb Explosion.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -157,8 +178,8 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_hg38i")]
-script = ExtResource("2_8j22a")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
+script = ExtResource("2_37usa")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/Bobomb Explode Air.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

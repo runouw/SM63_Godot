@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_w1lu7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_jx8v6"]
+
+[sub_resource type="Animation" id="Animation_5k67c"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,26 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1xry"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nuvmj"]
 _data = {
-"Default": SubResource("Animation_w1lu7")
+"Default": SubResource("Animation_5k67c")
 }
 
+[sub_resource type="GDScript" id="GDScript_ee8y2"]
+script/source = "extends Node
+# _visible = false;
+# "
+
 [node name="M2-3Ice" type="Node2D"]
+script = ExtResource("1_jx8v6")
+source_xml = "res://sm63/LIBRARY/M2-3Ice.xml"
+linkage = "M2-3Ice"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w1xry")
+"Timeline": SubResource("AnimationLibrary_nuvmj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -47,3 +59,6 @@ libraries = {
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ee8y2")

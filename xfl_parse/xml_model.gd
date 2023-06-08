@@ -25,7 +25,7 @@ func _init(parser: XMLParser):
 					
 					# print("    ", attribute_name, " = ", attribute_value)
 				
-				var element = XMLNode.new(node_name)
+				var element := XMLNode.new(node_name)
 				element.attributes = attributes
 				
 				if root == null:
@@ -42,13 +42,16 @@ func _init(parser: XMLParser):
 				# print("/", parser.get_node_name())
 				current_node = current_node.parent
 			XMLParser.NODE_TEXT:
-				var text = parser.get_node_data().strip_edges()
+				var text: String = parser.get_node_data().strip_edges()
 				
 				if not text.is_empty():
 					current_node.text = text
 					# print("text: '", text, "'")
 			XMLParser.NODE_CDATA:
-				pass
+				var text: String = parser.get_node_name()
+				
+				if not text.is_empty():
+					current_node.c_data = text
 			_:
 				print("unhandled node type: ", parser.get_node_type())
 

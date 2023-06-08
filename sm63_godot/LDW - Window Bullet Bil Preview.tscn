@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_nthem"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_40n3w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_t5g0x"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_l7xgo"]
 
-[sub_resource type="Animation" id="Animation_j16db"]
+[sub_resource type="Animation" id="Animation_ilyf6"]
 length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -127,24 +127,41 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dsl5u"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ucvje"]
 _data = {
-"Default": SubResource("Animation_j16db")
+"Default": SubResource("Animation_ilyf6")
 }
 
+[sub_resource type="GDScript" id="GDScript_vpadd"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	gotoAndStop(_parent.fra);
+# 	if (_parent.chase == true) {
+# 		clip.play();
+# 	} else {
+# 		clip.gotoAndStop(1);
+# 	}
+# };
+# "
+
 [node name="LDW - Window Bullet Bil Preview" type="Node2D"]
+script = ExtResource("1_t5g0x")
+source_xml = "res://sm63/LIBRARY/LDW - Window Bullet Bil Preview.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dsl5u")
+"Timeline": SubResource("AnimationLibrary_ucvje")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_nthem")]
-script = ExtResource("2_40n3w")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_l7xgo")
 path = "res://sm63_godot/Gold Bullet Bill Color.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -160,8 +177,8 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_nthem")]
-script = ExtResource("2_40n3w")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("2_l7xgo")
 path = "res://sm63_godot/Gold Bullet Bill Color.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -177,8 +194,8 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_nthem")]
-script = ExtResource("2_40n3w")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
+script = ExtResource("2_l7xgo")
 path = "res://sm63_godot/Gold Bullet Bill Color.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -194,8 +211,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_nthem")]
-script = ExtResource("2_40n3w")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
+script = ExtResource("2_l7xgo")
 path = "res://sm63_godot/Gold Bullet Bill Color.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -211,8 +228,8 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_nthem")]
-script = ExtResource("2_40n3w")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
+script = ExtResource("2_l7xgo")
 path = "res://sm63_godot/Gold Bullet Bill Color.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -228,8 +245,8 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_nthem")]
-script = ExtResource("2_40n3w")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
+script = ExtResource("2_l7xgo")
 path = "res://sm63_godot/Gold Bullet Bill Color.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -245,8 +262,8 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("1_nthem")]
-script = ExtResource("2_40n3w")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6"]
+script = ExtResource("2_l7xgo")
 path = "res://sm63_godot/Gold Bullet Bill Color.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -262,8 +279,8 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_nthem")]
-script = ExtResource("2_40n3w")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
+script = ExtResource("2_l7xgo")
 path = "res://sm63_godot/Gold Bullet Bill Color.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -279,8 +296,8 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8" instance=ExtResource("1_nthem")]
-script = ExtResource("2_40n3w")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8"]
+script = ExtResource("2_l7xgo")
 path = "res://sm63_godot/Gold Bullet Bill Color.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -296,3 +313,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_vpadd")

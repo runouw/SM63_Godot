@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_smjs2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_yespn"]
+
+[sub_resource type="Animation" id="Animation_3ecqc"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mur3b"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ge52c"]
 _data = {
-"Default": SubResource("Animation_smjs2")
+"Default": SubResource("Animation_3ecqc")
 }
 
 [node name="2-4BPlatforms" type="Node2D"]
+script = ExtResource("1_yespn")
+source_xml = "res://sm63/LIBRARY/Course Clips/2 - Snowman's Land/2-4BPlatforms.xml"
+linkage = "2-4BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_mur3b")
+"Timeline": SubResource("AnimationLibrary_ge52c")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

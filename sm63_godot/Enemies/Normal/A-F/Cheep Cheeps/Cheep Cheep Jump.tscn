@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 4.png" id="1_gvm26"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 5.png" id="2_icjff"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 6.png" id="3_cxcx0"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 10.png" id="4_adoxn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 11.png" id="5_xvxuy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_q0c4w"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 4.png" id="2_d4bsy"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 5.png" id="3_ju2hm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 6.png" id="4_r355a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 10.png" id="5_5ecwh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep - 11.png" id="6_e7j4c"]
 
-[sub_resource type="Animation" id="Animation_larfl"]
+[sub_resource type="Animation" id="Animation_knjrl"]
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -94,16 +95,38 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e6jky"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0tktn"]
 _data = {
-"Default": SubResource("Animation_larfl")
+"Default": SubResource("Animation_knjrl")
 }
 
+[sub_resource type="GDScript" id="GDScript_cs2p6"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_qgkie"]
+script/source = "extends Node
+# prevFrame();
+# onEnterFrame = null;
+# "
+
 [node name="Cheep Cheep Jump" type="Node2D"]
+script = ExtResource("1_q0c4w")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Cheep Cheeps/Cheep Cheep Jump.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_e6jky")
+"Timeline": SubResource("AnimationLibrary_0tktn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -113,7 +136,7 @@ libraries = {
 [node name="@@50582" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-10.5, -10)
-texture = ExtResource("1_gvm26")
+texture = ExtResource("2_d4bsy")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -122,7 +145,7 @@ visible = false
 [node name="@@50583" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-10.5, -10.5)
-texture = ExtResource("2_icjff")
+texture = ExtResource("3_ju2hm")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -131,7 +154,7 @@ visible = false
 [node name="@@50584" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-11.5, -9.5)
-texture = ExtResource("3_cxcx0")
+texture = ExtResource("4_r355a")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -140,7 +163,7 @@ visible = false
 [node name="@@50585" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-11.5, -8.5)
-texture = ExtResource("4_adoxn")
+texture = ExtResource("5_5ecwh")
 centered = false
 
 [node name="Frame 13" type="Node2D" parent="Layer 1"]
@@ -149,12 +172,18 @@ visible = false
 [node name="@@50586" type="Sprite2D" parent="Layer 1/Frame 13"]
 texture_filter = 1
 position = Vector2(-10.5, -10)
-texture = ExtResource("5_xvxuy")
+texture = ExtResource("6_e7j4c")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_cs2p6")
+
 [node name="Frame 23" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 23"]
+script = SubResource("GDScript_qgkie")

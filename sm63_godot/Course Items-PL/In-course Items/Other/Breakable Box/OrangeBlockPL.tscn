@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_ytbxe"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dt5gu"]
+
+[sub_resource type="Animation" id="Animation_0bokr"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r6x3y"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jid3"]
 _data = {
-"Default": SubResource("Animation_ytbxe")
+"Default": SubResource("Animation_0bokr")
 }
 
 [node name="OrangeBlockPL" type="Node2D"]
+script = ExtResource("1_dt5gu")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Other/Breakable Box/OrangeBlockPL.xml"
+linkage = "OrangeBlockPL"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_r6x3y")
+"Timeline": SubResource("AnimationLibrary_4jid3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Castle Wall Large.png" id="1_wofeb"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Pillar.png" id="2_7y8aq"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_xof17"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_u0dsh"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Grey Brick Pattern.png" id="5_4njmu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ya6ol"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Castle Wall Large.png" id="2_do222"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Pillar.png" id="3_pjm7k"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_vt0hs"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Grey Brick Pattern.png" id="5_xilgs"]
 
-[sub_resource type="Animation" id="Animation_6rgc5"]
+[sub_resource type="Animation" id="Animation_77h6t"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -46,16 +46,72 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7wc2"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gqgue"]
 _data = {
-"Default": SubResource("Animation_6rgc5")
+"Default": SubResource("Animation_77h6t")
 }
 
+[sub_resource type="GDScript" id="GDScript_ju3vv"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"C-1-10\";
+# 	doortype = 2;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_3rq2v"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"9-02\";
+# 	walk = \"warppipe\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_kyuyx"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"level1\";
+# 	walk = \"warppipe\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_1d1m6"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 3;
+# 	_xscale = -100;
+# 	frame = \"idle\";
+# 	Mood = \"Smile\";
+# 	M1Moo = \"Happy\";
+# 	M1Txt = \"Have you been to the <b>Tidal Isles</b> yet?\";
+# 	M1Sta = function () {
+# 		return (BP());
+# 	};
+# 	M1End = function () {
+# 		return (BP());
+# 	};
+# 	//
+# 	M2Moo = \"Happy\";
+# 	M2Txt = \"It's a lovely place, with beaches, waves, sunken treasure, and lots of tropical fish!!\";
+# 	M2Sta = function () {
+# 		return (true);
+# 	};
+# 	M2End = function () {
+# 		return (BP());
+# 	};
+# }
+# "
+
 [node name="C-3-2 Back GFX" type="Node2D"]
+script = ExtResource("1_ya6ol")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-3-2 Back GFX.xml"
+linkage = "C-3-2BackGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_i7wc2")
+"Timeline": SubResource("AnimationLibrary_gqgue")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -73,7 +129,7 @@ position = Vector2(206.45, 3.45)
 [node name="@@43696" type="Polygon2D" parent="Layer 1/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_wofeb")
+texture = ExtResource("2_do222")
 texture_offset = Vector2(-47.1, 166.5)
 texture_scale = Vector2(1.33333, 1.36178)
 polygon = PackedVector2Array(95.075, -166.525, 95.075, -166.525, 95.075, -77, -249.25, -77, -249.25, -166.5)
@@ -87,7 +143,7 @@ position = Vector2(206.45, -0.55)
 [node name="@@43698" type="Polygon2D" parent="Layer 1/Frame 0/Group/@Group@43697/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_wofeb")
+texture = ExtResource("2_do222")
 texture_offset = Vector2(-47.1, -16.05)
 texture_scale = Vector2(1.33333, -1.36178)
 polygon = PackedVector2Array(-249.25, -74, 95.075, -74, 95.075, 16.075, 95.075, 16.075, -249.25, 16.05)
@@ -97,33 +153,33 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 texture_filter = 1
 position = Vector2(285.7, -163.05)
 scale = Vector2(1.5, 1.4631)
-texture = ExtResource("2_7y8aq")
+texture = ExtResource("3_pjm7k")
 centered = false
 
 [node name="@@43700" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(285.7, 15.45)
 scale = Vector2(1.5, -1.4631)
-texture = ExtResource("2_7y8aq")
+texture = ExtResource("3_pjm7k")
 centered = false
 
 [node name="@@43701" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-90.8, -162.55)
 scale = Vector2(1.5, 1.4631)
-texture = ExtResource("2_7y8aq")
+texture = ExtResource("3_pjm7k")
 centered = false
 
 [node name="@@43702" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-90.8, 15.45)
 scale = Vector2(1.5, -1.4631)
-texture = ExtResource("2_7y8aq")
+texture = ExtResource("3_pjm7k")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_xof17")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(126.85, -84.3)
-script = ExtResource("4_u0dsh")
+script = ExtResource("4_vt0hs")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/9-02 Secret Painting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -136,10 +192,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@43703" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_xof17")]
+[node name="@DOMSymbolInstance@43703" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -13)
 scale = Vector2(1.29999, 1.29999)
-script = ExtResource("4_u0dsh")
+script = ExtResource("4_vt0hs")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -152,10 +208,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@43704" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_xof17")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@43703"]
+script = SubResource("GDScript_ju3vv")
+
+[node name="@DOMSymbolInstance@43704" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(206.45, 92.35)
 scale = Vector2(1.3887, 1)
-script = ExtResource("4_u0dsh")
+script = ExtResource("4_vt0hs")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Invisible Door.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -168,10 +227,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@43705" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_xof17")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@43704"]
+script = SubResource("GDScript_3rq2v")
+
+[node name="@DOMSymbolInstance@43705" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(246.45, 92.35)
 scale = Vector2(1.3887, 1)
-script = ExtResource("4_u0dsh")
+script = ExtResource("4_vt0hs")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Invisible Door.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -184,9 +246,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@43706" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_xof17")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@43705"]
+script = SubResource("GDScript_kyuyx")
+
+[node name="@DOMSymbolInstance@43706" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(221.5, -6.6)
-script = ExtResource("4_u0dsh")
+script = ExtResource("4_vt0hs")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -199,6 +264,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@43706"]
+script = SubResource("GDScript_1d1m6")
+
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
@@ -210,7 +278,7 @@ brightness = 0.0
 [node name="@@43692" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_4njmu")
+texture = ExtResource("5_xilgs")
 texture_offset = Vector2(-332.9, 64.7)
 polygon = PackedVector2Array(334.45, -162.05, 683.4, -162.05, 683.4, -130.05, 334.45, -130.05, 652.4, -130.05, 683.4, -130.05, 683.4, -64.7, 652.4, -64.7, 332.9, -64.7, 683.4, -64.7, 683.4, -32.7, 332.9, -32.7)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11)])
@@ -220,18 +288,18 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 0/@Group@43693"]
 
 [node name="@@43694" type="Polygon2D" parent="Layer 3/Frame 0/@Group@43693/Shape"]
-color = Color(1, 1, 1, 0.8)
+color = Color(0, 0, 0, 0.8)
 polygon = PackedVector2Array(333.95, -162.05, 683.4, -162.05, 683.4, -130.05, 333.95, -130.05, 652.4, -130.05, 683.4, -130.05, 683.4, -64.7, 652.4, -64.7, 333.95, -64.7, 683.4, -64.7, 683.4, -32.7, 333.95, -32.7)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11)])
 
 [node name="@@43695" type="Polygon2D" parent="Layer 3/Frame 0/@Group@43693/Shape"]
-color = Color(1, 1, 1, 0.101961)
+color = Color(0, 0, 0, 0.101961)
 polygon = PackedVector2Array(285.45, -162.05, 333.95, -162.05, 333.95, -130.05, 285.45, -130.05, 285.45, -64.7, 333.95, -64.7, 333.95, -32.7, 285.45, -32.7)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("3_xof17")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(619.45, -97.35)
-script = ExtResource("4_u0dsh")
+script = ExtResource("4_vt0hs")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1 Up Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_ffrma"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_17rdt"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_ediq5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_os8hr"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_aq4ak"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_avckv"]
 
-[sub_resource type="Animation" id="Animation_so2w2"]
+[sub_resource type="Animation" id="Animation_p7umn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,39 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wstd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cva6x"]
 _data = {
-"Default": SubResource("Animation_so2w2")
+"Default": SubResource("Animation_p7umn")
 }
 
+[sub_resource type="GDScript" id="GDScript_ifhex"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		xs = 120;
+# 	} else {
+# 		xs = 100;
+# 	}
+# 	_xscale += (xs-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (xs == 120) {
+# 		_parent.N(\"LD\");
+# 	}
+# };
+# "
+
 [node name="LDP Create Level Button" type="Node2D"]
+script = ExtResource("1_os8hr")
+source_xml = "res://sm63/LIBRARY/LDP Create Level Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3wstd")
+"Timeline": SubResource("AnimationLibrary_cva6x")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -65,7 +88,7 @@ libraries = {
 [node name="@@8845" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-77.075, -13.6, 77.05, -13.6, 77.05, 13.6, -77.075, 13.6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_ffrma")
+script = ExtResource("2_aq4ak")
 matrix = Transform2D(0.0940704, 0, 0, 0.0165863, 0, 0)
 entries_color = PackedColorArray(0.756863, 0.701961, 1, 1, 0.0431373, 0.137255, 0.992157, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -83,8 +106,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_17rdt")]
-script = ExtResource("3_ediq5")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("3_avckv")
 path = "res://sm63_godot/LDP &#034Create&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,3 +123,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_ifhex")

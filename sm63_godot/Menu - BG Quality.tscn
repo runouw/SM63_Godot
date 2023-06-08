@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_1kffk"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_3e04m"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_tkd5x"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_iegip"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_74a06"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_omnqd"]
 
-[sub_resource type="Animation" id="Animation_lp1wy"]
+[sub_resource type="Animation" id="Animation_eo1ml"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,55 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cm3kp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gyv0n"]
 _data = {
-"Default": SubResource("Animation_lp1wy")
+"Default": SubResource("Animation_eo1ml")
 }
 
+[sub_resource type="GDScript" id="GDScript_g18bp"]
+script/source = "extends Node
+# al = 50;
+# sc = 75;
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		al = 100;
+# 		sc = 100;
+# 	} else {
+# 		al = 50;
+# 		sc = 75;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	_alpha += (al-_alpha)/2;
+# 	//_root.var = Mode 
+# };
+# onMouseDown = function () {
+# 	if (sc == 100) {
+# 		if (LOW.sc !== 120 && MEDIUM.sc !== 120 && HIGH.sc !== 120) {
+# 			_xscale = 110;
+# 			_yscale = 110;
+# 			if (_root.BGquality == \"LOW\") {
+# 				_root.BGquality = \"MEDIUM\";
+# 			} else if (_root.BGquality == \"MEDIUM\") {
+# 				_root.BGquality = \"HIGH\";
+# 			} else {
+# 				_root.BGquality = \"LOW\";
+# 			}
+# 		}
+# 	}
+# };
+# "
+
 [node name="Menu - BG Quality" type="Node2D"]
+script = ExtResource("1_iegip")
+source_xml = "res://sm63/LIBRARY/Menu - BG Quality.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_cm3kp")
+"Timeline": SubResource("AnimationLibrary_gyv0n")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -65,7 +104,7 @@ libraries = {
 [node name="@@13200" type="Polygon2D" parent="Layer 3/Frame 0/Shape"]
 polygon = PackedVector2Array(-106.55, -24.1, 106.55, -24.1, 106.55, 24.1, -106.55, 24.1)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_1kffk")
+script = ExtResource("2_74a06")
 matrix = Transform2D(0.121048, 0, 0, 0.0314484, -29.95, 0)
 entries_color = PackedColorArray(0.0627451, 0.741176, 0.0588235, 1, 0, 1, 0, 1, 0.054902, 0.580392, 0.207843, 1, 0.133333, 1, 0.133333, 1)
 entries_ratio = PackedFloat32Array(0, 0.580392, 0.67451, 1)
@@ -83,9 +122,9 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_3e04m")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(3.35, -15.55)
-script = ExtResource("3_tkd5x")
+script = ExtResource("3_omnqd")
 path = "res://sm63_godot/Menu - &#034Your Computer's Speed&#058&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -98,9 +137,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13197" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_3e04m")]
+[node name="@DOMSymbolInstance@13197" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-78.25, 7.05)
-script = ExtResource("3_tkd5x")
+script = ExtResource("3_omnqd")
 path = "res://sm63_godot/Menu - Comps Speed Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -113,9 +152,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13198" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_3e04m")]
+[node name="@DOMSymbolInstance@13198" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-1.8, 7.05)
-script = ExtResource("3_tkd5x")
+script = ExtResource("3_omnqd")
 path = "res://sm63_godot/Menu - Comps Speed Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -128,9 +167,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13199" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_3e04m")]
+[node name="@DOMSymbolInstance@13199" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(78.2, 7.05)
-script = ExtResource("3_tkd5x")
+script = ExtResource("3_omnqd")
 path = "res://sm63_godot/Menu - Comps Speed Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -146,3 +185,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_g18bp")

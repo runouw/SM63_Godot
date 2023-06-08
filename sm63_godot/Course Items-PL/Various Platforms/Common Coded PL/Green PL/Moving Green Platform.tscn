@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_s8q5d"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_r208u"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gatwv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_y5f0d"]
 
-[sub_resource type="Animation" id="Animation_2vted"]
+[sub_resource type="Animation" id="Animation_jjnil"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,24 +43,168 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t78eu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m6y0k"]
 _data = {
-"Default": SubResource("Animation_2vted")
+"Default": SubResource("Animation_jjnil")
 }
 
+[sub_resource type="GDScript" id="GDScript_dlewu"]
+script/source = "extends Node
+# stop();
+# if (DirectionX == undefined) {
+# 	DirectionX = \"Right\";
+# }
+# if (DirectionY == undefined) {
+# 	DirectionY = \"Up\";
+# }
+# if (distanceX == undefined) {
+# 	distanceX = 25;
+# }
+# if (distanceY == undefined) {
+# 	distanceY = 0;
+# }
+# if (accelX == undefined) {
+# 	accelX = 1;
+# }
+# if (accelY == undefined) {
+# 	accelY = 0;
+# }
+# if (speedX == undefined) {
+# 	speedX = 5;
+# }
+# if (speedY == undefined) {
+# 	speedY = 0;
+# }
+# if (Xoffstart == undefined) {
+# 	Xoffstart = 0;
+# }
+# if (Yoffstart == undefined) {
+# 	Yoffstart = 0;
+# }
+# if (scale == undefined) {
+# 	scale = 2;
+# }
+# if (DirectionY == \"Up\") {
+# 	_y -= speedY;
+# } else {
+# 	_y += speedY;
+# }
+# if (DirectionY == \"Right\") {
+# 	_x -= speedX;
+# } else {
+# 	_x += speedX;
+# }
+# if (pauses == undefined) {
+# 	pauses = true;
+# }
+# pl.gotoAndStop(scale);
+# //
+# depth = _root.Course.BPlatforms.getNextHighestDepth();
+# _root.Course.BPlatforms.attachMovie(\"GreenPLcode\", \"GreenPL\"+depth, depth, {_x:_x, _y:_y, scale:scale});
+# tellTarget (_root.Course.BPlatforms[\"GreenPL\"+depth]) {
+# 	currentspeedX = 0;
+# 	distancecountX = speedX+Xoffstart;
+# 	currentspeedY = 0;
+# 	distancecountY = speedY+Yoffstart;
+# 	landedon = false;
+# 	//
+# 	lessthan = false;
+# 	morethan = false;
+# }
+# //
+# currentspeedX = 0;
+# distancecountX = speedX+Xoffstart;
+# currentspeedY = 0;
+# distancecountY = speedY+Yoffstart;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && (_root.playpause == false || pauses == false)) {
+# 		if (currentspeedY<0) {
+# 			pl._y = -currentspeedY;
+# 		} else {
+# 			pl._y = 0;
+# 		}
+# 		distancecountX++;
+# 		if (distancecountX>=distanceX) {
+# 			distancecountX = 0;
+# 			if (DirectionX == \"Right\") {
+# 				DirectionX = \"Left\";
+# 			} else {
+# 				DirectionX = \"Right\";
+# 			}
+# 		}
+# 		if (DirectionX == \"Right\") {
+# 			currentspeedX += accelX;
+# 		} else {
+# 			currentspeedX -= accelX;
+# 		}
+# 		//
+# 		distancecountY++;
+# 		if (distancecountY>=distanceY) {
+# 			distancecountY = 0;
+# 			if (DirectionY == \"Up\") {
+# 				DirectionY = \"Down\";
+# 			} else {
+# 				DirectionY = \"Up\";
+# 			}
+# 		}
+# 		if (DirectionY == \"Up\") {
+# 			currentspeedY -= accelY;
+# 		} else {
+# 			currentspeedY += accelY;
+# 		}
+# 		currentspeedX = Math.max(-speedX, currentspeedX);
+# 		currentspeedX = Math.min(speedX, currentspeedX);
+# 		currentspeedY = Math.max(-speedY, currentspeedY);
+# 		currentspeedY = Math.min(speedY, currentspeedY);
+# 		_x += currentspeedX;
+# 		_y += currentspeedY;
+# 		//
+# 		if (Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 			tellTarget (_root.Course.BPlatforms[\"GreenPL\"+depth]) {
+# 				if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+this.currentspeedY+3)*_root.coursescale/100)+_root.Course._y, false) && _root.Course.Char.yspeed>-1) {
+# 					_root.Course.Char._x += this.currentspeedX;
+# 					_root.Course.Char._y += this.currentspeedY;
+# 					_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 					if (landedon == false) {
+# 						_root.Course.Char.xspeed -= this.currentspeedX/2;
+# 					}
+# 					landedon = true;
+# 				} else {
+# 					if (landedon == true) {
+# 						_root.Course.Char.xspeed += this.currentspeedX;
+# 						_root.Course.Char.yspeed += this.currentspeedY;
+# 					}
+# 					landedon = false;
+# 				}
+# 				_y = this._y;
+# 				_x = this._x;
+# 			}
+# 		}
+# 	}
+# 	if (_root.PauseGame == false) {
+# 		enterframe();
+# 	}
+# };
+# "
+
 [node name="Moving Green Platform" type="Node2D"]
+script = ExtResource("1_gatwv")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Moving Green Platform.xml"
+linkage = "MovingGreenPlatform"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_t78eu")
+"Timeline": SubResource("AnimationLibrary_m6y0k")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_s8q5d")]
-script = ExtResource("2_r208u")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("2_y5f0d")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green PL Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -79,3 +223,6 @@ brightness = 0.0
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_dlewu")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ehqyb"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4i1j3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_81dt7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xoqjd"]
 
-[sub_resource type="Animation" id="Animation_3qj4b"]
+[sub_resource type="Animation" id="Animation_davo7"]
 length = 0.333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -151,24 +151,61 @@ tracks/11/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lxmsm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6qvst"]
 _data = {
-"Default": SubResource("Animation_3qj4b")
+"Default": SubResource("Animation_davo7")
 }
 
+[sub_resource type="GDScript" id="GDScript_jejhr"]
+script/source = "extends Node
+# frame = Number(_name.charAt(1));
+# if (_parent.helpfra == undefined) {
+# 	_parent.helpfra = 1;
+# }
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	if (_parent.helpfra == frame) {
+# 		sc = 80;
+# 		b.gotoAndStop(2);
+# 	} else {
+# 		b.gotoAndStop(1);
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		//_xscale = 130;
+# 		//_yscale = 130;
+# 		_parent.helpfra = frame;
+# 	}
+# };
+# b.stop();
+# gotoAndStop(frame+1);
+# "
+
 [node name="LDW - Help Button" type="Node2D"]
+script = ExtResource("1_81dt7")
+source_xml = "res://sm63/LIBRARY/LDW - Help Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lxmsm")
+"Timeline": SubResource("AnimationLibrary_6qvst")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ehqyb")]
-script = ExtResource("2_4i1j3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_xoqjd")
 path = "res://sm63_godot/LDW - Help Button Boognoosh.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -266,6 +303,9 @@ visible = false
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_jejhr")
 
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false

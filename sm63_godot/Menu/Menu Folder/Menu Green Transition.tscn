@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_vj4e5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u6ywr"]
+
+[sub_resource type="Animation" id="Animation_atlcg"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,50 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nauok"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nn2ju"]
 _data = {
-"Default": SubResource("Animation_vj4e5")
+"Default": SubResource("Animation_atlcg")
 }
 
+[sub_resource type="GDScript" id="GDScript_hpieg"]
+script/source = "extends Node
+# if (trans == true) {
+# 	_alpha = 0;
+# 	onEnterFrame = function () {
+# 		this._alpha += 10;
+# 		if (_alpha>=100) {
+# 			_alpha = 100;
+# 			//
+# 			//_root.CopyFile(_root.m.filem.HL);
+# 			_parent.gotoAndStop(\"Refresh\");
+# 			_root.CopyFile(file1, file2);
+# 			_parent.gotoAndStop(\"Story\");
+# 			//
+# 			onEnterFrame = function () {
+# 				this._alpha -= 10;
+# 				if (_alpha<=0) {
+# 					_alpha = 0;
+# 					this.removeMovieClip();
+# 				}
+# 			};
+# 		}
+# 	};
+# } else {
+# 	this.swapDepths(0);
+# 	this.removeMovieClip();
+# }
+# "
+
 [node name="Menu Green Transition" type="Node2D"]
+script = ExtResource("1_u6ywr")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Menu Green Transition.xml"
+linkage = "MenuGreenTrans"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nauok")
+"Timeline": SubResource("AnimationLibrary_nn2ju")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +90,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_hpieg")

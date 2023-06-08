@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_j02iy"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mwrye"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_etu6w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_rugpk"]
 
-[sub_resource type="Animation" id="Animation_bsvaj"]
+[sub_resource type="Animation" id="Animation_psnhs"]
 length = 4.66667
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,27 +79,51 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwqi1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iyfxx"]
 _data = {
-"Default": SubResource("Animation_bsvaj")
+"Default": SubResource("Animation_psnhs")
 }
 
+[sub_resource type="GDScript" id="GDScript_6bpbi"]
+script/source = "extends Node
+# gotoAndPlay(_currentframe+random(40));
+# "
+
+[sub_resource type="GDScript" id="GDScript_7jvw4"]
+script/source = "extends Node
+# if (h == undefined) {
+# 	Re = function () {
+# 		_x = X+200-random(100);
+# 		_xscale = 200*(random(2)-0.5);
+# 	};
+# 	X = _x;
+# 	h = \"1\";
+# 	gotoAndPlay(random(100));
+# }
+# Re();
+# "
+
 [node name="Bowser Battle 2 Cinema Metero explodighn eh" type="Node2D"]
+script = ExtResource("1_etu6w")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 2 Cinema Metero explodighn eh.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wwqi1")
+"Timeline": SubResource("AnimationLibrary_iyfxx")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_j02iy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-119.95, -501.8)
 rotation = 1.5708
 scale = Vector2(2, 2)
-script = ExtResource("2_mwrye")
+script = ExtResource("2_rugpk")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -115,11 +139,11 @@ brightness = 0.0
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 23" instance=ExtResource("1_j02iy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 23"]
 position = Vector2(2, -15.9)
 rotation = 3.14159
 scale = Vector2(2, 2)
-script = ExtResource("2_mwrye")
+script = ExtResource("2_rugpk")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -135,9 +159,9 @@ brightness = 0.0
 [node name="Frame 24" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24" instance=ExtResource("1_j02iy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24"]
 position = Vector2(3, -16)
-script = ExtResource("2_mwrye")
+script = ExtResource("2_rugpk")
 path = "res://sm63_godot/Cinema Meteor Explode Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -153,9 +177,15 @@ brightness = 0.0
 [node name="Frame 79" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 79"]
+script = SubResource("GDScript_6bpbi")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_7jvw4")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

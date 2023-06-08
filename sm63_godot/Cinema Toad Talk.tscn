@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 1.png" id="1_fa5b6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 2.png" id="2_kg3fy"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 3.png" id="3_b8wim"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 5.png" id="4_2u2j2"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="5_dgvba"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_jixjh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_84a01"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 1.png" id="2_fncdm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 2.png" id="3_a8bps"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 3.png" id="4_ubf8a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 5.png" id="5_xnyn1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_8l0ww"]
 
-[sub_resource type="Animation" id="Animation_pv787"]
+[sub_resource type="Animation" id="Animation_6s74b"]
 length = 3.96667
 loop_mode = 1
 tracks/0/type = "value"
@@ -227,35 +227,55 @@ tracks/17/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_blmdt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_myf40"]
 _data = {
-"Default": SubResource("Animation_pv787")
+"Default": SubResource("Animation_6s74b")
 }
 
+[sub_resource type="GDScript" id="GDScript_s0tqh"]
+script/source = "extends Node
+# gotoAndPlay(random(40)+_currentframe);
+# "
+
+[sub_resource type="GDScript" id="GDScript_mljos"]
+script/source = "extends Node
+# gotoAndPlay(random(40)+_currentframe);"
+
 [node name="Cinema Toad Talk" type="Node2D"]
+script = ExtResource("1_84a01")
+source_xml = "res://sm63/LIBRARY/Cinema Toad Talk.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_blmdt")
+"Timeline": SubResource("AnimationLibrary_myf40")
 }
 
 [node name="Body" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Body"]
 
+[node name="AS2" type="Node" parent="Body/Frame 0"]
+script = SubResource("GDScript_s0tqh")
+
 [node name="@@5436" type="Sprite2D" parent="Body/Frame 0"]
 texture_filter = 1
 position = Vector2(-6.5, -10)
-texture = ExtResource("1_fa5b6")
+texture = ExtResource("2_fncdm")
 centered = false
 
 [node name="Frame 59" type="Node2D" parent="Body"]
 visible = false
 
+[node name="AS2" type="Node" parent="Body/Frame 59"]
+script = SubResource("GDScript_mljos")
+
 [node name="@@5437" type="Sprite2D" parent="Body/Frame 59"]
 texture_filter = 1
 position = Vector2(-6.5, -11)
-texture = ExtResource("2_kg3fy")
+texture = ExtResource("3_a8bps")
 centered = false
 
 [node name="GFX" type="Node2D" parent="."]
@@ -265,7 +285,7 @@ centered = false
 [node name="@@5424" type="Sprite2D" parent="GFX/Frame 0"]
 texture_filter = 1
 position = Vector2(-9, -28)
-texture = ExtResource("3_b8wim")
+texture = ExtResource("4_ubf8a")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="GFX"]
@@ -274,15 +294,15 @@ visible = false
 [node name="@@5425" type="Sprite2D" parent="GFX/Frame 7"]
 texture_filter = 1
 position = Vector2(-9, -28)
-texture = ExtResource("4_2u2j2")
+texture = ExtResource("5_xnyn1")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="GFX"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="GFX/Frame 15" instance=ExtResource("5_dgvba")]
+[node name="DOMSymbolInstance" type="Node2D" parent="GFX/Frame 15"]
 position = Vector2(0, -18.5)
-script = ExtResource("6_jixjh")
+script = ExtResource("6_8l0ww")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Talk Head Blink.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -301,7 +321,7 @@ visible = false
 [node name="@@5426" type="Sprite2D" parent="GFX/Frame 22"]
 texture_filter = 1
 position = Vector2(-9, -28)
-texture = ExtResource("4_2u2j2")
+texture = ExtResource("5_xnyn1")
 centered = false
 
 [node name="Frame 29" type="Node2D" parent="GFX"]
@@ -310,7 +330,7 @@ visible = false
 [node name="@@5427" type="Sprite2D" parent="GFX/Frame 29"]
 texture_filter = 1
 position = Vector2(-9, -28)
-texture = ExtResource("3_b8wim")
+texture = ExtResource("4_ubf8a")
 centered = false
 
 [node name="Frame 36" type="Node2D" parent="GFX"]
@@ -319,15 +339,15 @@ visible = false
 [node name="@@5428" type="Sprite2D" parent="GFX/Frame 36"]
 texture_filter = 1
 position = Vector2(-9, -28)
-texture = ExtResource("4_2u2j2")
+texture = ExtResource("5_xnyn1")
 centered = false
 
 [node name="Frame 44" type="Node2D" parent="GFX"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="GFX/Frame 44" instance=ExtResource("5_dgvba")]
+[node name="DOMSymbolInstance" type="Node2D" parent="GFX/Frame 44"]
 position = Vector2(0, -18.5)
-script = ExtResource("6_jixjh")
+script = ExtResource("6_8l0ww")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Talk Head Blink.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -346,7 +366,7 @@ visible = false
 [node name="@@5429" type="Sprite2D" parent="GFX/Frame 51"]
 texture_filter = 1
 position = Vector2(-9, -28)
-texture = ExtResource("4_2u2j2")
+texture = ExtResource("5_xnyn1")
 centered = false
 
 [node name="Frame 59" type="Node2D" parent="GFX"]
@@ -355,7 +375,7 @@ visible = false
 [node name="@@5430" type="Sprite2D" parent="GFX/Frame 59"]
 texture_filter = 1
 position = Vector2(-9, -29)
-texture = ExtResource("3_b8wim")
+texture = ExtResource("4_ubf8a")
 centered = false
 
 [node name="Frame 66" type="Node2D" parent="GFX"]
@@ -364,15 +384,15 @@ visible = false
 [node name="@@5431" type="Sprite2D" parent="GFX/Frame 66"]
 texture_filter = 1
 position = Vector2(-9, -29)
-texture = ExtResource("4_2u2j2")
+texture = ExtResource("5_xnyn1")
 centered = false
 
 [node name="Frame 74" type="Node2D" parent="GFX"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="GFX/Frame 74" instance=ExtResource("5_dgvba")]
+[node name="DOMSymbolInstance" type="Node2D" parent="GFX/Frame 74"]
 position = Vector2(0, -19.5)
-script = ExtResource("6_jixjh")
+script = ExtResource("6_8l0ww")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Talk Head Blink.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -391,7 +411,7 @@ visible = false
 [node name="@@5432" type="Sprite2D" parent="GFX/Frame 81"]
 texture_filter = 1
 position = Vector2(-9, -29)
-texture = ExtResource("4_2u2j2")
+texture = ExtResource("5_xnyn1")
 centered = false
 
 [node name="Frame 88" type="Node2D" parent="GFX"]
@@ -400,7 +420,7 @@ visible = false
 [node name="@@5433" type="Sprite2D" parent="GFX/Frame 88"]
 texture_filter = 1
 position = Vector2(-9, -29)
-texture = ExtResource("3_b8wim")
+texture = ExtResource("4_ubf8a")
 centered = false
 
 [node name="Frame 95" type="Node2D" parent="GFX"]
@@ -409,15 +429,15 @@ visible = false
 [node name="@@5434" type="Sprite2D" parent="GFX/Frame 95"]
 texture_filter = 1
 position = Vector2(-9, -29)
-texture = ExtResource("4_2u2j2")
+texture = ExtResource("5_xnyn1")
 centered = false
 
 [node name="Frame 103" type="Node2D" parent="GFX"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="GFX/Frame 103" instance=ExtResource("5_dgvba")]
+[node name="DOMSymbolInstance" type="Node2D" parent="GFX/Frame 103"]
 position = Vector2(0, -19.5)
-script = ExtResource("6_jixjh")
+script = ExtResource("6_8l0ww")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Talk Head Blink.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -436,5 +456,5 @@ visible = false
 [node name="@@5435" type="Sprite2D" parent="GFX/Frame 110"]
 texture_filter = 1
 position = Vector2(-9, -29)
-texture = ExtResource("4_2u2j2")
+texture = ExtResource("5_xnyn1")
 centered = false

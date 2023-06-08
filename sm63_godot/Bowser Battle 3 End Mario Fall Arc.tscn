@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Hurt Ground - 2.png" id="1_am84l"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Hurt Ground - 3.png" id="2_2hyjl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_06u6u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Hurt Ground - 2.png" id="2_1ic3j"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Hurt Ground - 3.png" id="3_j3pjn"]
 
-[sub_resource type="Animation" id="Animation_ybmgo"]
+[sub_resource type="Animation" id="Animation_48pjx"]
 length = 1.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6npbs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ktup"]
 _data = {
-"Default": SubResource("Animation_ybmgo")
+"Default": SubResource("Animation_48pjx")
 }
 
 [node name="Bowser Battle 3 End Mario Fall Arc" type="Node2D"]
+script = ExtResource("1_06u6u")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 3 End Mario Fall Arc.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6npbs")
+"Timeline": SubResource("AnimationLibrary_6ktup")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -50,7 +56,7 @@ libraries = {
 [node name="@@2801" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-12, -16.5)
-texture = ExtResource("1_am84l")
+texture = ExtResource("2_1ic3j")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -59,5 +65,5 @@ visible = false
 [node name="@@2802" type="Sprite2D" parent="Layer 1/Frame 12"]
 texture_filter = 1
 position = Vector2(-12.15, -13.5)
-texture = ExtResource("2_2hyjl")
+texture = ExtResource("3_j3pjn")
 centered = false

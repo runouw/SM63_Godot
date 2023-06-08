@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/HUD CLIPS (& BITS)/Mario Lives.png" id="1_otb2w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_l88gx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/HUD CLIPS (& BITS)/Mario Lives.png" id="2_xiiu3"]
 
-[sub_resource type="Animation" id="Animation_46kw4"]
+[sub_resource type="Animation" id="Animation_yw1ro"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,26 +31,43 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jc76w"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rgw1v"]
 _data = {
-"Default": SubResource("Animation_46kw4")
+"Default": SubResource("Animation_yw1ro")
 }
 
+[sub_resource type="GDScript" id="GDScript_cs33i"]
+script/source = "extends Node
+# if (_root.TotalStars == 0) {
+# 	nextFrame();
+# } else {
+# 	stop();
+# }
+# "
+
 [node name="HUD Lives Clip (Invisible if on tutorial)" type="Node2D"]
+script = ExtResource("1_l88gx")
+source_xml = "res://sm63/LIBRARY/HUD Lives Clip (Invisible if on tutorial).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jc76w")
+"Timeline": SubResource("AnimationLibrary_rgw1v")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_cs33i")
+
 [node name="@@6176" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-38.85, -7.55)
-texture = ExtResource("1_otb2w")
+texture = ExtResource("2_xiiu3")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]

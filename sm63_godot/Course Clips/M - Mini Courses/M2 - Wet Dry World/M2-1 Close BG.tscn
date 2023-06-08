@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Faded Brick.png" id="1_yl8ff"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Hide Fledge.png" id="2_n6qp0"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Sanskrit Brick.png" id="3_hh55p"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_uwbyi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Faded Brick.png" id="2_xhxyn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Hide Fledge.png" id="3_t183l"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Sanskrit Brick.png" id="4_kcrmf"]
 
-[sub_resource type="Animation" id="Animation_kao4t"]
+[sub_resource type="Animation" id="Animation_ot6pk"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +33,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lwvfr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_po2vv"]
 _data = {
-"Default": SubResource("Animation_kao4t")
+"Default": SubResource("Animation_ot6pk")
 }
 
 [node name="M2-1 Close BG" type="Node2D"]
+script = ExtResource("1_uwbyi")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-1 Close BG.xml"
+linkage = "M2-1CloseBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lwvfr")
+"Timeline": SubResource("AnimationLibrary_po2vv")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -55,7 +61,7 @@ libraries = {
 [node name="@@45920" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_yl8ff")
+texture = ExtResource("2_xhxyn")
 texture_offset = Vector2(292.4, -219.05)
 texture_scale = Vector2(1.52381, 1.52381)
 polygon = PackedVector2Array(-1177.35, -257.15, -1177.35, -257.15, -1177.35, -257.125, 1123.22, -257.125, 1123.22, -257.125, 1123.22, -256.6, 6.35, -256.6, -1177.35, -256.6, 1123.22, -256.6, 1123.18, 462.65, -1177.38, 462.65)
@@ -64,7 +70,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(
 [node name="@@45921" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_n6qp0")
+texture = ExtResource("3_t183l")
 texture_offset = Vector2(-6.35, 288.6)
 polygon = PackedVector2Array(-1177.38, -288.6, 1123.2, -288.6, 1123.22, -257.125, 6.35, -256.6, 6.35, -256.6, -1177.35, -257.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
@@ -89,7 +95,7 @@ position = Vector2(0, -20)
 [node name="@@45904" type="Polygon2D" parent="Layer 2/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_hh55p")
+texture = ExtResource("4_kcrmf")
 texture_offset = Vector2(169.75, -310.25)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(-196.2, 69.75, -109.75, 69.75, -109.75, 265, -196.2, 265, -196.2, 265, -14.15, 265, -14.15, 462.2, -196.2, 462.2)
@@ -109,7 +115,7 @@ position = Vector2(0, -20)
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 0/@Group@45906"]
 
 [node name="@@45907" type="Polygon2D" parent="Layer 2/Frame 0/@Group@45906/Shape"]
-color = Color(1, 1, 1, 0.301961)
+color = Color(0, 0, 0, 0.301961)
 polygon = PackedVector2Array(-196.2, 69.75, -109.75, 69.75, -109.75, 265, -196.2, 265, -196.2, 265, -14.15, 265, -14.15, 462.2, -196.2, 462.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 
@@ -129,7 +135,7 @@ position = Vector2(-60, 0)
 [node name="@@45910" type="Polygon2D" parent="Layer 2/Frame 0/@Group@45909/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_hh55p")
+texture = ExtResource("4_kcrmf")
 texture_offset = Vector2(-347.4, -295.25)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(421.4, 47, 503, 47, 503, 109.75, 358.4, 109.75, 277.95, 109.75, 503, 109.75, 503, 447.2, 277.95, 447.2)
@@ -149,7 +155,7 @@ position = Vector2(-60, 0)
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 0/@Group@45912"]
 
 [node name="@@45913" type="Polygon2D" parent="Layer 2/Frame 0/@Group@45912/Shape"]
-color = Color(1, 1, 1, 0.301961)
+color = Color(0, 0, 0, 0.301961)
 polygon = PackedVector2Array(421.4, 47, 503, 47, 503, 109.75, 358.4, 109.75, 277.95, 109.75, 503, 109.75, 503, 447.2, 277.95, 447.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 
@@ -169,7 +175,7 @@ position = Vector2(-120, 0)
 [node name="@@45916" type="Polygon2D" parent="Layer 2/Frame 0/@Group@45915/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_hh55p")
+texture = ExtResource("4_kcrmf")
 texture_offset = Vector2(-926.6, -295.25)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(943.55, 27.75, 943.55, 27.75, 1016.6, 99, 946.25, 164.95, 946.25, 447.2, 857.15, 447.2, 857.15, 109.75, 868.477, 99)
@@ -189,6 +195,6 @@ position = Vector2(-120, 0)
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 0/@Group@45918"]
 
 [node name="@@45919" type="Polygon2D" parent="Layer 2/Frame 0/@Group@45918/Shape"]
-color = Color(1, 1, 1, 0.301961)
+color = Color(0, 0, 0, 0.301961)
 polygon = PackedVector2Array(943.55, 27.75, 943.55, 27.75, 1016.6, 99, 946.25, 164.95, 946.25, 447.2, 857.15, 447.2, 857.15, 109.75, 868.477, 99)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])

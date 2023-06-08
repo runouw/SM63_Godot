@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_jrixp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ane6m"]
+
+[sub_resource type="Animation" id="Animation_htj3e"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7hnb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w76oo"]
 _data = {
-"Default": SubResource("Animation_jrixp")
+"Default": SubResource("Animation_htj3e")
 }
 
 [node name="RI o" type="Node2D"]
+script = ExtResource("1_ane6m")
+source_xml = "res://sm63/LIBRARY/RI o.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_p7hnb")
+"Timeline": SubResource("AnimationLibrary_w76oo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -33,6 +40,7 @@ libraries = {
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(37.95, -0.05)
 
 [node name="@@13717" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 color = Color(0.0627451, 0.619608, 0.105882, 1)

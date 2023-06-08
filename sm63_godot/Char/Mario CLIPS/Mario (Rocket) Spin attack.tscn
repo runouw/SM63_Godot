@@ -1,17 +1,17 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck fast - 1.png" id="1_nt4vu"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck fast - 4.png" id="2_7lq0w"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck fast - 3.png" id="3_qd5a7"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck fast - 2.png" id="4_knqhj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck slow - 1.png" id="5_qnumh"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck slow - 4.png" id="6_28awh"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck slow - 3.png" id="7_ela7c"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck slow - 2.png" id="8_ol4v3"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="9_yq7nv"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="10_d1w2e"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6m0ng"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck fast - 1.png" id="2_gradn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck fast - 4.png" id="3_41a56"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck fast - 3.png" id="4_0xutb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck fast - 2.png" id="5_l2beg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck slow - 1.png" id="6_dhg1c"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck slow - 4.png" id="7_gltkj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck slow - 3.png" id="8_x1ayc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (Rocket) Spin Attck slow - 2.png" id="9_0dvt3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="10_7fcv8"]
 
-[sub_resource type="Animation" id="Animation_115f1"]
+[sub_resource type="Animation" id="Animation_jowkj"]
 length = 2.66667
 loop_mode = 1
 tracks/0/type = "value"
@@ -135,16 +135,85 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_at7wg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lovj"]
 _data = {
-"Default": SubResource("Animation_115f1")
+"Default": SubResource("Animation_jowkj")
 }
 
+[sub_resource type="GDScript" id="GDScript_8itn4"]
+script/source = "extends Node
+# frame = 1;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		frame += Math.min(Math.round(Math.max(_parent.speed, 5)), 10);
+# 		while (frame>=41) {
+# 			frame -= 40;
+# 		}
+# 		if (_parent.speed>10) {
+# 			gotoAndStop(frame);
+# 		} else {
+# 			gotoAndStop(frame+40);
+# 		}
+# 		if (_root.KeyDOWN() && _root.Course.Char.Water == false && _root.Course.Char.air == true) {
+# 			_parent.speed = Math.max(10, _parent.speed+1);
+# 			_root.Course.Char.yspeed += Math.sqrt((_parent.speed+1)/50)/5;
+# 		}
+# 		if (_parent.speed>7) {
+# 			_parent.speed = _root.groundFriction(_parent.speed, 0.5, 1.1);
+# 		} else {
+# 			_parent.speed = _root.groundFriction(_parent.speed, 0.1, 1.03);
+# 		}
+# 		if (_root.Course.Char.Water == true) {
+# 			_parent.speed = _root.groundFriction(_parent.speed, 0.3, 1.1);
+# 		}
+# 		_parent.speed = Math.max(_parent.speed, 1);
+# 		if ((_parent.speed<=5 && _root.Course.Char.air == false) || (_parent.speed<=3 && _root.Course.Char.air == true)) {
+# 			_root.Course.Char.attack = false;
+# 		}
+# 		if (_root.Course.Char.air == true) {
+# 			if (!_root.KeyDOWN()) {
+# 				if (_parent.speed>7) {
+# 					_root.Course.Char.yspeed = _root.groundFriction(_root.Course.Char.yspeed, 0.3, 1.05);
+# 				} else {
+# 					_root.Course.Char.yspeed = _root.groundFriction(_root.Course.Char.yspeed, 0.1, 1.03);
+# 				}
+# 				//_root.Course.Char.yspeed -= (_parent.speed+1)/15;
+# 				_root.Course.Char.yspeed -= Math.sqrt((_parent.speed+1)/30)/3;
+# 			}
+# 			if (_root.Course.Char.Water == true) {
+# 				_root.Course.Char.yspeed -= Math.sqrt((_parent.speed+1)/20)/2;
+# 			}
+# 		}
+# 		//               
+# 		if (_root.KeyRIGHT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		if (_root.KeyLEFT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		//              
+# 		if (_root.KeyTapRIGHT()) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 		if (_root.KeyTapLEFT()) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Mario (Rocket) Spin attack" type="Node2D"]
+script = ExtResource("1_6m0ng")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (Rocket) Spin attack.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_at7wg")
+"Timeline": SubResource("AnimationLibrary_0lovj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -154,7 +223,7 @@ libraries = {
 [node name="@@15346" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-12, -42)
-texture = ExtResource("1_nt4vu")
+texture = ExtResource("2_gradn")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -163,7 +232,7 @@ visible = false
 [node name="@@15347" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-13.15, -44)
-texture = ExtResource("2_7lq0w")
+texture = ExtResource("3_41a56")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
@@ -172,7 +241,7 @@ visible = false
 [node name="@@15348" type="Sprite2D" parent="Layer 1/Frame 19"]
 texture_filter = 1
 position = Vector2(-12.65, -41.9)
-texture = ExtResource("3_qd5a7")
+texture = ExtResource("4_0xutb")
 centered = false
 
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
@@ -181,7 +250,7 @@ visible = false
 [node name="@@15349" type="Sprite2D" parent="Layer 1/Frame 29"]
 texture_filter = 1
 position = Vector2(-14.15, -44.15)
-texture = ExtResource("4_knqhj")
+texture = ExtResource("5_l2beg")
 centered = false
 
 [node name="Frame 39" type="Node2D" parent="Layer 1"]
@@ -190,7 +259,7 @@ visible = false
 [node name="@@15350" type="Sprite2D" parent="Layer 1/Frame 39"]
 texture_filter = 1
 position = Vector2(-12.15, -42.15)
-texture = ExtResource("5_qnumh")
+texture = ExtResource("6_dhg1c")
 centered = false
 
 [node name="Frame 50" type="Node2D" parent="Layer 1"]
@@ -199,7 +268,7 @@ visible = false
 [node name="@@15351" type="Sprite2D" parent="Layer 1/Frame 50"]
 texture_filter = 1
 position = Vector2(-13.15, -44.15)
-texture = ExtResource("6_28awh")
+texture = ExtResource("7_gltkj")
 centered = false
 
 [node name="Frame 60" type="Node2D" parent="Layer 1"]
@@ -208,7 +277,7 @@ visible = false
 [node name="@@15352" type="Sprite2D" parent="Layer 1/Frame 60"]
 texture_filter = 1
 position = Vector2(-12.65, -41.9)
-texture = ExtResource("7_ela7c")
+texture = ExtResource("8_x1ayc")
 centered = false
 
 [node name="Frame 70" type="Node2D" parent="Layer 1"]
@@ -217,17 +286,20 @@ visible = false
 [node name="@@15353" type="Sprite2D" parent="Layer 1/Frame 70"]
 texture_filter = 1
 position = Vector2(-14.15, -44.15)
-texture = ExtResource("8_ol4v3")
+texture = ExtResource("9_0dvt3")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("9_yq7nv")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_8itn4")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(1, 3.5)
 scale = Vector2(1.18587, 0.6371)
-script = ExtResource("10_d1w2e")
+script = ExtResource("10_7fcv8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="1_juoy5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/Haunted Window.png" id="2_u7bm8"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_b1b8r"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_oijjd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_51mr0"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="2_k3mm1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/Haunted Window.png" id="3_ueg11"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_tyt78"]
 
-[sub_resource type="Animation" id="Animation_gvnce"]
+[sub_resource type="Animation" id="Animation_mnre0"]
 length = 23.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -2361,16 +2361,27 @@ tracks/195/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_72ghe"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k1oq2"]
 _data = {
-"Default": SubResource("Animation_gvnce")
+"Default": SubResource("Animation_mnre0")
 }
 
+[sub_resource type="GDScript" id="GDScript_6xk7s"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# "
+
 [node name="BC-2BG Tower Falling" type="Node2D"]
+script = ExtResource("1_51mr0")
+source_xml = "res://sm63/LIBRARY/BC-2BG Tower Falling.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_72ghe")
+"Timeline": SubResource("AnimationLibrary_k1oq2")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -2382,7 +2393,7 @@ libraries = {
 [node name="@@628" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-65.5, -141.975, -65.5, -141.975, -43.375, -104.15, -87.625, -104.15, -87.6, -104.15, -43.375, -104.15, -43.375, 18.75, -86.15, 18.75, -86.35, 18.75, 87.6, 18.75, 87.6, 56, 56.875, 88.25, 56.9, 229.95, -86.35, 229.95, -86.35, 56)
@@ -2400,35 +2411,35 @@ end_cap_mode = 2
 texture_filter = 1
 position = Vector2(-71.65, -106.65)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="@@631" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-71.65, -46.65)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="@@632" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-71.65, 43.35)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="@@633" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-21.65, 43.35)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="@@634" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(29.35, 43.35)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 114" type="Node2D" parent="Layer 1"]
@@ -2441,7 +2452,7 @@ visible = false
 [node name="@@635" type="Polygon2D" parent="Layer 1/Frame 114/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-31.275, 32.3, -31.275, 32.3, -15.0496, 40.1405, 0.75, 48.6, -2.30686, 66.8749, -0.223524, 85.6749, 7, 105, 13, 108, 16, 112, 33, 120, 45.3095, 120.922, -86.35, 120.922, -86.35, 101.3, -71, 99, -60.6125, 84.5375, -52.25, 68.75, -42.7391, 50.0544, -36.3377, 40.1405, 56.875, 120.75, 56.875, 120.75, 56.875, 120.922, 45.3095, 120.922, -86.35, 120.922, 56.875, 120.922, 56.9, 229.95, -86.35, 229.95)
@@ -2459,7 +2470,7 @@ end_cap_mode = 2
 texture_filter = 1
 position = Vector2(-21.65, 43.35)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 509" type="Node2D" parent="Layer 1"]
@@ -2472,7 +2483,7 @@ visible = false
 [node name="@@638" type="Polygon2D" parent="Layer 1/Frame 509/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-31.275, 32.3, -31.275, 32.3, -15.0496, 40.1405, 0.75, 48.6, -2.30686, 66.8749, -0.223524, 85.6749, 7, 105, 13, 108, 16, 112, 33, 120, 45.3095, 120.922, -86.35, 120.922, -86.35, 101.3, -71, 99, -60.6125, 84.5375, -52.25, 68.75, -42.7391, 50.0544, -36.3377, 40.1405, 56.875, 120.75, 56.875, 120.75, 56.875, 120.922, 45.3095, 120.922, -86.35, 120.922, 56.875, 120.922, 56.9, 229.95, -86.35, 229.95)
@@ -2490,7 +2501,7 @@ end_cap_mode = 2
 texture_filter = 1
 position = Vector2(-21.65, 43.35)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 691" type="Node2D" parent="Layer 1"]
@@ -2503,11 +2514,12 @@ scale = Vector2(0.999433, 1.0018)
 skew = 0.054338
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 691/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@641" type="Polygon2D" parent="Layer 1/Frame 691/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-31.275, 32.3, -31.275, 32.3, -15.0496, 40.1405, 0.75, 48.6, -2.30686, 66.8749, -0.223524, 85.6749, 7, 105, 13, 108, 16, 112, 33, 120, 45.3095, 120.922, -86.35, 120.922, -86.35, 101.3, -71, 99, -60.6125, 84.5375, -52.25, 68.75, -42.7391, 50.0544, -36.3377, 40.1405, 56.875, 120.75, 56.875, 120.75, 56.875, 120.922, 45.3095, 120.922, -86.35, 120.922, 56.875, 120.922, 56.9, 229.95, -86.35, 229.95)
@@ -2527,7 +2539,7 @@ position = Vector2(157.1, 281.3)
 rotation = 1.55179
 scale = Vector2(0.399761, 0.400717)
 skew = 0.0543541
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 692" type="Node2D" parent="Layer 1"]
@@ -2547,7 +2559,7 @@ visible = false
 [node name="@@607" type="Polygon2D" parent="Layer 2/Frame 114/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(2.55, 18.75, 87.6, 18.75, 87.6, 56, 56.875, 88.25, 56.875, 120.75, 45.3095, 120.922, 45.3095, 120.922, 33, 120, 16, 112, 13, 108, 7, 105, -1.04444, 81.9111, -1.71111, 59.5778, 5, 38, 4.95, 36)
@@ -2565,7 +2577,7 @@ end_cap_mode = 2
 texture_filter = 1
 position = Vector2(29.35, 43.35)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 148" type="Node2D" parent="Layer 2"]
@@ -2577,11 +2589,12 @@ rotation = 0.205373
 scale = Vector2(0.999334, 0.999334)
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 148/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@610" type="Polygon2D" parent="Layer 2/Frame 148/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(2.55, 18.75, 87.6, 18.75, 87.6, 56, 56.875, 88.25, 56.875, 120.75, 45.3095, 120.922, 45.3095, 120.922, 33, 120, 16, 112, 13, 108, 7, 105, -1.04444, 81.9111, -1.71111, 59.5778, 5, 38, 4.95, 36)
@@ -2600,7 +2613,7 @@ texture_filter = 1
 position = Vector2(36.25, 42.5)
 rotation = 0.205361
 scale = Vector2(0.399726, 0.399726)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 156" type="Node2D" parent="Layer 2"]
@@ -2612,11 +2625,12 @@ rotation = 0.2618
 scale = Vector2(1, 1)
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 156/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@613" type="Polygon2D" parent="Layer 2/Frame 156/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(2.55, 18.75, 87.6, 18.75, 87.6, 56, 56.875, 88.25, 56.875, 120.75, 45.3095, 120.922, 45.3095, 120.922, 33, 120, 16, 112, 13, 108, 7, 105, -1.04444, 81.9111, -1.71111, 59.5778, 5, 38, 4.95, 36)
@@ -2635,7 +2649,7 @@ texture_filter = 1
 position = Vector2(37.75, 40.8)
 rotation = 0.261809
 scale = Vector2(0.399998, 0.399998)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 183" type="Node2D" parent="Layer 2"]
@@ -2652,7 +2666,7 @@ skew = -1.0848e-05
 [node name="@@616" type="Polygon2D" parent="Layer 2/Frame 183/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(2.55, 18.75, 87.6, 18.75, 87.6, 56, 56.875, 88.25, 56.875, 120.75, 45.3095, 120.922, 45.3095, 120.922, 33, 120, 16, 112, 13, 108, 7, 105, -1.04444, 81.9111, -1.71111, 59.5778, 5, 38, 4.95, 36)
@@ -2672,7 +2686,7 @@ position = Vector2(77.4, 51.4)
 rotation = 0.785398
 scale = Vector2(0.400013, 0.400003)
 skew = -2.70605e-05
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 207" type="Node2D" parent="Layer 2"]
@@ -2684,11 +2698,12 @@ rotation = 0.966844
 scale = Vector2(0.997988, 0.997975)
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 207/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@619" type="Polygon2D" parent="Layer 2/Frame 207/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(2.55, 18.75, 87.6, 18.75, 87.6, 56, 56.875, 88.25, 56.875, 120.75, 45.3095, 120.922, 45.3095, 120.922, 33, 120, 16, 112, 13, 108, 7, 105, -1.04444, 81.9111, -1.71111, 59.5778, 5, 38, 4.95, 36)
@@ -2708,7 +2723,7 @@ position = Vector2(112.3, 64.3)
 rotation = 0.966828
 scale = Vector2(0.399207, 0.399195)
 skew = -2.18153e-05
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 224" type="Node2D" parent="Layer 2"]
@@ -2725,7 +2740,7 @@ skew = -3.79086e-05
 [node name="@@622" type="Polygon2D" parent="Layer 2/Frame 224/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(2.55, 18.75, 87.6, 18.75, 87.6, 56, 56.875, 88.25, 56.875, 120.75, 45.3095, 120.922, 45.3095, 120.922, 33, 120, 16, 112, 13, 108, 7, 105, -1.04444, 81.9111, -1.71111, 59.5778, 5, 38, 4.95, 36)
@@ -2745,7 +2760,7 @@ position = Vector2(160.4, 146.05)
 rotation = 1.29083
 scale = Vector2(0.399465, 0.399454)
 skew = -4.73261e-05
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 265" type="Node2D" parent="Layer 2"]
@@ -2758,11 +2773,12 @@ scale = Vector2(0.998825, 0.99882)
 skew = -1.41859e-05
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 265/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@625" type="Polygon2D" parent="Layer 2/Frame 265/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(2.55, 18.75, 87.6, 18.75, 87.6, 56, 56.875, 88.25, 56.875, 120.75, 45.3095, 120.922, 45.3095, 120.922, 33, 120, 16, 112, 13, 108, 7, 105, -1.04444, 81.9111, -1.71111, 59.5778, 5, 38, 4.95, 36)
@@ -2782,7 +2798,7 @@ position = Vector2(255.5, 334)
 rotation = 1.95321
 scale = Vector2(0.399542, 0.399536)
 skew = -3.54052e-05
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 266" type="Node2D" parent="Layer 2"]
@@ -2802,7 +2818,7 @@ visible = false
 [node name="@@595" type="Polygon2D" parent="Layer 3/Frame 114/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-43.375, -78.025, -43.375, -78.025, -43.375, 18.75, -52.1, 18.75, -54, 14, -59, -6.66667, -60.6667, -28.6667, -59, -52, -63, -58, -63, -65, -61, -70, -52.1, 18.75, 2.55, 18.75, 4.95, 36, 5, 38, 0.75, 48.6, 0.75, 48.6, -12.4677, 41.4654, -25.9844, 34.7654, -39.8, 28.5, -50, 24)
@@ -2826,7 +2842,7 @@ visible = false
 [node name="@@597" type="Polygon2D" parent="Layer 3/Frame 155/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-43.375, -78.025, -43.375, -78.025, -43.375, 18.75, -52.1, 18.75, -54, 14, -59, -6.66667, -60.6667, -28.6667, -59, -52, -63, -58, -63, -65, -61, -70, -52.1, 18.75, 2.55, 18.75, 4.95, 36, 5, 38, 0.75, 48.6, 0.75, 48.6, -12.4677, 41.4654, -25.9844, 34.7654, -39.8, 28.5, -50, 24)
@@ -2851,7 +2867,7 @@ position = Vector2(25.75, 13.55)
 [node name="@@599" type="Polygon2D" parent="Layer 3/Frame 183/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-43.375, -78.025, -43.375, -78.025, -43.375, 18.75, -52.1, 18.75, -54, 14, -59, -6.66667, -60.6667, -28.6667, -59, -52, -63, -58, -63, -65, -61, -70, -52.1, 18.75, 2.55, 18.75, 4.95, 36, 5, 38, 0.75, 48.6, 0.75, 48.6, -12.4677, 41.4654, -25.9844, 34.7654, -39.8, 28.5, -50, 24)
@@ -2874,11 +2890,12 @@ rotation = 0.147704
 scale = Vector2(0.999608, 0.999608)
 
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 207/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@601" type="Polygon2D" parent="Layer 3/Frame 207/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-43.375, -78.025, -43.375, -78.025, -43.375, 18.75, -52.1, 18.75, -54, 14, -59, -6.66667, -60.6667, -28.6667, -59, -52, -63, -58, -63, -65, -61, -70, -52.1, 18.75, 2.55, 18.75, 4.95, 36, 5, 38, 0.75, 48.6, 0.75, 48.6, -12.4677, 41.4654, -25.9844, 34.7654, -39.8, 28.5, -50, 24)
@@ -2905,7 +2922,7 @@ scale = Vector2(0.998023, 0.998023)
 [node name="@@603" type="Polygon2D" parent="Layer 3/Frame 234/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-43.375, -78.025, -43.375, -78.025, -43.375, 18.75, -52.1, 18.75, -54, 14, -59, -6.66667, -60.6667, -28.6667, -59, -52, -63, -58, -63, -65, -61, -70, -52.1, 18.75, 2.55, 18.75, 4.95, 36, 5, 38, 0.75, 48.6, 0.75, 48.6, -12.4677, 41.4654, -25.9844, 34.7654, -39.8, 28.5, -50, 24)
@@ -2932,7 +2949,7 @@ scale = Vector2(0.997962, 0.997962)
 [node name="@@605" type="Polygon2D" parent="Layer 3/Frame 310/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-43.375, -78.025, -43.375, -78.025, -43.375, 18.75, -52.1, 18.75, -54, 14, -59, -6.66667, -60.6667, -28.6667, -59, -52, -63, -58, -63, -65, -61, -70, -52.1, 18.75, 2.55, 18.75, 4.95, 36, 5, 38, 0.75, 48.6, 0.75, 48.6, -12.4677, 41.4654, -25.9844, 34.7654, -39.8, 28.5, -50, 24)
@@ -2963,7 +2980,7 @@ visible = false
 [node name="@@559" type="Polygon2D" parent="Layer 5/Frame 114/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-65.5, -141.975, -65.5, -141.975, -43.375, -104.15, -87.625, -104.15, -87.6, -104.15, -43.375, -104.15, -43.375, -78.025, -61, -70, -63, -65, -63, -58, -61.675, -56, -61.675, -56, -74.4357, -58.3064, -87.1, -61.05, -87.2969, -78.025)
@@ -2981,7 +2998,7 @@ end_cap_mode = 2
 texture_filter = 1
 position = Vector2(-71.65, -106.65)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 259" type="Node2D" parent="Layer 5"]
@@ -2994,7 +3011,7 @@ visible = false
 [node name="@@562" type="Polygon2D" parent="Layer 5/Frame 259/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-65.5, -141.975, -65.5, -141.975, -43.375, -104.15, -87.625, -104.15, -87.6, -104.15, -43.375, -104.15, -43.375, -78.025, -61, -70, -63, -65, -63, -58, -61.675, -56, -61.675, -56, -74.4357, -58.3064, -87.1, -61.05, -87.2969, -78.025)
@@ -3012,7 +3029,7 @@ end_cap_mode = 2
 texture_filter = 1
 position = Vector2(-71.65, -106.65)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 298" type="Node2D" parent="Layer 5"]
@@ -3028,7 +3045,7 @@ scale = Vector2(0.996869, 0.996869)
 [node name="@@565" type="Polygon2D" parent="Layer 5/Frame 298/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-65.5, -141.975, -65.5, -141.975, -43.375, -104.15, -87.625, -104.15, -87.6, -104.15, -43.375, -104.15, -43.375, -78.025, -61, -70, -63, -65, -63, -58, -61.675, -56, -61.675, -56, -74.4357, -58.3064, -87.1, -61.05, -87.2969, -78.025)
@@ -3047,7 +3064,7 @@ texture_filter = 1
 position = Vector2(-54.35, -105.95)
 rotation = 0.354637
 scale = Vector2(0.398728, 0.398728)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 342" type="Node2D" parent="Layer 5"]
@@ -3063,7 +3080,7 @@ scale = Vector2(0.994129, 0.994129)
 [node name="@@568" type="Polygon2D" parent="Layer 5/Frame 342/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-65.5, -141.975, -65.5, -141.975, -43.375, -104.15, -87.625, -104.15, -87.6, -104.15, -43.375, -104.15, -43.375, -78.025, -61, -70, -63, -65, -63, -58, -61.675, -56, -61.675, -56, -74.4357, -58.3064, -87.1, -61.05, -87.2969, -78.025)
@@ -3082,7 +3099,7 @@ texture_filter = 1
 position = Vector2(-14.65, 12.5)
 rotation = 1.68439
 scale = Vector2(0.397644, 0.397644)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 343" type="Node2D" parent="Layer 5"]
@@ -3096,7 +3113,7 @@ position = Vector2(-20, 0)
 [node name="@@571" type="Polygon2D" parent="Layer 5/Frame 343/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3124,7 +3141,7 @@ scale = Vector2(0.993614, 0.993614)
 [node name="@@573" type="Polygon2D" parent="Layer 5/Frame 362/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3148,11 +3165,12 @@ rotation = -1.6607
 scale = Vector2(0.991983, 0.991983)
 
 [node name="Shape" type="Node2D" parent="Layer 5/Frame 379/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@575" type="Polygon2D" parent="Layer 5/Frame 379/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3176,11 +3194,12 @@ rotation = -1.83576
 scale = Vector2(0.991417, 0.991417)
 
 [node name="Shape" type="Node2D" parent="Layer 5/Frame 381/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@577" type="Polygon2D" parent="Layer 5/Frame 381/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3204,11 +3223,12 @@ rotation = -1.74365
 scale = Vector2(0.991119, 0.991119)
 
 [node name="Shape" type="Node2D" parent="Layer 5/Frame 384/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@579" type="Polygon2D" parent="Layer 5/Frame 384/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3236,7 +3256,7 @@ scale = Vector2(0.990651, 0.990651)
 [node name="@@581" type="Polygon2D" parent="Layer 5/Frame 386/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3264,7 +3284,7 @@ scale = Vector2(0.990651, 0.990651)
 [node name="@@583" type="Polygon2D" parent="Layer 5/Frame 509/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3292,7 +3312,7 @@ scale = Vector2(0.990091, 0.990091)
 [node name="@@585" type="Polygon2D" parent="Layer 5/Frame 512/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3320,7 +3340,7 @@ scale = Vector2(0.989632, 0.989632)
 [node name="@@587" type="Polygon2D" parent="Layer 5/Frame 518/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3348,7 +3368,7 @@ scale = Vector2(0.988877, 0.988877)
 [node name="@@589" type="Polygon2D" parent="Layer 5/Frame 521/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3376,7 +3396,7 @@ scale = Vector2(0.986501, 0.986501)
 [node name="@@591" type="Polygon2D" parent="Layer 5/Frame 552/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3404,7 +3424,7 @@ scale = Vector2(0.986, 0.986)
 [node name="@@593" type="Polygon2D" parent="Layer 5/Frame 606/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3437,7 +3457,7 @@ position = Vector2(-20, 0)
 [node name="@@544" type="Polygon2D" parent="Layer 7/Frame 343/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3457,7 +3477,7 @@ texture_filter = 1
 position = Vector2(-14.65, 12.5)
 rotation = 1.68439
 scale = Vector2(0.397644, 0.397644)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 362" type="Node2D" parent="Layer 7"]
@@ -3473,7 +3493,7 @@ scale = Vector2(0.998367, 0.998367)
 [node name="@@547" type="Polygon2D" parent="Layer 7/Frame 362/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3493,7 +3513,7 @@ texture_filter = 1
 position = Vector2(46.7, -2.5)
 rotation = 2.42362
 scale = Vector2(0.396999, 0.396999)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 368" type="Node2D" parent="Layer 7"]
@@ -3509,7 +3529,7 @@ scale = Vector2(0.996566, 0.996566)
 [node name="@@550" type="Polygon2D" parent="Layer 7/Frame 368/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3529,7 +3549,7 @@ texture_filter = 1
 position = Vector2(72.95, 5.4)
 rotation = 2.71234
 scale = Vector2(0.396289, 0.396289)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 385" type="Node2D" parent="Layer 7"]
@@ -3541,11 +3561,12 @@ rotation = 1.8292
 scale = Vector2(0.997015, 0.997015)
 
 [node name="Shape" type="Node2D" parent="Layer 7/Frame 385/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@553" type="Polygon2D" parent="Layer 7/Frame 385/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3565,7 +3586,7 @@ texture_filter = 1
 position = Vector2(141.75, 56.85)
 rotation = -2.76961
 scale = Vector2(0.39647, 0.39647)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 424" type="Node2D" parent="Layer 7"]
@@ -3581,7 +3602,7 @@ scale = Vector2(0.996114, 0.996114)
 [node name="@@556" type="Polygon2D" parent="Layer 7/Frame 424/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(-76.4571, -157.093)
 texture_scale = Vector2(2.47608, 2.47608)
 texture_rotation = -1.68444
@@ -3601,7 +3622,7 @@ texture_filter = 1
 position = Vector2(202.45, 261.95)
 rotation = -0.914321
 scale = Vector2(0.396115, 0.396115)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 426" type="Node2D" parent="Layer 7"]
@@ -3621,7 +3642,7 @@ visible = false
 [node name="@@524" type="Polygon2D" parent="Layer 6/Frame 114/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-87.1, -61.05, -87.1, -61.05, -74.4357, -58.3064, -61.675, -56, -59, -52, -59.7, -46.3, -60, -43.325, -60.5694, -23.1862, -58.5694, -4.07786, -54, 14, -52.1, 18.75, -86.15, 18.75, -87.0673, -58.3064, -86.35, 18.75, -52.1, 18.75, -50, 24, -39.8, 28.5, -31.275, 32.3, -42.7391, 50.0544, -52.25, 68.75, -60.6125, 84.5375, -71, 99, -86.35, 101.3, -86.35, 101.3, -86.35, 24)
@@ -3639,14 +3660,14 @@ end_cap_mode = 2
 texture_filter = 1
 position = Vector2(-71.65, -46.65)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="@@527" type="Sprite2D" parent="Layer 6/Frame 114/Group"]
 texture_filter = 1
 position = Vector2(-71.65, 43.35)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 297" type="Node2D" parent="Layer 6"]
@@ -3659,7 +3680,7 @@ visible = false
 [node name="@@528" type="Polygon2D" parent="Layer 6/Frame 297/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-87.1, -61.05, -87.1, -61.05, -74.4357, -58.3064, -61.675, -56, -59, -52, -59.7, -46.3, -60, -43.325, -60.5694, -23.1862, -58.5694, -4.07786, -54, 14, -52.1, 18.75, -86.15, 18.75, -87.0673, -58.3064, -86.35, 18.75, -52.1, 18.75, -50, 24, -39.8, 28.5, -31.275, 32.3, -42.7391, 50.0544, -52.25, 68.75, -60.6125, 84.5375, -71, 99, -86.35, 101.3, -86.35, 101.3, -86.35, 24)
@@ -3677,14 +3698,14 @@ end_cap_mode = 2
 texture_filter = 1
 position = Vector2(-71.65, -46.65)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="@@531" type="Sprite2D" parent="Layer 6/Frame 297/Group"]
 texture_filter = 1
 position = Vector2(-71.65, 43.35)
 scale = Vector2(0.399994, 0.399994)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 340" type="Node2D" parent="Layer 6"]
@@ -3696,11 +3717,12 @@ rotation = -0.419941
 scale = Vector2(0.998784, 0.998784)
 
 [node name="Shape" type="Node2D" parent="Layer 6/Frame 340/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@532" type="Polygon2D" parent="Layer 6/Frame 340/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-87.1, -61.05, -87.1, -61.05, -74.4357, -58.3064, -61.675, -56, -59, -52, -59.7, -46.3, -60, -43.325, -60.5694, -23.1862, -58.5694, -4.07786, -54, 14, -52.1, 18.75, -86.15, 18.75, -87.0673, -58.3064, -86.35, 18.75, -52.1, 18.75, -50, 24, -39.8, 28.5, -31.275, 32.3, -42.7391, 50.0544, -52.25, 68.75, -60.6125, 84.5375, -71, 99, -86.35, 101.3, -86.35, 101.3, -86.35, 24)
@@ -3719,7 +3741,7 @@ texture_filter = 1
 position = Vector2(-133.1, -37.4)
 rotation = -0.419958
 scale = Vector2(0.399507, 0.399507)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="@@535" type="Sprite2D" parent="Layer 6/Frame 340/Group"]
@@ -3727,7 +3749,7 @@ texture_filter = 1
 position = Vector2(-96.45, 44.7)
 rotation = -0.419958
 scale = Vector2(0.399507, 0.399507)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 379" type="Node2D" parent="Layer 6"]
@@ -3739,11 +3761,12 @@ rotation = -1.38267
 scale = Vector2(0.997256, 0.997256)
 
 [node name="Shape" type="Node2D" parent="Layer 6/Frame 379/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@536" type="Polygon2D" parent="Layer 6/Frame 379/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-87.1, -61.05, -87.1, -61.05, -74.4357, -58.3064, -61.675, -56, -59, -52, -59.7, -46.3, -60, -43.325, -60.5694, -23.1862, -58.5694, -4.07786, -54, 14, -52.1, 18.75, -86.15, 18.75, -87.0673, -58.3064, -86.35, 18.75, -52.1, 18.75, -50, 24, -39.8, 28.5, -31.275, 32.3, -42.7391, 50.0544, -52.25, 68.75, -60.6125, 84.5375, -71, 99, -86.35, 101.3, -86.35, 101.3, -86.35, 24)
@@ -3762,7 +3785,7 @@ texture_filter = 1
 position = Vector2(-238.1, 90)
 rotation = -1.38267
 scale = Vector2(0.398899, 0.398899)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="@@539" type="Sprite2D" parent="Layer 6/Frame 379/Group"]
@@ -3770,7 +3793,7 @@ texture_filter = 1
 position = Vector2(-149.9, 106.85)
 rotation = -1.38267
 scale = Vector2(0.398899, 0.398899)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 427" type="Node2D" parent="Layer 6"]
@@ -3786,7 +3809,7 @@ scale = Vector2(0.995634, 0.995634)
 [node name="@@540" type="Polygon2D" parent="Layer 6/Frame 427/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_juoy5")
+texture = ExtResource("2_k3mm1")
 texture_offset = Vector2(6.7, -58.2)
 texture_scale = Vector2(2.46154, 2.46154)
 polygon = PackedVector2Array(-87.1, -61.05, -87.1, -61.05, -74.4357, -58.3064, -61.675, -56, -59, -52, -59.7, -46.3, -60, -43.325, -60.5694, -23.1862, -58.5694, -4.07786, -54, 14, -52.1, 18.75, -86.15, 18.75, -87.0673, -58.3064, -86.35, 18.75, -52.1, 18.75, -50, 24, -39.8, 28.5, -31.275, 32.3, -42.7391, 50.0544, -52.25, 68.75, -60.6125, 84.5375, -71, 99, -86.35, 101.3, -86.35, 101.3, -86.35, 24)
@@ -3805,7 +3828,7 @@ texture_filter = 1
 position = Vector2(-260.75, 333.4)
 rotation = -2.14407
 scale = Vector2(0.398247, 0.398247)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="@@543" type="Sprite2D" parent="Layer 6/Frame 427/Group"]
@@ -3813,7 +3836,7 @@ texture_filter = 1
 position = Vector2(-185.4, 284.8)
 rotation = -2.14407
 scale = Vector2(0.398247, 0.398247)
-texture = ExtResource("2_u7bm8")
+texture = ExtResource("3_ueg11")
 centered = false
 
 [node name="Frame 428" type="Node2D" parent="Layer 6"]
@@ -3822,6 +3845,9 @@ visible = false
 [node name="Frame 692" type="Node2D" parent="Layer 6"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 6/Frame 692"]
+script = SubResource("GDScript_6xk7s")
+
 [node name="Layer 8" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 8"]
@@ -3829,11 +3855,11 @@ visible = false
 [node name="Frame 114" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 114" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 114"]
 position = Vector2(0, 51.95)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3846,11 +3872,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@512" type="Node2D" parent="Layer 8/Frame 114" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@512" type="Node2D" parent="Layer 8/Frame 114"]
 position = Vector2(21, 106)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3863,10 +3889,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@513" type="Node2D" parent="Layer 8/Frame 114" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@513" type="Node2D" parent="Layer 8/Frame 114"]
 position = Vector2(18.65, 75.3)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3885,11 +3911,11 @@ visible = false
 [node name="Frame 134" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 134" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 134"]
 position = Vector2(-7, 66)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3902,11 +3928,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@514" type="Node2D" parent="Layer 8/Frame 134" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@514" type="Node2D" parent="Layer 8/Frame 134"]
 position = Vector2(-69.15, 131)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3925,11 +3951,11 @@ visible = false
 [node name="Frame 153" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 153" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 153"]
 position = Vector2(57, 37.65)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3942,11 +3968,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@515" type="Node2D" parent="Layer 8/Frame 153" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@515" type="Node2D" parent="Layer 8/Frame 153"]
 position = Vector2(-49.7, -56)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3959,10 +3985,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@516" type="Node2D" parent="Layer 8/Frame 153" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@516" type="Node2D" parent="Layer 8/Frame 153"]
 position = Vector2(18.65, 75.3)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3981,11 +4007,11 @@ visible = false
 [node name="Frame 171" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 171" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 171"]
 position = Vector2(86, 58.65)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4004,11 +4030,11 @@ visible = false
 [node name="Frame 190" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 190" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 190"]
 position = Vector2(-67.9, 127)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4027,11 +4053,11 @@ visible = false
 [node name="Frame 214" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 214" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 214"]
 position = Vector2(-24.9, 114)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4050,11 +4076,11 @@ visible = false
 [node name="Frame 239" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 239" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 239"]
 position = Vector2(-24.9, 58)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4067,10 +4093,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@517" type="Node2D" parent="Layer 8/Frame 239" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@517" type="Node2D" parent="Layer 8/Frame 239"]
 position = Vector2(81.95, 117.3)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4089,11 +4115,11 @@ visible = false
 [node name="Frame 262" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 262" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 262"]
 position = Vector2(-57, 90.7)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4106,10 +4132,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@518" type="Node2D" parent="Layer 8/Frame 262" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@518" type="Node2D" parent="Layer 8/Frame 262"]
 position = Vector2(-72.65, -60)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4128,11 +4154,11 @@ visible = false
 [node name="Frame 284" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 284" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 284"]
 position = Vector2(-78, -2)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4151,11 +4177,11 @@ visible = false
 [node name="Frame 307" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 307" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 307"]
 position = Vector2(-38, -75)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4168,10 +4194,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@519" type="Node2D" parent="Layer 8/Frame 307" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@519" type="Node2D" parent="Layer 8/Frame 307"]
 position = Vector2(-80.45, -48.65)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4190,11 +4216,11 @@ visible = false
 [node name="Frame 331" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 331" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 331"]
 position = Vector2(-30, -23)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4207,10 +4233,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@520" type="Node2D" parent="Layer 8/Frame 331" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@520" type="Node2D" parent="Layer 8/Frame 331"]
 position = Vector2(-69.45, 38.35)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4229,11 +4255,11 @@ visible = false
 [node name="Frame 353" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 353" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 353"]
 position = Vector2(-73, 32)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4246,10 +4272,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@521" type="Node2D" parent="Layer 8/Frame 353" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@521" type="Node2D" parent="Layer 8/Frame 353"]
 position = Vector2(19.45, -2.65)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4268,11 +4294,11 @@ visible = false
 [node name="Frame 378" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 378" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 378"]
 position = Vector2(-88, 84.8)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4285,10 +4311,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@522" type="Node2D" parent="Layer 8/Frame 378" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@522" type="Node2D" parent="Layer 8/Frame 378"]
 position = Vector2(-66.65, 87.35)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4307,11 +4333,11 @@ visible = false
 [node name="Frame 400" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 400" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 400"]
 position = Vector2(-81.3, 78)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4342,11 +4368,11 @@ visible = false
 [node name="Frame 467" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 467" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 467"]
 position = Vector2(-4, 107)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4371,11 +4397,11 @@ visible = false
 [node name="Frame 510" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 510" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 510"]
 position = Vector2(-56, 117)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4388,10 +4414,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@523" type="Node2D" parent="Layer 8/Frame 510" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@523" type="Node2D" parent="Layer 8/Frame 510"]
 position = Vector2(-16.45, 88.75)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4410,11 +4436,11 @@ visible = false
 [node name="Frame 528" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 528" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 528"]
 position = Vector2(-81, 107)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4433,11 +4459,11 @@ visible = false
 [node name="Frame 549" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 549" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 549"]
 position = Vector2(14, 103)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4456,11 +4482,11 @@ visible = false
 [node name="Frame 571" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 571" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 571"]
 position = Vector2(36.45, 108)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4486,11 +4512,11 @@ visible = false
 [node name="Frame 120" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 120" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 120"]
 position = Vector2(50, 47)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4509,11 +4535,11 @@ visible = false
 [node name="Frame 141" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 141" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 141"]
 position = Vector2(-61.05, 24)
 rotation = -0.19384
 scale = Vector2(0.998171, 0.998171)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4532,11 +4558,11 @@ visible = false
 [node name="Frame 160" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 160" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 160"]
 position = Vector2(-56, 12.65)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4555,11 +4581,11 @@ visible = false
 [node name="Frame 178" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 178" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 178"]
 position = Vector2(-69.15, -80.7)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4578,11 +4604,11 @@ visible = false
 [node name="Frame 200" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 200" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 200"]
 position = Vector2(114, 94)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4601,11 +4627,11 @@ visible = false
 [node name="Frame 222" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 222" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 222"]
 position = Vector2(-49.7, 28)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4624,11 +4650,11 @@ visible = false
 [node name="Frame 246" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 246" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 246"]
 position = Vector2(-76, -95)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4647,11 +4673,11 @@ visible = false
 [node name="Frame 269" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 269" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 269"]
 position = Vector2(-78, -60)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4664,10 +4690,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@506" type="Node2D" parent="Layer 9/Frame 269" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@506" type="Node2D" parent="Layer 9/Frame 269"]
 position = Vector2(-62.25, -98.7)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4686,11 +4712,11 @@ visible = false
 [node name="Frame 292" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 292" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 292"]
 position = Vector2(-57, 37.65)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4709,11 +4735,11 @@ visible = false
 [node name="Frame 317" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 317" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 317"]
 position = Vector2(-98, -30)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4726,11 +4752,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@507" type="Node2D" parent="Layer 9/Frame 317" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@507" type="Node2D" parent="Layer 9/Frame 317"]
 position = Vector2(-20, 56)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4749,11 +4775,11 @@ visible = false
 [node name="Frame 337" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 337" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 337"]
 position = Vector2(-30, 26)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4766,10 +4792,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@508" type="Node2D" parent="Layer 9/Frame 337" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@508" type="Node2D" parent="Layer 9/Frame 337"]
 position = Vector2(-26, 6.3)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4788,11 +4814,11 @@ visible = false
 [node name="Frame 363" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 363" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 363"]
 position = Vector2(51, 7)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4805,11 +4831,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@509" type="Node2D" parent="Layer 9/Frame 363" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@509" type="Node2D" parent="Layer 9/Frame 363"]
 position = Vector2(-163, 32)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4828,11 +4854,11 @@ visible = false
 [node name="Frame 387" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 387" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 387"]
 position = Vector2(-200, 121.7)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4845,10 +4871,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@510" type="Node2D" parent="Layer 9/Frame 387" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@510" type="Node2D" parent="Layer 9/Frame 387"]
 position = Vector2(151.3, 74.65)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4867,11 +4893,11 @@ visible = false
 [node name="Frame 407" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 407" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 407"]
 position = Vector2(-67.9, 128)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4908,11 +4934,11 @@ visible = false
 [node name="Frame 496" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 496" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 496"]
 position = Vector2(-29, 64)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4931,11 +4957,11 @@ visible = false
 [node name="Frame 516" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 516" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 516"]
 position = Vector2(-56, 72)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4948,10 +4974,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@511" type="Node2D" parent="Layer 9/Frame 516" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@511" type="Node2D" parent="Layer 9/Frame 516"]
 position = Vector2(-32.6, 59.9)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4970,11 +4996,11 @@ visible = false
 [node name="Frame 537" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 537" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 537"]
 position = Vector2(0, 103)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4993,11 +5019,11 @@ visible = false
 [node name="Frame 556" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 556" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 556"]
 position = Vector2(-50, 162)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5029,11 +5055,11 @@ visible = false
 [node name="Frame 127" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 127" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 127"]
 position = Vector2(-69.15, -16)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5052,11 +5078,11 @@ visible = false
 [node name="Frame 147" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 147" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 147"]
 position = Vector2(38.45, 120.95)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5069,10 +5095,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@498" type="Node2D" parent="Layer 10/Frame 147" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@498" type="Node2D" parent="Layer 10/Frame 147"]
 position = Vector2(-56.6, -17.75)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5091,11 +5117,11 @@ visible = false
 [node name="Frame 165" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 165" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 165"]
 position = Vector2(5, 51.95)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5108,10 +5134,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@499" type="Node2D" parent="Layer 10/Frame 165" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@499" type="Node2D" parent="Layer 10/Frame 165"]
 position = Vector2(-31.3, 31.3)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5130,11 +5156,11 @@ visible = false
 [node name="Frame 185" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 185" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 185"]
 position = Vector2(-20.9, -41.4)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5153,11 +5179,11 @@ visible = false
 [node name="Frame 209" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 209" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 209"]
 position = Vector2(44, 63)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5170,11 +5196,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@500" type="Node2D" parent="Layer 10/Frame 209" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@500" type="Node2D" parent="Layer 10/Frame 209"]
 position = Vector2(-83, -71)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5193,11 +5219,11 @@ visible = false
 [node name="Frame 231" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 231" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 231"]
 position = Vector2(105.55, -11.3)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5216,11 +5242,11 @@ visible = false
 [node name="Frame 256" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 256" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 256"]
 position = Vector2(24, 130)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5239,11 +5265,11 @@ visible = false
 [node name="Frame 278" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 278" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 278"]
 position = Vector2(-57, -117)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5262,11 +5288,11 @@ visible = false
 [node name="Frame 297" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 297" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 297"]
 position = Vector2(-67.9, 89)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5279,10 +5305,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@501" type="Node2D" parent="Layer 10/Frame 297" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@501" type="Node2D" parent="Layer 10/Frame 297"]
 position = Vector2(-62.25, 58.3)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5301,11 +5327,11 @@ visible = false
 [node name="Frame 326" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 326" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 326"]
 position = Vector2(-81, 84)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5324,11 +5350,11 @@ visible = false
 [node name="Frame 347" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 347" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 347"]
 position = Vector2(0, 12.65)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5341,11 +5367,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@502" type="Node2D" parent="Layer 10/Frame 347" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@502" type="Node2D" parent="Layer 10/Frame 347"]
 position = Vector2(-96, 59)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5358,10 +5384,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@503" type="Node2D" parent="Layer 10/Frame 347" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@503" type="Node2D" parent="Layer 10/Frame 347"]
 position = Vector2(-46.55, 22.65)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5380,11 +5406,11 @@ visible = false
 [node name="Frame 373" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 373" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 373"]
 position = Vector2(-25, 81)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5403,11 +5429,11 @@ visible = false
 [node name="Frame 396" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 396" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 396"]
 position = Vector2(-19, 73.15)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5426,11 +5452,11 @@ visible = false
 [node name="Frame 415" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 415" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 415"]
 position = Vector2(9, 108)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5449,11 +5475,11 @@ visible = false
 [node name="Frame 441" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 441" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 441"]
 position = Vector2(-57, 82.4)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5466,10 +5492,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@504" type="Node2D" parent="Layer 10/Frame 441" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@504" type="Node2D" parent="Layer 10/Frame 441"]
 position = Vector2(-17.3, 50.65)
 scale = Vector2(2, 2)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5503,11 +5529,11 @@ visible = false
 [node name="Frame 502" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 502" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 502"]
 position = Vector2(-81.3, 82.4)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5520,11 +5546,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@505" type="Node2D" parent="Layer 10/Frame 502" instance=ExtResource("3_b1b8r")]
+[node name="@DOMSymbolInstance@505" type="Node2D" parent="Layer 10/Frame 502"]
 position = Vector2(7.9, 144)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5543,11 +5569,11 @@ visible = false
 [node name="Frame 523" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 523" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 523"]
 position = Vector2(0, 156.3)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5566,11 +5592,11 @@ visible = false
 [node name="Frame 543" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 543" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 543"]
 position = Vector2(-4, 171)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5589,11 +5615,11 @@ visible = false
 [node name="Frame 564" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 564" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 564"]
 position = Vector2(32, 185)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5612,11 +5638,11 @@ visible = false
 [node name="Frame 583" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 583" instance=ExtResource("3_b1b8r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 583"]
 position = Vector2(25, 137)
 rotation = 1.11825
 scale = Vector2(0.998984, 0.998984)
-script = ExtResource("4_oijjd")
+script = ExtResource("4_tyt78")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

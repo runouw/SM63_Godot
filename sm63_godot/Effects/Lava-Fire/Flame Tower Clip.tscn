@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_brpmn"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xpfi3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5lile"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_tm606"]
 
-[sub_resource type="Animation" id="Animation_r4tle"]
+[sub_resource type="Animation" id="Animation_vm82x"]
 length = 0.733333
 loop_mode = 1
 tracks/0/type = "value"
@@ -283,24 +283,149 @@ tracks/22/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3p3k"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fbo5s"]
 _data = {
-"Default": SubResource("Animation_r4tle")
+"Default": SubResource("Animation_vm82x")
 }
 
+[sub_resource type="GDScript" id="GDScript_x01a6"]
+script/source = "extends Node
+# // Make OnWait \"endless\" to go forever
+# if (OnWait == undefined) {
+# 	OnWait = 64;
+# }
+# if (OffWait == undefined) {
+# 	OffWait = 92;
+# }
+# if(graphic == undefined){
+# 	graphic = false;
+# }"
+
+[sub_resource type="GDScript" id="GDScript_mu32w"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (graphic == false) {
+# 			if (Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 				_visible = true;
+# 				if (this.body.hitTest(_root.Course.Char.charClip.body) && ((_root.Metal !== true && _root.Invincible !== true) || _root.PowerTimer<=0)) {
+# 					//
+# 					if (_root.Course.Char.blink<=0) {
+# 						if (_root.Course.Char._x>_x+_parent._x) {
+# 							_root.MarioHit(2, 90, 0, 3, 20, \"none\");
+# 						} else {
+# 							_root.MarioHit(2, 90, 0, -3, 20, \"none\");
+# 						}
+# 						if (_root.CharHP>=0) {
+# 							_root.Course.Char.yspeed = Math.min(-16, _root.Course.Char.yspeed);
+# 							_root.Course.Char.attack = true;
+# 							_root.Course.Char.attackFrame = \"Lava\";
+# 						} else {
+# 							_root.Course.Char.attack = true;
+# 							_root.Course.Char.attackFrame = \"Faint\";
+# 						}
+# 					}
+# 					//             
+# 				}
+# 			} else {
+# 				_visible = false;
+# 			}
+# 		}
+# 		if (OnWait !== \"endless\") {
+# 			count++;
+# 			if (count>OnWait) {
+# 				play();
+# 				onEnterFrame = function () {
+# 					if (_root.PauseGame == false) {
+# 						play();
+# 					} else {
+# 						stop();
+# 					}
+# 				};
+# 			}
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_dsxs2"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (offstart !== undefined) {
+# 			count += offstart;
+# 			offstart = undefined;
+# 		}
+# 		count++;
+# 		if (count>OffWait) {
+# 			play();
+# 			onEnterFrame = function () {
+# 				if (_root.PauseGame == false) {
+# 					//
+# 					if (graphic == false) {
+# 						if (Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 							_visible = true;
+# 							if (this.body.hitTest(_root.Course.Char.charClip.body) && ((_root.Metal !== true && _root.Invincible !== true) || _root.PowerTimer<=0)) {
+# 								//
+# 								if (_root.Course.Char.blink<=0) {
+# 									if (_root.Course.Char._x>_x+_parent._x) {
+# 										_root.MarioHit(2, 90, 0, 3, 20, \"none\");
+# 									} else {
+# 										_root.MarioHit(2, 90, 0, -3, 20, \"none\");
+# 									}
+# 									if (_root.CharHP>=0) {
+# 										_root.Course.Char.yspeed = Math.min(-16, _root.Course.Char.yspeed);
+# 										_root.Course.Char.attack = true;
+# 										_root.Course.Char.attackFrame = \"Lava\";
+# 									} else {
+# 										_root.Course.Char.attack = true;
+# 										_root.Course.Char.attackFrame = \"Faint\";
+# 									}
+# 								}
+# 								//            
+# 							}
+# 						} else {
+# 							_visible = false;
+# 						}
+# 					}
+# 					//         
+# 					play();
+# 				} else {
+# 					stop();
+# 				}
+# 			};
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_0ro4k"]
+script/source = "extends Node
+# gotoAndStop(3);
+# "
+
 [node name="Flame Tower Clip" type="Node2D"]
+script = ExtResource("1_5lile")
+source_xml = "res://sm63/LIBRARY/Effects/Lava-Fire/Flame Tower Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_b3p3k")
+"Timeline": SubResource("AnimationLibrary_fbo5s")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brpmn")]
-script = ExtResource("2_xpfi3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Flame Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -316,8 +441,8 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_brpmn")]
-script = ExtResource("2_xpfi3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Flame Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -333,10 +458,10 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8" instance=ExtResource("1_brpmn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8"]
 position = Vector2(0, 46)
 scale = Vector2(0.166672, 0.0416718)
-script = ExtResource("2_xpfi3")
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Flame Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -355,10 +480,10 @@ visible = false
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 10" instance=ExtResource("1_brpmn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 10"]
 position = Vector2(0, 42)
 scale = Vector2(0.166672, 0.125519)
-script = ExtResource("2_xpfi3")
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Flame Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -374,10 +499,10 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13" instance=ExtResource("1_brpmn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13"]
 position = Vector2(0, 5.5)
 scale = Vector2(0.791672, 0.885422)
-script = ExtResource("2_xpfi3")
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Flame Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -393,10 +518,10 @@ brightness = 0.0
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 17" instance=ExtResource("1_brpmn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 17"]
 position = Vector2(0, 6)
 scale = Vector2(0.958252, 0.875)
-script = ExtResource("2_xpfi3")
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Flame Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -412,8 +537,8 @@ brightness = 0.0
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21" instance=ExtResource("1_brpmn")]
-script = ExtResource("2_xpfi3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21"]
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Flame Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -433,10 +558,10 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2" instance=ExtResource("1_brpmn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2"]
 position = Vector2(-0.5, 46.5)
 scale = Vector2(0.371918, 1.37462)
-script = ExtResource("2_xpfi3")
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -455,10 +580,10 @@ visible = false
 [node name="Frame 5" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 5" instance=ExtResource("1_brpmn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 5"]
 position = Vector2(-0.5, 43.6)
 scale = Vector2(0.230392, 0.633881)
-script = ExtResource("2_xpfi3")
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -477,10 +602,10 @@ visible = false
 [node name="Frame 10" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 10" instance=ExtResource("1_brpmn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 10"]
 position = Vector2(0, 51.95)
 scale = Vector2(0.194702, 0.561249)
-script = ExtResource("2_xpfi3")
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -499,10 +624,10 @@ visible = false
 [node name="Frame 13" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 13" instance=ExtResource("1_brpmn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 13"]
 position = Vector2(0, 43.7)
 scale = Vector2(0.229828, 0.870056)
-script = ExtResource("2_xpfi3")
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -521,10 +646,10 @@ visible = false
 [node name="Frame 18" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 18" instance=ExtResource("1_brpmn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 18"]
 position = Vector2(0, 45.6)
 scale = Vector2(0.229828, 1.11624)
-script = ExtResource("2_xpfi3")
+script = ExtResource("2_tm606")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -544,11 +669,23 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_x01a6")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_mu32w")
 
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 9"]
+script = SubResource("GDScript_dsxs2")
+
 [node name="Frame 21" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 21"]
+script = SubResource("GDScript_0ro4k")

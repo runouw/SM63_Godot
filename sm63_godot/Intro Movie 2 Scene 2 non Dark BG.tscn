@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_pujby"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_akowe"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8bbya"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6rtb2"]
 
-[sub_resource type="Animation" id="Animation_3uo4k"]
+[sub_resource type="Animation" id="Animation_37mlg"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,29 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2326h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yrq1j"]
 _data = {
-"Default": SubResource("Animation_3uo4k")
+"Default": SubResource("Animation_37mlg")
 }
 
 [node name="Intro Movie 2 Scene 2 non Dark BG" type="Node2D"]
+script = ExtResource("1_8bbya")
+source_xml = "res://sm63/LIBRARY/Intro Movie 2 Scene 2 non Dark BG.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2326h")
+"Timeline": SubResource("AnimationLibrary_yrq1j")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_pujby")]
-script = ExtResource("2_akowe")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_6rtb2")
 path = "res://sm63_godot/Intro Movie Scene 2 Background.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

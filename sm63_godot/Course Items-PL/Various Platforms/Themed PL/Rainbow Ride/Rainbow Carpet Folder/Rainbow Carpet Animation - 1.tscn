@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_pgmad"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_nv5qk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xh3cp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ypo6a"]
 
-[sub_resource type="Animation" id="Animation_t3346"]
+[sub_resource type="Animation" id="Animation_sueqj"]
 length = 16.8333
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,25 +67,49 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_aomjm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7bkx"]
 _data = {
-"Default": SubResource("Animation_t3346")
+"Default": SubResource("Animation_sueqj")
 }
 
+[sub_resource type="GDScript" id="GDScript_ym11f"]
+script/source = "extends Node
+# stop();
+# played = false;
+# landedon = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (landedon == true) {
+# 			played = true;
+# 		}
+# 		if (played == true) {
+# 			play();
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Rainbow Carpet Animation - 1" type="Node2D"]
+script = ExtResource("1_xh3cp")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Animation - 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_aomjm")
+"Timeline": SubResource("AnimationLibrary_s7bkx")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_pgmad")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.2, 0.7)
-script = ExtResource("2_nv5qk")
+script = ExtResource("2_ypo6a")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -101,9 +125,9 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29" instance=ExtResource("1_pgmad")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29"]
 position = Vector2(98.55, 0.7)
-script = ExtResource("2_nv5qk")
+script = ExtResource("2_ypo6a")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -119,9 +143,9 @@ brightness = 0.0
 [node name="Frame 504" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 504" instance=ExtResource("1_pgmad")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 504"]
 position = Vector2(1.15, -5.3)
-script = ExtResource("2_nv5qk")
+script = ExtResource("2_ypo6a")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -157,3 +181,6 @@ end_cap_mode = 2
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_ym11f")

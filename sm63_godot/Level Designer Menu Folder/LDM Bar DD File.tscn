@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_oylve"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_jprud"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_x80fk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_i5k3r"]
 
-[sub_resource type="Animation" id="Animation_javoi"]
+[sub_resource type="Animation" id="Animation_8nxby"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -151,16 +151,81 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sh8jt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0b5wi"]
 _data = {
-"Default": SubResource("Animation_javoi")
+"Default": SubResource("Animation_8nxby")
 }
 
+[sub_resource type="GDScript" id="GDScript_c6at0"]
+script/source = "extends Node
+# array = [\"Course Info\", \"Reset Course\", \"Test Course\", \"Save Course\", \"Load Course\", \"Exit\"];
+# arrayf = [\"WInfoF\", \"WResetF\", \"WTestF\", \"WSaveF\", \"WLoadF\", \"WExitF\"];
+# "
+
+[sub_resource type="GDScript" id="GDScript_e8uym"]
+script/source = "extends Node
+# array = [\"CloseWindows\", \"Movement Settings\", \"Toggle Layering\", \"Re-Center Camera\"];
+# arrayf = [\"WCloseWindowsF\", \"WMovementSettingsF\", \"WToggleLayeringF\", \"ReCenterCameraF\"];
+# "
+
+[sub_resource type="GDScript" id="GDScript_obel3"]
+script/source = "extends Node
+# array = [\"Place Tiles\", \"Eraser\", \"Change Grid Size\"];
+# arrayf = [\"WPlaceTilesF\", \"WEraseTilesF\", \"WGridSizeF\"];
+# "
+
+[sub_resource type="GDScript" id="GDScript_s2mkv"]
+script/source = "extends Node
+# array = [\"Place Items\", \"Select Items\", \"Eraser\"];
+# arrayf = [\"WPlaceItemsF\", \"WSelectItemsF\", \"WEraseItemsF\"];
+# "
+
+[sub_resource type="GDScript" id="GDScript_jyqp0"]
+script/source = "extends Node
+# array = [\"Unlock\", \"Controls\", \"Instructions\"];
+# arrayf = [\"WUnlockF\", \"WControlsF\", \"WInstructionsF\"];
+# "
+
+[sub_resource type="GDScript" id="GDScript_ew2bi"]
+script/source = "extends Node
+# gotoAndStop(_parent.txt);
+# hl._alpha = 0;
+# onEnterFrame = function () {
+# 	//hl._width = this._width;
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		hl._alpha += (100-hl._alpha)/3;
+# 		Y = Math.max(Math.min(Math.round((this._ymouse-15/2)/15), array.length-1), 0);
+# 		Y *= 15;
+# 		hl._y = Y;
+# 	} else {
+# 		hl._alpha += (0-hl._alpha)/3;
+# 	}
+# 	if (_parent._parent.cl !== _parent.txt) {
+# 		_parent.rev = true;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (_parent._parent.cl == _parent.txt) {
+# 		_parent._parent.cl = \"\";
+# 	}
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true) && isNaN(Y) == false) {
+# 		_root.M[arrayf[(Y/15)]]();
+# 		//trace(arrayf[(Y/15)]);
+# 		_parent.rev = true;
+# 	}
+# };
+# "
+
 [node name="LDM Bar DD File" type="Node2D"]
+script = ExtResource("1_x80fk")
+source_xml = "res://sm63/LIBRARY/Level Designer Menu Folder/LDM Bar DD File.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sh8jt")
+"Timeline": SubResource("AnimationLibrary_0b5wi")
 }
 
 [node name="BG" type="Node2D" parent="."]
@@ -175,6 +240,7 @@ polygon = PackedVector2Array(0.55, 0.275, 107.15, 0.275, 107.15, 91.775, 0.55, 9
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="@@50859" type="Polygon2D" parent="BG/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0.05, -0.475, 107.65, -0.475, 108, -0.375, 108.15, -0.1, 108.15, 0.275, -0.45, 0.275, -0.45, -0.1, -0.3, -0.375, -0.45, -0.1, -0.45, -0.1, -0.45, -0.1, -0.45, -0.1, -0.45, 0.275, 0.55, 0.275, 0.55, 91.775, -0.45, 91.775, 107.15, 0.275, 108.15, 0.275, 108.15, 91.775, 107.15, 91.775, -0.45, 91.775, 108.15, 91.775, 108.15, 92.15, 108, 92.4, 107.65, 92.525, 0.05, 92.525, -0.3, 92.4, -0.45, 92.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(20, 21, 22, 23, 24, 25, 26, 27)])
 
@@ -184,6 +250,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="BG/Frame 1"]
 
 [node name="@@50860" type="Polygon2D" parent="BG/Frame 1/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0.575, 0, 117.35, 0, 117.75, 0.15, 117.95, 0.475, 117.95, 0.975, 0, 0.975, 0, 0.475, 0.175, 0.15, 0, 0.975, 1.15, 0.975, 1.15, 61.325, 0, 61.325, 116.775, 0.975, 117.95, 0.975, 117.95, 61.325, 116.775, 61.325, 0, 61.325, 117.95, 61.325, 117.95, 61.825, 117.75, 62.2, 117.35, 62.35, 0.575, 62.35, 0.175, 62.2, 0, 61.825)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20, 21, 22, 23)])
 
@@ -216,6 +283,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="BG/Frame 3"]
 
 [node name="@@50864" type="Polygon2D" parent="BG/Frame 3/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0.35, -0.025, 82.1, -0.025, 82.375, 0.1, 82.475, 0.35, 82.475, 0.725, -0.025, 0.725, -0.025, 0.35, 0.1, 0.1, -0.025, 0.725, 0.725, 0.725, 0.725, 45.725, -0.025, 45.725, 81.725, 0.725, 82.475, 0.725, 82.475, 45.725, 81.725, 45.725, -0.025, 45.725, 82.475, 45.725, 82.475, 46.1, 82.375, 46.375, 82.1, 46.475, 0.35, 46.475, 0.1, 46.375, -0.025, 46.1)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20, 21, 22, 23)])
 
@@ -230,6 +298,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="BG/Frame 4"]
 
 [node name="@@50866" type="Polygon2D" parent="BG/Frame 4/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0.35, -0.025, 82.1, -0.025, 82.375, 0.1, 82.475, 0.35, 82.475, 0.725, -0.025, 0.725, -0.025, 0.35, 0.1, 0.1, -0.025, 0.725, 0.725, 0.725, 0.725, 45.725, -0.025, 45.725, 81.725, 0.725, 82.475, 0.725, 82.475, 45.725, 81.725, 45.725, -0.025, 45.725, 82.475, 45.725, 82.475, 46.1, 82.375, 46.375, 82.1, 46.475, 0.35, 46.475, 0.1, 46.375, -0.025, 46.1)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20, 21, 22, 23)])
 
@@ -242,6 +311,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_c6at0")
+
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 0"]
 
 [node name="@@50856" type="Line2D" parent="Layer 2/Frame 0/Shape"]
@@ -251,9 +323,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_oylve")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 scale = Vector2(2.14001, 1)
-script = ExtResource("2_jprud")
+script = ExtResource("2_i5k3r")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Bar DD HL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -269,6 +341,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_e8uym")
+
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 1"]
 
 [node name="@@50857" type="Line2D" parent="Layer 2/Frame 1/Shape"]
@@ -278,9 +353,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_oylve")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
 scale = Vector2(2.35834, 1)
-script = ExtResource("2_jprud")
+script = ExtResource("2_i5k3r")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Bar DD HL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -296,9 +371,12 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("1_oylve")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_obel3")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2"]
 scale = Vector2(2.00003, 1)
-script = ExtResource("2_jprud")
+script = ExtResource("2_i5k3r")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Bar DD HL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -314,9 +392,12 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3" instance=ExtResource("1_oylve")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 3"]
+script = SubResource("GDScript_s2mkv")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3"]
 scale = Vector2(1.64003, 1)
-script = ExtResource("2_jprud")
+script = ExtResource("2_i5k3r")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Bar DD HL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -332,9 +413,12 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 4" instance=ExtResource("1_oylve")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 4"]
+script = SubResource("GDScript_jyqp0")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 4"]
 scale = Vector2(1.64003, 1)
-script = ExtResource("2_jprud")
+script = ExtResource("2_i5k3r")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Bar DD HL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -354,3 +438,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_ew2bi")

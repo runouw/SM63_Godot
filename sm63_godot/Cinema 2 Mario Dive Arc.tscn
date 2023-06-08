@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Slide (None).png" id="1_5w3dc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pc27k"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Slide (None).png" id="2_utixo"]
 
-[sub_resource type="Animation" id="Animation_wqevq"]
+[sub_resource type="Animation" id="Animation_kmwrs"]
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_udb3i"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_846si"]
 _data = {
-"Default": SubResource("Animation_wqevq")
+"Default": SubResource("Animation_kmwrs")
 }
 
 [node name="Cinema 2 Mario Dive Arc" type="Node2D"]
+script = ExtResource("1_pc27k")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Mario Dive Arc.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_udb3i")
+"Timeline": SubResource("AnimationLibrary_846si")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,7 +57,7 @@ texture_filter = 1
 position = Vector2(14, -8.2)
 rotation = -3.08459
 scale = Vector2(0.999808, -0.999808)
-texture = ExtResource("1_5w3dc")
+texture = ExtResource("2_utixo")
 centered = false
 
 [node name="Frame 11" type="Node2D" parent="Layer 1"]
@@ -62,5 +68,5 @@ texture_filter = 1
 position = Vector2(-74.35, -15.55)
 rotation = 1.8896
 scale = Vector2(0.999811, -0.999811)
-texture = ExtResource("1_5w3dc")
+texture = ExtResource("2_utixo")
 centered = false

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_f0ue4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4eypk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pye0j"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_k5g3d"]
 
-[sub_resource type="Animation" id="Animation_mvfmd"]
+[sub_resource type="Animation" id="Animation_hou0i"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,24 +67,68 @@ tracks/4/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1k28t"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u786k"]
 _data = {
-"Default": SubResource("Animation_mvfmd")
+"Default": SubResource("Animation_hou0i")
 }
 
+[sub_resource type="GDScript" id="GDScript_7iq21"]
+script/source = "extends Node
+# scaly = 100;
+# qual = \"BEST\";
+# onEnterFrame = function () {
+# 	//
+# 	if (hl == true) {
+# 		_parent.qual = qual;
+# 	} else if (_parent.qual == qual) {
+# 		_parent.qual = undefined;
+# 	}
+# 	//                       
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		hl = true;
+# 	} else {
+# 		hl = false;
+# 	}
+# 	if (hl == true) {
+# 		_xscale += ((scaly+25)-_xscale)/5;
+# 	} else {
+# 		_xscale += (scaly-_xscale)/5;
+# 	}
+# 	if (_parent.realqual == qual) {
+# 		scaly += (125-scaly)/5;
+# 		gotoAndStop(2);
+# 	} else {
+# 		gotoAndStop(1);
+# 		scaly += (100-scaly)/5;
+# 	}
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		scaly = 175;
+# 	}
+# };
+# stop();
+# "
+
 [node name="Options Best" type="Node2D"]
+script = ExtResource("1_pye0j")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Options/Options Best.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1k28t")
+"Timeline": SubResource("AnimationLibrary_u786k")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_f0ue4")]
-script = ExtResource("2_4eypk")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_k5g3d")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Options Best Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -104,9 +148,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1" instance=ExtResource("1_f0ue4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1"]
 position = Vector2(-1.45, 0.55)
-script = ExtResource("2_4eypk")
+script = ExtResource("2_k5g3d")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Options Quality Bevel Box.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -123,13 +167,16 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_7iq21")
+
 [node name="BG" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="BG"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="BG/Frame 0" instance=ExtResource("1_f0ue4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="BG/Frame 0"]
 scale = Vector2(0.542984, 0.43103)
-script = ExtResource("2_4eypk")
+script = ExtResource("2_k5g3d")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu Button (really).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

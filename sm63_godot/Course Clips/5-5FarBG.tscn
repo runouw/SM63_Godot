@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_wxanu"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_a1qwp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fi5fc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_58asm"]
 
-[sub_resource type="Animation" id="Animation_81c7j"]
+[sub_resource type="Animation" id="Animation_f7n3q"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,24 +43,41 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cj4mb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3bwcv"]
 _data = {
-"Default": SubResource("Animation_81c7j")
+"Default": SubResource("Animation_f7n3q")
 }
 
+[sub_resource type="GDScript" id="GDScript_wsvkx"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.BGquality == \"HIGH\") {
+# 		gotoAndStop(1);
+# 	} else if (_root.BGquality == \"MEDIUM\") {
+# 		gotoAndStop(2);
+# 	} else {
+# 		gotoAndStop(3);
+# 	}
+# };"
+
 [node name="5-5FarBG" type="Node2D"]
+script = ExtResource("1_fi5fc")
+source_xml = "res://sm63/LIBRARY/Course Clips/5-5FarBG.xml"
+linkage = "5-5FarBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_cj4mb")
+"Timeline": SubResource("AnimationLibrary_3bwcv")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wxanu")]
-script = ExtResource("2_a1qwp")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_58asm")
 path = "res://sm63_godot/Course Clips/5-5BG Red Tint.tscn"
 red_multiplier = 0.820313
 green_multiplier = 0.179688
@@ -79,9 +96,13 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 2"]
 
 [node name="@@16405" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-225, -150.025, 225, -150.025, 225, 149.975, -225, 149.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_wsvkx")

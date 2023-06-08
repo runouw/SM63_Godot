@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_tl8p7"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_hy86d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fyuqg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_py561"]
 
-[sub_resource type="Animation" id="Animation_oeepe"]
+[sub_resource type="Animation" id="Animation_o86c3"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xf4cu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmnop"]
 _data = {
-"Default": SubResource("Animation_oeepe")
+"Default": SubResource("Animation_o86c3")
 }
 
 [node name="NG_TANK_BUTTON" type="Node2D"]
+script = ExtResource("1_fyuqg")
+source_xml = "res://sm63/LIBRARY/~NG_API_COMPONENTS/NG_TANK_BUTTON.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xf4cu")
+"Timeline": SubResource("AnimationLibrary_xmnop")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -49,10 +54,10 @@ color = Color(1, 0.945098, 0.478431, 1)
 polygon = PackedVector2Array(52.6, -0.05, 111.375, -0.05, 137.203, 206.525, 109.639, 206.525, 62.4159, 35.5, 189.825, -0.05, 248.625, -0.05, 191.612, 206.525, 164.031, 206.525, 185.386, 35.5, -0.025, 35.5, -0.025, 35.5, 75.1656, 206.875, 41.0827, 206.875, -0.025, 139.425, -0.025, 38.025, 300.125, 38.025, 300.125, 38.025, 300.125, 141.225, 265.464, 198.125, 229.869, 198.125, 255.628, 139.425, 229.869, 198.125, 241, 198.125, 241, 210.975, 224.23, 210.975, 229.759, 198.375, 263.05, 198.125, 265.464, 198.125, 263.225, 201.8, 263.225, 201.8, 263.062, 198.375, 109.639, 206.525, 137.203, 206.525, 138.956, 220.55, 113.511, 220.55, 109.735, 206.875, 164.031, 206.525, 191.612, 206.525, 187.741, 220.55, 162.28, 220.55, 163.988, 206.875, 41.0827, 206.875, 75.1656, 206.875, 84.0393, 227.1, 53.4089, 227.1, 41.9512, 208.3, 224.23, 210.975, 241, 210.975, 241, 227.1, 217, 227.45, 217, 227.45, 223.648, 212.3, 113.511, 220.55, 138.956, 220.55, 139.875, 227.9, 115.54, 227.9, 113.566, 220.75, 162.28, 220.55, 187.741, 220.55, 185.775, 227.675, 161.375, 227.8, 161.375, 227.8, 162.255, 220.75, 53.4089, 227.1, 84.0393, 227.1, 84.5, 228.15, 54.125, 228.275, 54.125, 228.275, 53.6222, 227.45, 115.54, 227.9, 139.875, 227.9, 115.575, 228.025, 115.575, 228.025)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26), PackedInt32Array(27, 28, 29, 30, 31), PackedInt32Array(32, 33, 34, 35, 36), PackedInt32Array(37, 38, 39, 40, 41), PackedInt32Array(42, 43, 44, 45, 46), PackedInt32Array(47, 48, 49, 50, 51, 52), PackedInt32Array(53, 54, 55, 56, 57), PackedInt32Array(58, 59, 60, 61, 62, 63), PackedInt32Array(64, 65, 66, 67, 68, 69), PackedInt32Array(70, 71, 72, 73)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_tl8p7")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group"]
 position = Vector2(150.1, 246.25)
 scale = Vector2(0.702209, 0.702225)
-script = ExtResource("2_hy86d")
+script = ExtResource("2_py561")
 path = "res://sm63_godot/~NG_API_COMPONENTS/NG_TANK_02.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 8.png" id="1_4r3rp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mj21h"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 8.png" id="2_5wdvl"]
 
-[sub_resource type="Animation" id="Animation_85dlf"]
+[sub_resource type="Animation" id="Animation_flrul"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t2xdt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7eqf"]
 _data = {
-"Default": SubResource("Animation_85dlf")
+"Default": SubResource("Animation_flrul")
 }
 
 [node name="Toad Head Crazy Clip" type="Node2D"]
+script = ExtResource("1_mj21h")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head Crazy Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_t2xdt")
+"Timeline": SubResource("AnimationLibrary_l7eqf")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@50819" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-9, -9)
-texture = ExtResource("1_4r3rp")
+texture = ExtResource("2_5wdvl")
 centered = false

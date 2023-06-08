@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
-[sub_resource type="Animation" id="Animation_x06n0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rbflg"]
+
+[sub_resource type="Animation" id="Animation_bbnes"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -52,16 +54,82 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_aawjs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4h5ou"]
 _data = {
-"Default": SubResource("Animation_x06n0")
+"Default": SubResource("Animation_bbnes")
 }
 
+[sub_resource type="GDScript" id="GDScript_ybhtp"]
+script/source = "extends Node
+# Start = function () {
+# 	clip.removeMovieClip();
+# 	clip2.removeMovieClip();
+# 	RES();
+# 	onEnterFrame = function () {
+# 		OEF();
+# 	};
+# };
+# RES = function () {
+# 	if (scale == undefined) {
+# 		scale = 2;
+# 	}
+# 	if (angle == undefined) {
+# 		angle = 0;
+# 	}
+# 	if (distance == undefined) {
+# 		distance = 50;
+# 	}
+# 	if (speed == undefined) {
+# 		speed = 5;
+# 	}
+# 	if (dotdistance == undefined) {
+# 		dotdistance = 20;
+# 	}
+# 	if (armscale == undefined) {
+# 		armscale = 0;
+# 	}
+# 	if (num == undefined) {
+# 		num = 2;
+# 	}
+# 	this.createEmptyMovieClip(\"clip\", this.getNextHighestDepth());
+# 	if (dotdistance<360) {
+# 		for (i=0; i<360; i += dotdistance) {
+# 			clip.attachMovie(\"Path dot\", \"dot\"+clip.getNextHighestDepth(), clip.getNextHighestDepth(), {_y:Math.cos(_root.angleToRadians(i))*distance, _x:-Math.sin(_root.angleToRadians(i))*distance});
+# 		}
+# 	}
+# 	this.createEmptyMovieClip(\"clip2\", this.getNextHighestDepth());
+# 	for (i=0; i<num; i++) {
+# 		trace(scale);
+# 		clip2.attachMovie(\"GreenPLClip\", \"pl\"+i, clip2.getNextHighestDepth());
+# 		clip2[\"pl\"+i].gotoAndStop(scale);
+# 	}
+# };
+# OEF = function () {
+# 	angle += speed;
+# 	for (i=0; i<num; i++) {
+# 		clip2[\"pl\"+i]._x = -Math.sin(_root.angleToRadians(angle+(360/num)*i))*distance;
+# 		clip2[\"pl\"+i]._y = Math.cos(_root.angleToRadians(angle+(360/num)*i))*distance;
+# 	}
+# };
+# this.createEmptyMovieClip(\"clip2\", this.getNextHighestDepth());
+# clip2.attachMovie(\"GreenPLClip\", \"pl\"+0, clip2.getNextHighestDepth());
+# clip2[\"pl\"+0].gotoAndStop(2);
+# nextFrame();"
+
+[sub_resource type="GDScript" id="GDScript_voegr"]
+script/source = "extends Node
+# stop();"
+
 [node name="LDW - Circle Green PL Preview" type="Node2D"]
+script = ExtResource("1_rbflg")
+source_xml = "res://sm63/LIBRARY/LDW - Circle Green PL Preview.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_aawjs")
+"Timeline": SubResource("AnimationLibrary_4h5ou")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -71,6 +139,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@12044" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-12.55, -12.5, 12.5, -12.5, 12.5, 12.5, -12.55, 12.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -89,5 +158,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ybhtp")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_voegr")

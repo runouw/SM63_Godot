@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Mario Galaxy Star - 1.png" id="1_xh3xt"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_smdo4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_1j54d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_0082n"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Mario Galaxy Star - 1.png" id="2_lscer"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_lr1qx"]
 
-[sub_resource type="Animation" id="Animation_6nki5"]
+[sub_resource type="Animation" id="Animation_qumh2"]
 length = 2.0
 loop_mode = 1
 tracks/0/type = "value"
@@ -116,16 +116,52 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_10bsm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utp1x"]
 _data = {
-"Default": SubResource("Animation_6nki5")
+"Default": SubResource("Animation_qumh2")
 }
 
+[sub_resource type="GDScript" id="GDScript_nfhje"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.hitTest(_root.Course.Char.charClip.body) || this.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y-15)*_root.coursescale/100)+_root.Course._y, true)) {
+# 			starfunction();
+# 			play();
+# 		} else {
+# 			stop();
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_78268"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_nyi0t"]
+script/source = "extends Node
+# gotoAndStop(3);
+# "
+
 [node name="Rainbow Star" type="Node2D"]
+script = ExtResource("1_0082n")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Power-Ups/Rainbow Star.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_10bsm")
+"Timeline": SubResource("AnimationLibrary_utp1x")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -135,11 +171,20 @@ libraries = {
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_nfhje")
+
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 3"]
+script = SubResource("GDScript_78268")
+
 [node name="Frame 59" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 59"]
+script = SubResource("GDScript_nyi0t")
 
 [node name="Layer 3" type="Node2D" parent="."]
 
@@ -148,14 +193,14 @@ visible = false
 [node name="@@47000" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-11.5, -11.5)
-texture = ExtResource("1_xh3xt")
+texture = ExtResource("2_lscer")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2" instance=ExtResource("2_smdo4")]
-script = ExtResource("3_1j54d")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2"]
+script = ExtResource("3_lr1qx")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Power-Ups/Rainbow Star Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -171,8 +216,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 3" instance=ExtResource("2_smdo4")]
-script = ExtResource("3_1j54d")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 3"]
+script = ExtResource("3_lr1qx")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Power-Ups/Rainbow Star Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -188,9 +233,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9" instance=ExtResource("2_smdo4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9"]
 position = Vector2(0, -20)
-script = ExtResource("3_1j54d")
+script = ExtResource("3_lr1qx")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Power-Ups/Rainbow Star Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

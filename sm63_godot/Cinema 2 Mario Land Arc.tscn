@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="1_awy03"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_v06jr"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="2_dh76s"]
 
-[sub_resource type="Animation" id="Animation_efm2h"]
+[sub_resource type="Animation" id="Animation_745mr"]
 length = 0.733333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bx3rf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q1caj"]
 _data = {
-"Default": SubResource("Animation_efm2h")
+"Default": SubResource("Animation_745mr")
 }
 
 [node name="Cinema 2 Mario Land Arc" type="Node2D"]
+script = ExtResource("1_v06jr")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Mario Land Arc.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bx3rf")
+"Timeline": SubResource("AnimationLibrary_q1caj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,7 +57,7 @@ texture_filter = 1
 position = Vector2(-14.15, -8.55)
 rotation = -0.523598
 scale = Vector2(1, 1)
-texture = ExtResource("1_awy03")
+texture = ExtResource("2_dh76s")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -60,5 +66,5 @@ visible = false
 [node name="@@4184" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(-23, -14.5)
-texture = ExtResource("1_awy03")
+texture = ExtResource("2_dh76s")
 centered = false

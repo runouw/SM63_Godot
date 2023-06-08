@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_yvwsx"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_tjgdq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fpb5a"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ujrf6"]
 
-[sub_resource type="Animation" id="Animation_oaiiw"]
+[sub_resource type="Animation" id="Animation_nmvb8"]
 length = 0.366667
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,24 +67,77 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0mlhh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ja276"]
 _data = {
-"Default": SubResource("Animation_oaiiw")
+"Default": SubResource("Animation_nmvb8")
 }
 
+[sub_resource type="GDScript" id="GDScript_jbtdh"]
+script/source = "extends Node
+# //_parent.xs
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	if (count++<5) {
+# 		if (Boolean(Number(_parent.xs)) == true) {
+# 			fr = 2;
+# 			gotoAndStop(2);
+# 		} else {
+# 			fr = 11;
+# 			gotoAndStop(11);
+# 		}
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	if (_currentframe<fr) {
+# 		nextFrame();
+# 	}
+# 	if (_currentframe>fr) {
+# 		prevFrame();
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		if (fr == 2) {
+# 			fr = 11;
+# 			_parent.xs = 0;
+# 		} else {
+# 			fr = 2;
+# 			_parent.xs = 1;
+# 		}
+# 	}
+# };
+# count = 0;
+# if (Boolean(Number(_parent.xs)) == true) {
+# 	fr = 2;
+# 	gotoAndStop(2);
+# } else {
+# 	fr = 11;
+# 	gotoAndStop(11);
+# }
+# "
+
 [node name="LDW- Itemxscale" type="Node2D"]
+script = ExtResource("1_fpb5a")
+source_xml = "res://sm63/LIBRARY/LDW- Itemxscale.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_0mlhh")
+"Timeline": SubResource("AnimationLibrary_ja276")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_yvwsx")]
-script = ExtResource("2_tjgdq")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_ujrf6")
 path = "res://sm63_godot/LDW - Items &#034Reverse&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,8 +153,8 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_yvwsx")]
-script = ExtResource("2_tjgdq")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("2_ujrf6")
 path = "res://sm63_godot/LDW - Items &#034Reverse&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -117,10 +170,10 @@ brightness = 0.0
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 10" instance=ExtResource("1_yvwsx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 10"]
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_tjgdq")
+script = ExtResource("2_ujrf6")
 path = "res://sm63_godot/LDW - Items &#034Reverse&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -136,6 +189,9 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_jbtdh")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

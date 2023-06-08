@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/Log Bit.png" id="1_uxvbd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xwxxj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/Log Bit.png" id="2_8gt27"]
 
-[sub_resource type="Animation" id="Animation_n31k2"]
+[sub_resource type="Animation" id="Animation_gcl88"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,115 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6tcm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebwnc"]
 _data = {
-"Default": SubResource("Animation_n31k2")
+"Default": SubResource("Animation_gcl88")
 }
 
+[sub_resource type="GDScript" id="GDScript_qjkvq"]
+script/source = "extends Node
+# if (fallspeed == undefined) {
+# 	fallspeed = 10;
+# }
+# if (fallamount == undefined) {
+# 	fallamount = 24;
+# }
+# if (fallwait == undefined) {
+# 	fallwait = 10;
+# }
+# if (quakeamount == undefined) {
+# 	quakeamount = 3;
+# }
+# depth = _root.Course.BPlatforms.getNextHighestDepth();
+# _root.Course.BPlatforms.attachMovie(\"FallinglogCode\", \"FallinglogCode\"+depth, depth, {_x:_x, _y:_y, fallspeed:fallspeed, fallamount:fallamount, fallwait:fallwait, quakeamount:quakeamount, yspeed:0, fall:false});
+# startcount = 0;
+# onEnterFrame = function () {
+# 	if (startcount<5) {
+# 		startcount++;
+# 	}
+# 	if (_root.PauseGame == false && startcount>3 && Math.abs((_root.currentCamX)-(_x+_parent._x))<(600) && Math.abs((_root.currentCamY)-(_y+_parent._y))<(600)) {
+# 		tellTarget (_root.Course.BPlatforms[\"FallinglogCode\"+depth]) {
+# 			if (fall == false) {
+# 				this._alpha += 10;
+# 				this._alpha = Math.min(this._alpha, 100);
+# 				if (Math.abs((_root.currentCamX)-(_x+_parent._x))<(200) && Math.abs((_root.currentCamY)-(_y+_parent._y))<(200)) {
+# 					if (this._alpha>=100 && hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, false)) {
+# 						returnX = _x;
+# 						returnY = _y;
+# 						timefall = 0;
+# 						fallcount = 0;
+# 						fall = true;
+# 					}
+# 				}
+# 			}
+# 			if (fall == true) {
+# 				timefall++;
+# 				if (timefall>fallwait) {
+# 					fallcount++;
+# 					yspeed += _root.gravity;
+# 					yspeed = _root.groundFriction(yspeed, 0.1, 1.05);
+# 				} else {
+# 					_y = returnY+(Math.random()*quakeamount-Math.random()*quakeamount);
+# 					_x = returnX+(Math.random()*quakeamount-Math.random()*quakeamount);
+# 					if (timefall == fallwait) {
+# 						_y = returnY;
+# 						_x = returnX;
+# 					}
+# 				}
+# 				if (yspeed<0) {
+# 					_y -= yspeed;
+# 				}
+# 				if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, false)) {
+# 					//_root.Course.Char._x += currentspeedX;
+# 					_root.Course.Char._y += yspeed;
+# 					//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 					if (landedon == false) {
+# 						//_root.Course.Char.xspeed -= currentspeedX;
+# 						//
+# 						//this.frame = \"ride\";
+# 						//
+# 					}
+# 					landedon = true;
+# 				} else {
+# 					if (landedon == true) {
+# 						//_root.Course.Char.xspeed += currentspeedX;
+# 						_root.Course.Char.yspeed += yspeed;
+# 					}
+# 					landedon = false;
+# 				}
+# 				if (yspeed<0) {
+# 					_y += yspeed;
+# 				}
+# 				_y += yspeed;
+# 				if (fallcount>fallamount-10) {
+# 					this._alpha -= 10;
+# 					this._alpha = Math.max(this._alpha, 0);
+# 				}
+# 				if (fallcount>fallamount) {
+# 					fallcount = 0;
+# 					yspeed = 0;
+# 					_x = returnX;
+# 					_y = returnY;
+# 					fall = false;
+# 				}
+# 			}
+# 			this._y = _y;
+# 			this._x = _x;
+# 		}
+# 	}
+# };
+# "
+
 [node name="Falling Log Code (graphics)" type="Node2D"]
+script = ExtResource("1_xwxxj")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Coded Wooden PL/Falling Log Code (graphics).xml"
+linkage = "FallingLog"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_f6tcm")
+"Timeline": SubResource("AnimationLibrary_ebwnc")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -49,9 +149,12 @@ libraries = {
 [node name="@@47747" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8.5, -9)
-texture = ExtResource("1_uxvbd")
+texture = ExtResource("2_8gt27")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_qjkvq")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_8cfw6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ljese"]
+
+[sub_resource type="Animation" id="Animation_dgd7c"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,25 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_66d0e"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvqkp"]
 _data = {
-"Default": SubResource("Animation_8cfw6")
+"Default": SubResource("Animation_dgd7c")
 }
 
+[sub_resource type="GDScript" id="GDScript_h2sb0"]
+script/source = "extends Node
+# _visible = false"
+
 [node name="8-14Ice" type="Node2D"]
+script = ExtResource("1_ljese")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-14Ice.xml"
+linkage = "8-14Ice"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_66d0e")
+"Timeline": SubResource("AnimationLibrary_bvqkp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +65,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_h2sb0")

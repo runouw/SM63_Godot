@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="1_e1l1b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_puwq1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="2_o8nwv"]
 
-[sub_resource type="Animation" id="Animation_lhhwi"]
+[sub_resource type="Animation" id="Animation_3qjwa"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -42,16 +43,56 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rf146"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_phjkk"]
 _data = {
-"Default": SubResource("Animation_lhhwi")
+"Default": SubResource("Animation_3qjwa")
 }
 
+[sub_resource type="GDScript" id="GDScript_v1fmi"]
+script/source = "extends Node
+# stop();
+# speed = -0.5
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		//
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# };
+# "
+
 [node name="5-2 Spinning Ground Code" type="Node2D"]
+script = ExtResource("1_puwq1")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Sides (2&#0443)/5-2 Spinning Ground Code.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rf146")
+"Timeline": SubResource("AnimationLibrary_phjkk")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -68,7 +109,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31553" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_e1l1b")
+texture = ExtResource("2_o8nwv")
 texture_offset = Vector2(826.315, 1024.02)
 texture_scale = Vector2(1.00388, 1.00388)
 texture_rotation = 2.89608
@@ -81,3 +122,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_v1fmi")

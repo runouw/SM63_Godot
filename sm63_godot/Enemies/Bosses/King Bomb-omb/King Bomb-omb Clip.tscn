@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_k8v1k"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_vxuq2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_f3ens"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_san6d"]
 
-[sub_resource type="Animation" id="Animation_eufkl"]
+[sub_resource type="Animation" id="Animation_03yxe"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -115,25 +115,35 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_k8iyr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qggjd"]
 _data = {
-"Default": SubResource("Animation_eufkl")
+"Default": SubResource("Animation_03yxe")
 }
 
+[sub_resource type="GDScript" id="GDScript_pt0op"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="King Bomb-omb Clip" type="Node2D"]
+script = ExtResource("1_f3ens")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_k8iyr")
+"Timeline": SubResource("AnimationLibrary_qggjd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_k8v1k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(10, -0.05)
-script = ExtResource("2_vxuq2")
+script = ExtResource("2_san6d")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -149,9 +159,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_k8v1k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-10.55, 20.4)
-script = ExtResource("2_vxuq2")
+script = ExtResource("2_san6d")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Walking.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -167,9 +177,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_k8v1k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(7, 27.95)
-script = ExtResource("2_vxuq2")
+script = ExtResource("2_san6d")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Throw Bomb-omb.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -185,10 +195,10 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_k8v1k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(8, 27)
 scale = Vector2(1.00105, 1)
-script = ExtResource("2_vxuq2")
+script = ExtResource("2_san6d")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Grab.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -204,9 +214,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_k8v1k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(9, 0)
-script = ExtResource("2_vxuq2")
+script = ExtResource("2_san6d")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Turn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -222,9 +232,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_k8v1k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(8.5, 0.45)
-script = ExtResource("2_vxuq2")
+script = ExtResource("2_san6d")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Jump.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -240,9 +250,9 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("1_k8v1k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6"]
 position = Vector2(8, -1.05)
-script = ExtResource("2_vxuq2")
+script = ExtResource("2_san6d")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -261,3 +271,6 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_pt0op")

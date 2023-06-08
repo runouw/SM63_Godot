@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Block.png" id="1_t2iwn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pue6h"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Block.png" id="2_xht0f"]
 
-[sub_resource type="Animation" id="Animation_ejsm1"]
+[sub_resource type="Animation" id="Animation_4ksgv"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_oqr08"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lqjc3"]
 _data = {
-"Default": SubResource("Animation_ejsm1")
+"Default": SubResource("Animation_4ksgv")
 }
 
 [node name="Cannon Question Mark" type="Node2D"]
+script = ExtResource("1_pue6h")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Question Mark.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_oqr08")
+"Timeline": SubResource("AnimationLibrary_lqjc3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -41,7 +47,7 @@ libraries = {
 [node name="@@47673" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_t2iwn")
+texture = ExtResource("2_xht0f")
 texture_offset = Vector2(12, 12)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(-6.65, -12, 6.35, -12, 12, -1.7, 12, 12, -12, 12, -12, -0.95, -11.6369, -1.7)

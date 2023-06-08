@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_yqpii"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_y4ane"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_yaiiy"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Tile.png" id="4_v0whb"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Wall 2.png" id="5_4q7b2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Pillar.png" id="6_6wimg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u3twr"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_cq0ki"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_iir6c"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Tile.png" id="4_kf5kn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Wall 2.png" id="5_6mgtt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Pillar.png" id="6_hebua"]
 
-[sub_resource type="Animation" id="Animation_u8uii"]
+[sub_resource type="Animation" id="Animation_xjpd8"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -83,16 +83,413 @@ tracks/5/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t6fat"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kuj3l"]
 _data = {
-"Default": SubResource("Animation_u8uii")
+"Default": SubResource("Animation_xjpd8")
 }
 
+[sub_resource type="GDScript" id="GDScript_m0nrf"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"C-10-2\";
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_kml81"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	//trackclip = \"sst1\";
+# 	//otherstar = \"ss1\";
+# 	yblast = -30
+# 	xblast = 0
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_5j2i3"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 1;
+# 	if (random(2) == 0) {
+# 		//
+# 		//
+# 		Mood = \"Smile\";
+# 		M1Moo = \"Happy\";
+# 		M1Txt = \"I just <i>Love</i> this large, panoramic window!\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Happy\";
+# 		M2Txt = \"....<i>Just</i> being able to <i>stand</i> here makes my life <i>feel complete</i>...\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		//M3Moo = \"Talk\";
+# 		//M3Txt = \"Hungry Hungry Hungry\";
+# 		//M3Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M3End = function () {
+# 		//return (BP());
+# 		//};
+# 		//
+# 		M4Moo = \"Talk\";
+# 		M4Txt = \"Hungry Hungry Hungry Hungry\";
+# 		M4Sta = function () {
+# 			return (true);
+# 		};
+# 		M4End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M5Moo = \"Talk\";
+# 		M5Txt = \"Hungry Hungry Hungry Hungry Hungry\";
+# 		M5Sta = function () {
+# 			return (true);
+# 		};
+# 		M5End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M6Moo = \"Talk\";
+# 		M6Txt = \"Hungry Hungry Hungry Hungry Hungry Hungry\";
+# 		M6Sta = function () {
+# 			return (true);
+# 		};
+# 		M6End = function () {
+# 			return (BP());
+# 		};
+# 		//M6F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		//};
+# 		//
+# 		/*M7Moo = \"Happy\";
+# 		M7Txt = \"<b>Ha! ............  Bet you didn't catch </b>\";
+# 		M7Sta = function () {
+# 		return (true);
+# 		};
+# 		M7End = function () {
+# 		return (BP());
+# 		};*/
+# 		//M7F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		//};
+# 		//
+# 		//M8Moo = \"Sad\";
+# 		//M8Txt = \"I once looked up to you, \"+_root.CurrentPlayer;
+# 		//M8Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M8End = function () {
+# 		//return (BP());
+# 		//};
+# 		//M8F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1)
+# 		//};
+# 		//
+# 		M9Moo = \"Mad\";
+# 		M9Txt = \"I thought you were a nice person!!\";
+# 		M9Sta = function () {
+# 			return (true);
+# 		};
+# 		M9End = function () {
+# 			return (BP());
+# 		};
+# 		M9F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(\"yes\")
+# 		};
+# 		//
+# 		M10Moo = \"Sad\";
+# 		M10Txt = \"And then you come here and Destroyed all my Dreams!\";
+# 		M10Sta = function () {
+# 			return (true);
+# 		};
+# 		M10End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M11Moo = \"Crazy\";
+# 		M11Txt = \"DESTROYED IT!!!!\";
+# 		M11Sta = function () {
+# 			return (true);
+# 		};
+# 		M11End = function () {
+# 			return (BP());
+# 		};
+# 		M11F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\");
+# 		};
+# 		//
+# 		M12Moo = \"Mad\";
+# 		M12Txt = \"......\";
+# 		M12Sta = function () {
+# 			return (true);
+# 		};
+# 		M12End = function () {
+# 			return (BP());
+# 		};
+# 		M12F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"talk\");
+# 		};
+# 		//
+# 		M13Moo = \"Mad\";
+# 		M13Txt = \"...Gee, Thanks for ruining my life...\";
+# 		M13Sta = function () {
+# 			return (true);
+# 		};
+# 		M13End = function () {
+# 			return (BP());
+# 		};
+# 		M13F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 			this._xscale *= -1;
+# 			Mood = \"Mad\";
+# 			StartMood = \"Mad\";
+# 			M1Moo = \"Mad\";
+# 			M1Txt = \"......Go Away!!\";
+# 			M1Sta = function () {
+# 				return (BP());
+# 			};
+# 			M1End = function () {
+# 				return (BP());
+# 			};
+# 			//
+# 			M2Moo = undefined;
+# 			M2Txt = undefined;
+# 			M2Sta = null;
+# 			M2End = null;
+# 		};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_4goi3"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 1;
+# 	if (random(2) == 0) {
+# 		//
+# 		//
+# 		Mood = \"Smile\";
+# 		M1Moo = \"Talk\";
+# 		M1Txt = \"This here looks like one powerful Sling Star...\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Talk\";
+# 		M2Txt = \"I wonder where it's aimed at...\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		//M3Moo = \"Talk\";
+# 		//M3Txt = \"Hungry Hungry Hungry\";
+# 		//M3Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M3End = function () {
+# 		//return (BP());
+# 		//};
+# 		//
+# 		M4Moo = \"Talk\";
+# 		M4Txt = \"Hungry Hungry Hungry Hungry\";
+# 		M4Sta = function () {
+# 			return (true);
+# 		};
+# 		M4End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M5Moo = \"Talk\";
+# 		M5Txt = \"Hungry Hungry Hungry Hungry Hungry\";
+# 		M5Sta = function () {
+# 			return (true);
+# 		};
+# 		M5End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M6Moo = \"Talk\";
+# 		M6Txt = \"Hungry Hungry Hungry Hungry Hungry Hungry\";
+# 		M6Sta = function () {
+# 			return (true);
+# 		};
+# 		M6End = function () {
+# 			return (BP());
+# 		};
+# 		//M6F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		//};
+# 		//
+# 		/*M7Moo = \"Happy\";
+# 		M7Txt = \"<b>Ha! ............  Bet you didn't catch </b>\";
+# 		M7Sta = function () {
+# 		return (true);
+# 		};
+# 		M7End = function () {
+# 		return (BP());
+# 		};*/
+# 		//M7F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		//};
+# 		//
+# 		//M8Moo = \"Sad\";
+# 		//M8Txt = \"I once looked up to you, \"+_root.CurrentPlayer;
+# 		//M8Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M8End = function () {
+# 		//return (BP());
+# 		//};
+# 		//M8F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1)
+# 		//};
+# 		//
+# 		M9Moo = \"Mad\";
+# 		M9Txt = \"I thought you were a nice person!!\";
+# 		M9Sta = function () {
+# 			return (true);
+# 		};
+# 		M9End = function () {
+# 			return (BP());
+# 		};
+# 		M9F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(\"yes\")
+# 		};
+# 		//
+# 		M10Moo = \"Sad\";
+# 		M10Txt = \"And then you come here and Destroyed all my Dreams!\";
+# 		M10Sta = function () {
+# 			return (true);
+# 		};
+# 		M10End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M11Moo = \"Crazy\";
+# 		M11Txt = \"DESTROYED IT!!!!\";
+# 		M11Sta = function () {
+# 			return (true);
+# 		};
+# 		M11End = function () {
+# 			return (BP());
+# 		};
+# 		M11F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\");
+# 		};
+# 		//
+# 		M12Moo = \"Mad\";
+# 		M12Txt = \"......\";
+# 		M12Sta = function () {
+# 			return (true);
+# 		};
+# 		M12End = function () {
+# 			return (BP());
+# 		};
+# 		M12F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"talk\");
+# 		};
+# 		//
+# 		M13Moo = \"Mad\";
+# 		M13Txt = \"...Gee, Thanks for ruining my life...\";
+# 		M13Sta = function () {
+# 			return (true);
+# 		};
+# 		M13End = function () {
+# 			return (BP());
+# 		};
+# 		M13F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 			this._xscale *= -1;
+# 			Mood = \"Mad\";
+# 			StartMood = \"Mad\";
+# 			M1Moo = \"Mad\";
+# 			M1Txt = \"......Go Away!!\";
+# 			M1Sta = function () {
+# 				return (BP());
+# 			};
+# 			M1End = function () {
+# 				return (BP());
+# 			};
+# 			//
+# 			M2Moo = undefined;
+# 			M2Txt = undefined;
+# 			M2Sta = null;
+# 			M2End = null;
+# 		};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_d2qdf"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (this.warp1.hitTest(_root.Course.Char.charClip.feet)) {
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.xspeed = 0;
+# 		_root.Course.Char.yspeed = 0;
+# 		_root.Course.Char.attackFrame = \"none\";
+# 		warp = true;
+# 		warpnum = 1;
+# 	}
+# 	if (warp == true && _root.warpframe == false) {
+# 		if (warpnum == 1) {
+# 			_root.attachMovie(\"uptransition\", \"uptransition\"+_root.getNextHighestDepth(), _root.getNextHighestDepth(), {_x:_root.screensizeX/2, _y:_root.screensizeY/2});
+# 		}
+# 	}
+# 	if (_root.warpframe == true) {
+# 		if (warpnum == 1) {
+# 			_root.Fluddpow = \"\";
+# 			_root.StopBGsong();
+# 			_root.BossCheckpoint = false;
+# 			//_root.Playinglevel = \"\"
+# 			//_root.changecourse(\"uptransition2\", \"9-08\", 0, 0, 0, 0, true);
+# 			_root.gotoAndStop(\"KamekBattle2\");
+# 			_root.RemoveCourse();
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_kj0rg"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
 [node name="C-11 Back GFX" type="Node2D"]
+script = ExtResource("1_u3twr")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section C & D/C-11 Back GFX.xml"
+linkage = "C-11BackGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_t6fat")
+"Timeline": SubResource("AnimationLibrary_kuj3l")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -104,6 +501,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 0/Group"]
 
 [node name="@@44371" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-282, -502.9, 1010.55, -502.9, 1010.55, -328, -282, -328, -282, -328, 334.85, -328, 334.85, -182, -282, -182, 470.85, -328, 1010.55, -328, 1010.55, -182, 470.85, -182, -282, -182, 96.9, -182, 96.9, 13.95, -282, 13.95, 528.75, -182, 1010.55, -182, 1010.55, 13.95, 528.75, 13.95, -282, 13.95, 1010.55, 13.95, 1010.55, 106.95, -282, 106.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(20, 21, 22, 23)])
 
@@ -120,7 +518,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@44368" type="Polygon2D" parent="Glass/Frame 0/Group/Group/Shape"]
 polygon = PackedVector2Array(324.85, -328.5, 488.85, -328.5, 488.85, -182, 324.85, -182, 120.95, -182, 499.9, -182, 499.9, 4, 120.95, 4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
-script = ExtResource("1_yqpii")
+script = ExtResource("2_cq0ki")
 matrix = Transform2D(0.25769, 0, 0, 0.25769, 364.5, -116.5)
 entries_color = PackedColorArray(0.85098, 0.85098, 0.85098, 0.6, 0.482353, 0.905882, 0.94902, 0.101961)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -137,9 +535,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Glass/Frame 0" instance=ExtResource("2_y4ane")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Glass/Frame 0"]
 position = Vector2(310, 0)
-script = ExtResource("3_yaiiy")
+script = ExtResource("3_iir6c")
 path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-11 Transparent Stuff.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -164,7 +562,7 @@ position = Vector2(200, 0)
 [node name="@@44362" type="Polygon2D" parent="Layer 7/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_v0whb")
+texture = ExtResource("4_kf5kn")
 texture_offset = Vector2(149.95, 35.65)
 polygon = PackedVector2Array(-267.15, -82, -87.15, -82, -87.15, 4, -316.15, 4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -172,7 +570,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@44363" type="Polygon2D" parent="Layer 7/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_4q7b2")
+texture = ExtResource("5_6mgtt")
 texture_offset = Vector2(148.95, -68)
 polygon = PackedVector2Array(-316.15, 4, 346.85, 4, 346.85, 20, -316.15, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -199,7 +597,7 @@ position = Vector2(200, 0)
 [node name="Shape" type="Node2D" parent="Layer 7/Frame 0/@Group@44366"]
 
 [node name="@@44367" type="Polygon2D" parent="Layer 7/Frame 0/@Group@44366/Shape"]
-color = Color(1, 1, 1, 0.301961)
+color = Color(0, 0, 0, 0.301961)
 polygon = PackedVector2Array(-267.1, -82, -87.15, -82, -87.15, 4, -267.1, 4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -207,10 +605,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_y4ane")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -14)
 scale = Vector2(0.751068, 0.751068)
-script = ExtResource("3_yaiiy")
+script = ExtResource("3_iir6c")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Star Door.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -223,27 +621,30 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_m0nrf")
+
 [node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@44347" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(72.75, -182.5)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("6_6wimg")
+texture = ExtResource("6_hebua")
 centered = false
 
 [node name="@@44348" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(72.75, 4)
 scale = Vector2(1.5, -1.5)
-texture = ExtResource("6_6wimg")
+texture = ExtResource("6_hebua")
 centered = false
 
 [node name="@@44349" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-114.7, 4.5)
 scale = Vector2(1.5, -1.35205)
-texture = ExtResource("6_6wimg")
+texture = ExtResource("6_hebua")
 centered = false
 
 [node name="@Group@44350" type="Node2D" parent="Layer 1/Frame 0"]
@@ -253,14 +654,14 @@ position = Vector2(350, -9.5)
 texture_filter = 1
 position = Vector2(499.25, -183)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("6_6wimg")
+texture = ExtResource("6_hebua")
 centered = false
 
 [node name="@@44352" type="Sprite2D" parent="Layer 1/Frame 0/@Group@44350"]
 texture_filter = 1
 position = Vector2(499.25, 4)
 scale = Vector2(1.5, -1.5)
-texture = ExtResource("6_6wimg")
+texture = ExtResource("6_hebua")
 centered = false
 
 [node name="@Group@44353" type="Node2D" parent="Layer 1/Frame 0"]
@@ -271,14 +672,14 @@ scale = Vector2(0.958588, 0.783127)
 texture_filter = 1
 position = Vector2(290.4, -329)
 scale = Vector2(1.43788, 1.1747)
-texture = ExtResource("6_6wimg")
+texture = ExtResource("6_hebua")
 centered = false
 
 [node name="@@44355" type="Sprite2D" parent="Layer 1/Frame 0/@Group@44353"]
 texture_filter = 1
 position = Vector2(290.4, -182.55)
 scale = Vector2(1.43788, -1.17468)
-texture = ExtResource("6_6wimg")
+texture = ExtResource("6_hebua")
 centered = false
 
 [node name="@Group@44356" type="Node2D" parent="Layer 1/Frame 0"]
@@ -289,22 +690,22 @@ scale = Vector2(0.958588, 0.783127)
 texture_filter = 1
 position = Vector2(471.4, -329)
 scale = Vector2(1.43788, 1.1747)
-texture = ExtResource("6_6wimg")
+texture = ExtResource("6_hebua")
 centered = false
 
 [node name="@@44358" type="Sprite2D" parent="Layer 1/Frame 0/@Group@44356"]
 texture_filter = 1
 position = Vector2(471.4, -182.55)
 scale = Vector2(1.43788, -1.17468)
-texture = ExtResource("6_6wimg")
+texture = ExtResource("6_hebua")
 centered = false
 
-[node name="@DOMSymbolInstance@44359" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_y4ane")]
+[node name="@DOMSymbolInstance@44359" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(403.8, -57.95)
 rotation = -0.0015796
 scale = Vector2(0.830751, 0.840424)
 skew = 0.00127089
-script = ExtResource("3_yaiiy")
+script = ExtResource("3_iir6c")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star BackGFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -317,9 +718,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44360" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_y4ane")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@44359"]
+script = SubResource("GDScript_kml81")
+
+[node name="@DOMSymbolInstance@44360" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(144.85, -9.9)
-script = ExtResource("3_yaiiy")
+script = ExtResource("3_iir6c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -332,9 +736,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44361" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_y4ane")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@44360"]
+script = SubResource("GDScript_5j2i3")
+
+[node name="@DOMSymbolInstance@44361" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(457.8, -9.9)
-script = ExtResource("3_yaiiy")
+script = ExtResource("3_iir6c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -346,6 +753,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@44361"]
+script = SubResource("GDScript_4goi3")
 
 [node name="Layer 6" type="Node2D" parent="."]
 
@@ -354,10 +764,13 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 2" instance=ExtResource("2_y4ane")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 2"]
+script = SubResource("GDScript_d2qdf")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 2"]
 position = Vector2(400.95, -405)
 scale = Vector2(4.39359, 4.47232)
-script = ExtResource("3_yaiiy")
+script = ExtResource("3_iir6c")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -369,3 +782,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 6/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_kj0rg")

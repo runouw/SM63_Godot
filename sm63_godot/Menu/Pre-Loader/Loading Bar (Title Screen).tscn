@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_bbbyh"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_rj50u"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_bmuyk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u6asj"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_ck6w8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_njcxo"]
 
-[sub_resource type="Animation" id="Animation_qew1x"]
+[sub_resource type="Animation" id="Animation_rpm6g"]
 length = 33.3667
 loop_mode = 1
 tracks/0/type = "value"
@@ -128,16 +128,21 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jp26g"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gkxyc"]
 _data = {
-"Default": SubResource("Animation_qew1x")
+"Default": SubResource("Animation_rpm6g")
 }
 
 [node name="Loading Bar (Title Screen)" type="Node2D"]
+script = ExtResource("1_u6asj")
+source_xml = "res://sm63/LIBRARY/Menu/Pre-Loader/Loading Bar (Title Screen).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jp26g")
+"Timeline": SubResource("AnimationLibrary_gkxyc")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -145,11 +150,13 @@ libraries = {
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(0, 13.25)
+scale = Vector2(1, 0.12558)
 
 [node name="@@52923" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-20.35, -92.35, 19.15, -92.35, 19.15, 15.15, -20.35, 15.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_bbbyh")
+script = ExtResource("2_ck6w8")
 matrix = Transform2D(1, 0, 0, 0.150894, -92, -14.95)
 entries_color = PackedColorArray(0.784314, 0.784314, 0.784314, 0.301961, 1, 1, 1, 0.4, 0.784314, 0.784314, 0.784314, 0.352941)
 entries_ratio = PackedFloat32Array(0, 0.505882, 1)
@@ -167,11 +174,13 @@ end_cap_mode = 2
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 499"]
+position = Vector2(0, -13.85)
+scale = Vector2(1, 1.83205)
 
 [node name="@@52925" type="Polygon2D" parent="Layer 1/Frame 499/Shape"]
 polygon = PackedVector2Array(-20.35, -92.35, 19.15, -92.35, 19.15, 15.15, -20.35, 15.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_bbbyh")
+script = ExtResource("2_ck6w8")
 matrix = Transform2D(1, 0, 0, 0.150894, -92, -14.95)
 entries_color = PackedColorArray(0.784314, 0.784314, 0.784314, 0.301961, 1, 1, 1, 0.4, 0.784314, 0.784314, 0.784314, 0.352941)
 entries_ratio = PackedFloat32Array(0, 0.505882, 1)
@@ -189,11 +198,13 @@ end_cap_mode = 2
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 999"]
+position = Vector2(0, -26.8)
+scale = Vector2(1, 2.61086)
 
 [node name="@@52927" type="Polygon2D" parent="Layer 1/Frame 999/Shape"]
 polygon = PackedVector2Array(-20.35, -92.35, 19.15, -92.35, 19.15, 15.15, -20.35, 15.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_bbbyh")
+script = ExtResource("2_ck6w8")
 matrix = Transform2D(1, 0, 0, 0.150894, -92, -14.95)
 entries_color = PackedColorArray(0.784314, 0.784314, 0.784314, 0.301961, 1, 1, 1, 0.101961, 0.784314, 0.784314, 0.784314, 0.101961)
 entries_ratio = PackedFloat32Array(0, 0.505882, 1)
@@ -214,9 +225,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_rj50u")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-31.15, -386.05)
-script = ExtResource("3_bmuyk")
+script = ExtResource("3_njcxo")
 path = "res://sm63_godot/Menu/Pre-Loader/&#034Loading&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -232,10 +243,10 @@ brightness = 0.0
 [node name="Frame 499" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 499" instance=ExtResource("2_rj50u")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 499"]
 position = Vector2(-36.1, -125)
 scale = Vector2(1.00154, 1)
-script = ExtResource("3_bmuyk")
+script = ExtResource("3_njcxo")
 path = "res://sm63_godot/Menu/Pre-Loader/&#034Loading&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -251,9 +262,9 @@ brightness = 0.0
 [node name="Frame 999" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 999" instance=ExtResource("2_rj50u")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 999"]
 position = Vector2(-36.15, 128.9)
-script = ExtResource("3_bmuyk")
+script = ExtResource("3_njcxo")
 path = "res://sm63_godot/Menu/Pre-Loader/&#034Loading&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -276,9 +287,9 @@ visible = false
 [node name="Frame 1000" type="Node2D" parent="Codes"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Codes/Frame 1000" instance=ExtResource("2_rj50u")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Codes/Frame 1000"]
 position = Vector2(0.05, -0.6)
-script = ExtResource("3_bmuyk")
+script = ExtResource("3_njcxo")
 path = "res://sm63_godot/Menu/Pre-Loader/Loading finished.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

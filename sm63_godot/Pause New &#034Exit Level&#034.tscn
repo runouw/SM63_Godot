@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_2yy3g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dq6fk"]
+
+[sub_resource type="Animation" id="Animation_dvfsw"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_38mxi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_opxwo"]
 _data = {
-"Default": SubResource("Animation_2yy3g")
+"Default": SubResource("Animation_dvfsw")
 }
 
 [node name="Pause New Exit Level" type="Node2D"]
+script = ExtResource("1_dq6fk")
+source_xml = "res://sm63/LIBRARY/Pause New &#034Exit Level&#034.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_38mxi")
+"Timeline": SubResource("AnimationLibrary_opxwo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

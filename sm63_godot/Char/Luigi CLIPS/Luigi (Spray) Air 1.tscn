@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Spray) 1.png" id="1_s56bl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_oh5gp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Spray) 1.png" id="2_c04ek"]
 
-[sub_resource type="Animation" id="Animation_l7vf4"]
+[sub_resource type="Animation" id="Animation_vh4su"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hic6f"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ye21t"]
 _data = {
-"Default": SubResource("Animation_l7vf4")
+"Default": SubResource("Animation_vh4su")
 }
 
 [node name="Luigi (Spray) Air 1" type="Node2D"]
+script = ExtResource("1_oh5gp")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi (Spray) Air 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hic6f")
+"Timeline": SubResource("AnimationLibrary_ye21t")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@14862" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-13.5, -20)
-texture = ExtResource("1_s56bl")
+texture = ExtResource("2_c04ek")
 centered = false

@@ -1,15 +1,15 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 2.png" id="1_ttm3l"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Mario Hedge 2.png" id="2_27pr2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 3.png" id="3_4mv4v"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Mario Hedge 1.png" id="4_567gy"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="5_cttar"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_n6dte"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 1.png" id="7_xxgap"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Tree 64.png" id="8_8p685"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nrv2o"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 2.png" id="2_btx2y"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Mario Hedge 2.png" id="3_g4kmo"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 3.png" id="4_hasdl"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Mario Hedge 1.png" id="5_e8jvt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_v8yj4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 1.png" id="7_x3mfq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Tree 64.png" id="8_yefqi"]
 
-[sub_resource type="Animation" id="Animation_1i8bx"]
+[sub_resource type="Animation" id="Animation_86pdb"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -49,16 +49,32 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8xjbx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jlmmg"]
 _data = {
-"Default": SubResource("Animation_1i8bx")
+"Default": SubResource("Animation_86pdb")
 }
 
+[sub_resource type="GDScript" id="GDScript_fvi0n"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.BGquality == \"HIGH\" || _root.BGquality == \"MEDIUM\") {
+# 		gotoAndStop(1);
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# };
+# "
+
 [node name="8-E1-1 BG Quality Items" type="Node2D"]
+script = ExtResource("1_nrv2o")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 BG Quality Items.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8xjbx")
+"Timeline": SubResource("AnimationLibrary_jlmmg")
 }
 
 [node name="High" type="Node2D" parent="."]
@@ -69,21 +85,21 @@ libraries = {
 texture_filter = 1
 position = Vector2(203.05, -231.2)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_ttm3l")
+texture = ExtResource("2_btx2y")
 centered = false
 
 [node name="@@38140" type="Sprite2D" parent="High/Frame 0"]
 texture_filter = 1
 position = Vector2(138.9, -227.7)
 scale = Vector2(0.759995, 0.759995)
-texture = ExtResource("2_27pr2")
+texture = ExtResource("3_g4kmo")
 centered = false
 
 [node name="@@38141" type="Sprite2D" parent="High/Frame 0"]
 texture_filter = 1
 position = Vector2(98.75, -232.2)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_4mv4v")
+texture = ExtResource("4_hasdl")
 centered = false
 
 [node name="@@38142" type="Sprite2D" parent="High/Frame 0"]
@@ -92,12 +108,12 @@ position = Vector2(-352.05, -103.65)
 rotation = -0.261791
 scale = Vector2(0.749995, 0.749999)
 skew = -1.96695e-05
-texture = ExtResource("4_567gy")
+texture = ExtResource("5_e8jvt")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="High/Frame 0" instance=ExtResource("5_cttar")]
+[node name="DOMSymbolInstance" type="Node2D" parent="High/Frame 0"]
 position = Vector2(362.6, -92.4)
-script = ExtResource("6_n6dte")
+script = ExtResource("6_v8yj4")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Tint Ground.tscn"
 red_multiplier = 0.75
 green_multiplier = 0.75
@@ -114,21 +130,21 @@ brightness = 0.0
 texture_filter = 1
 position = Vector2(32.9, -244.7)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("7_xxgap")
+texture = ExtResource("7_x3mfq")
 centered = false
 
 [node name="@@38144" type="Sprite2D" parent="High/Frame 0"]
 texture_filter = 1
 position = Vector2(-15.6, -166)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_ttm3l")
+texture = ExtResource("2_btx2y")
 centered = false
 
 [node name="@@38145" type="Sprite2D" parent="High/Frame 0"]
 texture_filter = 1
 position = Vector2(-286.35, -151)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("8_8p685")
+texture = ExtResource("8_yefqi")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="High"]
@@ -137,3 +153,6 @@ visible = false
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_fvi0n")

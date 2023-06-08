@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_xprqo"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_l70h1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8ngh0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_f2enh"]
 
-[sub_resource type="Animation" id="Animation_pxiaq"]
+[sub_resource type="Animation" id="Animation_bmsut"]
 length = 2.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -175,25 +175,87 @@ tracks/13/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfwxk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g38fn"]
 _data = {
-"Default": SubResource("Animation_pxiaq")
+"Default": SubResource("Animation_bmsut")
 }
 
+[sub_resource type="GDScript" id="GDScript_b2j1v"]
+script/source = "extends Node
+# hi = \"Highscore:  \"+_root[\"RecordCoin\"+_root.lastPlayinglevel];
+# //_root[\"RecordCoin\"+_root.lastPlayinglevel]
+# //
+# stop();
+# count = 0;
+# maxnum = _root.TotalCoins;
+# n = \"x 0\";
+# coinsound = new Sound();
+# coinsound.attachSound(\"Coin (Small)\");
+# onEnterFrame = function () {
+# 	if (_parent.stopnum == _parent._currentframe) {
+# 		if (count<maxnum) {
+# 			count++;
+# 			//
+# 			if (count%2 == 0) {
+# 				coinsound.start();
+# 			}
+# 			//     
+# 			n = \"x \"+count;
+# 		} else {
+# 			coinsound2 = new Sound();
+# 			coinsound2.attachSound(\"CoinJingle\");
+# 			coinsound2.start();
+# 			//
+# 			count = maxnum;
+# 			n = \"x \"+count;
+# 			//
+# 			if (_root.TotalCoins>_root[\"RecordCoin\"+_root.lastPlayinglevel] && _parent.level !== \"Secret Course\") {
+# 				//
+# 				this.play();
+# 				//_root.SaveHighScores();
+# 			} else {
+# 				_parent.play();
+# 			}
+# 			//  
+# 			onEnterFrame = null;
+# 		}
+# 	}
+# };
+# if (_parent.level == \"Secret Course\") {
+# 	gotoAndStop(\"nohighscore\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_jhfld"]
+script/source = "extends Node
+# hi = \"Highscore:  \"+_root.TotalCoins;
+# "
+
+[sub_resource type="GDScript" id="GDScript_nvddk"]
+script/source = "extends Node
+# stop();
+# _parent.play();
+# "
+
 [node name="HighScores Coin Count" type="Node2D"]
+script = ExtResource("1_8ngh0")
+source_xml = "res://sm63/LIBRARY/Menu/HighScores Coin Count.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kfwxk")
+"Timeline": SubResource("AnimationLibrary_g38fn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_xprqo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-117, 0)
-script = ExtResource("2_l70h1")
+script = ExtResource("2_f2enh")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -209,9 +271,9 @@ brightness = 0.0
 [node name="Frame 74" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 74" instance=ExtResource("1_xprqo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 74"]
 position = Vector2(-27, 0)
-script = ExtResource("2_l70h1")
+script = ExtResource("2_f2enh")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -253,11 +315,20 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_b2j1v")
+
 [node name="Frame 67" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 67"]
+script = SubResource("GDScript_jhfld")
+
 [node name="Frame 73" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 73"]
+script = SubResource("GDScript_nvddk")
 
 [node name="Frame 74" type="Node2D" parent="Layer 2"]
 visible = false

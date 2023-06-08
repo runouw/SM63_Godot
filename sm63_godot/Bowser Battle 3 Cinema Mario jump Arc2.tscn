@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_g2704"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_w78da"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2vxk1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3kgxo"]
 
-[sub_resource type="Animation" id="Animation_5of31"]
+[sub_resource type="Animation" id="Animation_b7jiw"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,24 +31,29 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_par2d"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xnm5t"]
 _data = {
-"Default": SubResource("Animation_5of31")
+"Default": SubResource("Animation_b7jiw")
 }
 
 [node name="Bowser Battle 3 Cinema Mario jump Arc2" type="Node2D"]
+script = ExtResource("1_2vxk1")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 3 Cinema Mario jump Arc2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_par2d")
+"Timeline": SubResource("AnimationLibrary_xnm5t")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_g2704")]
-script = ExtResource("2_w78da")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_3kgxo")
 path = "res://sm63_godot/Bowser Battle 3 Cinema Mario Jump Arc.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -64,9 +69,9 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19" instance=ExtResource("1_g2704")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19"]
 position = Vector2(50, 0)
-script = ExtResource("2_w78da")
+script = ExtResource("2_3kgxo")
 path = "res://sm63_godot/Bowser Battle 3 Cinema Mario Jump Arc.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

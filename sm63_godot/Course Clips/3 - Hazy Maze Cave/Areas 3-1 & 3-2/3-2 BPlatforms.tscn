@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_8vgov"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5mu7i"]
+
+[sub_resource type="Animation" id="Animation_55qpl"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hvv7u"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_26mtl"]
 _data = {
-"Default": SubResource("Animation_8vgov")
+"Default": SubResource("Animation_55qpl")
 }
 
 [node name="3-2 BPlatforms" type="Node2D"]
+script = ExtResource("1_5mu7i")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-1 & 3-2/3-2 BPlatforms.xml"
+linkage = "3-2BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hvv7u")
+"Timeline": SubResource("AnimationLibrary_26mtl")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

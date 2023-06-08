@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_4q8sn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dfyeq"]
+
+[sub_resource type="Animation" id="Animation_diro0"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vdsu1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wror2"]
 _data = {
-"Default": SubResource("Animation_4q8sn")
+"Default": SubResource("Animation_diro0")
 }
 
 [node name="6-5 CamEdge" type="Node2D"]
+script = ExtResource("1_dfyeq")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-5 CamEdge.xml"
+linkage = "6-5CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vdsu1")
+"Timeline": SubResource("AnimationLibrary_wror2")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

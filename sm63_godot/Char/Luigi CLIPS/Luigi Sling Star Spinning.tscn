@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_r7lkj"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_65pnt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Flipping.png" id="3_lt17g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_aui27"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5xrtd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Flipping.png" id="3_sgs4b"]
 
-[sub_resource type="Animation" id="Animation_ib2ta"]
+[sub_resource type="Animation" id="Animation_l60ba"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,32 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_aqe57"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bs2sq"]
 _data = {
-"Default": SubResource("Animation_ib2ta")
+"Default": SubResource("Animation_l60ba")
 }
 
+[sub_resource type="GDScript" id="GDScript_wp3id"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Luigi Sling Star Spinning" type="Node2D"]
+script = ExtResource("1_aui27")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Sling Star Spinning.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_aqe57")
+"Timeline": SubResource("AnimationLibrary_bs2sq")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -62,9 +78,9 @@ libraries = {
 
 [node name="Group" type="Node2D" parent="Layer 2/Frame 0"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0/Group" instance=ExtResource("1_r7lkj")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0/Group"]
 position = Vector2(1.35, -5.75)
-script = ExtResource("2_65pnt")
+script = ExtResource("2_5xrtd")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -80,12 +96,12 @@ brightness = 0.0
 [node name="@@15236" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-9.3, -16.55)
-texture = ExtResource("3_lt17g")
+texture = ExtResource("3_sgs4b")
 centered = false
 
-[node name="@DOMSymbolInstance@15237" type="Node2D" parent="Layer 2/Frame 0/Group" instance=ExtResource("1_r7lkj")]
+[node name="@DOMSymbolInstance@15237" type="Node2D" parent="Layer 2/Frame 0/Group"]
 position = Vector2(-1.6, 8.55)
-script = ExtResource("2_65pnt")
+script = ExtResource("2_5xrtd")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -103,9 +119,9 @@ visible = false
 
 [node name="Group" type="Node2D" parent="Layer 2/Frame 14"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 14/Group" instance=ExtResource("1_r7lkj")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 14/Group"]
 position = Vector2(1.35, -5.75)
-script = ExtResource("2_65pnt")
+script = ExtResource("2_5xrtd")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -121,12 +137,12 @@ brightness = 0.0
 [node name="@@15238" type="Sprite2D" parent="Layer 2/Frame 14/Group"]
 texture_filter = 1
 position = Vector2(-9.3, -16.55)
-texture = ExtResource("3_lt17g")
+texture = ExtResource("3_sgs4b")
 centered = false
 
-[node name="@DOMSymbolInstance@15239" type="Node2D" parent="Layer 2/Frame 14/Group" instance=ExtResource("1_r7lkj")]
+[node name="@DOMSymbolInstance@15239" type="Node2D" parent="Layer 2/Frame 14/Group"]
 position = Vector2(-1.6, 8.55)
-script = ExtResource("2_65pnt")
+script = ExtResource("2_5xrtd")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -142,3 +158,6 @@ brightness = 0.0
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_wp3id")

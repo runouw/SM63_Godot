@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Skelegoon/Skeleton Bird F4.png" id="1_2admo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_aew65"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Skelegoon/Skeleton Bird F4.png" id="2_aotf1"]
 
-[sub_resource type="Animation" id="Animation_6crru"]
+[sub_resource type="Animation" id="Animation_o8gx3"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -66,16 +67,41 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8bm66"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5js6c"]
 _data = {
-"Default": SubResource("Animation_6crru")
+"Default": SubResource("Animation_o8gx3")
 }
 
+[sub_resource type="GDScript" id="GDScript_jmolv"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_4tnpq"]
+script/source = "extends Node
+# onEnterFrame = null;
+# stop();
+# for (i=0; i<5; i++) {
+# 	_root.Course.BackGFX.attachMovie(\"SkeletonGoonieBone\", \"SkeletonGoonieBone\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:_parent._parent._x, _y:_parent._parent._y});
+# }
+# "
+
 [node name="Goonie Gone" type="Node2D"]
+script = ExtResource("1_aew65")
+source_xml = "res://sm63/LIBRARY/Goonie Gone.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8bm66")
+"Timeline": SubResource("AnimationLibrary_5js6c")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -86,7 +112,7 @@ libraries = {
 texture_filter = 1
 position = Vector2(-14.5, -6.95)
 scale = Vector2(1, 0.82103)
-texture = ExtResource("1_2admo")
+texture = ExtResource("2_aotf1")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -96,7 +122,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-12.75, -5.75)
 scale = Vector2(0.879303, 0.676468)
-texture = ExtResource("1_2admo")
+texture = ExtResource("2_aotf1")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -106,5 +132,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_jmolv")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_4tnpq")

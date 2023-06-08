@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_l3n2y"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ycyxf"]
+
+[sub_resource type="Animation" id="Animation_v8325"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c20qo"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b58s3"]
 _data = {
-"Default": SubResource("Animation_l3n2y")
+"Default": SubResource("Animation_v8325")
 }
 
 [node name="K-2Platforms" type="Node2D"]
+script = ExtResource("1_ycyxf")
+source_xml = "res://sm63/LIBRARY/K-2Platforms.xml"
+linkage = "K-2Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_c20qo")
+"Timeline": SubResource("AnimationLibrary_b58s3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

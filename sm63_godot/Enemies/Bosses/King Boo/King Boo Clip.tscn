@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_6uqs8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_826lv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dquya"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ednev"]
 
-[sub_resource type="Animation" id="Animation_8bxbi"]
+[sub_resource type="Animation" id="Animation_cpu5r"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -115,25 +115,38 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bmwxv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tcua6"]
 _data = {
-"Default": SubResource("Animation_8bxbi")
+"Default": SubResource("Animation_cpu5r")
 }
 
+[sub_resource type="GDScript" id="GDScript_nls2c"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="King Boo Clip" type="Node2D"]
+script = ExtResource("1_dquya")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Boo/King Boo Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bmwxv")
+"Timeline": SubResource("AnimationLibrary_tcua6")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6uqs8")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_nls2c")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(3.65, -10.05)
-script = ExtResource("2_826lv")
+script = ExtResource("2_ednev")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/King Boo Hidden Shine.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -149,9 +162,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_6uqs8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-3, -10)
-script = ExtResource("2_826lv")
+script = ExtResource("2_ednev")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/Boo Hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -167,9 +180,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_6uqs8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-3, -10)
-script = ExtResource("2_826lv")
+script = ExtResource("2_ednev")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/Boo Defeated.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -185,9 +198,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_6uqs8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(0, 0.25)
-script = ExtResource("2_826lv")
+script = ExtResource("2_ednev")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/King Boo Move.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -203,8 +216,8 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_6uqs8")]
-script = ExtResource("2_826lv")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
+script = ExtResource("2_ednev")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/King Boo Turn around.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -227,10 +240,10 @@ visible = false
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3" instance=ExtResource("1_6uqs8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3"]
 position = Vector2(1, 32.15)
 scale = Vector2(1.2921, 1.18549)
-script = ExtResource("2_826lv")
+script = ExtResource("2_ednev")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

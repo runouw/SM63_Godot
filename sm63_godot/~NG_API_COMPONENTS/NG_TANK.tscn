@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ccqey"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_f7vpq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vqpdq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_1fjpq"]
 
-[sub_resource type="Animation" id="Animation_8t2av"]
+[sub_resource type="Animation" id="Animation_bw81a"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +19,27 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6mw3f"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kqlw5"]
 _data = {
-"Default": SubResource("Animation_8t2av")
+"Default": SubResource("Animation_bw81a")
 }
 
+[sub_resource type="GDScript" id="GDScript_jobg4"]
+script/source = "extends Node
+# on(release) {
+# 	NewgroundsAPI.loadNewgrounds();
+# }"
+
 [node name="NG_TANK" type="Node2D"]
+script = ExtResource("1_vqpdq")
+source_xml = "res://sm63/LIBRARY/~NG_API_COMPONENTS/NG_TANK.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6mw3f")
+"Timeline": SubResource("AnimationLibrary_kqlw5")
 }
 
 [node name="Default Image" type="Node2D" parent="."]
@@ -38,11 +49,12 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Default Image/Frame 0"]
 
 [node name="@@52972" type="Polygon2D" parent="Default Image/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0.05, 0.05, 300.225, 0.05, 300.225, 251.975, 0.05, 251.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Default Image/Frame 0" instance=ExtResource("1_ccqey")]
-script = ExtResource("2_f7vpq")
+[node name="DOMSymbolInstance" type="Node2D" parent="Default Image/Frame 0"]
+script = ExtResource("2_1fjpq")
 path = "res://sm63_godot/~NG_API_COMPONENTS/NG_TANK_BUTTON.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -54,3 +66,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Default Image/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_jobg4")

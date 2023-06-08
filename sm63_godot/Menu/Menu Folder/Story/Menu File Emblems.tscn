@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_lf3cb"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_rl8ch"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4cxbf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4x4f1"]
 
-[sub_resource type="Animation" id="Animation_66xiq"]
+[sub_resource type="Animation" id="Animation_lwc47"]
 length = 1.16667
 loop_mode = 1
 tracks/0/type = "value"
@@ -283,25 +283,63 @@ tracks/22/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fxxn0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_voscc"]
 _data = {
-"Default": SubResource("Animation_66xiq")
+"Default": SubResource("Animation_lwc47")
 }
 
+[sub_resource type="GDScript" id="GDScript_bwb7k"]
+script/source = "extends Node
+# if (_root[\"File\"+_parent.file+\"TotalStars\"] == 0 && _root.m.MenuRedTrans.file !== _parent.file) {
+# 	gotoAndStop(35);
+# } else if (_root.m.MenuRedTrans.file !== _parent.file || _root.m.MenuRedTrans.YesF == null) {
+# 	stop();
+# }
+# 
+# //_level0.m.filem.Mode"
+
+[sub_resource type="GDScript" id="GDScript_1rp0t"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.m.filem.Mode = \"deleting\";
+# 	//_parent._parent.HL = undefined;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_h1sxl"]
+script/source = "extends Node
+# _root.DeleteFile(_parent.file);
+# //_root.m.Message(\"File \"+_parent.file+\" was Succesfully Deleted.\")
+# onEnterFrame = null
+# _root.m.filem.Mode = \"\";
+# _root.m.filem.HL = undefined
+# "
+
+[sub_resource type="GDScript" id="GDScript_7o2r8"]
+script/source = "extends Node
+# stop();
+# _root.m.filem.Mode = \"\";
+# "
+
 [node name="Menu File Emblems" type="Node2D"]
+script = ExtResource("1_4cxbf")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Story/Menu File Emblems.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fxxn0")
+"Timeline": SubResource("AnimationLibrary_voscc")
 }
 
 [node name="Stars" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Stars"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Stars/Frame 0" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Stars/Frame 0"]
 position = Vector2(38.1, 32.45)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Emblems Stars.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -317,9 +355,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Stars"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Stars/Frame 1" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Stars/Frame 1"]
 position = Vector2(38.1, 32.45)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Emblems Stars.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -335,9 +373,9 @@ brightness = 0.0
 [node name="Frame 12" type="Node2D" parent="Stars"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Stars/Frame 12" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Stars/Frame 12"]
 position = Vector2(38.1, 33.45)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Emblems Stars.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -353,10 +391,10 @@ brightness = 0.0
 [node name="Frame 33" type="Node2D" parent="Stars"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Stars/Frame 33" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Stars/Frame 33"]
 position = Vector2(80, 10.55)
 scale = Vector2(3.3656, 3.3656)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Emblems Stars.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -376,9 +414,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Coins"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Coins/Frame 0" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Coins/Frame 0"]
 position = Vector2(-4.65, 24.75)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Emblems Coins.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -394,9 +432,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Coins"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Coins/Frame 1" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Coins/Frame 1"]
 position = Vector2(-4.65, 24.75)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Emblems Coins.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -412,9 +450,9 @@ brightness = 0.0
 [node name="Frame 12" type="Node2D" parent="Coins"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Coins/Frame 12" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Coins/Frame 12"]
 position = Vector2(-5.15, 24)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Emblems Coins.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -430,10 +468,10 @@ brightness = 0.0
 [node name="Frame 33" type="Node2D" parent="Coins"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Coins/Frame 33" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Coins/Frame 33"]
 position = Vector2(89.15, 4.3)
 scale = Vector2(4.78082, 4.78082)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Emblems Coins.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -453,9 +491,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Keys"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Keys/Frame 0" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Keys/Frame 0"]
 position = Vector2(-39, 47)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Bowser Key.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -471,9 +509,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Keys"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Keys/Frame 1" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Keys/Frame 1"]
 position = Vector2(-39, 47)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Bowser Key.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -489,9 +527,9 @@ brightness = 0.0
 [node name="Frame 12" type="Node2D" parent="Keys"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Keys/Frame 12" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Keys/Frame 12"]
 position = Vector2(-37, 46.5)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Bowser Key.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -507,10 +545,10 @@ brightness = 0.0
 [node name="Frame 33" type="Node2D" parent="Keys"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Keys/Frame 33" instance=ExtResource("1_lf3cb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Keys/Frame 33"]
 position = Vector2(-56, 53.25)
 scale = Vector2(4.3158, 4.3158)
-script = ExtResource("2_rl8ch")
+script = ExtResource("2_4x4f1")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu File Bowser Key.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -543,11 +581,23 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_bwb7k")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_1rp0t")
 
 [node name="Frame 33" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 33"]
+script = SubResource("GDScript_h1sxl")
+
 [node name="Frame 34" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 34"]
+script = SubResource("GDScript_7o2r8")

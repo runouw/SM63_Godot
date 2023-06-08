@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
-[sub_resource type="Animation" id="Animation_ggygc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nglfh"]
+
+[sub_resource type="Animation" id="Animation_650mq"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -52,16 +54,209 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l84hs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sw6wo"]
 _data = {
-"Default": SubResource("Animation_ggygc")
+"Default": SubResource("Animation_650mq")
 }
 
+[sub_resource type="GDScript" id="GDScript_g8oc5"]
+script/source = "extends Node
+# if (WaterDeepness == undefined) {
+# 	WaterDeepness = 400;
+# }
+# if (WaterLength == undefined) {
+# 	WaterLength = 500;
+# }
+# if (polygons == undefined) {
+# 	polygons = 50;
+# }
+# 
+# if (_root.BGquality == \"LOW\") {
+# 	polygons = Math.round(polygons*0.5);
+# }
+# if (_root.BGquality == \"MEDIUM\") {
+# 	polygons = Math.round(polygons*0.75);
+# }
+# if (randomwave == undefined) {
+# 	randomwave = 1;
+# }
+# if (waterstength == undefined) {
+# 	waterstength = 0.3;
+# }
+# if (redcolor == undefined) {
+# 	redcolor = 40;
+# }
+# if (greencolor == undefined) {
+# 	greencolor = 128;
+# }
+# if (bluecolor == undefined) {
+# 	bluecolor = 215;
+# }
+# if (alpha == undefined) {
+# 	alpha = 50;
+# }
+# if (graphics == undefined) {
+# 	graphics = false
+# }
+# //_rotation = 0;   
+# "
+
+[sub_resource type="GDScript" id="GDScript_2tcwh"]
+script/source = "extends Node
+# stop();
+# // Ocean - Jim Bumgardner
+# kNbrPts = polygons;
+# SW = WaterLength;
+# SH = 0;
+# MovieClip.prototype.makeWave = function(deep, clr, jit, turbProb) {
+# 	//if (_root.PauseGame == false && _root.playpause == false && Math.abs(_root.Course.Char._y-(_y+_root.Course.FrontGFX._y))<1000) {
+# 	this.pts = [];
+# 	this.springs = [];
+# 	this.clr = clr;
+# 	this.jit = jit;
+# 	this.turbProb = turbProb;
+# 	this.deep = deep;
+# 	this.stiffK = waterstength;
+# 	this.kDamp = .85;
+# 	var segLen = (SW+100)/kNbrPts;
+# 	for (var i = 0; i<kNbrPts; ++i) {
+# 		this.pts[i] = {x:-50+i*segLen, y:0, fx:0, fy:0, vx:0, vy:0, restLen:.5*segLen, jy:0};
+# 	}
+# 	//}
+# };
+# MovieClip.prototype.simWave = function() {
+# 	if (_root.PauseGame == false && Math.abs(_root.Course.Char._y-(_y+_root.Course.FrontGFX._y))<1000) {
+# 		var i;
+# 		// Initialize forces with some noise
+# 		for (i=0; i<this.pts.length; ++i) {
+# 			this.pts[i].fy += Math.random()*(randomwave*2)-randomwave;
+# 			this.pts[i].fx = 0;
+# 			if (Math.random()<this.turbProb) {
+# 			} else {
+# 				this.pts[i].fy = 0;
+# 			}
+# 		}
+# 		//
+# 		if (graphics == false) {
+# 			if (Math.abs(_root.Course.Char.yspeed)>5 && Math.abs(_root.Course.Char._y-(_y+_root.Course.FrontGFX._y))<20) {
+# 				if (rot == undefined || rot == 0 || rot == 180) {
+# 					X = _root.Course.Char._x-(_x+_root.Course.FrontGFX._x)+_root.Course.Char.xspeed;
+# 				} else {
+# 					X = _root.Course.Char._y-(_y+_root.Course.FrontGFX._y)+_root.Course.Char.yspeed;
+# 				}
+# 				marioI = Math.round(((X)/SW*(kNbrPts)));
+# 				if (_root.Course.Char.yspeed>0) {
+# 					this.pts[marioI].fy = _root.Course.Char.yspeed/2;
+# 				} else {
+# 					this.pts[marioI].fy = _root.Course.Char.yspeed/3;
+# 				}
+# 				this.pts[marioI].fx += _root.Course.Char.xspeed/5;
+# 				for (i=1; i<3; ++i) {
+# 					if (rot == undefined || rot == 0) {
+# 						this.pts[mouseI+i].fy -= (_root.Course.Char.yspeed/15)/i;
+# 						this.pts[mouseI-i].fy -= (_root.Course.Char.yspeed/15)/i;
+# 						this.pts[marioI].fx += (_root.Course.Char.xspeed/10)/i;
+# 					} else if (rot == 90) {
+# 						this.pts[mouseI+i].fy -= (_root.Course.Char.xspeed/15)/i;
+# 						this.pts[mouseI-i].fy -= (_root.Course.Char.xspeed/15)/i;
+# 						this.pts[marioI].fx += (_root.Course.Char.yspeed/10)/i;
+# 					} else if (rot == -90) {
+# 						this.pts[mouseI+i].fy += (_root.Course.Char.xspeed/15)/i;
+# 						this.pts[mouseI-i].fy += (_root.Course.Char.xspeed/15)/i;
+# 						this.pts[marioI].fx -= (_root.Course.Char.yspeed/10)/i;
+# 					} else {
+# 						this.pts[mouseI+i].fy += (_root.Course.Char.yspeed/15)/i;
+# 						this.pts[mouseI-i].fy += (_root.Course.Char.yspeed/15)/i;
+# 						this.pts[marioI].fx -= (_root.Course.Char.xspeed/10)/i;
+# 						// rot = 180
+# 					}
+# 				}
+# 			}
+# 		}
+# 		// compute spring forces                                          
+# 		for (i=0; i<this.pts.length-1; ++i) {
+# 			var pt1 = this.pts[i];
+# 			var pt2 = this.pts[i+1];
+# 			var dx = pt2.x-pt1.x;
+# 			var dy = pt2.y-pt1.y;
+# 			var dist = Math.sqrt(dx*dx+dy*dy);
+# 			var f1 = this.stiffK*(dist-pt1.restLen);
+# 			var spr_fx = f1*dx/dist;
+# 			var spr_fy = f1*dy/dist;
+# 			if (i != 0) {
+# 				pt1.fx += spr_fx;
+# 				pt1.fy += spr_fy;
+# 			}
+# 			if (i != this.pts.length-2) {
+# 				pt2.fx -= spr_fx;
+# 				pt2.fy -= spr_fy;
+# 			}
+# 		}
+# 		this.clear();
+# 		r = Math.floor(redcolor);
+# 		g = Math.floor(greencolor);
+# 		b = Math.floor(bluecolor);
+# 		this.clr = (r << 16 | g << 8 | b);
+# 		this.beginFill(this.clr, alpha);
+# 		this.moveTo(this.pts[0].x, this.pts[0].y);
+# 		for (i=1; i<this.pts.length-1; ++i) {
+# 			pt = this.pts[i];
+# 			pt.vx *= this.kDamp;
+# 			pt.vy *= this.kDamp;
+# 			pt.vx += pt.fx;
+# 			pt.vy += pt.fy;
+# 			pt.x += pt.vx;
+# 			pt.y += pt.vy;
+# 			this.lineTo(pt.x, pt.y);
+# 		}
+# 		i = this.pts.length-1;
+# 		this.lineTo(this.pts[i].x, this.pts[i].y);
+# 		//this.lineTo(this.pts[i].x, this.deep);
+# 		//this.lineTo(this.pts[0].x, this.deep);
+# 		this.lineTo(this.pts[i].x, WaterDeepness);
+# 		this.lineTo(this.pts[0].x, WaterDeepness);
+# 		this.lineTo(this.pts[0].x, this.pts[0].y);
+# 		this.endFill();
+# 	}
+# };
+# var d = 0;
+# var vd = 4;
+# kNbrLines = 1;
+# for (var i = 1; i<kNbrLines+1; ++i) {
+# 	var r = i/(kNbrLines-1);
+# 	var ir = 1-r;
+# 	var mc = this.createEmptyMovieClip(\"mc\"+i, kNbrLines*2+1-i*2);
+# 	mc._x = 0;
+# 	mc._y = SH/2-d;
+# 	var deep;
+# 	if (i == 0) {
+# 		deep = SH/2;
+# 	} else {
+# 		deep = d*2;
+# 	}
+# 	mc.makeWave(deep, mergeColor(0x333747, 0xD6D5D9, r*.9), .1+1*ir*ir, .1);
+# 	mc.onEnterFrame = mc.simWave;
+# 	d += vd;
+# 	vd /= 2;
+# }
+# SS = 10;
+# var mc = \"\";
+# mc.cy = SH/2.8;
+# mc._x = -SW;
+# mc._y = SH/4;
+# //
+# "
+
 [node name="Water Code" type="Node2D"]
+script = ExtResource("1_nglfh")
+source_xml = "res://sm63/LIBRARY/Effects/Water/Water Code.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_l84hs")
+"Timeline": SubResource("AnimationLibrary_sw6wo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -75,5 +270,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_g8oc5")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_2tcwh")

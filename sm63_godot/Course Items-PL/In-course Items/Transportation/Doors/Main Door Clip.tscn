@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_56g6t"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_cpm0e"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4k4mk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_fqqm4"]
 
-[sub_resource type="Animation" id="Animation_g6t23"]
+[sub_resource type="Animation" id="Animation_kd6x5"]
 length = 1.53333
 loop_mode = 1
 tracks/0/type = "value"
@@ -343,16 +343,230 @@ tracks/27/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l85qy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k6e14"]
 _data = {
-"Default": SubResource("Animation_g6t23")
+"Default": SubResource("Animation_kd6x5")
 }
 
+[sub_resource type="GDScript" id="GDScript_6ldef"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_hknqi"]
+script/source = "extends Node
+# if (doortype == undefined) {
+# 	doortype = 1;
+# }
+# if (locked == undefined) {
+# 	locked = false;
+# }
+# if (keytype == undefined) {
+# 	keytype = \"none\";
+# }
+# if (removelock == undefined) {
+# 	removelock = false;
+# }
+# //   
+# if (locked == true) {
+# 	if (removelock == true) {
+# 		gotoAndStop(3);
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# } else {
+# 	gotoAndStop(4);
+# 	onEnterFrame = null;
+# }
+# //
+# "
+
+[sub_resource type="GDScript" id="GDScript_tcdfq"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (removelock == true) {
+# 		gotoAndStop(3);
+# 	}
+# 	if (_root.PauseGame == false) {
+# 		if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false) {
+# 			//
+# 			if (_root.KeyUP() && !_root.KeyRIGHT() && !_root.KeyLEFT()) {
+# 				doorlockfunction();
+# 			}
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_y151e"]
+script/source = "extends Node
+# stop();
+# waittoopen = false;
+# _root.unlockdooritem = \"\";
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false) {
+# 			//trce(_root.DoorOpenedArray[dooropenarray]);
+# 			if ((_root.KeyUP() || _root.KeyTapUP()) && !_root.KeyRIGHT() && !_root.KeyLEFT() && walk !== \"front\") {
+# 				// Key unlock animation code here 
+# 				_root.Course.Char.attack = true;
+# 				_root.Course.Char.xspeed = 0;
+# 				if (dooropenarray !== undefined) {
+# 					if (_root.DoorOpenedArray[dooropenarray] == false && locked == true && removelock == true) {
+# 						_root.DoorOpenedArray[dooropenarray] = true;
+# 						_root.Course.Char.attackFrame = \"UnlockDoor\";
+# 						if (unlockitem !== undefined) {
+# 							// Put for opening Doors with Keys and Stuff
+# 							_root.heldItemObtained = unlockitem;
+# 							_root.unlockdooritem = \"Item\";
+# 						} else {
+# 							_root.unlockdooritem = \"\";
+# 						}
+# 						waittoopen = true;
+# 					}
+# 				}
+# 				if (openwithkey == true) {
+# 					// For the doors in Boos Mansion and Bowsers Castle...
+# 					waittoopen = true;
+# 					_root.Course.Char.attackFrame = \"UnlockDoor\";
+# 					if (unlockitem !== undefined) {
+# 						_root.heldItemObtained = unlockitem;
+# 						_root.unlockdooritem = \"Item\";
+# 					} else {
+# 						_root.unlockdooritem = \"\";
+# 					}
+# 				}
+# 				if (waittoopen == false) {
+# 					//  
+# 					if (walk == \"far\") {
+# 						_root.Course.Char.attackFrame = \"FarDoor\";
+# 					} else {
+# 						_root.Course.Char.attackFrame = \"Door\";
+# 					}
+# 					_root.door = doorplace;
+# 					gotoAndPlay(\"play\");
+# 				} else {
+# 					onEnterFrame = function () {
+# 						if (_root.PauseGame == false) {
+# 							_root.Course.Char.attack = true;
+# 							_root.Course.Char.attackFrame = \"UnlockDoor\";
+# 							X = _x+_parent._x;
+# 							_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 							if (_root.Course.Char.charClip.frame.done == true) {
+# 								if (walk == \"far\") {
+# 									_root.Course.Char.attackFrame = \"FarDoor\";
+# 								} else {
+# 									_root.Course.Char.attackFrame = \"Door\";
+# 								}
+# 								_root.door = doorplace;
+# 								gotoAndPlay(\"play\");
+# 								onEnterFrame = null;
+# 							}
+# 						}
+# 					};
+# 				}
+# 			} else if (walk == \"front\" && (_root.KeyDOWN() || _root.KeyTapDOWN()) && !_root.KeyRIGHT() && !_root.KeyLEFT()) {
+# 				_root.Course.Char.attack = true;
+# 				_root.Course.Char.xspeed = 0;
+# 				_root.Course.Char.attackFrame = \"FrontDoor\";
+# 				_root.door = doorplace;
+# 				gotoAndPlay(\"play\");
+# 			}
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_m8jr4"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false) {
+# 			if ((_root.KeyUP() || _root.KeyTapUP()) && !_root.KeyRIGHT() && !_root.KeyLEFT() && walk !== \"front\") {
+# 				_root.Course.Char.attack = true;
+# 				_root.Course.Char.xspeed = 0;
+# 				if (walk == \"far\") {
+# 					_root.Course.Char.attackFrame = \"FarDoor\";
+# 				} else {
+# 					_root.Course.Char.attackFrame = \"Door\";
+# 				}
+# 				_root.door = doorplace;
+# 				play();
+# 			} else if (walk == \"front\" && (_root.KeyDOWN() || _root.KeyTapDOWN()) && !_root.KeyRIGHT() && !_root.KeyLEFT()) {
+# 				_root.Course.Char.attack = true;
+# 				_root.Course.Char.xspeed = 0;
+# 				_root.Course.Char.attackFrame = \"FrontDoor\";
+# 				_root.door = doorplace;
+# 				play();
+# 			}
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_d0y4f"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	X = _x+_parent._x;
+# 	_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# };
+# _root.WarpPipeX = placeX;
+# _root.WarpPipeY = placeY;
+# "
+
+[sub_resource type="GDScript" id="GDScript_gj8el"]
+script/source = "extends Node
+# if (doortype !== 4) {
+# 	doorsound = \"DoorClose\";
+# } else {
+# 	doorsound = \"door-metal\";
+# }
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(doorsound);
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_myasc"]
+script/source = "extends Node
+# onEnterFrame = null"
+
+[sub_resource type="GDScript" id="GDScript_oxyfu"]
+script/source = "extends Node
+# if (doortype == 4) {
+# 	doorsound = \"door-close\";
+# 	//
+# 	_root.Mariosound = new Sound(this);
+# 	_root.Mariosound.attachSound(doorsound);
+# 	_root.Mariosound.start(0, 1);
+# 	_root.Mariosound.setVolume(_root.MarioVolume);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_d2ryl"]
+script/source = "extends Node
+# stop();
+# if(doorplace == \"XY\"){
+# 	_root.Camspeed = 1;
+# 	_root.MaxCamspeed = 99999;
+# 	gotoAndPlay(1);
+# }
+# "
+
 [node name="Main Door Clip" type="Node2D"]
+script = ExtResource("1_4k4mk")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.xml"
+linkage = "MainDoorClip"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_l85qy")
+"Timeline": SubResource("AnimationLibrary_k6e14")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -383,8 +597,8 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_56g6t")]
-script = ExtResource("2_cpm0e")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Castle Door Doors.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -400,8 +614,8 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9" instance=ExtResource("1_56g6t")]
-script = ExtResource("2_cpm0e")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9"]
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Castle Door Doors.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -417,10 +631,10 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 15" instance=ExtResource("1_56g6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 15"]
 position = Vector2(5.75, 0)
 scale = Vector2(0.245087, 1)
-script = ExtResource("2_cpm0e")
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Castle Door Doors.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -439,10 +653,10 @@ visible = false
 [node name="Frame 33" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 33" instance=ExtResource("1_56g6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 33"]
 position = Vector2(5.75, 0)
 scale = Vector2(0.245087, 1)
-script = ExtResource("2_cpm0e")
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Castle Door Doors.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -458,8 +672,8 @@ brightness = 0.0
 [node name="Frame 39" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 39" instance=ExtResource("1_56g6t")]
-script = ExtResource("2_cpm0e")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 39"]
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Castle Door Doors.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -479,9 +693,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_56g6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
 scale = Vector2(1.00519, 1)
-script = ExtResource("2_cpm0e")
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Door Lock.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -494,10 +708,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47707" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_56g6t")]
+[node name="@DOMSymbolInstance@47707" type="Node2D" parent="Layer 2/Frame 1"]
 position = Vector2(2.4, 13.1)
 scale = Vector2(0.338867, 0.637497)
-script = ExtResource("2_cpm0e")
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -510,12 +724,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 1/@DOMSymbolInstance@47707"]
+script = SubResource("GDScript_6ldef")
+
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 4" instance=ExtResource("1_56g6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 4"]
 scale = Vector2(1.00519, 1)
-script = ExtResource("2_cpm0e")
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Door Lock.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -531,9 +748,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 9" instance=ExtResource("1_56g6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 9"]
 scale = Vector2(1.00519, 1)
-script = ExtResource("2_cpm0e")
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Door Lock.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -549,10 +766,10 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 15" instance=ExtResource("1_56g6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 15"]
 position = Vector2(6.1, 0)
 scale = Vector2(0.272232, 1)
-script = ExtResource("2_cpm0e")
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Door Lock.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -571,10 +788,10 @@ visible = false
 [node name="Frame 33" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 33" instance=ExtResource("1_56g6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 33"]
 position = Vector2(6.1, 0)
 scale = Vector2(0.272232, 1)
-script = ExtResource("2_cpm0e")
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Door Lock.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -590,9 +807,9 @@ brightness = 0.0
 [node name="Frame 39" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 39" instance=ExtResource("1_56g6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 39"]
 scale = Vector2(1.00519, 1)
-script = ExtResource("2_cpm0e")
+script = ExtResource("2_fqqm4")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Door Lock.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -609,17 +826,32 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_hknqi")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_tcdfq")
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 2"]
+script = SubResource("GDScript_y151e")
+
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 3"]
+script = SubResource("GDScript_m8jr4")
+
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 4"]
+script = SubResource("GDScript_d0y4f")
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
@@ -627,14 +859,26 @@ visible = false
 [node name="Frame 13" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 13"]
+script = SubResource("GDScript_gj8el")
+
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 17"]
+script = SubResource("GDScript_myasc")
+
 [node name="Frame 34" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 34"]
+script = SubResource("GDScript_oxyfu")
 
 [node name="Frame 37" type="Node2D" parent="Layer 1"]
 visible = false
 
 [node name="Frame 45" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 45"]
+script = SubResource("GDScript_d2ryl")

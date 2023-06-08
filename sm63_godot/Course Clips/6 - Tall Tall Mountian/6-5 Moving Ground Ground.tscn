@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_ec8cc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gcmac"]
+
+[sub_resource type="Animation" id="Animation_5gn7r"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,56 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5gxej"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8j8jf"]
 _data = {
-"Default": SubResource("Animation_ec8cc")
+"Default": SubResource("Animation_5gn7r")
 }
 
+[sub_resource type="GDScript" id="GDScript_68kxl"]
+script/source = "extends Node
+# stop();
+# speed = -4*0.25;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		//
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# };
+# "
+
 [node name="6-5 Moving Ground Ground" type="Node2D"]
+script = ExtResource("1_gcmac")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-5 Moving Ground Ground.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5gxej")
+"Timeline": SubResource("AnimationLibrary_8j8jf")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +96,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_68kxl")

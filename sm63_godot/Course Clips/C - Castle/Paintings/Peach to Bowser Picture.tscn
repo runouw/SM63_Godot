@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_o54to"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_owp7p"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_46ctq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_rw58a"]
 
-[sub_resource type="Animation" id="Animation_wdmkg"]
+[sub_resource type="Animation" id="Animation_o7x7r"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,24 +43,41 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4vh7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qqr1e"]
 _data = {
-"Default": SubResource("Animation_wdmkg")
+"Default": SubResource("Animation_o7x7r")
 }
 
+[sub_resource type="GDScript" id="GDScript_cix87"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	distance = Math.abs((_x+_parent._x)-_root.Course.Char._x);
+# 	distance *= 2;
+# 	distance -= 70;
+# 	distance = Math.max(distance, 0);
+# 	distance = Math.min(distance, 100);
+# 	peach._alpha = distance;
+# };
+# "
+
 [node name="Peach to Bowser Picture" type="Node2D"]
+script = ExtResource("1_46ctq")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/Peach to Bowser Picture.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w4vh7")
+"Timeline": SubResource("AnimationLibrary_qqr1e")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_o54to")]
-script = ExtResource("2_owp7p")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("2_rw58a")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/Bowser Picture Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -77,8 +94,8 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_o54to")]
-script = ExtResource("2_owp7p")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_rw58a")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/Peach Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -94,3 +111,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_cix87")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Rocket) - 1.png" id="1_y0pmc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_w3v4s"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Rocket) - 1.png" id="2_vtpbn"]
 
-[sub_resource type="Animation" id="Animation_uj8bf"]
+[sub_resource type="Animation" id="Animation_soync"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6jech"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_my5su"]
 _data = {
-"Default": SubResource("Animation_uj8bf")
+"Default": SubResource("Animation_soync")
 }
 
 [node name="Luigi (Rocket) air 1" type="Node2D"]
+script = ExtResource("1_w3v4s")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi (Rocket) air 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6jech")
+"Timeline": SubResource("AnimationLibrary_my5su")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@14860" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-13.5, -20.5)
-texture = ExtResource("1_y0pmc")
+texture = ExtResource("2_vtpbn")
 centered = false

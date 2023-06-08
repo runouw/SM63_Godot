@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ie2n0"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ja0n3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_j23ee"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5rik5"]
 
-[sub_resource type="Animation" id="Animation_mkubj"]
+[sub_resource type="Animation" id="Animation_hgooi"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,25 +31,30 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6w24e"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_smwyp"]
 _data = {
-"Default": SubResource("Animation_mkubj")
+"Default": SubResource("Animation_hgooi")
 }
 
 [node name="8-UpperInsideMidBG" type="Node2D"]
+script = ExtResource("1_j23ee")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-UpperInsideMidBG.xml"
+linkage = "8-UpperInsideMidBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6w24e")
+"Timeline": SubResource("AnimationLibrary_smwyp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ie2n0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -483.95)
-script = ExtResource("2_ja0n3")
+script = ExtResource("2_5rik5")
 path = "res://sm63_godot/Course Clips/8-UpperInsideMidBGTint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

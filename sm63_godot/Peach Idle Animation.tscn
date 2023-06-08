@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Peach SPP - Idle.png" id="1_n6kvl"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Peach SPP - Idle 2.png" id="2_bb61o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_cavin"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Peach SPP - Idle.png" id="2_g0hlj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Peach SPP - Idle 2.png" id="3_fetij"]
 
-[sub_resource type="Animation" id="Animation_yqt3s"]
+[sub_resource type="Animation" id="Animation_0ik0u"]
 length = 2.0
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,33 +32,54 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_oj35m"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cw2fe"]
 _data = {
-"Default": SubResource("Animation_yqt3s")
+"Default": SubResource("Animation_0ik0u")
 }
 
+[sub_resource type="GDScript" id="GDScript_upolq"]
+script/source = "extends Node
+# gotoAndPlay(random(15)+1);
+# "
+
+[sub_resource type="GDScript" id="GDScript_bwdfb"]
+script/source = "extends Node
+# gotoAndPlay(random(15)+30);
+# "
+
 [node name="Peach Idle Animation" type="Node2D"]
+script = ExtResource("1_cavin")
+source_xml = "res://sm63/LIBRARY/Peach Idle Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_oj35m")
+"Timeline": SubResource("AnimationLibrary_cw2fe")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_upolq")
+
 [node name="@@13586" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-10, -19)
-texture = ExtResource("1_n6kvl")
+texture = ExtResource("2_g0hlj")
 centered = false
 
 [node name="Frame 30" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 30"]
+script = SubResource("GDScript_bwdfb")
+
 [node name="@@13587" type="Sprite2D" parent="Layer 1/Frame 30"]
 texture_filter = 1
 position = Vector2(-10, -20)
-texture = ExtResource("2_bb61o")
+texture = ExtResource("3_fetij")
 centered = false

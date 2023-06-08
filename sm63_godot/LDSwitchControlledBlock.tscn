@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Switch Brick.png" id="1_el7fi"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1vu6u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Switch Brick.png" id="2_xewpn"]
 
-[sub_resource type="Animation" id="Animation_cu57k"]
+[sub_resource type="Animation" id="Animation_u5bys"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,39 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_or5gc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_csbnr"]
 _data = {
-"Default": SubResource("Animation_cu57k")
+"Default": SubResource("Animation_u5bys")
 }
 
+[sub_resource type="GDScript" id="GDScript_yqaju"]
+script/source = "extends Node
+# if (_root.LevelDesignerMenu == true) {
+# 	_alpha = 50;
+# } else {
+# 	_visible = false;
+# 	onEnterFrame = function () {
+# 		if (_root.OrangeBlockPLCount>0) {
+# 			if (_root.OrangeBlockPLCount>32*60 || Math.round(_root.OrangeBlockPLCount/Math.round(_root.OrangeBlockPLCount/16))%2 == 0) {
+# 				_visible = true;
+# 			} else {
+# 				_visible = false;
+# 			}
+# 		}
+# 	};
+# }
+# "
+
 [node name="LDSwitchControlledBlock" type="Node2D"]
+script = ExtResource("1_1vu6u")
+source_xml = "res://sm63/LIBRARY/LDSwitchControlledBlock.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_or5gc")
+"Timeline": SubResource("AnimationLibrary_csbnr")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,7 +75,7 @@ libraries = {
 [node name="@@11918" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_el7fi")
+texture = ExtResource("2_xewpn")
 texture_offset = Vector2(16, 16)
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -67,3 +91,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_yqaju")

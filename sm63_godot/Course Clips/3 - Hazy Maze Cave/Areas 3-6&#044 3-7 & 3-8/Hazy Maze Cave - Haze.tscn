@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_5o8dk"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mnbj7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dpp4y"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gkmyw"]
 
-[sub_resource type="Animation" id="Animation_cgrxr"]
+[sub_resource type="Animation" id="Animation_u2d1q"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,16 +79,149 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dx4u5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2rt2e"]
 _data = {
-"Default": SubResource("Animation_cgrxr")
+"Default": SubResource("Animation_u2d1q")
 }
 
+[sub_resource type="GDScript" id="GDScript_lpj2j"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 1765;
+# 	polygons = 54;
+# 	randomwave = 0.5;
+# 	//redcolor = 88;
+# 	//greencolor = 30;
+# 	//bluecolor = 225;
+# 	redcolor = 111;
+# 	greencolor = 221;
+# 	bluecolor = 0;
+# 	waterstength = 0.1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_1xw1d"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 1250;
+# 	polygons = 24;
+# 	randomwave = 0.5;
+# 	//redcolor = 88;
+# 	//greencolor = 30;
+# 	//bluecolor = 225;
+# 	redcolor = 111;
+# 	greencolor = 221;
+# 	bluecolor = 0;
+# 	waterstength = 0.1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_y0pv4"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 542;
+# 	polygons = 21;
+# 	randomwave = 0.5;
+# 	//redcolor = 88;
+# 	//greencolor = 30;
+# 	//bluecolor = 225;
+# 	redcolor = 111;
+# 	greencolor = 221;
+# 	bluecolor = 0;
+# 	waterstength = 0.1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_wlsu5"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_bmyco"]
+script/source = "extends Node
+# count = 0;
+# hit = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.box.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y-7)*_root.coursescale/100)+_root.Course._y, true) && _root.Metal !== true) {
+# 			//
+# 			if (_root.Metal == false && _root.Invincible == false && _root.Invisible == false) {
+# 				if (hit == false) {
+# 					//_root.HazymazeCaveSongChange(1);
+# 				}
+# 				hit = true;
+# 			}
+# 			//    
+# 			_root.Coure.Char.xspeed *= 0.97;
+# 			_root.Coure.Char.yspeed *= 0.95;
+# 			_root.Course.Char.fallcount = 0;
+# 			//
+# 			count++;
+# 			if (count>32*1.5) {
+# 				_root.Mariosound = new Sound(this);
+# 				_root.Mariosound.attachSound(\"sound - Drain\");
+# 				_root.Mariosound.start(0, 1);
+# 				_root.Mariosound.setVolume(_root.MarioVolume);
+# 				_root.CharHP--;
+# 				if (_root.CharHP<=0) {
+# 					_root.Course.Char.attack = true;
+# 					_root.Course.Char.attackFrame = \"Drown\";
+# 				}
+# 				count = 0;
+# 			}
+# 		} else {
+# 			if (_root.Metal == false && _root.Invincible == false && _root.Invisible == false) {
+# 				if (hit == true) {
+# 					//_root.HazymazeCaveSongChange(0);
+# 				}
+# 				hit = false;
+# 			}
+# 			count = 0;
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_5htm2"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_jrvlo"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_3lyix"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 50;
+# 	polygons = 12;
+# 	randomwave = 0.5;
+# 	//redcolor = 88;
+# 	//greencolor = 30;
+# 	//bluecolor = 225;
+# 	redcolor = 111;
+# 	greencolor = 221;
+# 	bluecolor = 0;
+# 	waterstength = 0.1;
+# }
+# "
+
 [node name="Hazy Maze Cave - Haze" type="Node2D"]
+script = ExtResource("1_dpp4y")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-6&#044 3-7 & 3-8/Hazy Maze Cave - Haze.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dx4u5")
+"Timeline": SubResource("AnimationLibrary_2rt2e")
 }
 
 [node name="Haze" type="Node2D" parent="."]
@@ -105,10 +238,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="Frame 1" type="Node2D" parent="Haze"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Haze/Frame 1" instance=ExtResource("1_5o8dk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Haze/Frame 1"]
 position = Vector2(-180, 569.9)
 scale = Vector2(1, 1.00417)
-script = ExtResource("2_mnbj7")
+script = ExtResource("2_gkmyw")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -121,10 +254,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@28920" type="Node2D" parent="Haze/Frame 1" instance=ExtResource("1_5o8dk")]
+[node name="AS2" type="Node" parent="Haze/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_lpj2j")
+
+[node name="@DOMSymbolInstance@28920" type="Node2D" parent="Haze/Frame 1"]
 position = Vector2(1639.45, 657.9)
 scale = Vector2(1, 1.00417)
-script = ExtResource("2_mnbj7")
+script = ExtResource("2_gkmyw")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -137,10 +273,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@28921" type="Node2D" parent="Haze/Frame 1" instance=ExtResource("1_5o8dk")]
+[node name="AS2" type="Node" parent="Haze/Frame 1/@DOMSymbolInstance@28920"]
+script = SubResource("GDScript_1xw1d")
+
+[node name="@DOMSymbolInstance@28921" type="Node2D" parent="Haze/Frame 1"]
 position = Vector2(3030, 817.9)
 scale = Vector2(1, 1.00555)
-script = ExtResource("2_mnbj7")
+script = ExtResource("2_gkmyw")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -152,15 +291,18 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Haze/Frame 1/@DOMSymbolInstance@28921"]
+script = SubResource("GDScript_y0pv4")
 
 [node name="Box(Mask)" type="Node2D" parent="."]
 visible = false
 
 [node name="Frame 0" type="Node2D" parent="Box(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Box(Mask)/Frame 0" instance=ExtResource("1_5o8dk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Box(Mask)/Frame 0"]
 position = Vector2(1536.05, 797)
-script = ExtResource("2_mnbj7")
+script = ExtResource("2_gkmyw")
 path = "res://sm63_godot/Course Clips/3 - Hazy Maze Cave/3-6 Haze Box.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -172,6 +314,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Box(Mask)/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_wlsu5")
 
 [node name="Frame 1" type="Node2D" parent="Box(Mask)"]
 visible = false
@@ -187,12 +332,18 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_bmyco")
+
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_5o8dk")]
+[node name="AS2" type="Node" parent="Layer 3/Frame 1"]
+script = SubResource("GDScript_5htm2")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(1536.05, 797)
-script = ExtResource("2_mnbj7")
+script = ExtResource("2_gkmyw")
 path = "res://sm63_godot/Course Clips/3 - Hazy Maze Cave/3-6 Haze Box.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -205,10 +356,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@28917" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_5o8dk")]
+[node name="AS2" type="Node" parent="Layer 3/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_jrvlo")
+
+[node name="@DOMSymbolInstance@28917" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(2368, 830.05)
 scale = Vector2(1, 1.00415)
-script = ExtResource("2_mnbj7")
+script = ExtResource("2_gkmyw")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -220,3 +374,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 1/@DOMSymbolInstance@28917"]
+script = SubResource("GDScript_3lyix")

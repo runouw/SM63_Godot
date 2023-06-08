@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_yiw2w"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6uiy7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_i8xud"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_y434c"]
 
-[sub_resource type="Animation" id="Animation_11ben"]
+[sub_resource type="Animation" id="Animation_jmykn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,39 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rinia"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6hqu0"]
 _data = {
-"Default": SubResource("Animation_11ben")
+"Default": SubResource("Animation_jmykn")
 }
 
+[sub_resource type="GDScript" id="GDScript_6gs6y"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 3000;
+# 	polygons = 100;
+# 	WaterDeepness = 800;
+# }
+# "
+
 [node name="9-03-DWater" type="Node2D"]
+script = ExtResource("1_i8xud")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-03-DWater.xml"
+linkage = "9-03-DWater"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rinia")
+"Timeline": SubResource("AnimationLibrary_6hqu0")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_yiw2w")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(539, 234.9)
-script = ExtResource("2_6uiy7")
+script = ExtResource("2_y434c")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -74,9 +88,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20657" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_yiw2w")]
+[node name="@DOMSymbolInstance@20657" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(2208.5, 234.9)
-script = ExtResource("2_6uiy7")
+script = ExtResource("2_y434c")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -94,9 +108,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2(Mask)/Frame 0" instance=ExtResource("1_yiw2w")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2(Mask)/Frame 0"]
 position = Vector2(-76.55, -93.05)
-script = ExtResource("2_6uiy7")
+script = ExtResource("2_y434c")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -108,6 +122,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 2(Mask)/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_6gs6y")
 
 [node name="Layer 1" type="Node2D" parent="."]
 

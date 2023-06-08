@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="1_8hf80"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kcqf3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="2_1pqoy"]
 
-[sub_resource type="Animation" id="Animation_mjx7y"]
+[sub_resource type="Animation" id="Animation_12mpw"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_skkb3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3r6td"]
 _data = {
-"Default": SubResource("Animation_mjx7y")
+"Default": SubResource("Animation_12mpw")
 }
 
 [node name="BC-2 ConveyerRock 1" type="Node2D"]
+script = ExtResource("1_kcqf3")
+source_xml = "res://sm63/LIBRARY/BC-2 ConveyerRock 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_skkb3")
+"Timeline": SubResource("AnimationLibrary_3r6td")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@488" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_8hf80")
+texture = ExtResource("2_1pqoy")
 texture_offset = Vector2(16, 16)
 polygon = PackedVector2Array(2.85, -36, 36, -36, 36, -18, -9, -18, -1, -20, -36, -18.825, -36, -18.825, -22.5806, -18.2285, -9, -18, -36, -18, -36, -18.2285, -36, -18, 36, -18, 36, 34.75, 36, 34.75, 16.793, 31.6161, -1.20703, 26.3661, -18, 19, -26.2478, 10.0997, -36, 3.875)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15, 16, 17, 18, 19)])

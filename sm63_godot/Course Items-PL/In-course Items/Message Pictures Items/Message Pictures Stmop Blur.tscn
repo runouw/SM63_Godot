@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (None) - Hurt - 3.png" id="1_5iqxu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u1w38"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (None) - Hurt - 3.png" id="2_cktbu"]
 
-[sub_resource type="Animation" id="Animation_kkes0"]
+[sub_resource type="Animation" id="Animation_7winh"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vbey7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tikne"]
 _data = {
-"Default": SubResource("Animation_kkes0")
+"Default": SubResource("Animation_7winh")
 }
 
 [node name="Message Pictures Stmop Blur" type="Node2D"]
+script = ExtResource("1_u1w38")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Message Pictures Items/Message Pictures Stmop Blur.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vbey7")
+"Timeline": SubResource("AnimationLibrary_tikne")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@47125" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-11.5, -14)
-texture = ExtResource("1_5iqxu")
+texture = ExtResource("2_cktbu")
 centered = false

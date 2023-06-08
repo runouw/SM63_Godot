@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_gdxdi"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_88u3y"]
+
+[sub_resource type="Animation" id="Animation_ykdy2"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqtal"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vuc0m"]
 _data = {
-"Default": SubResource("Animation_gdxdi")
+"Default": SubResource("Animation_ykdy2")
 }
 
 [node name="Menu Red Transition Text" type="Node2D"]
+script = ExtResource("1_88u3y")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Story/Menu Red Transition Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dqtal")
+"Timeline": SubResource("AnimationLibrary_vuc0m")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

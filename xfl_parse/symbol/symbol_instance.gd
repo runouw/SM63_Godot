@@ -21,7 +21,13 @@ var _loaded: bool = false
 func _ready():
 	_update_color()
 	
-	if get_child_count() > 0:
+	var has_instance_already: bool = false
+	for child in get_children():
+		if child is Node2D:
+			has_instance_already = true
+			break
+	
+	if has_instance_already:
 		_loaded = true
 		return
 	
@@ -29,11 +35,13 @@ func _ready():
 	
 	if is_visible_in_tree():
 		_do_load()
-	else:
-		visibility_changed.connect(func():
-			if is_inside_tree() and is_visible_in_tree() and _loaded == false:
-				_do_load()
-		, CONNECT_ONE_SHOT)
+	
+	visibility_changed.connect(func():
+		if is_inside_tree() and is_visible_in_tree() and _loaded == false:
+			_do_load()
+		if is_inside_tree() and not is_visible_in_tree() and _loaded == true:
+			_do_unload()
+	)
 
 
 func _update_color():
@@ -68,3 +76,11 @@ func _do_load():
 			var instance = packed_scene.instantiate()
 			add_child(instance)
 			instance.owner = owner
+
+
+func _do_unload():
+	_loaded = false
+	
+	for child in get_children():
+		if child is Node2D:
+			child.queue_free()

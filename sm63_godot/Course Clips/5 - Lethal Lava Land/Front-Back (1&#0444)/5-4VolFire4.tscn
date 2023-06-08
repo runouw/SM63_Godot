@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_4bog3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_v74p8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_e18g8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_rbhqg"]
 
-[sub_resource type="Animation" id="Animation_y8o2n"]
+[sub_resource type="Animation" id="Animation_pnqfm"]
 length = 2.93333
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,24 +79,54 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pl32n"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6gof"]
 _data = {
-"Default": SubResource("Animation_y8o2n")
+"Default": SubResource("Animation_pnqfm")
 }
 
+[sub_resource type="GDScript" id="GDScript_6c05o"]
+script/source = "extends Node
+# yspeed = -(random(13)+9);
+# xspeed = (random(6)-2.5)*3;
+# rotspeed = (random(6)-2.5)*3;
+# onEnterFrame = function () {
+# 	_y += yspeed;
+# 	_x += xspeed;
+# 	_rotation += rotspeed;
+# 	yspeed += 0.5;
+# 	yspeed *= 0.98;
+# 	xspeed *= 0.99
+# 	if (end == true) {
+# 		this.removeMovieClip();
+# 		stop();
+# 		yspeed = 0;
+# 		xspeed = 0;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ydi2w"]
+script/source = "extends Node
+# end = true"
+
 [node name="5-4VolFire4" type="Node2D"]
+script = ExtResource("1_e18g8")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-4VolFire4.xml"
+linkage = "5-4VolFire4"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pl32n")
+"Timeline": SubResource("AnimationLibrary_f6gof")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_4bog3")]
-script = ExtResource("2_v74p8")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_rbhqg")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-4VolRockFrame.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -112,8 +142,8 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_4bog3")]
-script = ExtResource("2_v74p8")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
+script = ExtResource("2_rbhqg")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-4VolRockFrame.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -129,8 +159,8 @@ brightness = 0.0
 [node name="Frame 79" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 79" instance=ExtResource("1_4bog3")]
-script = ExtResource("2_v74p8")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 79"]
+script = ExtResource("2_rbhqg")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-4VolRockFrame.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -146,8 +176,8 @@ brightness = 0.0
 [node name="Frame 87" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 87" instance=ExtResource("1_4bog3")]
-script = ExtResource("2_v74p8")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 87"]
+script = ExtResource("2_rbhqg")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-4VolRockFrame.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -164,5 +194,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_6c05o")
+
 [node name="Frame 87" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 87"]
+script = SubResource("GDScript_ydi2w")

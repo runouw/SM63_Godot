@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Turbo) 5.png" id="1_q02h3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 5.png" id="2_0fvox"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pbve2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Turbo) 5.png" id="2_0x0ra"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 5.png" id="3_vap8f"]
 
-[sub_resource type="Animation" id="Animation_8vivy"]
+[sub_resource type="Animation" id="Animation_hf55y"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tfnip"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i4ddd"]
 _data = {
-"Default": SubResource("Animation_8vivy")
+"Default": SubResource("Animation_hf55y")
 }
 
 [node name="Message Picture - Pictures Turbo Blurr" type="Node2D"]
+script = ExtResource("1_pbve2")
+source_xml = "res://sm63/LIBRARY/Message Picture - Pictures Turbo Blurr.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tfnip")
+"Timeline": SubResource("AnimationLibrary_i4ddd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -40,7 +46,7 @@ texture_filter = 1
 position = Vector2(36.6, -19.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_q02h3")
+texture = ExtResource("2_0x0ra")
 centered = false
 
 [node name="@@13283" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -48,5 +54,5 @@ texture_filter = 1
 position = Vector2(6.35, -22.3)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_0fvox")
+texture = ExtResource("3_vap8f")
 centered = false

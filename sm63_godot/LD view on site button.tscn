@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_iawcv"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_7v648"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_p00q1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ml3w1"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_31lps"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_q35f6"]
 
-[sub_resource type="Animation" id="Animation_cs7bk"]
+[sub_resource type="Animation" id="Animation_copb6"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,38 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7iltc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vx257"]
 _data = {
-"Default": SubResource("Animation_cs7bk")
+"Default": SubResource("Animation_copb6")
 }
 
+[sub_resource type="GDScript" id="GDScript_fca3v"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		xs = 120;
+# 	} else {
+# 		xs = 100;
+# 	}
+# 	_xscale += (xs-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (xs == 120) {
+# 		getURL(\"http://runouw.com/levels/viewlevel.php?id=\"+_root.LDSelectedLevel, \"_blank\");
+# 	}
+# };"
+
 [node name="LD view on site button" type="Node2D"]
+script = ExtResource("1_ml3w1")
+source_xml = "res://sm63/LIBRARY/LD view on site button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7iltc")
+"Timeline": SubResource("AnimationLibrary_vx257")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -65,7 +87,7 @@ libraries = {
 [node name="@@8781" type="Polygon2D" parent="Layer 3/Frame 0/Shape"]
 polygon = PackedVector2Array(-57.525, -11.05, 57.475, -11.05, 57.475, 11.05, -57.525, 11.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_iawcv")
+script = ExtResource("2_31lps")
 matrix = Transform2D(0.12323, 0, 0, 0.0714722, -54.95, -12)
 entries_color = PackedColorArray(0.337255, 0.666667, 0.996078, 1, 0.00392157, 0.262745, 0.427451, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -83,8 +105,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_7v648")]
-script = ExtResource("3_p00q1")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("3_q35f6")
 path = "res://sm63_godot/LD view on site text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,3 +122,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_fca3v")

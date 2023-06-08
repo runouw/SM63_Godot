@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_lns07"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ie10x"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Stone PL x2.png" id="3_aecug"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Mesh Fence Large.png" id="4_m51yh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_l3jol"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_d8uvd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Stone PL x2.png" id="3_whfdj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Mesh Fence Large.png" id="4_btr4y"]
 
-[sub_resource type="Animation" id="Animation_q7w4q"]
+[sub_resource type="Animation" id="Animation_l6siu"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -33,26 +33,58 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_g4wmt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e6gk6"]
 _data = {
-"Default": SubResource("Animation_q7w4q")
+"Default": SubResource("Animation_l6siu")
 }
 
+[sub_resource type="GDScript" id="GDScript_vtcgs"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	OffWait = 0
+# 	OnWait = \"endless\"
+# 	offstart = 0
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_vnrgv"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	OffWait = 0
+# 	OnWait = \"endless\"
+# 	offstart = 0
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_y0bqk"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	OffWait = 0
+# 	OnWait = \"endless\"
+# 	offstart = 0
+# }
+# "
+
 [node name="6-5FrontGFX" type="Node2D"]
+script = ExtResource("1_l3jol")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-5FrontGFX.xml"
+linkage = "6-5FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_g4wmt")
+"Timeline": SubResource("AnimationLibrary_e6gk6")
 }
 
 [node name="Ground" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Ground"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Ground/Frame 0" instance=ExtResource("1_lns07")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Ground/Frame 0"]
 position = Vector2(0, 250)
 rotation = 1.5708
-script = ExtResource("2_ie10x")
+script = ExtResource("2_d8uvd")
 path = "res://sm63_godot/Course Clips/6 - Tall Tall Mountian/6-5 Moving Ground GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -76,15 +108,15 @@ brightness = 0.0
 [node name="@@32747" type="Polygon2D" parent="Lines/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_aecug")
+texture = ExtResource("3_whfdj")
 texture_offset = Vector2(651.5, -862.4)
 polygon = PackedVector2Array(-837.45, 862.4, -618.5, 862.4, -618.5, 869.95, -837.45, 869.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Lines/Frame 0" instance=ExtResource("1_lns07")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Lines/Frame 0"]
 position = Vector2(-676.95, 897.05)
 scale = Vector2(0.777191, 0.564728)
-script = ExtResource("2_ie10x")
+script = ExtResource("2_d8uvd")
 path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -97,10 +129,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@32748" type="Node2D" parent="Lines/Frame 0" instance=ExtResource("1_lns07")]
+[node name="AS2" type="Node" parent="Lines/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_vtcgs")
+
+[node name="@DOMSymbolInstance@32748" type="Node2D" parent="Lines/Frame 0"]
 position = Vector2(-786.95, 897.05)
 scale = Vector2(0.777191, 0.564728)
-script = ExtResource("2_ie10x")
+script = ExtResource("2_d8uvd")
 path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -113,10 +148,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@32749" type="Node2D" parent="Lines/Frame 0" instance=ExtResource("1_lns07")]
+[node name="AS2" type="Node" parent="Lines/Frame 0/@DOMSymbolInstance@32748"]
+script = SubResource("GDScript_vnrgv")
+
+[node name="@DOMSymbolInstance@32749" type="Node2D" parent="Lines/Frame 0"]
 position = Vector2(-636.95, 897.05)
 scale = Vector2(0.777191, 0.564728)
-script = ExtResource("2_ie10x")
+script = ExtResource("2_d8uvd")
 path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -128,6 +166,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Lines/Frame 0/@DOMSymbolInstance@32749"]
+script = SubResource("GDScript_y0bqk")
 
 [node name="@Group@32750" type="Node2D" parent="Lines/Frame 0"]
 
@@ -166,7 +207,7 @@ end_cap_mode = 2
 [node name="@@32757" type="Polygon2D" parent="Lines/Frame 0/@Group@32756/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_m51yh")
+texture = ExtResource("4_btr4y")
 texture_offset = Vector2(540.05, -1228.45)
 polygon = PackedVector2Array(-685.05, 580.95, -315.05, 580.95, -315.05, 633.95, -685.05, 633.95, -685.05, 633.95, -629.05, 633.95, -629.05, 700.2, -685.05, 700.2, -685.05, 636.95, -517.05, 633.95, -315.05, 633.95, -315.05, 636.95, -517.05, 636.95, -517.05, 636.95, -461.05, 636.95, -461.05, 700.2, -517.05, 700.2, -685.05, 700.2, -461.05, 700.2, -461.05, 756, -685.05, 756, -396.7, 915.95, -339.15, 915.95, -339.15, 949.15, -396.7, 949.15, -396.7, 916.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25)])
@@ -174,7 +215,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@32758" type="Polygon2D" parent="Lines/Frame 0/@Group@32756/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_m51yh")
+texture = ExtResource("4_btr4y")
 texture_offset = Vector2(264.1, -1259.25)
 polygon = PackedVector2Array(-120.75, 946.75, -16.1, 946.75, -16.1, 979.95, -120.75, 979.95, -120.75, 949.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -182,7 +223,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@32759" type="Polygon2D" parent="Lines/Frame 0/@Group@32756/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_m51yh")
+texture = ExtResource("4_btr4y")
 texture_offset = Vector2(385.1, -1259.25)
 polygon = PackedVector2Array(-241.75, 946.75, -184.2, 946.75, -184.2, 979.95, -241.75, 979.95, -241.75, 949.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -190,7 +231,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@32760" type="Polygon2D" parent="Lines/Frame 0/@Group@32756/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_m51yh")
+texture = ExtResource("4_btr4y")
 texture_offset = Vector2(96.1, -1163.8)
 polygon = PackedVector2Array(47.25, 851.95, 152.85, 851.95, 152.85, 884.5, 47.25, 884.5, 47.25, 879.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -198,7 +239,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@32761" type="Polygon2D" parent="Lines/Frame 0/@Group@32756/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_m51yh")
+texture = ExtResource("4_btr4y")
 texture_offset = Vector2(662.05, -1229.45)
 polygon = PackedVector2Array(-493.05, 916.95, -461.15, 916.95, -461.15, 950.15, -493.05, 950.15, -493.05, 939.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -206,7 +247,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@32762" type="Polygon2D" parent="Lines/Frame 0/@Group@32756/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_m51yh")
+texture = ExtResource("4_btr4y")
 texture_offset = Vector2(-285.8, -1159.8)
 polygon = PackedVector2Array(429.15, 847.3, 461.85, 847.3, 461.85, 880.5, 429.15, 880.5, 429.15, 851.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -214,7 +255,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@32763" type="Polygon2D" parent="Lines/Frame 0/@Group@32756/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_m51yh")
+texture = ExtResource("4_btr4y")
 texture_offset = Vector2(-415.25, -1158.8)
 polygon = PackedVector2Array(558.6, 846.3, 591.3, 846.3, 591.3, 879.5, 558.6, 879.5, 558.6, 847.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -222,7 +263,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@32764" type="Polygon2D" parent="Lines/Frame 0/@Group@32756/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_m51yh")
+texture = ExtResource("4_btr4y")
 texture_offset = Vector2(668.05, -1227.45)
 polygon = PackedVector2Array(-832.05, 915.95, -779.05, 915.95, -779.05, 939.15, -832.05, 939.15, -832.05, 916.95, -692.05, 915.95, -587.15, 915.95, -587.15, 939.15, -692.05, 939.15, -692.05, 916.95, -832.05, 939.15, -587.15, 939.15, -587.15, 949.15, -832.05, 949.15, -832.05, 946.75, -787.95, 949.15, -683.05, 949.15, -683.05, 970.95, -787.95, 970.95, -787.95, 950.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18, 19)])
@@ -243,10 +284,10 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="@DOMSymbolInstance@32767" type="Node2D" parent="Lines/Frame 0" instance=ExtResource("1_lns07")]
+[node name="@DOMSymbolInstance@32767" type="Node2D" parent="Lines/Frame 0"]
 position = Vector2(-531.2, 884.9)
 rotation = 3.14159
-script = ExtResource("2_ie10x")
+script = ExtResource("2_d8uvd")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Invis Cap Arrows.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_03yg3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_sooax"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qa6v6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_p6sd6"]
 
-[sub_resource type="Animation" id="Animation_4ink8"]
+[sub_resource type="Animation" id="Animation_mqkf5"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,25 +55,41 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r311o"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p08xr"]
 _data = {
-"Default": SubResource("Animation_4ink8")
+"Default": SubResource("Animation_mqkf5")
 }
 
+[sub_resource type="GDScript" id="GDScript_og11p"]
+script/source = "extends Node
+# if (_root.Star[41] == true) {
+# 	stop();
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_wyark"]
+script/source = "extends Node
+# stop();"
+
 [node name="Castle Grounds Warpipe" type="Node2D"]
+script = ExtResource("1_qa6v6")
+source_xml = "res://sm63/LIBRARY/Castle Grounds Warpipe.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_r311o")
+"Timeline": SubResource("AnimationLibrary_p08xr")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_03yg3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 0.05)
-script = ExtResource("2_sooax")
+script = ExtResource("2_p6sd6")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Warp Pipe/Green WarpPipe.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -93,5 +109,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_og11p")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_wyark")

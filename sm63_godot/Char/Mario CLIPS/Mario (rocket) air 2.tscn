@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Rocket) 2.png" id="1_1pnct"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_kseh4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_k476j"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8ecqa"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Rocket) 2.png" id="2_q6sed"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_nb8jo"]
 
-[sub_resource type="Animation" id="Animation_0rpm1"]
+[sub_resource type="Animation" id="Animation_k1dyb"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ddtwj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rvwug"]
 _data = {
-"Default": SubResource("Animation_0rpm1")
+"Default": SubResource("Animation_k1dyb")
 }
 
 [node name="Mario (rocket) air 2" type="Node2D"]
+script = ExtResource("1_8ecqa")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (rocket) air 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ddtwj")
+"Timeline": SubResource("AnimationLibrary_rvwug")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,18 +56,18 @@ libraries = {
 [node name="@@15460" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-13, -22.5)
-texture = ExtResource("1_1pnct")
+texture = ExtResource("2_q6sed")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_kseh4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0.6, -4.8)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("3_k476j")
+script = ExtResource("3_nb8jo")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

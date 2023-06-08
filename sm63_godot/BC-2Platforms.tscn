@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=26 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_vthod"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_owpfo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_bfg62"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_r8q1w"]
 
-[sub_resource type="Animation" id="Animation_hq4gp"]
+[sub_resource type="Animation" id="Animation_ofks4"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +19,927 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cdvql"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ufrh0"]
 _data = {
-"Default": SubResource("Animation_hq4gp")
+"Default": SubResource("Animation_ofks4")
 }
 
+[sub_resource type="GDScript" id="GDScript_jh2yk"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -0.1;
+# 	fallspeed = 1;
+# 	started = false;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (started == true) {
+# 			_rotation += speed;
+# 			_y += fallspeed;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 			_root.Course.FrontGFX.fall1.started = true;
+# 			started = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_6mlpk"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 0.3;
+# 	fallspeed = 1;
+# 	started = false;
+# 	xspeed = 1.2;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (started == true) {
+# 			_rotation += speed;
+# 			_y += fallspeed;
+# 			_x += xspeed;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff+xspeed;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 			started = true;
+# 			_root.Course.FrontGFX.fall2.started = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff+xspeed;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_0v3ve"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -2.5;
+# 	fallspeed = 0.6;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y>700) {
+# 			_y -= 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_121xv"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -1.5;
+# 	fallspeed = 1;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y>700) {
+# 			_y -= 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_udu82"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 2.1;
+# 	fallspeed = -1
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y<-600) {
+# 			_y += 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_2x6n7"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 2.1;
+# 	fallspeed = 0.6
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if(_y > 700){
+# 			_y -= 1400;
+# 		}
+# 		//
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ajtfh"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -1.2
+# 	fallspeed = -1
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y<-600) {
+# 			_y += 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_3uf6f"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 1
+# 	fallspeed = -1
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y<-600) {
+# 			_y += 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_tm2rn"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -1.9;
+# 	fallspeed = 0.6;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y>700) {
+# 			_y -= 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_1itnq"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 1.4;
+# 	fallspeed = 1;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y>700) {
+# 			_y -= 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_u4td4"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -1;
+# 	fallspeed = 1;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y>700) {
+# 			_y -= 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_3iq05"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -0.1
+# 	fallspeed = 0.6;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_wr8lo"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 0.5
+# 	fallspeed = 1;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y>700) {
+# 			_y -= 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_1g34v"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 0.2;
+# 	fallspeed = -1;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y>700) {
+# 			_y -= 1400;
+# 		}
+# 		//  
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_vhyo7"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 1
+# 	fallspeed = -1
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y>700) {
+# 			_y -= 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_2t7fu"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -3.5;
+# 	fallspeed = -1
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if(_y > 700){
+# 			_y -= 1400;
+# 		}
+# 		//
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_b0ucp"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 2
+# 	fallspeed = -0.7
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y<-600) {
+# 			_y += 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_vqfxa"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -1.7
+# 	fallspeed = -0.7
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y<-600) {
+# 			_y += 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_dw086"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 1
+# 	fallspeed = -0.7
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y>700) {
+# 			_y -= 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_4snq8"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 0.5
+# 	fallspeed = -0.7
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y<-600) {
+# 			_y += 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_vkr6j"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 0.7
+# 	fallspeed = -0.7
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		if (_y<-600) {
+# 			_y += 1400;
+# 		}
+# 		// 
+# 		ydistance = (_y+_parent._y)-_root.Course.Char._y;
+# 		xdistance = (_x+_parent._x)-_root.Course.Char._x;
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		rot = Math.atan2(ydistance, xdistance);
+# 		xdiff = Math.cos(rot)*distance-Math.cos(rot+_root.angleToRadians(this.speed))*distance;
+# 		ydiff = Math.sin(rot)*distance-Math.sin(rot+_root.angleToRadians(this.speed))*distance;
+# 		//
+# 		if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.air == false) {
+# 			_root.Course.Char._x += xdiff;
+# 			_root.Course.Char._y += ydiff+fallspeed;
+# 			//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 			if (landedon == false) {
+# 				_root.Course.Char.xspeed -= xdiff;
+# 				//
+# 			}
+# 			landedon = true;
+# 		} else {
+# 			if (landedon == true) {
+# 				_root.Course.Char.xspeed += xdiff;
+# 				_root.Course.Char.yspeed += ydiff;
+# 			}
+# 			landedon = false;
+# 		}
+# 	}
+# }
+# "
+
 [node name="BC-2Platforms" type="Node2D"]
+script = ExtResource("1_bfg62")
+source_xml = "res://sm63/LIBRARY/BC-2Platforms.xml"
+linkage = "BC-2Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_cdvql")
+"Timeline": SubResource("AnimationLibrary_ufrh0")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -42,9 +953,9 @@ color = Color(0, 1, 0, 1)
 polygon = PackedVector2Array(-2513.6, -66.95, -2513.6, -66.95, -2154.05, 23.3, -2207.2, 220, -2513.6, 220, -2513.6, 23.3, 607.8, 138, 663.75, 138, 663.75, 193.95, 607.8, 193.95, -2513.6, 220, -2219.85, 220, -2227.32, 244.512, -2227.62, 247, -2430.39, 247, -2513.6, 224.7, -2513.6, 220.75, -2219.85, 220, -2207.2, 220, -2207.4, 220.75, -2207.4, 220.75, -2430.39, 247, -2309.85, 247, -2310.85, 257, -2311.45, 257.15, -2316.25, 267.32, -2321.52, 276.175, -2321.52, 276.175, -2403.36, 254.244, -2309.85, 247, -2227.62, 247, -2229.85, 266, -2233.85, 271, -2239.85, 271, -2262.85, 262.244, -2286.18, 254.244, -1997.95, 373.95, -1933.95, 373.95, -1933.95, 406.95, -1997.95, 406.95, -2613.4, 424.95, -2613.4, 424.95, -2318.05, 428.95, -2327.1, 439.8, -2327.85, 440, -2337.23, 454.75, -2348.85, 469, -2351.85, 471, -2370.75, 471.75, -2387.85, 474, -2390.85, 479, -2394.85, 482, -2395.37, 508.394, -2400.94, 531.911, -2411.55, 552.55, -2415.85, 559, -2418.85, 560, -2424.48, 581.25, -2430.66, 602.5, -2437.4, 623.75, -2444.7, 645, -2446.48, 650.8, -2497.35, 650.8, -2611.34, 428.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25, 26, 27, 28), PackedInt32Array(29, 30, 31, 32, 33, 34, 35), PackedInt32Array(36, 37, 38, 39), PackedInt32Array(40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-1109.25, 241.75)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2FallingPL2 Ground.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -57,9 +968,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@955" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_jh2yk")
+
+[node name="@DOMSymbolInstance@955" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-2295.4, 539.85)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2FallingPL3.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -69,12 +983,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@956" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@955"]
+script = SubResource("GDScript_6mlpk")
+
+[node name="@DOMSymbolInstance@956" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-297.1, 72)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -84,12 +1001,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@957" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@956"]
+script = SubResource("GDScript_0v3ve")
+
+[node name="@DOMSymbolInstance@957" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-397.5, 85.5)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -99,12 +1019,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@958" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@957"]
+script = SubResource("GDScript_121xv")
+
+[node name="@DOMSymbolInstance@958" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-538.8, 159.5)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyorRock 3.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -114,12 +1037,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@959" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@958"]
+script = SubResource("GDScript_udu82")
+
+[node name="@DOMSymbolInstance@959" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-294.85, 286.3)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyorRock 3.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -129,12 +1055,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@960" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@959"]
+script = SubResource("GDScript_2x6n7")
+
+[node name="@DOMSymbolInstance@960" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-560.55, -204.9)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyorRock 4.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -144,12 +1073,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@961" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@960"]
+script = SubResource("GDScript_ajtfh")
+
+[node name="@DOMSymbolInstance@961" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-541.05, 394.2)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -159,12 +1091,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@962" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@961"]
+script = SubResource("GDScript_3uf6f")
+
+[node name="@DOMSymbolInstance@962" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-283.9, -195)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -174,12 +1109,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@963" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@962"]
+script = SubResource("GDScript_tm2rn")
+
+[node name="@DOMSymbolInstance@963" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-411.85, 570.8)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyorRock 3.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -189,12 +1127,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@964" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@963"]
+script = SubResource("GDScript_1itnq")
+
+[node name="@DOMSymbolInstance@964" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-414.1, 299.05)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -204,12 +1145,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@965" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@964"]
+script = SubResource("GDScript_u4td4")
+
+[node name="@DOMSymbolInstance@965" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-32.85, 107.95)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 Falling PL1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -219,12 +1163,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@966" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@965"]
+script = SubResource("GDScript_3iq05")
+
+[node name="@DOMSymbolInstance@966" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-425.85, -137.3)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -234,8 +1181,11 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@966"]
+script = SubResource("GDScript_wr8lo")
 
 [node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(40.55, -67.4)
@@ -281,9 +1231,9 @@ color = Color(0, 0.4, 0, 1)
 polygon = PackedVector2Array(-2573.65, 718.2, 311.05, 718.2, 311.05, 850.25, -2573.65, 850.25)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="@DOMSymbolInstance@974" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="@DOMSymbolInstance@974" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-554.05, -26.75)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -293,12 +1243,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@975" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@974"]
+script = SubResource("GDScript_1g34v")
+
+[node name="@DOMSymbolInstance@975" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-569.95, -362)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -308,12 +1261,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@976" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@975"]
+script = SubResource("GDScript_vhyo7")
+
+[node name="@DOMSymbolInstance@976" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-547.55, 604)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyorRock 4.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -323,12 +1279,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@977" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@976"]
+script = SubResource("GDScript_2t7fu")
+
+[node name="@DOMSymbolInstance@977" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-680.75, -16.6)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyorRock 4.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -338,12 +1297,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@978" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@977"]
+script = SubResource("GDScript_b0ucp")
+
+[node name="@DOMSymbolInstance@978" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-746.45, -470.5)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyorRock 4.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -353,12 +1315,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@979" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@978"]
+script = SubResource("GDScript_vqfxa")
+
+[node name="@DOMSymbolInstance@979" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-694.75, -312.9)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -368,12 +1333,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@980" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@979"]
+script = SubResource("GDScript_dw086")
+
+[node name="@DOMSymbolInstance@980" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-706.7, 284.8)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyerRock 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -383,12 +1351,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@981" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vthod")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@980"]
+script = SubResource("GDScript_4snq8")
+
+[node name="@DOMSymbolInstance@981" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-704.95, 562.75)
-script = ExtResource("2_owpfo")
+script = ExtResource("2_r8q1w")
 path = "res://sm63_godot/BC-2 ConveyorRock 3.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -398,5 +1369,8 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@981"]
+script = SubResource("GDScript_vkr6j")

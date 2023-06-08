@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_2otd6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_v3xsa"]
+
+[sub_resource type="Animation" id="Animation_b58m1"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5m4yg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b2ggq"]
 _data = {
-"Default": SubResource("Animation_2otd6")
+"Default": SubResource("Animation_b58m1")
 }
 
 [node name="LDW - Movement Scroll Text" type="Node2D"]
+script = ExtResource("1_v3xsa")
+source_xml = "res://sm63/LIBRARY/LDW - Movement Scroll Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5m4yg")
+"Timeline": SubResource("AnimationLibrary_b2ggq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

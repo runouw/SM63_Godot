@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Bullet Bill Gold 1.png" id="1_8qpax"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Bullet Bill Gold 2.png" id="2_tfg8t"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_p8wij"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Bullet Bill Gold 1.png" id="2_1cuih"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Bullet Bill Gold 2.png" id="3_mbq5c"]
 
-[sub_resource type="Animation" id="Animation_5tg66"]
+[sub_resource type="Animation" id="Animation_hi0xs"]
 length = 0.533333
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,16 +80,26 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_poju0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qybb8"]
 _data = {
-"Default": SubResource("Animation_5tg66")
+"Default": SubResource("Animation_hi0xs")
 }
 
+[sub_resource type="GDScript" id="GDScript_g2wef"]
+script/source = "extends Node
+# gotoAndPlay(\"repeat\");
+# "
+
 [node name="Gold Bullet Bill Color" type="Node2D"]
+script = ExtResource("1_p8wij")
+source_xml = "res://sm63/LIBRARY/Gold Bullet Bill Color.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_poju0")
+"Timeline": SubResource("AnimationLibrary_qybb8")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -98,7 +109,7 @@ libraries = {
 [node name="@@6171" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-14.5, -12)
-texture = ExtResource("1_8qpax")
+texture = ExtResource("2_1cuih")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -107,7 +118,7 @@ visible = false
 [node name="@@6172" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-14.5, -12)
-texture = ExtResource("1_8qpax")
+texture = ExtResource("2_1cuih")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
@@ -116,7 +127,7 @@ visible = false
 [node name="@@6173" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(-14.5, -12)
-texture = ExtResource("2_tfg8t")
+texture = ExtResource("3_mbq5c")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -128,3 +139,6 @@ visible = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 15"]
+script = SubResource("GDScript_g2wef")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (eyes) - 6.png" id="1_pgvmo"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (eyes) - 12.png" id="2_86hnq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7qcfm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (eyes) - 6.png" id="2_5lobk"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (eyes) - 12.png" id="3_wj3lm"]
 
-[sub_resource type="Animation" id="Animation_cpgga"]
+[sub_resource type="Animation" id="Animation_8sc6j"]
 length = 1.06667
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_doqfh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eh6ht"]
 _data = {
-"Default": SubResource("Animation_cpgga")
+"Default": SubResource("Animation_8sc6j")
 }
 
 [node name="Boo Eyes Front" type="Node2D"]
+script = ExtResource("1_7qcfm")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo Eyes Front.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_doqfh")
+"Timeline": SubResource("AnimationLibrary_eh6ht")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -50,7 +56,7 @@ libraries = {
 [node name="@@50374" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-20, -8.5)
-texture = ExtResource("1_pgvmo")
+texture = ExtResource("2_5lobk")
 centered = false
 
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
@@ -59,5 +65,5 @@ visible = false
 [node name="@@50375" type="Sprite2D" parent="Layer 1/Frame 29"]
 texture_filter = 1
 position = Vector2(-20, -8.5)
-texture = ExtResource("2_86hnq")
+texture = ExtResource("3_wj3lm")
 centered = false

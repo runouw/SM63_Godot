@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_xhbav"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ecggu"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Grey Brick Small.png" id="3_mhpr0"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="4_e8r38"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_152g1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_tud63"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Grey Brick Small.png" id="3_sxc7u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="4_q1mdp"]
 
-[sub_resource type="Animation" id="Animation_fd0qg"]
+[sub_resource type="Animation" id="Animation_l0mcu"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -57,16 +57,66 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xjyte"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pober"]
 _data = {
-"Default": SubResource("Animation_fd0qg")
+"Default": SubResource("Animation_l0mcu")
 }
 
+[sub_resource type="GDScript" id="GDScript_j68cp"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	OffWait = 64
+# 	OnWait = 16
+# 	offstart = 0
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_prkrc"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	OffWait = 64
+# 	OnWait = 16
+# 	offstart = 16
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ptx6u"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	OffWait = 64
+# 	OnWait = 16
+# 	offstart = 32
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_0py10"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	OffWait = 64
+# 	OnWait = 16
+# 	offstart = 48
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_7r7aa"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	OffWait = 64
+# 	OnWait = 16
+# 	offstart = 64
+# }
+# "
+
 [node name="5-8 FrontGFX" type="Node2D"]
+script = ExtResource("1_152g1")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/5-8 FrontGFX.xml"
+linkage = "5-8FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xjyte")
+"Timeline": SubResource("AnimationLibrary_pober")
 }
 
 [node name="Lava" type="Node2D" parent="."]
@@ -75,9 +125,9 @@ libraries = {
 
 [node name="Group" type="Node2D" parent="Lava/Frame 0"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_xhbav")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(315.4, 30.6)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -90,9 +140,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@30596" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_xhbav")]
+[node name="@DOMSymbolInstance@30596" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(59.4, 30.6)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -124,11 +174,11 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Lava/Frame 0" instance=ExtResource("1_xhbav")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Lava/Frame 0"]
 position = Vector2(355.95, -502)
 rotation = 3.14159
 scale = Vector2(0.6875, -0.71875)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -141,11 +191,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@30600" type="Node2D" parent="Lava/Frame 0" instance=ExtResource("1_xhbav")]
+[node name="AS2" type="Node" parent="Lava/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_j68cp")
+
+[node name="@DOMSymbolInstance@30600" type="Node2D" parent="Lava/Frame 0"]
 position = Vector2(305.95, -502)
 rotation = 3.14159
 scale = Vector2(0.6875, -0.71875)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -158,11 +211,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@30601" type="Node2D" parent="Lava/Frame 0" instance=ExtResource("1_xhbav")]
+[node name="AS2" type="Node" parent="Lava/Frame 0/@DOMSymbolInstance@30600"]
+script = SubResource("GDScript_prkrc")
+
+[node name="@DOMSymbolInstance@30601" type="Node2D" parent="Lava/Frame 0"]
 position = Vector2(255.95, -502)
 rotation = 3.14159
 scale = Vector2(0.6875, -0.71875)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -175,11 +231,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@30602" type="Node2D" parent="Lava/Frame 0" instance=ExtResource("1_xhbav")]
+[node name="AS2" type="Node" parent="Lava/Frame 0/@DOMSymbolInstance@30601"]
+script = SubResource("GDScript_ptx6u")
+
+[node name="@DOMSymbolInstance@30602" type="Node2D" parent="Lava/Frame 0"]
 position = Vector2(205.95, -502)
 rotation = 3.14159
 scale = Vector2(0.6875, -0.71875)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -192,11 +251,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@30603" type="Node2D" parent="Lava/Frame 0" instance=ExtResource("1_xhbav")]
+[node name="AS2" type="Node" parent="Lava/Frame 0/@DOMSymbolInstance@30602"]
+script = SubResource("GDScript_0py10")
+
+[node name="@DOMSymbolInstance@30603" type="Node2D" parent="Lava/Frame 0"]
 position = Vector2(155.95, -502)
 rotation = 3.14159
 scale = Vector2(0.6875, -0.71875)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Effects/Lava-Fire/Flame Tower Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -208,6 +270,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Lava/Frame 0/@DOMSymbolInstance@30603"]
+script = SubResource("GDScript_7r7aa")
 
 [node name="@Group@30604" type="Node2D" parent="Lava/Frame 0"]
 
@@ -216,7 +281,7 @@ brightness = 0.0
 [node name="@@30605" type="Polygon2D" parent="Lava/Frame 0/@Group@30604/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_mhpr0")
+texture = ExtResource("3_sxc7u")
 texture_offset = Vector2(-29.95, 713.95)
 polygon = PackedVector2Array(28.45, -713.95, 306.95, -713.95, 306.95, -697.95, 28.45, -697.95, 141.4, -697.95, 189.9, -697.95, 189.9, -657.95, 141.4, -657.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
@@ -233,10 +298,10 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Ray"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_xhbav")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Ray/Frame 0"]
 position = Vector2(283.55, 86.95)
 scale = Vector2(0.0882111, 1.93578)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -251,9 +316,9 @@ brightness = 0.0
 
 [node name="Group" type="Node2D" parent="Ray/Frame 0"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Ray/Frame 0/Group" instance=ExtResource("1_xhbav")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Ray/Frame 0/Group"]
 position = Vector2(150, -685.3)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -266,9 +331,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@30593" type="Node2D" parent="Ray/Frame 0/Group" instance=ExtResource("1_xhbav")]
+[node name="@DOMSymbolInstance@30593" type="Node2D" parent="Ray/Frame 0/Group"]
 position = Vector2(-106, -685.3)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -290,10 +355,10 @@ color = Color(0.741176, 0, 0, 1)
 polygon = PackedVector2Array(-51.8, -678.3, 394.5, -678.3, 394.5, -629.3, -51.8, -629.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="@DOMSymbolInstance@30595" type="Node2D" parent="Ray/Frame 0" instance=ExtResource("1_xhbav")]
+[node name="@DOMSymbolInstance@30595" type="Node2D" parent="Ray/Frame 0"]
 position = Vector2(158.15, -630.95)
 scale = Vector2(0.0987244, 1.91539)
-script = ExtResource("2_ecggu")
+script = ExtResource("2_tud63")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -315,6 +380,7 @@ brightness = 0.0
 [node name="Shape" type="Node2D" parent="BLAK/Frame 0/Group"]
 
 [node name="@@30592" type="Polygon2D" parent="BLAK/Frame 0/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-1077.3, -1354.1, 1115.2, -1354.1, 1115.2, -866, -1077.3, -866, -1077.3, -866, -65.1, -866, -65.1, 98.05, -1077.3, 98.05, 523.05, -866, 1115.2, -866, 1115.2, 98.05, 523.05, 98.05, -1077.3, 98.05, 1115.2, 98.05, 1115.2, 218.1, -1077.3, 218.1)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15)])
 
@@ -329,7 +395,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@30589" type="Polygon2D" parent="Brick/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_e8r38")
+texture = ExtResource("4_q1mdp")
 texture_offset = Vector2(-479, 45)
 polygon = PackedVector2Array(-80.05, -874.95, 540.9, -874.95, 540.9, -844.95, -80.05, -844.95, -80.05, -844.95, -46.9, -844.95, -46.9, -651.95, -80.05, -651.95, -80.05, -745.95, 511, -844.95, 540.9, -844.95, 540.9, -621.95, 511, -621.95, 511, -745.95, 382.85, -745.95, 415.85, -745.95, 415.85, -651.95, 382.85, -651.95, -80.05, -651.95, 415.85, -651.95, 415.85, -621.95, -80.05, -621.95, -80.05, -621.95, -46.9, -621.95, -46.9, -269, -80.05, -269, -80.05, -572.95, 382.85, -621.95, 415.85, -621.95, 415.85, -572.95, 382.85, -572.95, 511, -621.95, 540.9, -621.95, 540.9, -172, 511, -172, 511, -572.95, -80.05, -269, 15.9, -269, 15.9, -222, -80.05, -222, -80.05, -238, 80.9, -269, 143.9, -269, 143.9, -222, 80.9, -222, 80.9, -238, 208.9, -269, 270.85, -269, 270.85, -222, 208.9, -222, 208.9, -238, 334.85, -238, 367.85, -238, 367.85, -172, 334.85, -172, 334.85, -222, -80.05, -222, -46.9, -222, -46.9, -43, -80.05, -43, -80.05, -205, 234.85, -222, 270.85, -222, 270.85, -205, 234.85, -205, 432.85, -205, 477, -205, 477, -172, 432.85, -172, 446.8, -172, 477, -172, 477, -141.05, 446.8, -141.05, 511, -172, 540.9, -172, 540.9, -43, 511, -43, 511, -141.05, -80.05, -43, -46.9, -43, -46.9, 4, -80.05, 4, 479, -43, 540.9, -43, 540.9, 83.35, 479, 83.35, 479, 4, -80.05, 4, 82.1, 4, 82.1, 83.35, -80.05, 83.35, -80.05, 83.35, 540.9, 83.35, 540.9, 115.35, -80.05, 115.35)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26), PackedInt32Array(27, 28, 29, 30), PackedInt32Array(31, 32, 33, 34, 35), PackedInt32Array(36, 37, 38, 39, 40), PackedInt32Array(41, 42, 43, 44, 45), PackedInt32Array(46, 47, 48, 49, 50), PackedInt32Array(51, 52, 53, 54, 55), PackedInt32Array(56, 57, 58, 59, 60), PackedInt32Array(61, 62, 63, 64), PackedInt32Array(65, 66, 67, 68), PackedInt32Array(69, 70, 71, 72), PackedInt32Array(73, 74, 75, 76, 77), PackedInt32Array(78, 79, 80, 81), PackedInt32Array(82, 83, 84, 85, 86), PackedInt32Array(87, 88, 89, 90), PackedInt32Array(91, 92, 93, 94)])

@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=31 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="1_ulxkt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Haunted Brick Tile.png" id="2_x24g4"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_5praq"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_3mblq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Stone PL x2.png" id="5_14k2t"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u4ivo"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="2_lewq5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Haunted Brick Tile.png" id="3_2dbj6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_5k6ek"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Stone PL x2.png" id="5_qb6gk"]
 
-[sub_resource type="Animation" id="Animation_aplhc"]
+[sub_resource type="Animation" id="Animation_r8meb"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -178,16 +178,470 @@ tracks/13/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bf4m8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfrbj"]
 _data = {
-"Default": SubResource("Animation_aplhc")
+"Default": SubResource("Animation_r8meb")
 }
 
+[sub_resource type="GDScript" id="GDScript_7c55w"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-6-1\";
+# 	doortype = 5;
+# 	if (_root.Starnum == 1) {
+# 		locked = true;
+# 		keytype = 1;
+# 		if (_root.lvl4keyA == true) {
+# 			removelock = true;
+# 		}
+# 		// 
+# 		openwithkey = true;
+# 		unlockitem = \"lvl4keyA\";
+# 		//                      
+# 		doorlockfunction = function () {
+# 			_root.Course.Char.attack = true;
+# 			_root.Course.Char.attackFrame = \"Sign\";
+# 			_root.Course.Char.xspeed = 0;
+# 			//
+# 			_root.PlayMessage(\"This Door is Locked! Maybe there's a key somewhere nearby\");
+# 			_root.Mariosound = new Sound(this);
+# 			_root.Mariosound.attachSound(\"Boo\");
+# 			_root.Mariosound.start(0, 1);
+# 			_root.Mariosound.setVolume(_root.MarioVolume);
+# 			count = 0;
+# 			onEnterFrame = function () {
+# 				X = _x+_parent._x;
+# 				_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 				//
+# 				_root.playpause = true;
+# 				//
+# 				count++;
+# 				if (_root.KeyZ() && count>5) {
+# 					_root.StopMessage();
+# 					//
+# 					count = 0;
+# 					onEnterFrame = function () {
+# 						count++;
+# 						if (count>5) {
+# 							_root.playpause = false;
+# 							_root.Course.Char.attack = false;
+# 							onEnterFrame = null;
+# 							gotoAndStop(1);
+# 						}
+# 					};
+# 				}
+# 			};
+# 		};
+# 		//
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_o6e7i"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-7-1\";
+# 	doortype = 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_uv7hv"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-3-1\";
+# 	doortype = 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_mjlxw"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-4-1\";
+# 	doortype = 5;
+# 	if (_root.Starnum == 1) {
+# 		locked = true;
+# 		keytype = 7
+# 		//                      
+# 		doorlockfunction = function () {
+# 			_root.Course.Char.attack = true;
+# 			_root.Course.Char.attackFrame = \"Sign\";
+# 			_root.Course.Char.xspeed = 0;
+# 			//
+# 			_root.PlayMessage(\"This Door is Locked!\");
+# 			_root.Mariosound = new Sound(this);
+# 			_root.Mariosound.attachSound(\"Boo\");
+# 			_root.Mariosound.start(0, 1);
+# 			_root.Mariosound.setVolume(_root.MarioVolume);
+# 			count = 0;
+# 			onEnterFrame = function () {
+# 				X = _x+_parent._x;
+# 				_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 				//
+# 				_root.playpause = true;
+# 				//
+# 				count++;
+# 				if (_root.KeyZ() && count>5) {
+# 					_root.StopMessage();
+# 					//
+# 					count = 0;
+# 					onEnterFrame = function () {
+# 						count++;
+# 						if (count>5) {
+# 							_root.playpause = false;
+# 							_root.Course.Char.attack = false;
+# 							onEnterFrame = null;
+# 							gotoAndStop(1);
+# 						}
+# 					};
+# 				}
+# 			};
+# 		};
+# 		//
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_dmsos"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-6-2\";
+# 	doortype = 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_a0jsf"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-7-2\";
+# 	doortype = 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_5wjlh"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-3-3\";
+# 	doortype = 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_pat0c"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-4-3\";
+# 	doortype = 5;
+# 	if (_root.Starnum == 1) {
+# 		locked = true;
+# 		keytype = 1;
+# 		if (_root.lvl4keyB == true) {
+# 			removelock = true;
+# 		}
+# 		openwithkey = true;
+# 		unlockitem = \"lvl4keyB\";
+# 		//           
+# 		doorlockfunction = function () {
+# 			_root.Course.Char.attack = true;
+# 			_root.Course.Char.attackFrame = \"Sign\";
+# 			_root.Course.Char.xspeed = 0;
+# 			//
+# 			_root.PlayMessage(\"This Door is also Locked! There should be another Key somewhere here.\");
+# 			_root.Mariosound = new Sound(this);
+# 			_root.Mariosound.attachSound(\"Boo\");
+# 			_root.Mariosound.start(0, 1);
+# 			_root.Mariosound.setVolume(_root.MarioVolume);
+# 			count = 0;
+# 			onEnterFrame = function () {
+# 				X = _x+_parent._x;
+# 				_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 				//
+# 				_root.playpause = true;
+# 				//
+# 				count++;
+# 				if (_root.KeyZ() && count>5) {
+# 					_root.StopMessage();
+# 					//
+# 					count = 0;
+# 					onEnterFrame = function () {
+# 						count++;
+# 						if (count>5) {
+# 							_root.playpause = false;
+# 							_root.Course.Char.attack = false;
+# 							onEnterFrame = null;
+# 							gotoAndStop(1);
+# 						}
+# 					};
+# 				}
+# 			};
+# 		};
+# 		//
+# 	}
+# }
+# // Originally Locked if Starnum = 1
+# "
+
+[sub_resource type="GDScript" id="GDScript_3djf2"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-9-1\";
+# 	doortype = 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_x8s4t"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"4-9-1\";
+# 	doortype = 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ujbcg"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	DirectionX = \"Left\";
+# 	DirectionY = \"Up\";
+# 	distanceX = 140;
+# 	distanceY = 0;
+# 	accelX = 0.5;
+# 	accelY = 0;
+# 	speedX = 1;
+# 	speedY = 0;
+# 	scale = 3;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_i4e7d"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	picture = true;
+# 	signmessage = \"4m\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_1br1s"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	picture = true;
+# 	signmessage = \"4m\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_iiqic"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	signmessage = \"The Mansion is empty...\\n The Shine Sprite you are looking for must be in the Basement!\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ax868"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	picture = true;
+# 	signmessage = \"4m\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_4dyf2"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	picture = true;
+# 	signmessage = \"4mrc\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_s0ofx"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	picture = true;
+# 	signmessage = \"4mrc\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_6k77p"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	signmessage = \"Big Boo's Library is just above you.\\nBut Since ghosts can float, no material path to it was built...\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_y20ch"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	picture = true;
+# 	signmessage = \"4m\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_07j6x"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# onClipEvent (enterFrame) {
+# 	if (this.hitTest(_root.Course.Char.charClip.body)) {
+# 		if (_root.PauseGame == false && _root.playpause == false) {
+# 			//_root.Course.Char.yspeed = _root.groundFriction(_root.Course.Char.yspeed, 0.015, 1.001);
+# 			if (savezoom == undefined) {
+# 				savezoom = _root.CameraZoom;
+# 			}
+# 			if (_root.CameraZoom>85) {
+# 				_root.CameraZoom -= 1;
+# 			}
+# 		}
+# 	} else {
+# 		if (savezoom !== undefined) {
+# 			if (_root.CameraZoom<savezoom) {
+# 				_root.CameraZoom += 1;
+# 			} else {
+# 				savezoom = undefined;
+# 			}
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_kq31s"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# onClipEvent (enterFrame) {
+# 	if (this.hitTest(_root.Course.Char.charClip.body)) {
+# 		if (_root.PauseGame == false && _root.playpause == false) {
+# 			//_root.Course.Char.yspeed = _root.groundFriction(_root.Course.Char.yspeed, 0.015, 1.001);
+# 			if (savezoom == undefined) {
+# 				savezoom = _root.CameraZoom;
+# 			}
+# 			if (_root.CameraZoom>85) {
+# 				_root.CameraZoom -= 1;
+# 			}
+# 		}
+# 	} else {
+# 		if (savezoom !== undefined) {
+# 			if (_root.CameraZoom<savezoom) {
+# 				_root.CameraZoom += 1;
+# 			} else {
+# 				savezoom = undefined;
+# 			}
+# 		}
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_snume"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	invis = true;
+# 	starnum = 19;
+# 	timecount = 0;
+# 	//
+# 	if (_root.Course.coincountnum == undefined) {
+# 		_root.Course.coincountnum = 0;
+# 	} else {
+# 		_root.Course.coincountnum++;
+# 	}
+# 	if (_root[\"coindata\"+_root.playingcourse][0] == undefined) {
+# 		_root[\"coindata\"+_root.playingcourse] = [\"\"];
+# 	}
+# 	coinnum = _root.Course.coincountnum;
+# 	if (_root[\"coindata\"+_root.playingcourse][coinnum] == 1) {
+# 		invis = false;
+# 	}
+# }
+# onClipEvent (enterFrame) {
+# 	timecount++;
+# 	if (_root.RedCoins>=8 && timecount>12) {
+# 		_root[\"coindata\"+_root.playingcourse][coinnum] = 1;
+# 		invis = false;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_g1tqv"]
+script/source = "extends Node
+# gotoAndStop(_root.Starnum+1);
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Boo\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# if (_root.Starnum == 1 && _root.lvl4BooMessage == false) {
+# 	_root.lvl4BooMessage = true;
+# 	count = 0;
+# 	onEnterFrame = function () {
+# 		count++;
+# 		if (count>5 && _root.Course.Char.air == false && _root.Course.Char.attack == false) {
+# 			count = 0;
+# 			//
+# 			_root.PlayMessage(\"Big Boo: Mwahaha! Welcome to my Mansion, Mario.  Come on up to my Balcony, IF YOU CAN GET THERE!!  I've locked all the doors that you 'humans' need to get up to my balcony. MWAHHAAHA!\");
+# 			onEnterFrame = function () {
+# 				//
+# 				_root.playpause = true;
+# 				//
+# 				count++;
+# 				if (_root.KeyZ() && count>5) {
+# 					_root.StopMessage();
+# 					//
+# 					count = 0;
+# 					onEnterFrame = function () {
+# 						count++;
+# 						if (count>5) {
+# 							_root.playpause = false;
+# 							_root.Course.Char.attack = false;
+# 							onEnterFrame = null;
+# 							gotoAndStop(1);
+# 						}
+# 					};
+# 				}
+# 			};
+# 		}
+# 	};
+# 	//       
+# }
+# if (_root.Starnum == 3 && _root.lvl4BooMessage == false) {
+# 	_root.lvl4BooMessage = true;
+# 	count = 0;
+# 	onEnterFrame = function () {
+# 		count++;
+# 		if (count>5 && _root.Course.Char.air == false && _root.Course.Char.attack == false) {
+# 			count = 0;
+# 			//
+# 			_root.PlayMessage(\"The Mansion is empty...\\n The Shine Sprite you are looking for must be in the Basement!  You can get there from the Shack outside\");
+# 			onEnterFrame = function () {
+# 				//
+# 				_root.playpause = true;
+# 				//
+# 				count++;
+# 				if (_root.KeyZ() && count>5) {
+# 					_root.StopMessage();
+# 					//
+# 					count = 0;
+# 					onEnterFrame = function () {
+# 						count++;
+# 						if (count>5) {
+# 							_root.playpause = false;
+# 							_root.Course.Char.attack = false;
+# 							onEnterFrame = null;
+# 							gotoAndStop(1);
+# 						}
+# 					};
+# 				}
+# 			};
+# 		}
+# 	};
+# 	//       
+# }
+# "
+
 [node name="4-2 Back GFX" type="Node2D"]
+script = ExtResource("1_u4ivo")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-2 Back GFX.xml"
+linkage = "4-2BackGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bf4m8")
+"Timeline": SubResource("AnimationLibrary_kfrbj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -199,7 +653,7 @@ libraries = {
 [node name="@@29400" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_ulxkt")
+texture = ExtResource("2_lewq5")
 texture_offset = Vector2(67.75, -38.35)
 polygon = PackedVector2Array(-653.7, -852.4, 649.85, -852.4, 649.85, -777.3, -653.7, -777.3, -653.7, -777.3, -419.3, -777.3, -499.75, -701.6, -499.75, -348.9, -653.7, -348.9, -653.7, -703.05, 430.1, -777.3, 649.85, -777.3, 649.85, -348.9, 499.9, -348.9, 499.9, -703.05, -653.7, -348.9, -119.85, -348.9, -187.95, -278.9, -499.75, -276.9, -499.75, 8.05, -653.7, 8.05, -653.7, -286.9, 117.05, -348.9, 649.85, -348.9, 649.85, -278.9, 187.15, -278.9, 179.139, -286.9, 499.9, -278.9, 649.85, -278.9, 649.85, 8.05, 499.9, 8.05, 499.9, -276.9, -653.7, 8.05, 649.85, 8.05, 649.85, 120.05, -650.161, 120.05, -653.7, 118.95, -650.161, 120.05, -499.95, 120.05, -499.95, 120.1, -650, 120.1, 499.95, 120.05, 649.85, 120.05, 649.85, 120.1, 499.95, 120.1)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26), PackedInt32Array(27, 28, 29, 30, 31), PackedInt32Array(32, 33, 34, 35, 36), PackedInt32Array(37, 38, 39, 40), PackedInt32Array(41, 42, 43, 44)])
@@ -227,7 +681,7 @@ end_cap_mode = 2
 [node name="@@29403" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_x24g4")
+texture = ExtResource("3_2dbj6")
 texture_offset = Vector2(32, 36)
 polygon = PackedVector2Array(-418.8, -777.3, 429.7, -777.3, 499.9, -702.05, 499.9, -552, -499.75, -552, -499.75, -702.35, -499.75, -552, -432.85, -552, -432.85, -488, -499.75, -488, -499.75, -521, -432.85, -552, -432, -552, -432, -488, -432.85, -488, -432.85, -521, -368, -552, -282, -552, -282, -488, -368, -488, -368, -521, -218, -552, 217.15, -552, 217.15, -521, -218, -521, 217.15, -552, 218, -552, 218, -488, 217.15, -488, 217.15, -521, 282, -552, 367.15, -552, 367.15, -488, 282, -488, 282, -521, 367.15, -552, 368, -552, 368, -488, 367.15, -488, 367.15, -521, 432, -552, 499.9, -552, 499.9, -488, 432, -488, 432, -521, -218, -521, -217.15, -521, -218, -520, -218, -520, -217.15, -521, 217.15, -521, 217.15, -488, -218, -488, -218, -520, -499.75, -488, 499.9, -488, 499.9, -348.9, -499.75, -348.9, -119.85, -348.9, 117.05, -348.9, 187.15, -278.9, -187.95, -278.9, -187.95, -278.9, 499.9, -278.9, 499.9, -182, -499.75, -182, -499.75, -276.9, -499.75, -182, -432, -182, -432, -118, -499.75, -118, -499.75, -151, -368, -182, -282, -182, -282, -151, -368, -151, -218, -182, 218, -182, 218, -151, -218, -151, 282, -182, 367.15, -182, 367.15, -151, 282, -151, 367.15, -182, 368, -182, 368, -118, 367.15, -118, 367.15, -151, 432, -182, 499.9, -182, 499.9, -118, 432, -118, 432, -151, -368, -151, -367.15, -151, -368, -150, -368, -150, -367.15, -151, -282, -151, -282, -118, -368, -118, -368, -150, -218, -151, -217.15, -151, -218, -150, -218, -150, -217.15, -151, 218, -151, 218, -118, -218, -118, -218, -150, 282, -151, 282.85, -151, 282, -150, 282, -150, 282.85, -151, 367.15, -151, 367.15, -118, 282, -118, 282, -150, -499.75, -118, 499.9, -118, 499.9, 8.05, -499.75, 8.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24), PackedInt32Array(25, 26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33, 34), PackedInt32Array(35, 36, 37, 38, 39), PackedInt32Array(40, 41, 42, 43, 44), PackedInt32Array(45, 46, 47, 48), PackedInt32Array(49, 50, 51, 52, 53), PackedInt32Array(54, 55, 56, 57), PackedInt32Array(58, 59, 60, 61), PackedInt32Array(62, 63, 64, 65, 66), PackedInt32Array(67, 68, 69, 70, 71), PackedInt32Array(72, 73, 74, 75), PackedInt32Array(76, 77, 78, 79), PackedInt32Array(80, 81, 82, 83), PackedInt32Array(84, 85, 86, 87, 88), PackedInt32Array(89, 90, 91, 92, 93), PackedInt32Array(94, 95, 96, 97), PackedInt32Array(98, 99, 100, 101, 102), PackedInt32Array(103, 104, 105, 106), PackedInt32Array(107, 108, 109, 110, 111), PackedInt32Array(112, 113, 114, 115), PackedInt32Array(116, 117, 118, 119, 120), PackedInt32Array(121, 122, 123, 124)])
@@ -249,10 +703,10 @@ color = Color(1, 1, 1, 0.101961)
 polygon = PackedVector2Array(297.85, -777.7, 428.5, -777.7, 498.7, -704.05, 498.7, -600.85, 114.9, -600.85, 180.9, -662.85, 297.188, -777.05, -424.375, -777.05, -287.05, -777.05, -174.05, -662.85, -111.1, -600.85, -500.95, -600.85, -500.95, -703.35, -500.223, -704.05, -500.95, -600.85, 498.7, -600.85, 498.7, -552, -500.95, -552, -500.95, -552, -432, -552, -432, -488, -500.95, -488, -368, -552, -282, -552, -282, -488, -368, -488, -218, -552, 218, -552, 218, -488, -218, -488, 282, -552, 368, -552, 368, -488, 282, -488, 432, -552, 498.7, -552, 498.7, -488, 432, -488, -500.95, -488, 498.7, -488, 498.7, -349.9, -500.95, -349.9, -121.05, -349.9, 115.85, -349.9, 185.95, -279.9, -189.15, -279.9, -189.15, -279.9, 498.7, -279.9, 498.7, -182, -500.95, -182, -500.95, -277.9, -500.95, -182, -432, -182, -432, -118, -500.95, -118, -368, -182, -282, -182, -282, -118, -368, -118, -218, -182, 218, -182, 218, -118, -218, -118, 282, -182, 368, -182, 368, -118, 282, -118, 432, -182, 498.7, -182, 498.7, -118, 432, -118, -500.95, -118, 498.7, -118, 498.7, 7.05, -500.95, 7.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33), PackedInt32Array(34, 35, 36, 37), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 43, 44, 45), PackedInt32Array(46, 47, 48, 49, 50), PackedInt32Array(51, 52, 53, 54), PackedInt32Array(55, 56, 57, 58), PackedInt32Array(59, 60, 61, 62), PackedInt32Array(63, 64, 65, 66), PackedInt32Array(67, 68, 69, 70), PackedInt32Array(71, 72, 73, 74)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(250, -15.2)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -265,11 +719,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29407" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_7c55w")
+
+[node name="@DOMSymbolInstance@29407" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-250, -15.2)
 rotation = 3.14159
 scale = Vector2(1.5, -1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -282,10 +739,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29408" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29407"]
+script = SubResource("GDScript_o6e7i")
+
+[node name="@DOMSymbolInstance@29408" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(400, -15.2)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -298,11 +758,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29409" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29408"]
+script = SubResource("GDScript_uv7hv")
+
+[node name="@DOMSymbolInstance@29409" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-400, -15.2)
 rotation = 3.14159
 scale = Vector2(1.5, -1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -315,10 +778,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29410" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29409"]
+script = SubResource("GDScript_mjlxw")
+
+[node name="@DOMSymbolInstance@29410" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(250, -371.75)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -331,11 +797,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29411" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29410"]
+script = SubResource("GDScript_dmsos")
+
+[node name="@DOMSymbolInstance@29411" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-250, -371.75)
 rotation = 3.14159
 scale = Vector2(1.5, -1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -348,10 +817,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29412" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29411"]
+script = SubResource("GDScript_a0jsf")
+
+[node name="@DOMSymbolInstance@29412" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(400, -371.75)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -364,11 +836,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29413" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29412"]
+script = SubResource("GDScript_5wjlh")
+
+[node name="@DOMSymbolInstance@29413" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-400, -371.75)
 rotation = 3.14159
 scale = Vector2(1.5, -1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -381,10 +856,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29414" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29413"]
+script = SubResource("GDScript_pat0c")
+
+[node name="@DOMSymbolInstance@29414" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(10.5, -684.75)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -397,11 +875,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29415" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29414"]
+script = SubResource("GDScript_3djf2")
+
+[node name="@DOMSymbolInstance@29415" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-10.5, -684.75)
 rotation = 3.14159
 scale = Vector2(1.5, -1.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -413,6 +894,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29415"]
+script = SubResource("GDScript_x8s4t")
 
 [node name="Door Notes" type="Node2D" parent="."]
 
@@ -427,7 +911,7 @@ brightness = 0.0
 [node name="@@29384" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_ulxkt")
+texture = ExtResource("2_lewq5")
 texture_offset = Vector2(-242.05, 278.25)
 polygon = PackedVector2Array(-173.95, -661.5, 184.95, -661.5, 114.85, -599.5, -109, -599.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -440,9 +924,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(71, -340.9)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Moving Green Platform.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -455,9 +939,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29386" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_ujbcg")
+
+[node name="@DOMSymbolInstance@29386" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-79.5, -370.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -470,9 +957,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29387" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29387" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-39.5, -370.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -485,9 +972,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29388" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29388" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0.5, -370.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -500,9 +987,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29389" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29389" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(40.5, -370.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -515,9 +1002,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29390" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29390" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(80.5, -370.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -533,18 +1020,18 @@ brightness = 0.0
 [node name="@@29391" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-203.5, -662.45)
-texture = ExtResource("5_14k2t")
+texture = ExtResource("5_qb6gk")
 centered = false
 
 [node name="@@29392" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(180.95, -661.5)
-texture = ExtResource("5_14k2t")
+texture = ExtResource("5_qb6gk")
 centered = false
 
-[node name="@DOMSymbolInstance@29393" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29393" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-328, -368.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Char/Fludd CLIPS/Squirt Nozzle Box Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -557,9 +1044,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29394" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29394" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-316.95, -18.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -572,9 +1059,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29395" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29395" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-286.95, -18.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -587,9 +1074,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29396" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29396" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-346.95, -18.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -602,9 +1089,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29397" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29397" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(330.9, -18.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -617,9 +1104,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29398" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29398" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(360.9, -18.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -632,9 +1119,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29399" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_5praq")]
+[node name="@DOMSymbolInstance@29399" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(300.9, -18.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -654,9 +1141,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 1" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 1"]
 position = Vector2(-102.5, 10.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Coded Sign.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -668,13 +1155,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 5/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_i4e7d")
 
 [node name="Frame 2" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 2" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 2"]
 position = Vector2(-102.5, 10.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Coded Sign.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -686,13 +1176,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 5/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_1br1s")
 
 [node name="Frame 3" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3"]
 position = Vector2(121.95, 10.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Coded Sign.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -705,9 +1198,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29381" type="Node2D" parent="Layer 5/Frame 3" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 5/Frame 3/DOMSymbolInstance"]
+script = SubResource("GDScript_iiqic")
+
+[node name="@DOMSymbolInstance@29381" type="Node2D" parent="Layer 5/Frame 3"]
 position = Vector2(-102.5, 10.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Coded Sign.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -719,13 +1215,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 5/Frame 3/@DOMSymbolInstance@29381"]
+script = SubResource("GDScript_ax868")
 
 [node name="Frame 4" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 4" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 4"]
 position = Vector2(315, -347.45)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Coded Sign.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -738,9 +1237,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29382" type="Node2D" parent="Layer 5/Frame 4" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 5/Frame 4/DOMSymbolInstance"]
+script = SubResource("GDScript_4dyf2")
+
+[node name="@DOMSymbolInstance@29382" type="Node2D" parent="Layer 5/Frame 4"]
 position = Vector2(-102.5, 10.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Coded Sign.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -752,13 +1254,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 5/Frame 4/@DOMSymbolInstance@29382"]
+script = SubResource("GDScript_s0ofx")
 
 [node name="Frame 5" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5"]
 position = Vector2(-183, -343.45)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Coded Sign.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -771,9 +1276,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29383" type="Node2D" parent="Layer 5/Frame 5" instance=ExtResource("3_5praq")]
+[node name="AS2" type="Node" parent="Layer 5/Frame 5/DOMSymbolInstance"]
+script = SubResource("GDScript_6k77p")
+
+[node name="@DOMSymbolInstance@29383" type="Node2D" parent="Layer 5/Frame 5"]
 position = Vector2(-102.5, 10.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Coded Sign.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -785,6 +1293,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 5/Frame 5/@DOMSymbolInstance@29383"]
+script = SubResource("GDScript_y20ch")
 
 [node name="Layer 7" type="Node2D" parent="."]
 
@@ -793,11 +1304,11 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 1" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 1"]
 position = Vector2(0, -146)
 rotation = 3.14159
 scale = Vector2(2.77928, 35.427)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -809,15 +1320,18 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 7/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_07j6x")
 
 [node name="Frame 5" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 5" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 5"]
 position = Vector2(0, -515.8)
 rotation = 3.14159
 scale = Vector2(12.1906, 26.7419)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -829,14 +1343,17 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 7/Frame 5/DOMSymbolInstance"]
+script = SubResource("GDScript_kq31s")
 
 [node name="RC Star" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="RC Star"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="RC Star/Frame 0" instance=ExtResource("3_5praq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="RC Star/Frame 0"]
 position = Vector2(322.95, -422.5)
-script = ExtResource("4_3mblq")
+script = ExtResource("4_5k6ek")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -849,6 +1366,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="RC Star/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_snume")
+
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_g1tqv")

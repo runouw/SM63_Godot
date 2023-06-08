@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_j17ou"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_32tkj"]
+
+[sub_resource type="Animation" id="Animation_vpncw"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m47o0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iv0tu"]
 _data = {
-"Default": SubResource("Animation_j17ou")
+"Default": SubResource("Animation_vpncw")
 }
 
 [node name="5-3 Lava" type="Node2D"]
+script = ExtResource("1_32tkj")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Sides (2&#0443)/5-3 Lava.xml"
+linkage = "5-3Lava"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_m47o0")
+"Timeline": SubResource("AnimationLibrary_iv0tu")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

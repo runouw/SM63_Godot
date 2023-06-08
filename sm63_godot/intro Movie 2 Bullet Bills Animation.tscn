@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Bullet Bill Gold 2.png" id="1_rkbj3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Bullet Bill Gold 1.png" id="2_r33rd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rkeyl"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Bullet Bill Gold 2.png" id="2_mdmvm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Bullet Bill Gold 1.png" id="3_b65qr"]
 
-[sub_resource type="Animation" id="Animation_0jpbj"]
+[sub_resource type="Animation" id="Animation_iskji"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dllsc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jddnu"]
 _data = {
-"Default": SubResource("Animation_0jpbj")
+"Default": SubResource("Animation_iskji")
 }
 
 [node name="intro Movie 2 Bullet Bills Animation" type="Node2D"]
+script = ExtResource("1_rkeyl")
+source_xml = "res://sm63/LIBRARY/intro Movie 2 Bullet Bills Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dllsc")
+"Timeline": SubResource("AnimationLibrary_jddnu")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -50,7 +56,7 @@ libraries = {
 [node name="@@14250" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-14.5, -12)
-texture = ExtResource("1_rkbj3")
+texture = ExtResource("2_mdmvm")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -59,5 +65,5 @@ visible = false
 [node name="@@14251" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-14.5, -12)
-texture = ExtResource("2_r33rd")
+texture = ExtResource("3_b65qr")
 centered = false

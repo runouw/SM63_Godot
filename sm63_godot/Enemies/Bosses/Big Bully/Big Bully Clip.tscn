@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Big Bully/Big Bully Walk - 3.png" id="1_rwe8b"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_xoknw"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_x2ot8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Big Bully/Big Bully Hurt.png" id="4_448y2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_oo2os"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Big Bully/Big Bully Walk - 3.png" id="2_6psnq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_855mp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Big Bully/Big Bully Hurt.png" id="4_uqwcw"]
 
-[sub_resource type="Animation" id="Animation_2j1rr"]
+[sub_resource type="Animation" id="Animation_e2jik"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -81,16 +81,25 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_j6ux6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_orcrb"]
 _data = {
-"Default": SubResource("Animation_2j1rr")
+"Default": SubResource("Animation_e2jik")
 }
 
+[sub_resource type="GDScript" id="GDScript_t8u6m"]
+script/source = "extends Node
+# stop();"
+
 [node name="Big Bully Clip" type="Node2D"]
+script = ExtResource("1_oo2os")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Big Bully/Big Bully Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_j6ux6")
+"Timeline": SubResource("AnimationLibrary_orcrb")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -100,14 +109,14 @@ libraries = {
 [node name="@@48851" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-20.5, -55)
-texture = ExtResource("1_rwe8b")
+texture = ExtResource("2_6psnq")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_xoknw")]
-script = ExtResource("3_x2ot8")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("3_855mp")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Walk.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -126,15 +135,15 @@ visible = false
 [node name="@@48852" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-21, -54)
-texture = ExtResource("4_448y2")
+texture = ExtResource("4_uqwcw")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_xoknw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(0, -27.5)
-script = ExtResource("3_x2ot8")
+script = ExtResource("3_855mp")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Defeated.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -150,9 +159,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_xoknw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0, -30)
-script = ExtResource("3_x2ot8")
+script = ExtResource("3_855mp")
 path = "res://sm63_godot/Enemies/Bosses/Big Bully/Big Bully Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -168,3 +177,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_t8u6m")

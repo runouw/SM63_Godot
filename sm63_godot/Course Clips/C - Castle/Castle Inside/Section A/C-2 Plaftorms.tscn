@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_mrf2n"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_t33ch"]
+
+[sub_resource type="Animation" id="Animation_7c6lv"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ut8x4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ghvo"]
 _data = {
-"Default": SubResource("Animation_mrf2n")
+"Default": SubResource("Animation_7c6lv")
 }
 
 [node name="C-2 Plaftorms" type="Node2D"]
+script = ExtResource("1_t33ch")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-2 Plaftorms.xml"
+linkage = "C-2BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ut8x4")
+"Timeline": SubResource("AnimationLibrary_5ghvo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Metal Tile.png" id="1_5vu4p"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Mesh Fence Large.png" id="2_pimw3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Grey Stone Textrue.png" id="3_2yw7j"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_iveji"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Metal Tile.png" id="2_63d1f"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Mesh Fence Large.png" id="3_b327f"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Grey Stone Textrue.png" id="4_4ind2"]
 
-[sub_resource type="Animation" id="Animation_rhi8h"]
+[sub_resource type="Animation" id="Animation_b8ja2"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -56,16 +57,31 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ut0en"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ik7vw"]
 _data = {
-"Default": SubResource("Animation_rhi8h")
+"Default": SubResource("Animation_b8ja2")
 }
 
+[sub_resource type="GDScript" id="GDScript_l826j"]
+script/source = "extends Node
+# if (speed == undefined) {
+# 	speed = -3;
+# }
+# onEnterFrame = function () {
+# 	this._rotation += speed;
+# };
+# "
+
 [node name="Cinema 2 Airship Gear" type="Node2D"]
+script = ExtResource("1_iveji")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Airship Gear.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ut0en")
+"Timeline": SubResource("AnimationLibrary_ik7vw")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -77,7 +93,7 @@ libraries = {
 [node name="@@3562" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_5vu4p")
+texture = ExtResource("2_63d1f")
 texture_offset = Vector2(261.65, -63.3)
 polygon = PackedVector2Array(23.9, -41.5, 23.9, -41.5, 47.9, 0, 24, 41.5, -23.9, 41.5, -47.9, 0, -24, -41.45)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
@@ -98,7 +114,7 @@ visible = false
 [node name="@@3564" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_pimw3")
+texture = ExtResource("3_b327f")
 texture_offset = Vector2(4.3, 28.75)
 polygon = PackedVector2Array(-4.3, -51.25, 4.3, -51.25, 4.3, 51.25, -4.3, 51.25)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -119,7 +135,7 @@ visible = false
 [node name="@@3566" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_2yw7j")
+texture = ExtResource("4_4ind2")
 texture_offset = Vector2(-27.35, 73.65)
 polygon = PackedVector2Array(-25.2, -158.15, -25.2, -158.15, 73.1, -142.6, 73.4755, -142.225, -56.4863, -142.225, -55.7495, -142.6, -56.4863, -142.225, -22.675, -142.225, -102.6, -101.55, -143.275, -21.625, -129.25, 66.875, -65.8, 130.25, 22.675, 144.225, -73.4755, 144.225, -143.6, 74.2, -159.2, -24.15, -114, -112.95, -83.9416, -128.25, -22.675, -142.225, 73.4755, -142.225, 143.6, -72.2, 159.2, 26.15, 114, 114.95, 56.4863, 144.225, 22.675, 144.225, 102.6, 103.55, 143.275, 23.625, 129.25, -64.875, 65.8, -128.25, -73.4755, 144.225, 56.4863, 144.225, 25.2, 160.15, 25.2, 160.15, -73.1, 144.6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28), PackedInt32Array(29, 30, 31, 32, 33)])
@@ -143,3 +159,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_l826j")

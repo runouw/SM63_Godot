@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_km0r4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gg7hd"]
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_5no52"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_36ywu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_otbxm"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_pq5sb"]
 
-[sub_resource type="Animation" id="Animation_fbeke"]
+[sub_resource type="Animation" id="Animation_2jp44"]
 length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -152,16 +152,70 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dibl0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hoq5l"]
 _data = {
-"Default": SubResource("Animation_fbeke")
+"Default": SubResource("Animation_2jp44")
 }
 
+[sub_resource type="GDScript" id="GDScript_d4vd2"]
+script/source = "extends Node
+# if (_parent.coincountnum == undefined) {
+# 	_parent.coincountnum = 0;
+# } else {
+# 	_parent.coincountnum++;
+# }
+# if (_root[\"coindata\"+_root.playingcourse][0] == undefined) {
+# 	_root[\"coindata\"+_root.playingcourse] = [\"\"];
+# }
+# coinnum = _parent.coincountnum;
+# if (_root[\"coindata\"+_root.playingcourse][coinnum] == 1 && _root[\"coindata\"+_root.playingcourse][coinnum] !== undefined) {
+# 	gotoAndStop(\"end\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_q5tl7"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (Math.abs((_root.currentCamX)-(_x+_parent._x))<1000 && Math.abs((_root.currentCamY)-(_y+_parent._y))<1000) {
+# 		_visible = true;
+# 		if (this.hitTest(_root.Course.Char.charClip.body) || this.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y-15)*_root.coursescale/100)+_root.Course._y, true)) {
+# 			play();
+# 			//_root.WaterAmount += 5000;
+# 			_root.Power += 15
+# 			onEnterFrame = null;
+# 		}
+# 	} else {
+# 		_visible = false;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ox0dv"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"Fludd Nozzle\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# //
+# _root[\"coindata\"+_root.playingcourse][coinnum] = 1;
+# "
+
+[sub_resource type="GDScript" id="GDScript_ebpbb"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Power Bottle" type="Node2D"]
+script = ExtResource("1_36ywu")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Water Bottle/Power Bottle.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dibl0")
+"Timeline": SubResource("AnimationLibrary_hoq5l")
 }
 
 [node name="Bubbles" type="Node2D" parent="."]
@@ -178,9 +232,9 @@ visible = false
 [node name="Frame 3" type="Node2D" parent="Water"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Water/Frame 3" instance=ExtResource("1_km0r4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Water/Frame 3"]
 position = Vector2(8, 31.8)
-script = ExtResource("2_gg7hd")
+script = ExtResource("2_otbxm")
 path = "res://sm63_godot/Effects/Water/Water Splash.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -205,7 +259,7 @@ visible = false
 [node name="@@47037" type="Polygon2D" parent="Frame/Frame 0/Shape"]
 polygon = PackedVector2Array(0, -10.45, 0, -10.45, 7.1, -7.4, 10.05, 0, 7.1, 7.4, 0, 10.45, 0, 10.45, -7.1, 7.4, -10.05, 0, -7.1, -7.4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
-script = ExtResource("3_5no52")
+script = ExtResource("3_pq5sb")
 matrix = Transform2D(0.0128174, 0, 0, 0.0128174, 0, 0)
 entries_color = PackedColorArray(0.964706, 0.411765, 0.411765, 0.501961, 0.901961, 0, 0, 0.501961)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -222,8 +276,8 @@ end_cap_mode = 2
 [node name="Frame 3" type="Node2D" parent="Frame"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Frame/Frame 3" instance=ExtResource("1_km0r4")]
-script = ExtResource("2_gg7hd")
+[node name="DOMSymbolInstance" type="Node2D" parent="Frame/Frame 3"]
+script = ExtResource("2_otbxm")
 path = "res://sm63_godot/Effects/Water/Runsplash 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -243,11 +297,23 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_d4vd2")
+
 [node name="Frame 2" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 2"]
+script = SubResource("GDScript_q5tl7")
 
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 3"]
+script = SubResource("GDScript_ox0dv")
+
 [node name="Frame 17" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 17"]
+script = SubResource("GDScript_ebpbb")

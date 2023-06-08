@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_27p35"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3chjt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hixpj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gptsx"]
 
-[sub_resource type="Animation" id="Animation_jh4hv"]
+[sub_resource type="Animation" id="Animation_clq88"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,82 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b2ckk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x06vi"]
 _data = {
-"Default": SubResource("Animation_jh4hv")
+"Default": SubResource("Animation_clq88")
 }
 
+[sub_resource type="GDScript" id="GDScript_08leb"]
+script/source = "extends Node
+# if (trans !== true) {
+# 	this.swapDepths(0);
+# 	this.removeMovieClip();
+# }
+# onEnterFrame = function () {
+# 	this._y -= 70
+# 	if (_y<=-150 && uy == undefined) {
+# 		_parent.GSF();
+# 		uy = \"defined\";
+# 	}
+# 	if (_y<-500) {
+# 		this.removeMovieClip();
+# 	}
+# };
+# gotoAndStop(1);
+# /*if (trans !== true) {
+# this.swapDepths(0);
+# this.removeMovieClip();
+# }
+# if (_x<0) {
+# speed = 75;
+# TF = function () {
+# if (_x>=0) {
+# t = true;
+# }
+# };
+# gotoAndStop(2);
+# } else {
+# speed = -75;
+# TF = function () {
+# if (_x<=0) {
+# t = true;
+# }
+# };
+# gotoAndStop(3);
+# }
+# onEnterFrame = function () {
+# this._x += speed;
+# TF();
+# if (t == true && uy == undefined) {
+# _parent.GSF();
+# uy = \"defined\";
+# }
+# if (_x>500 || _x<-500) {
+# 
+# this.removeMovieClip();
+# }
+# };*/
+# "
+
 [node name="Menu - Transition Clip" type="Node2D"]
+script = ExtResource("1_hixpj")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Menu - Transition Clip.xml"
+linkage = "MenuTransition"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_b2ckk")
+"Timeline": SubResource("AnimationLibrary_x06vi")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_27p35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 146)
-script = ExtResource("2_3chjt")
+script = ExtResource("2_gptsx")
 path = "res://sm63_godot/Menu/Menu Folder/Menu Transition Object.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -87,3 +144,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_08leb")

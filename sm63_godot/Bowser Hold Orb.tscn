@@ -1,14 +1,14 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 2.png" id="1_17wkc"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 16.png" id="2_v8rpk"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_sxv0f"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_44nv7"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 1.png" id="5_fjgar"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 1.png" id="6_ybw3s"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="7_ctqqw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ts82b"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 2.png" id="2_obi7j"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 16.png" id="3_kyw2u"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_hgcif"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 1.png" id="5_g1k7v"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 1.png" id="6_2gl5e"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="7_uvw8e"]
 
-[sub_resource type="Animation" id="Animation_c2kte"]
+[sub_resource type="Animation" id="Animation_gftyw"]
 length = 0.766667
 loop_mode = 1
 tracks/0/type = "value"
@@ -456,16 +456,36 @@ tracks/36/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iqspg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fj4pq"]
 _data = {
-"Default": SubResource("Animation_c2kte")
+"Default": SubResource("Animation_gftyw")
 }
 
+[sub_resource type="GDScript" id="GDScript_x4n62"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_b38wd"]
+script/source = "extends Node
+# stop();"
+
+[sub_resource type="GDScript" id="GDScript_yr310"]
+script/source = "extends Node
+# stop();"
+
 [node name="Bowser Hold Orb" type="Node2D"]
+script = ExtResource("1_ts82b")
+source_xml = "res://sm63/LIBRARY/Bowser Hold Orb.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iqspg")
+"Timeline": SubResource("AnimationLibrary_fj4pq")
 }
 
 [node name="L-Arm" type="Node2D" parent="."]
@@ -477,7 +497,7 @@ texture_filter = 1
 position = Vector2(-15.7, -13.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_17wkc")
+texture = ExtResource("2_obi7j")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="L-Arm"]
@@ -488,7 +508,7 @@ texture_filter = 1
 position = Vector2(-8.9, -7.8)
 rotation = -2.618
 scale = Vector2(1, -1)
-texture = ExtResource("1_17wkc")
+texture = ExtResource("2_obi7j")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="L-Arm"]
@@ -499,7 +519,7 @@ texture_filter = 1
 position = Vector2(-9, 1.65)
 rotation = -2.09439
 scale = Vector2(1, -1)
-texture = ExtResource("1_17wkc")
+texture = ExtResource("2_obi7j")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="L-Arm"]
@@ -511,7 +531,7 @@ position = Vector2(-44.25, -26.85)
 rotation = 2.22905
 scale = Vector2(0.998839, -0.998848)
 skew = 1.20401e-05
-texture = ExtResource("2_v8rpk")
+texture = ExtResource("3_kyw2u")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="L-Arm"]
@@ -523,7 +543,7 @@ position = Vector2(-27.8, -32.65)
 rotation = 2.75263
 scale = Vector2(0.998834, -0.998862)
 skew = 1.15633e-05
-texture = ExtResource("2_v8rpk")
+texture = ExtResource("3_kyw2u")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="L-Arm"]
@@ -535,7 +555,7 @@ position = Vector2(-27.8, -32.65)
 rotation = 2.75263
 scale = Vector2(0.998834, -0.998862)
 skew = 1.15633e-05
-texture = ExtResource("2_v8rpk")
+texture = ExtResource("3_kyw2u")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="L-Arm"]
@@ -547,7 +567,7 @@ position = Vector2(-44.25, -26.85)
 rotation = 2.22905
 scale = Vector2(0.998839, -0.998848)
 skew = 1.20401e-05
-texture = ExtResource("2_v8rpk")
+texture = ExtResource("3_kyw2u")
 centered = false
 
 [node name="Frame 20" type="Node2D" parent="L-Arm"]
@@ -558,7 +578,7 @@ texture_filter = 1
 position = Vector2(-9, 1.65)
 rotation = -2.09439
 scale = Vector2(1, -1)
-texture = ExtResource("1_17wkc")
+texture = ExtResource("2_obi7j")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="L-Arm"]
@@ -569,7 +589,7 @@ texture_filter = 1
 position = Vector2(-8.9, -7.8)
 rotation = -2.618
 scale = Vector2(1, -1)
-texture = ExtResource("1_17wkc")
+texture = ExtResource("2_obi7j")
 centered = false
 
 [node name="Frame 22" type="Node2D" parent="L-Arm"]
@@ -580,7 +600,7 @@ texture_filter = 1
 position = Vector2(-15.7, -13.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_17wkc")
+texture = ExtResource("2_obi7j")
 centered = false
 
 [node name="Layer 5" type="Node2D" parent="."]
@@ -590,9 +610,9 @@ centered = false
 [node name="Frame 5" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5" instance=ExtResource("3_sxv0f")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5"]
 position = Vector2(-51.3, -10.85)
-script = ExtResource("4_44nv7")
+script = ExtResource("4_hgcif")
 path = "res://sm63_godot/Key - Orb of Power.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -608,9 +628,9 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 8" instance=ExtResource("3_sxv0f")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 8"]
 position = Vector2(-44.8, -28.35)
-script = ExtResource("4_44nv7")
+script = ExtResource("4_hgcif")
 path = "res://sm63_godot/Key - Orb of Power.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -626,9 +646,9 @@ brightness = 0.0
 [node name="Frame 17" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 17" instance=ExtResource("3_sxv0f")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 17"]
 position = Vector2(-44.8, -28.35)
-script = ExtResource("4_44nv7")
+script = ExtResource("4_hgcif")
 path = "res://sm63_godot/Key - Orb of Power.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -644,9 +664,9 @@ brightness = 0.0
 [node name="Frame 20" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 20" instance=ExtResource("3_sxv0f")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 20"]
 position = Vector2(-51.3, -10.85)
-script = ExtResource("4_44nv7")
+script = ExtResource("4_hgcif")
 path = "res://sm63_godot/Key - Orb of Power.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -669,7 +689,7 @@ visible = false
 [node name="@@3216" type="Sprite2D" parent="Body/Frame 0"]
 texture_filter = 1
 position = Vector2(-26.5, -30)
-texture = ExtResource("5_fjgar")
+texture = ExtResource("5_g1k7v")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Body"]
@@ -678,7 +698,7 @@ visible = false
 [node name="@@3217" type="Sprite2D" parent="Body/Frame 17"]
 texture_filter = 1
 position = Vector2(-26.5, -30)
-texture = ExtResource("5_fjgar")
+texture = ExtResource("5_g1k7v")
 centered = false
 
 [node name="R-Arm" type="Node2D" parent="."]
@@ -688,7 +708,7 @@ centered = false
 [node name="@@3214" type="Sprite2D" parent="R-Arm/Frame 0"]
 texture_filter = 1
 position = Vector2(-1.7, -10.15)
-texture = ExtResource("6_ybw3s")
+texture = ExtResource("6_2gl5e")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="R-Arm"]
@@ -697,7 +717,7 @@ visible = false
 [node name="@@3215" type="Sprite2D" parent="R-Arm/Frame 17"]
 texture_filter = 1
 position = Vector2(-1.7, -10.15)
-texture = ExtResource("6_ybw3s")
+texture = ExtResource("6_2gl5e")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -707,7 +727,7 @@ centered = false
 [node name="@@3208" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-36.6, -33)
-texture = ExtResource("7_ctqqw")
+texture = ExtResource("7_uvw8e")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -716,7 +736,7 @@ visible = false
 [node name="@@3209" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-36.6, -33)
-texture = ExtResource("7_ctqqw")
+texture = ExtResource("7_uvw8e")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
@@ -727,7 +747,7 @@ texture_filter = 1
 position = Vector2(-29.35, -37.6)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("7_ctqqw")
+texture = ExtResource("7_uvw8e")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
@@ -738,7 +758,7 @@ texture_filter = 1
 position = Vector2(-29.35, -37.6)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("7_ctqqw")
+texture = ExtResource("7_uvw8e")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -747,7 +767,7 @@ visible = false
 [node name="@@3212" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(-36.6, -33)
-texture = ExtResource("7_ctqqw")
+texture = ExtResource("7_uvw8e")
 centered = false
 
 [node name="Frame 22" type="Node2D" parent="Layer 1"]
@@ -756,7 +776,7 @@ visible = false
 [node name="@@3213" type="Sprite2D" parent="Layer 1/Frame 22"]
 texture_filter = 1
 position = Vector2(-36.6, -33)
-texture = ExtResource("7_ctqqw")
+texture = ExtResource("7_uvw8e")
 centered = false
 
 [node name="Layer 7" type="Node2D" parent="."]
@@ -766,10 +786,10 @@ centered = false
 [node name="Frame 2" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 2" instance=ExtResource("3_sxv0f")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 2"]
 position = Vector2(-34.5, 8)
 scale = Vector2(0.399994, 0.399994)
-script = ExtResource("4_44nv7")
+script = ExtResource("4_hgcif")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 0.0
@@ -785,11 +805,11 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 8" instance=ExtResource("3_sxv0f")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 8"]
 position = Vector2(-44.5, -28)
 rotation = 1.5708
 scale = Vector2(1.59998, 1.59998)
-script = ExtResource("4_44nv7")
+script = ExtResource("4_hgcif")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 0.0
@@ -805,11 +825,11 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 9" instance=ExtResource("3_sxv0f")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 9"]
 position = Vector2(-44.5, -28)
 rotation = 1.5708
 scale = Vector2(1.59998, 1.59998)
-script = ExtResource("4_44nv7")
+script = ExtResource("4_hgcif")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 0.0
@@ -822,14 +842,17 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 7/Frame 9/DOMSymbolInstance"]
+script = SubResource("GDScript_x4n62")
+
 [node name="Frame 17" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 17" instance=ExtResource("3_sxv0f")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 17"]
 position = Vector2(-44.5, -28)
 rotation = 1.5708
 scale = Vector2(1.59998, 1.59998)
-script = ExtResource("4_44nv7")
+script = ExtResource("4_hgcif")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 0.0
@@ -845,11 +868,11 @@ brightness = 0.0
 [node name="Frame 21" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 21" instance=ExtResource("3_sxv0f")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 21"]
 position = Vector2(-34.5, 8.95)
 rotation = 3.14159
 scale = Vector2(0.399994, 0.399994)
-script = ExtResource("4_44nv7")
+script = ExtResource("4_hgcif")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 0.0
@@ -872,8 +895,14 @@ visible = false
 [node name="Frame 14" type="Node2D" parent="Layer 6"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 6/Frame 14"]
+script = SubResource("GDScript_b38wd")
+
 [node name="Frame 17" type="Node2D" parent="Layer 6"]
 visible = false
 
 [node name="Frame 22" type="Node2D" parent="Layer 6"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 6/Frame 22"]
+script = SubResource("GDScript_yr310")

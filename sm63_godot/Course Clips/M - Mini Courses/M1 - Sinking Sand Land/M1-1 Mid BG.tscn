@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Ancient Brick.png" id="1_tvmmn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Sand.png" id="2_j4153"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_str36"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Ancient Brick.png" id="2_38nbs"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Sand.png" id="3_5x2sy"]
 
-[sub_resource type="Animation" id="Animation_gkrsy"]
+[sub_resource type="Animation" id="Animation_e77yb"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xm8od"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kd2fv"]
 _data = {
-"Default": SubResource("Animation_gkrsy")
+"Default": SubResource("Animation_e77yb")
 }
 
 [node name="M1-1 Mid BG" type="Node2D"]
+script = ExtResource("1_str36")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Mid BG.xml"
+linkage = "M1-1MidBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xm8od")
+"Timeline": SubResource("AnimationLibrary_kd2fv")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -55,7 +61,7 @@ position = Vector2(-890.9, 175.45)
 [node name="@@45672" type="Polygon2D" parent="Layer 2/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_tvmmn")
+texture = ExtResource("2_38nbs")
 texture_offset = Vector2(-736.55, 181.25)
 texture_scale = Vector2(3.03043, 3.03043)
 polygon = PackedVector2Array(1032.9, -211.9, 1032.9, -211.9, 1141.65, -103.15, 924.95, -103.15)
@@ -98,7 +104,7 @@ end_cap_mode = 2
 [node name="@@45668" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_j4153")
+texture = ExtResource("3_5x2sy")
 texture_offset = Vector2(-357.35, 261)
 texture_scale = Vector2(0.888889, 0.888889)
 polygon = PackedVector2Array(169.825, 18.0417, 169.825, 18.0417, 184.842, 19.1333, 199.55, 21.6, 211.425, 24.925, 223.441, 30.3812, 234.2, 37.975, 246.275, 48.4, 263.188, 62.9688, 280.55, 77.125, 286.1, 82.05, 293, 88.575, 299.325, 94.35, 310.92, 105.28, 322.396, 116.321, 333.75, 127.475, 338.975, 132.675, 345.9, 140.625, 355.425, 150.7, 368.359, 161.706, 381.35, 172.675, 394.476, 184.471, 413.434, 202.613, 438.225, 227.1, -136.775, 227.1, -125.011, 195.935, -115.56, 173.359, -108.423, 159.373, -103.6, 153.975, -92.8, 149.25, -78.2312, 136.087, -63.25, 123.225, -53.175, 115.8, -35.8719, 103.859, -19.3, 90.775, -4.325, 78.675, 11.15, 67.175, 27.125, 56.275, 43.2156, 46.6156, 60.075, 38.175, 74.1, 32.4, 88.5, 27.6, 106.142, 23.1833, 124.158, 20.2833, 142.55, 18.9, 154.5, 18.325, 1089.72, 23.275, 1089.72, 23.275, 1125.96, 28.0932, 1160.08, 50.8849, 1180.68, 77.125, 1180.69, 77.1406, 1192.08, 91.6499, 1204.36, 115.8, 1204.38, 115.825, 1215.86, 138.4, 831.025, 138.4, 849.625, 116.842, 850.518, 115.825, 850.539, 115.8, 865.77, 98.4437, 879.462, 83.2047, 890.7, 71.125, 904.558, 58.6583, 920.075, 48.65, 937.25, 41.1, 955.067, 36.15, 973.567, 33.6083, 992.75, 33.475, 1000.21, 32.9225, 1018.86, 31.0383, 1048.7, 27.8225, 1074.84, 24.925, 673.95, 39.2, 673.95, 39.2, 688.706, 39.5727, 703.5, 42.025, 709.125, 43.5, 714.05, 45.3, 732.275, 55.2969, 748.55, 67.975, 758.975, 77.05, 768.975, 85.075, 775.725, 90.1, 785.397, 97.6531, 794.375, 106.125, 805.7, 117.394, 817.4, 128.1, 828.275, 136.525, 831.025, 138.4, 515.488, 138.4, 517.441, 136.304, 524.425, 129, 537.485, 115.825, 550.775, 103.05, 567.481, 88.2937, 585.125, 74.55, 592.325, 69.6, 609.175, 59.6917, 626.733, 51.325, 645, 44.5, 659.457, 40.8415, 670.66, 39.5727, 1884.6, 48, 1884.6, 48, 1893.8, 50.625, 1912.31, 54.45, 1931.3, 58.125, 1947.65, 62.775, 1959.82, 69.75, 1968.38, 77.125, 1968.39, 77.1406, 1977.75, 86.275, 1989.84, 98.9688, 2001.65, 111.85, 2005.21, 115.8, 2005.23, 115.825, 2022.97, 135.525, 2028.35, 142, 2035.85, 151.244, 2043.8, 159.7, 2047.93, 164.475, 2057.53, 176.684, 2060.07, 179.36, 2060.1, 179.4, 2068.1, 187.825, 2078.68, 198.325, 2092.73, 213.059, 2107.93, 227.1, 1715.85, 227.1, 1724.32, 213.55, 1730.97, 203.5, 1735.95, 196.75, 1741.93, 188.234, 1747.35, 179.4, 1748.45, 177.45, 1750.93, 172.9, 1760.41, 155.55, 1770.51, 138.592, 1781.22, 122.025, 1792.68, 106.934, 1805.45, 93.7, 1819.63, 80.9917, 1824.11, 77.1406, 1834.13, 68.5083, 1848.95, 56.25, 1864.46, 48.825, 1874.83, 48.4, 1606.03, 133, 1606.03, 133, 1612.4, 133.5, 1621.28, 136.725, 1631.4, 141.925, 1640.57, 146.741, 1649.53, 152.175, 1660.2, 159.581, 1669.28, 166.875, 1673.6, 171.6, 1677.71, 179.36, 1687.14, 197.86, 1701.88, 227.1, 1425.65, 227.1, 1444.4, 201.961, 1460.43, 184.761, 1473.75, 175.5, 1502.6, 162.75, 1520.54, 155.183, 1538.47, 148.442, 1556.38, 142.525, 1574.55, 137.35, 1589.9, 134.331, 1599.97, 133.5, 515.488, 138.4, 1215.86, 138.4, 1221.96, 150.388, 1227.06, 164.475, 1227.08, 164.531, 1232.45, 179.36, 1232.46, 179.4, 1249.72, 227.1, 449.675, 227.1, 459.575, 211.825, 474.663, 188.806, 482, 178.125, 492.691, 164.531, 503.4, 151.725, 510.525, 143.725, 515.309, 138.592)

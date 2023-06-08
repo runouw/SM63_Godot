@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Small PF.png" id="1_i5jci"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Med PL.png" id="2_8amu6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Large PL.png" id="3_8v0o1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6ilr8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Small PF.png" id="2_ddory"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Med PL.png" id="3_20m52"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Large PL.png" id="4_j1jp5"]
 
-[sub_resource type="Animation" id="Animation_g8ije"]
+[sub_resource type="Animation" id="Animation_snsef"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +45,21 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lx3de"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3yrx"]
 _data = {
-"Default": SubResource("Animation_g8ije")
+"Default": SubResource("Animation_snsef")
 }
 
 [node name="Green PL Clip" type="Node2D"]
+script = ExtResource("1_6ilr8")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green PL Clip.xml"
+linkage = "GreenPLClip"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lx3de")
+"Timeline": SubResource("AnimationLibrary_w3yrx")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -63,7 +69,7 @@ libraries = {
 [node name="@@47966" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-16, -8)
-texture = ExtResource("1_i5jci")
+texture = ExtResource("2_ddory")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -72,7 +78,7 @@ visible = false
 [node name="@@47967" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-24, -8)
-texture = ExtResource("2_8amu6")
+texture = ExtResource("3_20m52")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -81,5 +87,5 @@ visible = false
 [node name="@@47968" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-32, -8)
-texture = ExtResource("3_8v0o1")
+texture = ExtResource("4_j1jp5")
 centered = false

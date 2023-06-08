@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_6wu6e"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_78cg4"]
+
+[sub_resource type="Animation" id="Animation_yakev"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,26 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ttad8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6obrv"]
 _data = {
-"Default": SubResource("Animation_6wu6e")
+"Default": SubResource("Animation_yakev")
 }
 
+[sub_resource type="GDScript" id="GDScript_gc3ib"]
+script/source = "extends Node
+# this.removeMovieClip(this);
+# "
+
 [node name="red X" type="Node2D"]
+script = ExtResource("1_78cg4")
+source_xml = "res://sm63/LIBRARY/Xtra/red X.xml"
+linkage = "redX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ttad8")
+"Timeline": SubResource("AnimationLibrary_6obrv")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -57,6 +69,7 @@ libraries = {
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(454, 250)
 
 [node name="@@52968" type="Line2D" parent="Layer 1/Frame 0/Shape"]
 width = 1.0
@@ -71,3 +84,6 @@ end_cap_mode = 2
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_gc3ib")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_8y4x6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_24hkg"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_ssn08"]
 
-[sub_resource type="Animation" id="Animation_nwy2d"]
+[sub_resource type="Animation" id="Animation_8j108"]
 length = 1.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -90,16 +91,65 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qeijg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kj4oh"]
 _data = {
-"Default": SubResource("Animation_nwy2d")
+"Default": SubResource("Animation_8j108")
 }
 
+[sub_resource type="GDScript" id="GDScript_v71rl"]
+script/source = "extends Node
+# if (trans == true) {
+# 	/*_alpha = 0;
+# 	onEnterFrame = function () {
+# 	_alpha += 10;
+# 	if (_alpha>=100) {
+# 	_root.nextFrame();
+# 	onEnterFrame = function () {
+# 	_alpha -= 10;
+# 	if (_alpha<=0) {
+# 	this.swapDepths(0);
+# 	this.removeMovieClip();
+# 	}
+# 	};
+# 	}
+# 	};*/
+# 	_xscale = ((random(2)-0.5)*200);
+# 	_yscale = ((random(2)-0.5)*200);
+# } else {
+# 	this.swapDepths(0);
+# 	this.removeMovieClip();
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_h800w"]
+script/source = "extends Node
+# _root.gotoAndStop(\"File Select\");
+# /*onEnterFrame = function () {
+# _alpha -= 8
+# if (_alpha<=0) {
+# this.swapDepths(0);
+# this.removeMovieClip();
+# }
+# };*/
+# "
+
+[sub_resource type="GDScript" id="GDScript_n6sl7"]
+script/source = "extends Node
+# stop();
+# this.swapDepths(0);
+# this.removeMovieClip();
+# "
+
 [node name="Title Screen Transition" type="Node2D"]
+script = ExtResource("1_24hkg")
+source_xml = "res://sm63/LIBRARY/Menu/Title Screen Transition.xml"
+linkage = "TitleScreenTransition"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qeijg")
+"Timeline": SubResource("AnimationLibrary_kj4oh")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -111,9 +161,9 @@ libraries = {
 [node name="@@51713" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-225.075, -149.95, 224.925, -149.95, 224.925, 150.05, -225.075, 150.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_8y4x6")
+script = ExtResource("2_ssn08")
 matrix = Transform2D(-0.0281067, -0.0486908, 0.158569, -0.0915527, 211.65, 209.6)
-entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+entries_color = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
@@ -125,9 +175,9 @@ visible = false
 [node name="@@51714" type="Polygon2D" parent="Layer 1/Frame 19/Shape"]
 polygon = PackedVector2Array(-225.075, -149.95, 224.925, -149.95, 224.925, 150.05, -225.075, 150.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_8y4x6")
+script = ExtResource("2_ssn08")
 matrix = Transform2D(-0.0281067, -0.0486908, 0.158569, -0.0915527, -233.85, -197.15)
-entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+entries_color = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
@@ -139,9 +189,9 @@ visible = false
 [node name="@@51715" type="Polygon2D" parent="Layer 1/Frame 20/Shape"]
 polygon = PackedVector2Array(-225.075, -149.95, 224.925, -149.95, 224.925, 150.05, -225.075, 150.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_8y4x6")
+script = ExtResource("2_ssn08")
 matrix = Transform2D(0.0281067, 0.0486908, -0.158569, 0.0915527, 351.9, 153.45)
-entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+entries_color = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
@@ -153,9 +203,9 @@ visible = false
 [node name="@@51716" type="Polygon2D" parent="Layer 1/Frame 39/Shape"]
 polygon = PackedVector2Array(-225.075, -149.95, 224.925, -149.95, 224.925, 150.05, -225.075, 150.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_8y4x6")
+script = ExtResource("2_ssn08")
 matrix = Transform2D(0.0281067, 0.0486908, -0.158569, 0.0915527, -263.75, -195)
-entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+entries_color = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
@@ -163,8 +213,17 @@ spread_method_reflect = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_v71rl")
+
 [node name="Frame 19" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 19"]
+script = SubResource("GDScript_h800w")
+
 [node name="Frame 39" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 39"]
+script = SubResource("GDScript_n6sl7")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Fly 1.png" id="1_kpy32"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Fly 2.png" id="2_0urwi"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ifoo4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Fly 1.png" id="2_6qpph"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Fly 2.png" id="3_4qqrs"]
 
-[sub_resource type="Animation" id="Animation_e64ln"]
+[sub_resource type="Animation" id="Animation_u2lx1"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tr27j"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jmfon"]
 _data = {
-"Default": SubResource("Animation_e64ln")
+"Default": SubResource("Animation_u2lx1")
 }
 
 [node name="Penguin Fly 1 Animation" type="Node2D"]
+script = ExtResource("1_ifoo4")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Fly 1 Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tr27j")
+"Timeline": SubResource("AnimationLibrary_jmfon")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -52,7 +58,7 @@ texture_filter = 1
 position = Vector2(8.5, -9)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_kpy32")
+texture = ExtResource("2_6qpph")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -63,5 +69,5 @@ texture_filter = 1
 position = Vector2(8.5, -9)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_0urwi")
+texture = ExtResource("3_4qqrs")
 centered = false

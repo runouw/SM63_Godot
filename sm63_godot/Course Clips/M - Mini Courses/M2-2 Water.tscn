@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_xladx"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7ysph"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_yrhh8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mwoa5"]
 
-[sub_resource type="Animation" id="Animation_iddyj"]
+[sub_resource type="Animation" id="Animation_i8rqw"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,56 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_o25s3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_darlx"]
 _data = {
-"Default": SubResource("Animation_iddyj")
+"Default": SubResource("Animation_i8rqw")
 }
 
+[sub_resource type="GDScript" id="GDScript_rvngc"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterDeepness = 2000;
+# 	WaterLength = 1800;
+# 	polygons = 100;
+# 	Y = _root[\"M2-1WaterLevel\"];
+# 	_y = Y+420;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (((Y)-_root[\"M2-1WaterLevel\"])>3) {
+# 			Y -= 2;
+# 		}
+# 		if (((Y)-_root[\"M2-1WaterLevel\"])<-3) {
+# 			Y += 2;
+# 		}
+# 		_y = Y+420;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_j8rlr"]
+script/source = "extends Node
+# //_visible = false"
+
 [node name="M2-2 Water" type="Node2D"]
+script = ExtResource("1_yrhh8")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M2-2 Water.xml"
+linkage = "M2-2Water"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_o25s3")
+"Timeline": SubResource("AnimationLibrary_darlx")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_xladx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-329.2, 137)
-script = ExtResource("2_7ysph")
+script = ExtResource("2_mwoa5")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -79,10 +110,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Water(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Water(Mask)/Frame 0" instance=ExtResource("1_xladx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Water(Mask)/Frame 0"]
 position = Vector2(-1092, 0)
 scale = Vector2(1, 1.00139)
-script = ExtResource("2_7ysph")
+script = ExtResource("2_mwoa5")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -95,6 +126,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Water(Mask)/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_rvngc")
+
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_j8rlr")

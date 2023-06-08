@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Arena Door.png" id="1_7rkqd"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_ftajd"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_2djmk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lkl24"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Arena Door.png" id="2_2va1s"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_8m1b4"]
 
-[sub_resource type="Animation" id="Animation_t00gh"]
+[sub_resource type="Animation" id="Animation_g1fn8"]
 length = 1.26667
 loop_mode = 1
 tracks/0/type = "value"
@@ -236,16 +236,199 @@ tracks/18/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_re1i3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yp0vs"]
 _data = {
-"Default": SubResource("Animation_t00gh")
+"Default": SubResource("Animation_g1fn8")
 }
 
+[sub_resource type="GDScript" id="GDScript_r4sfy"]
+script/source = "extends Node
+# if (locked == undefined) {
+# 	locked = false;
+# }
+# if (removelock == undefined) {
+# 	removelock = false;
+# }
+# //    
+# if (locked == true) {
+# 	if (removelock == true) {
+# 		gotoAndStop(3);
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# } else {
+# 	gotoAndStop(4);
+# 	onEnterFrame = null;
+# }
+# //
+# "
+
+[sub_resource type="GDScript" id="GDScript_kchex"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (removelock == true) {
+# 		gotoAndStop(3);
+# 	}
+# 	if (_root.PauseGame == false) {
+# 		if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false) {
+# 			//
+# 			if (_root.KeyUP() && !_root.KeyRIGHT() && !_root.KeyLEFT()) {
+# 				doorlockfunction();
+# 			}
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_6k01v"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ensnv"]
+script/source = "extends Node
+# stop();
+# waittoopen = false;
+# _root.unlockdooritem = \"\";
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false) {
+# 			if ((_root.KeyUP() || _root.KeyTapUP()) && !_root.KeyRIGHT() && !_root.KeyLEFT() && walk !== \"front\") {
+# 				// Key unlock animation code here 
+# 				_root.Course.Char.attack = true;
+# 				_root.Course.Char.xspeed = 0;
+# 				if (dooropenarray !== undefined) {
+# 					if (_root.DoorOpenedArray[dooropenarray] == false && locked == true && removelock == true) {
+# 						_root.DoorOpenedArray[dooropenarray] = true;
+# 						_root.Course.Char.attackFrame = \"UnlockDoor\";
+# 						if (unlockitem !== undefined) {
+# 							// Put for opening Doors with Keys and Stuff
+# 							_root.heldItemObtained = unlockitem;
+# 							_root.unlockdooritem = \"Item\";
+# 						} else {
+# 							_root.unlockdooritem = \"\";
+# 						}
+# 						waittoopen = true;
+# 					}
+# 				}
+# 				if (openwithkey == true) {
+# 					// For the doors in Boos Mansion and Bowsers Castle...
+# 					waittoopen = true;
+# 					_root.Course.Char.attackFrame = \"UnlockDoor\";
+# 					if (unlockitem !== undefined) {
+# 						_root.heldItemObtained = unlockitem;
+# 						_root.unlockdooritem = \"Item\";
+# 					} else {
+# 						_root.unlockdooritem = \"\";
+# 					}
+# 				}
+# 				if (waittoopen == false) {
+# 					//  
+# 					if (walk == \"far\") {
+# 						_root.Course.Char.attackFrame = \"FarDoor\";
+# 					} else {
+# 						_root.Course.Char.attackFrame = \"Door\";
+# 					}
+# 					_root.door = doorplace;
+# 					gotoAndPlay(\"play\");
+# 				} else {
+# 					onEnterFrame = function () {
+# 						if (_root.PauseGame == false) {
+# 							_root.Course.Char.attack = true;
+# 							_root.Course.Char.attackFrame = \"UnlockDoor\";
+# 							X = _x+_parent._x;
+# 							_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 							if (_root.Course.Char.charClip.frame.done == true) {
+# 								if (walk == \"far\") {
+# 									_root.Course.Char.attackFrame = \"FarDoor\";
+# 								} else {
+# 									_root.Course.Char.attackFrame = \"Door\";
+# 								}
+# 								_root.door = doorplace;
+# 								gotoAndPlay(\"play\");
+# 								onEnterFrame = null;
+# 							}
+# 						}
+# 					};
+# 				}
+# 			} else if (walk == \"front\" && (_root.KeyDOWN() || _root.KeyTapDOWN()) && !_root.KeyRIGHT() && !_root.KeyLEFT()) {
+# 				_root.Course.Char.attack = true;
+# 				_root.Course.Char.xspeed = 0;
+# 				_root.Course.Char.attackFrame = \"FrontDoor\";
+# 				_root.door = doorplace;
+# 				gotoAndPlay(\"play\");
+# 			}
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_sfqtj"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_hittd"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false) {
+# 		if (_root.KeyUP() && !_root.KeyRIGHT() && !_root.KeyLEFT() && walk !== \"front\") {
+# 			_root.Course.Char.attack = true;
+# 			_root.Course.Char.xspeed = 0;
+# 			if (walk == \"far\") {
+# 				_root.Course.Char.attackFrame = \"FarDoor\";
+# 			} else {
+# 				_root.Course.Char.attackFrame = \"Door\";
+# 			}
+# 			_root.door = doorplace;
+# 			gotoAndPlay(\"play\");
+# 		} else if (walk == \"front\" && _root.KeyDOWN() && !_root.KeyRIGHT() && !_root.KeyLEFT()) {
+# 			_root.Course.Char.attack = true;
+# 			_root.Course.Char.xspeed = 0;
+# 			_root.Course.Char.attackFrame = \"FrontDoor\";
+# 			_root.door = doorplace;
+# 			gotoAndPlay(\"play\");
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_jtejq"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_v5yoj"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	X = _x+_parent._x;
+# 	_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_pqui7"]
+script/source = "extends Node
+# onEnterFrame = null;
+# "
+
 [node name="Star Door" type="Node2D"]
+script = ExtResource("1_lkl24")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Star Door.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_re1i3")
+"Timeline": SubResource("AnimationLibrary_yp0vs")
 }
 
 [node name="Layer 5" type="Node2D" parent="."]
@@ -267,7 +450,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 texture_filter = 1
 position = Vector2(-24, -24)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -277,7 +460,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-24, -24)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
@@ -287,7 +470,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-47, -24)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
@@ -297,7 +480,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-49, -24)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Frame 37" type="Node2D" parent="Layer 1"]
@@ -307,7 +490,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-24, -24)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -319,7 +502,7 @@ texture_filter = 1
 position = Vector2(24, -24)
 rotation = 3.14159
 scale = Vector2(0.75, -0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
@@ -330,7 +513,7 @@ texture_filter = 1
 position = Vector2(24, -24)
 rotation = 3.14159
 scale = Vector2(0.75, -0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 3"]
@@ -341,7 +524,7 @@ texture_filter = 1
 position = Vector2(46, -24)
 rotation = 3.14159
 scale = Vector2(0.75, -0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Frame 23" type="Node2D" parent="Layer 3"]
@@ -352,7 +535,7 @@ texture_filter = 1
 position = Vector2(49, -24)
 rotation = 3.14159
 scale = Vector2(0.75, -0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Frame 37" type="Node2D" parent="Layer 3"]
@@ -363,7 +546,7 @@ texture_filter = 1
 position = Vector2(24, -24)
 rotation = 3.14159
 scale = Vector2(0.75, -0.75)
-texture = ExtResource("1_7rkqd")
+texture = ExtResource("2_2va1s")
 centered = false
 
 [node name="Layer 2(Mask)" type="Node2D" parent="."]
@@ -396,13 +579,19 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_r4sfy")
+
 [node name="Frame 1" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1" instance=ExtResource("2_ftajd")]
+[node name="AS2" type="Node" parent="Layer 4/Frame 1"]
+script = SubResource("GDScript_kchex")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1"]
 position = Vector2(0, 25)
 scale = Vector2(0.566422, 0.637497)
-script = ExtResource("3_2djmk")
+script = ExtResource("3_8m1b4")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -414,14 +603,20 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_6k01v")
 
 [node name="Frame 2" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2" instance=ExtResource("2_ftajd")]
+[node name="AS2" type="Node" parent="Layer 4/Frame 2"]
+script = SubResource("GDScript_ensnv")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2"]
 position = Vector2(0, 25)
 scale = Vector2(0.566422, 0.637497)
-script = ExtResource("3_2djmk")
+script = ExtResource("3_8m1b4")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -433,14 +628,20 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_sfqtj")
 
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3" instance=ExtResource("2_ftajd")]
+[node name="AS2" type="Node" parent="Layer 4/Frame 3"]
+script = SubResource("GDScript_hittd")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3"]
 position = Vector2(0, 25)
 scale = Vector2(0.566422, 0.637497)
-script = ExtResource("3_2djmk")
+script = ExtResource("3_8m1b4")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -453,8 +654,17 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 3/DOMSymbolInstance"]
+script = SubResource("GDScript_jtejq")
+
 [node name="Frame 4" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 4"]
+script = SubResource("GDScript_v5yoj")
+
 [node name="Frame 17" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 17"]
+script = SubResource("GDScript_pqui7")

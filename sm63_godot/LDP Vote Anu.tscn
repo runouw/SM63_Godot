@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_afyvj"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gykf7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_d86or"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mbhx3"]
 
-[sub_resource type="Animation" id="Animation_lvynl"]
+[sub_resource type="Animation" id="Animation_3qbpu"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,30 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ryol6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_77n5g"]
 _data = {
-"Default": SubResource("Animation_lvynl")
+"Default": SubResource("Animation_3qbpu")
 }
 
 [node name="LDP Vote Anu" type="Node2D"]
+script = ExtResource("1_d86or")
+source_xml = "res://sm63/LIBRARY/LDP Vote Anu.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ryol6")
+"Timeline": SubResource("AnimationLibrary_77n5g")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_afyvj")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-133.85, -2.85)
-script = ExtResource("2_gykf7")
+script = ExtResource("2_mbhx3")
 path = "res://sm63_godot/LDP Vote Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

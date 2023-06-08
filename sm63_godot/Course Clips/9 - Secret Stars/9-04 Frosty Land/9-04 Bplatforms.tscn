@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_elfqd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hygxr"]
+
+[sub_resource type="Animation" id="Animation_t7vmm"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8abam"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yu5wl"]
 _data = {
-"Default": SubResource("Animation_elfqd")
+"Default": SubResource("Animation_t7vmm")
 }
 
 [node name="9-04 Bplatforms" type="Node2D"]
+script = ExtResource("1_hygxr")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-04 Frosty Land/9-04 Bplatforms.xml"
+linkage = "9-04Bplatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8abam")
+"Timeline": SubResource("AnimationLibrary_yu5wl")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

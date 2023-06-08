@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 3.png" id="1_ulg8b"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 4.png" id="2_vun3m"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 5.png" id="3_nmt40"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 2.png" id="4_ni4sf"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 1.png" id="5_0nidc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6eslw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 3.png" id="2_hqisq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 4.png" id="3_715yy"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 5.png" id="4_vn4ku"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 2.png" id="5_vkfyf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 1.png" id="6_02fh3"]
 
-[sub_resource type="Animation" id="Animation_1pjgr"]
+[sub_resource type="Animation" id="Animation_4kjey"]
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -130,16 +131,31 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7yxrw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wvmsj"]
 _data = {
-"Default": SubResource("Animation_1pjgr")
+"Default": SubResource("Animation_4kjey")
 }
 
+[sub_resource type="GDScript" id="GDScript_ibgmq"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_g8tuu"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Goomboss Clip" type="Node2D"]
+script = ExtResource("1_6eslw")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7yxrw")
+"Timeline": SubResource("AnimationLibrary_wvmsj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -149,7 +165,7 @@ libraries = {
 [node name="@@49281" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-32, -38.5)
-texture = ExtResource("1_ulg8b")
+texture = ExtResource("2_hqisq")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -158,7 +174,7 @@ visible = false
 [node name="@@49282" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-33, -38.5)
-texture = ExtResource("2_vun3m")
+texture = ExtResource("3_715yy")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -167,7 +183,7 @@ visible = false
 [node name="@@49283" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-34.5, -38.5)
-texture = ExtResource("3_nmt40")
+texture = ExtResource("4_vn4ku")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -176,7 +192,7 @@ visible = false
 [node name="@@49284" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-33, -38.5)
-texture = ExtResource("2_vun3m")
+texture = ExtResource("3_715yy")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -185,7 +201,7 @@ visible = false
 [node name="@@49285" type="Sprite2D" parent="Layer 1/Frame 12"]
 texture_filter = 1
 position = Vector2(-32, -38.5)
-texture = ExtResource("1_ulg8b")
+texture = ExtResource("2_hqisq")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
@@ -194,7 +210,7 @@ visible = false
 [node name="@@49286" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-31, -38.5)
-texture = ExtResource("4_ni4sf")
+texture = ExtResource("5_vkfyf")
 centered = false
 
 [node name="Frame 18" type="Node2D" parent="Layer 1"]
@@ -203,7 +219,7 @@ visible = false
 [node name="@@49287" type="Sprite2D" parent="Layer 1/Frame 18"]
 texture_filter = 1
 position = Vector2(-29.7, -38.15)
-texture = ExtResource("5_0nidc")
+texture = ExtResource("6_02fh3")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -212,12 +228,18 @@ visible = false
 [node name="@@49288" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(-32, -38.5)
-texture = ExtResource("4_ni4sf")
+texture = ExtResource("5_vkfyf")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ibgmq")
+
 [node name="Frame 12" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 12"]
+script = SubResource("GDScript_g8tuu")

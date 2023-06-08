@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_0ngbf"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_uustk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_83ehs"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_s2560"]
 
-[sub_resource type="Animation" id="Animation_66sm5"]
+[sub_resource type="Animation" id="Animation_wwdg7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,37 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p2flt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gbonm"]
 _data = {
-"Default": SubResource("Animation_66sm5")
+"Default": SubResource("Animation_wwdg7")
 }
 
+[sub_resource type="GDScript" id="GDScript_2u66o"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	difficulty = 2;
+# }
+# "
+
 [node name="8-E5-4FrontGFX" type="Node2D"]
+script = ExtResource("1_83ehs")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4FrontGFX.xml"
+linkage = "8-E5-4FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_p2flt")
+"Timeline": SubResource("AnimationLibrary_gbonm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_0ngbf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(149.6, 1.95)
-script = ExtResource("2_uustk")
+script = ExtResource("2_s2560")
 path = "res://sm63_godot/Enemies/Bosses/Bowser/Clips/Bowser Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -49,3 +61,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_2u66o")

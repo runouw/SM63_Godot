@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_jkqir"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_u784e"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_u4ilx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_c30xb"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_8gild"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_g22ki"]
 
-[sub_resource type="Animation" id="Animation_amn1j"]
+[sub_resource type="Animation" id="Animation_k85gy"]
 length = 3.06667
 loop_mode = 1
 tracks/0/type = "value"
@@ -80,16 +80,21 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qu6be"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kd7bn"]
 _data = {
-"Default": SubResource("Animation_amn1j")
+"Default": SubResource("Animation_k85gy")
 }
 
 [node name="Menu Button BG" type="Node2D"]
+script = ExtResource("1_c30xb")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Universal Stuff/Menu Button BG.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qu6be")
+"Timeline": SubResource("AnimationLibrary_kd7bn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -101,7 +106,7 @@ libraries = {
 [node name="@@51959" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_jkqir")
+script = ExtResource("2_8gild")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, 36.5, -10)
 entries_color = PackedColorArray(0.054902, 0.054902, 0.745098, 1, 0.345098, 0.345098, 0.921569, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -115,7 +120,7 @@ visible = false
 [node name="@@51960" type="Polygon2D" parent="Layer 1/Frame 22/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_jkqir")
+script = ExtResource("2_8gild")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, 2.4, -6.45)
 entries_color = PackedColorArray(0.054902, 0.054902, 0.745098, 1, 0.345098, 0.345098, 0.921569, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -129,7 +134,7 @@ visible = false
 [node name="@@51961" type="Polygon2D" parent="Layer 1/Frame 45/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_jkqir")
+script = ExtResource("2_8gild")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, -35.5, -2.5)
 entries_color = PackedColorArray(0.054902, 0.054902, 0.745098, 1, 0.345098, 0.345098, 0.921569, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -143,7 +148,7 @@ visible = false
 [node name="@@51962" type="Polygon2D" parent="Layer 1/Frame 68/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_jkqir")
+script = ExtResource("2_8gild")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, 0.5, -6.25)
 entries_color = PackedColorArray(0.054902, 0.054902, 0.745098, 1, 0.345098, 0.345098, 0.921569, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -157,7 +162,7 @@ visible = false
 [node name="@@51963" type="Polygon2D" parent="Layer 1/Frame 91/Shape"]
 polygon = PackedVector2Array(-55.25, -29, 55.25, -29, 55.25, 29, -55.25, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_jkqir")
+script = ExtResource("2_8gild")
 matrix = Transform2D(0.0514221, 0, 0, 0.117905, 36.5, -10)
 entries_color = PackedColorArray(0.054902, 0.054902, 0.745098, 1, 0.345098, 0.345098, 0.921569, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -167,8 +172,8 @@ focal_point_ratio = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_u784e")]
-script = ExtResource("3_u4ilx")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("3_g22ki")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu Button (really).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Side - Hover.png" id="1_s81e5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Turbo Nozzle.png" id="2_fk058"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Rocket Nozzle.png" id="3_uu843"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_aefbj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Side - Hover.png" id="2_cgswj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Turbo Nozzle.png" id="3_ttb0g"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Rocket Nozzle.png" id="4_2bmvv"]
 
-[sub_resource type="Animation" id="Animation_1kssl"]
+[sub_resource type="Animation" id="Animation_qps13"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -92,16 +93,26 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_o2mdg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2k87q"]
 _data = {
-"Default": SubResource("Animation_1kssl")
+"Default": SubResource("Animation_qps13")
 }
 
+[sub_resource type="GDScript" id="GDScript_j762b"]
+script/source = "extends Node
+# gotoAndStop(_root.Fluddpow);
+# "
+
 [node name="Dynamic Fludd Nozzle Clip" type="Node2D"]
+script = ExtResource("1_aefbj")
+source_xml = "res://sm63/LIBRARY/Char/Fludd CLIPS/Dynamic Fludd Nozzle Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_o2mdg")
+"Timeline": SubResource("AnimationLibrary_2k87q")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -111,7 +122,7 @@ libraries = {
 [node name="@@14479" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-5.5, -7)
-texture = ExtResource("1_s81e5")
+texture = ExtResource("2_cgswj")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -122,7 +133,7 @@ texture_filter = 1
 position = Vector2(16.5, -9)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_fk058")
+texture = ExtResource("3_ttb0g")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -131,12 +142,15 @@ visible = false
 [node name="@@14481" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-5.5, -14)
-texture = ExtResource("3_uu843")
+texture = ExtResource("4_2bmvv")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_j762b")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

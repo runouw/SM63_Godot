@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_fu485"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_dfyhn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="3_jpv1n"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_37ggx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_o0kd2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="3_dfq00"]
 
-[sub_resource type="Animation" id="Animation_6xkek"]
+[sub_resource type="Animation" id="Animation_h1t7j"]
 length = 0.533333
 loop_mode = 1
 tracks/0/type = "value"
@@ -116,26 +116,124 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w33tc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_meu84"]
 _data = {
-"Default": SubResource("Animation_6xkek")
+"Default": SubResource("Animation_h1t7j")
 }
 
+[sub_resource type="GDScript" id="GDScript_l2ait"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_awyd6"]
+script/source = "extends Node
+# if (picture == undefined) {
+# 	picture = false;
+# }
+# aa._alpha = 0"
+
+[sub_resource type="GDScript" id="GDScript_tv567"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (_root.playpause == false) {
+# 			if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.KeyZ() && !_root.KeyRIGHT() && !_root.KeyLEFT()) {
+# 				_root.Course.Char.yspeed = 0;
+# 				_root.Course.Char.xspeed = 0;
+# 				_root.Course.Char.attack = true;
+# 				_root.Course.Char.attackFrame = \"Sign\";
+# 				//
+# 				onEnterFrame = function () {
+# 					aa._alpha += (0-aa._alpha)/3;
+# 					if (_root.PauseGame == false) {
+# 						_root.playpause = true;
+# 						X = _x+_root.Course.BackGFX._x;
+# 						_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 						_root.Camcenter = this;
+# 					}
+# 				};
+# 				play();
+# 			}
+# 		}
+# 		if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && !_root.KeyRIGHT() && !_root.KeyLEFT() && _root.playpause == false) {
+# 			aa.aa = 100;
+# 		} else {
+# 			aa.aa = 0;
+# 		}
+# 		aa._alpha += (aa.aa-aa._alpha)/3;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_vwvbn"]
+script/source = "extends Node
+# stop();
+# if (picture == false) {
+# 	_root.PlayMessage(signmessage);
+# } else {
+# 	_root.PlayPicture(signmessage);
+# }
+# readingfunction();
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	_root.playpause = true;
+# 	//
+# 	X = _x+_parent._x;
+# 	_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 	//
+# 	if (othercamcenter == undefined) {
+# 		//_root.Camcenter = this;
+# 	} else {
+# 		_root.Camcenter = othercamcenter;
+# 	}
+# 	// 
+# 	if (!_root.KeyZ()) {
+# 		SPACE = false;
+# 	}
+# 	if (_root.KeyZ() && SPACE == false) {
+# 		if (picture == false) {
+# 			_root.StopMessage();
+# 		} else {
+# 			_root.StopPicture();
+# 		}
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_52c8j"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# _root.Course.Char.attackFrame = \"\";
+# completefunction()
+# onEnterFrame = null;
+# _root.playpause = false;
+# "
+
 [node name="Coded Sign" type="Node2D"]
+script = ExtResource("1_37ggx")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Coded Sign.xml"
+linkage = "CodedSign"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w33tc")
+"Timeline": SubResource("AnimationLibrary_meu84")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_fu485")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, -0.25)
 scale = Vector2(0.283218, 0.937485)
-script = ExtResource("2_dfyhn")
+script = ExtResource("2_o0kd2")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -148,6 +246,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_l2ait")
+
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
 visible = false
 
@@ -155,10 +256,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_fu485")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(0.25, -74.25)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("2_dfyhn")
+script = ExtResource("2_o0kd2")
 path = "res://sm63_godot/Coded Sign Z.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -180,7 +281,7 @@ brightness = 0.0
 [node name="@@46554" type="Polygon2D" parent="Graphics/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_jpv1n")
+texture = ExtResource("3_dfq00")
 texture_offset = Vector2(-28.6, 58.4)
 polygon = PackedVector2Array(-3, -23.3, 3, -23.3, 3, -0.75, -3, -0.75)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -188,7 +289,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@46555" type="Polygon2D" parent="Graphics/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_jpv1n")
+texture = ExtResource("3_dfq00")
 texture_offset = Vector2(55.9, 60.6)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(-16, -53.3, 16, -53.3, 16, -23.3, -16, -23.3)
@@ -202,9 +303,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 0" instance=ExtResource("1_fu485")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 0"]
 position = Vector2(0, -38.2)
-script = ExtResource("2_dfyhn")
+script = ExtResource("2_o0kd2")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Sign Image Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -232,11 +333,23 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_awyd6")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_tv567")
 
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 9"]
+script = SubResource("GDScript_vwvbn")
+
 [node name="Frame 15" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 15"]
+script = SubResource("GDScript_52c8j")

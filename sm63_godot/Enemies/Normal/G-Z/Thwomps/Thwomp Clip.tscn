@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Thwomps/MPA Thwomp.png" id="1_qw430"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_0qre6"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_2a1lm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_knojb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Thwomps/MPA Thwomp.png" id="2_2oxei"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_pxh0k"]
 
-[sub_resource type="Animation" id="Animation_45sqd"]
+[sub_resource type="Animation" id="Animation_86ccm"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -56,16 +56,213 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_drgwc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ogdbq"]
 _data = {
-"Default": SubResource("Animation_45sqd")
+"Default": SubResource("Animation_86ccm")
 }
 
+[sub_resource type="GDScript" id="GDScript_jehca"]
+script/source = "extends Node
+# yspeed = 0;
+# startY = _y;
+# frame = \"idle\";
+# if (mariowait == undefined) {
+# 	mariowait = false;
+# }
+# startcounting = false;
+# if (waittime == undefined) {
+# 	waittime = _root.framerate*3;
+# }
+# if (count == undefined) {
+# 	count = 0;
+# }
+# if (groundwaittime == undefined) {
+# 	groundwaittime = _root.framerate*0.5;
+# }
+# if (fallspeed == undefined) {
+# 	fallspeed = 7;
+# }
+# if (fallaccel == undefined) {
+# 	fallaccel = 1;
+# }
+# if (riseaccel == undefined) {
+# 	riseaccel = 0.1;
+# }
+# if (risespeed == undefined) {
+# 	risespeed = 3;
+# }
+# if (Xrange == undefined) {
+# 	Xrange = 30;
+# }
+# riseaccel = 0.1;
+# risespeed = 3;
+# ycutoff = 0;
+# yspeed = risespeed;
+# while (yspeed>=riseaccel) {
+# 	yspeed -= riseaccel;
+# 	ycutoff += yspeed;
+# }
+# yspeed = 0;
+# //
+# depth = _root.Course.Platforms.getNextHighestDepth();
+# _root.Course.Platforms.attachMovie(\"ThwompGround\", \"ThwompGround\"+depth, depth, {_x:_x, _y:_y, scale:scale});
+# depth2 = _root.Course.BPlatforms.getNextHighestDepth();
+# _root.Course.BPlatforms.attachMovie(\"ThwompPlatform\", \"ThwompPlatform\"+depth2, depth2, {_x:_x, _y:_y, scale:scale});
+# "
+
+[sub_resource type="GDScript" id="GDScript_s0dnl"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false && Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 		if (mariowait == true) {
+# 			Xdiff = _root.Course.Char._x-(_x+_parent._x);
+# 			Ydiff = _root.Course.Char._y-(_y+_parent._y);
+# 			if (Math.abs(Xdiff)<Xrange && Ydiff>0) {
+# 				startcounting = true;
+# 				//count++;
+# 			}
+# 			if ((startcounting == true && frame == \"idle\") || frame == \"ground\") {
+# 				count++;
+# 			}
+# 		} else {
+# 			if (frame == \"idle\" || frame == \"ground\") {
+# 				count++;
+# 			}
+# 		}
+# 		if (frame == \"idle\" && count>waittime) {
+# 			startcounting = false;
+# 			//
+# 			yspeed += fallaccel;
+# 			yspeed = Math.min(fallspeed, yspeed);
+# 			//
+# 			if (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				count = 0;
+# 				frame = \"ground\";
+# 				yspeed = 0;
+# 				//
+# 				distancevolume = Math.sqrt(Math.pow((_root.currentCamX)-(_x+_parent._x), 2)+Math.pow((_root.currentCamY)-(_y+_parent._y), 2));
+# 				distancevolume /= 100;
+# 				distancevolume *= 15;
+# 				distancevolume = Math.min(100, distancevolume);
+# 				distancevolume = Math.max(0, distancevolume);
+# 				distancevolume -= 100;
+# 				distancevolume *= -1;
+# 				//
+# 				if (distancevolume>=1) {
+# 					randomnum = random(2)+1;
+# 					soundclip = new Sound(this);
+# 					soundclip.attachSound(\"thwomp-\"+randomnum);
+# 					soundclip.start(0, 1);
+# 					soundclip.setVolume((_root.MarioVolume/100)*distancevolume);
+# 					panX = (_root.currentCamX)-(_x+_parent._x);
+# 					panX /= -2;
+# 					panX = Math.min(100, panX);
+# 					panX = Math.max(-100, panX);
+# 					soundclip.setPan(panX);
+# 				}
+# 				//                                           
+# 			}
+# 		}
+# 		if (frame == \"ground\" && count>groundwaittime) {
+# 			if ((_y-ycutoff)>=startY) {
+# 				yspeed -= riseaccel;
+# 				yspeed = Math.max(-risespeed, yspeed);
+# 			} else {
+# 				yspeed += riseaccel;
+# 				if (yspeed>=0) {
+# 					count = 0;
+# 					yspeed = 0;
+# 					frame = \"idle\";
+# 				}
+# 			}
+# 		}
+# 		if (Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 			while (_root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-1)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				_y--;
+# 				//
+# 				_root.Course.Platforms[\"ThwompGround\"+depth]._y = this._y;
+# 				_root.Course.Platforms[\"ThwompGround\"+depth]._x = this._x;
+# 				//
+# 				_root.Course.BPlatforms[\"ThwompPlatform\"+depth2]._y = this._y;
+# 				_root.Course.BPlatforms[\"ThwompPlatform\"+depth2]._x = this._x;
+# 			}
+# 			whilecount = 0;
+# 			while (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-1)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				if (whilecount++>5) {
+# 					break;
+# 				}
+# 				_y--;
+# 				//
+# 				_root.Course.Platforms[\"ThwompGround\"+depth]._y = this._y;
+# 				_root.Course.Platforms[\"ThwompGround\"+depth]._x = this._x;
+# 				//
+# 				_root.Course.BPlatforms[\"ThwompPlatform\"+depth2]._y = this._y;
+# 				_root.Course.BPlatforms[\"ThwompPlatform\"+depth2]._x = this._x;
+# 			}
+# 		}
+# 		repeats = Math.round(Math.abs(yspeed)/5)+1;
+# 		for (i=0; i<repeats; i++) {
+# 			_y += yspeed/repeats;
+# 			_root.Course.Platforms[\"ThwompGround\"+depth]._y = this._y;
+# 			_root.Course.Platforms[\"ThwompGround\"+depth]._x = this._x;
+# 			_root.Course.BPlatforms[\"ThwompPlatform\"+depth2]._y = this._y;
+# 			_root.Course.BPlatforms[\"ThwompPlatform\"+depth2]._x = this._x;
+# 			if (yspeed>0 && (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-1)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-1)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				break;
+# 			}
+# 		}
+# 		_root.Course.Platforms[\"ThwompGround\"+depth]._y = this._y;
+# 		_root.Course.Platforms[\"ThwompGround\"+depth]._x = this._x;
+# 		_root.Course.BPlatforms[\"ThwompPlatform\"+depth2]._y = this._y;
+# 		_root.Course.BPlatforms[\"ThwompPlatform\"+depth2]._x = this._x;
+# 		tellTarget (_root.Course.BPlatforms[\"ThwompPlatform\"+depth2]) {
+# 			if (yspeed<0) {
+# 				_y -= this.yspeed;
+# 			}
+# 			if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				//_root.Course.Char._x += currentspeedX;
+# 				if (this.yspeed<0) {
+# 					_root.Course.Char._y += this.yspeed;
+# 				}
+# 				//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);   
+# 				if (landedon == false) {
+# 					//_root.Course.Char.xspeed -= currentspeedX;
+# 					//
+# 					//this.frame = \"ride\";
+# 					//
+# 				}
+# 				landedon = true;
+# 			} else {
+# 				if (landedon == true) {
+# 					//_root.Course.Char.xspeed += currentspeedX;
+# 					_root.Course.Char.yspeed += this.yspeed;
+# 				}
+# 				landedon = false;
+# 			}
+# 			//
+# 			//
+# 			if (yspeed<0) {
+# 				_y += this.yspeed;
+# 			}
+# 			_y += this.yspeed;
+# 			//
+# 		}
+# 	}
+# 	//                                                  
+# };
+# "
+
 [node name="Thwomp Clip" type="Node2D"]
+script = ExtResource("1_knojb")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Thwomps/Thwomp Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_drgwc")
+"Timeline": SubResource("AnimationLibrary_ogdbq")
 }
 
 [node name="Face" type="Node2D" parent="."]
@@ -75,19 +272,22 @@ libraries = {
 [node name="@@50766" type="Sprite2D" parent="Face/Frame 0"]
 texture_filter = 1
 position = Vector2(-24, -48)
-texture = ExtResource("1_qw430")
+texture = ExtResource("2_2oxei")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_jehca")
+
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("2_0qre6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(-0.35, -0.85)
-script = ExtResource("3_2a1lm")
+script = ExtResource("3_pxh0k")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Thwomps/Thwomp Ground.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,8 +300,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50765" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("2_0qre6")]
-script = ExtResource("3_2a1lm")
+[node name="@DOMSymbolInstance@50765" type="Node2D" parent="Layer 3/Frame 1"]
+script = ExtResource("3_pxh0k")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Thwomps/Thwomp Bplatforms.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -116,3 +316,6 @@ brightness = 0.0
 
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 2"]
+script = SubResource("GDScript_s0dnl")

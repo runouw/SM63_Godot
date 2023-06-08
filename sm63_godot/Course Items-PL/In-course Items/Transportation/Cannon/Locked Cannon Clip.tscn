@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Cannon/Cannontop.png" id="1_kmd0n"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ljwra"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Cannon/Cannontop.png" id="2_s4kea"]
 
-[sub_resource type="Animation" id="Animation_fapt5"]
+[sub_resource type="Animation" id="Animation_8gy7b"]
 length = 4.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -186,16 +187,72 @@ tracks/14/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_62m5d"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdn3b"]
 _data = {
-"Default": SubResource("Animation_fapt5")
+"Default": SubResource("Animation_8gy7b")
 }
 
+[sub_resource type="GDScript" id="GDScript_bq2pl"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_parent.cannonsetup == true) {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_t4rbw"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.Camcenter = _parent;
+# 	_root.playpause = true;
+# 	_root.PauseGame = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_geoyc"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"cannon2\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);"
+
+[sub_resource type="GDScript" id="GDScript_wjieh"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"cannon1\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_0h2nr"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.playpause = true;
+# 	_root.PauseGame = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_8fcia"]
+script/source = "extends Node
+# stop();
+# _root.playpause = false;
+# _root.PauseGame = false;
+# onEnterFrame = null;
+# _parent.play();
+# "
+
 [node name="Locked Cannon Clip" type="Node2D"]
+script = ExtResource("1_ljwra")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Cannon/Locked Cannon Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_62m5d")
+"Timeline": SubResource("AnimationLibrary_hdn3b")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -206,7 +263,7 @@ libraries = {
 texture_filter = 1
 position = Vector2(-16, -6)
 scale = Vector2(1, 0.25)
-texture = ExtResource("1_kmd0n")
+texture = ExtResource("2_s4kea")
 centered = false
 
 [node name="Frame 41" type="Node2D" parent="Layer 1"]
@@ -216,7 +273,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-16, -6)
 scale = Vector2(1, 0.25)
-texture = ExtResource("1_kmd0n")
+texture = ExtResource("2_s4kea")
 centered = false
 
 [node name="Frame 52" type="Node2D" parent="Layer 1"]
@@ -226,7 +283,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-16, -1.5)
 scale = Vector2(1, 0.25)
-texture = ExtResource("1_kmd0n")
+texture = ExtResource("2_s4kea")
 centered = false
 
 [node name="Frame 65" type="Node2D" parent="Layer 1"]
@@ -236,7 +293,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-16, -1.5)
 scale = Vector2(1, 0.25)
-texture = ExtResource("1_kmd0n")
+texture = ExtResource("2_s4kea")
 centered = false
 
 [node name="Frame 76" type="Node2D" parent="Layer 1"]
@@ -246,7 +303,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-16, -1.5)
 scale = Vector2(1, 0.25)
-texture = ExtResource("1_kmd0n")
+texture = ExtResource("2_s4kea")
 centered = false
 
 [node name="Frame 101" type="Node2D" parent="Layer 1"]
@@ -256,7 +313,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-48.5, -1.5)
 scale = Vector2(1, 0.25)
-texture = ExtResource("1_kmd0n")
+texture = ExtResource("2_s4kea")
 centered = false
 
 [node name="Frame 102" type="Node2D" parent="Layer 1"]
@@ -280,17 +337,35 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_bq2pl")
+
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 1"]
+script = SubResource("GDScript_t4rbw")
 
 [node name="Frame 41" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 41"]
+script = SubResource("GDScript_geoyc")
+
 [node name="Frame 76" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 76"]
+script = SubResource("GDScript_wjieh")
 
 [node name="Frame 117" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 117"]
+script = SubResource("GDScript_0h2nr")
+
 [node name="Frame 131" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 131"]
+script = SubResource("GDScript_8fcia")

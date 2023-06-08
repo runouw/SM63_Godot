@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_bsqvr"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_f02hp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4bsj0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_47bxt"]
 
-[sub_resource type="Animation" id="Animation_cfa5g"]
+[sub_resource type="Animation" id="Animation_qvsse"]
 length = 3.66667
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,27 +103,58 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eslek"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asps4"]
 _data = {
-"Default": SubResource("Animation_cfa5g")
+"Default": SubResource("Animation_qvsse")
 }
 
+[sub_resource type="GDScript" id="GDScript_ic1xt"]
+script/source = "extends Node
+# gotoAndPlay(_currentframe+random(50));
+# "
+
+[sub_resource type="GDScript" id="GDScript_lmikr"]
+script/source = "extends Node
+# if (h == undefined) {
+# 	Re = function () {
+# 		_x = X+200-random(100);
+# 		_xscale = 200*(random(2)-0.5);
+# 	};
+# 	X = _x;
+# 	h = \"1\";
+# 	gotoAndPlay(random(100));
+# }
+# Re();
+# "
+
+[sub_resource type="GDScript" id="GDScript_lfa6v"]
+script/source = "extends Node
+# if (random(2) == 0) {
+# 	gotoAndPlay(_currentframe+30+random(40));
+# }
+# "
+
 [node name="Bowser Battle 2 Cinema Meteorclips" type="Node2D"]
+script = ExtResource("1_4bsj0")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 2 Cinema Meteorclips.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_eslek")
+"Timeline": SubResource("AnimationLibrary_asps4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_bsqvr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-113.9, -413.8)
 rotation = -1.8326
 scale = Vector2(2, 2)
-script = ExtResource("2_f02hp")
+script = ExtResource("2_47bxt")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -139,11 +170,11 @@ brightness = 0.0
 [node name="Frame 24" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24" instance=ExtResource("1_bsqvr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24"]
 position = Vector2(0.05, 0.05)
 rotation = 3.14159
 scale = Vector2(2, 2)
-script = ExtResource("2_f02hp")
+script = ExtResource("2_47bxt")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -159,11 +190,11 @@ brightness = 0.0
 [node name="Frame 25" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 25" instance=ExtResource("1_bsqvr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 25"]
 position = Vector2(86.1, -413.8)
 rotation = 2.09439
 scale = Vector2(2, 2)
-script = ExtResource("2_f02hp")
+script = ExtResource("2_47bxt")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -179,11 +210,11 @@ brightness = 0.0
 [node name="Frame 44" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 44" instance=ExtResource("1_bsqvr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 44"]
 position = Vector2(0.05, 0.05)
 rotation = 3.14159
 scale = Vector2(2, 2)
-script = ExtResource("2_f02hp")
+script = ExtResource("2_47bxt")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -199,12 +230,21 @@ brightness = 0.0
 [node name="Frame 45" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 45"]
+script = SubResource("GDScript_ic1xt")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_lmikr")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 24" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 24"]
+script = SubResource("GDScript_lfa6v")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bully/Bits/Bully Walk - 3.png" id="1_vch6s"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rbp5a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bully/Bits/Bully Walk - 3.png" id="2_p6rb6"]
 
-[sub_resource type="Animation" id="Animation_3237l"]
+[sub_resource type="Animation" id="Animation_13m66"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xgnjh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wenx3"]
 _data = {
-"Default": SubResource("Animation_3237l")
+"Default": SubResource("Animation_13m66")
 }
 
 [node name="Bully Stand" type="Node2D"]
+script = ExtResource("1_rbp5a")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Bully/Clips/Bully Stand.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xgnjh")
+"Timeline": SubResource("AnimationLibrary_wenx3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@50567" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8.5, -12)
-texture = ExtResource("1_vch6s")
+texture = ExtResource("2_p6rb6")
 centered = false

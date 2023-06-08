@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_fjc62"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kop16"]
+
+[sub_resource type="Animation" id="Animation_5xd80"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ob4q5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dtdyy"]
 _data = {
-"Default": SubResource("Animation_fjc62")
+"Default": SubResource("Animation_5xd80")
 }
 
 [node name="8-4CamEdge" type="Node2D"]
+script = ExtResource("1_kop16")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Bowser's Castle/8-4CamEdge.xml"
+linkage = "8-4CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ob4q5")
+"Timeline": SubResource("AnimationLibrary_dtdyy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_qsuxe"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_w2vp3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nvf50"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ykfl3"]
 
-[sub_resource type="Animation" id="Animation_c4vl3"]
+[sub_resource type="Animation" id="Animation_xuo8y"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,29 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3bmd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cgwpx"]
 _data = {
-"Default": SubResource("Animation_c4vl3")
+"Default": SubResource("Animation_xuo8y")
 }
 
 [node name="8-13CloseBG" type="Node2D"]
+script = ExtResource("1_nvf50")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-13CloseBG.xml"
+linkage = "8-13CloseBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w3bmd")
+"Timeline": SubResource("AnimationLibrary_cgwpx")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_qsuxe")]
-script = ExtResource("2_w2vp3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_ykfl3")
 path = "res://sm63_godot/Course Clips/8-13CloseBGTint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

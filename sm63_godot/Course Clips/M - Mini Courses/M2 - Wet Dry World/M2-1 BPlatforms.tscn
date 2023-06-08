@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_3hcpy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_w854q"]
+
+[sub_resource type="Animation" id="Animation_pkxi4"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e2ekb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r8bj5"]
 _data = {
-"Default": SubResource("Animation_3hcpy")
+"Default": SubResource("Animation_pkxi4")
 }
 
 [node name="M2-1 BPlatforms" type="Node2D"]
+script = ExtResource("1_w854q")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-1 BPlatforms.xml"
+linkage = "M2-1BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_e2ekb")
+"Timeline": SubResource("AnimationLibrary_r8bj5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

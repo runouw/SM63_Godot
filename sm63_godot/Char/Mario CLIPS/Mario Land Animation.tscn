@@ -1,14 +1,14 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_14ov1"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_j3yu3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Falling - 1.png" id="3_g2xxd"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Battle Stance - 3.png" id="4_43wsr"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Battle Stance - 4.png" id="5_etrv3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Jumping - 1.png" id="6_5njjs"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Jumping - 2.png" id="7_bdxim"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_etjfy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_i0kmq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Falling - 1.png" id="3_h6x2t"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Battle Stance - 3.png" id="4_t7hc8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Battle Stance - 4.png" id="5_aehpa"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Jumping - 1.png" id="6_7ogbk"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Jumping - 2.png" id="7_mhjy0"]
 
-[sub_resource type="Animation" id="Animation_540s6"]
+[sub_resource type="Animation" id="Animation_2ge6t"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -120,26 +120,53 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_774v8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fsydb"]
 _data = {
-"Default": SubResource("Animation_540s6")
+"Default": SubResource("Animation_2ge6t")
 }
 
+[sub_resource type="GDScript" id="GDScript_so2qp"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_jyvgg"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null"
+
+[sub_resource type="GDScript" id="GDScript_6yidt"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# "
+
 [node name="Mario Land Animation" type="Node2D"]
+script = ExtResource("1_etjfy")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Land Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_774v8")
+"Timeline": SubResource("AnimationLibrary_fsydb")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_14ov1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-8.25, -9.15)
 scale = Vector2(0.799988, 0.799988)
-script = ExtResource("2_j3yu3")
+script = ExtResource("2_i0kmq")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -157,14 +184,14 @@ texture_filter = 1
 position = Vector2(12, -16)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_g2xxd")
+texture = ExtResource("3_h6x2t")
 centered = false
 
-[node name="@DOMSymbolInstance@15754" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_14ov1")]
+[node name="@DOMSymbolInstance@15754" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.75, -10.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_j3yu3")
+script = ExtResource("2_i0kmq")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -185,14 +212,14 @@ texture_filter = 1
 position = Vector2(11.85, -15.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_43wsr")
+texture = ExtResource("4_t7hc8")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_14ov1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(1.25, -11.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_j3yu3")
+script = ExtResource("2_i0kmq")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -213,14 +240,14 @@ texture_filter = 1
 position = Vector2(11.35, -16.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_etrv3")
+texture = ExtResource("5_aehpa")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_14ov1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(1.75, -11.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_j3yu3")
+script = ExtResource("2_i0kmq")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -241,14 +268,14 @@ texture_filter = 1
 position = Vector2(11.5, -15.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_5njjs")
+texture = ExtResource("6_7ogbk")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_14ov1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(0.75, -11.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_j3yu3")
+script = ExtResource("2_i0kmq")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -269,14 +296,14 @@ texture_filter = 1
 position = Vector2(11.5, -15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("7_bdxim")
+texture = ExtResource("7_mhjy0")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("1_14ov1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6"]
 position = Vector2(0.75, -10.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_j3yu3")
+script = ExtResource("2_i0kmq")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -293,11 +320,20 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_so2qp")
+
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 4"]
+script = SubResource("GDScript_jyvgg")
 
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 7"]
+script = SubResource("GDScript_6yidt")

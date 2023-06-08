@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_fg7jk"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gsvxy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_uq5rx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7hg2h"]
 
-[sub_resource type="Animation" id="Animation_bpoj0"]
+[sub_resource type="Animation" id="Animation_4022o"]
 length = 1.7
 loop_mode = 1
 tracks/0/type = "value"
@@ -223,16 +223,104 @@ tracks/17/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5aroy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s3sa3"]
 _data = {
-"Default": SubResource("Animation_bpoj0")
+"Default": SubResource("Animation_4022o")
 }
 
+[sub_resource type="GDScript" id="GDScript_stisv"]
+script/source = "extends Node
+# if (trans == true) {
+# 	_alpha = 0;
+# 	onEnterFrame = function () {
+# 		this._alpha += 5;
+# 		if (_alpha>=100) {
+# 			_alpha = 100;
+# 			//trace(\"GS: file is \"+file);
+# 			//file = _root.m.filem.HL;
+# 			_root.m.gotoAndStop(\"Refresh\");
+# 			/*mousex = _root._xmouse;
+# 			mousey = _root._ymouse;
+# 			onEnterFrame = function () {
+# 			lastmousex = mousex;
+# 			mousex = _root._xmouse;
+# 			lastmousey = mousey;
+# 			mousey = _root._ymouse;
+# 			diffx = lastmousex-mousex;
+# 			diffy = lastmousey-mousey;
+# 			};*/
+# 		}
+# 	};
+# } else {
+# 	this.swapDepths(0);
+# 	this.removeMovieClip();
+# }
+# 
+# file = _root.m.filem.HL;
+# //trace(\"Load: file is \"+file);
+# txtt = \"Are you sure you want to Delete File \"+file+\"?\";
+# //
+# YesF = function () {
+# 	//trace(\"Yes: file is \"+file+\" before\");
+# 	_root.m.gotoAndStop(\"Story\");
+# 	_root.m.SpecialDeleteFile(file);
+# 	//trace(\"Yes: file is \"+file+\" after\");
+# 	//
+# 	play();
+# 	onEnterFrame = function () {
+# 		this._alpha -= 5;
+# 		no._alpha -= 2;
+# 		no._xscale -= 2;
+# 		no._yscale -= 2;
+# 		yes._xscale += 2;
+# 		yes._yscale += 2;
+# 		if (_alpha<=0) {
+# 			_alpha = 0;
+# 			this.removeMovieClip();
+# 		}
+# 	};
+# };
+# NoF = function () {
+# 	YesF = null;
+# 	_root.m.gotoAndStop(\"Story\");
+# 	gotoAndPlay(40);
+# 	onEnterFrame = function () {
+# 		yes._alpha -= 2;
+# 		yes._xscale -= 2;
+# 		yes._yscale -= 2;
+# 		no._xscale += 2;
+# 		no._yscale += 2;
+# 		this._alpha -= 5;
+# 		if (_alpha<=0) {
+# 			_alpha = 0;
+# 			this.removeMovieClip();
+# 		}
+# 	};
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ykc4b"]
+script/source = "extends Node
+# stop()"
+
+[sub_resource type="GDScript" id="GDScript_0d848"]
+script/source = "extends Node
+# stop()"
+
+[sub_resource type="GDScript" id="GDScript_xiika"]
+script/source = "extends Node
+# stop()"
+
 [node name="Menu Red Transition" type="Node2D"]
+script = ExtResource("1_uq5rx")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Menu Red Transition.xml"
+linkage = "MenuRedTrans"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5aroy")
+"Timeline": SubResource("AnimationLibrary_s3sa3")
 }
 
 [node name="BG" type="Node2D" parent="."]
@@ -262,6 +350,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="BG/Frame 29"]
 
 [node name="@@51843" type="Polygon2D" parent="BG/Frame 29/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-225, -150.025, 225, -150.025, 225, 149.975, -225, 149.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -292,9 +381,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Frame 1" type="Node2D" parent="Text"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 1" instance=ExtResource("1_fg7jk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 1"]
 position = Vector2(0, -292.7)
-script = ExtResource("2_gsvxy")
+script = ExtResource("2_7hg2h")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Red Transition Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -310,9 +399,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Text"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 9" instance=ExtResource("1_fg7jk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 9"]
 position = Vector2(0, -32.7)
-script = ExtResource("2_gsvxy")
+script = ExtResource("2_7hg2h")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Red Transition Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -328,9 +417,9 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Text"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 29" instance=ExtResource("1_fg7jk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 29"]
 position = Vector2(0, -292.7)
-script = ExtResource("2_gsvxy")
+script = ExtResource("2_7hg2h")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Red Transition Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -346,9 +435,9 @@ brightness = 0.0
 [node name="Frame 30" type="Node2D" parent="Text"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 30" instance=ExtResource("1_fg7jk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 30"]
 position = Vector2(0, -32.7)
-script = ExtResource("2_gsvxy")
+script = ExtResource("2_7hg2h")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Red Transition Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -364,9 +453,9 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="Text"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 50" instance=ExtResource("1_fg7jk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 50"]
 position = Vector2(0, -292.7)
-script = ExtResource("2_gsvxy")
+script = ExtResource("2_7hg2h")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Red Transition Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -383,9 +472,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_fg7jk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(-113, 100.95)
-script = ExtResource("2_gsvxy")
+script = ExtResource("2_7hg2h")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Delete Yes.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -398,9 +487,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51840" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_fg7jk")]
+[node name="@DOMSymbolInstance@51840" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(119.3, 106)
-script = ExtResource("2_gsvxy")
+script = ExtResource("2_7hg2h")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Delete No.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -421,14 +510,26 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_stisv")
+
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 9"]
+script = SubResource("GDScript_ykc4b")
+
 [node name="Frame 29" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 29"]
+script = SubResource("GDScript_0d848")
 
 [node name="Frame 30" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 50" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 50"]
+script = SubResource("GDScript_xiika")

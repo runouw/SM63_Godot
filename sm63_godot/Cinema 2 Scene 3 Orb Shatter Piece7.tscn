@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_ovb0o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hnu3g"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_35vg0"]
 
-[sub_resource type="Animation" id="Animation_lk1kg"]
+[sub_resource type="Animation" id="Animation_81yye"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,29 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m42ny"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oojpi"]
 _data = {
-"Default": SubResource("Animation_lk1kg")
+"Default": SubResource("Animation_81yye")
 }
 
+[sub_resource type="GDScript" id="GDScript_lsdhm"]
+script/source = "extends Node
+# _parent.I(_name);
+# onEnterFrame = function () {
+# 	_parent.OEF(_name);
+# };
+# "
+
 [node name="Cinema 2 Scene 3 Orb Shatter Piece7" type="Node2D"]
+script = ExtResource("1_hnu3g")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Scene 3 Orb Shatter Piece7.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_m42ny")
+"Timeline": SubResource("AnimationLibrary_oojpi")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,7 +68,7 @@ position = Vector2(-5, -7.55)
 [node name="@@4221" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(-0.25, -2.7, -0.25, -2.7, 4.35, 0.15, 14, 12.25, 9.5, 17.75, 8.25, 17.75, 7.95, 17.55, -4.025, 4.925, -0.25, 0.75, -0.25, 0.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)])
-script = ExtResource("1_ovb0o")
+script = ExtResource("2_35vg0")
 matrix = Transform2D(0.0443726, 0, 0, 0.0443726, 0, 0)
 entries_color = PackedColorArray(0.972549, 0.94902, 0.760784, 0.0823529, 0.996078, 0.968627, 0.737255, 0.623529)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -63,3 +77,6 @@ focal_point_ratio = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_lsdhm")

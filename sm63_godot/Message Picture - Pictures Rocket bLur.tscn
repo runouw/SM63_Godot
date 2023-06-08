@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Rocket) 2.png" id="1_a3i2o"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 5.png" id="2_sbjfr"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray Particle.png" id="3_3xgxc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_us8dt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Rocket) 2.png" id="2_pc4df"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 5.png" id="3_doo5p"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray Particle.png" id="4_f8vg6"]
 
-[sub_resource type="Animation" id="Animation_bg0gq"]
+[sub_resource type="Animation" id="Animation_4xkfo"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +21,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lao0i"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jvrx3"]
 _data = {
-"Default": SubResource("Animation_bg0gq")
+"Default": SubResource("Animation_4xkfo")
 }
 
 [node name="Message Picture - Pictures Rocket bLur" type="Node2D"]
+script = ExtResource("1_us8dt")
+source_xml = "res://sm63/LIBRARY/Message Picture - Pictures Rocket bLur.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lao0i")
+"Timeline": SubResource("AnimationLibrary_jvrx3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -42,26 +48,26 @@ position = Vector2(79.95, -32.8)
 [node name="@@13278" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-13.15, -41.55)
-texture = ExtResource("1_a3i2o")
+texture = ExtResource("2_pc4df")
 centered = false
 
 [node name="@@13279" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(13.1, -1.45)
 rotation = 1.5708
-texture = ExtResource("2_sbjfr")
+texture = ExtResource("3_doo5p")
 centered = false
 
 [node name="@@13280" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(9.6, -14.05)
 rotation = 1.5708
-texture = ExtResource("3_3xgxc")
+texture = ExtResource("4_f8vg6")
 centered = false
 
 [node name="@@13281" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(9.6, -24.05)
 rotation = 1.5708
-texture = ExtResource("3_3xgxc")
+texture = ExtResource("4_f8vg6")
 centered = false

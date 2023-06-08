@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_cx323"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xh2kj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gmf4p"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_b4c24"]
 
-[sub_resource type="Animation" id="Animation_cmowl"]
+[sub_resource type="Animation" id="Animation_wxh18"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,16 +79,107 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6s7mx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a4kjk"]
 _data = {
-"Default": SubResource("Animation_cmowl")
+"Default": SubResource("Animation_wxh18")
 }
 
+[sub_resource type="GDScript" id="GDScript_6n5in"]
+script/source = "extends Node
+# stop();
+# if (scale == undefined) {
+# 	scale = 2;
+# }
+# if (angle == undefined) {
+# 	angle = 0;
+# }
+# if (distance == undefined) {
+# 	distance = 50;
+# }
+# if (speed == undefined) {
+# 	speed = 5;
+# }
+# if (dotdistance == undefined) {
+# 	dotdistance = 20;
+# }
+# if (armscale == undefined) {
+# 	armscale = 0;
+# }
+# if (dotdistance<360) {
+# 	for (i=0; i<360; i += dotdistance) {
+# 		clip.attachMovie(\"Path dot\", \"dot\"+clip.getNextHighestDepth(), clip.getNextHighestDepth(), {_y:Math.cos(_root.angleToRadians(i))*distance, _x:-Math.sin(_root.angleToRadians(i))*distance});
+# 	}
+# }
+# if (armscale>0) {
+# 	clip.attachMovie(\"PL circle arm\", \"PLarm\", clip.getNextHighestDepth(), {_y:Math.cos(_root.angleToRadians(angle))*distance, _x:-Math.sin(_root.angleToRadians(angle))*distance, _rotation:angle-180});
+# }
+# depth = _root.Course.BPlatforms.getNextHighestDepth();
+# _root.Course.BPlatforms.attachMovie(\"GreenPLcode\", \"GreenPL\"+depth, depth, {_x:_x, _y:_y, scale:scale});
+# //
+# pl._y = Math.cos(_root.angleToRadians(angle))*distance;
+# pl._x = -Math.sin(_root.angleToRadians(angle))*distance;
+# pl.gotoAndStop(scale);
+# //
+# newx = pl._x;
+# newy = pl._y;
+# oldx = newx;
+# oldy = newy;
+# //
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		pl._y += diffy;
+# 		angle += speed;
+# 		newx = -Math.sin(_root.angleToRadians(angle))*distance;
+# 		newy = Math.cos(_root.angleToRadians(angle))*distance;
+# 		diffy = newy-oldy;
+# 		diffx = newx-oldx;
+# 		oldx = newx;
+# 		oldy = newy;
+# 		pl._x += diffx;
+# 		pl._y += diffy;
+# 		//             
+# 		if (Math.abs((_root.currentCamX)-(_x+_parent._x))<(600+(distance*2)) && Math.abs((_root.currentCamY)-(_y+_parent._y))<(600+(distance*2))) {
+# 			tellTarget (_root.Course.BPlatforms[\"GreenPL\"+depth]) {
+# 				if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+this.diffy+4)*_root.coursescale/100)+_root.Course._y, false) && _root.Course.Char.yspeed>-3) {
+# 					_root.Course.Char._x += this.diffx;
+# 					_root.Course.Char._y += this.diffy;
+# 					_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 					if (landedon == false) {
+# 						_root.Course.Char.xspeed -= this.diffx/2;
+# 					}
+# 					landedon = true;
+# 				} else {
+# 					if (landedon == true) {
+# 						_root.Course.Char.xspeed += this.diffx;
+# 						_root.Course.Char.yspeed += this.diffy;
+# 					}
+# 					landedon = false;
+# 				}
+# 				_y = this._y+this.pl._y;
+# 				_x = this._x+this.pl._x;
+# 			}
+# 		}
+# 		pl._y -= diffy;
+# 		if (armscale>0) {
+# 			clip.PLarm._y = pl._y;
+# 			clip.PLarm._x = pl._x;
+# 			clip.PLarm._rotation = _root.radiansToAngle(Math.atan2(pl._y, pl._x))+90;
+# 			clip.PLarm._yscale = armscale;
+# 		}
+# 	}
+# };
+# "
+
 [node name="Green Circle Platform" type="Node2D"]
+script = ExtResource("1_gmf4p")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green Circle Platform.xml"
+linkage = "GreenCirclePlatform"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6s7mx")
+"Timeline": SubResource("AnimationLibrary_a4kjk")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -98,8 +189,8 @@ libraries = {
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_cx323")]
-script = ExtResource("2_xh2kj")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
+script = ExtResource("2_b4c24")
 path = "res://sm63_godot/Xtra/Empty Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -125,8 +216,8 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_cx323")]
-script = ExtResource("2_xh2kj")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_b4c24")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green PL Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -142,8 +233,8 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_cx323")]
-script = ExtResource("2_xh2kj")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("2_b4c24")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Green PL Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -162,3 +253,6 @@ brightness = 0.0
 
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 1"]
+script = SubResource("GDScript_6n5in")

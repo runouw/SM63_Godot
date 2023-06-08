@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_uotot"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_s5ne5"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_0gqrq"]
 
-[sub_resource type="Animation" id="Animation_s0pl1"]
+[sub_resource type="Animation" id="Animation_4xnac"]
 length = 4.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -174,16 +175,26 @@ tracks/13/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qu7mr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_reppt"]
 _data = {
-"Default": SubResource("Animation_s0pl1")
+"Default": SubResource("Animation_4xnac")
 }
 
+[sub_resource type="GDScript" id="GDScript_xutbw"]
+script/source = "extends Node
+# gotoAndPlay(80);
+# "
+
 [node name="Message Pop-Up Space alphizer" type="Node2D"]
+script = ExtResource("1_s5ne5")
+source_xml = "res://sm63/LIBRARY/Menu/Message Pop-Up Space alphizer.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qu7mr")
+"Timeline": SubResource("AnimationLibrary_reppt")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -198,9 +209,9 @@ visible = false
 [node name="@@51380" type="Polygon2D" parent="Layer 2/Frame 37/Shape"]
 polygon = PackedVector2Array(-0.0250015, -10.725, -0.025, -10.725, 24.5306, -10.3754, 46.5639, -9.32543, 66.075, -7.575, 86.625, -4.10107, 93.475, 0.025, 86.625, 4.16377, 66.075, 7.65, 46.5639, 9.40061, 24.5306, 10.4506, -0.0250015, 10.8, -0.025, 10.8, -24.5667, 10.4506, -46.5917, 9.40061, -66.1, 7.65, -86.6312, 4.16377, -93.475, 0.025, -86.6312, -4.10107, -66.1, -7.575, -46.5917, -9.32543, -24.5667, -10.3754)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)])
-script = ExtResource("1_uotot")
+script = ExtResource("2_0gqrq")
 matrix = Transform2D(0.115387, 0, 0, 0.0135345, 0, 0.05)
-entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
+entries_color = PackedColorArray(1, 1, 1, 0, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 focal_point_ratio = 0.0
 
@@ -212,9 +223,9 @@ visible = false
 [node name="@@51381" type="Polygon2D" parent="Layer 2/Frame 49/Shape"]
 polygon = PackedVector2Array(-0.0250015, -10.725, -0.025, -10.725, 24.5306, -10.3754, 46.5639, -9.32543, 66.075, -7.575, 86.625, -4.10107, 93.475, 0.025, 86.625, 4.16377, 66.075, 7.65, 46.5639, 9.40061, 24.5306, 10.4506, -0.0250015, 10.8, -0.025, 10.8, -24.5667, 10.4506, -46.5917, 9.40061, -66.1, 7.65, -86.6312, 4.16377, -93.475, 0.025, -86.6312, -4.10107, -66.1, -7.575, -46.5917, -9.32543, -24.5667, -10.3754)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)])
-script = ExtResource("1_uotot")
+script = ExtResource("2_0gqrq")
 matrix = Transform2D(0.115387, 0, 0, 0.0135345, 0, 0.05)
-entries_color = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+entries_color = PackedColorArray(1, 1, 1, 0.501961, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 focal_point_ratio = 0.0
 
@@ -226,9 +237,9 @@ visible = false
 [node name="@@51382" type="Polygon2D" parent="Layer 2/Frame 79/Shape"]
 polygon = PackedVector2Array(-0.0250015, -10.725, -0.025, -10.725, 24.5306, -10.3754, 46.5639, -9.32543, 66.075, -7.575, 86.625, -4.10107, 93.475, 0.025, 86.625, 4.16377, 66.075, 7.65, 46.5639, 9.40061, 24.5306, 10.4506, -0.0250015, 10.8, -0.025, 10.8, -24.5667, 10.4506, -46.5917, 9.40061, -66.1, 7.65, -86.6312, 4.16377, -93.475, 0.025, -86.6312, -4.10107, -66.1, -7.575, -46.5917, -9.32543, -24.5667, -10.3754)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)])
-script = ExtResource("1_uotot")
+script = ExtResource("2_0gqrq")
 matrix = Transform2D(0.115387, 0, 0, 0.0135345, 0, 0.05)
-entries_color = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+entries_color = PackedColorArray(1, 1, 1, 0.501961, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 focal_point_ratio = 0.0
 
@@ -240,9 +251,9 @@ visible = false
 [node name="@@51383" type="Polygon2D" parent="Layer 2/Frame 90/Shape"]
 polygon = PackedVector2Array(-0.0250015, -10.725, -0.025, -10.725, 24.5306, -10.3754, 46.5639, -9.32543, 66.075, -7.575, 86.625, -4.10107, 93.475, 0.025, 86.625, 4.16377, 66.075, 7.65, 46.5639, 9.40061, 24.5306, 10.4506, -0.0250015, 10.8, -0.025, 10.8, -24.5667, 10.4506, -46.5917, 9.40061, -66.1, 7.65, -86.6312, 4.16377, -93.475, 0.025, -86.6312, -4.10107, -66.1, -7.575, -46.5917, -9.32543, -24.5667, -10.3754)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)])
-script = ExtResource("1_uotot")
+script = ExtResource("2_0gqrq")
 matrix = Transform2D(0.115387, 0, 0, 0.0135345, 0, 0.05)
-entries_color = PackedColorArray(1, 1, 1, 0.25098, 1, 1, 1, 0)
+entries_color = PackedColorArray(1, 1, 1, 0.25098, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 focal_point_ratio = 0.0
 
@@ -254,9 +265,9 @@ visible = false
 [node name="@@51384" type="Polygon2D" parent="Layer 2/Frame 124/Shape"]
 polygon = PackedVector2Array(-0.0250015, -10.725, -0.025, -10.725, 24.5306, -10.3754, 46.5639, -9.32543, 66.075, -7.575, 86.625, -4.10107, 93.475, 0.025, 86.625, 4.16377, 66.075, 7.65, 46.5639, 9.40061, 24.5306, 10.4506, -0.0250015, 10.8, -0.025, 10.8, -24.5667, 10.4506, -46.5917, 9.40061, -66.1, 7.65, -86.6312, 4.16377, -93.475, 0.025, -86.6312, -4.10107, -66.1, -7.575, -46.5917, -9.32543, -24.5667, -10.3754)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)])
-script = ExtResource("1_uotot")
+script = ExtResource("2_0gqrq")
 matrix = Transform2D(0.115387, 0, 0, 0.0135345, 0, 0.05)
-entries_color = PackedColorArray(1, 1, 1, 0.25098, 1, 1, 1, 0)
+entries_color = PackedColorArray(1, 1, 1, 0.25098, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 focal_point_ratio = 0.0
 
@@ -268,9 +279,9 @@ visible = false
 [node name="@@51385" type="Polygon2D" parent="Layer 2/Frame 134/Shape"]
 polygon = PackedVector2Array(-0.0250015, -10.725, -0.025, -10.725, 24.5306, -10.3754, 46.5639, -9.32543, 66.075, -7.575, 86.625, -4.10107, 93.475, 0.025, 86.625, 4.16377, 66.075, 7.65, 46.5639, 9.40061, 24.5306, 10.4506, -0.0250015, 10.8, -0.025, 10.8, -24.5667, 10.4506, -46.5917, 9.40061, -66.1, 7.65, -86.6312, 4.16377, -93.475, 0.025, -86.6312, -4.10107, -66.1, -7.575, -46.5917, -9.32543, -24.5667, -10.3754)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)])
-script = ExtResource("1_uotot")
+script = ExtResource("2_0gqrq")
 matrix = Transform2D(0.115387, 0, 0, 0.0135345, 0, 0.05)
-entries_color = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+entries_color = PackedColorArray(1, 1, 1, 0.501961, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 1)
 focal_point_ratio = 0.0
 
@@ -299,6 +310,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 49"]
+position = Vector2(105.2, 25.85)
 
 [node name="@@51375" type="Polygon2D" parent="Layer 1/Frame 49/Shape"]
 color = Color(0, 1, 1, 0.498039)
@@ -309,6 +321,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 79"]
+position = Vector2(105.2, 25.85)
 
 [node name="@@51376" type="Polygon2D" parent="Layer 1/Frame 79/Shape"]
 color = Color(0, 1, 1, 0.498039)
@@ -337,6 +350,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 
 [node name="Frame 134" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 134"]
+script = SubResource("GDScript_xutbw")
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 134"]
 

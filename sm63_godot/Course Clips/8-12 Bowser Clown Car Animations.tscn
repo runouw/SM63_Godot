@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_kln1y"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_dm0nv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_atwcv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_qkm47"]
 
-[sub_resource type="Animation" id="Animation_vl2j4"]
+[sub_resource type="Animation" id="Animation_xoxod"]
 length = 0.333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -127,25 +127,75 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lqbqh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asiyu"]
 _data = {
-"Default": SubResource("Animation_vl2j4")
+"Default": SubResource("Animation_xoxod")
 }
 
+[sub_resource type="GDScript" id="GDScript_21yap"]
+script/source = "extends Node
+# stop();
+# // Idle"
+
+[sub_resource type="GDScript" id="GDScript_uhiko"]
+script/source = "extends Node
+# // Talk"
+
+[sub_resource type="GDScript" id="GDScript_fgjmq"]
+script/source = "extends Node
+# // move and turn"
+
+[sub_resource type="GDScript" id="GDScript_q7eew"]
+script/source = "extends Node
+# // fireball attack"
+
+[sub_resource type="GDScript" id="GDScript_tjjsl"]
+script/source = "extends Node
+# // stomp"
+
+[sub_resource type="GDScript" id="GDScript_ljv6m"]
+script/source = "extends Node
+# // summon"
+
+[sub_resource type="GDScript" id="GDScript_kctkq"]
+script/source = "extends Node
+# // atk2 pre"
+
+[sub_resource type="GDScript" id="GDScript_pq3wp"]
+script/source = "extends Node
+# // fire attack
+# "
+
+[sub_resource type="GDScript" id="GDScript_rgl8n"]
+script/source = "extends Node
+# // hurt"
+
+[sub_resource type="GDScript" id="GDScript_b75gf"]
+script/source = "extends Node
+# // hurt2"
+
 [node name="8-12 Bowser Clown Car Animations" type="Node2D"]
+script = ExtResource("1_atwcv")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-12 Bowser Clown Car Animations.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lqbqh")
+"Timeline": SubResource("AnimationLibrary_asiyu")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_21yap")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -0.15)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Clown Car Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -161,9 +211,12 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_uhiko")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(0, -1.5)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Talking.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -179,9 +232,12 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 2"]
+script = SubResource("GDScript_fgjmq")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(0.2, -1.75)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Turn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -197,9 +253,12 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 3"]
+script = SubResource("GDScript_q7eew")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(0, -1.5)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Clown Car Fireball Attack.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -215,9 +274,12 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 4"]
+script = SubResource("GDScript_tjjsl")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0, -1.5)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Clown Car Stomp.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -233,9 +295,12 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 5"]
+script = SubResource("GDScript_ljv6m")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(0, -1.55)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Clown Car Summon Attack.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -251,10 +316,13 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 6"]
+script = SubResource("GDScript_kctkq")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6"]
 position = Vector2(0, -1.55)
 scale = Vector2(1, 1.00047)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Clown Car Atk2 Prepare.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -270,9 +338,12 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 7"]
+script = SubResource("GDScript_pq3wp")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
 position = Vector2(0, -1.5)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Clown Car Fire Attack.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -288,9 +359,12 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 8"]
+script = SubResource("GDScript_rgl8n")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8"]
 position = Vector2(0, -1.5)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Clown Car Hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -306,10 +380,13 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9" instance=ExtResource("1_kln1y")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 9"]
+script = SubResource("GDScript_b75gf")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9"]
 position = Vector2(0, -1.5)
 scale = Vector2(1, 1.00095)
-script = ExtResource("2_dm0nv")
+script = ExtResource("2_qkm47")
 path = "res://sm63_godot/Course Clips/8-12 Bowser Clown Car Hurt 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

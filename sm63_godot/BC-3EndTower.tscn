@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_wqnbi"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ia3el"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_0x673"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_11yxi"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3d7nd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_04v48"]
 
-[sub_resource type="Animation" id="Animation_qo5p5"]
+[sub_resource type="Animation" id="Animation_4dqql"]
 length = 2.76667
 loop_mode = 1
 tracks/0/type = "value"
@@ -140,25 +140,30 @@ tracks/10/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ph8is"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ev4pl"]
 _data = {
-"Default": SubResource("Animation_qo5p5")
+"Default": SubResource("Animation_4dqql")
 }
 
 [node name="BC-3EndTower" type="Node2D"]
+script = ExtResource("1_11yxi")
+source_xml = "res://sm63/LIBRARY/BC-3EndTower.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ph8is")
+"Timeline": SubResource("AnimationLibrary_ev4pl")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 27.35)
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle 3 Cinema End BrickTint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -178,7 +183,7 @@ brightness = -0.5
 [node name="@@1854" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_0x673")
+texture = ExtResource("3_04v48")
 texture_offset = Vector2(36.15, -118.15)
 polygon = PackedVector2Array(-19.25, 38.85, 102.15, 38.85, 102.15, 92.15, -30.0825, 92.15, -30.9529, 91.5464, -57.7, 83.7, -30.0825, 92.15, 70.5, 92.15, 56.65, 94.6875, 42.9, 98.4, 34.7611, 105.3, 22.2778, 122.133, 5.45, 148.9, 5.45, 148.9, 0.622095, 124.146, -11.5122, 105.029, -26.4235, 94.6875, 70.5, 92.15, 102.15, 92.15, 102.15, 109.35, 102.15, 109.35, 86.5, 108.15, 73.0375, 94.6875)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20, 21, 22)])
@@ -195,10 +200,10 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="w3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="w3/Frame 0" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="w3/Frame 0"]
 position = Vector2(-72, 5.15)
 rotation = -1.5708
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle 3 Cinema End Green Goop REd trhs.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -214,9 +219,9 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="w3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="w3/Frame 50" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="w3/Frame 50"]
 position = Vector2(-72, 5.15)
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle 3 Cinema End Green Goop REd trhs.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -233,10 +238,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="w2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="w2/Frame 0" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="w2/Frame 0"]
 position = Vector2(-2.05, -69.35)
 rotation = 3.14159
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle 3 Cinema End Green Goop REd trhs.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -252,10 +257,10 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="w2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="w2/Frame 50" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="w2/Frame 50"]
 position = Vector2(-1.05, -69.35)
 rotation = 1.5708
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle 3 Cinema End Green Goop REd trhs.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -272,10 +277,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="w1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="w1/Frame 0" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="w1/Frame 0"]
 position = Vector2(72, 5.15)
 rotation = -1.5708
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle 3 Cinema End Green Goop REd trhs.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -291,9 +296,9 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="w1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="w1/Frame 50" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="w1/Frame 50"]
 position = Vector2(72, 5.15)
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle 3 Cinema End Green Goop REd trhs.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -310,11 +315,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(-2, -69.55)
 rotation = -0.785398
 scale = Vector2(1, 1)
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle Cinema 3 End Rays.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -330,11 +335,11 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 19" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 19"]
 position = Vector2(-2, -69.55)
 rotation = -0.785398
 scale = Vector2(1, 1)
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle Cinema 3 End Rays.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -350,11 +355,11 @@ brightness = 0.0
 [node name="Frame 68" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 68" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 68"]
 position = Vector2(-2, -69.55)
 rotation = -0.785398
 scale = Vector2(1, 1)
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Bowser Battle Cinema 3 End Rays.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -371,10 +376,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 6"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("1_wqnbi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(-2.5, 14.3)
 scale = Vector2(2, 2)
-script = ExtResource("2_ia3el")
+script = ExtResource("2_3d7nd")
 path = "res://sm63_godot/Key - Orb of Power.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

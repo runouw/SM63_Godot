@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_pc4fu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4r8io"]
+
+[sub_resource type="Animation" id="Animation_lnaqs"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,21 +18,33 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e2040"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5gmh1"]
 _data = {
-"Default": SubResource("Animation_pc4fu")
+"Default": SubResource("Animation_lnaqs")
 }
 
+[sub_resource type="GDScript" id="GDScript_kvg4l"]
+script/source = "extends Node
+# _visible = false"
+
 [node name="2-2A Ice" type="Node2D"]
+script = ExtResource("1_4r8io")
+source_xml = "res://sm63/LIBRARY/Course Clips/2 - Snowman's Land/2-2A Ice.xml"
+linkage = "2-2AIce"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_e2040")
+"Timeline": SubResource("AnimationLibrary_5gmh1")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_kvg4l")
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="1_eehya"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_oe8s2"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_b3hjh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ev4ot"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="2_7stl5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_py1og"]
 
-[sub_resource type="Animation" id="Animation_ifpxn"]
+[sub_resource type="Animation" id="Animation_ml52k"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,113 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6scm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cpkub"]
 _data = {
-"Default": SubResource("Animation_ifpxn")
+"Default": SubResource("Animation_ml52k")
 }
 
+[sub_resource type="GDScript" id="GDScript_p34e8"]
+script/source = "extends Node
+# if (fallspeed == undefined) {
+# 	fallspeed = _root.gravity/5;
+# 	// speed it accelerates when falling
+# }
+# if (fallamount == undefined) {
+# 	fallamount = 32*6;
+# 	// how long it falls
+# }
+# if (fallwait == undefined) {
+# 	fallwait = 10;
+# 	// wait before falling
+# }
+# if (quakeamount == undefined) {
+# 	quakeamount = 2;
+# 	// shaking before falling
+# }
+# depth = _root.Course.Platforms.getNextHighestDepth();
+# _root.Course.Platforms.attachMovie(\"FallingblockCode\", \"FallingblockCode\"+depth, depth, {_x:_x, _y:_y, fallspeed:fallspeed, fallamount:fallamount, fallwait:fallwait, quakeamount:quakeamount, yspeed:0, fall:false});
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		tellTarget (_root.Course.Platforms[\"FallingblockCode\"+depth]) {
+# 			if (fall == false) {
+# 				this._alpha += 10;
+# 				this._alpha = Math.min(this._alpha, 100);
+# 				if (this._alpha>=100 && hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 					returnX = _x;
+# 					returnY = _y;
+# 					timefall = 0;
+# 					fallcount = 0;
+# 					fall = true;
+# 				}
+# 			}
+# 			if (fall == true) {
+# 				timefall++;
+# 				if (timefall>fallwait) {
+# 					fallcount++;
+# 					yspeed += fallspeed;
+# 					yspeed = _root.groundFriction(yspeed, 0.01, 1.25);
+# 				} else {
+# 					_y = returnY+(Math.random()*quakeamount-Math.random()*quakeamount);
+# 					//_x = returnX+(Math.random()*quakeamount-Math.random()*quakeamount);
+# 					if (timefall == fallwait) {
+# 						_y = returnY;
+# 						_x = returnX;
+# 					}
+# 				}
+# 				if (yspeed<0) {
+# 					_y -= yspeed;
+# 				}
+# 				if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 					//_root.Course.Char._x += currentspeedX;
+# 					_root.Course.Char._y += yspeed;
+# 					//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 					if (landedon == false) {
+# 						//_root.Course.Char.xspeed -= currentspeedX;
+# 						//
+# 						//this.frame = \"ride\";
+# 						//
+# 					}
+# 					landedon = true;
+# 				} else {
+# 					if (landedon == true) {
+# 						//_root.Course.Char.xspeed += currentspeedX;
+# 						_root.Course.Char.yspeed += yspeed;
+# 					}
+# 					landedon = false;
+# 				}
+# 				if (yspeed<0) {
+# 					_y += yspeed;
+# 				}
+# 				_y += yspeed;
+# 				if (fallcount>fallamount-10) {
+# 					this._alpha -= 10;
+# 					this._alpha = Math.max(this._alpha, 0);
+# 				}
+# 				if (fallcount>fallamount) {
+# 					fallcount = 0;
+# 					yspeed = 0;
+# 					_x = returnX;
+# 					_y = returnY;
+# 					fall = false;
+# 				}
+# 			}
+# 			this._y = _y;
+# 			this._x = _x;
+# 		}
+# 	}
+# };
+# "
+
 [node name="Falling Block" type="Node2D"]
+script = ExtResource("1_ev4ot")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Coded Wooden PL/Falling Block.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_f6scm")
+"Timeline": SubResource("AnimationLibrary_cpkub")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,7 +150,7 @@ libraries = {
 [node name="@@47744" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_eehya")
+texture = ExtResource("2_7stl5")
 texture_offset = Vector2(61.1, 65.65)
 polygon = PackedVector2Array(-12, -12.025, 12, -12.025, 12, 4.95, 4.975, 11.975, -5.025, 11.975, -12, 5, -12, 4.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
@@ -66,8 +163,8 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_oe8s2")]
-script = ExtResource("3_b3hjh")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("3_py1og")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Coded Wooden PL/Falling Block Alpha.tscn"
 red_multiplier = 0.671875
 green_multiplier = 0.671875
@@ -83,3 +180,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_p34e8")

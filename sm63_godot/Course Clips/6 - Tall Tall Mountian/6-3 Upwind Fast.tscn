@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_7on54"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_cj8qe"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1ttke"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ni8if"]
 
-[sub_resource type="Animation" id="Animation_spomf"]
+[sub_resource type="Animation" id="Animation_uemp6"]
 length = 3.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,24 +79,52 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pjwwj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tjxqc"]
 _data = {
-"Default": SubResource("Animation_spomf")
+"Default": SubResource("Animation_uemp6")
 }
 
+[sub_resource type="GDScript" id="GDScript_isdsj"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (_root.Course.Char.attackFrame == \"Star\") {
+# 			stop();
+# 		} else {
+# 			play();
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# //
+# gotoAndPlay(_currentframe+random(30));
+# "
+
+[sub_resource type="GDScript" id="GDScript_jgohf"]
+script/source = "extends Node
+# _xscale = random(40)+80;
+# _yscale = _xscale;
+# "
+
 [node name="6-3 Upwind Fast" type="Node2D"]
+script = ExtResource("1_1ttke")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-3 Upwind Fast.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pjwwj")
+"Timeline": SubResource("AnimationLibrary_tjxqc")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_7on54")]
-script = ExtResource("2_cj8qe")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_ni8if")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -112,9 +140,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9" instance=ExtResource("1_7on54")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9"]
 position = Vector2(0, -44.1)
-script = ExtResource("2_cj8qe")
+script = ExtResource("2_ni8if")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -130,9 +158,9 @@ brightness = 0.0
 [node name="Frame 39" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 39" instance=ExtResource("1_7on54")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 39"]
 position = Vector2(0, -191.05)
-script = ExtResource("2_cj8qe")
+script = ExtResource("2_ni8if")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -148,9 +176,9 @@ brightness = 0.0
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49" instance=ExtResource("1_7on54")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49"]
 position = Vector2(0, -240)
-script = ExtResource("2_cj8qe")
+script = ExtResource("2_ni8if")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -166,5 +194,11 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 50"]
+script = SubResource("GDScript_isdsj")
+
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 99"]
+script = SubResource("GDScript_jgohf")

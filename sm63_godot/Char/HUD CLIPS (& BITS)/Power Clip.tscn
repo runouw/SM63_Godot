@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_we7vo"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_42xrh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ou1tx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_utltk"]
 
-[sub_resource type="Animation" id="Animation_ytgun"]
+[sub_resource type="Animation" id="Animation_dn12c"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,25 +103,47 @@ tracks/7/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmg8f"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jpdn0"]
 _data = {
-"Default": SubResource("Animation_ytgun")
+"Default": SubResource("Animation_dn12c")
 }
 
+[sub_resource type="GDScript" id="GDScript_3yml1"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	frame = _root.hpcoincount+1;
+# 	if (_root.CharHP == 8) {
+# 		frame = 6;
+# 	}
+# 	gotoAndStop(frame);
+# 	//
+# 	if (_root.hpcoinplay == true) {
+# 		animation.play();
+# 		_root.hpcoinplay = false;
+# 	}
+# 	// 
+# };
+# "
+
 [node name="Power Clip" type="Node2D"]
+script = ExtResource("1_ou1tx")
+source_xml = "res://sm63/LIBRARY/Char/HUD CLIPS (& BITS)/Power Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wmg8f")
+"Timeline": SubResource("AnimationLibrary_jpdn0")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_we7vo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-1, 0)
-script = ExtResource("2_42xrh")
+script = ExtResource("2_utltk")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Power GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -131,12 +153,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.5
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0.4, 0.4, 0.4, 1)
 brightness = 0.0
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_3yml1")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

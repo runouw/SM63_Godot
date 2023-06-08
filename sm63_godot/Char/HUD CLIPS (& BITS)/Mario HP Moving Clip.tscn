@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_dm5nm"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7dxsu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4780d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_e2xlj"]
 
-[sub_resource type="Animation" id="Animation_4b1qi"]
+[sub_resource type="Animation" id="Animation_bjuxp"]
 length = 3.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -391,24 +391,143 @@ tracks/31/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iylui"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5m0g"]
 _data = {
-"Default": SubResource("Animation_4b1qi")
+"Default": SubResource("Animation_bjuxp")
 }
 
+[sub_resource type="GDScript" id="GDScript_agmhk"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# currenthp = _root.CharHP;
+# onEnterFrame = function () {
+# 	if (currenthp == _root.CharHP && _root.CharHP == 8) {
+# 		count++;
+# 	} else {
+# 		currenthp = _root.CharHP;
+# 		count = 0;
+# 	}
+# 	if (_root.WaterHP<=7) {
+# 		gotoAndPlay(\"hurtwater\");
+# 		onEnterFrame = null;
+# 	}
+# 	if (count>160) {
+# 		play();
+# 		onEnterFrame = null;
+# 	}
+# };
+# if (_root.WaterHP<=7 && _root.CharHP>=8) {
+# 	gotoAndStop(45);
+# }
+# if (_root.WaterHP<=7 && _root.CharHP<=7) {
+# 	gotoAndStop(\"both\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_l4cyd"]
+script/source = "extends Node
+# stop();
+# currenthp = _root.CharHP;
+# onEnterFrame = function () {
+# 	if (currenthp !== _root.CharHP || _root.CharHP<8) {
+# 		if (_root.CharHP<currenthp || _root.CharHP<7) {
+# 			play();
+# 		} else {
+# 			gotoAndPlay(\"slower\");
+# 		}
+# 		onEnterFrame = null;
+# 	}
+# 	if (_root.WaterHP !== 8) {
+# 		gotoAndPlay(\"water\");
+# 		onEnterFrame = null;
+# 	}
+# 	currenthp = _root.CharHP;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_7joho"]
+script/source = "extends Node
+# gotoAndStop(1);
+# "
+
+[sub_resource type="GDScript" id="GDScript_k8v1q"]
+script/source = "extends Node
+# gotoAndStop(1);
+# "
+
+[sub_resource type="GDScript" id="GDScript_ktc7w"]
+script/source = "extends Node
+# stop();
+# currenthp = _root.CharHP;
+# onEnterFrame = function () {
+# 	if (_root.CharHP<7) {
+# 		gotoAndPlay(\"hurtwater\");
+# 		onEnterFrame = null;
+# 	}
+# 	if (_root.WaterHP>=8) {
+# 		play();
+# 		onEnterFrame = null;
+# 	}
+# 	currenthp = _root.CharHP;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_14f1u"]
+script/source = "extends Node
+# gotoAndStop(15);
+# "
+
+[sub_resource type="GDScript" id="GDScript_u3n4l"]
+script/source = "extends Node
+# stop();
+# currenthp = _root.CharHP;
+# onEnterFrame = function () {
+# 	if (_root.CharHP>=8) {
+# 		gotoAndPlay(\"hpaway\");
+# 		onEnterFrame = null;
+# 	}
+# 	if (_root.WaterHP>=8) {
+# 		gotoAndPlay(\"wateraway\");
+# 		onEnterFrame = null;
+# 	}
+# 	currenthp = _root.CharHP;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ii86i"]
+script/source = "extends Node
+# gotoAndStop(\"both\");
+# "
+
+[sub_resource type="GDScript" id="GDScript_jxe8k"]
+script/source = "extends Node
+# gotoAndStop(45);
+# "
+
+[sub_resource type="GDScript" id="GDScript_waypf"]
+script/source = "extends Node
+# gotoAndStop(1);
+# "
+
 [node name="Mario HP Moving Clip" type="Node2D"]
+script = ExtResource("1_4780d")
+source_xml = "res://sm63/LIBRARY/Char/HUD CLIPS (& BITS)/Mario HP Moving Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iylui")
+"Timeline": SubResource("AnimationLibrary_v5m0g")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_dm5nm")]
-script = ExtResource("2_7dxsu")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -424,9 +543,9 @@ brightness = 0.0
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14"]
 position = Vector2(0, -50)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -442,8 +561,8 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19" instance=ExtResource("1_dm5nm")]
-script = ExtResource("2_7dxsu")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19"]
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -459,9 +578,9 @@ brightness = 0.0
 [node name="Frame 20" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 20" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 20"]
 position = Vector2(0, -50)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -477,8 +596,8 @@ brightness = 0.0
 [node name="Frame 34" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 34" instance=ExtResource("1_dm5nm")]
-script = ExtResource("2_7dxsu")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 34"]
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -494,9 +613,9 @@ brightness = 0.0
 [node name="Frame 35" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 35" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 35"]
 position = Vector2(0, -50)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -512,8 +631,8 @@ brightness = 0.0
 [node name="Frame 44" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 44" instance=ExtResource("1_dm5nm")]
-script = ExtResource("2_7dxsu")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 44"]
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -529,10 +648,10 @@ brightness = 0.0
 [node name="Frame 54" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 54" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 54"]
 position = Vector2(0, -50)
 scale = Vector2(1, 0.998657)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -548,10 +667,10 @@ brightness = 0.0
 [node name="Frame 55" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 55" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 55"]
 position = Vector2(0, -50)
 scale = Vector2(1, 0.998657)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -567,10 +686,10 @@ brightness = 0.0
 [node name="Frame 64" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 64" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 64"]
 position = Vector2(-30, 0)
 scale = Vector2(1, 0.998657)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -586,10 +705,10 @@ brightness = 0.0
 [node name="Frame 65" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 65" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 65"]
 position = Vector2(0, -0.05)
 scale = Vector2(1, 0.998657)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -605,10 +724,10 @@ brightness = 0.0
 [node name="Frame 74" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 74" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 74"]
 position = Vector2(-30, -0.05)
 scale = Vector2(1, 0.998657)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -624,10 +743,10 @@ brightness = 0.0
 [node name="Frame 75" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 75" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 75"]
 position = Vector2(-30, -0.05)
 scale = Vector2(1, 0.998657)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -643,10 +762,10 @@ brightness = 0.0
 [node name="Frame 84" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 84" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 84"]
 position = Vector2(0, -0.05)
 scale = Vector2(1, 0.998657)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -662,10 +781,10 @@ brightness = 0.0
 [node name="Frame 85" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 85" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 85"]
 position = Vector2(-30, -0.05)
 scale = Vector2(1, 0.998657)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -681,10 +800,10 @@ brightness = 0.0
 [node name="Frame 95" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 95" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 95"]
 position = Vector2(0, -50)
 scale = Vector2(1, 0.998657)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/WaterHP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -701,11 +820,20 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_agmhk")
+
 [node name="Frame 14" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 14"]
+script = SubResource("GDScript_l4cyd")
+
 [node name="Frame 19" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 19"]
+script = SubResource("GDScript_7joho")
 
 [node name="Frame 20" type="Node2D" parent="Layer 2"]
 visible = false
@@ -713,20 +841,29 @@ visible = false
 [node name="Frame 34" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 34"]
+script = SubResource("GDScript_k8v1q")
+
 [node name="Frame 35" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 44" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 44"]
+script = SubResource("GDScript_ktc7w")
+
 [node name="Frame 54" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 54"]
+script = SubResource("GDScript_14f1u")
 
 [node name="Frame 55" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 55" instance=ExtResource("1_dm5nm")]
-script = ExtResource("2_7dxsu")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 55"]
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -742,9 +879,12 @@ brightness = 0.0
 [node name="Frame 64" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 64" instance=ExtResource("1_dm5nm")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 64"]
+script = SubResource("GDScript_u3n4l")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 64"]
 position = Vector2(30, 0)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -760,9 +900,9 @@ brightness = 0.0
 [node name="Frame 65" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 65" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 65"]
 position = Vector2(0, -50)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -778,9 +918,12 @@ brightness = 0.0
 [node name="Frame 74" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 74" instance=ExtResource("1_dm5nm")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 74"]
+script = SubResource("GDScript_ii86i")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 74"]
 position = Vector2(30, 0)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -796,9 +939,9 @@ brightness = 0.0
 [node name="Frame 75" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 75" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 75"]
 position = Vector2(30, 0)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -814,9 +957,12 @@ brightness = 0.0
 [node name="Frame 84" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 84" instance=ExtResource("1_dm5nm")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 84"]
+script = SubResource("GDScript_jxe8k")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 84"]
 position = Vector2(0, -50)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -832,9 +978,9 @@ brightness = 0.0
 [node name="Frame 85" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 85" instance=ExtResource("1_dm5nm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 85"]
 position = Vector2(30, 0)
-script = ExtResource("2_7dxsu")
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -850,8 +996,11 @@ brightness = 0.0
 [node name="Frame 95" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 95" instance=ExtResource("1_dm5nm")]
-script = ExtResource("2_7dxsu")
+[node name="AS2" type="Node" parent="Layer 2/Frame 95"]
+script = SubResource("GDScript_waypf")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 95"]
+script = ExtResource("2_e2xlj")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/HP Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

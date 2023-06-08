@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Stones.png" id="1_iaw41"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mkewi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Stones.png" id="2_28jl4"]
 
-[sub_resource type="Animation" id="Animation_qacyl"]
+[sub_resource type="Animation" id="Animation_3shdg"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -54,16 +55,21 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6fcuh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jcrbo"]
 _data = {
-"Default": SubResource("Animation_qacyl")
+"Default": SubResource("Animation_3shdg")
 }
 
 [node name="K-3BackGFX" type="Node2D"]
+script = ExtResource("1_mkewi")
+source_xml = "res://sm63/LIBRARY/K-3BackGFX.xml"
+linkage = "K-3BackGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6fcuh")
+"Timeline": SubResource("AnimationLibrary_jcrbo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -75,7 +81,7 @@ libraries = {
 [node name="@@7148" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_iaw41")
+texture = ExtResource("2_28jl4")
 texture_offset = Vector2(46.95, 1)
 polygon = PackedVector2Array(-58.45, -828, 90.55, -828, 90.55, 30, -58.45, 30)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])

@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_icbo3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_fauuq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Stone.png" id="3_l516d"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="4_0uhqk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vuadf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_hwsnh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Stone.png" id="3_nod6v"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="4_tuujp"]
 
-[sub_resource type="Animation" id="Animation_c2txk"]
+[sub_resource type="Animation" id="Animation_ewvxk"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -81,16 +81,67 @@ tracks/5/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3xm7e"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wj0tj"]
 _data = {
-"Default": SubResource("Animation_c2txk")
+"Default": SubResource("Animation_ewvxk")
 }
 
+[sub_resource type="GDScript" id="GDScript_piwir"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	frame = \"Red\";
+# 	eat = false
+# 	chase = false
+# 	// speed = 4
+# 	// rotdiv = 10
+# 	// rotmaxspeed = 3
+# 	waittime = 128
+# 	addrandomly = false;
+# 	enemyhurt = false
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_st4tg"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	frame = \"Gold\";
+# 	eat = false
+# 	chase = false
+# 	// speed = 4
+# 	// rotdiv = 10
+# 	// rotmaxspeed = 3
+# 	offset = 64
+# 	waittime = 128
+# 	addrandomly = false;
+# 	enemyhurt = false
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_wxhyn"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_rjojk"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	size = 4568;
+# 	rate = 7;
+# 	Yheight = 100;
+# 	speed = 1;
+# }
+# "
+
 [node name="5-1 Front GFX" type="Node2D"]
+script = ExtResource("1_vuadf")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Front GFX.xml"
+linkage = "5-1FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3xm7e")
+"Timeline": SubResource("AnimationLibrary_wj0tj")
 }
 
 [node name="Lava" type="Node2D" parent="."]
@@ -108,9 +159,9 @@ color = Color(0.741176, 0, 0, 1)
 polygon = PackedVector2Array(-521.225, 195, 3532.15, 195, 3532.15, 215, -521.3, 215)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(0, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -123,9 +174,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31266" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31266" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(256, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -138,9 +189,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31267" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31267" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(-512, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -153,9 +204,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31268" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31268" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(-256, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -168,9 +219,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31269" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31269" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(767, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -183,9 +234,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31270" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31270" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(1023, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -198,9 +249,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31271" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31271" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(511, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -213,9 +264,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31272" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31272" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(1276, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -228,9 +279,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31273" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31273" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(1787, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -243,9 +294,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31274" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31274" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(2043, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -258,9 +309,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31275" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31275" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(1531, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -273,9 +324,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31276" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31276" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(2299, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -288,9 +339,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31277" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31277" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(2555, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -303,9 +354,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31278" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31278" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(2811, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -318,9 +369,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31279" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31279" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(3067, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -333,9 +384,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31280" type="Node2D" parent="Lava/Frame 0/Group" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31280" type="Node2D" parent="Lava/Frame 0/Group"]
 position = Vector2(3323, 185)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -359,7 +410,7 @@ brightness = 0.0
 [node name="@@31255" type="Polygon2D" parent="Pyro/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_l516d")
+texture = ExtResource("3_nod6v")
 texture_offset = Vector2(-1950.35, -176.05)
 polygon = PackedVector2Array(1950.35, 176.05, 2061.3, 176.05, 2061.3, 222.05, 1950.35, 222.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -379,7 +430,7 @@ end_cap_mode = 2
 [node name="@@31258" type="Polygon2D" parent="Pyro/Frame 0/@Group@31257/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_0uhqk")
+texture = ExtResource("4_tuujp")
 texture_offset = Vector2(-2844.85, 11)
 polygon = PackedVector2Array(3072, -59.05, 3162.1, -59.05, 3162.1, -50.25, 3072, -50.25, 3072, -58.8, 3072, -50.25, 3170.1, -50.25, 3170.1, -42.275, 3178.1, -42.25, 3178.1, -34.275, 3186.1, -34.25, 3186.1, -26.275, 3280.1, -26.25, 3280.1, 37.4, 3072, 37.4, 3072, -50)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)])
@@ -387,7 +438,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@31259" type="Polygon2D" parent="Pyro/Frame 0/@Group@31257/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_0uhqk")
+texture = ExtResource("4_tuujp")
 texture_offset = Vector2(-2844.65, -163.05)
 polygon = PackedVector2Array(2863, 133.1, 3005.7, 133.1, 3005.7, 180, 2863, 180, 2847.7, 180, 3005.7, 180, 3005.7, 212, 2847.7, 212)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
@@ -395,7 +446,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@31260" type="Polygon2D" parent="Pyro/Frame 0/@Group@31257/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_0uhqk")
+texture = ExtResource("4_tuujp")
 texture_offset = Vector2(-3069.65, -163.05)
 polygon = PackedVector2Array(3072, 133.1, 3368.65, 133.1, 3368.65, 212, 3072, 212, 3072, 180)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -403,7 +454,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@31261" type="Polygon2D" parent="Pyro/Frame 0/@Group@31257/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_0uhqk")
+texture = ExtResource("4_tuujp")
 texture_offset = Vector2(-2844.85, 43)
 polygon = PackedVector2Array(2847, -58.8, 2885.1, -58.8, 2885.1, -50, 2847, -50, 2847, -50.25, 2847, -50, 2893.1, -50, 2893.1, -42.025, 3005.65, -42, 3005.65, 37.4, 2847, 37.4, 2847, -42.275)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9, 10, 11)])
@@ -424,9 +475,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Pyro/Frame 0" instance=ExtResource("1_icbo3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Pyro/Frame 0"]
 position = Vector2(2854.5, 168.25)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Launcher.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -439,9 +490,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31264" type="Node2D" parent="Pyro/Frame 0" instance=ExtResource("1_icbo3")]
+[node name="AS2" type="Node" parent="Pyro/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_piwir")
+
+[node name="@DOMSymbolInstance@31264" type="Node2D" parent="Pyro/Frame 0"]
 position = Vector2(2854.5, 144.25)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Launcher.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -453,14 +507,17 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Pyro/Frame 0/@DOMSymbolInstance@31264"]
+script = SubResource("GDScript_st4tg")
 
 [node name="Watur Stuff" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Watur Stuff"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Watur Stuff/Frame 0" instance=ExtResource("1_icbo3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Watur Stuff/Frame 0"]
 position = Vector2(438.15, 114.1)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 F- Water Wheel Mask.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -473,9 +530,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@31254" type="Node2D" parent="Watur Stuff/Frame 0" instance=ExtResource("1_icbo3")]
+[node name="@DOMSymbolInstance@31254" type="Node2D" parent="Watur Stuff/Frame 0"]
 position = Vector2(812.15, 114.1)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 F- Water Wheel Mask.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -492,10 +549,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Lava Thing"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Lava Thing/Frame 0" instance=ExtResource("1_icbo3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Lava Thing/Frame 0"]
 position = Vector2(1599.6, 243)
 scale = Vector2(0.85202, 2.03613)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -512,12 +569,15 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 6"]
 
+[node name="AS2" type="Node" parent="Layer 6/Frame 0"]
+script = SubResource("GDScript_wxhyn")
+
 [node name="Frame 1" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 1" instance=ExtResource("1_icbo3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 1"]
 position = Vector2(-954.5, 186.5)
-script = ExtResource("2_fauuq")
+script = ExtResource("2_hwsnh")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Bubble Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -529,3 +589,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 6/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_rjojk")

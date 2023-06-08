@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Big Bully/Big Bully Walk - 3.png" id="1_8kkmp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_eupv1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Big Bully/Big Bully Walk - 3.png" id="2_wyrck"]
 
-[sub_resource type="Animation" id="Animation_t6yjj"]
+[sub_resource type="Animation" id="Animation_n7uwy"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kg3i2"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7lhlm"]
 _data = {
-"Default": SubResource("Animation_t6yjj")
+"Default": SubResource("Animation_n7uwy")
 }
 
 [node name="9-08 Big Bully Transform" type="Node2D"]
+script = ExtResource("1_eupv1")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-08 Big Bully Transform.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kg3i2")
+"Timeline": SubResource("AnimationLibrary_7lhlm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@20661" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-20.5, -27.5)
-texture = ExtResource("1_8kkmp")
+texture = ExtResource("2_wyrck")
 centered = false

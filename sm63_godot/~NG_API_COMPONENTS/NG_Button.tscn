@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_p1wsb"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_w41dv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ofv5q"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8dpqc"]
 
-[sub_resource type="Animation" id="Animation_x537k"]
+[sub_resource type="Animation" id="Animation_6rsxe"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,16 +79,21 @@ tracks/5/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fiogs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yieh8"]
 _data = {
-"Default": SubResource("Animation_x537k")
+"Default": SubResource("Animation_6rsxe")
 }
 
 [node name="NG_Button" type="Node2D"]
+script = ExtResource("1_ofv5q")
+source_xml = "res://sm63/LIBRARY/~NG_API_COMPONENTS/NG_Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fiogs")
+"Timeline": SubResource("AnimationLibrary_yieh8")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -98,6 +103,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 0"]
 
 [node name="@@52971" type="Polygon2D" parent="Layer 4/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(3.35, -2.775, 175.325, -2.775, 182.9, 0.35, 186.075, 7.975, 186.075, 13.55, 182.9, 21.175, 175.325, 24.375, 3.35, 24.375, -4.3, 21.175, -7.425, 13.55, -7.425, 7.975, -4.3, 0.35)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)])
 
@@ -119,10 +125,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_p1wsb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, 2.5)
 scale = Vector2(0.411652, 0.411652)
-script = ExtResource("2_w41dv")
+script = ExtResource("2_8dpqc")
 path = "res://sm63_godot/~NG_API_COMPONENTS/NG_TYPEFACE.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -138,10 +144,10 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_p1wsb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(0, 2.5)
 scale = Vector2(0.411652, 0.411652)
-script = ExtResource("2_w41dv")
+script = ExtResource("2_8dpqc")
 path = "res://sm63_godot/~NG_API_COMPONENTS/NG_TYPEFACE_HIGHLIGHT.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -162,6 +168,7 @@ brightness = 0.0
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 3"]
+position = Vector2(1, 1)
 
 [node name="@@52969" type="Polygon2D" parent="Layer 2/Frame 3/Shape"]
 color = Color(0, 0, 1, 1)

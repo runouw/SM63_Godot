@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_j7vy1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7qq5y"]
+
+[sub_resource type="Animation" id="Animation_yld0h"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,56 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nujbt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lhe0d"]
 _data = {
-"Default": SubResource("Animation_j7vy1")
+"Default": SubResource("Animation_yld0h")
 }
 
+[sub_resource type="GDScript" id="GDScript_ywp0g"]
+script/source = "extends Node
+# if (_rotation == 0) {
+# 	num = 1;
+# } else {
+# 	_alpha = 0;
+# 	al = 0;
+# 	num = -1;
+# }
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	if ((_parent.helpfra+num)>0 && (_parent.helpfra+num)<7) {
+# 		al = 100;
+# 	} else {
+# 		sc = 50;
+# 		al = 0;
+# 	}
+# 	_alpha += (al-_alpha)/2;
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		//_xscale = 130;
+# 		//_yscale = 130;
+# 		_parent.helpfra += num;
+# 	}
+# };
+# gotoAndStop(frame+1);
+# "
+
 [node name="LDW - Help Button Arrow" type="Node2D"]
+script = ExtResource("1_7qq5y")
+source_xml = "res://sm63/LIBRARY/LDW - Help Button Arrow.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nujbt")
+"Timeline": SubResource("AnimationLibrary_lhe0d")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -57,3 +99,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ywp0g")

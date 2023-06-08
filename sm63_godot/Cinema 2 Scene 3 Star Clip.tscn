@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_m66v8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_v7ygj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_i0e1o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_vnlpw"]
 
-[sub_resource type="Animation" id="Animation_iim1o"]
+[sub_resource type="Animation" id="Animation_va6iy"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,81 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qa2xh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rea1x"]
 _data = {
-"Default": SubResource("Animation_iim1o")
+"Default": SubResource("Animation_va6iy")
 }
 
+[sub_resource type="GDScript" id="GDScript_cdcaj"]
+script/source = "extends Node
+# xspeed = 0;
+# yspeed = 0;
+# rot = Math.random()*Math.PI*2-Math.PI;
+# clip._rotation = Math.random()*360;
+# rotspeed = Math.random()*30-15;
+# speed = 17+Math.random()*2;
+# trail._rotation = (rot*180/Math.PI)+90;
+# trail._yscale = 25;
+# clip3._visible = false;
+# clip2._visible = false;
+# //
+# clip._x += Math.cos(rot)*speed/2;
+# clip._y += Math.sin(rot)*speed/2;
+# //
+# count = 0;
+# onEnterFrame = function () {
+# 	count++;
+# 	if(count == 2){
+# 		clip2._visible = true;
+# 	}
+# 	if(count == 3){
+# 		clip3._visible = true;
+# 	}
+# 	clip3._rotation = clip2._rotation;
+# 	clip3._x = clip2._x
+# 	clip3._y = clip2._y;
+# 	//
+# 	clip2._rotation = clip._rotation;
+# 	clip2._x = clip._x
+# 	clip2._y = clip._y;
+# 	//
+# 	clip._rotation += rotspeed;
+# 	clip._x += Math.cos(rot)*speed;
+# 	clip._y += Math.sin(rot)*speed;
+# 	trail._x = clip._x;
+# 	trail._y = clip._y;
+# 	if (Math.abs(clip._x)>300) {
+# 		this.swapDepths(0);
+# 		this.removeMovieClip();
+# 	}
+# 	if (Math.abs(clip._y)>300) {
+# 		this.swapDepths(0);
+# 		this.removeMovieClip();
+# 	}
+# 	trail._xscale += (50-trail._xscale)/10;
+# 	trail._yscale += (150-trail._yscale)/10;
+# };
+# "
+
 [node name="Cinema 2 Scene 3 Star Clip" type="Node2D"]
+script = ExtResource("1_i0e1o")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Scene 3 Star Clip.xml"
+linkage = "Cinema2Scene3StarClip"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qa2xh")
+"Timeline": SubResource("AnimationLibrary_rea1x")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_m66v8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 30)
-script = ExtResource("2_v7ygj")
+script = ExtResource("2_vnlpw")
 path = "res://sm63_godot/Cinema 2 Scene 3 Star Clip 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -74,9 +130,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@4293" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_m66v8")]
+[node name="@DOMSymbolInstance@4293" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 10)
-script = ExtResource("2_v7ygj")
+script = ExtResource("2_vnlpw")
 path = "res://sm63_godot/Cinema 2 Scene 3 Star Clip 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -89,8 +145,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@4294" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_m66v8")]
-script = ExtResource("2_v7ygj")
+[node name="@DOMSymbolInstance@4294" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_vnlpw")
 path = "res://sm63_godot/Cinema 2 Scene 3 Star Clip 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -107,9 +163,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_m66v8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0.35, 0.35)
-script = ExtResource("2_v7ygj")
+script = ExtResource("2_vnlpw")
 path = "res://sm63_godot/Cinema 2 Scene 3 Star Trail.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -125,3 +181,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_cdcaj")

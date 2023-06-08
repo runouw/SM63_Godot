@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="1_uroh8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vfobm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="2_b7t0o"]
 
-[sub_resource type="Animation" id="Animation_h7hff"]
+[sub_resource type="Animation" id="Animation_07rqp"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jhe4u"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1psk7"]
 _data = {
-"Default": SubResource("Animation_h7hff")
+"Default": SubResource("Animation_07rqp")
 }
 
 [node name="BC 1 Touch n drop n rotate" type="Node2D"]
+script = ExtResource("1_vfobm")
+source_xml = "res://sm63/LIBRARY/BC 1 Touch n drop n rotate.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jhe4u")
+"Timeline": SubResource("AnimationLibrary_1psk7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -35,11 +41,12 @@ libraries = {
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(1626.1, -406.9)
 
 [node name="@@215" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_uroh8")
+texture = ExtResource("2_b7t0o")
 texture_offset = Vector2(-42.214, -1401.27)
 texture_scale = Vector2(0.999997, 0.999997)
 texture_rotation = -1.309

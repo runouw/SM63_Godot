@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 16.png" id="1_2w5eo"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 12.png" id="2_k5r0w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tw0u1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 16.png" id="2_8oxsl"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 12.png" id="3_yxqcj"]
 
-[sub_resource type="Animation" id="Animation_5wsrb"]
+[sub_resource type="Animation" id="Animation_6mvyl"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6xawd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_odywt"]
 _data = {
-"Default": SubResource("Animation_5wsrb")
+"Default": SubResource("Animation_6mvyl")
 }
 
 [node name="Boo Mouth Animated" type="Node2D"]
+script = ExtResource("1_tw0u1")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo Mouth Animated.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6xawd")
+"Timeline": SubResource("AnimationLibrary_odywt")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -50,7 +56,7 @@ libraries = {
 [node name="@@50411" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-19, -20)
-texture = ExtResource("1_2w5eo")
+texture = ExtResource("2_8oxsl")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -59,5 +65,5 @@ visible = false
 [node name="@@50412" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-18.65, -15.65)
-texture = ExtResource("2_k5r0w")
+texture = ExtResource("3_yxqcj")
 centered = false

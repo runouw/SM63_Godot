@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_kg0it"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_t0u2l"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_8vfwc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1jgu2"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_cxup6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_cj8gn"]
 
-[sub_resource type="Animation" id="Animation_i5alq"]
+[sub_resource type="Animation" id="Animation_xfxiy"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -80,16 +80,64 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iu4wo"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mw5dm"]
 _data = {
-"Default": SubResource("Animation_i5alq")
+"Default": SubResource("Animation_xfxiy")
 }
 
+[sub_resource type="GDScript" id="GDScript_cto8c"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true) && _parent.clicked !== true) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# //_root.TotalStars>=1 && !(_root.Star[41] == false && _root.BowserKey1 == true)
+# onMouseDown = function () {
+# 	if (sc == 120 && _parent.clicked !== true) {
+# 		_xscale = 140;
+# 		_yscale = 140;
+# 		_parent.clicked = true;
+# 		_root.starwarpframe = false;
+# 		_root.Blackout();
+# 		_parent.onEnterFrame = function() {
+# 			if (_root.starwarpframe == true) {
+# 				_root.newstar = true;
+# 				_root.LastItemGot = \"Exit\";
+# 				_root.ReturnToCastle();
+# 			}
+# 		};
+# 		//_parent.Trans(\"starmap\");
+# 	}
+# };
+# if (_root.TotalStars == 0 || (_root.Star[41] == false && _root.BowserKey1 == true)) {
+# 	//if (false) {
+# 	onEnterFrame = null;
+# 	onMouseDown = null;
+# 	sc = 90;
+# 	_xscale = 90;
+# 	_yscale = 90;
+# 	_alpha = 75;
+# 	gotoAndStop(3);
+# } else {
+# 	gotoAndStop(2);
+# }
+# "
+
 [node name="Pause New Exit Button" type="Node2D"]
+script = ExtResource("1_1jgu2")
+source_xml = "res://sm63/LIBRARY/Pause New Exit Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iu4wo")
+"Timeline": SubResource("AnimationLibrary_mw5dm")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -101,9 +149,9 @@ libraries = {
 [node name="@@13369" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-72.325, -15, 72.15, -15, 72.15, 15, -72.325, 15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_kg0it")
+script = ExtResource("2_cxup6")
 matrix = Transform2D(0.0928345, 0, 0, 0.059082, -0.15, 0)
-entries_color = PackedColorArray(0.0352941, 0.0352941, 1, 1, 1, 1, 1, 1)
+entries_color = PackedColorArray(0.0352941, 0.0352941, 1, 1, 0, 0, 0, 1)
 entries_ratio = PackedFloat32Array(0, 1)
 focal_point_ratio = 0.0
 
@@ -123,9 +171,9 @@ visible = false
 [node name="@@13371" type="Polygon2D" parent="Layer 2/Frame 2/Shape"]
 polygon = PackedVector2Array(-72.325, -15, 72.15, -15, 72.15, 15, -72.325, 15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_kg0it")
+script = ExtResource("2_cxup6")
 matrix = Transform2D(0.0928345, 0, 0, 0.059082, -0.15, 0)
-entries_color = PackedColorArray(0.501961, 0.505882, 0.533333, 1, 1, 1, 1, 1)
+entries_color = PackedColorArray(0.501961, 0.505882, 0.533333, 1, 0, 0, 0, 1)
 entries_ratio = PackedFloat32Array(0, 1)
 focal_point_ratio = 0.0
 
@@ -141,8 +189,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_t0u2l")]
-script = ExtResource("3_8vfwc")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("3_cj8gn")
 path = "res://sm63_godot/Pause New &#034Exit Level&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -158,8 +206,8 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("2_t0u2l")]
-script = ExtResource("3_8vfwc")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
+script = ExtResource("3_cj8gn")
 path = "res://sm63_godot/Pause New &#034Exit Level&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -175,6 +223,9 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_cto8c")
 
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false

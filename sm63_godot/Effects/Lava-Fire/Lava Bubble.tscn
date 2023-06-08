@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_hcjyl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_y4swd"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_3ppip"]
 
-[sub_resource type="Animation" id="Animation_yyu05"]
+[sub_resource type="Animation" id="Animation_o0mci"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -66,28 +67,70 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6t7qh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hq811"]
 _data = {
-"Default": SubResource("Animation_yyu05")
+"Default": SubResource("Animation_o0mci")
 }
 
+[sub_resource type="GDScript" id="GDScript_y51gw"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_aycks"]
+script/source = "extends Node
+# wave = random(90);
+# X = this._x;
+# Y = 0;
+# aspeed = 50/(Yheight/speed+5);
+# Yheight *= (Math.random()*0.3)+0.85;
+# //trace((_parent.Yheight/speed))
+# onEnterFrame = function () {
+# 	this._y -= speed;
+# 	Y += speed;
+# 	wave += 0.1;
+# 	_alpha -= aspeed;
+# 	this._x = X+Math.sin(wave)*10;
+# 	if (Y>Yheight) {
+# 		//trace(apseed*(_parent.Yheight/speed))
+# 		onEnterFrame = function () {
+# 			_alpha -= 6;
+# 			this._xscale *= 1.1;
+# 			this._yscale *= 1.1;
+# 			if (_alpha<10) {
+# 				this.removeMovieClip();
+# 				gotoAndStop(3);
+# 			}
+# 		};
+# 	}
+# };
+# "
+
 [node name="Lava Bubble" type="Node2D"]
+script = ExtResource("1_y4swd")
+source_xml = "res://sm63/LIBRARY/Effects/Lava-Fire/Lava Bubble.xml"
+linkage = "LavaBubble"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6t7qh")
+"Timeline": SubResource("AnimationLibrary_hq811")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_y51gw")
+
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@48661" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(0, -25, 0, -25, 9.61611, -23.1777, 17.7, -17.7, 23.1779, -9.61592, 25, 0, 23.1779, 9.61611, 17.7, 17.7, 9.61611, 23.1779, 0, 25, 0, 25, -9.61592, 23.1779, -17.7, 17.7, -23.1777, 9.61611, -25, 0, -23.1777, -9.61592, -17.7, -17.7, -9.61592, -23.1777)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17)])
-script = ExtResource("1_hcjyl")
+script = ExtResource("2_3ppip")
 matrix = Transform2D(0.031311, 0, 0, 0.031311, 0, 0)
 entries_color = PackedColorArray(0.992157, 0.00784314, 0.00784314, 1, 0.996078, 0.00392157, 0.00392157, 1, 1, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 0.705882, 1)
@@ -109,6 +152,9 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_aycks")
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false

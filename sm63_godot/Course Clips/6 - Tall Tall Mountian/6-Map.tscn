@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_nelal"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_j7474"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_icv0a"]
 
-[sub_resource type="Animation" id="Animation_b684d"]
+[sub_resource type="Animation" id="Animation_8ucx4"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -54,16 +55,21 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dk25a"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5daa0"]
 _data = {
-"Default": SubResource("Animation_b684d")
+"Default": SubResource("Animation_8ucx4")
 }
 
 [node name="6-Map" type="Node2D"]
+script = ExtResource("1_j7474")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-Map.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dk25a")
+"Timeline": SubResource("AnimationLibrary_5daa0")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -75,7 +81,7 @@ libraries = {
 [node name="@@32793" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-150.025, -125, 149.975, -125, 149.975, 125, -150.025, 125)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_nelal")
+script = ExtResource("2_icv0a")
 matrix = Transform2D(0.230865, 0, 0, 0.25061, -0.05, 0)
 entries_color = PackedColorArray(1, 1, 1, 0.901961, 1, 1, 1, 0.4)
 entries_ratio = PackedFloat32Array(0, 1)

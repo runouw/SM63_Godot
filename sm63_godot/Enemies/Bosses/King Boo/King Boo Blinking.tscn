@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (body) - 1.png" id="1_6ea8w"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (crown) - 1.png" id="2_d6ke1"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (eyes) - 8.png" id="3_fjyke"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 7.png" id="4_f38mg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hpve0"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (body) - 1.png" id="2_q5di7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (crown) - 1.png" id="3_dcw5h"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (eyes) - 8.png" id="4_sdkvv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 7.png" id="5_xpe6r"]
 
-[sub_resource type="Animation" id="Animation_42yq5"]
+[sub_resource type="Animation" id="Animation_w5vi3"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -21,16 +22,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_v50ox"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxpc7"]
 _data = {
-"Default": SubResource("Animation_42yq5")
+"Default": SubResource("Animation_w5vi3")
 }
 
 [node name="King Boo Blinking" type="Node2D"]
+script = ExtResource("1_hpve0")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Boo/King Boo Blinking.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_v50ox")
+"Timeline": SubResource("AnimationLibrary_yxpc7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -40,23 +46,23 @@ libraries = {
 [node name="@@50416" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-55, -37.25)
-texture = ExtResource("1_6ea8w")
+texture = ExtResource("2_q5di7")
 centered = false
 
 [node name="@@50417" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-11.15, -56.75)
-texture = ExtResource("2_d6ke1")
+texture = ExtResource("3_dcw5h")
 centered = false
 
 [node name="@@50418" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-29.15, -16.65)
-texture = ExtResource("3_fjyke")
+texture = ExtResource("4_sdkvv")
 centered = false
 
 [node name="@@50419" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-33.15, 6)
-texture = ExtResource("4_f38mg")
+texture = ExtResource("5_xpe6r")
 centered = false

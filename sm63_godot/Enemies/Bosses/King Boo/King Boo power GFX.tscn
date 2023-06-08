@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo Scare - 2.png" id="1_qqbtk"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (crown) - 4.png" id="2_y3ef0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qmxiu"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo Scare - 2.png" id="2_q1yt5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (crown) - 4.png" id="3_fgwmt"]
 
-[sub_resource type="Animation" id="Animation_iytxi"]
+[sub_resource type="Animation" id="Animation_xp2nn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ibebn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wm3bk"]
 _data = {
-"Default": SubResource("Animation_iytxi")
+"Default": SubResource("Animation_xp2nn")
 }
 
 [node name="King Boo power GFX" type="Node2D"]
+script = ExtResource("1_qmxiu")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Boo/King Boo power GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ibebn")
+"Timeline": SubResource("AnimationLibrary_wm3bk")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -38,11 +44,11 @@ libraries = {
 [node name="@@50495" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-52, -39.35)
-texture = ExtResource("1_qqbtk")
+texture = ExtResource("2_q1yt5")
 centered = false
 
 [node name="@@50496" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-14.35, -57.7)
-texture = ExtResource("2_y3ef0")
+texture = ExtResource("3_fgwmt")
 centered = false

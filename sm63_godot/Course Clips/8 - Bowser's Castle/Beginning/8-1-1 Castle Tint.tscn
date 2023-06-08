@@ -1,19 +1,19 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=16 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_okve3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ebmyg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/Haunted Window.png" id="3_adxuy"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Bowser Door.png" id="4_n15en"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/YI Window Stained Glass.png" id="5_catun"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Stone.png" id="6_qnoeq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="7_57dd8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="8_m1eq7"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Stones.png" id="9_wpgp3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Bowser Door Large.png" id="10_t1yfe"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Signs & Fences/Fence.png" id="11_pupcl"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/YI Window Large Stained Glass.png" id="12_0y3cg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2ahd4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ofmh7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/Haunted Window.png" id="3_yjkci"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Bowser Door.png" id="4_lvunn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/YI Window Stained Glass.png" id="5_16fth"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Stone.png" id="6_vrjsl"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="7_7bm0n"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="8_l3sip"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Stones.png" id="9_3ahum"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Bowser Door Large.png" id="10_illgy"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Signs & Fences/Fence.png" id="11_d2sx3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/YI Window Large Stained Glass.png" id="12_dain3"]
 
-[sub_resource type="Animation" id="Animation_dcc0x"]
+[sub_resource type="Animation" id="Animation_e3w7e"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -65,25 +65,45 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gis2y"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1yi6"]
 _data = {
-"Default": SubResource("Animation_dcc0x")
+"Default": SubResource("Animation_e3w7e")
 }
 
+[sub_resource type="GDScript" id="GDScript_75ibf"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	rotspeed = 0.03;
+# }
+# onClipEvent (enterFrame) {
+# 	_rotation += rotspeed;
+# 	count += 1;
+# 	if (count>260) {
+# 		rotspeed *= -1;
+# 		count = 0;
+# 	}
+# }"
+
 [node name="8-1-1 Castle Tint" type="Node2D"]
+script = ExtResource("1_2ahd4")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Bowser's Castle/Beginning/8-1-1 Castle Tint.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gis2y")
+"Timeline": SubResource("AnimationLibrary_b1yi6")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_okve3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-255.5, -83.7)
-script = ExtResource("2_ebmyg")
+script = ExtResource("2_ofmh7")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Beginning/8-1 Castle Second Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -104,237 +124,237 @@ brightness = 0.0
 texture_filter = 1
 position = Vector2(-330.45, -378.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35941" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-189.45, -378.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35942" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-49.45, -378.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35943" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(90.55, -378.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35944" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(230.55, -378.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35945" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(370.55, -378.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35946" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(510.55, -378.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35947" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(650.55, -378.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35948" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1630.55, -378.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35949" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-330.45, -258.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35950" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-189.45, -258.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35951" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-49.45, -258.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35952" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(90.55, -258.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35953" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(230.55, -258.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35954" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(370.55, -258.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35955" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(510.55, -258.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35956" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(650.55, -258.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35957" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1630.55, -258.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35958" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-330.45, -138.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35959" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-189.45, -138.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35960" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-49.45, -138.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35961" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(90.55, -138.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35962" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(230.55, -138.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35963" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-330.45, -18.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35964" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-189.45, -18.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35965" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-49.45, -18.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35966" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(90.55, -18.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35967" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-1260.4, -354.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35968" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-1202.4, -354.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35969" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-1260.4, -270.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35970" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-1202.4, -270.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35971" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-1260.4, -175.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35972" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-1202.4, -175.5)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35973" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-1236.55, -143.65)
-texture = ExtResource("4_n15en")
+texture = ExtResource("4_lvunn")
 centered = false
 
 [node name="@@35974" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -342,13 +362,13 @@ texture_filter = 1
 position = Vector2(-1205.05, -143.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_n15en")
+texture = ExtResource("4_lvunn")
 centered = false
 
 [node name="@@35975" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(997.45, -596.1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35976" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -356,13 +376,13 @@ texture_filter = 1
 position = Vector2(1027.45, -596.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35977" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1057.45, -596.1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35978" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -370,13 +390,13 @@ texture_filter = 1
 position = Vector2(1087.45, -596.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35979" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1222.45, -596.1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35980" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -384,13 +404,13 @@ texture_filter = 1
 position = Vector2(1252.45, -596.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35981" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1282.45, -596.1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35982" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -398,13 +418,13 @@ texture_filter = 1
 position = Vector2(1312.45, -596.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35983" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(997.45, -746.1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35984" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -412,13 +432,13 @@ texture_filter = 1
 position = Vector2(1027.45, -746.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35985" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1057.45, -746.1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35986" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -426,13 +446,13 @@ texture_filter = 1
 position = Vector2(1087.45, -746.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35987" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1222.45, -746.1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35988" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -440,13 +460,13 @@ texture_filter = 1
 position = Vector2(1252.45, -746.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35989" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1282.45, -746.1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35990" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -454,13 +474,13 @@ texture_filter = 1
 position = Vector2(1312.45, -746.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35991" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1038.9, -448.45)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35992" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -468,13 +488,13 @@ texture_filter = 1
 position = Vector2(1068.9, -448.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35993" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1253.9, -448.45)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35994" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -482,13 +502,13 @@ texture_filter = 1
 position = Vector2(1283.9, -448.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35995" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1108.9, -448.45)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35996" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -496,13 +516,13 @@ texture_filter = 1
 position = Vector2(1138.9, -448.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35997" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(1183.9, -448.45)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="@@35998" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -510,7 +530,7 @@ texture_filter = 1
 position = Vector2(1213.9, -448.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_catun")
+texture = ExtResource("5_16fth")
 centered = false
 
 [node name="Group" type="Node2D" parent="Layer 3/Frame 0"]
@@ -520,7 +540,7 @@ centered = false
 [node name="@@35999" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("6_qnoeq")
+texture = ExtResource("6_vrjsl")
 texture_offset = Vector2(-1178.25, 304.6)
 polygon = PackedVector2Array(1161.4, -409.225, 1161.4, -409.225, 1185.85, -366.2, 1136.95, -366.2, 1153.43, -395.2, 1086.95, -395.2, 1086.95, -395.2, 1136.95, -366.2, 1095.91, -366.2, 1235.85, -395.2, 1235.85, -395.2, 1226.89, -366.2, 1185.85, -366.2, 1095.91, -366.2, 1226.89, -366.2, 1218.85, -340.2, 1103.95, -340.2, 1101.79, -347.2, 1062, -347.2, 1062, -347.2, 1103.95, -340.2, 1065.37, -340.2, 1260.8, -347.2, 1260.8, -347.2, 1257.43, -340.2, 1218.85, -340.2, 1065.37, -340.2, 1257.43, -340.2, 1232.85, -289.2, 1269.8, -280.2, 1221.88, -212.725, 1099.95, -212.7, 1099.95, -212.7, 1099.93, -212.725, 1053, -280.2, 1089.95, -289.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29, 30, 31, 32, 33, 34, 35)])
@@ -542,7 +562,7 @@ end_cap_mode = 2
 [node name="@@35902" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("7_57dd8")
+texture = ExtResource("7_7bm0n")
 texture_offset = Vector2(340.45, 18)
 polygon = PackedVector2Array(-402.725, -485.05, -402.7, -485.05, -402.7, -485, -402.7, -485)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -550,7 +570,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@35903" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("7_57dd8")
+texture = ExtResource("7_7bm0n")
 texture_offset = Vector2(366.15, -0.3)
 texture_scale = Vector2(1.25002, 1.25002)
 polygon = PackedVector2Array(-1349.28, -375.975, -1349.28, -375.975, -1305.05, -300.325, -1393.53, -300.325, -1383.7, -317.125, -1088.28, -375.975, -1088.28, -375.975, -1044.05, -300.325, -1132.53, -300.325, -1122.7, -317.125, -1393.53, -300.325, -1305.07, -300.325, -1305.05, -114.5, -1394.5, -114.5, -1393.55, -300.3, -1132.53, -300.325, -1044.07, -300.325, -1044.08, -300.3, -1044.77, -241.475, -1044.77, -241.45, -1045.54, -176.225, -1045.54, -176.2, -1046.03, -135.5, -1132.55, -135.5, -1132.55, -300.3, -1132.55, -135.5, -1046.75, -135.5, -1047, -114.5, -1132.55, -114.5, -1394.5, -114.5, -1046.6, -114.5, -1046.6, 131.85, -1394.5, 131.85, -1394.5, -49.925)
@@ -559,7 +579,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35904" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("7_57dd8")
+texture = ExtResource("7_7bm0n")
 texture_offset = Vector2(2919.25, -818.417)
 texture_scale = Vector2(1.25001, 1.25001)
 texture_rotation = -0.26179
@@ -569,7 +589,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 [node name="@@35905" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("7_57dd8")
+texture = ExtResource("7_7bm0n")
 texture_offset = Vector2(1373.25, 369.676)
 texture_scale = Vector2(1.25084, 1.25084)
 texture_rotation = 0.201504
@@ -579,7 +599,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8)]
 [node name="@@35906" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("8_m1eq7")
+texture = ExtResource("8_l3sip")
 texture_offset = Vector2(2056.55, 143.65)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(-2038.97, -317.125, -2038.97, -317.125, -1997.35, -245.925, -1997.35, -49.925, -2083.25, -49.925, -2083.25, -241.45, -2083.23, -241.475, -2048.8, -300.325, -2083.25, -49.925, -1997.35, -49.925, -1997.35, 144.3, -2083.25, 144.3, -2083.25, -30.45)
@@ -614,7 +634,7 @@ end_cap_mode = 2
 [node name="@@35911" type="Polygon2D" parent="Layer 1/Frame 0/@Shape@35910"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("8_m1eq7")
+texture = ExtResource("8_l3sip")
 texture_offset = Vector2(479.65, 35.65)
 texture_scale = Vector2(1.23077, 1.23077)
 polygon = PackedVector2Array(-597.225, -435.975, -597.225, -435.975, -552.975, -360.325, -641.45, -360.325, -641.425, -360.325, -552.975, -360.325, -552.95, -360.3, -552.95, -114.5, -638.5, -114.5, -641.425, -360.3, -638.9, -114.5, -291, -114.5, -291, -40, -352.45, 24.5, -352.45, 131.85, -638.9, 131.85, -638.9, -40)
@@ -628,11 +648,11 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_okve3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-2717.8, 125.4)
 rotation = 0.341013
 scale = Vector2(0.799162, 0.799162)
-script = ExtResource("2_ebmyg")
+script = ExtResource("2_ofmh7")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Bobbing PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -645,6 +665,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_75ibf")
+
 [node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group"]
@@ -652,7 +675,7 @@ brightness = 0.0
 [node name="@@35913" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-544.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(544.95, -812.45, 560.95, -812.45, 560.95, -687.9, 544.95, -687.9, 544.95, -811.45, 544.95, -687.9, 560.95, -687.9, 560.95, -549.775, 544.95, -549.775, 544.95, -687.825, 544.95, -549.775, 560.95, -549.775, 560.95, -430.5, 544.95, -430.5, 544.95, -549.7)
@@ -661,7 +684,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35914" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-889.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(889.95, -812.45, 905.95, -812.45, 905.95, -687.9, 889.95, -687.9, 889.95, -811.45, 889.95, -687.9, 905.95, -687.9, 905.95, -549.775, 889.95, -549.775, 889.95, -687.825, 889.95, -549.775, 905.95, -549.775, 905.95, -430.5, 889.95, -430.5, 889.95, -549.7)
@@ -670,7 +693,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35915" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-609.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(609.95, -812.45, 625.95, -812.45, 625.95, -687.9, 609.95, -687.9, 609.95, -811.45, 609.95, -687.9, 625.95, -687.9, 625.95, -549.775, 609.95, -549.775, 609.95, -687.825, 609.95, -549.775, 625.95, -549.775, 625.95, -430.5, 609.95, -430.5, 609.95, -549.7)
@@ -679,7 +702,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35916" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-824.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(824.95, -812.45, 840.95, -812.45, 840.95, -687.9, 824.95, -687.9, 824.95, -811.45, 824.95, -687.9, 840.95, -687.9, 840.95, -549.775, 824.95, -549.775, 824.95, -687.825, 824.95, -549.775, 840.95, -549.775, 840.95, -430.5, 824.95, -430.5, 824.95, -549.7)
@@ -688,7 +711,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35917" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-759.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(759.95, -812.45, 775.95, -812.45, 775.95, -687.9, 759.95, -687.9, 759.95, -811.45, 759.95, -687.9, 775.95, -687.9, 775.95, -549.775, 759.95, -549.775, 759.95, -687.825, 759.95, -549.775, 775.95, -549.775, 775.95, -430.5, 759.95, -430.5, 759.95, -549.7)
@@ -697,7 +720,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35918" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-674.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(674.95, -812.45, 690.95, -812.45, 690.95, -687.9, 674.95, -687.9, 674.95, -811.45, 674.95, -687.9, 690.95, -687.9, 690.95, -549.775, 674.95, -549.775, 674.95, -687.825, 674.95, -549.775, 690.95, -549.775, 690.95, -430.5, 674.95, -430.5, 674.95, -549.7)
@@ -706,7 +729,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35919" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-1400.35, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(1400.35, -811.45, 1416.35, -811.45, 1416.35, -687.825, 1400.35, -687.825, 1400.35, -798.425, 1400.35, -687.825, 1416.35, -687.825, 1416.35, -549.7, 1400.35, -549.7, 1400.35, -660.275, 1400.35, -549.7, 1416.35, -549.7, 1416.35, -430.5, 1400.35, -430.5, 1400.35, -522.15)
@@ -715,7 +738,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35920" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-1465.35, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(1465.35, -811.45, 1481.35, -811.45, 1481.35, -687.825, 1465.35, -687.825, 1465.35, -798.425, 1465.35, -687.825, 1481.35, -687.825, 1481.35, -549.7, 1465.35, -549.7, 1465.35, -660.275, 1465.35, -549.7, 1481.35, -549.7, 1481.35, -430.5, 1465.35, -430.5, 1465.35, -522.15)
@@ -724,7 +747,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35921" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-1680.35, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(1680.35, -811.45, 1696.35, -811.45, 1696.35, -687.825, 1680.35, -687.825, 1680.35, -798.425, 1680.35, -687.825, 1696.35, -687.825, 1696.35, -549.7, 1680.35, -549.7, 1680.35, -660.275, 1680.35, -549.7, 1696.35, -549.7, 1696.35, -430.5, 1680.35, -430.5, 1680.35, -522.15)
@@ -733,7 +756,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35922" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-1615.35, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(1615.35, -811.45, 1631.35, -811.45, 1631.35, -687.825, 1615.35, -687.825, 1615.35, -798.425, 1615.35, -687.825, 1631.35, -687.825, 1631.35, -549.7, 1615.35, -549.7, 1615.35, -660.275, 1615.35, -549.7, 1631.35, -549.7, 1631.35, -430.5, 1615.35, -430.5, 1615.35, -522.15)
@@ -742,7 +765,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35923" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-1530.35, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(1530.35, -811.45, 1546.35, -811.45, 1546.35, -687.825, 1530.35, -687.825, 1530.35, -798.425, 1530.35, -687.825, 1546.35, -687.825, 1546.35, -549.7, 1530.35, -549.7, 1530.35, -660.275, 1530.35, -549.7, 1546.35, -549.7, 1546.35, -430.5, 1530.35, -430.5, 1530.35, -522.15)
@@ -751,7 +774,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35924" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-129.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(129.95, -812.45, 145.95, -812.45, 145.95, -687.9, 129.95, -687.9, 129.95, -811.45, 129.95, -687.9, 145.95, -687.9, 145.95, -549.775, 129.95, -549.775, 129.95, -687.825, 129.95, -549.775, 145.95, -549.775, 145.95, -430.5, 129.95, -430.5, 129.95, -549.7)
@@ -760,7 +783,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35925" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-474.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(474.95, -812.45, 490.95, -812.45, 490.95, -687.9, 474.95, -687.9, 474.95, -811.45, 474.95, -687.9, 490.95, -687.9, 490.95, -549.775, 474.95, -549.775, 474.95, -687.825, 474.95, -549.775, 490.95, -549.775, 490.95, -430.5, 474.95, -430.5, 474.95, -549.7)
@@ -769,7 +792,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35926" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-194.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(194.95, -812.45, 210.95, -812.45, 210.95, -687.9, 194.95, -687.9, 194.95, -811.45, 194.95, -687.9, 210.95, -687.9, 210.95, -549.775, 194.95, -549.775, 194.95, -687.825, 194.95, -549.775, 210.95, -549.775, 210.95, -430.5, 194.95, -430.5, 194.95, -549.7)
@@ -778,7 +801,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35927" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-409.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(409.95, -812.45, 425.95, -812.45, 425.95, -687.9, 409.95, -687.9, 409.95, -811.45, 409.95, -687.9, 425.95, -687.9, 425.95, -549.775, 409.95, -549.775, 409.95, -687.825, 409.95, -549.775, 425.95, -549.775, 425.95, -430.5, 409.95, -430.5, 409.95, -549.7)
@@ -787,7 +810,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35928" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-344.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(344.95, -812.45, 360.95, -812.45, 360.95, -687.9, 344.95, -687.9, 344.95, -811.45, 344.95, -687.9, 360.95, -687.9, 360.95, -549.775, 344.95, -549.775, 344.95, -687.825, 344.95, -549.775, 360.95, -549.775, 360.95, -430.5, 344.95, -430.5, 344.95, -549.7)
@@ -796,7 +819,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35929" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(-259.95, 446.5)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(259.95, -812.45, 275.95, -812.45, 275.95, -687.9, 259.95, -687.9, 259.95, -811.45, 259.95, -687.9, 275.95, -687.9, 275.95, -549.775, 259.95, -549.775, 259.95, -687.825, 259.95, -549.775, 275.95, -549.775, 275.95, -430.5, 259.95, -430.5, 259.95, -549.7)
@@ -805,7 +828,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35930" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(1328.05, -931.05)
 texture_scale = Vector2(2.90909, 2)
 texture_rotation = 3.14159
@@ -815,7 +838,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@35931" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(1388.05, -499.95)
 texture_scale = Vector2(2.90909, -2)
 texture_rotation = 3.14159
@@ -825,7 +848,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35932" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(1046.05, -499.95)
 texture_scale = Vector2(2.90909, -2)
 texture_rotation = 3.14159
@@ -835,7 +858,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35933" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(1104.05, -931.05)
 texture_scale = Vector2(2.90909, 2)
 texture_rotation = 3.14159
@@ -845,7 +868,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35934" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(1166.05, -499.95)
 texture_scale = Vector2(2.90909, -2)
 texture_rotation = 3.14159
@@ -855,7 +878,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35935" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("9_wpgp3")
+texture = ExtResource("9_3ahum")
 texture_offset = Vector2(1268.05, -499.95)
 texture_scale = Vector2(2.90909, -2)
 texture_rotation = 3.14159
@@ -881,7 +904,7 @@ end_cap_mode = 2
 [node name="@@35938" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(1124.3, -557.6)
-texture = ExtResource("10_t1yfe")
+texture = ExtResource("10_illgy")
 centered = false
 
 [node name="@@35939" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -889,7 +912,7 @@ texture_filter = 1
 position = Vector2(1186.3, -557.6)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("10_t1yfe")
+texture = ExtResource("10_illgy")
 centered = false
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -900,70 +923,70 @@ centered = false
 texture_filter = 1
 position = Vector2(-627.4, -358.45)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35876" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-590.4, -358.45)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35877" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-607.25, -204.8)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35878" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-615.5, -89.3)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35879" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-529, -89.3)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35880" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-428, -89.3)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35881" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-342, -89.3)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35882" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-615.5, -0.3)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35883" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-526.5, -0.3)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35884" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-426, -0.3)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="Group" type="Node2D" parent="Layer 4/Frame 0"]
@@ -974,7 +997,7 @@ position = Vector2(0, -108)
 [node name="@@35885" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("11_pupcl")
+texture = ExtResource("11_d2sx3")
 texture_offset = Vector2(-85.35, 335.4)
 texture_scale = Vector2(1.25002, 1.25002)
 polygon = PackedVector2Array(85.35, -335.4, 910.025, -335.4, 909.625, -334.975, 909.5, -334.85, 912.175, -327.5, 85.35, -327.5, 85.35, -334.975, 85.35, -327.5, 911.45, -327.5, 911.45, -321.8, 85.35, -321.8, 85.35, -327.3, 913.95, -322.625, 913.95, -322.625, 914.25, -321.8, 913.95, -321.8, 913.95, -322.425)
@@ -983,7 +1006,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), Packe
 [node name="@@35886" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("11_pupcl")
+texture = ExtResource("11_d2sx3")
 texture_offset = Vector2(-163.8, 399)
 texture_scale = Vector2(1.25002, 1.25002)
 polygon = PackedVector2Array(972.4, -399, 972.4, -399, 1339.9, -398.8, 1338.83, -395.2, 973.525, -395.2, 972.459, -398.8, 975.95, -395.2, 1338.83, -395.2, 1338.78, -395, 1338.76, -394.95, 1338.75, -394.9, 1338.67, -394.65, 1338.66, -394.6, 1336.96, -388.95, 1336.95, -388.9, 1336.92, -388.8, 1336.9, -388.75, 1336.87, -388.65, 1336.86, -388.6, 1335.9, -385.4, 976.4, -385.4, 975.3, -389.1, 975.55, -389.45, 975.7, -389.85, 975.7, -390.2, 975.8, -390.45, 976.45, -390.85, 976.7, -390.95, 976.95, -391.2, 977.3, -391.6, 977.55, -391.95, 977.7, -393.1, 977.55, -393.8, 977.45, -394.2, 977.05, -394.55, 976.55, -394.9, 976.05, -395.15)
@@ -992,7 +1015,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 [node name="@@35887" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("11_pupcl")
+texture = ExtResource("11_d2sx3")
 texture_offset = Vector2(-585.75, 334.5)
 texture_scale = Vector2(1.25002, 1.25002)
 polygon = PackedVector2Array(1402.75, -334.5, 1695.9, -334.5, 1695.9, -327.3, 1400.13, -327.3, 1400.2, -327.5, 1398.35, -327.3, 1695.9, -327.3, 1695.9, -320.9, 1398.35, -320.9, 1398.35, -322.625)
@@ -1001,7 +1024,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35888" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("11_pupcl")
+texture = ExtResource("11_d2sx3")
 texture_offset = Vector2(1702.57, 406.021)
 texture_scale = Vector2(1.25002, -1.25002)
 texture_rotation = -2.35619
@@ -1011,7 +1034,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@35889" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("11_pupcl")
+texture = ExtResource("11_d2sx3")
 texture_offset = Vector2(67.3873, 1228.88)
 texture_scale = Vector2(1.25002, 1.25002)
 texture_rotation = -0.785398
@@ -1022,34 +1045,34 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 texture_filter = 1
 position = Vector2(-1099.2, -332.85)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35891" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-1360.2, -332.85)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35892" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-1099.2, -217.85)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35893" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-1360.2, -216.85)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("3_adxuy")
+texture = ExtResource("3_yjkci")
 centered = false
 
 [node name="@@35894" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(780.9, -344.5)
-texture = ExtResource("12_0y3cg")
+texture = ExtResource("12_dain3")
 centered = false
 
 [node name="@@35895" type="Sprite2D" parent="Layer 4/Frame 0"]
@@ -1057,13 +1080,13 @@ texture_filter = 1
 position = Vector2(839.9, -344.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("12_0y3cg")
+texture = ExtResource("12_dain3")
 centered = false
 
 [node name="@@35896" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(915.9, -344.5)
-texture = ExtResource("12_0y3cg")
+texture = ExtResource("12_dain3")
 centered = false
 
 [node name="@@35897" type="Sprite2D" parent="Layer 4/Frame 0"]
@@ -1071,13 +1094,13 @@ texture_filter = 1
 position = Vector2(974.9, -344.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("12_0y3cg")
+texture = ExtResource("12_dain3")
 centered = false
 
 [node name="@@35898" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(1336.9, -344.5)
-texture = ExtResource("12_0y3cg")
+texture = ExtResource("12_dain3")
 centered = false
 
 [node name="@@35899" type="Sprite2D" parent="Layer 4/Frame 0"]
@@ -1085,13 +1108,13 @@ texture_filter = 1
 position = Vector2(1395.9, -344.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("12_0y3cg")
+texture = ExtResource("12_dain3")
 centered = false
 
 [node name="@@35900" type="Sprite2D" parent="Layer 4/Frame 0"]
 texture_filter = 1
 position = Vector2(1480.9, -344.5)
-texture = ExtResource("12_0y3cg")
+texture = ExtResource("12_dain3")
 centered = false
 
 [node name="@@35901" type="Sprite2D" parent="Layer 4/Frame 0"]
@@ -1099,5 +1122,5 @@ texture_filter = 1
 position = Vector2(1539.9, -344.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("12_0y3cg")
+texture = ExtResource("12_dain3")
 centered = false

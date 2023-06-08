@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Teleporting.png" id="1_dco2a"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 4 - Talking - 2.png" id="2_vr84f"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_0wgvd"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_3mj1k"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pyjyg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Teleporting.png" id="2_sm757"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 4 - Talking - 2.png" id="3_7xbou"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_glxlf"]
 
-[sub_resource type="Animation" id="Animation_eepq4"]
+[sub_resource type="Animation" id="Animation_hqv2v"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -201,16 +201,194 @@ tracks/15/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qfq70"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8782k"]
 _data = {
-"Default": SubResource("Animation_eepq4")
+"Default": SubResource("Animation_hqv2v")
 }
 
+[sub_resource type="GDScript" id="GDScript_03ey3"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = -100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_lt506"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# if (_root.BossCheckpoint == false) {
+# 	onEnterFrame = function () {
+# 		if (_root.PauseGame == false && _root.playpause == false && count++>3) {
+# 			if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.air == false && _root.Course.Char.yspeed>-3 && _root.Course.Char.attack == false) {
+# 				//
+# 				//_root.PlayMessage(\"Gah! \"+_root.CurrentPlayer+\" What are you doing here?!? You might mess up my Master's plans, so I'll have to kill you now!\");
+# 				_root.CinemaMessageFrame = 2;
+# 				_root.CinemaMessage = \"<b><i>Kamek:</i></b> Gah! \"+_root.CurrentPlayer+\" What are you doing here?!? You might mess up my Master's plans, so I'll have to kill you now!\";
+# 				play();
+# 				//
+# 				_root.Course.Char.yspeed = 0;
+# 				_root.Course.Char.xspeed = 0;
+# 				_root.Course.Char.attack = true;
+# 				_root.Course.Char.attackFrame = \"bosscinema\";
+# 				_root.playpause = true;
+# 				onEnterFrame = function () {
+# 					_root.Camcenter = this;
+# 					_root.PauseGame = false;
+# 				};
+# 			}
+# 		}
+# 		count = Math.min(count, 5);
+# 	};
+# } else {
+# 	gotoAndStop(\"m7\");
+# 	_root.Course.CamEdge.gotoAndStop(2);
+# 	_root.Course.Platforms.gotoAndStop(2);
+# 	_root.Course.BackGFX.gotoAndStop(4);
+# 	_root.Course.FrontGFX.gotoAndStop(3);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_itl0i"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_5mpd7"]
+script/source = "extends Node
+# _root.Course.CamEdge.gotoAndStop(2);
+# _root.Course.Platforms.gotoAndStop(2);
+# _root.Course.BackGFX.gotoAndStop(4);
+# "
+
+[sub_resource type="GDScript" id="GDScript_bcywm"]
+script/source = "extends Node
+# stop();
+# lastframeZ = _root.KeyZ();
+# //
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.KeyZ() == true && lastframeZ !== true && _root.CinemaMessageFinished == true) {
+# 		_root.CinemaMessage = \"\";
+# 		//_root.CinemaMessage = \"Some mroe text\";
+# 		//_root.CinemaMessageFrame = 3;
+# 		onEnterFrame = function () {
+# 			_root.Camcenter = this;
+# 			_root.PauseGame = false;
+# 			_root.playpause = true;
+# 		};
+# 		play();
+# 	}
+# 	lastframeZ = _root.KeyZ();
+# 	//
+# 	_root.Camcenter = this;
+# 	_root.PauseGame = false;
+# 	_root.playpause = true;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_5l0rq"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# _root.Course.Char.attackFrame = \"\";
+# _root.playpause = false;
+# onEnterFrame = null;
+# _root.StartNewMusicAndIntroNoVar(\"SuperMarioGalaxyPurpleCoin-Intro\", \"SuperMarioGalaxyPurpleCoin-Repeat\");
+# gotoAndStop(\"m1\");
+# "
+
+[sub_resource type="GDScript" id="GDScript_xbkfk"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# CheckNextMode = function () {
+# 	if (_parent.defeatedcount>=8) {
+# 		return (true);
+# 	} else {
+# 		return (false);
+# 	}
+# };
+# NextMode = function () {
+# 	if (_parent.defeatedcount>=8) {
+# 		gotoAndStop(\"m2\");
+# 		//
+# 		BlueCoinSummon()
+# 		//
+# 		CheckNextMode = function () {
+# 			if (_parent.defeatedcount>=20) {
+# 				return (true);
+# 			} else {
+# 				return (false);
+# 			}
+# 		};
+# 		NextMode = function () {
+# 			if (_parent.defeatedcount>20) {
+# 				gotoAndStop(\"m3\");
+# 				BlueCoinSummon()
+# 				CheckNextMode = function () {
+# 					if (_parent.defeatedcount>=30) {
+# 						return (true);
+# 					} else {
+# 						return (false);
+# 					}
+# 				};
+# 				NextMode = function () {
+# 					if (_parent.defeatedcount>30) {
+# 						gotoAndStop(\"m5\");
+# 						BlueCoinSummon()
+# 						CheckNextMode = function () {
+# 							if (_parent.defeatedcount>=45) {
+# 								return (true);
+# 							} else {
+# 								return (false);
+# 							}
+# 						};
+# 						NextMode = function () {
+# 							if (_parent.defeatedcount>45) {
+# 								gotoAndStop(\"m7\");
+# 								BlueCoinSummon()
+# 								NextMode = null;
+# 								CheckNextMode = null;
+# 							}
+# 						};
+# 					}
+# 				};
+# 			}
+# 		};
+# 		//
+# 	}
+# };
+# // _x:_x-22, _y:_y-15
+# //  yspeed:3+Math.random()*7, xspeed:-2-Math.random()*5
+# GoombaSummon = function (X, Y, Xvel, Yvel) {
+# 	_root.Course.FrontGFX.attachMovie(\"KamekTriangleAttack\", \"Triangle\"+_root.Course.FrontGFX.getNextHighestDepth(), _root.Course.FrontGFX.getNextHighestDepth(), {_x:X, _y:Y, yspeed:Yvel, xspeed:Xvel, explodetype:\"Goomba\"});
+# 	_parent.onscreencount++;
+# };
+# BobombSummon = function (X, Y, Xvel, Yvel) {
+# 	_root.Course.FrontGFX.attachMovie(\"KamekTriangleAttack\", \"Triangle\"+_root.Course.FrontGFX.getNextHighestDepth(), _root.Course.FrontGFX.getNextHighestDepth(), {_x:X, _y:Y, yspeed:Yvel, xspeed:Xvel, explodetype:\"Bobomb\"});
+# 	_parent.onscreencount++;
+# };
+# BombSummon = function (X, Y, Xvel, Yvel) {
+# 	_root.Course.FrontGFX.attachMovie(\"KamekTriangleAttack\", \"Triangle\"+_root.Course.FrontGFX.getNextHighestDepth(), _root.Course.FrontGFX.getNextHighestDepth(), {_x:X, _y:Y, yspeed:Yvel, xspeed:Xvel, explodetype:\"small\"});
+# };
+# BlueCoinSummon = function () {
+# 	_root.Course.BackGFX.attachMovie(\"BlueCoin\", \"BlueCoin\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:425+random(500), _y:-300-random(50), bounce:true});
+# };
+# // _parent.defeatedcount
+# "
+
 [node name="9-07 Kamek Graphics" type="Node2D"]
+script = ExtResource("1_pyjyg")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Graphics.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qfq70")
+"Timeline": SubResource("AnimationLibrary_8782k")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -220,7 +398,7 @@ libraries = {
 [node name="@@41190" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-18.65, -26.65)
-texture = ExtResource("1_dco2a")
+texture = ExtResource("2_sm757")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -229,15 +407,15 @@ visible = false
 [node name="@@41191" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-12, -27.5)
-texture = ExtResource("2_vr84f")
+texture = ExtResource("3_7xbou")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("3_0wgvd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(5, -13)
-script = ExtResource("4_3mj1k")
+script = ExtResource("4_glxlf")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Talking.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -256,15 +434,15 @@ visible = false
 [node name="@@41192" type="Sprite2D" parent="Layer 1/Frame 7"]
 texture_filter = 1
 position = Vector2(-12, -27.5)
-texture = ExtResource("2_vr84f")
+texture = ExtResource("3_7xbou")
 centered = false
 
 [node name="Frame 13" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13" instance=ExtResource("3_0wgvd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13"]
 position = Vector2(-5, -13.15)
-script = ExtResource("4_3mj1k")
+script = ExtResource("4_glxlf")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Ground Attack Animations.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -280,8 +458,8 @@ brightness = 0.0
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14" instance=ExtResource("3_0wgvd")]
-script = ExtResource("4_3mj1k")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14"]
+script = ExtResource("4_glxlf")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Air attack Animations.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -297,9 +475,9 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 15" instance=ExtResource("3_0wgvd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 15"]
 position = Vector2(0, -30)
-script = ExtResource("4_3mj1k")
+script = ExtResource("4_glxlf")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Summon Warp Pipe.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -315,8 +493,8 @@ brightness = 0.0
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16" instance=ExtResource("3_0wgvd")]
-script = ExtResource("4_3mj1k")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16"]
+script = ExtResource("4_glxlf")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Air attack Animations.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -332,9 +510,9 @@ brightness = 0.0
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 17" instance=ExtResource("3_0wgvd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 17"]
 position = Vector2(-480, -40)
-script = ExtResource("4_3mj1k")
+script = ExtResource("4_glxlf")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Summon Warp Pipe.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -347,11 +525,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 17/DOMSymbolInstance"]
+script = SubResource("GDScript_03ey3")
+
 [node name="Frame 18" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 18" instance=ExtResource("3_0wgvd")]
-script = ExtResource("4_3mj1k")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 18"]
+script = ExtResource("4_glxlf")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Air attack Animations.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -367,8 +548,8 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19" instance=ExtResource("3_0wgvd")]
-script = ExtResource("4_3mj1k")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19"]
+script = ExtResource("4_glxlf")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Summon Goomboss.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -385,10 +566,13 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_0wgvd")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_lt506")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-72, 162.95)
 scale = Vector2(7.18761, 1.93356)
-script = ExtResource("4_3mj1k")
+script = ExtResource("4_glxlf")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -401,14 +585,29 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_itl0i")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_5mpd7")
 
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 5"]
+script = SubResource("GDScript_bcywm")
+
 [node name="Frame 11" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 11"]
+script = SubResource("GDScript_5l0rq")
+
 [node name="Frame 13" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 13"]
+script = SubResource("GDScript_xbkfk")

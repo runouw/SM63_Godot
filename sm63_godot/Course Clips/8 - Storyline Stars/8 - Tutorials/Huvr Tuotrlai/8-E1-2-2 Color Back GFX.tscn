@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Mushy Repeat.png" id="1_okttc"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Mushy Top.png" id="2_fcrub"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 2.png" id="3_ug5xk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hhish"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Mushy Repeat.png" id="2_oluqo"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Mushy Top.png" id="3_4068b"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 2.png" id="4_xmynp"]
 
-[sub_resource type="Animation" id="Animation_13u30"]
+[sub_resource type="Animation" id="Animation_yjpxm"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +33,53 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_o3eko"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y26ks"]
 _data = {
-"Default": SubResource("Animation_13u30")
+"Default": SubResource("Animation_yjpxm")
 }
 
+[sub_resource type="GDScript" id="GDScript_eqee4"]
+script/source = "extends Node
+# if (_root.TotalStars !== 0) {
+# 	color = Math.round(_root.TotalStars*1.5)+25;
+# 	color2 = Math.abs(100-color);
+# 	myColor = new Color(this);
+# 	colorTrans = new Object();
+# 	colorTrans = {ra:(color*0.5)+50-(color2/3), rb:0, ga:(color*0.5)+50-(color2/3), gb:0, ba:(color*0.5)+50-(color2/3), bb:0, aa:100, ab:0};
+# 	myColor.setTransform(colorTrans);
+# 	onEnterFrame = function () {
+# 		color += Math.round(((_root.TotalStars*1.5)+25)-color)/7;
+# 		if (_root.CheatCastleRestore == true) {
+# 			color = 100;
+# 		}
+# 		//color = Math.max(color, 0);            
+# 		//color = Math.min(color, 100);
+# 		if (color>100) {
+# 			oldcolor = color;
+# 			color += Math.abs(100-color)*2.5;
+# 		}
+# 		color2 = Math.abs(100-color);
+# 		// color = percent of stars obained
+# 		// color 2  = percent of stars not yet obtained
+# 		colorTrans = {ra:(color*0.5)+50-(color2/3), rb:0, ga:(color*0.5)+50-(color2/3), gb:0, ba:(color*0.5)+50-(color2/3), bb:0, aa:100, ab:0};
+# 		myColor.setTransform(colorTrans);
+# 		if (color>100) {
+# 			color = oldcolor;
+# 		}
+# 	};
+# }
+# "
+
 [node name="8-E1-2-2 Color Back GFX" type="Node2D"]
+script = ExtResource("1_hhish")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/Huvr Tuotrlai/8-E1-2-2 Color Back GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_o3eko")
+"Timeline": SubResource("AnimationLibrary_y26ks")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -56,7 +94,7 @@ position = Vector2(-2245.15, 253.95)
 [node name="@@39001" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_okttc")
+texture = ExtResource("2_oluqo")
 texture_offset = Vector2(-2230.5, 273.55)
 polygon = PackedVector2Array(2230.5, -273.55, 2242.35, -273.55, 2242.35, -168.35, 2230.5, -168.35)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -69,7 +107,7 @@ position = Vector2(-2245.15, 253.95)
 [node name="@@39003" type="Polygon2D" parent="Layer 1/Frame 0/@Group@39002/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_okttc")
+texture = ExtResource("2_oluqo")
 texture_offset = Vector2(-2156.5, 266.1)
 polygon = PackedVector2Array(2156.5, -323.25, 2167.9, -323.25, 2167.9, -160.9, 2156.5, -160.9)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -77,19 +115,19 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@39004" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-110.8, -100.2)
-texture = ExtResource("2_fcrub")
+texture = ExtResource("3_4068b")
 centered = false
 
 [node name="@@39005" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-36.8, -49.25)
-texture = ExtResource("2_fcrub")
+texture = ExtResource("3_4068b")
 centered = false
 
 [node name="@@39006" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-91.8, 10.55)
-texture = ExtResource("2_fcrub")
+texture = ExtResource("3_4068b")
 centered = false
 
 [node name="@Group@39007" type="Node2D" parent="Layer 1/Frame 0"]
@@ -100,7 +138,7 @@ position = Vector2(-430.75, 82.4)
 [node name="@@39008" type="Polygon2D" parent="Layer 1/Frame 0/@Group@39007/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_okttc")
+texture = ExtResource("2_oluqo")
 texture_offset = Vector2(369.8, -56.2)
 texture_scale = Vector2(1, -1)
 texture_rotation = 3.14159
@@ -115,7 +153,7 @@ position = Vector2(-2103.65, 272.05)
 [node name="@@39010" type="Polygon2D" parent="Layer 1/Frame 0/@Group@39009/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_okttc")
+texture = ExtResource("2_oluqo")
 texture_offset = Vector2(-2166.5, 277.1)
 polygon = PackedVector2Array(2166.5, -334.25, 2178.35, -334.25, 2178.35, -171.9, 2166.5, -171.9)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -123,15 +161,18 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@39011" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(62.85, -49.85)
-texture = ExtResource("3_ug5xk")
+texture = ExtResource("4_xmynp")
 centered = false
 
 [node name="@@39012" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(40.7, -93.1)
-texture = ExtResource("2_fcrub")
+texture = ExtResource("3_4068b")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_eqee4")

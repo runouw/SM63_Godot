@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="1_3wu4q"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Blue 2.png" id="2_lfw78"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_k5wnf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="2_aoagv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Blue 2.png" id="3_1gcxg"]
 
-[sub_resource type="Animation" id="Animation_wbkix"]
+[sub_resource type="Animation" id="Animation_grtqo"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +56,34 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pstvm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dr8r6"]
 _data = {
-"Default": SubResource("Animation_wbkix")
+"Default": SubResource("Animation_grtqo")
 }
 
+[sub_resource type="GDScript" id="GDScript_ph0sd"]
+script/source = "extends Node
+# if (_root.Star[starnum] == true) {
+# 	stop();
+# } else {
+# 	nextFrame();
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_oa810"]
+script/source = "extends Node
+# stop();"
+
 [node name="Star Map Star" type="Node2D"]
+script = ExtResource("1_k5wnf")
+source_xml = "res://sm63/LIBRARY/Char/Star Map Star.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pstvm")
+"Timeline": SubResource("AnimationLibrary_dr8r6")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -75,7 +94,7 @@ libraries = {
 texture_filter = 1
 position = Vector2(-6.75, -8)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_3wu4q")
+texture = ExtResource("2_aoagv")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -85,12 +104,18 @@ visible = false
 texture_filter = 1
 position = Vector2(-6.75, -8)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_lfw78")
+texture = ExtResource("3_1gcxg")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ph0sd")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_oa810")

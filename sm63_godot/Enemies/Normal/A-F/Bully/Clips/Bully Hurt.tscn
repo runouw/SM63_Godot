@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bully/Bits/Bully Hurt.png" id="1_at6kb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tg167"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bully/Bits/Bully Hurt.png" id="2_ubkhr"]
 
-[sub_resource type="Animation" id="Animation_3uebt"]
+[sub_resource type="Animation" id="Animation_fhbtm"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pqiw5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_teha6"]
 _data = {
-"Default": SubResource("Animation_3uebt")
+"Default": SubResource("Animation_fhbtm")
 }
 
 [node name="Bully Hurt" type="Node2D"]
+script = ExtResource("1_tg167")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Bully/Clips/Bully Hurt.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pqiw5")
+"Timeline": SubResource("AnimationLibrary_teha6")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@50566" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8.5, -11)
-texture = ExtResource("1_at6kb")
+texture = ExtResource("2_ubkhr")
 centered = false

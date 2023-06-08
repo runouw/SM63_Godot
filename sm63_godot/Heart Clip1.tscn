@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_6n65j"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_va85i"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mtmbj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_odtdk"]
 
-[sub_resource type="Animation" id="Animation_t8h84"]
+[sub_resource type="Animation" id="Animation_8ohpv"]
 length = 3.06667
 loop_mode = 1
 tracks/0/type = "value"
@@ -115,25 +115,78 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w5rgd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bthci"]
 _data = {
-"Default": SubResource("Animation_t8h84")
+"Default": SubResource("Animation_8ohpv")
 }
 
+[sub_resource type="GDScript" id="GDScript_gq2uf"]
+script/source = "extends Node
+# sin = 90*(Math.PI/180);
+# speed = 1;
+# count = 0;
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		OEF();
+# 		for (i=0; i<speed; i++) {
+# 			nextFrame();
+# 			//sin += 4*(Math.PI/180);
+# 			sin = ((_currentframe-1+22.5)*4)*(Math.PI/180);
+# 			//sin += 0.05;
+# 			this._xscale = Math.sin(sin)*100;
+# 		}
+# 		//
+# 		if (this.body.hitTest(_root.Course.Char.charClip.body) && lastframehit == false && _root.Course.Char.air == false && Math.abs(_root.Course.Char.xspeed)>2) {
+# 			MarioHit(_root.Course.Char.xspeed);
+# 		}
+# 		lastframehit = this.body.hitTest(_root.Course.Char.charClip.body);
+# 	}
+# };
+# MarioHit = function (xspeed) {
+# 	count = 0;
+# 	speed = Math.round((speed-1)*0.5);
+# 	speed += Math.round(Math.abs(xspeed*2));
+# 	OEF = function () {
+# 		count += speed;
+# 		if (count>24) {
+# 			count = 0;
+# 			_root.hpcoincount += 5;
+# 		}
+# 		speed -= 0.2;
+# 		if (speed<=1) {
+# 			_root.hpcoincount += 5;
+# 			speed = 1;
+# 			OEF = null;
+# 		}
+# 	};
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ob552"]
+script/source = "extends Node
+# gotoAndStop(2);
+# "
+
 [node name="Heart Clip1" type="Node2D"]
+script = ExtResource("1_mtmbj")
+source_xml = "res://sm63/LIBRARY/Heart Clip1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w5rgd")
+"Timeline": SubResource("AnimationLibrary_bthci")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6n65j")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-0.1, 0)
-script = ExtResource("2_va85i")
+script = ExtResource("2_odtdk")
 path = "res://sm63_godot/Heart Clip GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -149,11 +202,11 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_6n65j")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 rotation = 0.018235
 scale = Vector2(1.00503, 1)
 skew = -0.0182351
-script = ExtResource("2_va85i")
+script = ExtResource("2_odtdk")
 path = "res://sm63_godot/Heart Clip GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -169,11 +222,11 @@ brightness = 0.0
 [node name="Frame 22" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 22" instance=ExtResource("1_6n65j")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 22"]
 rotation = 0.453082
 scale = Vector2(1.11222, 1)
 skew = -0.453082
-script = ExtResource("2_va85i")
+script = ExtResource("2_odtdk")
 path = "res://sm63_godot/Heart Clip GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -189,8 +242,8 @@ brightness = 0.0
 [node name="Frame 45" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 45" instance=ExtResource("1_6n65j")]
-script = ExtResource("2_va85i")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 45"]
+script = ExtResource("2_odtdk")
 path = "res://sm63_godot/Heart Clip GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -206,12 +259,12 @@ brightness = 0.0
 [node name="Frame 68" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 68" instance=ExtResource("1_6n65j")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 68"]
 position = Vector2(0, 0.05)
 rotation = -0.476419
 scale = Vector2(1.12531, 1)
 skew = 0.476419
-script = ExtResource("2_va85i")
+script = ExtResource("2_odtdk")
 path = "res://sm63_godot/Heart Clip GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -227,8 +280,8 @@ brightness = 0.0
 [node name="Frame 90" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 90" instance=ExtResource("1_6n65j")]
-script = ExtResource("2_va85i")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 90"]
+script = ExtResource("2_odtdk")
 path = "res://sm63_godot/Heart Clip GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -245,13 +298,16 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_gq2uf")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_6n65j")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
 position = Vector2(0, 15)
 scale = Vector2(0.265381, 0.620743)
-script = ExtResource("2_va85i")
+script = ExtResource("2_odtdk")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -266,3 +322,6 @@ brightness = 0.0
 
 [node name="Frame 91" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 91"]
+script = SubResource("GDScript_ob552")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 1 - Air - 1.png" id="1_q1r1w"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_a64m2"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_m5c6e"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kp1b1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 1 - Air - 1.png" id="2_ca8wo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_xgqpy"]
 
-[sub_resource type="Animation" id="Animation_e804q"]
+[sub_resource type="Animation" id="Animation_6b8ip"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ouprl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mrtc6"]
 _data = {
-"Default": SubResource("Animation_e804q")
+"Default": SubResource("Animation_6b8ip")
 }
 
 [node name="Mario (none) Airborn" type="Node2D"]
+script = ExtResource("1_kp1b1")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (none) Airborn.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ouprl")
+"Timeline": SubResource("AnimationLibrary_mrtc6")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,12 +44,12 @@ libraries = {
 [node name="@@15399" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-7, -6)
-texture = ExtResource("1_q1r1w")
+texture = ExtResource("2_ca8wo")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_a64m2")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(2, 10.35)
-script = ExtResource("3_m5c6e")
+script = ExtResource("3_xgqpy")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Backwards.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

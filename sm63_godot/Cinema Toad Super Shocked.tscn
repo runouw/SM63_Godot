@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_1nrff"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_f85tn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2vkij"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_n0ghn"]
 
-[sub_resource type="Animation" id="Animation_3v6wn"]
+[sub_resource type="Animation" id="Animation_fa42h"]
 length = 1.66667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,38 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8yn1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fedmr"]
 _data = {
-"Default": SubResource("Animation_3v6wn")
+"Default": SubResource("Animation_fa42h")
 }
 
+[sub_resource type="GDScript" id="GDScript_pmm55"]
+script/source = "extends Node
+# if (r == undefined) {
+# 	r = true;
+# 	gotoAndPlay(random(25));
+# }
+# "
+
 [node name="Cinema Toad Super Shocked" type="Node2D"]
+script = ExtResource("1_2vkij")
+source_xml = "res://sm63/LIBRARY/Cinema Toad Super Shocked.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_e8yn1")
+"Timeline": SubResource("AnimationLibrary_fedmr")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_1nrff")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.5, 14)
-script = ExtResource("2_f85tn")
+script = ExtResource("2_n0ghn")
 path = "res://sm63_godot/Cinema Toad Shocked.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -77,11 +90,11 @@ brightness = 0.0
 [node name="Frame 24" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24" instance=ExtResource("1_1nrff")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24"]
 position = Vector2(-0.5, 14)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_f85tn")
+script = ExtResource("2_n0ghn")
 path = "res://sm63_godot/Cinema Toad Shocked.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -97,3 +110,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_pmm55")

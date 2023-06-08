@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_0np8l"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_42tfp"]
+
+[sub_resource type="Animation" id="Animation_r74eh"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,45 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4o5i"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_drk7e"]
 _data = {
-"Default": SubResource("Animation_0np8l")
+"Default": SubResource("Animation_r74eh")
 }
 
+[sub_resource type="GDScript" id="GDScript_lk71h"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false) && _parent._parent.TotalPages>_root.Page+1) {
+# 		xs = 120;
+# 		gotoAndStop(3);
+# 	} else {
+# 		xs = 100;
+# 		gotoAndStop(2);
+# 	}
+# 	_xscale += (xs-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (xs == 120) {
+# 		_root.Page += 10;
+# 		_root.Page = Math.min(_parent._parent.TotalPages, _root.Page);
+# 		_parent.Refresh();
+# 		//_parent.N(\"Sha\");
+# 	}
+# };
+# stop();
+# "
+
 [node name="LD Nxtpage fast" type="Node2D"]
+script = ExtResource("1_42tfp")
+source_xml = "res://sm63/LIBRARY/LD Nxtpage fast.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w4o5i")
+"Timeline": SubResource("AnimationLibrary_drk7e")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -83,6 +114,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 0"]
 
 [node name="@@8750" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-8.95, -5, -8.95, -5, -0.1, -1.15, -0.1, 0.95, -8.95, 4.8, -8.95, 4.8, -8.95, 2.3, -2.8, -0.1, -8.95, -2.5, 1.55, -5, 1.55, -5, 10.4, -1.15, 10.4, 0.95, 1.55, 4.8, 1.55, 4.8, 1.55, 2.3, 7.7, -0.1, 1.55, -2.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13, 14, 15, 16, 17)])
 
@@ -102,6 +134,9 @@ visible = false
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_lk71h")
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false

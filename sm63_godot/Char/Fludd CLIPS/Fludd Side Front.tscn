@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Handle - Side.png" id="1_lxgxk"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_lbl6k"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_wqf2l"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_futdi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Handle - Side.png" id="2_rv8vt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_xwmsl"]
 
-[sub_resource type="Animation" id="Animation_bu6r6"]
+[sub_resource type="Animation" id="Animation_gytqm"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,30 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t2h61"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pu33q"]
 _data = {
-"Default": SubResource("Animation_bu6r6")
+"Default": SubResource("Animation_gytqm")
 }
 
+[sub_resource type="GDScript" id="GDScript_ii2kx"]
+script/source = "extends Node
+# if (_root.Fluddpow == \"\") {
+# 	nextFrame();
+# } else {
+# 	stop();
+# }
+# "
+
 [node name="Fludd Side Front" type="Node2D"]
+script = ExtResource("1_futdi")
+source_xml = "res://sm63/LIBRARY/Char/Fludd CLIPS/Fludd Side Front.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_t2h61")
+"Timeline": SubResource("AnimationLibrary_pu33q")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -68,16 +82,16 @@ position = Vector2(0.75, -2)
 [node name="@@14494" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_lxgxk")
+texture = ExtResource("2_rv8vt")
 texture_offset = Vector2(11.9, -3)
 texture_scale = Vector2(1, -1)
 texture_rotation = 3.14159
 polygon = PackedVector2Array(-8.75, -3, 5, -3, 5, 2.85, -8.75, 2.85, -8.75, 2.85, 7.25, 2.85, 7.25, 7, -8.75, 7)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_lbl6k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(7.65, -21.15)
-script = ExtResource("3_wqf2l")
+script = ExtResource("3_xwmsl")
 path = "res://sm63_godot/Char/Fludd CLIPS/Dynamic Fludd Nozzle Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -96,3 +110,6 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ii2kx")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_o17lv"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_04tbh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u2wxn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_far7x"]
 
-[sub_resource type="Animation" id="Animation_a74bp"]
+[sub_resource type="Animation" id="Animation_r5x0m"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,30 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m10p4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ca1xp"]
 _data = {
-"Default": SubResource("Animation_a74bp")
+"Default": SubResource("Animation_r5x0m")
 }
 
 [node name="BC-1Edge" type="Node2D"]
+script = ExtResource("1_u2wxn")
+source_xml = "res://sm63/LIBRARY/BC-1Edge.xml"
+linkage = "BC-1Edge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_m10p4")
+"Timeline": SubResource("AnimationLibrary_ca1xp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_o17lv")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-897.8, 780.45)
-script = ExtResource("2_04tbh")
+script = ExtResource("2_far7x")
 path = "res://sm63_godot/BC1 CamEdge Rise.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -47,12 +52,12 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@441" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_o17lv")]
+[node name="@DOMSymbolInstance@441" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(459.05, -39.95)
-script = ExtResource("2_04tbh")
+script = ExtResource("2_far7x")
 path = "res://sm63_godot/BC-Side Lava.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

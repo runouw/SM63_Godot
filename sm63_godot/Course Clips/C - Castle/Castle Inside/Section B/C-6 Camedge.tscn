@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_cdpfu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_diij3"]
+
+[sub_resource type="Animation" id="Animation_q2nn7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hw6qp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yiy45"]
 _data = {
-"Default": SubResource("Animation_cdpfu")
+"Default": SubResource("Animation_q2nn7")
 }
 
 [node name="C-6 Camedge" type="Node2D"]
+script = ExtResource("1_diij3")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-6 Camedge.xml"
+linkage = "C-6CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hw6qp")
+"Timeline": SubResource("AnimationLibrary_yiy45")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

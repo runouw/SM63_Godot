@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_ssmeh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_uwjq2"]
+
+[sub_resource type="Animation" id="Animation_8sw17"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,36 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qxcb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0enom"]
 _data = {
-"Default": SubResource("Animation_ssmeh")
+"Default": SubResource("Animation_8sw17")
 }
 
+[sub_resource type="GDScript" id="GDScript_hm46m"]
+script/source = "extends Node
+# //_xscale = random(50)+75
+# //_yscale = _xscale;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		//&& _root.Course.Char.air == true
+# 		if (this.hitTest(_root.Course.Char.charClip.body) && _root.Invincible !== true && _root.Invisible !== true) {
+# 			_root.Course.Char.xspeed -= 2;
+# 			_root.Course.Char.xspeed *= 0.8;
+# 		}
+# 	}
+# };
+# "
+
 [node name="9-02 Wave Clip" type="Node2D"]
+script = ExtResource("1_uwjq2")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Wave Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7qxcb")
+"Timeline": SubResource("AnimationLibrary_0enom")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -58,3 +80,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_hm46m")

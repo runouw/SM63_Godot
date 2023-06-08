@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_lbrwm"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_b6rad"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_fah1r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vxl8c"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_6m2sg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_k1om7"]
 
-[sub_resource type="Animation" id="Animation_xs3om"]
+[sub_resource type="Animation" id="Animation_tcmmm"]
 length = 2.36667
 loop_mode = 1
 tracks/0/type = "value"
@@ -92,16 +92,47 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2y5ne"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_01i4g"]
 _data = {
-"Default": SubResource("Animation_xs3om")
+"Default": SubResource("Animation_tcmmm")
 }
 
+[sub_resource type="GDScript" id="GDScript_sjt4m"]
+script/source = "extends Node
+# _visible = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 		_x -= (_xscale/100)*5.3125;
+# 		if (this.body.hitTest(_root.Course.Char.charClip.feet) && _root.Course.Char.air == false) {
+# 			if (_xscale<0) {
+# 				_root.MarioHit(1, 90, -4, 1, 10, \"Mario-Squish\", true);
+# 			} else {
+# 				_root.MarioHit(1, 90, -4, -1, 10, \"Mario-Squish\", true);
+# 			}
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# 	//   
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_4d2pv"]
+script/source = "extends Node
+# this.removeMovieClip(this);
+# "
+
 [node name="Ground Shockwave" type="Node2D"]
+script = ExtResource("1_vxl8c")
+source_xml = "res://sm63/LIBRARY/Effects/Other/Ground Shockwave.xml"
+linkage = "GroundShockwave"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2y5ne")
+"Timeline": SubResource("AnimationLibrary_01i4g")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -113,7 +144,7 @@ libraries = {
 [node name="@@48680" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(18.5, -18.225, 18.5, -18.225, 1.70059, -11.1346, -3.89922, -4.37109, 1.70059, 2.06543, 18.5, 8.175, 18.5, 8.175, 4.42959, 7.15879, -7.45, 4.3, -18.5, -5.025, -7.45, -14.375, 4.42959, -17.2171)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)])
-script = ExtResource("1_lbrwm")
+script = ExtResource("2_6m2sg")
 matrix = Transform2D(0.0464478, 0, 0, 0.0162811, 19.25, -5)
 entries_color = PackedColorArray(0.992157, 0.890196, 0.00784314, 1, 1, 1, 1, 0.45098)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -123,11 +154,12 @@ focal_point_ratio = 0.0
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 49"]
+position = Vector2(0, -5)
 
 [node name="@@48681" type="Polygon2D" parent="Layer 1/Frame 49/Shape"]
 polygon = PackedVector2Array(18.5, -13.225, 18.5, -13.225, 1.70059, -6.13457, -3.35782, -0.0250001, -3.35782, -0.025, -3.89922, 0.628906, 1.70059, 7.06543, 18.5, 13.175, 18.5, 13.175, 4.42959, 12.1588, -7.45, 9.3, -18.5, -0.025, -18.5, -0.0250001, -7.45, -9.375, 4.42959, -12.2171, -18.5, -0.0250001, -18.5, -0.0250001, -18.5, -0.025, -18.5, -0.025)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18)])
-script = ExtResource("1_lbrwm")
+script = ExtResource("2_6m2sg")
 matrix = Transform2D(0.0464478, 0, 0, 0.0162811, 19.25, 0)
 entries_color = PackedColorArray(0.992157, 0.890196, 0.00784314, 1, 1, 1, 1, 0.45098)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -137,11 +169,12 @@ focal_point_ratio = 0.0
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 69"]
+position = Vector2(0, -5)
 
 [node name="@@48682" type="Polygon2D" parent="Layer 1/Frame 69/Shape"]
 polygon = PackedVector2Array(18.5, -13.225, 18.5, -13.225, 1.70059, -6.13457, -3.35782, -0.0250001, -3.35782, -0.025, -3.89922, 0.628906, 1.70059, 7.06543, 18.5, 13.175, 18.5, 13.175, 4.42959, 12.1588, -7.45, 9.3, -18.5, -0.025, -18.5, -0.0250001, -7.45, -9.375, 4.42959, -12.2171, -18.5, -0.0250001, -18.5, -0.0250001, -18.5, -0.025, -18.5, -0.025)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18)])
-script = ExtResource("1_lbrwm")
+script = ExtResource("2_6m2sg")
 matrix = Transform2D(0.0265503, 0, 0, 0.0192719, 8, 1)
 entries_color = PackedColorArray(0.992157, 0.890196, 0.00784314, 0, 1, 1, 1, 0)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -154,10 +187,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("2_b6rad")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(1.5, 9.1)
 scale = Vector2(0.194656, 0.663437)
-script = ExtResource("3_fah1r")
+script = ExtResource("3_k1om7")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -174,5 +207,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_sjt4m")
+
 [node name="Frame 70" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 70"]
+script = SubResource("GDScript_4d2pv")

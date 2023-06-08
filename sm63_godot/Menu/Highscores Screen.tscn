@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_4uej8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_bo5u2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tt4cj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_k3m5h"]
 
-[sub_resource type="Animation" id="Animation_h2web"]
+[sub_resource type="Animation" id="Animation_ihxnw"]
 length = 1.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -283,16 +283,177 @@ tracks/22/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qh4l7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_exgah"]
 _data = {
-"Default": SubResource("Animation_h2web")
+"Default": SubResource("Animation_ihxnw")
 }
 
+[sub_resource type="GDScript" id="GDScript_8u7yh"]
+script/source = "extends Node
+# key = false;
+# num = 0;
+# //
+# level = \"Secret Course\";
+# if (_root.lastPlayinglevel == 1) {
+# 	level = \"Bob-omb Battle Field\";
+# }
+# if (_root.lastPlayinglevel == 2) {
+# 	level = \"Snowmans Land\";
+# }
+# if (_root.lastPlayinglevel == 3) {
+# 	level = \"Hazy Maze Cave\";
+# }
+# if (_root.lastPlayinglevel == 4) {
+# 	level = \"Boo's Mansion\";
+# }
+# if (_root.lastPlayinglevel == 5) {
+# 	level = \"Lethal Lava Land\";
+# }
+# if (_root.lastPlayinglevel == 6) {
+# 	level = \"Tall Tall Mountain\";
+# }
+# if (_root.lastPlayinglevel == 7) {
+# 	level = \"Rainbow Ride\";
+# }
+# if (_root.lastPlayinglevel == 8) {
+# 	level = \"Bowsers Castle\";
+# }
+# if (_root.lastPlayinglevel == 9) {
+# 	level = \"Sinking Sand Land\";
+# }
+# if (_root.lastPlayinglevel == 10) {
+# 	level = \"Wet Dry World\";
+# }
+# if (_root.lastPlayinglevel == 11) {
+# 	level = \"Tick Tock Clock\";
+# }
+# //level = _root.playingcourse;    
+# star = _root.StarNameArray[_root.lastStarnamenum];
+# sta = star;
+# cou = level;
+# //
+# SAVE = function () {
+# 	_root.SaveFile();
+# 	if (_root.TotalCoins>_root[\"RecordCoin\"+_root.lastPlayinglevel]) {
+# 		//
+# 		_root[\"RecordCoin\"+_root.lastPlayinglevel] = _root.TotalCoins;
+# 		_root.SaveHighScores();
+# 	}
+# 	count = 0;
+# 	onEnterFrame = function () {
+# 		count++;
+# 		_alpha -= 5;
+# 		_y -= 3;
+# 		if (count>=20) {
+# 			_root.DoneWithHighScores = true;
+# 			this.removeMovieClip();
+# 		}
+# 	};
+# 	//Robert's Save Coding
+# };
+# NOSAVE = function () {
+# 	//continue
+# 	count = 0;
+# 	onEnterFrame = function () {
+# 		count++;
+# 		_alpha -= 5;
+# 		_y -= 3;
+# 		if (count>=20) {
+# 			_root.DoneWithHighScores = true;
+# 			this.removeMovieClip();
+# 		}
+# 	};
+# };
+# SAVEXIT = function () {
+# 	_root.newstar = false;
+# 	_root.SaveFile();
+# 	_root.starwarpframe = false;
+# 	_root.Blackout();
+# 	onEnterFrame = function () {
+# 		if (_root.starwarpframe == true) {
+# 			_root.ReturnToTitle();
+# 			this.removeMovieClip();
+# 		}
+# 	};
+# 	//continue
+# };
+# ChangeHL = function (a, hl) {
+# 	hl = String(Number(hl)+a);
+# 	if (Number(hl)>3) {
+# 		hl = \"1\";
+# 	} else if (Number(hl)<1) {
+# 		hl = \"3\";
+# 	}
+# 	return hl;
+# };
+# CheckChange = function (a) {
+# 	if (lastkey == false) {
+# 		if (hl == undefined) {
+# 			hl = \"1\";
+# 		} else {
+# 			hl = ChangeHL(a, hl);
+# 		}
+# 	}
+# };
+# onEnterFrame = function () {
+# 	if (clicked == false) {
+# 		lastkey = key;
+# 		if (_root.KeyRIGHT() == true || _root.KeyDOWN() == true) {
+# 			key = true;
+# 			CheckChange(1);
+# 		} else if (_root.KeyLEFT() == true || _root.KeyUP() == true) {
+# 			key = true;
+# 			CheckChange(-1);
+# 		} else {
+# 			key = false;
+# 		}
+# 		//
+# 		//_root.KeyLEFT() == true || _root.KeyDOWN() == true
+# 		//   
+# 		if (_xmouse !== lastxmouse || _ymouse !== lastymouse) {
+# 			mousemove = true;
+# 		} else {
+# 			mousemove = false;
+# 		}
+# 		lastxmouse = _xmouse;
+# 		lastymouse = _ymouse;
+# 	}
+# };
+# //
+# /*if (_root.KeyRIGHT() == true) {
+# key = \"RIGHT\";
+# } else if (_root.KeyLEFT() == true) {
+# key = \"LEFT\";
+# } else if (_root.KeyUP() == true) {
+# key = \"UP\";
+# } else if (_root.KeyDOWN() == true) {
+# key = \"DOWN\";
+# }*/
+# "
+
+[sub_resource type="GDScript" id="GDScript_sueoy"]
+script/source = "extends Node
+# stop();
+# stopnum = _currentframe;
+# "
+
+[sub_resource type="GDScript" id="GDScript_cxxu2"]
+script/source = "extends Node
+# stop();
+# stopnum = _currentframe;
+# clicked = false;
+# "
+
 [node name="Highscores Screen" type="Node2D"]
+script = ExtResource("1_tt4cj")
+source_xml = "res://sm63/LIBRARY/Menu/Highscores Screen.xml"
+linkage = "HighscoresScreen"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qh4l7")
+"Timeline": SubResource("AnimationLibrary_exgah")
 }
 
 [node name="Exit" type="Node2D" parent="."]
@@ -302,9 +463,9 @@ libraries = {
 [node name="Frame 22" type="Node2D" parent="Exit"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Exit/Frame 22" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Exit/Frame 22"]
 position = Vector2(143.2, 181.25)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/Highscores Savexit.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -320,9 +481,9 @@ brightness = 0.0
 [node name="Frame 31" type="Node2D" parent="Exit"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Exit/Frame 31" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Exit/Frame 31"]
 position = Vector2(143.2, 144.2)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/Highscores Savexit.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -338,9 +499,9 @@ brightness = 0.0
 [node name="Frame 39" type="Node2D" parent="Exit"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Exit/Frame 39" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Exit/Frame 39"]
 position = Vector2(143.2, 111.25)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/Highscores Savexit.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -360,9 +521,9 @@ brightness = 0.0
 [node name="Frame 20" type="Node2D" parent="Don\'t"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Don\'t/Frame 20" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Don\'t/Frame 20"]
 position = Vector2(-2.75, 181.55)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/Highscores No Save.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -378,9 +539,9 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Don\'t"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Don\'t/Frame 29" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Don\'t/Frame 29"]
 position = Vector2(-2.75, 144.5)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/Highscores No Save.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -396,9 +557,9 @@ brightness = 0.0
 [node name="Frame 37" type="Node2D" parent="Don\'t"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Don\'t/Frame 37" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Don\'t/Frame 37"]
 position = Vector2(-2.75, 111.55)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/Highscores No Save.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -418,9 +579,9 @@ brightness = 0.0
 [node name="Frame 18" type="Node2D" parent="Save"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Save/Frame 18" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Save/Frame 18"]
 position = Vector2(-145.5, 181.6)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/Highscores Save & Continue.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -436,9 +597,9 @@ brightness = 0.0
 [node name="Frame 27" type="Node2D" parent="Save"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Save/Frame 27" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Save/Frame 27"]
 position = Vector2(-145.5, 144.55)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/Highscores Save & Continue.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -454,9 +615,9 @@ brightness = 0.0
 [node name="Frame 35" type="Node2D" parent="Save"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Save/Frame 35" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Save/Frame 35"]
 position = Vector2(-145.5, 111.6)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/Highscores Save & Continue.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -476,9 +637,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="C"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="C/Frame 4" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="C/Frame 4"]
 position = Vector2(0, 44.95)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/HighScores Coin Count.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -494,9 +655,9 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="C"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="C/Frame 15" instance=ExtResource("1_4uej8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="C/Frame 15"]
 position = Vector2(0, 44.95)
-script = ExtResource("2_bo5u2")
+script = ExtResource("2_k3m5h")
 path = "res://sm63_godot/Menu/HighScores Coin Count.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -530,8 +691,17 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 8"]
 
+[node name="AS2" type="Node" parent="Layer 8/Frame 0"]
+script = SubResource("GDScript_8u7yh")
+
 [node name="Frame 16" type="Node2D" parent="Layer 8"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 8/Frame 16"]
+script = SubResource("GDScript_sueoy")
+
 [node name="Frame 39" type="Node2D" parent="Layer 8"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 8/Frame 39"]
+script = SubResource("GDScript_cxxu2")

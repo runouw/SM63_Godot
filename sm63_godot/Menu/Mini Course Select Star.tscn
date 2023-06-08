@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_af0xd"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ma6n0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vw1e0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_bqlun"]
 
-[sub_resource type="Animation" id="Animation_26uoy"]
+[sub_resource type="Animation" id="Animation_pns3s"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,24 +67,77 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nivnc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ffmh"]
 _data = {
-"Default": SubResource("Animation_26uoy")
+"Default": SubResource("Animation_pns3s")
 }
 
+[sub_resource type="GDScript" id="GDScript_ly4m1"]
+script/source = "extends Node
+# Mousedown = false;
+# onEnterFrame = function () {
+# 	if (_root.Star[((_root.Playinglevelnum*3)+51)+starnum] == true) {
+# 		gotstar = true;
+# 	} else {
+# 		gotstar = false;
+# 	}
+# 	if (starnum == 1 || _root.Star[((_root.Playinglevelnum*3)+51)+starnum] == true || _root.Star[((_root.Playinglevelnum*3)+51)+(starnum-1)] == true) {
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 			_root.Selected = starnum;
+# 		}
+# 		if (_root.Selected == starnum) {
+# 			//_root.Starnames.gotoAndStop(((_root.Playinglevelnum*3))+starnum);
+# 			_root.starname = _root.StarNameArray[((_root.Playinglevelnum*3)+51)+starnum];
+# 			_root.stardescription = _root.StarDescArray[((_root.Playinglevelnum*3)+51)+starnum];
+# 			nextFrame();
+# 		} else {
+# 			prevFrame();
+# 		}
+# 	} else {
+# 		gotoAndStop(1);
+# 	}
+# 	//
+# 	if (Mousedown == true || Key.isDown(Key.SPACE) || _root.KeyZ() || _root.KeyX()) {
+# 		if (starnum == 1 || _root.Star[((_root.Playinglevelnum*3)+51)+starnum] == true || _root.Star[((_root.Playinglevelnum*3)+51)+(starnum-1)] == true) {
+# 			if (_root.Selected == starnum && _root.StartCourse == false) {
+# 				_root.Starnum = starnum;
+# 				_root.StartCourse = true;
+# 			}
+# 		}
+# 	}
+# 	Mousedown = false;
+# 	// 
+# };
+# onMouseDown = function () {
+# 	if (_root.StartCourse !== true && this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 		Mousedown = true;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_aloro"]
+script/source = "extends Node
+# // Select Sound FX
+# "
+
 [node name="Mini Course Select Star" type="Node2D"]
+script = ExtResource("1_vw1e0")
+source_xml = "res://sm63/LIBRARY/Menu/Mini Course Select Star.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nivnc")
+"Timeline": SubResource("AnimationLibrary_0ffmh")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_af0xd")]
-script = ExtResource("2_ma6n0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("2_bqlun")
 path = "res://sm63_godot/Menu/File Select/Coded Color Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,8 +153,8 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_af0xd")]
-script = ExtResource("2_ma6n0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
+script = ExtResource("2_bqlun")
 path = "res://sm63_godot/Menu/File Select/Coded Color Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -117,9 +170,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_af0xd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 5"]
 scale = Vector2(1.5, 1.5)
-script = ExtResource("2_ma6n0")
+script = ExtResource("2_bqlun")
 path = "res://sm63_godot/Menu/File Select/Coded Color Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -136,5 +189,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_ly4m1")
+
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 2"]
+script = SubResource("GDScript_aloro")

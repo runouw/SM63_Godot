@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="1_m0onf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_y3onq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="2_ohhoa"]
 
-[sub_resource type="Animation" id="Animation_gspem"]
+[sub_resource type="Animation" id="Animation_foeib"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mlsae"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u8tmt"]
 _data = {
-"Default": SubResource("Animation_gspem")
+"Default": SubResource("Animation_foeib")
 }
 
 [node name="BC-2 Falling PL1" type="Node2D"]
+script = ExtResource("1_y3onq")
+source_xml = "res://sm63/LIBRARY/BC-2 Falling PL1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_mlsae")
+"Timeline": SubResource("AnimationLibrary_u8tmt")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@496" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_m0onf")
+texture = ExtResource("2_ohhoa")
 texture_offset = Vector2(59, -62.9)
 texture_rotation = 1.5708
 polygon = PackedVector2Array(-159.85, -89.95, 181.9, -89.95, 181.9, -53, -168.635, -53, -164.163, -70.7495, -168.635, -53, -156, -53, -169, -51, -169, -51, -168.9, -51.95, -148, -53, 181.9, -53, 181.9, -40.55, 169.621, -38.7383, 157, -35.9, 165, -25.9, 160.6, -19.675, 151, -17.9, 147.25, -12.9, 145, 4.1, 139, 12.1, 139.75, 23.95, 141.688, 39.125, 143, 50.05, -120.699, 50.05, -119.8, 36.8667, -119.167, 20.5333, -119, 4, -131.95, 3.4, -147, -1, -147.98, -51.95, -120.699, 50.05, 99, 50.05, 98.85, 52.05, 97.346, 62, -112.947, 62, -121, 55, -120.9, 53, -120.835, 52.05, -112.947, 62, -6, 62, -40, 64, -56.05, 90, -87.575, 90, -97.4264, 77.4735, -108.568, 65.8069, -110.647, 64, -6, 62, 97.346, 62, 95.9578, 71.1841, 92.325, 90, 3.1, 90, -0.187793, 78.6439, -2.8, 66.95, -3, 65, -4, 64)

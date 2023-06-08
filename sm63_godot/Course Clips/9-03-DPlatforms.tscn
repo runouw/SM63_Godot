@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_1442f"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vvdco"]
+
+[sub_resource type="Animation" id="Animation_dyopd"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_acvrc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oslk4"]
 _data = {
-"Default": SubResource("Animation_1442f")
+"Default": SubResource("Animation_dyopd")
 }
 
 [node name="9-03-DPlatforms" type="Node2D"]
+script = ExtResource("1_vvdco")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-03-DPlatforms.xml"
+linkage = "9-03-DPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_acvrc")
+"Timeline": SubResource("AnimationLibrary_oslk4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

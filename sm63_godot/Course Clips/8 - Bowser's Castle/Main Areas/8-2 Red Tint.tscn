@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/YI Castle Wall Pattern.png" id="1_23286"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/YI Castle Wall Edge.png" id="2_3w7a0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_47rjt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/YI Castle Wall Pattern.png" id="2_2lane"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/YI Castle Wall Edge.png" id="3_hae45"]
 
-[sub_resource type="Animation" id="Animation_wvxdq"]
+[sub_resource type="Animation" id="Animation_iduc2"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qo4jc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bu1so"]
 _data = {
-"Default": SubResource("Animation_wvxdq")
+"Default": SubResource("Animation_iduc2")
 }
 
 [node name="8-2 Red Tint" type="Node2D"]
+script = ExtResource("1_47rjt")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Bowser's Castle/Main Areas/8-2 Red Tint.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qo4jc")
+"Timeline": SubResource("AnimationLibrary_bu1so")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -42,7 +48,7 @@ libraries = {
 [node name="@@36153" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_23286")
+texture = ExtResource("2_2lane")
 texture_offset = Vector2(152.6, 368.4)
 polygon = PackedVector2Array(31.15, -1070.15, 31.15, -1070.15, 51.65, -1040.63, -50.5184, -1040.63, -30.6, -1067.65, 230.85, -1041.4, 230.85, -1041.4, 230.555, -1040.63, 51.65, -1040.63, -50.5184, -1040.63, 230.555, -1040.63, 206.109, -976.4, -209.119, -976.4, -233.1, -1039.4, -50.85, -1040.18, -209.119, -976.4, -130.1, -976.4, -131.525, -975.85, 1.85, -623.45, -74.7663, -623.45, -208.909, -975.85, 134.85, -976.4, 206.109, -976.4, 71.7645, -623.45, 1.85, -623.45, 134.643, -975.85, -74.7663, -623.45, 71.7645, -623.45, 40.8, -542.1, -43.8, -542.1, -58.6, -542.1, 58.35, -542.1, 71.0863, -509.9, -71.3198, -509.9, -71.3198, -509.9, 0.9, -509.9, -37.9988, -405.4, -112.6, -405.4, -99.0309, -439.75, 0.9, -509.9, 71.0863, -509.9, 112.4, -405.45, 40.6395, -405.45, 27.5896, -439.75, 800.85, -439.75, 918.3, -439.75, 918.3, -407.1, 758.3, -407.1, 524.8, -407.1, 918.3, -407.1, 918.3, -378.6, 497.3, -378.6, 524.3, -406.1, 524.7, -406.9, -700.05, -406.9, -466.55, -406.9, -466.05, -405.9, -439.05, -378.4, -725.402, -378.4, -700.762, -406.1, 475.8, -405.6, 475.8, -405.6, 475.919, -405.45, 375.9, -405.45, 392.547, -405.475, 375.9, -405.475, 375.9, -405.475, 375.9, -405.45, 112.4, -405.45, 40.6395, -405.45, 475.919, -405.45, 497.3, -378.6, 50.8549, -378.6, 40.6585, -405.4, -417.55, -405.4, -37.9988, -405.4, -48.0492, -378.4, -439.05, -378.4, -438.891, -378.6, 50.8549, -378.6, 918.3, -378.6, 918.3, -360.1, 57.8935, -360.1, 50.931, -378.4, -725.402, -378.4, -48.0492, -378.4, -54.9356, -359.9, -741.858, -359.9, -741.68, -360.1, 57.8935, -360.1, 567.8, -360.1, 566.35, -359.6, 564.424, -357.1, 59.0349, -357.1, 57.9696, -359.9, 751.8, -360.1, 918.3, -360.1, 918.3, -322.4, 779.833, -322.4, 751.949, -359.9, -741.858, -359.9, -655.55, -359.9, -687.386, -321.1, -776.372, -321.1, -742.125, -359.6, -509.55, -359.9, -54.9356, -359.9, -56.0523, -356.9, -506.174, -356.9, -508.1, -359.4, -508.68, -359.6, 59.0349, -357.1, 228.35, -357.1, 214.35, -344.575, 224.35, -324.6, 71.4, -324.6, 59.111, -356.9, 437.35, -357.1, 564.424, -357.1, 537.85, -322.6, 464.35, -322.6, 437.507, -356.9, -506.174, -356.9, -379.1, -356.9, -406.1, -322.4, -479.6, -322.4, -496.681, -344.575, -225.1, -356.9, -56.0523, -356.9, -68.15, -324.4, -221.1, -324.4, -211.1, -344.375, -211.324, -344.575, 779.833, -322.4, 918.3, -322.4, 918.3, -321.1, 780.8, -321.1, -776.372, -321.1, -687.386, -321.1, -687.55, -320.9, -776.55, -320.9)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33), PackedInt32Array(34, 35, 36, 37, 38), PackedInt32Array(39, 40, 41, 42, 43), PackedInt32Array(44, 45, 46, 47), PackedInt32Array(48, 49, 50, 51, 52, 53), PackedInt32Array(54, 55, 56, 57, 58, 59), PackedInt32Array(60, 61, 62, 63, 64), PackedInt32Array(65, 66, 67, 68), PackedInt32Array(69, 70, 71, 72, 73), PackedInt32Array(74, 75, 76, 77, 78), PackedInt32Array(79, 80, 81, 82, 83), PackedInt32Array(84, 85, 86, 87, 88), PackedInt32Array(89, 90, 91, 92, 93, 94), PackedInt32Array(95, 96, 97, 98, 99), PackedInt32Array(100, 101, 102, 103, 104), PackedInt32Array(105, 106, 107, 108, 109, 110), PackedInt32Array(111, 112, 113, 114, 115, 116), PackedInt32Array(117, 118, 119, 120, 121), PackedInt32Array(122, 123, 124, 125, 126), PackedInt32Array(127, 128, 129, 130, 131, 132), PackedInt32Array(133, 134, 135, 136), PackedInt32Array(137, 138, 139, 140)])
@@ -54,7 +60,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="@@36155" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36154/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-1035.5, -28.4)
 texture_scale = Vector2(1, -1)
 texture_rotation = 1.5708
@@ -67,11 +73,12 @@ rotation = 0.0132457
 scale = Vector2(0.99995, 0.99995)
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@36156"]
+scale = Vector2(1, 1)
 
 [node name="@@36157" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36156/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-173.408, -409.594)
 texture_scale = Vector2(1.00174, -1.00174)
 texture_rotation = 2.79036
@@ -85,7 +92,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 [node name="@@36159" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36158/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_23286")
+texture = ExtResource("2_2lane")
 texture_offset = Vector2(121.15, -0.4)
 polygon = PackedVector2Array(-70.1, -144.45, 70.85, -144.45, 70.85, -99.925, -70.1, -99.925, -70.1, -99.95, 86.9, -99.95, 86.9, -99.95, 86.9251, -99.925, 70.85, -99.925, -70.1, -99.925, 86.9251, -99.925, 170.65, -16.7, 170.632, -9.5, -169.21, -9.5, -169.15, -16.6, -88.1, -99.7, -70.1, -99.725, -169.21, -9.5, -112.5, -9.5, -113.641, -8.25, -169.221, -8.25, -169.213, -9.2, -112.5, -9.5, 127.5, -9.5, 126.359, -8.25, -109.927, -8.25, -110.2, -8.35, -111.2, -9.2, 127.5, -9.5, 170.632, -9.5, 170.612, -1.3, 170.612, -1.3, 170.607, 0.45, 170.607, 0.45, 140.842, 0.45, 140.842, 0.45, 140.55, 0, 140.3, -0.2, 139.75, -0.75, 139.55, -1.1, 139.4, -1.3, 139.4, -1.3, 139.25, -1.5, 138.9, -1.85, 138.75, -2.05, 138.7, -2.25, 138.55, -2.45, 138, -3, 137.25, -4.2, 135.25, -6.35, 129.8, -8.35, 128.8, -9.2, -169.221, -8.25, -130.75, -8.25, -132.05, -8, -133.6, -6.8, -136.55, -4.8, -140.1, -1.45, -140.321, -1.3, -140.321, -1.3, -142.9, 0.45, -145.75, 3.05, -145.9, 3.4, -146.267, 3.95, -146.267, 3.95, -169.324, 3.95, -169.324, 3.95, -169.28, -1.3, -169.28, -1.3, -169.223, -8, -130.75, -8.25, -113.641, -8.25, -116.7, -4.9, -117.45, -1.3, -117.546, 0.45, -117.546, 0.45, -117.739, 3.95, -126, 3.95, -126, -3.75, -126.15, -4.3, -126.4, -5.25, -126.75, -6, -126.95, -6.2, -127.7, -6.65, -128.35, -7.05, -129.45, -7.95, -129.667, -8, -109.927, -8.25, 109.25, -8.25, 107.95, -8, 106.4, -6.8, 103.45, -4.8, 99.9, -1.45, 99.6789, -1.3, 99.6789, -1.3, 97.1, 0.45, 94.25, 3.05, 94.1, 3.4, 93.7333, 3.95, 93.7333, 3.95, -97.1833, 3.95, -97.1833, 3.95, -97.25, 3.75, -98.15, 2, -99.45, 0, -99.7, -0.2, -100.25, -0.75, -100.45, -1.1, -100.6, -1.3, -100.6, -1.3, -100.75, -1.5, -101.1, -1.85, -101.25, -2.05, -101.3, -2.25, -101.45, -2.45, -102, -3, -102.75, -4.2, -104.75, -6.35, -109.246, -8, 109.25, -8.25, 126.359, -8.25, 123.3, -4.9, 122.55, -1.3, 122.454, 0.45, 122.454, 0.45, 122.261, 3.95, 114, 3.95, 114, -3.75, 113.85, -4.3, 113.6, -5.25, 113.25, -6, 113.05, -6.2, 112.3, -6.65, 111.65, -7.05, 110.55, -7.95, 110.333, -8, -126, -1.3, -100.6, -1.3, -100.6, -1.3, -126, -1.3, 114, -1.3, 139.4, -1.3, 139.4, -1.3, 114, -1.3, -169.294, 0.45, -126, 0.45, -126, 0.45, -169.294, 0.45, -99.1575, 0.45, 114, 0.45, 114, 0.45, -99.1575, 0.45, 140.842, 0.45, 170.607, 0.45, 170.598, 3.95, 170.598, 3.95, 170.58, 11.4, 141.937, 11.4, 143.25, 9, 143.25, 5.25, 142.817, 3.95, 142.817, 3.95, 142.75, 3.75, 141.85, 2, -169.324, 3.95, -146.267, 3.95, -146.7, 4.6, -147.25, 5.3, -147.35, 5.7, -147.45, 5.9, -148, 6.6, -148.5, 8.15, -148.5, 9.45, -148.45, 9.65, -148.35, 9.8, -148.25, 10.2, -147.25, 10.95, -169.383, 10.95, -169.326, 4.15, -126, 3.95, -117.739, 3.95, -117.75, 4.15, -117.7, 4.3, -117.6, 4.5, -117.5, 4.9, -117.5, 5.65, -116.8, 6.9, -110.2, 9.2, -107.75, 10.3, -105.002, 10.95, -147.25, 10.95, -129.8, 8.55, -129.45, 8.35, -129.2, 8.2, -128.8, 8.05, -128, 7.5, -127.5, 6.75, -127.1, 6.4, -126.25, 5.25, -126, 4.5, -126, 4.15, -97.1833, 3.95, 93.7333, 3.95, 93.3, 4.6, -96.9667, 4.6, -97.1167, 4.15, 114, 3.95, 122.261, 3.95, 122.25, 4.15, 122.3, 4.3, 122.4, 4.5, 122.5, 4.9, 122.5, 5.65, 123.2, 6.9, 129.8, 9.2, 132.25, 10.3, 134.998, 10.95, 92.75, 10.95, 110.2, 8.55, 110.55, 8.35, 110.8, 8.2, 111.2, 8.05, 112, 7.5, 112.5, 6.75, 112.9, 6.4, 113.75, 5.25, 114, 4.5, 114, 4.15, -96.9667, 4.6, 93.225, 4.6, 93.2, 4.75, 92.75, 5.3, 92.65, 5.7, 92.55, 5.9, 92, 6.6, 91.5, 8.15, 91.5, 9.45, 91.55, 9.65, 91.65, 9.8, 91.75, 10.2, 92.7, 10.925, 92.7, 10.95, -97.817, 10.95, -96.75, 9, -96.75, 5.25, -96.9333, 4.7, -169.383, 10.95, -105.002, 10.95, -103.1, 11.4, -102.7, 11.7, -169.39, 11.7, -169.387, 11.4, -97.817, 10.95, 134.998, 10.95, 136.9, 11.4, 137.3, 11.7, -102.7, 11.7, -98.2, 11.65, -98.0632, 11.4, 141.937, 11.4, 170.58, 11.4, 170.579, 11.7, 137.3, 11.7, 141.8, 11.65, -169.39, 11.7, 170.579, 11.7, 170.555, 21.25, -169.471, 21.25, -169.471, 21.25, -145.5, 21.25, -147.05, 21.85, -148.2, 23.5, -148.61, 24.55, -169.499, 24.55, -169.471, 21.3, -145.5, 21.25, -142.25, 21.25, -142.6, 21.3, -143.3, 21.55, -144.1, 21.7, -144.1, 21.7, -144.8, 21.4, -145.267, 21.3, -142.25, 21.25, 94.5, 21.25, 92.95, 21.85, 92.497, 22.5, -139.625, 22.5, -142.145, 21.3, 94.5, 21.25, 97.75, 21.25, 97.4, 21.3, 96.7, 21.55, 95.9, 21.7, 95.9, 21.7, 95.2, 21.4, 94.7333, 21.3, 97.75, 21.25, 170.555, 21.25, 170.552, 22.5, 100.375, 22.5, 97.855, 21.3, -139.625, 22.5, -99.5, 22.5, -111.091, 23.75, -137.204, 23.75, -138.05, 23.25, -139.52, 22.55, -99.5, 22.5, 92.497, 22.5, 91.8, 23.5, 91.625, 23.95, 91, 25.55, 91, 31.625, 90.8, 33.975, 91, 34, -94.55, 34, -94.55, 33.725, -94.5, 33.65, -94.5, 32.15, -94.35, 26.15, -95, 23.5, -97, 22.55, 100.375, 22.5, 140.5, 22.5, 128.909, 23.75, 102.796, 23.75, 101.95, 23.25, 100.48, 22.55, 140.5, 22.5, 170.552, 22.5, 170.497, 44.75, 141.75, 44.75, 144.75, 42.05, 144.75, 36.8, 144.8, 36.65, 144.9, 36.45, 145, 36.05, 145, 35.7, 145.1, 35.3, 145.2, 34.95, 145.25, 34.55, 145.25, 34.4, 145.3, 34.2, 145.4, 34, 145.45, 33.8, 145.45, 33.725, 145.5, 33.65, 145.5, 32.15, 145.65, 26.15, 145, 23.5, 143, 22.55, -137.204, 23.75, -116.25, 23.75, -117.15, 24, -117.8, 24.55, -118.95, 31.2, -118.75, 35.9, -117.85, 38.2, -117.1, 39.45, -116.95, 39.65, -116.85, 39.8, -116.75, 40.2, -115.95, 41.2, -114.85, 41.85, -104.85, 43.7, -98.8786, 44.65, -144.15, 44.65, -136.05, 43.4, -133.6, 42.8, -130.9, 41.85, -127, 38.75, -126.7, 38.2, -126.3, 37.25, -126, 36.5, -125.6, 35.9, -125.1, 34.8, -124.75, 33.9, -124.75, 28.8, -127.6, 25.35, -134.95, 24.9, -135.2, 24.75, -135.55, 24.65, -135.85, 24.55, -137.035, 23.85, -116.25, 23.75, -111.091, 23.75, -114.8, 24.15, -114.8, 24.15, -115.2, 24, -115.9, 23.85, 102.796, 23.75, 123.75, 23.75, 122.85, 24, 122.2, 24.55, 121.05, 31.2, 121.25, 35.9, 122.15, 38.2, 122.9, 39.45, 123.05, 39.65, 123.15, 39.8, 123.25, 40.2, 124.05, 41.2, 125.15, 41.85, 135.15, 43.7, 141.121, 44.65, 95.85, 44.65, 103.95, 43.4, 106.4, 42.8, 109.1, 41.85, 113, 38.75, 113.3, 38.2, 113.7, 37.25, 114, 36.5, 114.4, 35.9, 114.9, 34.8, 115.25, 33.9, 115.25, 28.8, 112.4, 25.35, 105.05, 24.9, 104.8, 24.75, 104.45, 24.65, 104.15, 24.55, 102.965, 23.85, 123.75, 23.75, 128.909, 23.75, 125.2, 24.15, 125.2, 24.15, 124.8, 24, 124.1, 23.85, -169.499, 24.55, -148.61, 24.55, -149, 25.55, -149, 37.95, -148.95, 38.15, -148.85, 38.3, -148.75, 38.7, -148.6, 38.85, -148.3, 39.25, -148.1, 39.45, -147.8, 40.2, -147.45, 41.15, -147.25, 41.7, -147.1, 41.85, -146.8, 42.25, -146.35, 42.65, -144.15, 44.65, -169.669, 44.65, -169.5, 24.65, -94.6, 34, 91, 34, 91, 37.95, 91.05, 38.15, 91.15, 38.3, 91.25, 38.7, 91.4, 38.85, 91.7, 39.25, 91.9, 39.45, 92.2, 40.2, 92.55, 41.15, 92.75, 41.7, 92.9, 41.85, 93.2, 42.25, 93.65, 42.65, 95.85, 44.65, -98.1389, 44.65, -95.25, 42.05, -95.25, 36.8, -95.2, 36.65, -95.1, 36.45, -95, 36.05, -95, 35.7, -94.9, 35.3, -94.8, 34.95, -94.75, 34.55, -94.75, 34.4, -94.7, 34.2, -169.669, 44.65, -98.8786, 44.65, -98.25, 44.75, -169.67, 44.75, -98.1389, 44.65, 141.121, 44.65, 141.75, 44.75, -98.25, 44.75, -169.67, 44.75, 170.497, 44.75, 170.477, 52.5, -169.736, 52.5, -169.736, 52.5, -144.75, 52.5, -147.2, 55.05, -147.225, 56.1, -169.766, 56.1, -169.736, 52.6, -144.75, 52.5, 95.25, 52.5, 94.5294, 53.25, -137.75, 53.25, -141.85, 53.15, -143.15, 52.6, 95.25, 52.5, 170.477, 52.5, 170.475, 53.25, 102.25, 53.25, 98.15, 53.15, 96.85, 52.6, -137.75, 53.25, -108.75, 53.25, -109.85, 53.4, -114.95, 55.05, -115.25, 55.25, -127.152, 55.25, -128.15, 53.95, -129.55, 53.45, -131.6, 53.4, -108.75, 53.25, 94.5294, 53.25, 92.8, 55.05, 92.75, 57.15, 92.75, 59, 92.7, 59.2, 92.4, 59.75, 92.15, 60.3, 92, 60.9, 92, 61.25, 91.95, 61.45, 91.85, 61.6, 91.6, 62, 91.3, 62.6, 91, 63.3, 91, 63.7, 90.95, 63.85, 90.75, 64.65, 90.4, 65.4, 90, 66.3, 90, 70.65, 92.2451, 73.2, -95.7797, 73.2, -95.05, 72.45, -95, 72.25, -95, 71.5, -94.6, 70.95, -94.45, 70.55, -94.3, 70.2, -94.25, 70, -94.25, 69.65, -94.15, 69.25, -93.95, 65.5, -94, 62.7, -94, 62.5, -94.15, 61.95, -94.25, 61.35, -94.45, 60.8, -94.5, 60.65, -96.65, 55, -98.9, 53.55, -103.825, 53.4, 102.25, 53.25, 131.25, 53.25, 130.15, 53.4, 125.05, 55.05, 124.75, 55.25, 112.848, 55.25, 111.85, 53.95, 110.45, 53.45, 108.4, 53.4, 131.25, 53.25, 170.475, 53.25, 170.425, 73.2, 144.22, 73.2, 144.95, 72.45, 145, 72.25, 145, 71.5, 145.4, 70.95, 145.55, 70.55, 145.7, 70.2, 145.75, 70, 145.75, 69.65, 145.85, 69.25, 146.05, 65.5, 146, 62.7, 146, 62.5, 145.85, 61.95, 145.75, 61.35, 145.55, 60.8, 145.5, 60.65, 143.35, 55, 141.1, 53.55, 136.175, 53.4, -127.152, 55.25, -116, 55.25, -117.85, 56.1, -118.45, 57.2, -118.5, 57.4, -118.5, 57.55, -118.3, 61.5, -118.25, 64.7, -118.25, 64.9, -117.5, 67.35, -111.25, 72.35, -111.1, 72.4, -108.34, 73, -130, 73, -126.65, 69.3, -126.5, 66.5, -126.5, 64.65, -126.45, 64.45, -126.25, 63.3, -126.25, 60.5, -126.2, 60.3, -126.1, 60.15, -126, 59.75, -126, 56.75, -127.113, 55.3, -116, 55.25, -115.25, 55.25, -115.6, 55.3, -115.6, 55.3, 112.848, 55.25, 124, 55.25, 122.15, 56.1, 121.55, 57.2, 121.5, 57.4, 121.5, 57.55, 121.7, 61.5, 121.75, 64.7, 121.75, 64.9, 122.5, 67.35, 128.75, 72.35, 128.9, 72.4, 131.66, 73, 110, 73, 113.35, 69.3, 113.5, 66.5, 113.5, 64.65, 113.55, 64.45, 113.75, 63.3, 113.75, 60.5, 113.8, 60.3, 113.9, 60.15, 114, 59.75, 114, 56.75, 112.887, 55.3, 124, 55.25, 124.75, 55.25, 124.4, 55.3, 124.4, 55.3, -169.766, 56.1, -147.225, 56.1, -147.25, 57.15, -147.25, 59, -147.3, 59.2, -147.6, 59.75, -147.85, 60.3, -148, 60.9, -148, 61.25, -148.05, 61.45, -148.15, 61.6, -148.4, 62, -148.7, 62.6, -149, 63.3, -149, 63.7, -149.05, 63.85, -149.25, 64.65, -149.6, 65.4, -150, 66.3, -150, 70.65, -146.17, 75, -169.926, 75, -169.772, 56.75, -131.05, 72.8, -131.05, 72.8, -130.7, 72.9, -130, 73, -131.375, 73, -131.212, 72.9, 108.95, 72.8, 108.95, 72.8, 109.3, 72.9, 110, 73, 108.625, 73, 108.787, 72.9, -131.375, 73, -108.34, 73, -105.35, 73.65, -105.3, 73.7, -104.95, 74.2, -100.35, 74.8, -134.498, 74.8, -132.3, 73.55, -131.7, 73.2, 108.625, 73, 131.66, 73, 134.65, 73.65, 134.7, 73.7, 135.05, 74.2, 139.65, 74.8, 105.502, 74.8, 107.7, 73.55, 108.3, 73.2, -95.7797, 73.2, 92.2451, 73.2, 93.6538, 74.8, -100.35, 74.8, -99.95, 74.65, -96.85, 74.3, -96.1203, 73.55, 144.22, 73.2, 170.425, 73.2, 170.421, 74.8, 139.65, 74.8, 140.05, 74.65, 143.15, 74.3, 143.88, 73.55, -134.498, 74.8, 93.6538, 74.8, 94.05, 75.25, 101, 76.05, -139, 76.05, -134.85, 75, 105.502, 74.8, 170.421, 74.8, 170.418, 76.05, 101, 76.05, 105.15, 75, -169.926, 75, -146.17, 75, -145.95, 75.25, -139, 76.05, -169.935, 76.05, -169.928, 75.25, -169.935, 76.05, 170.418, 76.05, 170.35, 103.4, 170.35, 103.4, -170.15, 101.4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26, 27), PackedInt32Array(28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51), PackedInt32Array(52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69), PackedInt32Array(70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86), PackedInt32Array(87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118), PackedInt32Array(119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135), PackedInt32Array(136, 137, 138, 139), PackedInt32Array(140, 141, 142, 143), PackedInt32Array(144, 145, 146, 147), PackedInt32Array(148, 149, 150, 151), PackedInt32Array(152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163), PackedInt32Array(164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178), PackedInt32Array(179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200), PackedInt32Array(201, 202, 203, 204, 205), PackedInt32Array(206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227), PackedInt32Array(228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245), PackedInt32Array(246, 247, 248, 249, 250, 251), PackedInt32Array(252, 253, 254, 255, 256, 257, 258), PackedInt32Array(259, 260, 261, 262, 263), PackedInt32Array(264, 265, 266, 267), PackedInt32Array(268, 269, 270, 271, 272, 273, 274), PackedInt32Array(275, 276, 277, 278, 279, 280, 281, 282), PackedInt32Array(283, 284, 285, 286, 287, 288), PackedInt32Array(289, 290, 291, 292, 293, 294, 295, 296), PackedInt32Array(297, 298, 299, 300, 301), PackedInt32Array(302, 303, 304, 305, 306, 307), PackedInt32Array(308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322), PackedInt32Array(323, 324, 325, 326, 327, 328), PackedInt32Array(329, 330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351), PackedInt32Array(352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 384), PackedInt32Array(385, 386, 387, 388, 389, 390), PackedInt32Array(391, 392, 393, 394, 395, 396, 397, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423), PackedInt32Array(424, 425, 426, 427, 428, 429), PackedInt32Array(430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448), PackedInt32Array(449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476), PackedInt32Array(477, 478, 479, 480), PackedInt32Array(481, 482, 483, 484), PackedInt32Array(485, 486, 487, 488), PackedInt32Array(489, 490, 491, 492, 493, 494), PackedInt32Array(495, 496, 497, 498, 499, 500), PackedInt32Array(501, 502, 503, 504, 505, 506), PackedInt32Array(507, 508, 509, 510, 511, 512, 513, 514, 515), PackedInt32Array(516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557), PackedInt32Array(558, 559, 560, 561, 562, 563, 564, 565, 566), PackedInt32Array(567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 589), PackedInt32Array(590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 600, 601, 602, 603, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 614), PackedInt32Array(615, 616, 617, 618), PackedInt32Array(619, 620, 621, 622, 623, 624, 625, 626, 627, 628, 629, 630, 631, 632, 633, 634, 635, 636, 637, 638, 639, 640, 641, 642, 643), PackedInt32Array(644, 645, 646, 647), PackedInt32Array(648, 649, 650, 651, 652, 653, 654, 655, 656, 657, 658, 659, 660, 661, 662, 663, 664, 665, 666, 667, 668, 669, 670), PackedInt32Array(671, 672, 673, 674, 675, 676), PackedInt32Array(677, 678, 679, 680, 681, 682), PackedInt32Array(683, 684, 685, 686, 687, 688, 689, 690, 691), PackedInt32Array(692, 693, 694, 695, 696, 697, 698, 699, 700), PackedInt32Array(701, 702, 703, 704, 705, 706, 707), PackedInt32Array(708, 709, 710, 711, 712, 713, 714), PackedInt32Array(715, 716, 717, 718, 719, 720), PackedInt32Array(721, 722, 723, 724, 725), PackedInt32Array(726, 727, 728, 729, 730, 731), PackedInt32Array(732, 733, 734, 735, 736)])
@@ -98,7 +105,7 @@ position = Vector2(9.1, 86.55)
 [node name="@@36161" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36160/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(184.15, 104.15)
 polygon = PackedVector2Array(-184.15, -104.15, -176.15, -104.15, -176.15, 17.85, -176.15, 17.85, -182.65, 15.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -111,7 +118,7 @@ position = Vector2(9.1, 86.55)
 [node name="@@36163" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36162/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(204.955, 64.3821)
 texture_scale = Vector2(0.999999, 0.999999)
 texture_rotation = -0.785398
@@ -127,7 +134,7 @@ rotation = 3.14159
 [node name="@@36165" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36164/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(190.5, 28.75)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(80.25, -191, 80.25, -191, 75.25, -182.5, 75.25, -182.5, -94.25, -183.5, -98.9, -190.5)
@@ -143,7 +150,7 @@ scale = Vector2(1, -1)
 [node name="@@36167" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36166/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(184.15, 104.15)
 polygon = PackedVector2Array(-184.15, -104.15, -176.15, -104.15, -176.15, 17.85, -176.15, 17.85, -182.65, 15.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -158,7 +165,7 @@ scale = Vector2(1, -1)
 [node name="@@36169" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36168/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(204.955, 64.3821)
 texture_scale = Vector2(0.999999, 0.999999)
 texture_rotation = -0.785398
@@ -172,7 +179,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 [node name="@@36171" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36170/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_23286")
+texture = ExtResource("2_2lane")
 texture_offset = Vector2(361.35, -117.8)
 polygon = PackedVector2Array(-394.8, 71.05, -394.8, 71.05, -307.75, 72.55, -269.6, 111.05, -283.1, 235.55, -426.6, 235.55, -434.6, 111.55, -396.274, 72.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
@@ -184,7 +191,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
 [node name="@@36173" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36172/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(233.31, -267.11)
 texture_scale = Vector2(0.999999, 0.999999)
 texture_rotation = -0.785398
@@ -198,7 +205,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 [node name="@@36175" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36174/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-263.468, -109.036)
 texture_scale = Vector2(0.999999, 0.999999)
 texture_rotation = -2.35619
@@ -212,7 +219,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 [node name="@@36177" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36176/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-66.75, -272.6)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(-394.25, 66.25, -394.25, 66.25, -307.6, 66.5, -307.6, 74.8, -307.6, 74.8, -395.1, 74.75, -394.275, 66.5)
@@ -226,7 +233,7 @@ position = Vector2(739.15, -0.9)
 [node name="@@36179" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36178/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_23286")
+texture = ExtResource("2_2lane")
 texture_offset = Vector2(361.35, -117.8)
 polygon = PackedVector2Array(-394.8, 71.05, -394.8, 71.05, -307.75, 72.55, -269.6, 111.05, -283.1, 235.55, -426.6, 235.55, -434.6, 111.55, -396.274, 72.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
@@ -239,7 +246,7 @@ position = Vector2(739.15, -0.9)
 [node name="@@36181" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36180/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(233.31, -267.11)
 texture_scale = Vector2(0.999999, 0.999999)
 texture_rotation = -0.785398
@@ -254,7 +261,7 @@ position = Vector2(739.15, -0.9)
 [node name="@@36183" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36182/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-263.468, -109.036)
 texture_scale = Vector2(0.999999, 0.999999)
 texture_rotation = -2.35619
@@ -269,7 +276,7 @@ position = Vector2(739.15, -0.9)
 [node name="@@36185" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36184/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-66.75, -272.6)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(-394.25, 66.25, -394.25, 66.25, -307.6, 66.5, -307.6, 74.8, -307.6, 74.8, -395.1, 74.75, -394.275, 66.5)
@@ -282,7 +289,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 [node name="@@36187" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36186/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(360.079, 294.576)
 texture_scale = Vector2(0.999998, 0.999998)
 texture_rotation = -0.523598
@@ -299,7 +306,7 @@ scale = Vector2(0.999605, 0.999605)
 [node name="@@36189" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36188/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(575.601, 236.771)
 texture_scale = Vector2(0.999998, 0.999998)
 texture_rotation = -0.523598
@@ -312,11 +319,12 @@ rotation = 1.88191
 scale = Vector2(0.998976, 0.998976)
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@36190"]
+scale = Vector2(1, 1)
 
 [node name="@@36191" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36190/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(575.601, 236.771)
 texture_scale = Vector2(0.999998, 0.999998)
 texture_rotation = -0.523598
@@ -330,7 +338,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@36193" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36192/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-401, 294)
 texture_scale = Vector2(1, -1)
 texture_rotation = 1.5708
@@ -344,7 +352,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@36195" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36194/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(77.3923, -318.971)
 texture_scale = Vector2(1.00102, 1.00102)
 texture_rotation = -2.4055
@@ -358,7 +366,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 [node name="@@36197" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36196/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(362.9, -301.2)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(-380.6, -362.9, -225.3, -362.9, -225.3, -355.9, -380.6, -355.9)
@@ -372,7 +380,7 @@ position = Vector2(1.5, -1)
 [node name="@@36199" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36198/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(522.727, 142.671)
 texture_scale = Vector2(1.00039, 1.00039)
 texture_rotation = -0.641931
@@ -388,7 +396,7 @@ scale = Vector2(1, -1)
 [node name="@@36201" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36200/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(408.95, -588.1)
 texture_scale = Vector2(1, -1)
 texture_rotation = -1.5708
@@ -402,7 +410,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 [node name="@@36203" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36202/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(795.322, -290.346)
 texture_scale = Vector2(1.00102, -1.00102)
 texture_rotation = -0.736089
@@ -419,7 +427,7 @@ scale = Vector2(1, -1)
 [node name="@@36205" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36204/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(362.9, -301.2)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(-380.6, -362.9, -225.3, -362.9, -225.3, -355.9, -380.6, -355.9)
@@ -435,7 +443,7 @@ scale = Vector2(1, -1)
 [node name="@@36207" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36206/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(522.727, 142.671)
 texture_scale = Vector2(1.00039, 1.00039)
 texture_rotation = -0.641931
@@ -450,7 +458,7 @@ position = Vector2(-276.25, -1.1)
 [node name="@@36209" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36208/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(522.727, 142.671)
 texture_scale = Vector2(1.00039, 1.00039)
 texture_rotation = -0.641931
@@ -467,7 +475,7 @@ scale = Vector2(1, -1)
 [node name="@@36211" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36210/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(360.079, 294.576)
 texture_scale = Vector2(0.999998, 0.999998)
 texture_rotation = -0.523598
@@ -484,7 +492,7 @@ scale = Vector2(0.999605, -0.999605)
 [node name="@@36213" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36212/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(575.601, 236.771)
 texture_scale = Vector2(0.999998, 0.999998)
 texture_rotation = -0.523598
@@ -497,11 +505,12 @@ rotation = 1.25969
 scale = Vector2(0.998976, -0.998976)
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@36214"]
+scale = Vector2(1, 1)
 
 [node name="@@36215" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36214/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(575.601, 236.771)
 texture_scale = Vector2(0.999998, 0.999998)
 texture_rotation = -0.523598
@@ -515,7 +524,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@36217" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36216/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-401.2, -352.25)
 texture_rotation = 1.5708
 polygon = PackedVector2Array(110.35, -408.2, 475.25, -408.2, 476.35, -406.55, 476.35, -401.2, 110.35, -401.2, 110.35, -406.55)
@@ -531,7 +540,7 @@ scale = Vector2(1, -1)
 [node name="@@36219" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36218/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(77.3923, -318.971)
 texture_scale = Vector2(1.00102, 1.00102)
 texture_rotation = -2.4055
@@ -545,7 +554,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 [node name="@@36221" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36220/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(363.1, 359.45)
 texture_scale = Vector2(1, -1)
 texture_rotation = -1.5708
@@ -562,7 +571,7 @@ scale = Vector2(1, -1)
 [node name="@@36223" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36222/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(522.727, 142.671)
 texture_scale = Vector2(1.00039, 1.00039)
 texture_rotation = -0.641931
@@ -578,7 +587,7 @@ rotation = 3.14159
 [node name="@@36225" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36224/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(408.95, -588.1)
 texture_scale = Vector2(1, -1)
 texture_rotation = -1.5708
@@ -592,7 +601,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 [node name="@@36227" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36226/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-206.304, 956.131)
 texture_scale = Vector2(1.00102, 1.00102)
 texture_rotation = -0.834707
@@ -606,7 +615,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@36229" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36228/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(363.05, 641.15)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(561.75, -363.05, 755.05, -363.05, 755.05, -356.05, 561.75, -356.05)
@@ -620,7 +629,7 @@ position = Vector2(943.85, -1.15)
 [node name="@@36231" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36230/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(522.727, 142.671)
 texture_scale = Vector2(1.00039, 1.00039)
 texture_rotation = -0.641931
@@ -637,7 +646,7 @@ scale = Vector2(1, -1)
 [node name="@@36233" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36232/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(522.727, 142.671)
 texture_scale = Vector2(1.00039, 1.00039)
 texture_rotation = -0.641931
@@ -653,7 +662,7 @@ scale = Vector2(1, -1)
 [node name="@@36235" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36234/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(362.9, -301.2)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(-380.6, -362.9, -225.3, -362.9, -225.3, -355.9, -380.6, -355.9)
@@ -669,7 +678,7 @@ scale = Vector2(0.999979, 0.999979)
 [node name="@@36237" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36236/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-173.785, 406.261)
 texture_scale = Vector2(1.00174, 1.00174)
 texture_rotation = 0.351229
@@ -683,7 +692,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 [node name="@@36239" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36238/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-245.601, -456.062)
 texture_scale = Vector2(1.00179, -1.00179)
 texture_rotation = 2.77712
@@ -700,7 +709,7 @@ scale = Vector2(1, -1)
 [node name="@@36241" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36240/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-245.601, -456.062)
 texture_scale = Vector2(1.00179, -1.00179)
 texture_rotation = 2.77712
@@ -714,7 +723,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@36243" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36242/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-217.336, -696.319)
 texture_scale = Vector2(1.00179, -1.00179)
 texture_rotation = 2.77712
@@ -728,7 +737,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 [node name="@@36245" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36244/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-150.096, -676.056)
 texture_scale = Vector2(1.00179, -1.00179)
 texture_rotation = 2.77712
@@ -742,7 +751,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 [node name="@@36247" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36246/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(980.5, 6.64996)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(141.8, -980.5, 141.8, -980.5, 133.55, -973.5, -135.75, -973.5, -137.25, -980.25)
@@ -755,7 +764,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@36249" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36248/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-220.793, 695)
 texture_scale = Vector2(1.00179, 1.00179)
 texture_rotation = 0.364475
@@ -772,7 +781,7 @@ scale = Vector2(1, -1)
 [node name="@@36251" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36250/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(-150.096, -676.056)
 texture_scale = Vector2(1.00179, -1.00179)
 texture_rotation = 2.77712
@@ -790,7 +799,7 @@ position = Vector2(-2.75, 0)
 [node name="@@36253" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36252/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(1072.95, 47.95)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(-31.45, -1072.95, 37.65, -1072.95, 37.65, -1065.95, -31.45, -1065.95)
@@ -804,7 +813,7 @@ position = Vector2(347.9, -711.05)
 [node name="@@36255" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36252/@Group@36254/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(522.727, 142.671)
 texture_scale = Vector2(1.00039, 1.00039)
 texture_rotation = -0.641931
@@ -821,7 +830,7 @@ scale = Vector2(1, -1)
 [node name="@@36257" type="Polygon2D" parent="Layer 1/Frame 0/@Group@36252/@Group@36256/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_3w7a0")
+texture = ExtResource("3_hae45")
 texture_offset = Vector2(522.727, 142.671)
 texture_scale = Vector2(1.00039, 1.00039)
 texture_rotation = -0.641931

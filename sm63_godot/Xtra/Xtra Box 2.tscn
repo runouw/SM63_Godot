@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_wg0j4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7t8a5"]
+
+[sub_resource type="Animation" id="Animation_xjtir"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rcvbt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7eh3o"]
 _data = {
-"Default": SubResource("Animation_wg0j4")
+"Default": SubResource("Animation_xjtir")
 }
 
 [node name="Xtra Box 2" type="Node2D"]
+script = ExtResource("1_7t8a5")
+source_xml = "res://sm63/LIBRARY/Xtra/Xtra Box 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rcvbt")
+"Timeline": SubResource("AnimationLibrary_7eh3o")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -35,6 +42,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@52965" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-15.3, -15.05, 15.25, -15.05, 15.25, 15.1, -15.3, 15.1)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 

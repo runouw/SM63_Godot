@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ma65u"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_oven7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_cb7qp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_54ak8"]
 
-[sub_resource type="Animation" id="Animation_v335j"]
+[sub_resource type="Animation" id="Animation_wro17"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,25 +79,284 @@ tracks/5/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_836pf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ce1s"]
 _data = {
-"Default": SubResource("Animation_v335j")
+"Default": SubResource("Animation_wro17")
 }
 
+[sub_resource type="GDScript" id="GDScript_e4s83"]
+script/source = "extends Node
+# HP = 3;
+# startX = _x
+# startY = _y"
+
+[sub_resource type="GDScript" id="GDScript_lk6ek"]
+script/source = "extends Node
+# depth = _root.Course.Platforms.getNextHighestDepth();
+# _root.Course.Platforms.attachMovie(\"KingBombombGround\", \"KingBombombGround\"+depth, depth, {_x:_x, _y:_y});
+# "
+
+[sub_resource type="GDScript" id="GDScript_3ifpk"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_kf3x0"]
+script/source = "extends Node
+# stop();
+# _x = startX;
+# _y = startY;
+# //
+# _root.Course.Platforms[\"KingBombombGround\"+depth]._y = _y;
+# _root.Course.Platforms[\"KingBombombGround\"+depth]._x = _x;
+# //
+# onEnterFrame = function () {
+# 	// Talking
+# 	if (this.box.hitTest(_root.Course.Char.charClip.feet) && _root.Course.Char.attack == false && _root.Course.Char.air == false) {
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.attackFrame = \"bosscinema\";
+# 		_root.Course.Char._xscale = 100;
+# 		//
+# 		_root.playpause = true;
+# 		onEnterFrame = function () {
+# 			_root.Camcenter = this;
+# 			_root.PauseGame = false;
+# 			//
+# 			count = 0;
+# 			//
+# 			_root.StopBGsong();
+# 			_root.PlayMessage(\"Mario... I remember you... You can't grab me and throw me this time, so I'll destroy you with my bombs!!\");
+# 			clip.gotoAndStop(5);
+# 			onEnterFrame = function () {
+# 				//
+# 				_root.playpause = true;
+# 				//
+# 				count++;
+# 				if (_root.KeyZ() && count>5) {
+# 					_root.StopMessage();
+# 					//
+# 					count = 0;
+# 					onEnterFrame = function () {
+# 						count++;
+# 						if (count>5) {
+# 							_root.Course.Char.attack = false;
+# 							//_root.Course.Char.frame = 1;
+# 							//
+# 							_root.playpause = false;
+# 							onEnterFrame = null;
+# 							//
+# 							_root.StopBGsong();
+# 							_root.StartBoss64Music();
+# 							//
+# 							_root.Course.Edge.gotoAndStop(2);
+# 							_root.Course.CamEdge.gotoAndStop(2);
+# 							//
+# 							nextFrame();
+# 						}
+# 					};
+# 				}
+# 			};
+# 		};
+# 	}
+# 	//                 
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ljovw"]
+script/source = "extends Node
+# stop();
+# frame = 1;
+# attack = false;
+# attackFrame = \"\";
+# air = false;
+# //
+# xspeed = 0;
+# yspeed = 0;
+# //
+# idlecount = 0;
+# idlecount = 0;
+# tall = 50;
+# wide = 35;
+# //
+# throwcount = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		//   
+# 		while ((_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) && !(_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-1)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 			_y++;
+# 		}
+# 		while (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-1)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_y--;
+# 		}
+# 		//
+# 		if (attack == true) {
+# 			idlecount = 0;
+# 		}
+# 		idlecount++;
+# 		idlecounts = idlecount/_root.framerate;
+# 		if (idlecounts>0.5 && attack == false && air == false) {
+# 			if (_xscale>0 && (_x+_parent._x)-_root.Course.Char._x<-10) {
+# 				attack = true;
+# 				attackFrame = \"turn\";
+# 			} else if (_xscale<0 && (_x+_parent._x)-_root.Course.Char._x>10) {
+# 				attack = true;
+# 				attackFrame = \"turn\";
+# 			}
+# 		}
+# 		if (idlecounts>1) {
+# 			randomnum = random(3)+1;
+# 			if (randomnum == 1) {
+# 				if (random(2) == 1) {
+# 					randomnum = 3;
+# 				} else {
+# 					randomnum = 2;
+# 				}
+# 			}
+# 			if (throwcount>random(4)+2) {
+# 				randomnum = 1;
+# 			}
+# 			if (attack == false && air == false && randomnum == 1) {
+# 				if (_xscale>0 && (_x+_parent._x)-_root.Course.Char._x>15) {
+# 					attack = true;
+# 					attackFrame = \"throw\";
+# 				} else if (_xscale<0 && (_x+_parent._x)-_root.Course.Char._x<-15) {
+# 					attack = true;
+# 					attackFrame = \"throw\";
+# 				}
+# 				throwcount = 0;
+# 			} else if (attack == false && air == false && randomnum == 2) {
+# 				if (_xscale>0 && (_x+_parent._x)-_root.Course.Char._x>20) {
+# 					frame = \"walk\";
+# 				} else if (_xscale<0 && (_x+_parent._x)-_root.Course.Char._x<-20) {
+# 					frame = \"walk\";
+# 				}
+# 				idlecount = 0;
+# 				idlecounts = 0;
+# 				//
+# 				throwcount++;
+# 			} else if (attack == false && air == false && randomnum == 3 && frame !== \"walk\") {
+# 				attack = true;
+# 				attackFrame = \"jump\";
+# 				idlecount = 0;
+# 				idlecounts = 0;
+# 				throwcount++;
+# 			}
+# 		}
+# 		if (idlecounts>0.5 && _xscale>0 && (_x+_parent._x)-_root.Course.Char._x<30 && (_x+_parent._x)-_root.Course.Char._x>0) {
+# 			attack = true;
+# 			attackFrame = \"grab\";
+# 			frame = \"idle\";
+# 		} else if (idlecounts>1 && _xscale<0 && (_x+_parent._x)-_root.Course.Char._x>-30 && (_x+_parent._x)-_root.Course.Char._x<0) {
+# 			attack = true;
+# 			attackFrame = \"grab\";
+# 			frame = \"idle\";
+# 		}
+# 		if (frame == \"walk\" && attack == false) {
+# 			if (_xscale>0) {
+# 				xspeed -= 0.7;
+# 			} else if (_xscale<0) {
+# 				xspeed += 0.7;
+# 			}
+# 			if ((!(_x+_parent._x)-_root.Course.Char._x>20 && !(_x+_parent._x)-_root.Course.Char._x<-20) || (attack == true)) {
+# 				frame = \"idle\";
+# 			}
+# 			//                                                                           
+# 		}
+# 		//                           
+# 		if (crown.hitTest(_root.Course.Char.charClip.feet) && _root.Course.Char.air == false) {
+# 			if (_root.Course.Char._x>_x+_parent._x) {
+# 				_root.MarioHit(1, 30, 5, 7, 0, \"\");
+# 			} else {
+# 				_root.MarioHit(1, 30, 5, -7, 0, \"\");
+# 			}
+# 		}
+# 		//                           
+# 		if (_root.Course.Enemyhurt.hitTest(((_x-wide)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, (((_y-(tall/2)))*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.Enemyhurt.hitTest(((_x+wide)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, (((_y-(tall/2)))*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.Enemyhurt.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, (((_y))*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.Enemyhurt.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, (((_y-(tall/1.5)))*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.Enemyhurt.hitTest(((_x-wide/2)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, (((_y-(tall)))*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.Enemyhurt.hitTest(((_x+wide/2)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, (((_y-(tall)))*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.Enemyhurt.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, (((_y-tall))*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			if ((attack == false || attackFrame !== \"hurt\")) {
+# 				attack = true;
+# 				attackFrame = \"hurt\";
+# 				if (_root.Course.Char.attack == true && _root.Course.Char.attackFrame == \"grabbed\") {
+# 					_root.Course.Char.attack = false;
+# 				}
+# 			}
+# 		}
+# 		//                                                                                            
+# 		xspeed *= 0.7;
+# 		//          
+# 		if (attack == false) {
+# 			clip.gotoAndStop(frame);
+# 		} else {
+# 			clip.gotoAndStop(attackFrame);
+# 		}
+# 		if (_root.Course.Platforms.hitTest(((_x+xspeed-(_xscale/15))*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+5)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x+xspeed-(_xscale/15))*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+5)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_x += xspeed;
+# 		} else {
+# 			frame = 1;
+# 		}
+# 		if (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			yspeed = Math.min(yspeed, 0);
+# 			//
+# 			while ((_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) && !(_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-1)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_y++;
+# 			}
+# 			while (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-1)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				_y--;
+# 			}
+# 		} else {
+# 			yspeed += 0.5;
+# 		}
+# 		_y += yspeed;
+# 		//
+# 		_root.Course.Platforms[\"KingBombombGround\"+depth]._y = _y;
+# 		_root.Course.Platforms[\"KingBombombGround\"+depth]._x = _x;
+# 		// Battle
+# 		// Escape
+# 		/*
+# 		if (_root.Course.BackGFX.excape.hitTest(_root.Course.Char.charClip.body) || (_root.Course.Char.attack == true && _root.Course.Char.attackFrame == \"Faint\")) {
+# 		_root.StopBGsong();
+# 		_root.PlayBGSong(_root[\"1-1Music\"]);
+# 		if (_root.Course.Char.attack == true && _root.Course.Char.attackFrame == \"Faint\") {
+# 		_root.StopBGsong();
+# 		}
+# 		//                             
+# 		onEnterFrame = null;
+# 		clip.gotoAndStop(1);
+# 		_root.Course.Platforms[\"KingBombombGround\"+depth].removeMovieClip();
+# 		_xscale = 100;
+# 		gotoAndPlay(2);
+# 		}
+# 		// ^ Escape ^ 
+# 		*/
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_kl7su"]
+script/source = "extends Node
+# clip.gotoAndStop(\"defeated\");
+# "
+
 [node name="King Bomb-omb Code" type="Node2D"]
+script = ExtResource("1_cb7qp")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb Code.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_836pf")
+"Timeline": SubResource("AnimationLibrary_7ce1s")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ma65u")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-9, -29.95)
-script = ExtResource("2_oven7")
+script = ExtResource("2_54ak8")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -114,13 +373,19 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_e4s83")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_ma65u")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_lk6ek")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
 position = Vector2(0, 0.05)
 scale = Vector2(1, 0.997162)
-script = ExtResource("2_oven7")
+script = ExtResource("2_54ak8")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Ground.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -133,13 +398,19 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_3ifpk")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("1_ma65u")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_kf3x0")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2"]
 position = Vector2(48.9, 10.45)
 scale = Vector2(1.42995, 0.265076)
-script = ExtResource("2_oven7")
+script = ExtResource("2_54ak8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -155,10 +426,13 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3" instance=ExtResource("1_ma65u")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 3"]
+script = SubResource("GDScript_ljovw")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3"]
 position = Vector2(-6.55, -9.5)
 scale = Vector2(0.505432, 0.660858)
-script = ExtResource("2_oven7")
+script = ExtResource("2_54ak8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -171,10 +445,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@49329" type="Node2D" parent="Layer 2/Frame 3" instance=ExtResource("1_ma65u")]
+[node name="@DOMSymbolInstance@49329" type="Node2D" parent="Layer 2/Frame 3"]
 position = Vector2(0.45, -34.3)
 scale = Vector2(0.39917, 0.27478)
-script = ExtResource("2_oven7")
+script = ExtResource("2_54ak8")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -189,3 +463,6 @@ brightness = 0.0
 
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 4"]
+script = SubResource("GDScript_kl7su")

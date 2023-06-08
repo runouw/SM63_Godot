@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_6fcwx"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_i5vb2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rx6vf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8a6ju"]
 
-[sub_resource type="Animation" id="Animation_bdqbe"]
+[sub_resource type="Animation" id="Animation_af87f"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,24 +55,232 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nxiwi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mldsj"]
 _data = {
-"Default": SubResource("Animation_bdqbe")
+"Default": SubResource("Animation_af87f")
 }
 
+[sub_resource type="GDScript" id="GDScript_4l4ni"]
+script/source = "extends Node
+# gridframe = 100;
+# if (_root.GridYSize == undefined) {
+# 	_root.GridYSize = 40;
+# 	_root.GridXSize = 40;
+# }
+# MaxY = 999;
+# MaxX = 999;
+# MinY = 16;
+# MinX = 24;
+# Y = _root.GridYSize;
+# X = _root.GridXSize;
+# Check = function (clip) {
+# 	if (hold == clip) {
+# 		if (this[clip].hitTest(_root._xmouse, _root._ymouse, false)) {
+# 			clicktime++;
+# 			if (clicktime>12 && (Math.round(clicktime/2) == clicktime/2 || clicktime>120)) {
+# 				this[\"Function\"+clip]();
+# 			}
+# 		} else {
+# 			clicktime = 0;
+# 			hold = undefined;
+# 		}
+# 	}
+# 	//                            
+# 	if (this[clip].hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		this[clip]._xscale += (150-this[clip]._xscale)/4;
+# 	} else {
+# 		this[clip]._xscale += (100-this[clip]._xscale)/4;
+# 	}
+# 	this[clip]._yscale = this[clip]._xscale;
+# };
+# CheckClick = function (clip) {
+# 	if (this[clip].hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		this[\"Function\"+clip]();
+# 		hold = clip;
+# 		clicktime = 0;
+# 	}
+# };
+# CheckUp = function () {
+# 	hold = undefined;
+# };
+# Functionup = function () {
+# 	if (Y<MaxY-1) {
+# 		Y += 1;
+# 		for (i=0; i<_root.LDItemNum; i++) {
+# 			_root.LDItemArray[i][2] = Number(_root.LDItemArray[i][2])+32;
+# 			if (_root.LDItemArray[i][0] == \"39\" || _root.LDItemArray[i][0] == \"40\") {
+# 				_root.LDItemArray[i][4] = Number(_root.LDItemArray[i][4])+32;
+# 			}
+# 			_root.Scene2[\"Item\"+i]._x = _root.LDItemArray[i][1];
+# 			_root.Scene2[\"Item\"+i]._y = _root.LDItemArray[i][2];
+# 		}
+# 		// up Plus
+# 		for (i=0; i<_root.TileArray.length; i++) {
+# 			_root.TileArray[i].unshift(_root.BlankTile);
+# 		}
+# 	}
+# };
+# Functiondp = function () {
+# 	if (Y<MaxY-1) {
+# 		Y += 1;
+# 		// down plus
+# 		for (i=0; i<_root.TileArray.length; i++) {
+# 			_root.TileArray[i].push(_root.BlankTile);
+# 		}
+# 	}
+# };
+# Functionlp = function () {
+# 	if (X<MaxX-1) {
+# 		for (i=0; i<_root.LDItemNum; i++) {
+# 			_root.LDItemArray[i][1] = Number(_root.LDItemArray[i][1])+32;
+# 			if (_root.LDItemArray[i][0] == \"39\" || _root.LDItemArray[i][0] == \"40\") {
+# 				_root.LDItemArray[i][3] = Number(_root.LDItemArray[i][3])+32;
+# 			}
+# 			_root.Scene2[\"Item\"+i]._x = _root.LDItemArray[i][1];
+# 			_root.Scene2[\"Item\"+i]._y = _root.LDItemArray[i][2];
+# 		}
+# 		X += 1;
+# 		// left plus
+# 		array = [];
+# 		for (i=0; i<Y; i++) {
+# 			array.push(_root.BlankTile);
+# 		}
+# 		_root.TileArray.unshift(array);
+# 	}
+# };
+# Functionrp = function () {
+# 	if (X<MaxX-1) {
+# 		X += 1;
+# 		// right plus
+# 		array = [];
+# 		for (i=0; i<Y; i++) {
+# 			array.push(_root.BlankTile);
+# 		}
+# 		_root.TileArray.push(array);
+# 	}
+# };
+# //
+# Functionum = function () {
+# 	if (Y>MinY+1) {
+# 		for (i=0; i<_root.LDItemNum; i++) {
+# 			_root.LDItemArray[i][2] = Number(_root.LDItemArray[i][2])-32;
+# 			if (_root.LDItemArray[i][0] == \"39\" || _root.LDItemArray[i][0] == \"40\") {
+# 				_root.LDItemArray[i][4] = Number(_root.LDItemArray[i][4])-32;
+# 			}
+# 			_root.Scene2[\"Item\"+i]._x = _root.LDItemArray[i][1];
+# 			_root.Scene2[\"Item\"+i]._y = _root.LDItemArray[i][2];
+# 		}
+# 		Y -= 1;
+# 		// up minus
+# 		for (i=0; i<_root.TileArray.length; i++) {
+# 			_root.TileArray[i].shift(_root.BlankTile);
+# 		}
+# 	}
+# };
+# Functiondm = function () {
+# 	if (Y>MinY+1) {
+# 		Y -= 1;
+# 		// down minus
+# 		for (i=0; i<_root.TileArray.length; i++) {
+# 			_root.TileArray[i].pop(_root.BlankTile);
+# 		}
+# 	}
+# };
+# Functionlm = function () {
+# 	if (X>MinX+1) {
+# 		for (i=0; i<_root.LDItemNum; i++) {
+# 			_root.LDItemArray[i][1] = Number(_root.LDItemArray[i][1])-32;
+# 			if (_root.LDItemArray[i][0] == \"39\" || _root.LDItemArray[i][0] == \"40\") {
+# 				_root.LDItemArray[i][3] = Number(_root.LDItemArray[i][3])-32;
+# 			}
+# 			_root.Scene2[\"Item\"+i]._x = _root.LDItemArray[i][1];
+# 			_root.Scene2[\"Item\"+i]._y = _root.LDItemArray[i][2];
+# 		}
+# 		X -= 1;
+# 		// left minus
+# 		array = [];
+# 		for (i=0; i<Y; i++) {
+# 			array.push(_root.BlankTile);
+# 		}
+# 		_root.TileArray.shift(array);
+# 	}
+# };
+# Functionrm = function () {
+# 	if (X>MinX+1) {
+# 		X -= 1;
+# 		// right minus
+# 		array = [];
+# 		for (i=0; i<Y; i++) {
+# 			array.push(_root.BlankTile);
+# 		}
+# 		_root.TileArray.pop(array);
+# 	}
+# };
+# onEnterFrame = function () {
+# 	trace(_root.TileArray.length);
+# 	trace(_root.TileArray[0].length);
+# 	Y = Math.max(Math.min(Y, MaxY), MinY);
+# 	X = Math.max(Math.min(X, MaxX), MinX);
+# 	gfx.clip._xscale = 100+(1.5*(X-20));
+# 	gfx.clip._yscale = 100+(1.5*(Y-20));
+# 	xx = \"x: \"+X;
+# 	yy = \"y: \"+Y;
+# 	_root.GridYSize = Y;
+# 	_root.GridXSize = X;
+# 	//
+# 	Check(\"up\");
+# 	Check(\"dp\");
+# 	Check(\"lp\");
+# 	Check(\"rp\");
+# 	//
+# 	Check(\"um\");
+# 	Check(\"dm\");
+# 	Check(\"lm\");
+# 	Check(\"rm\");
+# };
+# onMouseDown = function () {
+# 	CheckClick(\"up\");
+# 	CheckClick(\"dp\");
+# 	CheckClick(\"lp\");
+# 	CheckClick(\"rp\");
+# 	//
+# 	CheckClick(\"um\");
+# 	CheckClick(\"dm\");
+# 	CheckClick(\"lm\");
+# 	CheckClick(\"rm\");
+# };
+# onMouseUp = function () {
+# 	CheckUp();
+# 	/*CheckUp(\"up\");
+# 	CheckUp(\"dp\");
+# 	CheckUp(\"lp\");
+# 	CheckUp(\"rp\");
+# 	//
+# 	CheckUp(\"um\");
+# 	CheckUp(\"dm\");
+# 	CheckUp(\"lm\");
+# 	CheckUp(\"rm\");*/
+# };
+# "
+
 [node name="LDW - Info Grid Size" type="Node2D"]
+script = ExtResource("1_rx6vf")
+source_xml = "res://sm63/LIBRARY/Level Designer Windows/LDW - Info/LDW - Info Grid Size.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nxiwi")
+"Timeline": SubResource("AnimationLibrary_mldsj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6fcwx")]
-script = ExtResource("2_i5vb2")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_8a6ju")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -89,9 +297,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_6fcwx")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-29.95, -3.6)
-script = ExtResource("2_i5vb2")
+script = ExtResource("2_8a6ju")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid Plus.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -104,9 +312,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51256" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_6fcwx")]
+[node name="@DOMSymbolInstance@51256" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-30.05, 7.1)
-script = ExtResource("2_i5vb2")
+script = ExtResource("2_8a6ju")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid Minus.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -119,9 +327,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51257" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_6fcwx")]
+[node name="@DOMSymbolInstance@51257" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(30.05, 5.9)
-script = ExtResource("2_i5vb2")
+script = ExtResource("2_8a6ju")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid Plus.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -134,9 +342,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51258" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_6fcwx")]
+[node name="@DOMSymbolInstance@51258" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(29.95, -4.65)
-script = ExtResource("2_i5vb2")
+script = ExtResource("2_8a6ju")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid Minus.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -149,9 +357,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51259" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_6fcwx")]
+[node name="@DOMSymbolInstance@51259" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(6.5, 26.5)
-script = ExtResource("2_i5vb2")
+script = ExtResource("2_8a6ju")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid Plus.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -164,9 +372,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51260" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_6fcwx")]
+[node name="@DOMSymbolInstance@51260" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-6.7, 26.5)
-script = ExtResource("2_i5vb2")
+script = ExtResource("2_8a6ju")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid Minus.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -179,9 +387,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51261" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_6fcwx")]
+[node name="@DOMSymbolInstance@51261" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-6.75, -26.75)
-script = ExtResource("2_i5vb2")
+script = ExtResource("2_8a6ju")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid Plus.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -194,9 +402,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51262" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_6fcwx")]
+[node name="@DOMSymbolInstance@51262" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(6.55, -26.75)
-script = ExtResource("2_i5vb2")
+script = ExtResource("2_8a6ju")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Grid Minus.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -216,3 +424,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_4l4ni")

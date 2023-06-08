@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="1_xkfso"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 1.png" id="2_2v7nn"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_dx8c6"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_fqbsl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xheiu"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="2_gjws0"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 1.png" id="3_vpgxd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_o2pdd"]
 
-[sub_resource type="Animation" id="Animation_pt4h2"]
+[sub_resource type="Animation" id="Animation_55o6s"]
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -152,16 +152,99 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_teghp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rm1ao"]
 _data = {
-"Default": SubResource("Animation_pt4h2")
+"Default": SubResource("Animation_55o6s")
 }
 
+[sub_resource type="GDScript" id="GDScript_bfv6f"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_qcbo7"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 		tellTarget (_root.Course.Char) {
+# 			if (_root.KeyDOWN() && Water == false) {
+# 				doublejump = 0;
+# 				attack = true;
+# 				if (_root.WingCap == true) {
+# 					_root.Course.Char.attackFrame = \"Flying\";
+# 				} else {
+# 					attackFrame = \"Dive\";
+# 					yspeed += 3;
+# 					if (_xscale<0) {
+# 						xspeed -= (xspeed-_root.Divespeed)/5;
+# 					} else {
+# 						xspeed -= (xspeed+_root.Divespeed)/5;
+# 					}
+# 					//
+# 					_root.Mariosound = new Sound(this);
+# 					_root.Mariosound.attachSound(\"Mario-Dive\");
+# 					_root.Mariosound.start(0, 1);
+# 					_root.Mariosound.setVolume(_root.MarioVolume);
+# 				}
+# 			}
+# 			if (air == false && _root.Course.Char.yspeed>-3) {
+# 				attack = false;
+# 			}
+# 			if (_root.KeyZ() && (Water == false || _root.Metal == true)) {
+# 				attack = true;
+# 				attackFrame = \"Ground\";
+# 				xspeed = 0;
+# 				yspeed = 0;
+# 			}
+# 		}
+# 		if (_root.KeyRIGHT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		if (_root.KeyLEFT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		//           
+# 		if (_root.KeyTapRIGHT()) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 		if (_root.KeyTapLEFT()) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_4nitm"]
+script/source = "extends Node
+# if (_root.WingCap == true) {
+# 	_root.Course.Char.attackFrame = \"Flying\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_gpvp6"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# "
+
 [node name="Mario (none) Frontflip" type="Node2D"]
+script = ExtResource("1_xheiu")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (none) Frontflip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_teghp")
+"Timeline": SubResource("AnimationLibrary_rm1ao")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -173,7 +256,7 @@ texture_filter = 1
 position = Vector2(6.35, -14.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_xkfso")
+texture = ExtResource("2_gjws0")
 centered = false
 
 [node name="Frame 22" type="Node2D" parent="Layer 1"]
@@ -184,7 +267,7 @@ texture_filter = 1
 position = Vector2(12.6, -8.15)
 rotation = -2.618
 scale = Vector2(1, -1)
-texture = ExtResource("1_xkfso")
+texture = ExtResource("2_gjws0")
 centered = false
 
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
@@ -195,7 +278,7 @@ texture_filter = 1
 position = Vector2(-5.3, -17.1)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("2_2v7nn")
+texture = ExtResource("3_vpgxd")
 centered = false
 
 [node name="Frame 28" type="Node2D" parent="Layer 1"]
@@ -204,18 +287,18 @@ visible = false
 [node name="@@15407" type="Sprite2D" parent="Layer 1/Frame 28"]
 texture_filter = 1
 position = Vector2(-9.65, -15.15)
-texture = ExtResource("2_2v7nn")
+texture = ExtResource("3_vpgxd")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("3_dx8c6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(1.6, -9.35)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("4_fqbsl")
+script = ExtResource("4_o2pdd")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -231,11 +314,11 @@ brightness = 0.0
 [node name="Frame 22" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 22" instance=ExtResource("3_dx8c6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 22"]
 position = Vector2(6.1, -6.4)
 rotation = -2.618
 scale = Vector2(1, -1)
-script = ExtResource("4_fqbsl")
+script = ExtResource("4_o2pdd")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -251,11 +334,11 @@ brightness = 0.0
 [node name="Frame 23" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 23" instance=ExtResource("3_dx8c6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 23"]
 position = Vector2(7.6, -6.9)
 rotation = -2.618
 scale = Vector2(1, -1)
-script = ExtResource("4_fqbsl")
+script = ExtResource("4_o2pdd")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -271,11 +354,11 @@ brightness = 0.0
 [node name="Frame 28" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 28" instance=ExtResource("3_dx8c6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 28"]
 position = Vector2(5.45, -8.85)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("4_fqbsl")
+script = ExtResource("4_o2pdd")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -292,11 +375,23 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_bfv6f")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_qcbo7")
 
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 9"]
+script = SubResource("GDScript_4nitm")
+
 [node name="Frame 29" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 29"]
+script = SubResource("GDScript_gpvp6")

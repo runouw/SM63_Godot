@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cool Cool mountain Background.png" id="1_0te3p"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qc5yh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cool Cool mountain Background.png" id="2_2yxjl"]
 
-[sub_resource type="Animation" id="Animation_83nxa"]
+[sub_resource type="Animation" id="Animation_rai4w"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ehmv0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bsw7j"]
 _data = {
-"Default": SubResource("Animation_83nxa")
+"Default": SubResource("Animation_rai4w")
 }
 
 [node name="2-1 BG" type="Node2D"]
+script = ExtResource("1_qc5yh")
+source_xml = "res://sm63/LIBRARY/Course Clips/2 - Snowman's Land/2-1 BG.xml"
+linkage = "2-farBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ehmv0")
+"Timeline": SubResource("AnimationLibrary_bsw7j")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -45,7 +51,7 @@ scale = Vector2(1.02119, 1.17188)
 [node name="@@23494" type="Polygon2D" parent="Layer 1/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_0te3p")
+texture = ExtResource("2_2yxjl")
 texture_offset = Vector2(259.5, 128)
 polygon = PackedVector2Array(-259.5, -128, 259.5, -128, 259.5, 128, -259.5, 128)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])

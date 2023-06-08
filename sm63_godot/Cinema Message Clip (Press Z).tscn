@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_262l1"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_wfuti"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_54a67"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2uh2u"]
 
-[sub_resource type="Animation" id="Animation_p4ro8"]
+[sub_resource type="Animation" id="Animation_2trpm"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -91,16 +91,86 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtu4r"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h20lu"]
 _data = {
-"Default": SubResource("Animation_p4ro8")
+"Default": SubResource("Animation_2trpm")
 }
 
+[sub_resource type="GDScript" id="GDScript_0sqgp"]
+script/source = "extends Node
+# _alpha = 0;
+# aa = 0;
+# txt = \"\";
+# txt2 = \"\";
+# num = 0;
+# ///fr = 0;
+# bz.aa = 0;
+# bz._alpha = 0;
+# onEnterFrame = function () {
+# 	_root.CinemaMessageFinished = false;
+# 	//fr++;
+# 	gotoAndStop(_root.CinemaMessageFrame);
+# 	_alpha += (aa-_alpha)/4;
+# 	if (_root.CinemaMessage == \"\") {
+# 		aa = 0;
+# 	} else {
+# 		aa = 100;
+# 	}
+# 	bz._alpha += (bz.aa-bz._alpha)/2;
+# 	//
+# 	if (_alpha>98) {
+# 		if (lasttm !== _root.CinemaMessage) {
+# 			num = 0;
+# 			txt = \"\";
+# 			txt2 = \"\";
+# 			if (_root.CinemaMessage.length<40) {
+# 				txt2 += \" \"+newline+\" \";
+# 			}
+# 		}
+# 		// && fr/2 == Math.round(fr/2)      
+# 		for (i=0; i<2; i++) {
+# 			if (num<_root.CinemaMessage.length) {
+# 				txt += _root.CinemaMessage.charAt(num);
+# 				txt2 += _root.CinemaMessage.charAt(num);
+# 				num++;
+# 			} else {
+# 				_root.CinemaMessageFinished = true;
+# 				txt = _root.CinemaMessage;
+# 			}
+# 		}
+# 		if (_root.KeyZ() == true && lastframeZ !== true) {
+# 			txt = \"\";
+# 			txt2 = \"\";
+# 			if (_root.CinemaMessage.length<40) {
+# 				txt2 += \" \"+newline+\" \";
+# 			}
+# 			txt = _root.CinemaMessage;
+# 			txt2 += _root.CinemaMessage;
+# 			num = _root.CinemaMessage.length;
+# 		}
+# 		lastframeZ = _root.KeyZ();
+# 		if (num>=_root.CinemaMessage.length) {
+# 			bz.aa = 100;
+# 		} else {
+# 			bz.aa = 0;
+# 		}
+# 		lasttm = _root.CinemaMessage;
+# 	} else if (_alpha<=2) {
+# 		txt = \"\";
+# 	}
+# };
+# "
+
 [node name="Cinema Message Clip (Press Z)" type="Node2D"]
+script = ExtResource("1_54a67")
+source_xml = "res://sm63/LIBRARY/Cinema Message Clip (Press Z).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wtu4r")
+"Timeline": SubResource("AnimationLibrary_h20lu")
 }
 
 [node name="BG" type="Node2D" parent="."]
@@ -210,10 +280,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), Packe
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_262l1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(143.45, 1)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("2_wfuti")
+script = ExtResource("2_2uh2u")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad M Button Z.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -233,3 +303,6 @@ brightness = 0.0
 [node name="Code" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Code"]
+
+[node name="AS2" type="Node" parent="Code/Frame 0"]
+script = SubResource("GDScript_0sqgp")

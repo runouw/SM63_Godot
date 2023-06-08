@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_a4wvc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hbhf1"]
+
+[sub_resource type="Animation" id="Animation_dpdk3"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ndnm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cttm4"]
 _data = {
-"Default": SubResource("Animation_a4wvc")
+"Default": SubResource("Animation_dpdk3")
 }
 
 [node name="4-7Red Tint Bars" type="Node2D"]
+script = ExtResource("1_hbhf1")
+source_xml = "res://sm63/LIBRARY/Course Clips/4-7Red Tint Bars.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7ndnm")
+"Timeline": SubResource("AnimationLibrary_cttm4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

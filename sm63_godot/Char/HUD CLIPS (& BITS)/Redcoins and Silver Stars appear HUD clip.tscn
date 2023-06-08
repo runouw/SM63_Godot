@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_763np"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0pgep"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_wjcr5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_yx81o"]
 
-[sub_resource type="Animation" id="Animation_u2pdf"]
+[sub_resource type="Animation" id="Animation_lhsgo"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,25 +67,47 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t1xja"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6thuy"]
 _data = {
-"Default": SubResource("Animation_u2pdf")
+"Default": SubResource("Animation_lhsgo")
 }
 
+[sub_resource type="GDScript" id="GDScript_eql4x"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	frame = 1;
+# 	if (_root.RedCoins<=0) {
+# 		frame = 2;
+# 	}
+# 	if (_root.SilverStars<=0) {
+# 		frame = 3;
+# 	}
+# 	if (_root.RedCoins<=0 && _root.SilverStars<=0) {
+# 		frame = 4;
+# 	}
+# 	gotoAndStop(frame);
+# };
+# "
+
 [node name="Redcoins and Silver Stars appear HUD clip" type="Node2D"]
+script = ExtResource("1_wjcr5")
+source_xml = "res://sm63/LIBRARY/Char/HUD CLIPS (& BITS)/Redcoins and Silver Stars appear HUD clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_t1xja")
+"Timeline": SubResource("AnimationLibrary_6thuy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_763np")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-13.55, -17.05)
-script = ExtResource("2_0pgep")
+script = ExtResource("2_yx81o")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Red Folder/Red Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -98,9 +120,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@14724" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_763np")]
+[node name="@DOMSymbolInstance@14724" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-36.5, 12.7)
-script = ExtResource("2_0pgep")
+script = ExtResource("2_yx81o")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Silver Stars/Silver Star Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -116,9 +138,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_763np")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-20.5, -12.3)
-script = ExtResource("2_0pgep")
+script = ExtResource("2_yx81o")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Silver Stars/Silver Star Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -134,9 +156,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_763np")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-13.55, -12.05)
-script = ExtResource("2_0pgep")
+script = ExtResource("2_yx81o")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Red Folder/Red Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -155,3 +177,6 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_eql4x")

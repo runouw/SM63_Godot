@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_dtetl"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_y4v60"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_eogr1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_tqxv0"]
 
-[sub_resource type="Animation" id="Animation_7rbp8"]
+[sub_resource type="Animation" id="Animation_57msa"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,25 +67,34 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_k8fm3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1xhyn"]
 _data = {
-"Default": SubResource("Animation_7rbp8")
+"Default": SubResource("Animation_57msa")
 }
 
+[sub_resource type="GDScript" id="GDScript_j3vx1"]
+script/source = "extends Node
+# stop();"
+
 [node name="9-08 koopa Fly Away" type="Node2D"]
+script = ExtResource("1_eogr1")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-08 koopa Fly Away.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_k8fm3")
+"Timeline": SubResource("AnimationLibrary_1xhyn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_dtetl")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 2)
-script = ExtResource("2_y4v60")
+script = ExtResource("2_tqxv0")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Flying Koopa Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -101,11 +110,11 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_dtetl")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(4.65, 2)
 scale = Vector2(1, 1.01501)
 skew = 0.172197
-script = ExtResource("2_y4v60")
+script = ExtResource("2_tqxv0")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Flying Koopa Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -121,11 +130,11 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_dtetl")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(4.5, -3.05)
 rotation = -2.87979
 scale = Vector2(1, -1)
-script = ExtResource("2_y4v60")
+script = ExtResource("2_tqxv0")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Flying Koopa Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -141,11 +150,11 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13" instance=ExtResource("1_dtetl")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13"]
 position = Vector2(244.5, -92.05)
 rotation = -2.87979
 scale = Vector2(1, -1)
-script = ExtResource("2_y4v60")
+script = ExtResource("2_tqxv0")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Koopa/Flying Koopa Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -160,3 +169,6 @@ brightness = 0.0
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 14"]
+script = SubResource("GDScript_j3vx1")

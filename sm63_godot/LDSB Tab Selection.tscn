@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_5uxmt"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_82xdd"]
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_43pof"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xvect"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_jhato"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_bpqp3"]
 
-[sub_resource type="Animation" id="Animation_i6ihn"]
+[sub_resource type="Animation" id="Animation_kucbo"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -164,24 +164,86 @@ tracks/12/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7ugu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c3djp"]
 _data = {
-"Default": SubResource("Animation_i6ihn")
+"Default": SubResource("Animation_kucbo")
 }
 
+[sub_resource type="GDScript" id="GDScript_bigit"]
+script/source = "extends Node
+# gotoAndStop(2);
+# _root.MenuAccess = false;
+# "
+
+[sub_resource type="GDScript" id="GDScript_swui8"]
+script/source = "extends Node
+# chang._alpha = 0;
+# selecting = false;
+# if (Tab == undefined) {
+# 	Tab = 0
+# }
+# tablast = Tab;
+# onEnterFrame = function () {
+# 	if (_currentframe>2) {
+# 		_root.MenuAccess = true;
+# 	}
+# 	if (tablast !== Tab) {
+# 		_parent.moved.Tab = this.Tab;
+# 		_parent.moved.Reload();
+# 		currenttab.gotoAndStop(Tab+1);
+# 	}
+# 	//      
+# 	if (currenttab._xscale>105 && _currentframe<3) {
+# 		chang._alpha += (100-chang._alpha)/4;
+# 	} else {
+# 		chang._alpha += (0-chang._alpha)/4;
+# 	}
+# 	tablast = Tab;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_s644m"]
+script/source = "extends Node
+# _parent.bar.tabbing = false;
+# _parent.moved.tabbing = false;
+# onMouseDown = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse)) {
+# 		play();
+# 		_parent.bar.tabbing = true;
+# 		_parent.moved.tabbing = true;
+# 		onMouseDown = null;
+# 	}
+# };
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_a82v3"]
+script/source = "extends Node
+# stop();
+# selecting = true;
+# onMouseDown = function () {
+# 	play();
+# };
+# "
+
 [node name="LDSB Tab Selection" type="Node2D"]
+script = ExtResource("1_xvect")
+source_xml = "res://sm63/LIBRARY/LDSB Tab Selection.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_p7ugu")
+"Timeline": SubResource("AnimationLibrary_c3djp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_5uxmt")]
-script = ExtResource("2_82xdd")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -198,8 +260,8 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_5uxmt")]
-script = ExtResource("2_82xdd")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Change Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -224,11 +286,12 @@ position = Vector2(66.55, -32.65)
 scale = Vector2(0.0458527, -0.43103)
 
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 2/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@9311" type="Polygon2D" parent="Layer 4/Frame 2/Group/Shape"]
 polygon = PackedVector2Array(-280.25, -139.325, 69.75, -139.325, 69.75, -23.3, -280.25, -23.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_43pof")
+script = ExtResource("3_bpqp3")
 matrix = Transform2D(0.257629, 0, 0, 0.470474, -19.45, -76.5)
 entries_color = PackedColorArray(0.8, 0.8, 0.8, 0.501961, 0.682353, 0.682353, 0.682353, 0.501961)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -254,7 +317,7 @@ scale = Vector2(1, -1)
 [node name="@@9313" type="Polygon2D" parent="Layer 4/Frame 7/Group/Shape"]
 polygon = PackedVector2Array(-280.25, -139.325, 69.75, -139.325, 69.75, -23.3, -280.25, -23.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_43pof")
+script = ExtResource("3_bpqp3")
 matrix = Transform2D(0.257629, 0, 0, 0.470474, -19.45, -76.5)
 entries_color = PackedColorArray(0.8, 0.8, 0.8, 0.501961, 0.682353, 0.682353, 0.682353, 0.501961)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -276,11 +339,12 @@ position = Vector2(66.55, -32.65)
 scale = Vector2(0.0458527, -0.43103)
 
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 13/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@9315" type="Polygon2D" parent="Layer 4/Frame 13/Group/Shape"]
 polygon = PackedVector2Array(-280.25, -139.325, 69.75, -139.325, 69.75, -23.3, -280.25, -23.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_43pof")
+script = ExtResource("3_bpqp3")
 matrix = Transform2D(0.257629, 0, 0, 0.470474, -19.45, -76.5)
 entries_color = PackedColorArray(0.8, 0.8, 0.8, 0.501961, 0.682353, 0.682353, 0.682353, 0.501961)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -297,6 +361,9 @@ end_cap_mode = 2
 [node name="Frame 14" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 14"]
+script = SubResource("GDScript_bigit")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
@@ -304,9 +371,9 @@ visible = false
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(-126.95, 72.95)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -319,9 +386,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9300" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9300" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(-126.95, 35.95)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -334,9 +401,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9301" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9301" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(-126.95, -1.05)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -349,9 +416,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9302" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9302" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(-57.95, 72.95)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -364,9 +431,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9303" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9303" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(-57.95, 35.95)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -379,9 +446,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9304" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9304" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(-57.95, -1.05)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -394,9 +461,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9305" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9305" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(11.05, 72.95)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -409,9 +476,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9306" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9306" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(11.05, 35.95)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -424,9 +491,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9307" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9307" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(11.05, -1.05)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -439,9 +506,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9308" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9308" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(-195.95, -1.05)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -454,9 +521,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9309" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9309" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(-195.95, 72.95)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -469,9 +536,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@9310" type="Node2D" parent="Layer 2/Frame 5" instance=ExtResource("1_5uxmt")]
+[node name="@DOMSymbolInstance@9310" type="Node2D" parent="Layer 2/Frame 5"]
 position = Vector2(-195.95, 35.95)
-script = ExtResource("2_82xdd")
+script = ExtResource("2_jhato")
 path = "res://sm63_godot/LDSB Tab Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -491,8 +558,17 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_swui8")
+
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 1"]
+script = SubResource("GDScript_s644m")
+
 [node name="Frame 7" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 7"]
+script = SubResource("GDScript_a82v3")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/YI Baby Bowser Stand - 5.png" id="1_7rtny"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pfqph"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/YI Baby Bowser Stand - 5.png" id="2_2aanq"]
 
-[sub_resource type="Animation" id="Animation_2hm2d"]
+[sub_resource type="Animation" id="Animation_035b5"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dje51"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6m5cf"]
 _data = {
-"Default": SubResource("Animation_2hm2d")
+"Default": SubResource("Animation_035b5")
 }
 
 [node name="YI Baby Bowser Ground Pound" type="Node2D"]
+script = ExtResource("1_pfqph")
+source_xml = "res://sm63/LIBRARY/YI Baby Bowser Ground Pound.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dje51")
+"Timeline": SubResource("AnimationLibrary_6m5cf")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -49,7 +55,7 @@ libraries = {
 [node name="@@14244" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-17, -20.5)
-texture = ExtResource("1_7rtny")
+texture = ExtResource("2_2aanq")
 centered = false
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
@@ -58,5 +64,5 @@ visible = false
 [node name="@@14245" type="Sprite2D" parent="Layer 1/Frame 14"]
 texture_filter = 1
 position = Vector2(-91.35, -20.5)
-texture = ExtResource("1_7rtny")
+texture = ExtResource("2_2aanq")
 centered = false

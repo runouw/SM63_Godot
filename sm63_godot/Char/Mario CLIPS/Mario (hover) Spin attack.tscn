@@ -1,16 +1,16 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack slow - 1.png" id="1_ggwx4"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack fast - 4.png" id="2_yo6qx"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack fast - 3.png" id="3_8r1oe"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack fast - 2.png" id="4_86kw4"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack slow - 4.png" id="5_25lri"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack slow - 3.png" id="6_kwlag"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack slow - 2.png" id="7_suy3h"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="8_q0ps8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="9_oa2ok"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ki2r1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack slow - 1.png" id="2_q5d16"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack fast - 4.png" id="3_rr02l"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack fast - 3.png" id="4_rxjbe"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack fast - 2.png" id="5_3c4fh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack slow - 4.png" id="6_pl3gu"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack slow - 3.png" id="7_vonsh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (hover) Spin attack slow - 2.png" id="8_2f54b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="9_hq3ec"]
 
-[sub_resource type="Animation" id="Animation_eejph"]
+[sub_resource type="Animation" id="Animation_qhwkv"]
 length = 2.66667
 loop_mode = 1
 tracks/0/type = "value"
@@ -134,16 +134,85 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_856pm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jxmiw"]
 _data = {
-"Default": SubResource("Animation_eejph")
+"Default": SubResource("Animation_qhwkv")
 }
 
+[sub_resource type="GDScript" id="GDScript_abj86"]
+script/source = "extends Node
+# frame = 1;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		frame += Math.min(Math.round(Math.max(_parent.speed, 5)), 10);
+# 		while (frame>=41) {
+# 			frame -= 40;
+# 		}
+# 		if (_parent.speed>10) {
+# 			gotoAndStop(frame);
+# 		} else {
+# 			gotoAndStop(frame+40);
+# 		}
+# 		if (_root.KeyDOWN() && _root.Course.Char.Water == false && _root.Course.Char.air == true) {
+# 			_parent.speed = Math.max(10, _parent.speed+1);
+# 			_root.Course.Char.yspeed += Math.sqrt((_parent.speed+1)/50)/5;
+# 		}
+# 		if (_parent.speed>7) {
+# 			_parent.speed = _root.groundFriction(_parent.speed, 0.5, 1.1);
+# 		} else {
+# 			_parent.speed = _root.groundFriction(_parent.speed, 0.1, 1.03);
+# 		}
+# 		if (_root.Course.Char.Water == true) {
+# 			_parent.speed = _root.groundFriction(_parent.speed, 0.3, 1.1);
+# 		}
+# 		_parent.speed = Math.max(_parent.speed, 1);
+# 		if ((_parent.speed<=5 && _root.Course.Char.air == false) || (_parent.speed<=3 && _root.Course.Char.air == true)) {
+# 			_root.Course.Char.attack = false;
+# 		}
+# 		if (_root.Course.Char.air == true) {
+# 			if (!_root.KeyDOWN()) {
+# 				if (_parent.speed>7) {
+# 					_root.Course.Char.yspeed = _root.groundFriction(_root.Course.Char.yspeed, 0.3, 1.05);
+# 				} else {
+# 					_root.Course.Char.yspeed = _root.groundFriction(_root.Course.Char.yspeed, 0.1, 1.03);
+# 				}
+# 				//_root.Course.Char.yspeed -= (_parent.speed+1)/15;
+# 				_root.Course.Char.yspeed -= Math.sqrt((_parent.speed+1)/30)/3;
+# 			}
+# 			if (_root.Course.Char.Water == true) {
+# 				_root.Course.Char.yspeed -= Math.sqrt((_parent.speed+1)/20)/2;
+# 			}
+# 		}
+# 		//               
+# 		if (_root.KeyRIGHT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		if (_root.KeyLEFT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/1.5;
+# 		}
+# 		//              
+# 		if (_root.KeyTapRIGHT()) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 		if (_root.KeyTapLEFT()) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0);
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Mario (hover) Spin attack" type="Node2D"]
+script = ExtResource("1_ki2r1")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (hover) Spin attack.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_856pm")
+"Timeline": SubResource("AnimationLibrary_jxmiw")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -153,7 +222,7 @@ libraries = {
 [node name="@@15383" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-12, -34)
-texture = ExtResource("1_ggwx4")
+texture = ExtResource("2_q5d16")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -162,7 +231,7 @@ visible = false
 [node name="@@15384" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-11.15, -27.15)
-texture = ExtResource("2_yo6qx")
+texture = ExtResource("3_rr02l")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
@@ -171,7 +240,7 @@ visible = false
 [node name="@@15385" type="Sprite2D" parent="Layer 1/Frame 19"]
 texture_filter = 1
 position = Vector2(-12.65, -34)
-texture = ExtResource("3_8r1oe")
+texture = ExtResource("4_rxjbe")
 centered = false
 
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
@@ -180,7 +249,7 @@ visible = false
 [node name="@@15386" type="Sprite2D" parent="Layer 1/Frame 29"]
 texture_filter = 1
 position = Vector2(-13.65, -28)
-texture = ExtResource("4_86kw4")
+texture = ExtResource("5_3c4fh")
 centered = false
 
 [node name="Frame 39" type="Node2D" parent="Layer 1"]
@@ -189,7 +258,7 @@ visible = false
 [node name="@@15387" type="Sprite2D" parent="Layer 1/Frame 39"]
 texture_filter = 1
 position = Vector2(-12.15, -34)
-texture = ExtResource("1_ggwx4")
+texture = ExtResource("2_q5d16")
 centered = false
 
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
@@ -198,7 +267,7 @@ visible = false
 [node name="@@15388" type="Sprite2D" parent="Layer 1/Frame 49"]
 texture_filter = 1
 position = Vector2(-11.15, -27.15)
-texture = ExtResource("5_25lri")
+texture = ExtResource("6_pl3gu")
 centered = false
 
 [node name="Frame 59" type="Node2D" parent="Layer 1"]
@@ -207,7 +276,7 @@ visible = false
 [node name="@@15389" type="Sprite2D" parent="Layer 1/Frame 59"]
 texture_filter = 1
 position = Vector2(-12.65, -34)
-texture = ExtResource("6_kwlag")
+texture = ExtResource("7_vonsh")
 centered = false
 
 [node name="Frame 69" type="Node2D" parent="Layer 1"]
@@ -216,17 +285,20 @@ visible = false
 [node name="@@15390" type="Sprite2D" parent="Layer 1/Frame 69"]
 texture_filter = 1
 position = Vector2(-13.65, -28)
-texture = ExtResource("7_suy3h")
+texture = ExtResource("8_2f54b")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("8_q0ps8")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_abj86")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(1, 7)
 scale = Vector2(1.23848, 0.6371)
-script = ExtResource("9_oa2ok")
+script = ExtResource("9_hq3ec")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

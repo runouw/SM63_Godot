@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_gq5hy"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4r50i"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_06ibp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6xa4f"]
 
-[sub_resource type="Animation" id="Animation_2h1m6"]
+[sub_resource type="Animation" id="Animation_mkutw"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,24 +31,39 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tfbcn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wv5gh"]
 _data = {
-"Default": SubResource("Animation_2h1m6")
+"Default": SubResource("Animation_mkutw")
 }
 
+[sub_resource type="GDScript" id="GDScript_cpn7r"]
+script/source = "extends Node
+# if (_root.BowserKey3 !== true) {
+# 	nextFrame();
+# }
+# stop();"
+
 [node name="C-13 WarpPipe" type="Node2D"]
+script = ExtResource("1_06ibp")
+source_xml = "res://sm63/LIBRARY/C-13 WarpPipe.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tfbcn")
+"Timeline": SubResource("AnimationLibrary_wv5gh")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_gq5hy")]
-script = ExtResource("2_4r50i")
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_cpn7r")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_6xa4f")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Warp Pipe/Green WarpPipe.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

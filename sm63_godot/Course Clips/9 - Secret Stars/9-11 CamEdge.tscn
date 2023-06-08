@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_gk31x"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kmyy8"]
+
+[sub_resource type="Animation" id="Animation_eo7st"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_okfc0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npyyp"]
 _data = {
-"Default": SubResource("Animation_gk31x")
+"Default": SubResource("Animation_eo7st")
 }
 
 [node name="9-11 CamEdge" type="Node2D"]
+script = ExtResource("1_kmyy8")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-11 CamEdge.xml"
+linkage = "9-11CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_okfc0")
+"Timeline": SubResource("AnimationLibrary_npyyp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -50,6 +57,7 @@ rotation = 1.5708
 scale = Vector2(1.76936, 1)
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@39324"]
+scale = Vector2(1, 1)
 
 [node name="@@39325" type="Polygon2D" parent="Layer 1/Frame 0/@Group@39324/Shape"]
 color = Color(0.2, 0.2, 0.2, 1)

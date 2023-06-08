@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
-[sub_resource type="Animation" id="Animation_76r8i"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_cii2g"]
+
+[sub_resource type="Animation" id="Animation_0lphq"]
 length = 0.733333
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,38 @@ tracks/4/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjl3j"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p2c6v"]
 _data = {
-"Default": SubResource("Animation_76r8i")
+"Default": SubResource("Animation_0lphq")
 }
 
+[sub_resource type="GDScript" id="GDScript_4y2ic"]
+script/source = "extends Node
+# stop()"
+
+[sub_resource type="GDScript" id="GDScript_wu6bd"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		this._xscale += (130-this._xscale)/3;
+# 	} else {
+# 		this._xscale += (100-this._xscale)/3;
+# 	}
+# 	this._yscale = this._xscale;
+# };
+# "
+
 [node name="Mini Quality Button Mizer" type="Node2D"]
+script = ExtResource("1_cii2g")
+source_xml = "res://sm63/LIBRARY/Char/Mini Quality Button Folder/Mini Quality Button Mizer.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bjl3j")
+"Timeline": SubResource("AnimationLibrary_p2c6v")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -101,6 +125,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 21"]
+script = SubResource("GDScript_4y2ic")
+
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 21"]
 
 [node name="@@16046" type="Polygon2D" parent="Layer 1/Frame 21/Shape"]
@@ -115,3 +142,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_wu6bd")

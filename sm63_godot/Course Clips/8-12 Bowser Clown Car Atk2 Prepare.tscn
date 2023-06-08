@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 6.png" id="1_wr04x"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_368np"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_mkunq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 4.png" id="4_v8626"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 3.png" id="5_sx7fe"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="6_gbk51"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_jjokv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 6.png" id="2_rhe4w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_3if1t"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 4.png" id="4_1ol2i"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 3.png" id="5_e8ei3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="6_51rpt"]
 
-[sub_resource type="Animation" id="Animation_ybvbl"]
+[sub_resource type="Animation" id="Animation_rxaqv"]
 length = 1.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -263,16 +263,61 @@ tracks/20/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pwdyi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xyw01"]
 _data = {
-"Default": SubResource("Animation_ybvbl")
+"Default": SubResource("Animation_rxaqv")
 }
 
+[sub_resource type="GDScript" id="GDScript_b60n2"]
+script/source = "extends Node
+# rotto = 25;
+# speed = 15;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		_rotation -= (_rotation-rotto)/speed;
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_g33pl"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"Bowser - Inhale\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);"
+
+[sub_resource type="GDScript" id="GDScript_abhmh"]
+script/source = "extends Node
+# rotto = 0;
+# speed = 10;
+# "
+
+[sub_resource type="GDScript" id="GDScript_ck2lq"]
+script/source = "extends Node
+# with (_parent._parent) {
+# 	targety = -50;
+# 	frame = \"atk2\";
+# 	if (_x>0) {
+# 		targetx = -200;
+# 	} else {
+# 		targetx = 200;
+# 	}
+# }
+# "
+
 [node name="8-12 Bowser Clown Car Atk2 Prepare" type="Node2D"]
+script = ExtResource("1_jjokv")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-12 Bowser Clown Car Atk2 Prepare.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pwdyi")
+"Timeline": SubResource("AnimationLibrary_xyw01")
 }
 
 [node name="Bowser Body - 6" type="Node2D" parent="."]
@@ -282,16 +327,16 @@ libraries = {
 [node name="@@18110" type="Sprite2D" parent="Bowser Body - 6/Frame 0"]
 texture_filter = 1
 position = Vector2(-20.45, -42.8)
-texture = ExtResource("1_wr04x")
+texture = ExtResource("2_rhe4w")
 centered = false
 
 [node name="Layer 5" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("2_368np")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(0, 20.85)
-script = ExtResource("3_mkunq")
+script = ExtResource("3_3if1t")
 path = "res://sm63_godot/Course Clips/8-12 Clown Car Base (Plus Expressions).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -311,7 +356,7 @@ brightness = 0.0
 [node name="@@18105" type="Sprite2D" parent="Bowser Arm - 4/Frame 0"]
 texture_filter = 1
 position = Vector2(-30, -22.65)
-texture = ExtResource("4_v8626")
+texture = ExtResource("4_1ol2i")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Bowser Arm - 4"]
@@ -320,7 +365,7 @@ visible = false
 [node name="@@18106" type="Sprite2D" parent="Bowser Arm - 4/Frame 4"]
 texture_filter = 1
 position = Vector2(-30, -23.65)
-texture = ExtResource("4_v8626")
+texture = ExtResource("4_1ol2i")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Bowser Arm - 4"]
@@ -329,7 +374,7 @@ visible = false
 [node name="@@18107" type="Sprite2D" parent="Bowser Arm - 4/Frame 9"]
 texture_filter = 1
 position = Vector2(-29, -24.65)
-texture = ExtResource("4_v8626")
+texture = ExtResource("4_1ol2i")
 centered = false
 
 [node name="Frame 20" type="Node2D" parent="Bowser Arm - 4"]
@@ -338,7 +383,7 @@ visible = false
 [node name="@@18108" type="Sprite2D" parent="Bowser Arm - 4/Frame 20"]
 texture_filter = 1
 position = Vector2(-28, -25.65)
-texture = ExtResource("4_v8626")
+texture = ExtResource("4_1ol2i")
 centered = false
 
 [node name="Frame 41" type="Node2D" parent="Bowser Arm - 4"]
@@ -347,7 +392,7 @@ visible = false
 [node name="@@18109" type="Sprite2D" parent="Bowser Arm - 4/Frame 41"]
 texture_filter = 1
 position = Vector2(-30, -23.65)
-texture = ExtResource("4_v8626")
+texture = ExtResource("4_1ol2i")
 centered = false
 
 [node name="Bowser Arm - 3" type="Node2D" parent="."]
@@ -357,7 +402,7 @@ centered = false
 [node name="@@18100" type="Sprite2D" parent="Bowser Arm - 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-2, -26.65)
-texture = ExtResource("5_sx7fe")
+texture = ExtResource("5_e8ei3")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Bowser Arm - 3"]
@@ -366,7 +411,7 @@ visible = false
 [node name="@@18101" type="Sprite2D" parent="Bowser Arm - 3/Frame 4"]
 texture_filter = 1
 position = Vector2(-1, -27.65)
-texture = ExtResource("5_sx7fe")
+texture = ExtResource("5_e8ei3")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Bowser Arm - 3"]
@@ -375,7 +420,7 @@ visible = false
 [node name="@@18102" type="Sprite2D" parent="Bowser Arm - 3/Frame 9"]
 texture_filter = 1
 position = Vector2(-1, -28.65)
-texture = ExtResource("5_sx7fe")
+texture = ExtResource("5_e8ei3")
 centered = false
 
 [node name="Frame 20" type="Node2D" parent="Bowser Arm - 3"]
@@ -384,7 +429,7 @@ visible = false
 [node name="@@18103" type="Sprite2D" parent="Bowser Arm - 3/Frame 20"]
 texture_filter = 1
 position = Vector2(0, -29.65)
-texture = ExtResource("5_sx7fe")
+texture = ExtResource("5_e8ei3")
 centered = false
 
 [node name="Frame 41" type="Node2D" parent="Bowser Arm - 3"]
@@ -393,7 +438,7 @@ visible = false
 [node name="@@18104" type="Sprite2D" parent="Bowser Arm - 3/Frame 41"]
 texture_filter = 1
 position = Vector2(-1, -27.65)
-texture = ExtResource("5_sx7fe")
+texture = ExtResource("5_e8ei3")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -403,7 +448,7 @@ centered = false
 [node name="@@18095" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-31, -52.65)
-texture = ExtResource("6_gbk51")
+texture = ExtResource("6_51rpt")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
@@ -412,7 +457,7 @@ visible = false
 [node name="@@18096" type="Sprite2D" parent="Layer 2/Frame 4"]
 texture_filter = 1
 position = Vector2(-31, -53.65)
-texture = ExtResource("6_gbk51")
+texture = ExtResource("6_51rpt")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
@@ -421,7 +466,7 @@ visible = false
 [node name="@@18097" type="Sprite2D" parent="Layer 2/Frame 9"]
 texture_filter = 1
 position = Vector2(-30, -54.65)
-texture = ExtResource("6_gbk51")
+texture = ExtResource("6_51rpt")
 centered = false
 
 [node name="Frame 20" type="Node2D" parent="Layer 2"]
@@ -430,7 +475,7 @@ visible = false
 [node name="@@18098" type="Sprite2D" parent="Layer 2/Frame 20"]
 texture_filter = 1
 position = Vector2(-29, -55.65)
-texture = ExtResource("6_gbk51")
+texture = ExtResource("6_51rpt")
 centered = false
 
 [node name="Frame 41" type="Node2D" parent="Layer 2"]
@@ -439,18 +484,30 @@ visible = false
 [node name="@@18099" type="Sprite2D" parent="Layer 2/Frame 41"]
 texture_filter = 1
 position = Vector2(-31, -53.65)
-texture = ExtResource("6_gbk51")
+texture = ExtResource("6_51rpt")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_b60n2")
+
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 4"]
+script = SubResource("GDScript_g33pl")
 
 [node name="Frame 40" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 40"]
+script = SubResource("GDScript_abhmh")
+
 [node name="Frame 44" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 44"]
+script = SubResource("GDScript_ck2lq")

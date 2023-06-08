@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_lr822"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8p4be"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_s5aqj"]
 
-[sub_resource type="Animation" id="Animation_muo0w"]
+[sub_resource type="Animation" id="Animation_l0exp"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,34 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2w32y"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h623h"]
 _data = {
-"Default": SubResource("Animation_muo0w")
+"Default": SubResource("Animation_l0exp")
 }
 
+[sub_resource type="GDScript" id="GDScript_8sst8"]
+script/source = "extends Node
+# wave = 0;
+# Y = this._y;
+# startscale = _yscale+50;
+# flux = Math.round(startscale*0.02)*50*0.3
+# onEnterFrame = function () {
+# 	wave += 0.05;
+# 	//this._y = Y+Math.sin(wave)*25
+# 	this._yscale = startscale+Math.sin(wave)*flux
+# };
+# "
+
 [node name="5-1 Lava FG Ray" type="Node2D"]
+script = ExtResource("1_8p4be")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2w32y")
+"Timeline": SubResource("AnimationLibrary_h623h")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,7 +72,7 @@ libraries = {
 [node name="@@31281" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(-2284, -50.475, 2283.98, -50.475, 2283.98, -0.475, -2284, -0.475)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_lr822")
+script = ExtResource("2_s5aqj")
 matrix = Transform2D(0, -0.0293427, 0.0317383, 0, -844.25, -25.45)
 entries_color = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0.352941, 1, 0.215686, 0.133333, 0)
 entries_ratio = PackedFloat32Array(0, 0.352941, 1)
@@ -62,3 +81,6 @@ spread_method_reflect = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_8sst8")

@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_cjgxt"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_sd32k"]
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_8mte5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6moyy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3ke3k"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_1o68p"]
 
-[sub_resource type="Animation" id="Animation_1tn32"]
+[sub_resource type="Animation" id="Animation_cbp50"]
 length = 5.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -140,25 +140,40 @@ tracks/10/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wy2rf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w5btj"]
 _data = {
-"Default": SubResource("Animation_1tn32")
+"Default": SubResource("Animation_cbp50")
 }
 
+[sub_resource type="GDScript" id="GDScript_s2bq4"]
+script/source = "extends Node
+# gotoAndPlay(random(150));
+# "
+
+[sub_resource type="GDScript" id="GDScript_u6sy6"]
+script/source = "extends Node
+# gotoAndPlay(2);
+# "
+
 [node name="Highscores Button" type="Node2D"]
+script = ExtResource("1_6moyy")
+source_xml = "res://sm63/LIBRARY/Menu/Highscores Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wy2rf")
+"Timeline": SubResource("AnimationLibrary_w5btj")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_cjgxt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-0.55, -0.55)
-script = ExtResource("2_sd32k")
+script = ExtResource("2_3ke3k")
 path = "res://sm63_godot/Menu/Highscores Button Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -180,7 +195,7 @@ brightness = 0.0
 [node name="@@51323" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-62.525, -20.025, 62.475, -20.025, 62.475, 19.975, -62.525, 19.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_8mte5")
+script = ExtResource("3_1o68p")
 matrix = Transform2D(0.0800781, 0, 0, 0.0800781, 62.5, 0.25)
 entries_color = PackedColorArray(0, 0, 1, 1, 0, 0, 0.588235, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -202,7 +217,7 @@ visible = false
 [node name="@@51325" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
 polygon = PackedVector2Array(-62.525, -20.025, 62.475, -20.025, 62.475, 19.975, -62.525, 19.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_8mte5")
+script = ExtResource("3_1o68p")
 matrix = Transform2D(0.0800781, 0, 0, 0.0800781, 62.5, 0.25)
 entries_color = PackedColorArray(0, 0, 1, 1, 0, 0, 0.588235, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -224,7 +239,7 @@ visible = false
 [node name="@@51327" type="Polygon2D" parent="Layer 1/Frame 39/Shape"]
 polygon = PackedVector2Array(-62.5, -20, 62.5, -20, 62.5, 20, -62.5, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_8mte5")
+script = ExtResource("3_1o68p")
 matrix = Transform2D(0.0800171, 0, 0, 0.0799866, 3.55, 0.6)
 entries_color = PackedColorArray(0, 0, 1, 1, 0, 0, 0.588235, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -246,7 +261,7 @@ visible = false
 [node name="@@51329" type="Polygon2D" parent="Layer 1/Frame 79/Shape"]
 polygon = PackedVector2Array(-62.525, -20.025, 62.475, -20.025, 62.475, 19.975, -62.525, 19.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_8mte5")
+script = ExtResource("3_1o68p")
 matrix = Transform2D(0.0799561, -1.52588e-05, 1.52588e-05, 0.079895, -62, 1)
 entries_color = PackedColorArray(0, 0, 1, 1, 0, 0, 0.588235, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -268,7 +283,7 @@ visible = false
 [node name="@@51331" type="Polygon2D" parent="Layer 1/Frame 80/Shape"]
 polygon = PackedVector2Array(-62.525, -20.025, 62.475, -20.025, 62.475, 19.975, -62.525, 19.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_8mte5")
+script = ExtResource("3_1o68p")
 matrix = Transform2D(0.0799561, -1.52588e-05, 1.52588e-05, 0.079895, -62, 1)
 entries_color = PackedColorArray(0, 0, 1, 1, 0, 0, 0.588235, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -290,7 +305,7 @@ visible = false
 [node name="@@51333" type="Polygon2D" parent="Layer 1/Frame 120/Shape"]
 polygon = PackedVector2Array(-62.5, -20, 62.5, -20, 62.5, 20, -62.5, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_8mte5")
+script = ExtResource("3_1o68p")
 matrix = Transform2D(0.0800171, 0, 0, 0.0799866, 3.55, 0.6)
 entries_color = PackedColorArray(0, 0, 1, 1, 0, 0, 0.588235, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -312,7 +327,7 @@ visible = false
 [node name="@@51335" type="Polygon2D" parent="Layer 1/Frame 158/Shape"]
 polygon = PackedVector2Array(-62.525, -20.025, 62.475, -20.025, 62.475, 19.975, -62.525, 19.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_8mte5")
+script = ExtResource("3_1o68p")
 matrix = Transform2D(0.0800781, 0, 0, 0.0800781, 62.5, 0.25)
 entries_color = PackedColorArray(0, 0, 1, 1, 0, 0, 0.588235, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -330,8 +345,14 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_s2bq4")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 158" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 158"]
+script = SubResource("GDScript_u6sy6")

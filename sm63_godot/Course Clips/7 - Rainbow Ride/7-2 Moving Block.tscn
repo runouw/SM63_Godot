@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_m8edg"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_836ts"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dslpn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_qxfkp"]
 
-[sub_resource type="Animation" id="Animation_1583h"]
+[sub_resource type="Animation" id="Animation_51uq7"]
 length = 24.3667
 loop_mode = 1
 tracks/0/type = "value"
@@ -151,25 +151,54 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ml816"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6tuuw"]
 _data = {
-"Default": SubResource("Animation_1583h")
+"Default": SubResource("Animation_51uq7")
 }
 
+[sub_resource type="GDScript" id="GDScript_n6t40"]
+script/source = "extends Node
+# stop();
+# played = false;
+# landedon = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (played == true) {
+# 			play();
+# 		}
+# 		if (landedon == true && _root.Course.Char.yspeed>=-3) {
+# 			played = true;
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_rvihj"]
+script/source = "extends Node
+# gotoAndStop(1);
+# "
+
 [node name="7-2 Moving Block" type="Node2D"]
+script = ExtResource("1_dslpn")
+source_xml = "res://sm63/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Moving Block.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ml816")
+"Timeline": SubResource("AnimationLibrary_6tuuw")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_m8edg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.05, 0)
-script = ExtResource("2_836ts")
+script = ExtResource("2_qxfkp")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Custom Moving Platform.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -185,9 +214,9 @@ brightness = 0.0
 [node name="Frame 58" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 58" instance=ExtResource("1_m8edg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 58"]
 position = Vector2(0.1, 45.45)
-script = ExtResource("2_836ts")
+script = ExtResource("2_qxfkp")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Custom Moving Platform.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -203,9 +232,9 @@ brightness = 0.0
 [node name="Frame 650" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 650" instance=ExtResource("1_m8edg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 650"]
 position = Vector2(240.8, 653.05)
-script = ExtResource("2_836ts")
+script = ExtResource("2_qxfkp")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Custom Moving Platform.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -221,9 +250,9 @@ brightness = 0.0
 [node name="Frame 682" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 682" instance=ExtResource("1_m8edg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 682"]
 position = Vector2(242.05, 628)
-script = ExtResource("2_836ts")
+script = ExtResource("2_qxfkp")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Custom Moving Platform.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -239,9 +268,9 @@ brightness = 0.0
 [node name="Frame 700" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 700" instance=ExtResource("1_m8edg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 700"]
 position = Vector2(242.05, 628)
-script = ExtResource("2_836ts")
+script = ExtResource("2_qxfkp")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Custom Moving Platform.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -257,9 +286,9 @@ brightness = 0.0
 [node name="Frame 714" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 714" instance=ExtResource("1_m8edg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 714"]
 position = Vector2(245.05, 628)
-script = ExtResource("2_836ts")
+script = ExtResource("2_qxfkp")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Custom Moving Platform.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -278,9 +307,9 @@ visible = false
 [node name="Frame 716" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 716" instance=ExtResource("1_m8edg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 716"]
 position = Vector2(0.05, 0)
-script = ExtResource("2_836ts")
+script = ExtResource("2_qxfkp")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Custom Moving Platform.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -296,9 +325,9 @@ brightness = 0.0
 [node name="Frame 730" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 730" instance=ExtResource("1_m8edg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 730"]
 position = Vector2(0.05, 0)
-script = ExtResource("2_836ts")
+script = ExtResource("2_qxfkp")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Common Coded PL/Custom Moving Platform.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -335,5 +364,11 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_n6t40")
+
 [node name="Frame 730" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 730"]
+script = SubResource("GDScript_rvihj")

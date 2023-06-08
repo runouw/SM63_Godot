@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_u2y6s"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_85to2"]
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="3_3by6c"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2lypx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_li14i"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="3_icbjn"]
 
-[sub_resource type="Animation" id="Animation_ervhw"]
+[sub_resource type="Animation" id="Animation_20lt8"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,25 +44,30 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iywv0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vrcit"]
 _data = {
-"Default": SubResource("Animation_ervhw")
+"Default": SubResource("Animation_20lt8")
 }
 
 [node name="LDP Diffi Anu" type="Node2D"]
+script = ExtResource("1_2lypx")
+source_xml = "res://sm63/LIBRARY/LDP Diffi Anu.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iywv0")
+"Timeline": SubResource("AnimationLibrary_vrcit")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_u2y6s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-134.15, 65.4)
-script = ExtResource("2_85to2")
+script = ExtResource("2_li14i")
 path = "res://sm63_godot/LDP Diffi uCnu.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -85,7 +90,7 @@ visible = false
 [node name="@@8848" type="Polygon2D" parent="Layer 2(Mask)/Frame 0/Shape"]
 polygon = PackedVector2Array(-81.5, -47, 83.5, -47, 83.5, 68.95, -81.5, 68.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_3by6c")
+script = ExtResource("3_icbjn")
 matrix = Transform2D(-0.0634766, 0.0700989, -0.0453186, -0.0500488, 9.4, 3.6)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.466667, 1, 1, 0.25098, 0.435294, 0.776471, 1, 1, 0.333333, 1, 1, 0.313726, 0, 0.968627, 0.968627, 0.501961)
 entries_ratio = PackedFloat32Array(0, 0.4, 0.494118, 0.596078, 1)

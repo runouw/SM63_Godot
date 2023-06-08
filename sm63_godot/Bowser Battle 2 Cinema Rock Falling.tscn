@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Volcano Rock 2.png" id="1_68gpq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brick.png" id="2_7ova1"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_d0j34"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Ancient Wall Tile.png" id="4_1vl6v"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_c6i12"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Volcano Rock 2.png" id="2_tgujt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brick.png" id="3_63we0"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="4_x7qsn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Ancient Wall Tile.png" id="5_0oudu"]
 
-[sub_resource type="Animation" id="Animation_igmix"]
+[sub_resource type="Animation" id="Animation_uhwku"]
 length = 0.333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -153,16 +154,44 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w5rkq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nwykv"]
 _data = {
-"Default": SubResource("Animation_igmix")
+"Default": SubResource("Animation_uhwku")
 }
 
+[sub_resource type="GDScript" id="GDScript_oia5k"]
+script/source = "extends Node
+# Re = function () {
+# 	gotoAndStop(random(9)+2);
+# 	_rotation = random(360);
+# 	rotspeed = random(10)-5;
+# 	_x = random(500)-250;
+# 	_y = -250-random(100);
+# 	xspeed = (random(10)/5)-1;
+# 	yspeed = 6+random(10)/5;
+# };
+# Re();
+# _y -= random(500);
+# onEnterFrame = function () {
+# 	_x += xspeed;
+# 	_y += yspeed;
+# 	_rotation += rotspeed;
+# 	if (_y>300) {
+# 		Re();
+# 	}
+# };
+# "
+
 [node name="Bowser Battle 2 Cinema Rock Falling" type="Node2D"]
+script = ExtResource("1_c6i12")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 2 Cinema Rock Falling.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w5rkq")
+"Timeline": SubResource("AnimationLibrary_nwykv")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -174,7 +203,7 @@ libraries = {
 [node name="@@1976" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_68gpq")
+texture = ExtResource("2_tgujt")
 texture_offset = Vector2(-28.3, 12.05)
 texture_scale = Vector2(2.66667, 2.66667)
 polygon = PackedVector2Array(-4.9, -18.45, -4.9, -18.45, 7.7, -10.525, -14.0765, -10.525, -12.55, -12.775, -12, -14.65, -10.5, -16.725, -14.0765, -10.525, 17.625, -10.525, 17.625, -1.9, 12.75, 4.275, 13.425, 7.2, 15.35, 11.85, 14.15, 15.6, 12, 17.15, 12, 17.15, -2.325, 15.225, -10.875, 4.1, -15, 1.275, -16.825, -1.225, -16.875, -6.4)
@@ -196,7 +225,7 @@ visible = false
 [node name="@@1978" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_68gpq")
+texture = ExtResource("2_tgujt")
 texture_offset = Vector2(13, 15.1)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(-5.35, -24, -5.35, -24, 9.8375, -19.9, 19.9968, -14.1, -16.75, -14.1, -8.75, -22.35, -7.3, -23.15, -23.5, -14.1, 19.9968, -14.1, 23.5, -12.1, 22.0069, -1.35, 22.0069, -1.35, 18.5, 23.9, 18.5, 23.9, 2.675, 22.1, -11.1, 14.7, -11.8, 13.35, -19.5, -1.35, -19.5, -1.35, -14, -6.6, -23.5, -9.6, -23.5, -12.1, -19.5, -1.35, -19.5, -1.35, -19.5, -1.35, -19.5, -1.35)
@@ -218,7 +247,7 @@ visible = false
 [node name="@@1980" type="Polygon2D" parent="Layer 1/Frame 3/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_68gpq")
+texture = ExtResource("2_tgujt")
 texture_offset = Vector2(11.65, 8.45)
 texture_scale = Vector2(4, 4)
 polygon = PackedVector2Array(0.8, -7.625, 0.8, -7.625, 6.075, -4.25, 8.6, 0.85, 8.6, 0.85, 7.35, 4.625, -6.74046, 4.625, -8.52766, 0.85, -8.52766, 0.85, -8.575, 0.75, -5.25, -5.6, -6.74046, 4.625, 5.775, 4.625, 2.4, 7.775, -0.025, 8.05, -0.0250001, 8.05, -6.125, 5.925)
@@ -240,7 +269,7 @@ visible = false
 [node name="@@1982" type="Polygon2D" parent="Layer 1/Frame 4/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_7ova1")
+texture = ExtResource("3_63we0")
 texture_offset = Vector2(16, 10.65)
 polygon = PackedVector2Array(-16, -10.65, 16, -10.65, 16, -2.6, -16, -2.6, -16, -2.6, 12.05, -2.6, 7.55, 10.65, -16, 10.65, -16, 0.9, 12.05, -2.6, 16, -2.6, 16, 0.9, 16, 0.9)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12)])
@@ -261,7 +290,7 @@ visible = false
 [node name="@@1984" type="Polygon2D" parent="Layer 1/Frame 5/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_d0j34")
+texture = ExtResource("4_x7qsn")
 texture_offset = Vector2(16, 8.55)
 polygon = PackedVector2Array(-16, -8.55, -2.25, -8.55, -2.25, -5.75, -15.0889, -5.75, 5.5, -8.55, 16, -8.55, 14.6889, -5.75, -2.25, -5.75, -15.0889, -5.75, 14.6889, -5.75, 13.05, -2.25, -13.95, -2.25, -13.95, -2.25, 11.25, -2.25, 11.25, 1.575, 8, 8.5, -16, 8.5, -13.1548, 0.193848)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15, 16, 17)])
@@ -282,7 +311,7 @@ visible = false
 [node name="@@1986" type="Polygon2D" parent="Layer 1/Frame 6/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_d0j34")
+texture = ExtResource("4_x7qsn")
 texture_offset = Vector2(16, 24.4)
 polygon = PackedVector2Array(-16, -8.1, 12.25, -8.1, 16, -3.1, 16, 3.6, 2.22334, 7.62139, 2.22334, 7.62139, -16, 7.6, -16, -3.1)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
@@ -303,7 +332,7 @@ visible = false
 [node name="@@1988" type="Polygon2D" parent="Layer 1/Frame 7/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_d0j34")
+texture = ExtResource("4_x7qsn")
 texture_offset = Vector2(27.25, 29.75)
 polygon = PackedVector2Array(13.75, -10.5, 13.75, -10.5, 10.5, 2, -12.4957, 2, -7.25, -7.5, -12.4957, 2, 21.25, 2, 21.25, 11.25, -3.75, 11.25, -3.75, 8.25, -13.6, 4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9, 10)])
@@ -324,7 +353,7 @@ visible = false
 [node name="@@1990" type="Polygon2D" parent="Layer 1/Frame 8/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_1vl6v")
+texture = ExtResource("5_0oudu")
 texture_offset = Vector2(70.9, 10.25)
 polygon = PackedVector2Array(1, -12.35, 1, -12.35, 21.25, -4.6, 17.25, -0.6, -17.6667, -0.6, -10.5, -12.1, -17.6667, -0.6, 0.1, -0.6, 0.1, 5.15, -21.25, 5.15, -8.75, 5.15, 0.1, 5.15, 0.1, 12.3, -11.65, 12.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13)])
@@ -341,11 +370,12 @@ end_cap_mode = 2
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 9"]
+position = Vector2(0, -3.5)
 
 [node name="@@1992" type="Polygon2D" parent="Layer 1/Frame 9/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_1vl6v")
+texture = ExtResource("5_0oudu")
 texture_offset = Vector2(72.05, 25.9)
 polygon = PackedVector2Array(0.35, -12.5, 0.35, -12.5, -2.4, -5, -4.15, -2.5, -16.9405, -2.5, -16.15, -9.25, -16.9405, -2.5, 19.35, -2.5, 19.35, 5, -17.8189, 5, -17.8189, 5, 14.6, 5, 11.35, 19.5, -19.4, 19.5, -19.4, 18.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14)])
@@ -361,6 +391,9 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_oia5k")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

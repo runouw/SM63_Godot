@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_fcdvp"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_bkiin"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_53hl4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2cc6v"]
 
-[sub_resource type="Animation" id="Animation_iujpg"]
+[sub_resource type="Animation" id="Animation_qr8vi"]
 length = 1.63333
 loop_mode = 1
 tracks/0/type = "value"
@@ -115,24 +115,34 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2w8as"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_unjow"]
 _data = {
-"Default": SubResource("Animation_iujpg")
+"Default": SubResource("Animation_qr8vi")
 }
 
+[sub_resource type="GDScript" id="GDScript_c76ex"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Bully Lava" type="Node2D"]
+script = ExtResource("1_53hl4")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Bully/Clips/Bully Lava.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2w8as")
+"Timeline": SubResource("AnimationLibrary_unjow")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_fcdvp")]
-script = ExtResource("2_bkiin")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_2cc6v")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bully/Clips/Bully Hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -148,9 +158,9 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_fcdvp")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
 position = Vector2(0, -3.2)
-script = ExtResource("2_bkiin")
+script = ExtResource("2_2cc6v")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bully/Clips/Bully Hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -160,15 +170,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.1
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16" instance=ExtResource("1_fcdvp")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16"]
 position = Vector2(0, -10)
-script = ExtResource("2_bkiin")
+script = ExtResource("2_2cc6v")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bully/Clips/Bully Hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -178,14 +188,14 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.2
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Frame 26" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 26" instance=ExtResource("1_fcdvp")]
-script = ExtResource("2_bkiin")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 26"]
+script = ExtResource("2_2cc6v")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bully/Clips/Bully Hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -195,15 +205,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.4
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Frame 37" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 37" instance=ExtResource("1_fcdvp")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 37"]
 position = Vector2(0, -6)
-script = ExtResource("2_bkiin")
+script = ExtResource("2_2cc6v")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bully/Clips/Bully Hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -213,15 +223,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.75
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Frame 47" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 47" instance=ExtResource("1_fcdvp")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 47"]
 position = Vector2(0, 14)
-script = ExtResource("2_bkiin")
+script = ExtResource("2_2cc6v")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bully/Clips/Bully Hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -231,7 +241,7 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Frame 48" type="Node2D" parent="Layer 1"]
@@ -243,3 +253,6 @@ visible = false
 
 [node name="Frame 48" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 48"]
+script = SubResource("GDScript_c76ex")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_1jup3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3wirj"]
+
+[sub_resource type="Animation" id="Animation_o1i5n"]
 length = 0.566667
 loop_mode = 1
 tracks/0/type = "value"
@@ -88,16 +90,26 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jd2ij"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m12qg"]
 _data = {
-"Default": SubResource("Animation_1jup3")
+"Default": SubResource("Animation_o1i5n")
 }
 
+[sub_resource type="GDScript" id="GDScript_s2xda"]
+script/source = "extends Node
+# this.removeMovieClip(this);
+# "
+
 [node name="Transition from down" type="Node2D"]
+script = ExtResource("1_3wirj")
+source_xml = "res://sm63/LIBRARY/Effects/Transitions/Transition from down.xml"
+linkage = "downtransition2"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jd2ij")
+"Timeline": SubResource("AnimationLibrary_m12qg")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -107,6 +119,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@48724" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(274.975, -200.025, 274.975, -200.025, 274.975, 199.975, -275.025, 200, -275.025, 200, -275.05, -200)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 
@@ -116,6 +129,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 2"]
 
 [node name="@@48725" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(274.975, -200.025, 274.975, -200.025, 274.975, 199.975, -275.025, 200, -275.025, 200, -275.05, -200)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 
@@ -125,6 +139,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 7"]
 
 [node name="@@48726" type="Polygon2D" parent="Layer 1/Frame 7/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(274.975, -200.025, 274.975, -200.025, 274.975, -107.449, 51.2646, -107.454, 162.503, -138.313, 274.929, -200, -275.05, -200, -275.05, -200, -167.512, -138.297, -58.7404, -107.449, -275.044, -107.449, -275.046, -138.313, -275.044, -107.449, 274.975, -107.449, 274.975, 199.975, -275.025, 200, -275.025, 200, -275.025, 199.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15, 16, 17)])
 
@@ -134,6 +149,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 15"]
 
 [node name="@@48727" type="Polygon2D" parent="Layer 1/Frame 15/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-55.018, 135.997, 54.982, 135.997, 164.988, 142.698, 275, 156.1, 274.975, 199.975, -275.025, 200, -275.025, 200, -275, 156.1, -165.012, 142.698)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8)])
 
@@ -146,3 +162,6 @@ visible = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 16"]
+script = SubResource("GDScript_s2xda")

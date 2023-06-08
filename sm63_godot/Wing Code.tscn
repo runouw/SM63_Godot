@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_etqu1"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_egpm2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hgss3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_n66an"]
 
-[sub_resource type="Animation" id="Animation_s56x3"]
+[sub_resource type="Animation" id="Animation_c8pis"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,24 +43,53 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qpl3c"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3pgw"]
 _data = {
-"Default": SubResource("Animation_s56x3")
+"Default": SubResource("Animation_c8pis")
 }
 
+[sub_resource type="GDScript" id="GDScript_wh8ii"]
+script/source = "extends Node
+# if (_root.WingCap == false) {
+# 	nextFrame();
+# 	onEnterFrame = function () {
+# 		if (_root.WingCap == true) {
+# 			gotoAndStop(1);
+# 		}
+# 	};
+# } else {
+# 	onEnterFrame = function () {
+# 		if (_root.WingCap == false) {
+# 			nextFrame();
+# 			onEnterFrame = function () {
+# 				if (_root.WingCap == true) {
+# 					gotoAndStop(1);
+# 				}
+# 			};
+# 		}
+# 	};
+# 	stop();
+# }
+# "
+
 [node name="Wing Code" type="Node2D"]
+script = ExtResource("1_hgss3")
+source_xml = "res://sm63/LIBRARY/Wing Code.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qpl3c")
+"Timeline": SubResource("AnimationLibrary_b3pgw")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_etqu1")]
-script = ExtResource("2_egpm2")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_n66an")
 path = "res://sm63_godot/Wing Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -79,3 +108,6 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_wh8ii")

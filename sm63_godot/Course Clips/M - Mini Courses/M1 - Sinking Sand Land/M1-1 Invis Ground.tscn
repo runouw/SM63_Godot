@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_fbul8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_b0ahu"]
+
+[sub_resource type="Animation" id="Animation_x7wfl"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nyxd4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cif4p"]
 _data = {
-"Default": SubResource("Animation_fbul8")
+"Default": SubResource("Animation_x7wfl")
 }
 
 [node name="M1-1 Invis Ground" type="Node2D"]
+script = ExtResource("1_b0ahu")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Invis Ground.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nyxd4")
+"Timeline": SubResource("AnimationLibrary_cif4p")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

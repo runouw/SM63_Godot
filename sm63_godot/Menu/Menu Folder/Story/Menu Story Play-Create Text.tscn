@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_ly1hd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dctnb"]
+
+[sub_resource type="Animation" id="Animation_b57im"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,32 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w21cf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rx2jf"]
 _data = {
-"Default": SubResource("Animation_ly1hd")
+"Default": SubResource("Animation_b57im")
 }
 
+[sub_resource type="GDScript" id="GDScript_j35o1"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root[\"File\"+_parent._parent.HL+\"TotalStars\"] == 0 && _root[\"File\"+_parent._parent.HL+\"TotalStars\"] !== undefined) {
+# 		gotoAndStop(1);
+# 	} else if (_root[\"File\"+_parent._parent.HL+\"TotalStars\"] !== undefined) {
+# 		gotoAndStop(2);
+# 	}
+# };
+# "
+
 [node name="Menu Story Play-Create Text" type="Node2D"]
+script = ExtResource("1_dctnb")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Story/Menu Story Play-Create Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w21cf")
+"Timeline": SubResource("AnimationLibrary_rx2jf")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -76,3 +94,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_j35o1")

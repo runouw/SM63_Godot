@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 6.png" id="1_2t1tf"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_n2n4b"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_4livg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 4.png" id="4_ghual"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="5_n0eq3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 3.png" id="6_u3817"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_38c8h"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 6.png" id="2_3g6ly"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_lbnr5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 4.png" id="4_b20jb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="5_prtca"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 3.png" id="6_dq8jm"]
 
-[sub_resource type="Animation" id="Animation_aw5kb"]
+[sub_resource type="Animation" id="Animation_2fy0y"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -23,16 +23,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvhtb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pbfj7"]
 _data = {
-"Default": SubResource("Animation_aw5kb")
+"Default": SubResource("Animation_2fy0y")
 }
 
 [node name="8-12 Bowser Clown Car Clip" type="Node2D"]
+script = ExtResource("1_38c8h")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-12 Bowser Clown Car Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bvhtb")
+"Timeline": SubResource("AnimationLibrary_pbfj7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -42,12 +47,12 @@ libraries = {
 [node name="@@18111" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-20.45, -44.15)
-texture = ExtResource("1_2t1tf")
+texture = ExtResource("2_3g6ly")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_n2n4b")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 19.5)
-script = ExtResource("3_4livg")
+script = ExtResource("3_lbnr5")
 path = "res://sm63_godot/Course Clips/8-12 Clown Car Base (Plus Expressions).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -63,17 +68,17 @@ brightness = 0.0
 [node name="@@18112" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-30, -24)
-texture = ExtResource("4_ghual")
+texture = ExtResource("4_b20jb")
 centered = false
 
 [node name="@@18113" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-31, -54)
-texture = ExtResource("5_n0eq3")
+texture = ExtResource("5_prtca")
 centered = false
 
 [node name="@@18114" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-2, -28)
-texture = ExtResource("6_u3817")
+texture = ExtResource("6_dq8jm")
 centered = false

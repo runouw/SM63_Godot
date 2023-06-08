@@ -1,14 +1,14 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 1.png" id="1_liqeq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 2.png" id="2_yxca6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 3.png" id="3_guy52"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 4.png" id="4_44aed"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="5_vkyy3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_4tl4q"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 5.png" id="7_5djdu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_x8yxn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 1.png" id="2_jxgnq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 2.png" id="3_4qbpn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 3.png" id="4_rae66"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 4.png" id="5_rn1ob"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_11ija"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg - 5.png" id="7_2c4nr"]
 
-[sub_resource type="Animation" id="Animation_2lrmq"]
+[sub_resource type="Animation" id="Animation_j4cg2"]
 length = 1.06667
 loop_mode = 1
 tracks/0/type = "value"
@@ -324,16 +324,99 @@ tracks/25/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lntuj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4fpxr"]
 _data = {
-"Default": SubResource("Animation_2lrmq")
+"Default": SubResource("Animation_j4cg2")
 }
 
+[sub_resource type="GDScript" id="GDScript_qyi2d"]
+script/source = "extends Node
+# if (firstplay == undefined) {
+# 	gotoAndStop(\"end\");
+# 	firstplay = true;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_nip6l"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	distance = Math.abs((_x+_parent._x)-_root.Course.Char._x);
+# 	distance = Math.max(distance, 0);
+# 	distance = Math.min(distance, 100);
+# 	if (_root.Course.Char._x>_x+_parent._x) {
+# 		_xscale = -100;
+# 	} else {
+# 		_xscale = 100;
+# 	}
+# 	if (distance>=100) {
+# 		play();
+# 	}
+# 	///   
+# 	if (this.body.hitTest(_root.Course.Char.charClip.body)) {
+# 		//
+# 		if (_root.Course.Char.blink<=0) {
+# 			if (_root.Course.Char._x>_x+_parent._x) {
+# 				_root.MarioHit(2, 90, 0, 3, 20, \"none\");
+# 			} else {
+# 				_root.MarioHit(2, 90, 0, -3, 20, \"none\");
+# 			}
+# 			if (_root.CharHP>=0) {
+# 				_root.Course.Char.yspeed = Math.min(-16, _root.Course.Char.yspeed);
+# 				_root.Course.Char.attack = true;
+# 				_root.Course.Char.attackFrame = \"Lava\";
+# 			}
+# 		}
+# 		//     
+# 	}
+# 	///   
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_4uq12"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	distance = Math.abs((_x+_parent._x)-_root.Course.Char._x);
+# 	distance = Math.max(distance, 0);
+# 	distance = Math.min(distance, 100);
+# 	if (_root.Course.Char._x>_x+_parent._x) {
+# 		_xscale = -100;
+# 	} else {
+# 		_xscale = 100;
+# 	}
+# 	if (distance<100) {
+# 		play();
+# 		if (this.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			//
+# 			if (_root.Course.Char.blink<=0) {
+# 				if (_root.Course.Char._x>_x+_parent._x) {
+# 					_root.MarioHit(2, 90, 0, 3, 20, \"none\");
+# 				} else {
+# 					_root.MarioHit(2, 90, 0, -3, 20, \"none\");
+# 				}
+# 				if (_root.CharHP>=0) {
+# 					_root.Course.Char.yspeed = Math.min(-16, _root.Course.Char.yspeed);
+# 					_root.Course.Char.attack = true;
+# 					_root.Course.Char.attackFrame = \"Lava\";
+# 				}
+# 			}
+# 			//     
+# 		}
+# 	}
+# };
+# "
+
 [node name="Blarg Clip" type="Node2D"]
+script = ExtResource("1_x8yxn")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Blarg/Blarg Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lntuj")
+"Timeline": SubResource("AnimationLibrary_4fpxr")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -344,7 +427,7 @@ libraries = {
 texture_filter = 1
 position = Vector2(-16, 15.5)
 scale = Vector2(1, 0.129028)
-texture = ExtResource("1_liqeq")
+texture = ExtResource("2_jxgnq")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -353,7 +436,7 @@ visible = false
 [node name="@@50498" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-16, -15.5)
-texture = ExtResource("1_liqeq")
+texture = ExtResource("2_jxgnq")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
@@ -362,7 +445,7 @@ visible = false
 [node name="@@50499" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(-16, -18.5)
-texture = ExtResource("2_yxca6")
+texture = ExtResource("3_4qbpn")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
@@ -371,7 +454,7 @@ visible = false
 [node name="@@50500" type="Sprite2D" parent="Layer 1/Frame 10"]
 texture_filter = 1
 position = Vector2(-16, -20.5)
-texture = ExtResource("3_guy52")
+texture = ExtResource("4_rae66")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -380,15 +463,15 @@ visible = false
 [node name="@@50501" type="Sprite2D" parent="Layer 1/Frame 12"]
 texture_filter = 1
 position = Vector2(-16.5, -26.5)
-texture = ExtResource("4_44aed")
+texture = ExtResource("5_rn1ob")
 centered = false
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14" instance=ExtResource("5_vkyy3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14"]
 position = Vector2(0, -7)
-script = ExtResource("6_4tl4q")
+script = ExtResource("6_11ija")
 path = "res://sm63_godot/Enemies/Normal/A-F/Blarg/Blarg Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -407,7 +490,7 @@ visible = false
 [node name="@@50502" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-15.5, -29.5)
-texture = ExtResource("7_5djdu")
+texture = ExtResource("7_2c4nr")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
@@ -416,7 +499,7 @@ visible = false
 [node name="@@50503" type="Sprite2D" parent="Layer 1/Frame 17"]
 texture_filter = 1
 position = Vector2(-16.5, -26.5)
-texture = ExtResource("4_44aed")
+texture = ExtResource("5_rn1ob")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
@@ -425,7 +508,7 @@ visible = false
 [node name="@@50504" type="Sprite2D" parent="Layer 1/Frame 19"]
 texture_filter = 1
 position = Vector2(-16, -20.5)
-texture = ExtResource("3_guy52")
+texture = ExtResource("4_rae66")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -434,7 +517,7 @@ visible = false
 [node name="@@50505" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(-16, -18.5)
-texture = ExtResource("2_yxca6")
+texture = ExtResource("3_4qbpn")
 centered = false
 
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
@@ -443,7 +526,7 @@ visible = false
 [node name="@@50506" type="Sprite2D" parent="Layer 1/Frame 23"]
 texture_filter = 1
 position = Vector2(-16, -15.5)
-texture = ExtResource("1_liqeq")
+texture = ExtResource("2_jxgnq")
 centered = false
 
 [node name="Frame 30" type="Node2D" parent="Layer 1"]
@@ -453,7 +536,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-16, 15.5)
 scale = Vector2(1, 0.129028)
-texture = ExtResource("1_liqeq")
+texture = ExtResource("2_jxgnq")
 centered = false
 
 [node name="Frame 31" type="Node2D" parent="Layer 1"]
@@ -463,11 +546,20 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_qyi2d")
+
 [node name="Frame 14" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 14"]
+script = SubResource("GDScript_nip6l")
+
 [node name="Frame 31" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 31"]
+script = SubResource("GDScript_4uq12")
 
 [node name="Layer 3" type="Node2D" parent="."]
 
@@ -476,10 +568,10 @@ visible = false
 [node name="Frame 4" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4" instance=ExtResource("5_vkyy3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4"]
 position = Vector2(-1.5, 14.95)
 scale = Vector2(0.441681, 0.212067)
-script = ExtResource("6_4tl4q")
+script = ExtResource("6_11ija")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -498,10 +590,10 @@ visible = false
 [node name="Frame 10" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 10" instance=ExtResource("5_vkyy3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 10"]
 position = Vector2(-1.5, 15.85)
 scale = Vector2(0.441681, 0.386993)
-script = ExtResource("6_4tl4q")
+script = ExtResource("6_11ija")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -517,10 +609,10 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 13" instance=ExtResource("5_vkyy3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 13"]
 position = Vector2(-1.5, 15.85)
 scale = Vector2(0.441681, 0.386993)
-script = ExtResource("6_4tl4q")
+script = ExtResource("6_11ija")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -536,10 +628,10 @@ brightness = 0.0
 [node name="Frame 14" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 14" instance=ExtResource("5_vkyy3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 14"]
 position = Vector2(-1.5, 14.75)
 scale = Vector2(0.441681, 0.598206)
-script = ExtResource("6_4tl4q")
+script = ExtResource("6_11ija")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -555,10 +647,10 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 15" instance=ExtResource("5_vkyy3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 15"]
 position = Vector2(-1.5, 15.85)
 scale = Vector2(0.441681, 0.386993)
-script = ExtResource("6_4tl4q")
+script = ExtResource("6_11ija")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -577,10 +669,10 @@ visible = false
 [node name="Frame 19" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 19" instance=ExtResource("5_vkyy3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 19"]
 position = Vector2(-1.5, 14.95)
 scale = Vector2(0.441681, 0.212067)
-script = ExtResource("6_4tl4q")
+script = ExtResource("6_11ija")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_hokyk"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8ydmh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_e6a6n"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ldcdq"]
 
-[sub_resource type="Animation" id="Animation_qkpjo"]
+[sub_resource type="Animation" id="Animation_lg8mp"]
 length = 5.56667
 loop_mode = 1
 tracks/0/type = "value"
@@ -919,16 +919,80 @@ tracks/75/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ql8m"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5fhcr"]
 _data = {
-"Default": SubResource("Animation_qkpjo")
+"Default": SubResource("Animation_lg8mp")
 }
 
+[sub_resource type="GDScript" id="GDScript_ylb8i"]
+script/source = "extends Node
+# stop();
+# varplay = false;
+# if (Xscale == undefined) {
+# 	Xscale = _xscale;
+# }
+# depth = _root.Course.Platforms.getNextHighestDepth();
+# _root.Course.Platforms.attachMovie(\"BookGround\", \"BookGround\"+depth, depth, {_x:_x, _y:_y, _yscale:_yscale, _xscale:Xscale, count:0, spincount:0, DirectionX:DirectionX, distanceX:distanceX, accelX:accelX, speedX:speedX, DirectionY:DirectionY, distanceY:distanceY, accelY:accelY, speedY:speedY, Xoffstart:Xoffstart, Yoffstart:Yoffstart});
+# offset = 0;
+# count = 0;
+# hit = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (_currentframe>=123) {
+# 			if (_root.Course.Char.air == false && this.box2.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				_root.Course.Char.xspeed *= 0.7;
+# 				_root.Course.Char.xspeed += (Xscale/50);
+# 			}
+# 		}
+# 		if (_currentframe>=2 && _currentframe<=70) {
+# 			if (_root.Course.Char.air == false && this.box2.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				_root.Course.Char.xspeed *= 0.7;
+# 				_root.Course.Char.xspeed -= (Xscale/30);
+# 			}
+# 		}
+# 		if (this.box.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			offset = 160;
+# 			count = 0;
+# 			varplay = true;
+# 		} else {
+# 			count++;
+# 			if (count>10) {
+# 				count = 0;
+# 				offset = 0;
+# 			}
+# 		}
+# 		tellTarget (_root.Course.Platforms[\"BookGround\"+depth]) {
+# 			if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				//this.hit = true;
+# 				this.varplay = true;
+# 			}
+# 			gotoAndStop(this._currentframe+this.offset);
+# 		}
+# 		if (this.varplay == true) {
+# 			play();
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_l5ms0"]
+script/source = "extends Node
+# varplay = false;
+# gotoAndStop(2);
+# "
+
 [node name="Snapping Book" type="Node2D"]
+script = ExtResource("1_e6a6n")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Themed PL/Mutant/Snapping Book.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_0ql8m")
+"Timeline": SubResource("AnimationLibrary_5fhcr")
 }
 
 [node name="Bottom Pages" type="Node2D" parent="."]
@@ -1429,6 +1493,7 @@ position = Vector2(24.4, 6.8)
 scale = Vector2(1.03847, 1.00191)
 
 [node name="Shape" type="Node2D" parent="Seem 1/Frame 111/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@48491" type="Polygon2D" parent="Seem 1/Frame 111/Group/Shape"]
 color = Color(0.980392, 0.952941, 0.796078, 1)
@@ -3191,10 +3256,10 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Box"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Box/Frame 0" instance=ExtResource("1_hokyk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Box/Frame 0"]
 position = Vector2(-9.65, 2.15)
 scale = Vector2(3.49057, 1.20143)
-script = ExtResource("2_8ydmh")
+script = ExtResource("2_ldcdq")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3207,10 +3272,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@48286" type="Node2D" parent="Box/Frame 0" instance=ExtResource("1_hokyk")]
+[node name="@DOMSymbolInstance@48286" type="Node2D" parent="Box/Frame 0"]
 position = Vector2(10.35, -117.85)
 scale = Vector2(3.94412, 11.4382)
-script = ExtResource("2_8ydmh")
+script = ExtResource("2_ldcdq")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3227,5 +3292,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Cody"]
 
+[node name="AS2" type="Node" parent="Cody/Frame 0"]
+script = SubResource("GDScript_ylb8i")
+
 [node name="Frame 166" type="Node2D" parent="Cody"]
 visible = false
+
+[node name="AS2" type="Node" parent="Cody/Frame 166"]
+script = SubResource("GDScript_l5ms0")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_kxc6q"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pfqa1"]
+
+[sub_resource type="Animation" id="Animation_st7kg"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_x366x"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ox4vh"]
 _data = {
-"Default": SubResource("Animation_kxc6q")
+"Default": SubResource("Animation_st7kg")
 }
 
 [node name="M3-3CamEdge" type="Node2D"]
+script = ExtResource("1_pfqa1")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-3CamEdge.xml"
+linkage = "M3-3CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_x366x")
+"Timeline": SubResource("AnimationLibrary_ox4vh")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

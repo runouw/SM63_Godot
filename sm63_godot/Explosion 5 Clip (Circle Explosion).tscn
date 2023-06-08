@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 1.png" id="1_jlt47"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 2.png" id="2_22vxp"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 3.png" id="3_xs3rj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 4.png" id="4_uk6lo"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 5.png" id="5_icxib"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 6.png" id="6_7wty8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 7.png" id="7_0qegl"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 8.png" id="8_iarkc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_r0x8f"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 1.png" id="2_o2v1i"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 2.png" id="3_v0syx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 3.png" id="4_gundm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 4.png" id="5_qy0nx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 5.png" id="6_fx2qe"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 6.png" id="7_k0xso"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 7.png" id="8_kax21"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Circle Explosion - 8.png" id="9_rorpd"]
 
-[sub_resource type="Animation" id="Animation_aexda"]
+[sub_resource type="Animation" id="Animation_vb0yi"]
 length = 0.566667
 loop_mode = 1
 tracks/0/type = "value"
@@ -157,16 +158,63 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhsj3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtck5"]
 _data = {
-"Default": SubResource("Animation_aexda")
+"Default": SubResource("Animation_vb0yi")
 }
 
+[sub_resource type="GDScript" id="GDScript_lyd4j"]
+script/source = "extends Node
+# alf = _alpha;
+# this._alpha = 0;
+# this._xscale *= 0.5;
+# this._yscale *= 0.5;
+# rspeed = ((random(2)-0.5)*2)*(Math.random()*7+2);
+# onEnterFrame = function () {
+# 	if (_root.PauseGame !== true) {
+# 		this._rotation += rspeed*1.25;
+# 		this._xscale *= 1.4
+# 		this._yscale *= 1.4
+# 		this._alpha += alf/2;
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_62lw8"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame !== true) {
+# 		this._rotation += rspeed*(_alpha/80);
+# 		this._xscale *=1.01
+# 		this._yscale *=1.01
+# 		this._alpha -= alf/14
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_51xgu"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# this.removeMovieClip(this);
+# "
+
 [node name="Explosion 5 Clip (Circle Explosion)" type="Node2D"]
+script = ExtResource("1_r0x8f")
+source_xml = "res://sm63/LIBRARY/Explosion 5 Clip (Circle Explosion).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xhsj3")
+"Timeline": SubResource("AnimationLibrary_gtck5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -176,7 +224,7 @@ libraries = {
 [node name="@@6123" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-11, -11)
-texture = ExtResource("1_jlt47")
+texture = ExtResource("2_o2v1i")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -185,7 +233,7 @@ visible = false
 [node name="@@6124" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-7.5, -7)
-texture = ExtResource("2_22vxp")
+texture = ExtResource("3_v0syx")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -194,7 +242,7 @@ visible = false
 [node name="@@6125" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-12.5, -12)
-texture = ExtResource("3_xs3rj")
+texture = ExtResource("4_gundm")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -203,7 +251,7 @@ visible = false
 [node name="@@6126" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-15.5, -15)
-texture = ExtResource("4_uk6lo")
+texture = ExtResource("5_qy0nx")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
@@ -212,7 +260,7 @@ visible = false
 [node name="@@6127" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(-16.5, -16)
-texture = ExtResource("5_icxib")
+texture = ExtResource("6_fx2qe")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
@@ -221,7 +269,7 @@ visible = false
 [node name="@@6128" type="Sprite2D" parent="Layer 1/Frame 10"]
 texture_filter = 1
 position = Vector2(-15.5, -15.5)
-texture = ExtResource("6_7wty8")
+texture = ExtResource("7_k0xso")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -230,7 +278,7 @@ visible = false
 [node name="@@6129" type="Sprite2D" parent="Layer 1/Frame 12"]
 texture_filter = 1
 position = Vector2(-16.5, -15.5)
-texture = ExtResource("7_0qegl")
+texture = ExtResource("8_kax21")
 centered = false
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
@@ -239,7 +287,7 @@ visible = false
 [node name="@@6130" type="Sprite2D" parent="Layer 1/Frame 14"]
 texture_filter = 1
 position = Vector2(-15.5, -14.5)
-texture = ExtResource("8_iarkc")
+texture = ExtResource("9_rorpd")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
@@ -249,8 +297,17 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_lyd4j")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_62lw8")
+
 [node name="Frame 16" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 16"]
+script = SubResource("GDScript_51xgu")

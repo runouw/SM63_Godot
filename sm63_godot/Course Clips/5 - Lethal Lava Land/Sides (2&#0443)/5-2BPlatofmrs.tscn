@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_igwrs"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rpvwf"]
+
+[sub_resource type="Animation" id="Animation_uab5s"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3fvpx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vyij4"]
 _data = {
-"Default": SubResource("Animation_igwrs")
+"Default": SubResource("Animation_uab5s")
 }
 
 [node name="5-2BPlatofmrs" type="Node2D"]
+script = ExtResource("1_rpvwf")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Sides (2&#0443)/5-2BPlatofmrs.xml"
+linkage = "5-2BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3fvpx")
+"Timeline": SubResource("AnimationLibrary_vyij4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

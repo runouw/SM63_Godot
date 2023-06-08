@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ljlfo"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_645we"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xm4en"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_hycd2"]
 
-[sub_resource type="Animation" id="Animation_f5l75"]
+[sub_resource type="Animation" id="Animation_qndrq"]
 length = 4.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -139,25 +139,55 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_y1e1r"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fsosr"]
 _data = {
-"Default": SubResource("Animation_f5l75")
+"Default": SubResource("Animation_qndrq")
 }
 
+[sub_resource type="GDScript" id="GDScript_06s0t"]
+script/source = "extends Node
+# stop();
+# played = false;
+# landedon = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (played == true) {
+# 			play();
+# 		}
+# 		if (landedon == true && _root.Course.Char.yspeed>=-3) {
+# 			played = true;
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_q6xu0"]
+script/source = "extends Node
+# //gotoAndStop(1);
+# stop();
+# onEnterFrame = null;"
+
 [node name="7-3 Carpet Entrace" type="Node2D"]
+script = ExtResource("1_xm4en")
+source_xml = "res://sm63/LIBRARY/Course Clips/7-3 Carpet Entrace.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_y1e1r")
+"Timeline": SubResource("AnimationLibrary_fsosr")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_ljlfo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-0.85, 0.05)
-script = ExtResource("2_645we")
+script = ExtResource("2_hycd2")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -173,9 +203,9 @@ brightness = 0.0
 [node name="Frame 84" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 84" instance=ExtResource("1_ljlfo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 84"]
 position = Vector2(-0.85, -191.6)
-script = ExtResource("2_645we")
+script = ExtResource("2_hycd2")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -191,9 +221,9 @@ brightness = 0.0
 [node name="Frame 111" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 111" instance=ExtResource("1_ljlfo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 111"]
 position = Vector2(-0.85, -219.95)
-script = ExtResource("2_645we")
+script = ExtResource("2_hycd2")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -209,9 +239,9 @@ brightness = 0.0
 [node name="Frame 117" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 117" instance=ExtResource("1_ljlfo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 117"]
 position = Vector2(-0.85, -219.95)
-script = ExtResource("2_645we")
+script = ExtResource("2_hycd2")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -227,9 +257,9 @@ brightness = 0.0
 [node name="Frame 123" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 123" instance=ExtResource("1_ljlfo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 123"]
 position = Vector2(-0.85, -219.95)
-script = ExtResource("2_645we")
+script = ExtResource("2_hycd2")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -248,9 +278,9 @@ visible = false
 [node name="Frame 125" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 125" instance=ExtResource("1_ljlfo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 125"]
 position = Vector2(0, 100)
-script = ExtResource("2_645we")
+script = ExtResource("2_hycd2")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -266,9 +296,9 @@ brightness = 0.0
 [node name="Frame 127" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 127" instance=ExtResource("1_ljlfo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 127"]
 position = Vector2(0, 102)
-script = ExtResource("2_645we")
+script = ExtResource("2_hycd2")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -288,5 +318,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_06s0t")
+
 [node name="Frame 129" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 129"]
+script = SubResource("GDScript_q6xu0")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/Small Waterfall.png" id="1_ty68m"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7xenx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/Small Waterfall.png" id="2_cqfii"]
 
-[sub_resource type="Animation" id="Animation_3p1li"]
+[sub_resource type="Animation" id="Animation_mf4rb"]
 length = 0.466667
 loop_mode = 1
 tracks/0/type = "value"
@@ -54,16 +55,38 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fshwy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ea8aq"]
 _data = {
-"Default": SubResource("Animation_3p1li")
+"Default": SubResource("Animation_mf4rb")
 }
 
+[sub_resource type="GDScript" id="GDScript_lp3n1"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (Math.abs((_root.currentCamX)-(_x+_parent._x))<1000) {
+# 		_visible = true;
+# 		if (_root.PauseGame == false) {
+# 			if (_root.playpause == false && (this.hitTest(_root.Course.Char.charClip.body) || this.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y-15)*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_root.WaterAmount += 50;
+# 				// Water ++
+# 			}
+# 		}
+# 	} else {
+# 		_visible = false;
+# 	}
+# };
+# "
+
 [node name="6-1 Waterfall Animation 1" type="Node2D"]
+script = ExtResource("1_7xenx")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1 & 6-2/6-1 Waterfall Animation 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fshwy")
+"Timeline": SubResource("AnimationLibrary_ea8aq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -77,7 +100,7 @@ libraries = {
 [node name="@@33329" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_ty68m")
+texture = ExtResource("2_cqfii")
 texture_offset = Vector2(220.65, -204.35)
 texture_scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-35, -646.1, 35, -646.1, 35, 646.1, -35, 646.1)
@@ -94,7 +117,7 @@ position = Vector2(0, 29.7)
 [node name="@@33330" type="Polygon2D" parent="Layer 1/Frame 13/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_ty68m")
+texture = ExtResource("2_cqfii")
 texture_offset = Vector2(220.65, -204.35)
 texture_scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-35, -646.1, 35, -646.1, 35, 646.1, -35, 646.1)
@@ -106,6 +129,7 @@ visible = false
 [node name="Frame 0" type="Node2D" parent="Layer 2(Mask)"]
 
 [node name="Shape" type="Node2D" parent="Layer 2(Mask)/Frame 0"]
+position = Vector2(0, 50)
 
 [node name="@@33328" type="Polygon2D" parent="Layer 2(Mask)/Frame 0/Shape"]
 color = Color(0.4, 0.4, 0.4, 1)
@@ -115,3 +139,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_lp3n1")

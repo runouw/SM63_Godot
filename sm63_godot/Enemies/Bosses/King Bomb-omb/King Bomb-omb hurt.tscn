@@ -1,15 +1,15 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=25 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Arm.png" id="1_1jo8y"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Hand.png" id="2_q6hms"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Leg.png" id="3_cja6p"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Foot.png" id="4_6170a"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="5_xngnw"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_8xt0o"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Mustache.png" id="7_hlr6b"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Eye.png" id="8_elpv8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8jgfg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Arm.png" id="2_pbde0"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Hand.png" id="3_tawab"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Leg.png" id="4_l13ek"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Foot.png" id="5_41y0r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_pr611"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Mustache.png" id="7_u8e5x"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Eye.png" id="8_ro4wb"]
 
-[sub_resource type="Animation" id="Animation_4vs6a"]
+[sub_resource type="Animation" id="Animation_buu7l"]
 length = 2.23333
 loop_mode = 1
 tracks/0/type = "value"
@@ -529,16 +529,162 @@ tracks/42/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1foo"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d223e"]
 _data = {
-"Default": SubResource("Animation_4vs6a")
+"Default": SubResource("Animation_buu7l")
 }
 
+[sub_resource type="GDScript" id="GDScript_j6bem"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_elu43"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_s5ful"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_hr2p6"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_1iwwu"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_srqmo"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_hl11c"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_34lgs"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_m6p26"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 		//
+# 	} else {
+# 		stop();
+# 	}
+# };
+# 
+# "
+
+[sub_resource type="GDScript" id="GDScript_nu4m7"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"thwomp-1\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);"
+
+[sub_resource type="GDScript" id="GDScript_ty0ao"]
+script/source = "extends Node
+# _parent._parent.HP--;
+# if (_parent._parent.HP<=0) {
+# 	_root.Course.Platforms[\"KingBombombGround\"+_parent._parent.depth].removeMovieClip();
+# 	//
+# 	_root[\"coindata\"+_root.playingcourse][_parent._parent.coinnum] = 1;
+# 	//
+# 	_parent._parent.onEnterFrame = null;
+# 	gotoAndPlay(\"fall\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_g3xk4"]
+script/source = "extends Node
+# _parent._parent.attack = false;
+# _parent.gotoAndStop(1);
+# "
+
+[sub_resource type="GDScript" id="GDScript_2eiv3"]
+script/source = "extends Node
+# stop();
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"thwomp-2\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# onEnterFrame = function () {
+# 	_root.StopBGsong();
+# 	// Play Message
+# 	_root.playpause = true;
+# 	onEnterFrame = function () {
+# 		_root.Camcenter = this;
+# 		_root.PauseGame = false;
+# 		//
+# 		count = 0;
+# 		//
+# 		_root.PlayMessage(\"Next...time...I'll...be...stronger...........\");
+# 		onEnterFrame = function () {
+# 			//
+# 			_root.playpause = true;
+# 			//
+# 			count++;
+# 			if (_root.KeyZ() && count>5) {
+# 				_root.StopMessage();
+# 				//
+# 				count = 0;
+# 				onEnterFrame = function () {
+# 					count++;
+# 					if (count>5) {
+# 						_root.bgsoundFX = new Sound(this);
+# 						_root.bgsoundFX.attachSound(\"Explode9\");
+# 						_root.bgsoundFX.start(0, 1);
+# 						_root.bgsoundFX.setVolume(_root.BgVolume);
+# 						play();
+# 						onEnterFrame = function () {
+# 							if (_root.PauseGame == false) {
+# 								play();
+# 								//
+# 							} else {
+# 								stop();
+# 							}
+# 						};
+# 						//
+# 					}
+# 				};
+# 			}
+# 		};
+# 		//
+# 	};
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_wyxvd"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# //
+# _root.playpause = false;
+# _root.Course.Char.attack = false;
+# //
+# _root.StopBGsong();
+# _root.PlayBGSong(_root[\"1-1Music\"]);
+# _root.SongRepeat = _root[\"1-1Music\"];
+# _root.kingBombdefeated = true;
+# //
+# _root.Course.Edge.gotoAndStop(1);
+# _root.Course.CamEdge.gotoAndStop(1);
+# "
+
 [node name="King Bomb-omb hurt" type="Node2D"]
+script = ExtResource("1_8jgfg")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb hurt.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_i1foo")
+"Timeline": SubResource("AnimationLibrary_d223e")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -548,36 +694,36 @@ libraries = {
 [node name="@@50120" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-19.2, -2.55)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50121" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-23.2, 5.45)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50122" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(4.8, 14.95)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50123" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(2.3, 21.45)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50124" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-9.45, 14.95)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(2.85, -3.95)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -593,37 +739,37 @@ brightness = 0.0
 [node name="@@50125" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-13.95, 21.45)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50126" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-17.2, -5.9)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50127" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-10.2, -11.05)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50128" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-3.2, -11.05)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50129" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(10.3, -0.05)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50130" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(12.25, 6.45)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -634,7 +780,7 @@ texture_filter = 1
 position = Vector2(-16.1, -8.8)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50132" type="Sprite2D" parent="Layer 1/Frame 1"]
@@ -642,7 +788,7 @@ texture_filter = 1
 position = Vector2(-22, -2.1)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50133" type="Sprite2D" parent="Layer 1/Frame 1"]
@@ -650,13 +796,13 @@ texture_filter = 1
 position = Vector2(6.1, 14.3)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50134" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(2.15, 21.6)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50135" type="Sprite2D" parent="Layer 1/Frame 1"]
@@ -664,14 +810,14 @@ texture_filter = 1
 position = Vector2(-14.2, 11.1)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(5.6, -4.45)
 rotation = 0.2618
 scale = Vector2(1, 1)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -684,12 +830,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_j6bem")
+
 [node name="@@50136" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-20.2, 16.25)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50137" type="Sprite2D" parent="Layer 1/Frame 1"]
@@ -697,7 +846,7 @@ texture_filter = 1
 position = Vector2(-13.25, -11.5)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50138" type="Sprite2D" parent="Layer 1/Frame 1"]
@@ -705,7 +854,7 @@ texture_filter = 1
 position = Vector2(-5.2, -14.7)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50139" type="Sprite2D" parent="Layer 1/Frame 1"]
@@ -713,7 +862,7 @@ texture_filter = 1
 position = Vector2(1.55, -12.85)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50140" type="Sprite2D" parent="Layer 1/Frame 1"]
@@ -721,7 +870,7 @@ texture_filter = 1
 position = Vector2(11.75, 1.3)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50141" type="Sprite2D" parent="Layer 1/Frame 1"]
@@ -729,7 +878,7 @@ texture_filter = 1
 position = Vector2(12, 8.05)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -740,7 +889,7 @@ texture_filter = 1
 position = Vector2(-15.35, -9.85)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50143" type="Sprite2D" parent="Layer 1/Frame 3"]
@@ -748,7 +897,7 @@ texture_filter = 1
 position = Vector2(-21.5, -3.35)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50144" type="Sprite2D" parent="Layer 1/Frame 3"]
@@ -756,13 +905,13 @@ texture_filter = 1
 position = Vector2(6.1, 13.95)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50145" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(2.15, 21.6)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50146" type="Sprite2D" parent="Layer 1/Frame 3"]
@@ -770,14 +919,14 @@ texture_filter = 1
 position = Vector2(-14.1, 10.1)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(6.2, -4.8)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -795,7 +944,7 @@ texture_filter = 1
 position = Vector2(-20.25, 15.05)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50148" type="Sprite2D" parent="Layer 1/Frame 3"]
@@ -803,7 +952,7 @@ texture_filter = 1
 position = Vector2(-12.45, -12.45)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50149" type="Sprite2D" parent="Layer 1/Frame 3"]
@@ -811,7 +960,7 @@ texture_filter = 1
 position = Vector2(-4.3, -15.4)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50150" type="Sprite2D" parent="Layer 1/Frame 3"]
@@ -819,7 +968,7 @@ texture_filter = 1
 position = Vector2(2.4, -13.35)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50151" type="Sprite2D" parent="Layer 1/Frame 3"]
@@ -827,7 +976,7 @@ texture_filter = 1
 position = Vector2(12.15, 1.1)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50152" type="Sprite2D" parent="Layer 1/Frame 3"]
@@ -835,7 +984,7 @@ texture_filter = 1
 position = Vector2(12.2, 7.9)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -846,7 +995,7 @@ texture_filter = 1
 position = Vector2(-13, -11.75)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50154" type="Sprite2D" parent="Layer 1/Frame 5"]
@@ -854,7 +1003,7 @@ texture_filter = 1
 position = Vector2(-19.45, -5.55)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50155" type="Sprite2D" parent="Layer 1/Frame 5"]
@@ -862,7 +1011,7 @@ texture_filter = 1
 position = Vector2(7.25, 13.1)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50156" type="Sprite2D" parent="Layer 1/Frame 5"]
@@ -870,7 +1019,7 @@ texture_filter = 1
 position = Vector2(1.6, 19.95)
 rotation = 0.100575
 scale = Vector2(0.999665, 0.999665)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50157" type="Sprite2D" parent="Layer 1/Frame 5"]
@@ -878,14 +1027,14 @@ texture_filter = 1
 position = Vector2(-12.75, 8.25)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(8.3, -5.65)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -903,7 +1052,7 @@ texture_filter = 1
 position = Vector2(-19.1, 12.9)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50159" type="Sprite2D" parent="Layer 1/Frame 5"]
@@ -911,7 +1060,7 @@ texture_filter = 1
 position = Vector2(-10, -14.2)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50160" type="Sprite2D" parent="Layer 1/Frame 5"]
@@ -919,7 +1068,7 @@ texture_filter = 1
 position = Vector2(-1.7, -16.75)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50161" type="Sprite2D" parent="Layer 1/Frame 5"]
@@ -927,7 +1076,7 @@ texture_filter = 1
 position = Vector2(4.9, -14.4)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50162" type="Sprite2D" parent="Layer 1/Frame 5"]
@@ -935,7 +1084,7 @@ texture_filter = 1
 position = Vector2(13.95, 0.55)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50163" type="Sprite2D" parent="Layer 1/Frame 5"]
@@ -943,7 +1092,7 @@ texture_filter = 1
 position = Vector2(13.65, 7.35)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
@@ -954,7 +1103,7 @@ texture_filter = 1
 position = Vector2(-12.7, -12.3)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50165" type="Sprite2D" parent="Layer 1/Frame 7"]
@@ -962,7 +1111,7 @@ texture_filter = 1
 position = Vector2(-23.35, -8.3)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50166" type="Sprite2D" parent="Layer 1/Frame 7"]
@@ -970,7 +1119,7 @@ texture_filter = 1
 position = Vector2(6.8, 13.2)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50167" type="Sprite2D" parent="Layer 1/Frame 7"]
@@ -978,7 +1127,7 @@ texture_filter = 1
 position = Vector2(-0.1, 18.8)
 rotation = 0.3077
 scale = Vector2(0.999008, 0.999008)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50168" type="Sprite2D" parent="Layer 1/Frame 7"]
@@ -986,14 +1135,14 @@ texture_filter = 1
 position = Vector2(-13.05, 7.7)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
 position = Vector2(8.45, -5.55)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1011,7 +1160,7 @@ texture_filter = 1
 position = Vector2(-19.55, 12.15)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50170" type="Sprite2D" parent="Layer 1/Frame 7"]
@@ -1019,7 +1168,7 @@ texture_filter = 1
 position = Vector2(-9.6, -14.65)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50171" type="Sprite2D" parent="Layer 1/Frame 7"]
@@ -1027,7 +1176,7 @@ texture_filter = 1
 position = Vector2(13.9, 0.85)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50172" type="Sprite2D" parent="Layer 1/Frame 7"]
@@ -1035,7 +1184,7 @@ texture_filter = 1
 position = Vector2(17.35, 3.65)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50173" type="Sprite2D" parent="Layer 1/Frame 7"]
@@ -1044,7 +1193,7 @@ position = Vector2(-1.4, -14)
 rotation = 0.363978
 scale = Vector2(0.995565, 0.354026)
 skew = -0.147521
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50174" type="Sprite2D" parent="Layer 1/Frame 7"]
@@ -1053,7 +1202,7 @@ position = Vector2(5.1, -11.5)
 rotation = 0.363978
 scale = Vector2(0.995565, 0.354026)
 skew = -0.147521
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
@@ -1064,7 +1213,7 @@ texture_filter = 1
 position = Vector2(-12.7, -12.3)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50176" type="Sprite2D" parent="Layer 1/Frame 17"]
@@ -1072,7 +1221,7 @@ texture_filter = 1
 position = Vector2(-23.35, -8.3)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50177" type="Sprite2D" parent="Layer 1/Frame 17"]
@@ -1080,7 +1229,7 @@ texture_filter = 1
 position = Vector2(6.8, 13.2)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50178" type="Sprite2D" parent="Layer 1/Frame 17"]
@@ -1088,7 +1237,7 @@ texture_filter = 1
 position = Vector2(-0.1, 18.8)
 rotation = 0.3077
 scale = Vector2(0.999008, 0.999008)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50179" type="Sprite2D" parent="Layer 1/Frame 17"]
@@ -1096,14 +1245,14 @@ texture_filter = 1
 position = Vector2(-13.05, 7.7)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 17" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 17"]
 position = Vector2(8.45, -5.55)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1121,7 +1270,7 @@ texture_filter = 1
 position = Vector2(-19.55, 12.15)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50181" type="Sprite2D" parent="Layer 1/Frame 17"]
@@ -1129,7 +1278,7 @@ texture_filter = 1
 position = Vector2(-9.6, -14.65)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50182" type="Sprite2D" parent="Layer 1/Frame 17"]
@@ -1137,7 +1286,7 @@ texture_filter = 1
 position = Vector2(-1.2, -16.95)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50183" type="Sprite2D" parent="Layer 1/Frame 17"]
@@ -1145,7 +1294,7 @@ texture_filter = 1
 position = Vector2(5.3, -14.4)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50184" type="Sprite2D" parent="Layer 1/Frame 17"]
@@ -1153,7 +1302,7 @@ texture_filter = 1
 position = Vector2(13.9, 0.85)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50185" type="Sprite2D" parent="Layer 1/Frame 17"]
@@ -1161,7 +1310,7 @@ texture_filter = 1
 position = Vector2(17.35, 3.65)
 rotation = 0.374265
 scale = Vector2(0.999617, 0.999617)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
@@ -1172,7 +1321,7 @@ texture_filter = 1
 position = Vector2(-13, -11.75)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50187" type="Sprite2D" parent="Layer 1/Frame 19"]
@@ -1180,7 +1329,7 @@ texture_filter = 1
 position = Vector2(-19.45, -5.55)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50188" type="Sprite2D" parent="Layer 1/Frame 19"]
@@ -1188,7 +1337,7 @@ texture_filter = 1
 position = Vector2(7.25, 13.1)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50189" type="Sprite2D" parent="Layer 1/Frame 19"]
@@ -1196,7 +1345,7 @@ texture_filter = 1
 position = Vector2(1.6, 19.95)
 rotation = 0.100575
 scale = Vector2(0.999665, 0.999665)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50190" type="Sprite2D" parent="Layer 1/Frame 19"]
@@ -1204,14 +1353,14 @@ texture_filter = 1
 position = Vector2(-12.75, 8.25)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19"]
 position = Vector2(8.3, -5.65)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1229,7 +1378,7 @@ texture_filter = 1
 position = Vector2(-19.1, 12.9)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50192" type="Sprite2D" parent="Layer 1/Frame 19"]
@@ -1237,7 +1386,7 @@ texture_filter = 1
 position = Vector2(-10, -14.2)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50193" type="Sprite2D" parent="Layer 1/Frame 19"]
@@ -1245,7 +1394,7 @@ texture_filter = 1
 position = Vector2(-1.7, -16.75)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50194" type="Sprite2D" parent="Layer 1/Frame 19"]
@@ -1253,7 +1402,7 @@ texture_filter = 1
 position = Vector2(4.9, -14.4)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50195" type="Sprite2D" parent="Layer 1/Frame 19"]
@@ -1261,7 +1410,7 @@ texture_filter = 1
 position = Vector2(13.95, 0.55)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50196" type="Sprite2D" parent="Layer 1/Frame 19"]
@@ -1269,7 +1418,7 @@ texture_filter = 1
 position = Vector2(13.65, 7.35)
 rotation = 0.342033
 scale = Vector2(0.999728, 0.999728)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -1280,7 +1429,7 @@ texture_filter = 1
 position = Vector2(-15.35, -9.85)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50198" type="Sprite2D" parent="Layer 1/Frame 21"]
@@ -1288,7 +1437,7 @@ texture_filter = 1
 position = Vector2(-21.5, -3.35)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50199" type="Sprite2D" parent="Layer 1/Frame 21"]
@@ -1296,13 +1445,13 @@ texture_filter = 1
 position = Vector2(6.1, 13.95)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50200" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(2.15, 21.6)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50201" type="Sprite2D" parent="Layer 1/Frame 21"]
@@ -1310,14 +1459,14 @@ texture_filter = 1
 position = Vector2(-14.1, 10.1)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21"]
 position = Vector2(6.2, -4.8)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1335,7 +1484,7 @@ texture_filter = 1
 position = Vector2(-20.25, 15.05)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50203" type="Sprite2D" parent="Layer 1/Frame 21"]
@@ -1343,7 +1492,7 @@ texture_filter = 1
 position = Vector2(-12.45, -12.45)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50204" type="Sprite2D" parent="Layer 1/Frame 21"]
@@ -1351,7 +1500,7 @@ texture_filter = 1
 position = Vector2(-4.3, -15.4)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50205" type="Sprite2D" parent="Layer 1/Frame 21"]
@@ -1359,7 +1508,7 @@ texture_filter = 1
 position = Vector2(2.4, -13.35)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50206" type="Sprite2D" parent="Layer 1/Frame 21"]
@@ -1367,7 +1516,7 @@ texture_filter = 1
 position = Vector2(12.15, 1.1)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50207" type="Sprite2D" parent="Layer 1/Frame 21"]
@@ -1375,7 +1524,7 @@ texture_filter = 1
 position = Vector2(12.2, 7.9)
 rotation = 0.29341
 scale = Vector2(0.999885, 0.999885)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
@@ -1386,7 +1535,7 @@ texture_filter = 1
 position = Vector2(-16.1, -8.8)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50209" type="Sprite2D" parent="Layer 1/Frame 23"]
@@ -1394,7 +1543,7 @@ texture_filter = 1
 position = Vector2(-22, -2.1)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50210" type="Sprite2D" parent="Layer 1/Frame 23"]
@@ -1402,13 +1551,13 @@ texture_filter = 1
 position = Vector2(6.1, 14.3)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50211" type="Sprite2D" parent="Layer 1/Frame 23"]
 texture_filter = 1
 position = Vector2(2.15, 21.6)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50212" type="Sprite2D" parent="Layer 1/Frame 23"]
@@ -1416,14 +1565,14 @@ texture_filter = 1
 position = Vector2(-14.2, 11.1)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 23" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 23"]
 position = Vector2(5.6, -4.45)
 rotation = 0.2618
 scale = Vector2(1, 1)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1436,12 +1585,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 23/DOMSymbolInstance"]
+script = SubResource("GDScript_elu43")
+
 [node name="@@50213" type="Sprite2D" parent="Layer 1/Frame 23"]
 texture_filter = 1
 position = Vector2(-20.2, 16.25)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50214" type="Sprite2D" parent="Layer 1/Frame 23"]
@@ -1449,7 +1601,7 @@ texture_filter = 1
 position = Vector2(-13.25, -11.5)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50215" type="Sprite2D" parent="Layer 1/Frame 23"]
@@ -1457,7 +1609,7 @@ texture_filter = 1
 position = Vector2(-5.2, -14.7)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50216" type="Sprite2D" parent="Layer 1/Frame 23"]
@@ -1465,7 +1617,7 @@ texture_filter = 1
 position = Vector2(1.55, -12.85)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50217" type="Sprite2D" parent="Layer 1/Frame 23"]
@@ -1473,7 +1625,7 @@ texture_filter = 1
 position = Vector2(11.75, 1.3)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50218" type="Sprite2D" parent="Layer 1/Frame 23"]
@@ -1481,7 +1633,7 @@ texture_filter = 1
 position = Vector2(12, 8.05)
 rotation = 0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 25" type="Node2D" parent="Layer 1"]
@@ -1490,36 +1642,36 @@ visible = false
 [node name="@@50219" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(-19.2, -2.55)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50220" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(-23.2, 5.45)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50221" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(4.8, 14.95)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50222" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(2.3, 21.45)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50223" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(-9.45, 14.95)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 25" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 25"]
 position = Vector2(2.85, -3.95)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1535,37 +1687,37 @@ brightness = 0.0
 [node name="@@50224" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(-13.95, 21.45)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50225" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(-17.2, -5.9)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50226" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(-10.2, -11.05)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50227" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(-3.2, -11.05)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50228" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(10.3, -0.05)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50229" type="Sprite2D" parent="Layer 1/Frame 25"]
 texture_filter = 1
 position = Vector2(12.25, 6.45)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 27" type="Node2D" parent="Layer 1"]
@@ -1576,7 +1728,7 @@ texture_filter = 1
 position = Vector2(-4.45, -16.1)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50231" type="Sprite2D" parent="Layer 1/Frame 27"]
@@ -1584,7 +1736,7 @@ texture_filter = 1
 position = Vector2(-10.8, -24.95)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50232" type="Sprite2D" parent="Layer 1/Frame 27"]
@@ -1592,7 +1744,7 @@ texture_filter = 1
 position = Vector2(7.75, 13.6)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50233" type="Sprite2D" parent="Layer 1/Frame 27"]
@@ -1600,7 +1752,7 @@ texture_filter = 1
 position = Vector2(-1.4, 21.05)
 rotation = 0.0458991
 scale = Vector2(0.999007, 0.999007)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50234" type="Sprite2D" parent="Layer 1/Frame 27"]
@@ -1608,14 +1760,14 @@ texture_filter = 1
 position = Vector2(-10, 3.15)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 27" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 27"]
 position = Vector2(14.2, -4.05)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1628,12 +1780,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 27/DOMSymbolInstance"]
+script = SubResource("GDScript_s5ful")
+
 [node name="@@50235" type="Sprite2D" parent="Layer 1/Frame 27"]
 texture_filter = 1
 position = Vector2(-16.95, 4.2)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50236" type="Sprite2D" parent="Layer 1/Frame 27"]
@@ -1641,7 +1796,7 @@ texture_filter = 1
 position = Vector2(-0.85, -17.55)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50237" type="Sprite2D" parent="Layer 1/Frame 27"]
@@ -1649,7 +1804,7 @@ texture_filter = 1
 position = Vector2(7.85, -17.55)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50238" type="Sprite2D" parent="Layer 1/Frame 27"]
@@ -1657,7 +1812,7 @@ texture_filter = 1
 position = Vector2(13.45, -13.45)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50239" type="Sprite2D" parent="Layer 1/Frame 27"]
@@ -1665,7 +1820,7 @@ texture_filter = 1
 position = Vector2(17.85, 3.5)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50240" type="Sprite2D" parent="Layer 1/Frame 27"]
@@ -1673,7 +1828,7 @@ texture_filter = 1
 position = Vector2(25.4, 2.15)
 rotation = 0.636073
 scale = Vector2(0.999613, 0.999613)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 28" type="Node2D" parent="Layer 1"]
@@ -1684,7 +1839,7 @@ texture_filter = 1
 position = Vector2(3.65, -17.95)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50242" type="Sprite2D" parent="Layer 1/Frame 28"]
@@ -1692,7 +1847,7 @@ texture_filter = 1
 position = Vector2(1.5, -28.7)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50243" type="Sprite2D" parent="Layer 1/Frame 28"]
@@ -1700,7 +1855,7 @@ texture_filter = 1
 position = Vector2(7.8, 13.9)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50244" type="Sprite2D" parent="Layer 1/Frame 28"]
@@ -1708,7 +1863,7 @@ texture_filter = 1
 position = Vector2(-1.4, 21.05)
 rotation = 0.0458991
 scale = Vector2(0.999007, 0.999007)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50245" type="Sprite2D" parent="Layer 1/Frame 28"]
@@ -1716,14 +1871,14 @@ texture_filter = 1
 position = Vector2(-6.65, -2.3)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 28" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 28"]
 position = Vector2(18.55, -1.45)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1741,7 +1896,7 @@ texture_filter = 1
 position = Vector2(-12.15, -3.65)
 rotation = 1.42147
 scale = Vector2(0.999619, 0.999619)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50247" type="Sprite2D" parent="Layer 1/Frame 28"]
@@ -1749,7 +1904,7 @@ texture_filter = 1
 position = Vector2(7.55, -18.4)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50248" type="Sprite2D" parent="Layer 1/Frame 28"]
@@ -1757,7 +1912,7 @@ texture_filter = 1
 position = Vector2(15.95, -16.15)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50249" type="Sprite2D" parent="Layer 1/Frame 28"]
@@ -1765,7 +1920,7 @@ texture_filter = 1
 position = Vector2(20.3, -10.75)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50250" type="Sprite2D" parent="Layer 1/Frame 28"]
@@ -1773,7 +1928,7 @@ texture_filter = 1
 position = Vector2(20.15, 6.75)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50251" type="Sprite2D" parent="Layer 1/Frame 28"]
@@ -1781,7 +1936,7 @@ texture_filter = 1
 position = Vector2(28.85, 7.2)
 rotation = 0.897879
 scale = Vector2(0.999618, 0.999618)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
@@ -1792,7 +1947,7 @@ texture_filter = 1
 position = Vector2(5.35, -20.15)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50253" type="Sprite2D" parent="Layer 1/Frame 29"]
@@ -1800,7 +1955,7 @@ texture_filter = 1
 position = Vector2(5.4, -32)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50254" type="Sprite2D" parent="Layer 1/Frame 29"]
@@ -1808,7 +1963,7 @@ texture_filter = 1
 position = Vector2(7.4, 11.9)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50255" type="Sprite2D" parent="Layer 1/Frame 29"]
@@ -1816,7 +1971,7 @@ texture_filter = 1
 position = Vector2(-3.05, 16.6)
 rotation = 0.339741
 scale = Vector2(0.998058, 0.998058)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50256" type="Sprite2D" parent="Layer 1/Frame 29"]
@@ -1824,14 +1979,14 @@ texture_filter = 1
 position = Vector2(-6, -5.2)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29"]
 position = Vector2(19.1, -2.7)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1844,12 +1999,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 29/DOMSymbolInstance"]
+script = SubResource("GDScript_hr2p6")
+
 [node name="@@50257" type="Sprite2D" parent="Layer 1/Frame 29"]
 texture_filter = 1
 position = Vector2(-11.35, -6.9)
 rotation = 1.4872
 scale = Vector2(0.999401, 0.999401)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50258" type="Sprite2D" parent="Layer 1/Frame 29"]
@@ -1857,7 +2015,7 @@ texture_filter = 1
 position = Vector2(9.25, -20.3)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50259" type="Sprite2D" parent="Layer 1/Frame 29"]
@@ -1865,7 +2023,7 @@ texture_filter = 1
 position = Vector2(17.45, -17.5)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50260" type="Sprite2D" parent="Layer 1/Frame 29"]
@@ -1873,7 +2031,7 @@ texture_filter = 1
 position = Vector2(21.45, -11.85)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50261" type="Sprite2D" parent="Layer 1/Frame 29"]
@@ -1881,7 +2039,7 @@ texture_filter = 1
 position = Vector2(22.15, 5.1)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50262" type="Sprite2D" parent="Layer 1/Frame 29"]
@@ -1889,7 +2047,7 @@ texture_filter = 1
 position = Vector2(30.85, 5.15)
 rotation = 0.96361
 scale = Vector2(0.999408, 0.999408)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 30" type="Node2D" parent="Layer 1"]
@@ -1900,7 +2058,7 @@ texture_filter = 1
 position = Vector2(9.6, -21.1)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50264" type="Sprite2D" parent="Layer 1/Frame 30"]
@@ -1908,7 +2066,7 @@ texture_filter = 1
 position = Vector2(11.95, -32.75)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50265" type="Sprite2D" parent="Layer 1/Frame 30"]
@@ -1916,7 +2074,7 @@ texture_filter = 1
 position = Vector2(5.45, 10.65)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50266" type="Sprite2D" parent="Layer 1/Frame 30"]
@@ -1924,7 +2082,7 @@ texture_filter = 1
 position = Vector2(-5.7, 13.3)
 rotation = 0.532672
 scale = Vector2(0.997428, 0.997428)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50267" type="Sprite2D" parent="Layer 1/Frame 30"]
@@ -1932,14 +2090,14 @@ texture_filter = 1
 position = Vector2(-4.4, -8.65)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 30" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 30"]
 position = Vector2(19.75, -1.4)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1957,7 +2115,7 @@ texture_filter = 1
 position = Vector2(-9.35, -11.3)
 rotation = 1.68014
 scale = Vector2(0.998778, 0.998778)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50269" type="Sprite2D" parent="Layer 1/Frame 30"]
@@ -1965,7 +2123,7 @@ texture_filter = 1
 position = Vector2(13.45, -20.55)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50270" type="Sprite2D" parent="Layer 1/Frame 30"]
@@ -1973,7 +2131,7 @@ texture_filter = 1
 position = Vector2(20.95, -16.2)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50271" type="Sprite2D" parent="Layer 1/Frame 30"]
@@ -1981,7 +2139,7 @@ texture_filter = 1
 position = Vector2(23.8, -9.9)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50272" type="Sprite2D" parent="Layer 1/Frame 30"]
@@ -1989,7 +2147,7 @@ texture_filter = 1
 position = Vector2(21.25, 6.85)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50273" type="Sprite2D" parent="Layer 1/Frame 30"]
@@ -1997,7 +2155,7 @@ texture_filter = 1
 position = Vector2(29.75, 8.55)
 rotation = 1.15654
 scale = Vector2(0.998789, 0.998789)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 31" type="Node2D" parent="Layer 1"]
@@ -2008,7 +2166,7 @@ texture_filter = 1
 position = Vector2(12.05, -20.6)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50275" type="Sprite2D" parent="Layer 1/Frame 31"]
@@ -2016,7 +2174,7 @@ texture_filter = 1
 position = Vector2(15.65, -31.9)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50276" type="Sprite2D" parent="Layer 1/Frame 31"]
@@ -2024,7 +2182,7 @@ texture_filter = 1
 position = Vector2(4.6, 10.55)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50277" type="Sprite2D" parent="Layer 1/Frame 31"]
@@ -2032,7 +2190,7 @@ texture_filter = 1
 position = Vector2(-6.75, 12)
 rotation = 0.63824
 scale = Vector2(0.997075, 0.997075)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50278" type="Sprite2D" parent="Layer 1/Frame 31"]
@@ -2040,14 +2198,14 @@ texture_filter = 1
 position = Vector2(-3.15, -9.65)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 31" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 31"]
 position = Vector2(20.1, 0.1)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2060,12 +2218,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 31/DOMSymbolInstance"]
+script = SubResource("GDScript_1iwwu")
+
 [node name="@@50279" type="Sprite2D" parent="Layer 1/Frame 31"]
 texture_filter = 1
 position = Vector2(-7.8, -12.85)
 rotation = 1.78572
 scale = Vector2(0.998435, 0.998435)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50280" type="Sprite2D" parent="Layer 1/Frame 31"]
@@ -2073,7 +2234,7 @@ texture_filter = 1
 position = Vector2(15.8, -19.65)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50281" type="Sprite2D" parent="Layer 1/Frame 31"]
@@ -2081,7 +2242,7 @@ texture_filter = 1
 position = Vector2(22.85, -14.5)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50282" type="Sprite2D" parent="Layer 1/Frame 31"]
@@ -2089,7 +2250,7 @@ texture_filter = 1
 position = Vector2(25, -7.95)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50283" type="Sprite2D" parent="Layer 1/Frame 31"]
@@ -2097,7 +2258,7 @@ texture_filter = 1
 position = Vector2(20.7, 8.45)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50284" type="Sprite2D" parent="Layer 1/Frame 31"]
@@ -2105,7 +2266,7 @@ texture_filter = 1
 position = Vector2(28.95, 11.05)
 rotation = 1.26211
 scale = Vector2(0.99844, 0.99844)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 32" type="Node2D" parent="Layer 1"]
@@ -2116,7 +2277,7 @@ texture_filter = 1
 position = Vector2(15.05, -19.3)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50286" type="Sprite2D" parent="Layer 1/Frame 32"]
@@ -2124,7 +2285,7 @@ texture_filter = 1
 position = Vector2(19.8, -30.1)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50287" type="Sprite2D" parent="Layer 1/Frame 32"]
@@ -2132,7 +2293,7 @@ texture_filter = 1
 position = Vector2(4.35, 10.95)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50288" type="Sprite2D" parent="Layer 1/Frame 32"]
@@ -2140,7 +2301,7 @@ texture_filter = 1
 position = Vector2(-7.05, 11.2)
 rotation = 0.744045
 scale = Vector2(0.996721, 0.996721)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50289" type="Sprite2D" parent="Layer 1/Frame 32"]
@@ -2148,14 +2309,14 @@ texture_filter = 1
 position = Vector2(-1.25, -10)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 32" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 32"]
 position = Vector2(20.9, 2.15)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2173,7 +2334,7 @@ texture_filter = 1
 position = Vector2(-5.5, -13.6)
 rotation = 1.8915
 scale = Vector2(0.998094, 0.998094)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50291" type="Sprite2D" parent="Layer 1/Frame 32"]
@@ -2181,7 +2342,7 @@ texture_filter = 1
 position = Vector2(18.65, -17.95)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50292" type="Sprite2D" parent="Layer 1/Frame 32"]
@@ -2189,7 +2350,7 @@ texture_filter = 1
 position = Vector2(25.15, -12.05)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50293" type="Sprite2D" parent="Layer 1/Frame 32"]
@@ -2197,7 +2358,7 @@ texture_filter = 1
 position = Vector2(26.6, -5.3)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50294" type="Sprite2D" parent="Layer 1/Frame 32"]
@@ -2205,7 +2366,7 @@ texture_filter = 1
 position = Vector2(20.6, 10.55)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50295" type="Sprite2D" parent="Layer 1/Frame 32"]
@@ -2213,7 +2374,7 @@ texture_filter = 1
 position = Vector2(28.55, 14)
 rotation = 1.36791
 scale = Vector2(0.998087, 0.998087)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 33" type="Node2D" parent="Layer 1"]
@@ -2224,7 +2385,7 @@ texture_filter = 1
 position = Vector2(17.5, -16.3)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50297" type="Sprite2D" parent="Layer 1/Frame 33"]
@@ -2232,7 +2393,7 @@ texture_filter = 1
 position = Vector2(22.75, -26.8)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50298" type="Sprite2D" parent="Layer 1/Frame 33"]
@@ -2240,7 +2401,7 @@ texture_filter = 1
 position = Vector2(5.3, 13.45)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50299" type="Sprite2D" parent="Layer 1/Frame 33"]
@@ -2248,7 +2409,7 @@ texture_filter = 1
 position = Vector2(-6.1, 13.15)
 rotation = 0.79302
 scale = Vector2(0.996556, 0.996556)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50300" type="Sprite2D" parent="Layer 1/Frame 33"]
@@ -2256,14 +2417,14 @@ texture_filter = 1
 position = Vector2(0.75, -7.8)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 33" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 33"]
 position = Vector2(22.25, 5.45)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2276,12 +2437,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 33/DOMSymbolInstance"]
+script = SubResource("GDScript_srqmo")
+
 [node name="@@50301" type="Sprite2D" parent="Layer 1/Frame 33"]
 texture_filter = 1
 position = Vector2(-3.35, -11.6)
 rotation = 1.94048
 scale = Vector2(0.997947, 0.997947)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50302" type="Sprite2D" parent="Layer 1/Frame 33"]
@@ -2289,7 +2453,7 @@ texture_filter = 1
 position = Vector2(21, -14.75)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50303" type="Sprite2D" parent="Layer 1/Frame 33"]
@@ -2297,7 +2461,7 @@ texture_filter = 1
 position = Vector2(27.2, -8.55)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50304" type="Sprite2D" parent="Layer 1/Frame 33"]
@@ -2305,7 +2469,7 @@ texture_filter = 1
 position = Vector2(28.3, -1.7)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50305" type="Sprite2D" parent="Layer 1/Frame 33"]
@@ -2313,7 +2477,7 @@ texture_filter = 1
 position = Vector2(21.55, 13.85)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50306" type="Sprite2D" parent="Layer 1/Frame 33"]
@@ -2321,7 +2485,7 @@ texture_filter = 1
 position = Vector2(29.3, 17.65)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 34" type="Node2D" parent="Layer 1"]
@@ -2332,7 +2496,7 @@ texture_filter = 1
 position = Vector2(18.5, -14.3)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50308" type="Sprite2D" parent="Layer 1/Frame 34"]
@@ -2340,7 +2504,7 @@ texture_filter = 1
 position = Vector2(23.75, -24.8)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50309" type="Sprite2D" parent="Layer 1/Frame 34"]
@@ -2348,7 +2512,7 @@ texture_filter = 1
 position = Vector2(6.3, 15.45)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50310" type="Sprite2D" parent="Layer 1/Frame 34"]
@@ -2356,7 +2520,7 @@ texture_filter = 1
 position = Vector2(-5.1, 15.15)
 rotation = 0.79302
 scale = Vector2(0.996556, 0.996556)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50311" type="Sprite2D" parent="Layer 1/Frame 34"]
@@ -2364,14 +2528,14 @@ texture_filter = 1
 position = Vector2(1.75, -5.8)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 34" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 34"]
 position = Vector2(23.25, 7.45)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2389,7 +2553,7 @@ texture_filter = 1
 position = Vector2(-2.35, -9.6)
 rotation = 1.94048
 scale = Vector2(0.997947, 0.997947)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50313" type="Sprite2D" parent="Layer 1/Frame 34"]
@@ -2397,7 +2561,7 @@ texture_filter = 1
 position = Vector2(22, -12.75)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50314" type="Sprite2D" parent="Layer 1/Frame 34"]
@@ -2405,7 +2569,7 @@ texture_filter = 1
 position = Vector2(28.2, -6.55)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50315" type="Sprite2D" parent="Layer 1/Frame 34"]
@@ -2413,7 +2577,7 @@ texture_filter = 1
 position = Vector2(29.3, 0.3)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50316" type="Sprite2D" parent="Layer 1/Frame 34"]
@@ -2421,7 +2585,7 @@ texture_filter = 1
 position = Vector2(22.55, 15.85)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50317" type="Sprite2D" parent="Layer 1/Frame 34"]
@@ -2429,7 +2593,7 @@ texture_filter = 1
 position = Vector2(30.3, 19.65)
 rotation = 1.41689
 scale = Vector2(0.997926, 0.997926)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 35" type="Node2D" parent="Layer 1"]
@@ -2440,7 +2604,7 @@ texture_filter = 1
 position = Vector2(19.5, -12.3)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50319" type="Sprite2D" parent="Layer 1/Frame 35"]
@@ -2448,7 +2612,7 @@ texture_filter = 1
 position = Vector2(26, -19.5)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50320" type="Sprite2D" parent="Layer 1/Frame 35"]
@@ -2456,7 +2620,7 @@ texture_filter = 1
 position = Vector2(5.95, 16.95)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50321" type="Sprite2D" parent="Layer 1/Frame 35"]
@@ -2464,7 +2628,7 @@ texture_filter = 1
 position = Vector2(-1.5, 16.25)
 rotation = 1.32731
 scale = Vector2(0.99505, 0.99505)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50322" type="Sprite2D" parent="Layer 1/Frame 35"]
@@ -2472,14 +2636,14 @@ texture_filter = 1
 position = Vector2(2.35, -4.5)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 35" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 35"]
 position = Vector2(23.2, 9.7)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2492,12 +2656,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 35/DOMSymbolInstance"]
+script = SubResource("GDScript_hl11c")
+
 [node name="@@50323" type="Sprite2D" parent="Layer 1/Frame 35"]
 texture_filter = 1
 position = Vector2(-3.15, -7)
 rotation = 1.72212
 scale = Vector2(0.996957, 0.996957)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50324" type="Sprite2D" parent="Layer 1/Frame 35"]
@@ -2505,7 +2672,7 @@ texture_filter = 1
 position = Vector2(22.85, -10.55)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50325" type="Sprite2D" parent="Layer 1/Frame 35"]
@@ -2514,7 +2681,7 @@ position = Vector2(26.25, -4.1)
 rotation = 1.54452
 scale = Vector2(0.992133, 0.261005)
 skew = -0.404715
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50326" type="Sprite2D" parent="Layer 1/Frame 35"]
@@ -2523,7 +2690,7 @@ position = Vector2(26.45, 2.8)
 rotation = 1.54452
 scale = Vector2(0.992133, 0.261005)
 skew = -0.404715
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50327" type="Sprite2D" parent="Layer 1/Frame 35"]
@@ -2531,7 +2698,7 @@ texture_filter = 1
 position = Vector2(22.15, 18.05)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50328" type="Sprite2D" parent="Layer 1/Frame 35"]
@@ -2539,7 +2706,7 @@ texture_filter = 1
 position = Vector2(29.65, 23.7)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 36" type="Node2D" parent="Layer 1"]
@@ -2550,7 +2717,7 @@ texture_filter = 1
 position = Vector2(19.5, -7.3)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50330" type="Sprite2D" parent="Layer 1/Frame 36"]
@@ -2558,7 +2725,7 @@ texture_filter = 1
 position = Vector2(26, -14.5)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50331" type="Sprite2D" parent="Layer 1/Frame 36"]
@@ -2566,7 +2733,7 @@ texture_filter = 1
 position = Vector2(5.95, 16.95)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50332" type="Sprite2D" parent="Layer 1/Frame 36"]
@@ -2574,7 +2741,7 @@ texture_filter = 1
 position = Vector2(-1.5, 16.25)
 rotation = 1.32731
 scale = Vector2(0.99505, 0.99505)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50333" type="Sprite2D" parent="Layer 1/Frame 36"]
@@ -2582,14 +2749,14 @@ texture_filter = 1
 position = Vector2(2.35, -0.5)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 36" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 36"]
 position = Vector2(23.2, 9.7)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2607,7 +2774,7 @@ texture_filter = 1
 position = Vector2(-4.45, -2.8)
 rotation = 1.52963
 scale = Vector2(0.996343, 0.996343)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50335" type="Sprite2D" parent="Layer 1/Frame 36"]
@@ -2615,7 +2782,7 @@ texture_filter = 1
 position = Vector2(22.85, -10.55)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50336" type="Sprite2D" parent="Layer 1/Frame 36"]
@@ -2623,7 +2790,7 @@ texture_filter = 1
 position = Vector2(28.8, -4.1)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50337" type="Sprite2D" parent="Layer 1/Frame 36"]
@@ -2631,7 +2798,7 @@ texture_filter = 1
 position = Vector2(29.6, 2.8)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50338" type="Sprite2D" parent="Layer 1/Frame 36"]
@@ -2639,7 +2806,7 @@ texture_filter = 1
 position = Vector2(22.15, 18.05)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50339" type="Sprite2D" parent="Layer 1/Frame 36"]
@@ -2647,7 +2814,7 @@ texture_filter = 1
 position = Vector2(30.65, 21.7)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 37" type="Node2D" parent="Layer 1"]
@@ -2658,7 +2825,7 @@ texture_filter = 1
 position = Vector2(19.5, -7.3)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50341" type="Sprite2D" parent="Layer 1/Frame 37"]
@@ -2666,7 +2833,7 @@ texture_filter = 1
 position = Vector2(26, -14.5)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50342" type="Sprite2D" parent="Layer 1/Frame 37"]
@@ -2674,7 +2841,7 @@ texture_filter = 1
 position = Vector2(4.45, 15.95)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50343" type="Sprite2D" parent="Layer 1/Frame 37"]
@@ -2682,7 +2849,7 @@ texture_filter = 1
 position = Vector2(-2.95, 14.85)
 rotation = 1.53286
 scale = Vector2(0.994399, 0.994399)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50344" type="Sprite2D" parent="Layer 1/Frame 37"]
@@ -2690,14 +2857,14 @@ texture_filter = 1
 position = Vector2(2.35, 4.5)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 37" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 37"]
 position = Vector2(23.2, 9.7)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2710,12 +2877,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 37/DOMSymbolInstance"]
+script = SubResource("GDScript_34lgs")
+
 [node name="@@50345" type="Sprite2D" parent="Layer 1/Frame 37"]
 texture_filter = 1
 position = Vector2(-4.45, 2.2)
 rotation = 1.52963
 scale = Vector2(0.996343, 0.996343)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50346" type="Sprite2D" parent="Layer 1/Frame 37"]
@@ -2723,7 +2893,7 @@ texture_filter = 1
 position = Vector2(23, -12.15)
 rotation = 1.46129
 scale = Vector2(0.897634, 0.997767)
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50347" type="Sprite2D" parent="Layer 1/Frame 37"]
@@ -2731,7 +2901,7 @@ texture_filter = 1
 position = Vector2(28.8, -5.6)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50348" type="Sprite2D" parent="Layer 1/Frame 37"]
@@ -2739,7 +2909,7 @@ texture_filter = 1
 position = Vector2(29.6, 1.3)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50349" type="Sprite2D" parent="Layer 1/Frame 37"]
@@ -2747,7 +2917,7 @@ texture_filter = 1
 position = Vector2(22.15, 16.05)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50350" type="Sprite2D" parent="Layer 1/Frame 37"]
@@ -2755,7 +2925,7 @@ texture_filter = 1
 position = Vector2(30.65, 19.7)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 38" type="Node2D" parent="Layer 1"]
@@ -2766,7 +2936,7 @@ texture_filter = 1
 position = Vector2(19.5, -7.3)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50352" type="Sprite2D" parent="Layer 1/Frame 38"]
@@ -2774,7 +2944,7 @@ texture_filter = 1
 position = Vector2(26, -12.5)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="@@50353" type="Sprite2D" parent="Layer 1/Frame 38"]
@@ -2782,7 +2952,7 @@ texture_filter = 1
 position = Vector2(2.95, 14.45)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
 [node name="@@50354" type="Sprite2D" parent="Layer 1/Frame 38"]
@@ -2790,14 +2960,14 @@ texture_filter = 1
 position = Vector2(2.35, 8.5)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("3_cja6p")
+texture = ExtResource("4_l13ek")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 38" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 38"]
 position = Vector2(23.2, 9.7)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2815,7 +2985,7 @@ texture_filter = 1
 position = Vector2(-4.45, 6.2)
 rotation = 1.52963
 scale = Vector2(0.996343, 0.996343)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50356" type="Sprite2D" parent="Layer 1/Frame 38"]
@@ -2823,7 +2993,7 @@ texture_filter = 1
 position = Vector2(-3.65, 15)
 rotation = 1.43611
 scale = Vector2(0.99408, 0.99408)
-texture = ExtResource("4_6170a")
+texture = ExtResource("5_41y0r")
 centered = false
 
 [node name="@@50357" type="Sprite2D" parent="Layer 1/Frame 38"]
@@ -2832,7 +3002,7 @@ position = Vector2(23.6, -10.95)
 rotation = 1.49687
 scale = Vector2(0.773536, 0.997767)
 skew = -0.0355805
-texture = ExtResource("7_hlr6b")
+texture = ExtResource("7_u8e5x")
 centered = false
 
 [node name="@@50358" type="Sprite2D" parent="Layer 1/Frame 38"]
@@ -2840,7 +3010,7 @@ texture_filter = 1
 position = Vector2(28.8, -6.1)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50359" type="Sprite2D" parent="Layer 1/Frame 38"]
@@ -2848,7 +3018,7 @@ texture_filter = 1
 position = Vector2(29.6, 0.05)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("8_elpv8")
+texture = ExtResource("8_ro4wb")
 centered = false
 
 [node name="@@50360" type="Sprite2D" parent="Layer 1/Frame 38"]
@@ -2856,7 +3026,7 @@ texture_filter = 1
 position = Vector2(22.15, 13.55)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("1_1jo8y")
+texture = ExtResource("2_pbde0")
 centered = false
 
 [node name="@@50361" type="Sprite2D" parent="Layer 1/Frame 38"]
@@ -2864,7 +3034,7 @@ texture_filter = 1
 position = Vector2(30.65, 15.7)
 rotation = 1.46129
 scale = Vector2(0.997767, 0.997767)
-texture = ExtResource("2_q6hms")
+texture = ExtResource("3_tawab")
 centered = false
 
 [node name="Frame 54" type="Node2D" parent="Layer 1"]
@@ -2877,9 +3047,9 @@ visible = false
 [node name="Frame 49" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 49" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 49"]
 position = Vector2(2.75, 3.2)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2892,9 +3062,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50119" type="Node2D" parent="Layer 6/Frame 49" instance=ExtResource("5_xngnw")]
+[node name="@DOMSymbolInstance@50119" type="Node2D" parent="Layer 6/Frame 49"]
 position = Vector2(27.75, -1.8)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Explosion 3 Clip (Small 2).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2917,9 +3087,9 @@ visible = false
 [node name="Frame 39" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 39" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 39"]
 position = Vector2(11.25, 13.55)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2932,9 +3102,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50118" type="Node2D" parent="Layer 3/Frame 39" instance=ExtResource("5_xngnw")]
+[node name="@DOMSymbolInstance@50118" type="Node2D" parent="Layer 3/Frame 39"]
 position = Vector2(25.35, 4.35)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Explosion 3 Clip (Small 2).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2957,9 +3127,9 @@ visible = false
 [node name="Frame 41" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 41" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 41"]
 position = Vector2(19.35, 8.35)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Effects/Explosion/Explosion 4 Clip (Whack).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2982,9 +3152,9 @@ visible = false
 [node name="Frame 46" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 46" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 46"]
 position = Vector2(22.35, 0.35)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3006,14 +3176,26 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_m6p26")
+
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 6"]
+script = SubResource("GDScript_nu4m7")
 
 [node name="Frame 8" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 8"]
+script = SubResource("GDScript_ty0ao")
+
 [node name="Frame 26" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 26"]
+script = SubResource("GDScript_g3xk4")
 
 [node name="Frame 27" type="Node2D" parent="Layer 2"]
 visible = false
@@ -3021,12 +3203,15 @@ visible = false
 [node name="Frame 38" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 38"]
+script = SubResource("GDScript_2eiv3")
+
 [node name="Frame 44" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 44" instance=ExtResource("5_xngnw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 44"]
 position = Vector2(18.2, 7.7)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Effects/Explosion/Nuke Explosion.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3039,9 +3224,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50117" type="Node2D" parent="Layer 2/Frame 44" instance=ExtResource("5_xngnw")]
+[node name="@DOMSymbolInstance@50117" type="Node2D" parent="Layer 2/Frame 44"]
 position = Vector2(19.35, -2.65)
-script = ExtResource("6_8xt0o")
+script = ExtResource("6_pr611")
 path = "res://sm63_godot/Effects/Explosion/Explosion 4 Clip (Whack).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3056,3 +3241,6 @@ brightness = 0.0
 
 [node name="Frame 66" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 66"]
+script = SubResource("GDScript_wyxvd")

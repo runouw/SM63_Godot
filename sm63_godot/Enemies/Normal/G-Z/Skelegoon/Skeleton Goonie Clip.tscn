@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_2tixs"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_068e4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ckb8c"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2vrn2"]
 
-[sub_resource type="Animation" id="Animation_nih1j"]
+[sub_resource type="Animation" id="Animation_1xgwp"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,25 +55,38 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hlw7h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6mh8p"]
 _data = {
-"Default": SubResource("Animation_nih1j")
+"Default": SubResource("Animation_1xgwp")
 }
 
+[sub_resource type="GDScript" id="GDScript_12v6f"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Skeleton Goonie Clip" type="Node2D"]
+script = ExtResource("1_ckb8c")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hlw7h")
+"Timeline": SubResource("AnimationLibrary_6mh8p")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_2tixs")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_12v6f")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 1)
-script = ExtResource("2_068e4")
+script = ExtResource("2_2vrn2")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie Fly.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -89,9 +102,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_2tixs")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-4, -5)
-script = ExtResource("2_068e4")
+script = ExtResource("2_2vrn2")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Skelegoon/Skeleton Goonie No wings Running.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -107,9 +120,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_2tixs")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-4, -3)
-script = ExtResource("2_068e4")
+script = ExtResource("2_2vrn2")
 path = "res://sm63_godot/Goonie Gone.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -125,8 +138,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_2tixs")]
-script = ExtResource("2_068e4")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
+script = ExtResource("2_2vrn2")
 path = "res://sm63_godot/Skeleton Goonie Bone.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

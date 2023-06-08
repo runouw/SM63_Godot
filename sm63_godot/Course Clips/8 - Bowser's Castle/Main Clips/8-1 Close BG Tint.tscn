@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="1_skfqd"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="2_dl8wt"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_6ckn4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_q3tsj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_br4k1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="2_onnj6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_8u0q8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_kftda"]
 
-[sub_resource type="Animation" id="Animation_5d3cn"]
+[sub_resource type="Animation" id="Animation_ru3k7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -21,16 +21,53 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n8xya"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n0rm0"]
 _data = {
-"Default": SubResource("Animation_5d3cn")
+"Default": SubResource("Animation_ru3k7")
 }
 
+[sub_resource type="GDScript" id="GDScript_2xnvh"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	rotspeed = 0.08;
+# }
+# onClipEvent (enterFrame) {
+# 	_rotation += rotspeed;
+# 	count += 1;
+# 	if (count>250) {
+# 		rotspeed *= -1;
+# 		count = 0;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_8ahhb"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	rotspeed = 0.08;
+# }
+# onClipEvent (enterFrame) {
+# 	_rotation += rotspeed;
+# 	count += 1;
+# 	if (count>250) {
+# 		rotspeed *= -1;
+# 		count = 0;
+# 	}
+# }
+# "
+
 [node name="8-1 Close BG Tint" type="Node2D"]
+script = ExtResource("1_br4k1")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Close BG Tint.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_n8xya")
+"Timeline": SubResource("AnimationLibrary_n0rm0")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -42,7 +79,7 @@ libraries = {
 [node name="@@36303" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_skfqd")
+texture = ExtResource("2_onnj6")
 texture_offset = Vector2(65.4333, 145.965)
 texture_scale = Vector2(1.43152, -1.43152)
 texture_rotation = 2.8866
@@ -52,7 +89,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 [node name="@@36304" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_skfqd")
+texture = ExtResource("2_onnj6")
 texture_offset = Vector2(834.276, 13.1258)
 texture_scale = Vector2(1.39122, -1.39122)
 texture_rotation = 3.11848
@@ -62,7 +99,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 [node name="@@36305" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_dl8wt")
+texture = ExtResource("3_8u0q8")
 texture_offset = Vector2(920.35, 148.1)
 texture_scale = Vector2(1.55152, 1.55152)
 polygon = PackedVector2Array(0, -64.575, 0, -64.575, 44.25, 11.05, 44.2, 11.075, 43.55, 208.525, -44.25, 208.525, -44.25, 11.075, -23.2217, -24.875)
@@ -71,7 +108,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
 [node name="@@36306" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_skfqd")
+texture = ExtResource("2_onnj6")
 texture_offset = Vector2(-1905.93, 740.951)
 texture_scale = Vector2(1.43152, -1.43152)
 texture_rotation = 2.8866
@@ -81,7 +118,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), Packe
 [node name="@@36307" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_dl8wt")
+texture = ExtResource("3_8u0q8")
 texture_offset = Vector2(2664.75, 108.4)
 texture_scale = Vector2(1.55152, 1.55152)
 polygon = PackedVector2Array(-1744.4, -24.875, -1744.4, -24.875, -1723.38, 11.05, -1723.36, 11.075, -1700.15, 50.75, -1700.2, 50.775, -1700.85, 248.225, -1788.65, 248.225, -1788.65, 50.775, -1765.43, 11.075, -1765.41, 11.05)
@@ -95,10 +132,10 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_6ckn4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-739.6, 256.55)
 scale = Vector2(0.599991, 0.599991)
-script = ExtResource("4_q3tsj")
+script = ExtResource("4_kftda")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Bobbing Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -111,10 +148,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@36309" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_6ckn4")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_2xnvh")
+
+[node name="@DOMSymbolInstance@36309" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-2183.35, 316.4)
 scale = Vector2(0.599991, 0.599991)
-script = ExtResource("4_q3tsj")
+script = ExtResource("4_kftda")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Bobbing Tower.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -126,3 +166,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@36309"]
+script = SubResource("GDScript_8ahhb")

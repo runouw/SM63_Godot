@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_20fnb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6qgny"]
+
+[sub_resource type="Animation" id="Animation_ximd7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ix18"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5r48v"]
 _data = {
-"Default": SubResource("Animation_20fnb")
+"Default": SubResource("Animation_ximd7")
 }
 
 [node name="Cinema 1 Intro Text" type="Node2D"]
+script = ExtResource("1_6qgny")
+source_xml = "res://sm63/LIBRARY/Cinema 1 Intro Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1ix18")
+"Timeline": SubResource("AnimationLibrary_5r48v")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

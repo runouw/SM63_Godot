@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_vo1fw"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_hxcne"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_p5f42"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_e1xub"]
 
-[sub_resource type="Animation" id="Animation_jyv2h"]
+[sub_resource type="Animation" id="Animation_r5yww"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,25 +55,34 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hvyo3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_otw80"]
 _data = {
-"Default": SubResource("Animation_jyv2h")
+"Default": SubResource("Animation_r5yww")
 }
 
+[sub_resource type="GDScript" id="GDScript_ysmsv"]
+script/source = "extends Node
+# stop()"
+
 [node name="9-02 Water" type="Node2D"]
+script = ExtResource("1_p5f42")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Water.xml"
+linkage = "9-02Water"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hvyo3")
+"Timeline": SubResource("AnimationLibrary_otw80")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_vo1fw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(502, 244.65)
-script = ExtResource("2_hxcne")
+script = ExtResource("2_e1xub")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -86,9 +95,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@39819" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_vo1fw")]
+[node name="@DOMSymbolInstance@39819" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(2171.5, 244.65)
-script = ExtResource("2_hxcne")
+script = ExtResource("2_e1xub")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -106,10 +115,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2(Mask)/Frame 0" instance=ExtResource("1_vo1fw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2(Mask)/Frame 0"]
 position = Vector2(0, 0.05)
 scale = Vector2(1, 1.00278)
-script = ExtResource("2_hxcne")
+script = ExtResource("2_e1xub")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Water Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -136,3 +145,6 @@ end_cap_mode = 2
 
 [node name="Frame 1" type="Node2D" parent="Temp"]
 visible = false
+
+[node name="AS2" type="Node" parent="Temp/Frame 1"]
+script = SubResource("GDScript_ysmsv")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_wecio"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_jfoyd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5pn1b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ceoyh"]
 
-[sub_resource type="Animation" id="Animation_7oakd"]
+[sub_resource type="Animation" id="Animation_upvq2"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,24 +43,177 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7ixw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8vrkn"]
 _data = {
-"Default": SubResource("Animation_7oakd")
+"Default": SubResource("Animation_upvq2")
 }
 
+[sub_resource type="GDScript" id="GDScript_6pswh"]
+script/source = "extends Node
+# stop();
+# yspeed = 0;
+# xspeed = 0;
+# rotmovement = 0;
+# rotspeed = 2;
+# //
+# count = 0;
+# //
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		xdistance = (_root.Course.Char._x)-(_x+_parent._x);
+# 		ydistance = (_root.Course.Char._y)-(_y+_parent._y);
+# 		distance = Math.sqrt(Math.pow(xdistance, 2)+Math.pow(ydistance, 2));
+# 		if (frame !== \"Die\") {
+# 			if (Math.abs(distance)<500 && Math.abs(ydistance)<300) {
+# 				if (Math.abs(ydistance)<Math.abs(xdistance)*2) {
+# 					if (xdistance<-10 && _root.Course.Char._xscale>0 && _xscale<0) {
+# 						frame = \"Chase\";
+# 						xspeed -= 0.5;
+# 						yspeed += Math.min(Math.max(ydistance/30, -0.3), 0.3);
+# 						_xscale = -100;
+# 					} else if (xdistance<-10 && _root.Course.Char._xscale<0 && _xscale<0) {
+# 						frame = \"Hide\";
+# 					} else if (_xscale<0) {
+# 						frame = \"Idle\";
+# 					}
+# 					if (xdistance>10 && _root.Course.Char._xscale<0 && _xscale>0) {
+# 						frame = \"Chase\";
+# 						xspeed += 0.5;
+# 						yspeed += Math.min(Math.max(ydistance/30, -0.3), 0.3);
+# 						_xscale = 100;
+# 					} else if (xdistance>10 && _root.Course.Char._xscale>0 && _xscale>0) {
+# 						frame = \"Hide\";
+# 					} else if (_xscale>0) {
+# 						frame = \"Idle\";
+# 					}
+# 				} else {
+# 					frame = \"Idle\";
+# 				}
+# 			} else {
+# 				frame = \"Idle\";
+# 			}
+# 		}
+# 		//  hitTests                                               
+# 		if (this.head.hitTest(_root.Course.Char.charClip.feet) && _root.Course.Char.air == true && _root.Course.Char.yspeed>0 && frame !== \"Die\" && frame !== \"Hide\") {
+# 			frame = \"Die\";
+# 			yspeed += Math.max(_root.Course.Char.yspeed, 0)+5;
+# 			xspeed += _root.Course.Char.xspeed/2;
+# 			//
+# 			_root.Course.Char.yspeed /= 2;
+# 			_root.Course.Char.yspeed -= 13;
+# 			//
+# 			_root.bgsoundFX = new Sound(this);
+# 			_root.bgsoundFX.attachSound(\"MarioImpact\");
+# 			_root.bgsoundFX.start(0, 1);
+# 			_root.bgsoundFX.setVolume(_root.BgVolume);
+# 			//
+# 		}
+# 		if (this.body.hitTest(_root.Course.Char.charClip.body) && (_root.Course.Char.attackFrame == \"Dive\" && _root.Course.Char.attack == true && Math.abs(_root.Course.Char.xspeed)>0.3) && frame !== \"Die\" && frame !== \"Hide\") {
+# 			frame = \"Die\";
+# 			yspeed -= 7;
+# 			xspeed += _root.Course.Char.xspeed/2;
+# 		}
+# 		if (this.body.hitTest(_root.Course.Char.charClip.body) && (Math.abs(_root.Course.Char.xspeed)>=7 && _root.KeySPACE() && _root.Power>=100 && _root.WaterAmount>0 && _root.Fluddpow == \"T\") && frame !== \"Die\" && frame !== \"Hide\") {
+# 			frame = \"Die\";
+# 			yspeed -= 7;
+# 			xspeed += _root.Course.Char.xspeed/2;
+# 		}
+# 		if (this.body.hitTest(_root.Course.Char.charClip.water) || this.body.hitTest(_root.Course.Char.charClip.frame.water) || this.head.hitTest(_root.Course.Char.charClip.water) || this.head.hitTest(_root.Course.Char.charClip.frame.water) && frame !== \"Die\" && frame !== \"Hide\") {
+# 			frame = \"Die\";
+# 			yspeed -= 9;
+# 			xspeed += (Math.random()*8)-4;
+# 		}
+# 		if (this.body.hitTest(_root.Course.Char.charClip.body) && (_root.Course.Char.attack == false || !(_root.Course.Char.attackFrame == \"Dive\" && _root.Course.Char.attack == true && Math.abs(_root.Course.Char.xspeed)>0.3)) && !(Math.abs(_root.Course.Char.xspeed)>7 && _root.KeySPACE() && _root.Power>=100 && _root.WaterAmount>0 && _root.Fluddpow == \"T\") && frame !== \"Die\" && frame !== \"Hide\") {
+# 			if (_root.Course.Char.blink<=0) {
+# 				sound = true;
+# 			} else {
+# 				sound = false;
+# 			}
+# 			if (_root.Course.Char._x>_x+_parent._x) {
+# 				_root.MarioHit(1, 90, -5, 7, 7, \"\");
+# 			} else {
+# 				_root.MarioHit(1, 90, -5, -7, 7, \"\");
+# 			}
+# 			if (_root.Course.Char.blink>0 && sound == true) {
+# 				_root.Mariosound = new Sound(this);
+# 				_root.Mariosound.attachSound(\"Boo\");
+# 				_root.Mariosound.start(0, 1);
+# 				_root.Mariosound.setVolume(_root.MarioVolume);
+# 			}
+# 		}
+# 		// ^  hitTests ^                                                      
+# 		if (frame == \"Idle\") {
+# 			if (_xscale>0) {
+# 				xspeed += 0.3;
+# 			} else {
+# 				xspeed -= 0.3;
+# 			}
+# 			count += random(3)+1;
+# 			if (count>300) {
+# 				count = 0;
+# 				_xscale *= -1;
+# 			}
+# 		}
+# 		if (frame == \"Hide\") {
+# 			_alpha -= 5;
+# 			_alpha = Math.max(_alpha, 30);
+# 		} else {
+# 			_alpha += 5;
+# 			_alpha = Math.min(_alpha, 100);
+# 		}
+# 		if (frame == \"Die\") {
+# 			_alpha -= 10;
+# 			clip._rotation += random(10)+15;
+# 			if (_alpha<=30) {
+# 				_alpha = Math.max(_alpha, 0);
+# 				frame = \"Idle\";
+# 			}
+# 		}
+# 		if (frame !== \"Die\") {
+# 			clip._rotation = _root.groundFriction(clip._rotation, 5, 1.2);
+# 			rotspeed = Math.abs(xspeed)+1;
+# 			rotmovement += rotspeed/30;
+# 			xspeed *= 0.7;
+# 			yspeed *= 0.7;
+# 			clip._y = Math.sin(rotmovement)*10;
+# 		} else {
+# 			xspeed *= 0.9;
+# 			yspeed *= 0.7;
+# 		}
+# 		//
+# 		_yscale = scale*100;
+# 		if (_xscale>0) {
+# 			_xscale = scale*100;
+# 		}
+# 		if (_xscale<0) {
+# 			_xscale = -scale*100;
+# 		}
+# 		//   
+# 		clip.gotoAndStop(frame);
+# 		_x += xspeed;
+# 		_y += yspeed;
+# 	}
+# };
+# "
+
 [node name="Ghost Code" type="Node2D"]
+script = ExtResource("1_5pn1b")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Boo/Ghost Code.xml"
+linkage = "GhostCode"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_p7ixw")
+"Timeline": SubResource("AnimationLibrary_8vrkn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wecio")]
-script = ExtResource("2_jfoyd")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_ceoyh")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Frames.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -80,10 +233,13 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("1_wecio")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_6pswh")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2"]
 position = Vector2(-1.5, 14.65)
 scale = Vector2(0.513382, 0.273483)
-script = ExtResource("2_jfoyd")
+script = ExtResource("2_ceoyh")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -96,10 +252,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50553" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("1_wecio")]
+[node name="@DOMSymbolInstance@50553" type="Node2D" parent="Layer 2/Frame 2"]
 position = Vector2(0.5, 0)
 scale = Vector2(0.442459, 0.28302)
-script = ExtResource("2_jfoyd")
+script = ExtResource("2_ceoyh")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

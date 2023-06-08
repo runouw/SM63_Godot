@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_j6ijc"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_wyw0v"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ofibl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_77f61"]
 
-[sub_resource type="Animation" id="Animation_3obk5"]
+[sub_resource type="Animation" id="Animation_jri0d"]
 length = 7.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,25 +55,30 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qlohv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ibaxb"]
 _data = {
-"Default": SubResource("Animation_3obk5")
+"Default": SubResource("Animation_jri0d")
 }
 
 [node name="RI BG" type="Node2D"]
+script = ExtResource("1_ofibl")
+source_xml = "res://sm63/LIBRARY/RI BG.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qlohv")
+"Timeline": SubResource("AnimationLibrary_ibaxb")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_j6ijc")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(11, 9)
-script = ExtResource("2_wyw0v")
+script = ExtResource("2_77f61")
 path = "res://sm63_godot/Tween 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -89,9 +94,9 @@ brightness = 0.0
 [node name="Frame 163" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 163" instance=ExtResource("1_j6ijc")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 163"]
 position = Vector2(-21, 9)
-script = ExtResource("2_wyw0v")
+script = ExtResource("2_77f61")
 path = "res://sm63_godot/Tween 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -108,9 +113,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_j6ijc")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(21, 9)
-script = ExtResource("2_wyw0v")
+script = ExtResource("2_77f61")
 path = "res://sm63_godot/Tween 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -126,9 +131,9 @@ brightness = 0.0
 [node name="Frame 163" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 163" instance=ExtResource("1_j6ijc")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 163"]
 position = Vector2(11, -9)
-script = ExtResource("2_wyw0v")
+script = ExtResource("2_77f61")
 path = "res://sm63_godot/Tween 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

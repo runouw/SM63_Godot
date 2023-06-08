@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_5w6ns"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xu0sb"]
+
+[sub_resource type="Animation" id="Animation_mi0ay"]
 length = 1.46667
 loop_mode = 1
 tracks/0/type = "value"
@@ -52,16 +54,21 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vf4y5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vsqm1"]
 _data = {
-"Default": SubResource("Animation_5w6ns")
+"Default": SubResource("Animation_mi0ay")
 }
 
 [node name="Level Select Pess Z X or C" type="Node2D"]
+script = ExtResource("1_xu0sb")
+source_xml = "res://sm63/LIBRARY/Level Select Pess Z X or C.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vf4y5")
+"Timeline": SubResource("AnimationLibrary_vsqm1")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

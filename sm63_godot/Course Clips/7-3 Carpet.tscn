@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_81xqo"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_cp27e"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_g8eo8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_cvp71"]
 
-[sub_resource type="Animation" id="Animation_wp1my"]
+[sub_resource type="Animation" id="Animation_uk603"]
 length = 47.6333
 loop_mode = 1
 tracks/0/type = "value"
@@ -127,25 +127,54 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ohi4p"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8yel1"]
 _data = {
-"Default": SubResource("Animation_wp1my")
+"Default": SubResource("Animation_uk603")
 }
 
+[sub_resource type="GDScript" id="GDScript_gkeym"]
+script/source = "extends Node
+# stop();
+# played = false;
+# landedon = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (played == true) {
+# 			play();
+# 		}
+# 		if (landedon == true && _root.Course.Char.yspeed>=-3) {
+# 			played = true;
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_yqgk2"]
+script/source = "extends Node
+# gotoAndStop(1);
+# "
+
 [node name="7-3 Carpet" type="Node2D"]
+script = ExtResource("1_g8eo8")
+source_xml = "res://sm63/LIBRARY/Course Clips/7-3 Carpet.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ohi4p")
+"Timeline": SubResource("AnimationLibrary_8yel1")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_81xqo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-0.85, 0.05)
-script = ExtResource("2_cp27e")
+script = ExtResource("2_cvp71")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -161,9 +190,9 @@ brightness = 0.0
 [node name="Frame 87" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 87" instance=ExtResource("1_81xqo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 87"]
 position = Vector2(114.65, -50.85)
-script = ExtResource("2_cp27e")
+script = ExtResource("2_cvp71")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -179,9 +208,9 @@ brightness = 0.0
 [node name="Frame 1403" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1403" instance=ExtResource("1_81xqo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1403"]
 position = Vector2(562.55, -586.45)
-script = ExtResource("2_cp27e")
+script = ExtResource("2_cvp71")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -197,9 +226,9 @@ brightness = 0.0
 [node name="Frame 1418" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1418" instance=ExtResource("1_81xqo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1418"]
 position = Vector2(541.45, -553.45)
-script = ExtResource("2_cp27e")
+script = ExtResource("2_cvp71")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -218,9 +247,9 @@ visible = false
 [node name="Frame 1420" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1420" instance=ExtResource("1_81xqo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1420"]
 position = Vector2(-0.85, 0.05)
-script = ExtResource("2_cp27e")
+script = ExtResource("2_cvp71")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -236,9 +265,9 @@ brightness = 0.0
 [node name="Frame 1428" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1428" instance=ExtResource("1_81xqo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1428"]
 position = Vector2(-0.85, 0.05)
-script = ExtResource("2_cp27e")
+script = ExtResource("2_cvp71")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Rainbow Ride/Rainbow Carpet Folder/Rainbow Carpet Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -275,5 +304,11 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_gkeym")
+
 [node name="Frame 1428" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1428"]
+script = SubResource("GDScript_yqgk2")

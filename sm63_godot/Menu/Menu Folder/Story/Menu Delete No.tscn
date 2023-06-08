@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_uuq64"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mbni3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1an4r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_oqkv3"]
 
-[sub_resource type="Animation" id="Animation_c2sxw"]
+[sub_resource type="Animation" id="Animation_lr74l"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,78 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gydvv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x13jm"]
 _data = {
-"Default": SubResource("Animation_c2sxw")
+"Default": SubResource("Animation_lr74l")
 }
 
+[sub_resource type="GDScript" id="GDScript_ec0va"]
+script/source = "extends Node
+# yspeed = 0;
+# xspeed = 0;
+# onEnterFrame = function () {
+# 	if (bg.hitTest(_root._xmouse, _root._ymouse, true) && _parent.clicked !== true) {
+# 		hl = true;
+# 	} else {
+# 		hl = false;
+# 	}
+# 	if (hl == true && cl !== true) {
+# 		this._xscale += (125-this._xscale)/4;
+# 	} else if (cl !== true) {
+# 		this._xscale += (100-this._xscale)/4;
+# 	}
+# 	this._yscale = this._xscale;
+# 	//
+# 	/*	xspeed = 100/(this._x-_parent._xmouse);
+# 	yspeed = 100/(this._y-_parent._ymouse);*/
+# 	dist = Math.sqrt(Math.pow((this._x-_parent._xmouse), 2)+Math.pow((this._y-_parent._ymouse), 2));
+# 	//
+# 	dist = Math.max(dist, 2);
+# 	rot = Math.atan2((this._y-_parent._ymouse), (this._x-_parent._xmouse));
+# 	xspeed = Math.cos(rot)*(dist/350);
+# 	yspeed = Math.sin(rot)*(dist/350)
+# 	//xspeed = Math.min(Math.max(xspeed, -7), 7);
+# 	//yspeed = Math.min(Math.max(yspeed, -7), 7);
+# 	if (hl !== true) {
+# 		this._x -= xspeed;
+# 		this._y -= yspeed;
+# 	} else {
+# 		this._x -= xspeed/2;
+# 		this._y -= yspeed/2;
+# 	}
+# 	//
+# 	this._x = Math.min((225-_width/2), _x);
+# 	this._x = Math.max(-(225-_width/2), _x);
+# 	this._y = Math.min((150-_height/2), _y);
+# 	this._y = Math.max(-(150-_height/2), _y);
+# };
+# onMouseDown = function () {
+# 	if (hl == true && cl !== true && _parent._currentframe == 10) {
+# 		_parent.NoF();
+# 		cl = true;
+# 	}
+# };
+# "
+
 [node name="Menu Delete No" type="Node2D"]
+script = ExtResource("1_1an4r")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Story/Menu Delete No.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gydvv")
+"Timeline": SubResource("AnimationLibrary_x13jm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_uuq64")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 scale = Vector2(0.927597, 1.27586)
-script = ExtResource("2_mbni3")
+script = ExtResource("2_oqkv3")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu Button BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -74,8 +127,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51867" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_uuq64")]
-script = ExtResource("2_mbni3")
+[node name="@DOMSymbolInstance@51867" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_oqkv3")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Delete No Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -95,3 +148,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_ec0va")

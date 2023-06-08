@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Hurt 1.png" id="1_2s1s5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Hurt 2.png" id="2_3l08a"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 3.png" id="3_dan0h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_0pcw5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Hurt 1.png" id="2_jj6px"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Hurt 2.png" id="3_q4tab"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 3.png" id="4_md2fa"]
 
-[sub_resource type="Animation" id="Animation_46dx0"]
+[sub_resource type="Animation" id="Animation_0ufhj"]
 length = 1.26667
 loop_mode = 1
 tracks/0/type = "value"
@@ -188,16 +189,130 @@ tracks/14/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_um3rg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fevy0"]
 _data = {
-"Default": SubResource("Animation_46dx0")
+"Default": SubResource("Animation_0ufhj")
 }
 
+[sub_resource type="GDScript" id="GDScript_v3nn2"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		_parent.xspeed *= 0.9;
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ypyhs"]
+script/source = "extends Node
+# count = 50;
+# if (_root.PauseGame == false && _root.playpause == false) {
+# 	play();
+# 	//   
+# 	count -= 1.5;
+# 	count = Math.max(count, 2);
+# 	onEnterFrame = function () {
+# 		_root.Course.Char.yspeed = 0;
+# 		Y = _parent._y+_parent._parent._y;
+# 		Y -= count;
+# 		_root.Course.Char._y += (Y-_root.Course.Char._y)/(5);
+# 		//           
+# 		X = _parent._x+_parent._parent._x;
+# 		_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 	};
+# } else {
+# 	stop();
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_icfms"]
+script/source = "extends Node
+# if (_parent._parent.bounce == true) {
+# 	_root.Course.Char._y -= 5;
+# }
+# 
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"LargeGoombaDie\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_ugidu"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# _root.Course.Char.yspeed -= 10;
+# _root.Course.Char.xspeed += _parent._xscale/50;
+# "
+
+[sub_resource type="GDScript" id="GDScript_0jc3e"]
+script/source = "extends Node
+# _root.Course.BackGFX.attachMovie(\"BlueCoin\", \"BlueCoin\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:425+random(500), _y:-300-random(50), bounce:true});
+# // Blue Coin
+# "
+
+[sub_resource type="GDScript" id="GDScript_lghj6"]
+script/source = "extends Node
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		count++;
+# 		tellTarget (_parent) {
+# 			myColor = new Color(_parent);
+# 			colorTrans = new Object();
+# 			colorTrans = {ra:100-(_parent.hp*10), rb:_parent.hp*25+this.count*5, ga:100-(_parent.hp*10), gb:0, ba:100-(_parent.hp*10), bb:0, aa:100, ab:0};
+# 			myColor.setTransform(colorTrans);
+# 		}
+# 		if (_parent._xscale>0) {
+# 			_parent._xscale += 2;
+# 		} else {
+# 			_parent._xscale -= 2;
+# 		}
+# 		_parent._yscale += 2;
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_vyttg"]
+script/source = "extends Node
+# _parent.hp++;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_cbmsv"]
+script/source = "extends Node
+# stop();
+# _parent.action = undefined;
+# 
+# "
+
 [node name="Goomboss Hurt" type="Node2D"]
+script = ExtResource("1_0pcw5")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Hurt.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_um3rg")
+"Timeline": SubResource("AnimationLibrary_fevy0")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -207,7 +322,7 @@ libraries = {
 [node name="@@49297" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-32, -37.5)
-texture = ExtResource("1_2s1s5")
+texture = ExtResource("2_jj6px")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -218,7 +333,7 @@ texture_filter = 1
 position = Vector2(-28.6, -15)
 scale = Vector2(1, 0.680762)
 skew = 0.0719446
-texture = ExtResource("1_2s1s5")
+texture = ExtResource("2_jj6px")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -229,7 +344,7 @@ texture_filter = 1
 position = Vector2(-25.65, -25)
 scale = Vector2(1, 0.82634)
 skew = 0.109609
-texture = ExtResource("1_2s1s5")
+texture = ExtResource("2_jj6px")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
@@ -238,7 +353,7 @@ visible = false
 [node name="@@49300" type="Sprite2D" parent="Layer 1/Frame 16"]
 texture_filter = 1
 position = Vector2(-32, -37.5)
-texture = ExtResource("1_2s1s5")
+texture = ExtResource("2_jj6px")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
@@ -247,7 +362,7 @@ visible = false
 [node name="@@49301" type="Sprite2D" parent="Layer 1/Frame 17"]
 texture_filter = 1
 position = Vector2(-32, -38.5)
-texture = ExtResource("2_3l08a")
+texture = ExtResource("3_q4tab")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -256,7 +371,7 @@ visible = false
 [node name="@@49302" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(-32, -38.5)
-texture = ExtResource("3_dan0h")
+texture = ExtResource("4_md2fa")
 centered = false
 
 [node name="Frame 26" type="Node2D" parent="Layer 1"]
@@ -265,30 +380,54 @@ visible = false
 [node name="@@49303" type="Sprite2D" parent="Layer 1/Frame 26"]
 texture_filter = 1
 position = Vector2(-32, -38.5)
-texture = ExtResource("2_3l08a")
+texture = ExtResource("3_q4tab")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_v3nn2")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_ypyhs")
 
 [node name="Frame 8" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 8"]
+script = SubResource("GDScript_icfms")
+
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 9"]
+script = SubResource("GDScript_ugidu")
 
 [node name="Frame 21" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 21"]
+script = SubResource("GDScript_0jc3e")
+
 [node name="Frame 27" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 27"]
+script = SubResource("GDScript_lghj6")
 
 [node name="Frame 32" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 32"]
+script = SubResource("GDScript_vyttg")
+
 [node name="Frame 37" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 37"]
+script = SubResource("GDScript_cbmsv")

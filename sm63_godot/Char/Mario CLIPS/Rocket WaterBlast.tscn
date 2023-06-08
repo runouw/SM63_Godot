@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 3.png" id="1_eb8dg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 5.png" id="2_i42g2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray Particle.png" id="3_wekme"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lwhe2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 3.png" id="2_cqvus"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 5.png" id="3_ves5r"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray Particle.png" id="4_8wcdb"]
 
-[sub_resource type="Animation" id="Animation_16e5i"]
+[sub_resource type="Animation" id="Animation_h1iaw"]
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -224,16 +225,89 @@ tracks/17/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sm11e"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tf4xx"]
 _data = {
-"Default": SubResource("Animation_16e5i")
+"Default": SubResource("Animation_h1iaw")
 }
 
+[sub_resource type="GDScript" id="GDScript_wnk24"]
+script/source = "extends Node
+# stop();
+# gotoAndStop(_parent.chargeframe);
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (_root.waterblast == true) {
+# 			nextFrame();
+# 			this.attachMovie(\"ChargeLine\", \"ChargeLine\"+this.getNextHighestDepth(), this.getNextHighestDepth(), {_x:0, _y:0});
+# 		} else {
+# 			prevFrame();
+# 		}
+# 		_parent.chargeframe = _currentframe;
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_jrgeu"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		nextFrame();
+# 		_root.Course.Char.yspeed *= 0.97;
+# 		_parent.chargeframe = _currentframe;
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_o42uv"]
+script/source = "extends Node
+# _root.Power = 1;
+# "
+
+[sub_resource type="GDScript" id="GDScript_kqo27"]
+script/source = "extends Node
+# play();
+# _root.WaterAmount -= 500;
+# _root.Power = 0;
+# _root.Course.Char.yspeed = Math.min(-_root.RocketBlast+Math.max((_root.Course.Char.yspeed/3),0), _root.Course.Char.yspeed);
+# onEnterFrame = function () {
+# 	_root.Power = 0;
+# 	_root.Course.Char.yspeed -= _root.RocketBlast/50;
+# 	if (_root.Course.Char.Water == true) {
+# 		_root.Course.Char.yspeed -= _root.RocketBlast/45;
+# 	}
+# 	_root.Course.Char.lockon = false;
+# 	if (Key.isDown(Key.RIGHT)) {
+# 		_root.Course.Char.xspeed += 0.7;
+# 		_root.Course.Char._rotation += 5;
+# 	}
+# 	if (Key.isDown(Key.LEFT)) {
+# 		_root.Course.Char.xspeed -= 0.7;
+# 		_root.Course.Char._rotation -= 5;
+# 	}
+# 	_parent.chargeframe = 0;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_di5q4"]
+script/source = "extends Node
+# _parent.chargeframe = 1;
+# gotoAndStop(1);
+# "
+
 [node name="Rocket WaterBlast" type="Node2D"]
+script = ExtResource("1_lwhe2")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Rocket WaterBlast.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sm11e")
+"Timeline": SubResource("AnimationLibrary_tf4xx")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -277,7 +351,7 @@ visible = false
 texture_filter = 1
 position = Vector2(9.5, -0.15)
 rotation = 1.5708
-texture = ExtResource("1_eb8dg")
+texture = ExtResource("2_cqvus")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 2"]
@@ -287,7 +361,7 @@ visible = false
 texture_filter = 1
 position = Vector2(8.85, 0.85)
 rotation = 1.5708
-texture = ExtResource("2_i42g2")
+texture = ExtResource("3_ves5r")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 2"]
@@ -297,14 +371,14 @@ visible = false
 texture_filter = 1
 position = Vector2(8.85, 18.85)
 rotation = 1.5708
-texture = ExtResource("2_i42g2")
+texture = ExtResource("3_ves5r")
 centered = false
 
 [node name="@@15993" type="Sprite2D" parent="Layer 2/Frame 17"]
 texture_filter = 1
 position = Vector2(4.85, 11.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@15994" type="Sprite2D" parent="Layer 2/Frame 17"]
@@ -312,7 +386,7 @@ texture_filter = 1
 position = Vector2(4.85, 14.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="Frame 18" type="Node2D" parent="Layer 2"]
@@ -322,14 +396,14 @@ visible = false
 texture_filter = 1
 position = Vector2(8.85, 58.85)
 rotation = 1.5708
-texture = ExtResource("2_i42g2")
+texture = ExtResource("3_ves5r")
 centered = false
 
 [node name="@@15996" type="Sprite2D" parent="Layer 2/Frame 18"]
 texture_filter = 1
 position = Vector2(4.85, 51.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@15997" type="Sprite2D" parent="Layer 2/Frame 18"]
@@ -337,14 +411,14 @@ texture_filter = 1
 position = Vector2(4.85, 54.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@15998" type="Sprite2D" parent="Layer 2/Frame 18"]
 texture_filter = 1
 position = Vector2(4.85, 31.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@15999" type="Sprite2D" parent="Layer 2/Frame 18"]
@@ -352,14 +426,14 @@ texture_filter = 1
 position = Vector2(4.85, 34.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16000" type="Sprite2D" parent="Layer 2/Frame 18"]
 texture_filter = 1
 position = Vector2(4.85, 11.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16001" type="Sprite2D" parent="Layer 2/Frame 18"]
@@ -367,7 +441,7 @@ texture_filter = 1
 position = Vector2(4.85, 14.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 2"]
@@ -377,14 +451,14 @@ visible = false
 texture_filter = 1
 position = Vector2(8.85, 68.85)
 rotation = 1.5708
-texture = ExtResource("2_i42g2")
+texture = ExtResource("3_ves5r")
 centered = false
 
 [node name="@@16003" type="Sprite2D" parent="Layer 2/Frame 19"]
 texture_filter = 1
 position = Vector2(4.85, 61.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16004" type="Sprite2D" parent="Layer 2/Frame 19"]
@@ -392,14 +466,14 @@ texture_filter = 1
 position = Vector2(4.85, 64.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16005" type="Sprite2D" parent="Layer 2/Frame 19"]
 texture_filter = 1
 position = Vector2(4.85, 41.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16006" type="Sprite2D" parent="Layer 2/Frame 19"]
@@ -407,14 +481,14 @@ texture_filter = 1
 position = Vector2(4.85, 44.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16007" type="Sprite2D" parent="Layer 2/Frame 19"]
 texture_filter = 1
 position = Vector2(4.85, 21.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16008" type="Sprite2D" parent="Layer 2/Frame 19"]
@@ -422,7 +496,7 @@ texture_filter = 1
 position = Vector2(4.85, 24.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16009" type="Sprite2D" parent="Layer 2/Frame 19"]
@@ -430,7 +504,7 @@ texture_filter = 1
 position = Vector2(4.85, 14.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="Frame 20" type="Node2D" parent="Layer 2"]
@@ -441,7 +515,7 @@ texture_filter = 1
 position = Vector2(-8.15, 68.85)
 rotation = 1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("2_i42g2")
+texture = ExtResource("3_ves5r")
 centered = false
 
 [node name="@@16011" type="Sprite2D" parent="Layer 2/Frame 20"]
@@ -449,14 +523,14 @@ texture_filter = 1
 position = Vector2(-4.15, 61.5)
 rotation = 1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16012" type="Sprite2D" parent="Layer 2/Frame 20"]
 texture_filter = 1
 position = Vector2(-4.15, 64.5)
 rotation = -1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16013" type="Sprite2D" parent="Layer 2/Frame 20"]
@@ -464,14 +538,14 @@ texture_filter = 1
 position = Vector2(-4.15, 41.5)
 rotation = 1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16014" type="Sprite2D" parent="Layer 2/Frame 20"]
 texture_filter = 1
 position = Vector2(-4.15, 44.5)
 rotation = -1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16015" type="Sprite2D" parent="Layer 2/Frame 20"]
@@ -479,21 +553,21 @@ texture_filter = 1
 position = Vector2(-4.15, 21.5)
 rotation = 1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16016" type="Sprite2D" parent="Layer 2/Frame 20"]
 texture_filter = 1
 position = Vector2(-4.15, 24.5)
 rotation = -1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16017" type="Sprite2D" parent="Layer 2/Frame 20"]
 texture_filter = 1
 position = Vector2(-4.15, 14.5)
 rotation = -1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 2"]
@@ -503,14 +577,14 @@ visible = false
 texture_filter = 1
 position = Vector2(8.85, 68.85)
 rotation = 1.5708
-texture = ExtResource("2_i42g2")
+texture = ExtResource("3_ves5r")
 centered = false
 
 [node name="@@16019" type="Sprite2D" parent="Layer 2/Frame 21"]
 texture_filter = 1
 position = Vector2(4.85, 61.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16020" type="Sprite2D" parent="Layer 2/Frame 21"]
@@ -518,14 +592,14 @@ texture_filter = 1
 position = Vector2(4.85, 64.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16021" type="Sprite2D" parent="Layer 2/Frame 21"]
 texture_filter = 1
 position = Vector2(4.85, 41.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16022" type="Sprite2D" parent="Layer 2/Frame 21"]
@@ -533,14 +607,14 @@ texture_filter = 1
 position = Vector2(4.85, 44.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16023" type="Sprite2D" parent="Layer 2/Frame 21"]
 texture_filter = 1
 position = Vector2(4.85, 21.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16024" type="Sprite2D" parent="Layer 2/Frame 21"]
@@ -548,7 +622,7 @@ texture_filter = 1
 position = Vector2(4.85, 24.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16025" type="Sprite2D" parent="Layer 2/Frame 21"]
@@ -556,7 +630,7 @@ texture_filter = 1
 position = Vector2(4.85, 14.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="Frame 22" type="Node2D" parent="Layer 2"]
@@ -566,14 +640,14 @@ visible = false
 texture_filter = 1
 position = Vector2(8.85, 18.85)
 rotation = 1.5708
-texture = ExtResource("2_i42g2")
+texture = ExtResource("3_ves5r")
 centered = false
 
 [node name="@@16027" type="Sprite2D" parent="Layer 2/Frame 22"]
 texture_filter = 1
 position = Vector2(4.85, 11.5)
 rotation = 1.5708
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="@@16028" type="Sprite2D" parent="Layer 2/Frame 22"]
@@ -581,7 +655,7 @@ texture_filter = 1
 position = Vector2(4.85, 14.5)
 rotation = -1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("3_wekme")
+texture = ExtResource("4_8wcdb")
 centered = false
 
 [node name="Frame 23" type="Node2D" parent="Layer 2"]
@@ -591,14 +665,29 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_wnk24")
+
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 9"]
+script = SubResource("GDScript_jrgeu")
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 14"]
+script = SubResource("GDScript_o42uv")
+
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 15"]
+script = SubResource("GDScript_kqo27")
+
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 23"]
+script = SubResource("GDScript_di5q4")

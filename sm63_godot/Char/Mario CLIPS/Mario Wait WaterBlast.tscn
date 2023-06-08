@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 2.png" id="1_hh6h4"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 3.png" id="2_1ollw"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 4.png" id="3_t64h3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 5.png" id="4_ovljw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_iaikj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 2.png" id="2_ltpgd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 3.png" id="3_tab15"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 4.png" id="4_whf3n"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Water Spray 5.png" id="5_sreus"]
 
-[sub_resource type="Animation" id="Animation_17dmr"]
+[sub_resource type="Animation" id="Animation_abphp"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -129,16 +130,55 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_33ih8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ul5e7"]
 _data = {
-"Default": SubResource("Animation_17dmr")
+"Default": SubResource("Animation_abphp")
 }
 
+[sub_resource type="GDScript" id="GDScript_715cb"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		//
+# 		//  
+# 		_yscale *= -1;
+# 		if (_root.KeySPACE() && _root.Power>0 && _root.WaterAmount>0) {
+# 			//
+# 			/*
+# 			if (count++>4) {
+# 			
+# 			_root.Mariosound = new Sound(this);
+# 			_root.Mariosound.attachSound(\"SprayWater\");
+# 			_root.Mariosound.start(0, 1);
+# 			_root.Mariosound.setVolume(_root.MarioVolume);
+# 			count = 0;
+# 			}
+# 			*/
+# 			//  
+# 			nextFrame();
+# 		} else {
+# 			prevFrame();
+# 		}
+# 		_root.Fluddaniout = _currentframe;
+# 	}
+# };
+# if (_root.Fluddaniout !== undefined && _root.KeySPACE()) {
+# 	gotoAndStop(_root.Fluddaniout);
+# }
+# "
+
 [node name="Mario Wait WaterBlast" type="Node2D"]
+script = ExtResource("1_iaikj")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Wait WaterBlast.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_33ih8")
+"Timeline": SubResource("AnimationLibrary_ul5e7")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -151,7 +191,7 @@ visible = false
 [node name="@@15924" type="Sprite2D" parent="Layer 2/Frame 1"]
 texture_filter = 1
 position = Vector2(-2, -9.5)
-texture = ExtResource("1_hh6h4")
+texture = ExtResource("2_ltpgd")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
@@ -160,7 +200,7 @@ visible = false
 [node name="@@15925" type="Sprite2D" parent="Layer 2/Frame 2"]
 texture_filter = 1
 position = Vector2(-2, -9.5)
-texture = ExtResource("2_1ollw")
+texture = ExtResource("3_tab15")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
@@ -169,7 +209,7 @@ visible = false
 [node name="@@15926" type="Sprite2D" parent="Layer 2/Frame 3"]
 texture_filter = 1
 position = Vector2(-2, -9.5)
-texture = ExtResource("3_t64h3")
+texture = ExtResource("4_whf3n")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
@@ -178,17 +218,21 @@ visible = false
 [node name="@@15927" type="Sprite2D" parent="Layer 2/Frame 4"]
 texture_filter = 1
 position = Vector2(-2, -9.5)
-texture = ExtResource("4_ovljw")
+texture = ExtResource("5_sreus")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_715cb")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 1"]
+position = Vector2(-4, -2)
 
 [node name="@@15920" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
 color = Color(1, 1, 1, 0)
@@ -199,6 +243,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 2"]
+position = Vector2(-4, 5)
 
 [node name="@@15921" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
 color = Color(1, 1, 1, 0)
@@ -209,6 +254,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 3"]
+position = Vector2(-4, 5)
 
 [node name="@@15922" type="Polygon2D" parent="Layer 1/Frame 3/Shape"]
 color = Color(1, 1, 1, 0)

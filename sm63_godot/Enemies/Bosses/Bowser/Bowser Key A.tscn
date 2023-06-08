@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_qt8xq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_sokku"]
+
+[sub_resource type="Animation" id="Animation_5bxud"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_was7e"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nhe7j"]
 _data = {
-"Default": SubResource("Animation_qt8xq")
+"Default": SubResource("Animation_5bxud")
 }
 
 [node name="Bowser Key A" type="Node2D"]
+script = ExtResource("1_sokku")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bowser Key A.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_was7e")
+"Timeline": SubResource("AnimationLibrary_nhe7j")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

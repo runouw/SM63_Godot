@@ -1,12 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5552a6kosm1l"]
+[gd_scene load_steps=6 format=3 uid="uid://b5552a6kosm1l"]
 
-[ext_resource type="Material" uid="uid://w3mk20gt30rh" path="res://xfl_parse/gradient/linear_gradient_material.tres" id="1_5htmt"]
+[ext_resource type="Shader" path="res://xfl_parse/gradient/linear_gradient.gdshader" id="1_eg3uu"]
 [ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_vbcgb"]
+
+[sub_resource type="Gradient" id="Gradient_2xipk"]
+offsets = PackedFloat32Array()
+colors = PackedColorArray()
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jtjed"]
+gradient = SubResource("Gradient_2xipk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kh2qn"]
+resource_local_to_scene = true
+shader = ExtResource("1_eg3uu")
+shader_parameter/transformMatrix = Transform2D(1, 0, 0, 1, 0, 0)
+shader_parameter/spreadMethodReflect = false
+shader_parameter/gradientTexture = SubResource("GradientTexture1D_jtjed")
 
 [node name="LinearGradient" type="Node2D"]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-material = ExtResource("1_5htmt")
+material = SubResource("ShaderMaterial_kh2qn")
 polygon = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
 script = ExtResource("2_vbcgb")
-spread_method_reflect = null

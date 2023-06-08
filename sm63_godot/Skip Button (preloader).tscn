@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_c68rt"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_whwi8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vn8rd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_tstop"]
 
-[sub_resource type="Animation" id="Animation_e3sn1"]
+[sub_resource type="Animation" id="Animation_b5ees"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,65 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sg63a"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wlhj4"]
 _data = {
-"Default": SubResource("Animation_e3sn1")
+"Default": SubResource("Animation_b5ees")
 }
 
+[sub_resource type="GDScript" id="GDScript_28f2e"]
+script/source = "extends Node
+# al = 0;
+# _alpha = 0;
+# timer = 32;
+# onEnterFrame = function () {
+# 	timer--;
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false) && _root.percentloaded>=100) {
+# 		al = 100;
+# 		sc = 120;
+# 		timer = 0;
+# 	} else if (timer<=0) {
+# 		if(_root.percentloaded>=100){
+# 			al = 25;
+# 		}else{
+# 			al = 0;
+# 		}
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	_alpha += (al-_alpha)/5;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		_parent.Skip();
+# 		_alpha = 100;
+# 		sc = 100;
+# 		timer = 64;
+# 		_xscale = 140;
+# 		_yscale = 140;
+# 	}
+# };
+# "
+
 [node name="Skip Button (preloader)" type="Node2D"]
+script = ExtResource("1_vn8rd")
+source_xml = "res://sm63/LIBRARY/Skip Button (preloader).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sg63a")
+"Timeline": SubResource("AnimationLibrary_wlhj4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_c68rt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-30, -16)
-script = ExtResource("2_whwi8")
+script = ExtResource("2_tstop")
 path = "res://sm63_godot/Skip Butto Buttongbnfd.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -74,9 +114,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13866" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_c68rt")]
+[node name="@DOMSymbolInstance@13866" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-29.7, -14.9)
-script = ExtResource("2_whwi8")
+script = ExtResource("2_tstop")
 path = "res://sm63_godot/Skip Button &#034Skiphgshgs&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -96,3 +136,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_28f2e")

@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Fuse - 2.png" id="1_f1fia"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Fuse - 4.png" id="2_tbajs"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_akqlj"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_3one4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_e8dhm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Fuse - 2.png" id="2_t72oc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Fuse - 4.png" id="3_ictl0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_oshu2"]
 
-[sub_resource type="Animation" id="Animation_4getq"]
+[sub_resource type="Animation" id="Animation_6oxre"]
 length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -81,16 +81,29 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbpmc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wlc24"]
 _data = {
-"Default": SubResource("Animation_4getq")
+"Default": SubResource("Animation_6oxre")
 }
 
+[sub_resource type="GDScript" id="GDScript_jidcp"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	gotoAndStop(Math.round(_parent._parent._parent.explodetimer/10));
+# };
+# "
+
 [node name="YI Styled Bomb omb Fuse Clip" type="Node2D"]
+script = ExtResource("1_e8dhm")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lbpmc")
+"Timeline": SubResource("AnimationLibrary_wlc24")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -100,7 +113,7 @@ libraries = {
 [node name="@@50547" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-3, -5)
-texture = ExtResource("1_f1fia")
+texture = ExtResource("2_t72oc")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
@@ -109,7 +122,7 @@ visible = false
 [node name="@@50548" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(-3, -2)
-texture = ExtResource("2_tbajs")
+texture = ExtResource("3_ictl0")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -119,9 +132,9 @@ centered = false
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("3_akqlj")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
 position = Vector2(-0.25, -4.85)
-script = ExtResource("4_3one4")
+script = ExtResource("4_oshu2")
 path = "res://sm63_godot/Effects/Explosion/Fuse Fire.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -137,9 +150,9 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 8" instance=ExtResource("3_akqlj")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 8"]
 position = Vector2(-0.25, 0.4)
-script = ExtResource("4_3one4")
+script = ExtResource("4_oshu2")
 path = "res://sm63_godot/Effects/Explosion/Fuse Fire.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -155,3 +168,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_jidcp")

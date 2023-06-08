@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_0o35d"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_cr8x5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qny7g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_amjrl"]
 
-[sub_resource type="Animation" id="Animation_12j3o"]
+[sub_resource type="Animation" id="Animation_fu2kn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,30 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cee5o"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_362to"]
 _data = {
-"Default": SubResource("Animation_12j3o")
+"Default": SubResource("Animation_fu2kn")
 }
 
 [node name="M2-3CloseBG" type="Node2D"]
+script = ExtResource("1_qny7g")
+source_xml = "res://sm63/LIBRARY/M2-3CloseBG.xml"
+linkage = "M2-3CloseBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_cee5o")
+"Timeline": SubResource("AnimationLibrary_362to")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_0o35d")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-646.95, 691.35)
-script = ExtResource("2_cr8x5")
+script = ExtResource("2_amjrl")
 path = "res://sm63_godot/M2-3CloseTint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

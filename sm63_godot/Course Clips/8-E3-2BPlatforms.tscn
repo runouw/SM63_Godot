@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_0201x"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5xq86"]
+
+[sub_resource type="Animation" id="Animation_55xmu"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5wwba"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0bic2"]
 _data = {
-"Default": SubResource("Animation_0201x")
+"Default": SubResource("Animation_55xmu")
 }
 
 [node name="8-E3-2BPlatforms" type="Node2D"]
+script = ExtResource("1_5xq86")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-E3-2BPlatforms.xml"
+linkage = "8-E3-2BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5wwba")
+"Timeline": SubResource("AnimationLibrary_0bic2")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

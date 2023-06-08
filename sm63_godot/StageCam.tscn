@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_q8if4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rufmd"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_lhu5k"]
 
-[sub_resource type="Animation" id="Animation_1fvko"]
+[sub_resource type="Animation" id="Animation_tabbj"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -54,16 +55,120 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rl3n6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gt1vh"]
 _data = {
-"Default": SubResource("Animation_1fvko")
+"Default": SubResource("Animation_tabbj")
 }
 
+[sub_resource type="GDScript" id="GDScript_1w63y"]
+script/source = "extends Node
+# function camControl():Void {
+# 	if (_root.QuakeX == undefined) {
+# 		_root.QuakeX = 0;
+# 	}
+# 	if (_root.QuakeY == undefined) {
+# 		_root.QuakeY = 0;
+# 	}
+# 	if (_root.RumbleNum == undefined) {
+# 		_root.RumbleNum = 0;
+# 	}
+# 	if (_root.BGSpeed == undefined) {
+# 		_root.BGSpeed = 0.5;
+# 	}
+# 	if (_root.RumbleNum>0) {
+# 		trumble = Math.round(Math.sqrt(_root.RumbleNum)+1)*1.2;
+# 		_root.QuakeX = Math.random()*trumble-(trumble/2);
+# 		_root.QuakeY = Math.random()*trumble-(trumble/2);
+# 	} else {
+# 		_root.QuakeX = -_root.QuakeX*0.7;
+# 		_root.QuakeY = -_root.QuakeY*0.7;
+# 		if (Math.abs(_root.QuakeX)<0.01) {
+# 			_root.QuakeX = 0;
+# 		}
+# 		if (Math.abs(_root.QuakeY)<0.01) {
+# 			_root.QuakeY = 0;
+# 		}
+# 	}
+# 	parentColor1.setTransform(camColor.getTransform());
+# 	parentColor2.setTransform(camColor.getTransform());
+# 	parentColor3.setTransform(camColor.getTransform());
+# 	var scaleX:Number = sX/((Width/100)*_xscale);
+# 	var scaleY:Number = sY/((Height/100)*_yscale);
+# 	_parent._parent._parent.Course.Stuff._x = -this._x+_root.QuakeX;
+# 	_parent._parent._parent.Course.Stuff._y = -this._y+_root.QuakeY;
+# 	_parent._parent._parent.Course._xscale = 100*scaleX;
+# 	_parent._parent._parent.Course._yscale = 100*scaleY;
+# 	_parent._parent._parent.BG._xscale = ((_parent._parent._parent.Course._xscale-100)*_root.BGSpeed)+100;
+# 	_parent._parent._parent.BG._yscale = ((_parent._parent._parent.Course._yscale-100)*_root.BGSpeed)+100;
+# 	_parent._parent._parent.BG.Stuff._x = (-this._x*_root.BGSpeed)+_root.QuakeX;
+# 	_parent._parent._parent.BG.Stuff._y = (-this._y*_root.BGSpeed)+_root.QuakeY;
+# 	//
+# 	_parent._parent._parent.BG._rotation = -this._rotation;
+# 	_parent._parent._parent.farBG._rotation = -this._rotation;
+# 	_parent._parent._rotation = -this._rotation;
+# 	//
+# }
+# /*
+# function resetStage():Void {
+# var resetTrans:Object = {ra:100, rb:0, ga:100, gb:0, ba:100, bb:0, aa:100, ab:0};
+# parentColor1.setTransform(resetTrans);
+# parentColor2.setTransform(resetTrans);
+# parentColor3.setTransform(resetTrans);
+# _parent._parent.Course._xscale = 100;
+# _parent._parent.Course._yscale = 100;
+# _parent._parent.Course._x = 0;
+# _parent._parent.Course._y = 0;
+# _parent._parent.BG._x = 0;
+# _parent._parent.BG._y = 0;
+# _parent._parent.BG._xscale = 100;
+# _parent._parent.BG._yscale = 100;
+# _root.QuakeX = 0;
+# _root.QuakeY = 0;
+# _root.BGSpeed = undefined;
+# }
+# */
+# // make frame invisible
+# this._visible = false;
+# // Capture stage parameters
+# var oldMode:String = Stage.scaleMode;
+# //Stage.scaleMode = \"exactFit\";
+# var cX:Number = Stage.width/2;
+# var cY:Number = Stage.height/2;
+# var sX:Number = Stage.width;
+# var sY:Number = Stage.height;
+# var Width:Number = 720;
+# var Height:Number = 480;
+# //Stage.scaleMode = oldMode;
+# // create color instances for color 
+# // transforms (if any).
+# var camColor:Color = new Color(this);
+# var parentColor1:Color = new Color(_parent._parent);
+# var parentColor2:Color = new Color(_parent._parent._parent.BG);
+# var parentColor3:Color = new Color(_parent._parent._parent.farBG);
+# // Make the stage move so that the 
+# // v-cam is centered on the
+# // viewport every frame
+# this.onEnterFrame = camControl;
+# // Make an explicit call to the camControl
+# // function to make sure it also runs on the
+# // first frame.
+# camControl();
+# // If the v-cam is ever removed (unloaded)
+# // the stage, return the stage to the default
+# // settings.
+# //this.onUnload = resetStage;
+# "
+
 [node name="StageCam" type="Node2D"]
+script = ExtResource("1_rufmd")
+source_xml = "res://sm63/LIBRARY/StageCam.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rl3n6")
+"Timeline": SubResource("AnimationLibrary_gt1vh")
 }
 
 [node name="frame" type="Node2D" parent="."]
@@ -123,6 +228,7 @@ polygon = PackedVector2Array(242.8, 197.675, 256.2, 197.675, 256.2, 226.225, 242
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="@@13873" type="Polygon2D" parent="color/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(336.55, 197.675, 349.95, 197.675, 349.95, 226.225, 336.55, 226.225)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -159,12 +265,15 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@13880" type="Polygon2D" parent="color/Frame 0/Shape"]
 polygon = PackedVector2Array(242.75, 226.225, 349.8, 226.225, 349.8, 232.6, 242.75, 232.6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_q8if4")
+script = ExtResource("2_lhu5k")
 matrix = Transform2D(0.0653687, 0, 0, 0.00387573, 296.25, 229.4)
-entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+entries_color = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
 [node name="actions" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="actions"]
+
+[node name="AS2" type="Node" parent="actions/Frame 0"]
+script = SubResource("GDScript_1w63y")

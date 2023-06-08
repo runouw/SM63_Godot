@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_7ctre"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_twox4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7ekp4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6e0m4"]
 
-[sub_resource type="Animation" id="Animation_74klj"]
+[sub_resource type="Animation" id="Animation_6q5aw"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,92 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t5u2p"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4oajx"]
 _data = {
-"Default": SubResource("Animation_74klj")
+"Default": SubResource("Animation_6q5aw")
 }
 
+[sub_resource type="GDScript" id="GDScript_4mcqk"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(39)+1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_fgeh0"]
+script/source = "extends Node
+# ywave = random(90);
+# rwave = random(90);
+# Y = this._y;
+# R = _rotation;
+# r = 0;
+# onEnterFrame = function () {
+# 	if (bg.hitTest(_root._xmouse, _root._ymouse, true) && _parent.clicked !== true) {
+# 		hl = true;
+# 	} else {
+# 		hl = false;
+# 	}
+# 	if (cl == true) {
+# 		rspeed += 1;
+# 		r += rspeed;
+# 		rspeed *= 0.95;
+# 		this._xscale += scalespeed;
+# 		scalespeed -= 1;
+# 		if (this._xscale<60) {
+# 			scalespeed += 1;
+# 			scalespeed *= 0.7;
+# 		}
+# 	}
+# 	if (hl == true && cl !== true) {
+# 		this._xscale += (125-this._xscale)/4;
+# 		r -= (125-this._xscale)/10;
+# 		txt._xscale += (120-txt._xscale)/5;
+# 		txt._yscale += (130-txt._yscale)/4;
+# 		ywave -= 0.025;
+# 	} else if (cl !== true) {
+# 		this._xscale += (100-this._xscale)/4;
+# 		r -= (100-this._xscale)/10;
+# 		txt._xscale += (100-txt._xscale)/5;
+# 		txt._yscale += (100-txt._yscale)/4;
+# 	}
+# 	//     
+# 	this._yscale = this._xscale;
+# 	//
+# 	ywave += 0.025;
+# 	rwave += 0.025;
+# 	this._y = Y+Math.sin(ywave)*5;
+# 	this._rotation = R+r+Math.sin(rwave)*_xscale/20;
+# };
+# onMouseDown = function () {
+# 	if (hl == true && cl !== true && _parent.clicked !== true) {
+# 		cl = true;
+# 		rspeed = 0;
+# 		scalespeed = 8;
+# 		_parent.clicked = true;
+# 		_parent.TransitionF(\"Options\");
+# 	}
+# };
+# "
+
 [node name="Menu-Options Button" type="Node2D"]
+script = ExtResource("1_7ekp4")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Options/Menu-Options Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_t5u2p")
+"Timeline": SubResource("AnimationLibrary_4oajx")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_7ctre")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 scale = Vector2(1.12218, 0.69783)
-script = ExtResource("2_twox4")
+script = ExtResource("2_6e0m4")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu Button BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -74,13 +141,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_4mcqk")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_7ctre")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0.05, 0.05)
-script = ExtResource("2_twox4")
+script = ExtResource("2_6e0m4")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Menu- Options Button 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -96,3 +166,6 @@ brightness = 0.0
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_fgeh0")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_sqfs7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_oyn0a"]
+
+[sub_resource type="Animation" id="Animation_0aok1"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ld87m"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_120e0"]
 _data = {
-"Default": SubResource("Animation_sqfs7")
+"Default": SubResource("Animation_0aok1")
 }
 
 [node name="C-3-2 Cam Edge" type="Node2D"]
+script = ExtResource("1_oyn0a")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-3-2 Cam Edge.xml"
+linkage = "C-3-2CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ld87m")
+"Timeline": SubResource("AnimationLibrary_120e0")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

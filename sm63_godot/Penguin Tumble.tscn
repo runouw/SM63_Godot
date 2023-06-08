@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Slide.png" id="1_nnlad"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_f1rgh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Slide.png" id="2_6rxt3"]
 
-[sub_resource type="Animation" id="Animation_38hsv"]
+[sub_resource type="Animation" id="Animation_m731h"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ejxx8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ihmy"]
 _data = {
-"Default": SubResource("Animation_38hsv")
+"Default": SubResource("Animation_m731h")
 }
 
 [node name="Penguin Tumble" type="Node2D"]
+script = ExtResource("1_f1rgh")
+source_xml = "res://sm63/LIBRARY/Penguin Tumble.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ejxx8")
+"Timeline": SubResource("AnimationLibrary_6ihmy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@13662" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-9, -8.5)
-texture = ExtResource("1_nnlad")
+texture = ExtResource("2_6rxt3")
 centered = false

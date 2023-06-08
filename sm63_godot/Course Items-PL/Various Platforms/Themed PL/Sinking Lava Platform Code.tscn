@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_bgt75"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_w7ttm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u6unk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7jqbf"]
 
-[sub_resource type="Animation" id="Animation_uec3l"]
+[sub_resource type="Animation" id="Animation_pfrrr"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,24 +43,130 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hi5kq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a2yff"]
 _data = {
-"Default": SubResource("Animation_uec3l")
+"Default": SubResource("Animation_pfrrr")
 }
 
+[sub_resource type="GDScript" id="GDScript_58rm6"]
+script/source = "extends Node
+# if (fallspeed1 == undefined) {
+# 	fallspeed1 = 0.2;
+# }
+# if (fallspeed2 == undefined) {
+# 	fallspeed2 = 0.8;
+# }
+# if (risespeed1 == undefined) {
+# 	risespeed1 = 0.1;
+# }
+# if (risespeed2 == undefined) {
+# 	risespeed2 = 0.85;
+# }
+# if (deepness == undefined) {
+# 	deepness = 32;
+# }
+# if (frame == undefined) {
+# 	frame = 1;
+# }
+# if (sinktime == undefined) {
+# 	sinktime = 32;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_jt5vm"]
+script/source = "extends Node
+# stop();
+# saveY = _y;
+# depth = _root.Course.Platforms.getNextHighestDepth();
+# _root.Course.Platforms.attachMovie(\"SinkingLavaGround\", \"SinkingLavaGround\"+depth, depth, {_x:_x, _y:_y, landedon:false});
+# startcount = 0;
+# sink = false;
+# currentspeedY = 0;
+# offcount = sinktime;
+# clip.gotoAndStop(frame);
+# _root.Course.Platforms[\"SinkingLavaGround\"+depth].gotoAndStop(frame);
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (startcount>5) {
+# 			distance = (_root.Course.Char._x-(_x+_parent._x))/this.scale;
+# 			//
+# 			if (sink == true) {
+# 				offcount = 0;
+# 			} else {
+# 				offcount++;
+# 			}
+# 			if (sink == true || offcount<=sinktime) {
+# 				if (_y>(saveY+deepness)-(currentspeedY*3)+3) {
+# 					currentspeedY = ((saveY+deepness)-_y)/25;
+# 				} else {
+# 					currentspeedY += fallspeed1;
+# 					currentspeedY *= fallspeed2;
+# 				}
+# 				//
+# 			} else {
+# 				if (_y>saveY+5) {
+# 					currentspeedY -= risespeed1;
+# 					currentspeedY *= risespeed2;
+# 				} else {
+# 					currentspeedY = (saveY-_y)/15;
+# 				}
+# 			}
+# 		} else {
+# 			startcount++;
+# 		}
+# 		_y += currentspeedY;
+# 		//   
+# 		tellTarget (_root.Course.Platforms[\"SinkingLavaGround\"+depth]) {
+# 			hit = false;
+# 			if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+this.currentspeedY+3)*_root.coursescale/100)+_root.Course._y, false)) {
+# 				if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+this.currentspeedY+3)*_root.coursescale/100)+_root.Course._y, true)) {
+# 					hit = true;
+# 				}
+# 			}
+# 			if (hit == true && _root.Course.Char.yspeed>-3) {
+# 				//_root.Course.Char._x += this.currentspeedX;
+# 				_root.Course.Char._y += this.currentspeedY;
+# 				//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 				if (landedon == false) {
+# 					currentspeedY += (_root.Course.Char.yspeed/2);
+# 					this.sink = true;
+# 					//_root.Course.Char.xspeed -= this.currentspeedX;
+# 				}
+# 				landedon = true;
+# 			} else {
+# 				if (landedon == true) {
+# 					this.sink = false;
+# 					//_root.Course.Char.xspeed += this.currentspeedX;
+# 					currentspeedY += (-_root.Course.Char.yspeed/1.5);
+# 					_root.Course.Char.yspeed += this.currentspeedY/2;
+# 				}
+# 				landedon = false;
+# 			}
+# 			_y = this._y;
+# 			_x = this._x;
+# 		}
+# 	}
+# };
+# "
+
 [node name="Sinking Lava Platform Code" type="Node2D"]
+script = ExtResource("1_u6unk")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Themed PL/Sinking Lava Platform Code.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hi5kq")
+"Timeline": SubResource("AnimationLibrary_a2yff")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_bgt75")]
-script = ExtResource("2_w7ttm")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_7jqbf")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Sinking Lava Pl GFX & Ground.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -77,5 +183,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_58rm6")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_jt5vm")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_6v7a1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_yexcr"]
+
+[sub_resource type="Animation" id="Animation_s6ie5"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,21 +30,56 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_afogp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hsajq"]
 _data = {
-"Default": SubResource("Animation_6v7a1")
+"Default": SubResource("Animation_s6ie5")
 }
 
+[sub_resource type="GDScript" id="GDScript_dknv6"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		xs = 120;
+# 		gotoAndStop(3);
+# 	} else {
+# 		xs = 100;
+# 		gotoAndStop(2);
+# 	}
+# 	_xscale += (xs-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (xs == 120) {
+# 		if(_root.Order == \"hardest\"){
+# 			_root.Order = \"easiest\";
+# 		}else{
+# 			_root.Order = \"hardest\";
+# 		}
+# 		_parent.Refresh();
+# 		//_parent.N(\"Sha\");
+# 	}
+# };
+# stop()
+# "
+
 [node name="LDP Fififutlilyttyt" type="Node2D"]
+script = ExtResource("1_yexcr")
+source_xml = "res://sm63/LIBRARY/LDP Fififutlilyttyt.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_afogp")
+"Timeline": SubResource("AnimationLibrary_hsajq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_dknv6")
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_muqh5"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5ky11"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin.png" id="3_cl412"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ygtoa"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2j7nt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin.png" id="3_l6e7r"]
 
-[sub_resource type="Animation" id="Animation_xtye8"]
+[sub_resource type="Animation" id="Animation_2xish"]
 length = 1.56667
 loop_mode = 1
 tracks/0/type = "value"
@@ -248,25 +248,79 @@ tracks/19/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_g2i6n"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qe6de"]
 _data = {
-"Default": SubResource("Animation_xtye8")
+"Default": SubResource("Animation_2xish")
 }
 
+[sub_resource type="GDScript" id="GDScript_wlwrn"]
+script/source = "extends Node
+# if (_root.StarCoin[StarCoinNum] == false) {
+# 	stop();
+# 	count = 0;
+# 	onEnterFrame = function () {
+# 		count++;
+# 		if (count>3) {
+# 			if (this.box.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y-20)*_root.coursescale/100)+_root.Course._y, true) && _root.CharHP>=0 && !(_root.Course.Char.attack == true && (_root.Course.Char.attackFrame == \"Faint\" || _root.Course.Char.attackFrame == \"Respawn\" || _root.Course.Char.attackFrame == \"Drown\"))) {
+# 				_root.StarCoin[StarCoinNum] = true;
+# 				_root.CalculateStarCoins();
+# 				_root.attachMovie(\"StarcoinMessage\", \"StarcoinMessage\", _root.getNextHighestDepth(), {_x:225, _y:150});
+# 				_root.PauseGame = true;
+# 				gotoAndPlay(3);
+# 				onEnterFrame = function () {
+# 					if (_root.PauseGame == false) {
+# 						play();
+# 					} else {
+# 						stop();
+# 					}
+# 				};
+# 			}
+# 		}
+# 	};
+# } else {
+# 	gotoAndStop(2);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_tp4l3"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_eedr0"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 2;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_icm53"]
+script/source = "extends Node
+# gotoAndStop(2);
+# onEnterFrame = null;
+# "
+
 [node name="Star Coin Code" type="Node2D"]
+script = ExtResource("1_ygtoa")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin Code.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_g2i6n")
+"Timeline": SubResource("AnimationLibrary_qe6de")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_muqh5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.5, -0.05)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -282,9 +336,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_muqh5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(0.5, -0.05)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin GFX.tscn"
 red_multiplier = 0.0
 green_multiplier = 0.398438
@@ -300,9 +354,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_muqh5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(0.5, -0.05)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -318,10 +372,10 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_muqh5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(0.5, -0.05)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -337,9 +391,9 @@ brightness = 0.8
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 10" instance=ExtResource("1_muqh5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 10"]
 position = Vector2(0.5, -0.05)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -358,7 +412,7 @@ visible = false
 [node name="@@46974" type="Sprite2D" parent="Layer 1/Frame 11"]
 texture_filter = 1
 position = Vector2(-15.5, -16.05)
-texture = ExtResource("3_cl412")
+texture = ExtResource("3_l6e7r")
 centered = false
 
 [node name="Frame 22" type="Node2D" parent="Layer 1"]
@@ -368,7 +422,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-11.5, -12.05)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_cl412")
+texture = ExtResource("3_l6e7r")
 centered = false
 
 [node name="Frame 40" type="Node2D" parent="Layer 1"]
@@ -379,7 +433,7 @@ texture_filter = 1
 position = Vector2(1.5, -36.05)
 rotation = 3.14159
 scale = Vector2(0.0625, -1)
-texture = ExtResource("3_cl412")
+texture = ExtResource("3_l6e7r")
 centered = false
 
 [node name="Frame 41" type="Node2D" parent="Layer 1"]
@@ -389,9 +443,12 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_muqh5")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_wlwrn")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 scale = Vector2(0.603775, 2)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -404,15 +461,18 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_tp4l3")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 34" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 34" instance=ExtResource("1_muqh5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 34"]
 position = Vector2(0.5, -0.05)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin GFX.tscn"
 red_multiplier = 0.0
 green_multiplier = 0.398438
@@ -428,9 +488,9 @@ brightness = 0.0
 [node name="Frame 46" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 46" instance=ExtResource("1_muqh5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 46"]
 position = Vector2(0.5, -0.05)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin GFX.tscn"
 red_multiplier = 0.0
 green_multiplier = 0.398438
@@ -447,8 +507,8 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_muqh5")]
-script = ExtResource("2_5ky11")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -461,14 +521,17 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_eedr0")
+
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2" instance=ExtResource("1_muqh5")]
-script = ExtResource("2_5ky11")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2"]
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -484,11 +547,11 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 29" instance=ExtResource("1_muqh5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 29"]
 position = Vector2(0, -10.1)
 rotation = 0.0578051
 scale = Vector2(0.661612, 0.661612)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -504,10 +567,10 @@ brightness = 0.0
 [node name="Frame 40" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 40" instance=ExtResource("1_muqh5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 40"]
 position = Vector2(0, -20)
 scale = Vector2(0.329987, 0.329987)
-script = ExtResource("2_5ky11")
+script = ExtResource("2_2j7nt")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -525,3 +588,6 @@ visible = false
 
 [node name="Frame 46" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 46"]
+script = SubResource("GDScript_icm53")

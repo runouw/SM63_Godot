@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_qpqhx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hr2ev"]
+
+[sub_resource type="Animation" id="Animation_0tlrs"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -76,16 +78,32 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_35wu0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tiae1"]
 _data = {
-"Default": SubResource("Animation_qpqhx")
+"Default": SubResource("Animation_0tlrs")
 }
 
+[sub_resource type="GDScript" id="GDScript_psc7w"]
+script/source = "extends Node
+# num = 2
+# for (i=1; i<4; i++) {
+# 	if (_root[\"File\"+_parent._parent.file+\"BowserKey\"+i] == true) {
+# 		num++;
+# 	}
+# }
+# gotoAndStop(num);
+# "
+
 [node name="Menu File Bowser Key" type="Node2D"]
+script = ExtResource("1_hr2ev")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Story/Menu File Bowser Key.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_35wu0")
+"Timeline": SubResource("AnimationLibrary_tiae1")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -350,3 +368,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_psc7w")

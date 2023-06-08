@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Grey Stone Textrue.png" id="1_dx5pv"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Hide Fledge.png" id="2_4x2sg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Metal Tile.png" id="3_ed5kp"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="4_du1ts"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="5_dxk8d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_b8wlv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Grey Stone Textrue.png" id="2_febxn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Hide Fledge.png" id="3_8u61s"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Metal Tile.png" id="4_35al8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="5_h1hk1"]
 
-[sub_resource type="Animation" id="Animation_bg3j6"]
+[sub_resource type="Animation" id="Animation_tpuj1"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -46,16 +46,84 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_38x6o"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jxmg5"]
 _data = {
-"Default": SubResource("Animation_bg3j6")
+"Default": SubResource("Animation_tpuj1")
 }
 
+[sub_resource type="GDScript" id="GDScript_wqqso"]
+script/source = "extends Node
+# stop();
+# if (cosine == undefined) {
+# 	cosine = -0.5;
+# }
+# if (tall == undefined) {
+# 	tall = 0.3;
+# }
+# if (speed == undefined) {
+# 	speed = 0.04
+# }
+# if (Yoffstart == undefined) {
+# 	Yoffstart = 0;
+# }
+# saveY = _y
+# for (i=0; i<Yoffstart; i++) {
+# 	cosine += speed;
+# 	currentspeedY = Math.cos(cosine)*tall;
+# 	_y += currentspeedY;
+# 	_y -= (_y-saveY)/50
+# }
+# depth = _root.Course.Platforms.getNextHighestDepth();
+# _root.Course.Platforms.attachMovie(\"TriangleDippingPLGround\", \"TriangleDippingPLGround\"+depth, depth, {_x:this._x, _y:this._y});
+# tellTarget (_root.Course.Platforms[\"TriangleDippingPLGround\"+depth]) {
+# 	landedon = false;
+# 	//
+# 	lessthan = false;
+# 	morethan = false;
+# }
+# //
+# currentspeedY = 0;
+# distancecountY = speedY+Yoffstart;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		cosine += speed;
+# 		currentspeedY = Math.cos(cosine)*tall;
+# 		_y += currentspeedY;
+# 		_y -= (_y-saveY)/50
+# 		//
+# 		tellTarget (_root.Course.Platforms[\"TriangleDippingPLGround\"+depth]) {
+# 			if (hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+this.currentspeedY+3)*_root.coursescale/100)+_root.Course._y, false) && _root.Course.Char.yspeed>-3) {
+# 				//_root.Course.Char._x += this.currentspeedX;
+# 				_root.Course.Char._y += this.currentspeedY;
+# 				//_root.Course.Char.xspeed = _root.groundFriction(_root.Course.Char.xspeed, 0.3, 1.1);
+# 				if (landedon == false) {
+# 					//_root.Course.Char.xspeed -= this.currentspeedX/2;
+# 				}
+# 				landedon = true;
+# 			} else {
+# 				if (landedon == true) {
+# 					//_root.Course.Char.xspeed += this.currentspeedX;
+# 					_root.Course.Char.yspeed += this.currentspeedY;
+# 				}
+# 				landedon = false;
+# 			}
+# 			_y = this._y;
+# 			_x = this._x;
+# 		}
+# 	}
+# };
+# "
+
 [node name="Triangle Dipping PL" type="Node2D"]
+script = ExtResource("1_b8wlv")
+source_xml = "res://sm63/LIBRARY/Triangle Dipping PL.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_38x6o")
+"Timeline": SubResource("AnimationLibrary_jxmg5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -67,7 +135,7 @@ libraries = {
 [node name="@@14219" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_dx5pv")
+texture = ExtResource("2_febxn")
 texture_offset = Vector2(-49.35, 43.65)
 polygon = PackedVector2Array(0, -18.95, 0, -18.95, 0.58936, -18.65, -0.58936, -18.65, -0.58936, -18.65, -0.15, -18.65, -0.85, -18.35, -33.35, 13.65, -33.55, 13.9, -37.85, 18.25, -37.975, 18.4, -73.375, 18.4, -1.17872, -18.35, -0.15, -18.65, 0.58936, -18.65, 73.375, 18.4, 36.925, 18.4, 36.8, 18.25, 0.55, -18.35)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17, 18)])
@@ -75,7 +143,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@14220" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_4x2sg")
+texture = ExtResource("3_8u61s")
 texture_offset = Vector2(32.65, 13.15)
 polygon = PackedVector2Array(-0.15, -11.75, -0.15, -11.75, 29.525, 18.4, -30.8, 18.4, -25.9712, 13.65)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -83,7 +151,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@14221" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_ed5kp")
+texture = ExtResource("4_35al8")
 texture_offset = Vector2(-34.85, 39.9)
 polygon = PackedVector2Array(-0.15, -18.65, -0.15, -18.65, 0.55, -18.35, 7.08689, -11.75, -7.55312, -11.75, -0.85, -18.35, -7.55312, -11.75, -0.15, -11.75, -30.8, 18.4, -37.975, 18.4, -37.85, 18.25, -33.55, 13.9, -33.35, 13.65, -0.15, -11.75, 7.08689, -11.75, 36.8, 18.25, 36.925, 18.4, 29.525, 18.4, 24.8498, 13.65)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17, 18)])
@@ -100,8 +168,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("4_du1ts")]
-script = ExtResource("5_dxk8d")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("5_h1hk1")
 path = "res://sm63_godot/Triangle Dipping PL Ground.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -116,3 +184,6 @@ brightness = 0.0
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_wqqso")

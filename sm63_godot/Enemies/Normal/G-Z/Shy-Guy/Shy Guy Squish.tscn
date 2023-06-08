@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Jumping - 1.png" id="1_rg7lo"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_86r4b"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_6a54l"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_10un6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Jumping - 1.png" id="2_jo5pj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_38wqf"]
 
-[sub_resource type="Animation" id="Animation_as0a1"]
+[sub_resource type="Animation" id="Animation_5emnn"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -212,16 +212,152 @@ tracks/16/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1hwxu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r7x0d"]
 _data = {
-"Default": SubResource("Animation_as0a1")
+"Default": SubResource("Animation_5emnn")
 }
 
+[sub_resource type="GDScript" id="GDScript_qa26t"]
+script/source = "extends Node
+# count = 12;
+# if (_parent._parent.bounce == true) {
+# 	//
+# 	if (_root.Course.Char.attack == false) {
+# 		if (_root.KeyUP()) {
+# 			_root.Course.Char.landtime = 1;
+# 		} else {
+# 			_root.Course.Char.landtime = 0;
+# 		}
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.attackFrame = \"EJump\";
+# 	}
+# 	//    
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		play();
+# 		//
+# 		count -= 1.5;
+# 		count = Math.max(count, 3);
+# 		onEnterFrame = function () {
+# 			_root.Course.Char.yspeed = 0;
+# 			xdivide = Math.abs(_root.Course.Char.xspeed/2)+5;
+# 			Y = _parent._parent._y+_parent._parent._parent._y;
+# 			Y -= count;
+# 			if (Math.abs(Y-_root.Course.Char._y)<15) {
+# 				_root.Course.Char._y += (Y-_root.Course.Char._y)/5;
+# 			}
+# 			//        
+# 			X = _parent._parent._x+_parent._parent._parent._x;
+# 			if (Math.abs(X-_root.Course.Char._x)<15) {
+# 				_root.Course.Char._x += (X-_root.Course.Char._x)/xdivide;
+# 			}
+# 		};
+# 	} else {
+# 		stop();
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_euco0"]
+script/source = "extends Node
+# if (_root.Course.Char.landtime == 1 && _parent._parent.bounce == true) {
+# } else {
+# 	//
+# 	if (_root.KeyUP()) {
+# 		_root.Course.Char.landtime = 2;
+# 	} else {
+# 		//
+# 		nextFrame();
+# 		play();
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_osllo"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Shy-Guy\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# //
+# if (_root.Course.Char.landtime == 1 && _parent._parent.bounce == true) {
+# } else {
+# 	//
+# 	if (_root.KeyUP()) {
+# 		_root.Course.Char.landtime = 2;
+# 	} else {
+# 		//
+# 		nextFrame();
+# 		play();
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_flbn2"]
+script/source = "extends Node
+# if (_root.Course.Char.landtime == 1 && _parent._parent.bounce == true) {
+# } else {
+# 	if (_root.KeyUP()) {
+# 		_root.Course.Char.landtime = 2;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_4itts"]
+script/source = "extends Node
+# if (_parent._parent.bounce == true) {
+# 	_root.Course.Char._y -= 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ykfi8"]
+script/source = "extends Node
+# if (_parent._parent.bounce == true) {
+# 	onEnterFrame = function () {
+# 		if (_root.PauseGame == false && _root.playpause == false) {
+# 			play();
+# 		} else {
+# 			stop();
+# 		}
+# 	};
+# 	if (_root.Course.Char.attackFrame == \"EJump\" && _root.Course.Char.attack == true) {
+# 		_root.Course.Char.attack = false;
+# 		if (_root.Course.Char.landtime == 1) {
+# 			_root.Course.Char.yspeed -= 10;
+# 		} else if (_root.Course.Char.landtime == 2) {
+# 			_root.Course.Char.yspeed -= 12;
+# 		} else {
+# 			_root.Course.Char.yspeed -= 7;
+# 		}
+# 	} else {
+# 		_root.Course.Char.yspeed -= 9;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_if4gl"]
+script/source = "extends Node
+# if (_root[\"coindata\"+_root.playingcourse][_parent._parent.coinnum] !== 1) {
+# 	_root[\"coindata\"+_root.playingcourse][_parent._parent.coinnum] = 1;
+# 	_root.Course.BackGFX.attachMovie(\"GoldCoin\", \"GoldCoin\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:_parent._parent._x, _y:_parent._parent._y-12, bounce:true});
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_bg38y"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# "
+
 [node name="Shy Guy Squish" type="Node2D"]
+script = ExtResource("1_10un6")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Squish.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1hwxu")
+"Timeline": SubResource("AnimationLibrary_r7x0d")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -231,7 +367,7 @@ libraries = {
 [node name="@@50730" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -19)
-texture = ExtResource("1_rg7lo")
+texture = ExtResource("2_jo5pj")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -241,7 +377,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-8.1, -8.6)
 scale = Vector2(1, 0.476364)
-texture = ExtResource("1_rg7lo")
+texture = ExtResource("2_jo5pj")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -251,7 +387,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-10.1, -6.1)
 scale = Vector2(1.25, 0.309631)
-texture = ExtResource("1_rg7lo")
+texture = ExtResource("2_jo5pj")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -261,7 +397,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-9.1, -8.6)
 scale = Vector2(1.125, 0.476364)
-texture = ExtResource("1_rg7lo")
+texture = ExtResource("2_jo5pj")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
@@ -271,7 +407,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-7, -22.75)
 scale = Vector2(0.875, 1.25)
-texture = ExtResource("1_rg7lo")
+texture = ExtResource("2_jo5pj")
 centered = false
 
 [node name="Frame 11" type="Node2D" parent="Layer 1"]
@@ -281,15 +417,15 @@ visible = false
 texture_filter = 1
 position = Vector2(-1, -27)
 scale = Vector2(0.124405, 1.44444)
-texture = ExtResource("1_rg7lo")
+texture = ExtResource("2_jo5pj")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 12" instance=ExtResource("2_86r4b")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 12"]
 position = Vector2(0.35, -18.65)
-script = ExtResource("3_6a54l")
+script = ExtResource("3_38wqf")
 path = "res://sm63_godot/Effects/Light Effects Folder/Sparkle Blue.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -305,12 +441,12 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13" instance=ExtResource("2_86r4b")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 13"]
 position = Vector2(0.3, -23.6)
 rotation = 0.785398
 scale = Vector2(0.500011, 0.500001)
 skew = -2.16961e-05
-script = ExtResource("3_6a54l")
+script = ExtResource("3_38wqf")
 path = "res://sm63_godot/Effects/Light Effects Folder/Sparkle Blue.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -330,23 +466,47 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_qa26t")
+
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 3"]
+script = SubResource("GDScript_euco0")
 
 [node name="Frame 5" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 5"]
+script = SubResource("GDScript_osllo")
+
 [node name="Frame 7" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 7"]
+script = SubResource("GDScript_flbn2")
 
 [node name="Frame 8" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 8"]
+script = SubResource("GDScript_4itts")
+
 [node name="Frame 9" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 9"]
+script = SubResource("GDScript_ykfi8")
 
 [node name="Frame 12" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 12"]
+script = SubResource("GDScript_if4gl")
+
 [node name="Frame 14" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 14"]
+script = SubResource("GDScript_bg38y")

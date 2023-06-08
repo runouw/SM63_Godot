@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_y2try"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_ce6kj"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_g2orj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_au44r"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_stylx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_uie7q"]
 
-[sub_resource type="Animation" id="Animation_j2jih"]
+[sub_resource type="Animation" id="Animation_021uy"]
 length = 0.966667
 loop_mode = 1
 tracks/0/type = "value"
@@ -284,16 +284,80 @@ tracks/22/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0e2cl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1g275"]
 _data = {
-"Default": SubResource("Animation_j2jih")
+"Default": SubResource("Animation_021uy")
 }
 
+[sub_resource type="GDScript" id="GDScript_1hk5c"]
+script/source = "extends Node
+# Y = this._y;
+# sin = 0;
+# sin2 = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		b.s._rotation += 0.3;
+# 		b._xscale = 80+Math.sin(sin2)*5;
+# 		b._yscale = b._xscale;
+# 		sin += 0.01;
+# 		sin2 += 0.015;
+# 		this._y = Y+Math.sin(sin)*8;
+# 	}
+# };
+# Explode = function () {
+# 	onEnterFrame = function () {
+# 		if (_root.PauseGame == false) {
+# 			b._xscale *= 1.1;
+# 			b.s._rotation++
+# 			b._alpha -= 10;
+# 			b._yscale = b._xscale;
+# 			nextFrame();
+# 			if (b._alpha<=0) {
+# 				b._alpha = 0;
+# 				b._xscale = 50;
+# 				b._yscale = b._xscale;
+# 				onEnterFrame = function () {
+# 					if (_root.PauseGame == false) {
+# 						nextFrame();
+# 					}
+# 				};
+# 			}
+# 		}
+# 	};
+# };
+# 
+# "
+
+[sub_resource type="GDScript" id="GDScript_o0o4m"]
+script/source = "extends Node
+# stop()"
+
+[sub_resource type="GDScript" id="GDScript_gbjjj"]
+script/source = "extends Node
+# stop();
+# b._alpha = 100;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		b.s._rotation += 3
+# 		b._xscale *= 1.05
+# 		b._yscale = b._xscale;
+# 		if (b._xscale>=80) {
+# 			gotoAndPlay(1);
+# 		}
+# 	}
+# };
+# "
+
 [node name="Bowser Bomb GFX" type="Node2D"]
+script = ExtResource("1_au44r")
+source_xml = "res://sm63/LIBRARY/Bowser Bomb GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_0e2cl")
+"Timeline": SubResource("AnimationLibrary_1g275")
 }
 
 [node name="Layer 5" type="Node2D" parent="."]
@@ -305,7 +369,7 @@ libraries = {
 [node name="@@3199" type="Polygon2D" parent="Layer 5/Frame 0/Shape"]
 polygon = PackedVector2Array(-6.125, 10, 6.15, 10, -0.15, 48, -0.15, 48)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0258484, 0, 0, 0.0258484, -2.5, 17.25)
 entries_color = PackedColorArray(0.568627, 0.435294, 0.435294, 1, 0.435294, 0.301961, 0.301961, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -331,10 +395,10 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_ce6kj")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -0.05)
 scale = Vector2(1, 1.00122)
-script = ExtResource("3_g2orj")
+script = ExtResource("3_uie7q")
 path = "res://sm63_godot/Bowser Bomb-Spikes Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -350,10 +414,10 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_ce6kj")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(0, -0.05)
 scale = Vector2(1, 1.00122)
-script = ExtResource("3_g2orj")
+script = ExtResource("3_uie7q")
 path = "res://sm63_godot/Bowser Bomb-Spikes Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -377,7 +441,7 @@ brightness = 0.0
 [node name="@@3169" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(-1.525, -16.375, -1.525, -16.375, 4.1, -15.975, 4.2, -15.925, 6.95, -14.95, 10.475, -12.65, 14.2, -8.35, 14.25, -8.25, 14.85, -7.125, 14.9, -7.025, 16.35, -1.525, 16.25, 2.6, 16.225, 2.775, 16.025, 3.7, 16.025, 3.825, 12.6, 10.475, 11, 12.2, 10.925, 12.275, 9.675, 13.3, 1.475, 16.35, 0.425, 16.425, -0.65, 16.425, -9.925, 13.1, -10.525, 12.625, -11.275, 11.975, -16.125, 3.35, -16.35, 2.025, -16.375, 1.5, -14.6, -7.675, -14.25, -8.35, -12.675, -10.525, -6.975, -14.95, -6.875, -15, -5.7, -15.475, -3.38055, -15.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.045105, 0.00775146, -0.00375366, 0.0218048, -5, -5.15)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -402,7 +466,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3171" type="Polygon2D" parent="Layer 3/Frame 1/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -428,7 +492,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3173" type="Polygon2D" parent="Layer 3/Frame 3/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -454,7 +518,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3175" type="Polygon2D" parent="Layer 3/Frame 5/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -479,7 +543,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3177" type="Polygon2D" parent="Layer 3/Frame 7/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -505,7 +569,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3179" type="Polygon2D" parent="Layer 3/Frame 9/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -531,7 +595,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3181" type="Polygon2D" parent="Layer 3/Frame 11/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -557,7 +621,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3183" type="Polygon2D" parent="Layer 3/Frame 13/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -583,7 +647,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3185" type="Polygon2D" parent="Layer 3/Frame 15/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -608,7 +672,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3187" type="Polygon2D" parent="Layer 3/Frame 17/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -634,7 +698,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3189" type="Polygon2D" parent="Layer 3/Frame 19/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -660,7 +724,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3191" type="Polygon2D" parent="Layer 3/Frame 21/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -686,7 +750,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3193" type="Polygon2D" parent="Layer 3/Frame 23/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -712,7 +776,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3195" type="Polygon2D" parent="Layer 3/Frame 25/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -738,7 +802,7 @@ scale = Vector2(0.75, 0.75)
 [node name="@@3197" type="Polygon2D" parent="Layer 3/Frame 27/Group/Shape"]
 polygon = PackedVector2Array(-2.025, -21.825, -2.025, -21.825, 5.45, -21.3, 5.6, -21.25, 9.25, -19.925, 13.95, -16.875, 18.925, -11.15, 19, -11, 19.8, -9.5, 19.875, -9.375, 21.8, -2.025, 21.65, 3.475, 21.625, 3.7, 21.375, 4.925, 21.35, 5.1, 16.8, 13.975, 14.675, 16.25, 14.55, 16.375, 12.9, 17.725, 1.975, 21.8, 0.55, 21.9, -0.875, 21.9, -13.25, 17.45, -14.05, 16.825, -15.05, 15.975, -21.5, 4.45, -21.8, 2.7, -21.85, 2, -19.475, -10.25, -19, -11.125, -16.9, -14.05, -9.3, -19.925, -9.175, -20, -7.6, -20.625, -4.46407, -21.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34)])
-script = ExtResource("1_y2try")
+script = ExtResource("2_stylx")
 matrix = Transform2D(0.0601349, 0.0103302, -0.00500488, 0.029068, -6.65, -6.9)
 entries_color = PackedColorArray(0.501961, 0.501961, 0.501961, 1, 0.368627, 0.368627, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.0313726, 0.584314)
@@ -763,8 +827,17 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_1hk5c")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_o0o4m")
+
 [node name="Frame 28" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 28"]
+script = SubResource("GDScript_gbjjj")

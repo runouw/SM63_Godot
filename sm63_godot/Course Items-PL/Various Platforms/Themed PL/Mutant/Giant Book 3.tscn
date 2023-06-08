@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_j8i28"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pyp7x"]
+
+[sub_resource type="Animation" id="Animation_d7i5g"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -76,16 +78,29 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_25dnb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_suprn"]
 _data = {
-"Default": SubResource("Animation_j8i28")
+"Default": SubResource("Animation_d7i5g")
 }
 
+[sub_resource type="GDScript" id="GDScript_j51bx"]
+script/source = "extends Node
+# if (small == true) {
+# 	gotoAndStop(5);
+# }
+# gotoAndStop(random(4)+1);
+# "
+
 [node name="Giant Book 3" type="Node2D"]
+script = ExtResource("1_pyp7x")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Themed PL/Mutant/Giant Book 3.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_25dnb")
+"Timeline": SubResource("AnimationLibrary_suprn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -251,6 +266,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="@Shape@48199" type="Node2D" parent="Layer 1/Frame 4"]
+position = Vector2(-5.3, 0)
 
 [node name="@@48200" type="Polygon2D" parent="Layer 1/Frame 4/@Shape@48199"]
 color = Color(0.980392, 0.952941, 0.796078, 1)
@@ -289,3 +305,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_j51bx")

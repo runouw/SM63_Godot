@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_68h6u"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_o4fc7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7bjyv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_m5dej"]
 
-[sub_resource type="Animation" id="Animation_c2mj1"]
+[sub_resource type="Animation" id="Animation_e5btx"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,26 +19,31 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_irxxe"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_88oon"]
 _data = {
-"Default": SubResource("Animation_c2mj1")
+"Default": SubResource("Animation_e5btx")
 }
 
 [node name="7+Hills+Ground BackGround2" type="Node2D"]
+script = ExtResource("1_7bjyv")
+source_xml = "res://sm63/LIBRARY/Course Clips/7+Hills+Ground BackGround2.xml"
+linkage = "7-MountainsBG2"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_irxxe")
+"Timeline": SubResource("AnimationLibrary_88oon")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_68h6u")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-0.15, 40)
 scale = Vector2(1.00006, 0.999893)
-script = ExtResource("2_o4fc7")
+script = ExtResource("2_m5dej")
 path = "res://sm63_godot/Course Clips/7+Hills+Ground BackGround.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

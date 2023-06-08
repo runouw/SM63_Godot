@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Elongated Wood.png" id="1_bkkl5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Grey Gravel.png" id="2_h6dml"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Metal Pole PL Repeat.png" id="3_s6bi7"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Mesh Fence.png" id="4_rqfy4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_cjnsg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Elongated Wood.png" id="2_8w4ha"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Grey Gravel.png" id="3_qfxfx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Crag/Metal Pole PL Repeat.png" id="4_msn7o"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Mesh Fence.png" id="5_8q5sr"]
 
-[sub_resource type="Animation" id="Animation_wvt56"]
+[sub_resource type="Animation" id="Animation_d2siv"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -33,16 +34,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6pvdv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6edth"]
 _data = {
-"Default": SubResource("Animation_wvt56")
+"Default": SubResource("Animation_d2siv")
 }
 
 [node name="M2-1 Front GFX" type="Node2D"]
+script = ExtResource("1_cjnsg")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-1 Front GFX.xml"
+linkage = "M2-1FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6pvdv")
+"Timeline": SubResource("AnimationLibrary_6edth")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -57,7 +63,7 @@ position = Vector2(1, 0)
 [node name="@@45937" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_bkkl5")
+texture = ExtResource("2_8w4ha")
 texture_offset = Vector2(27.35, -170.75)
 polygon = PackedVector2Array(-27.35, 170.75, -18.85, 170.75, -18.85, 430.2, -27.35, 430.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -78,7 +84,7 @@ position = Vector2(169, 0)
 [node name="@@45940" type="Polygon2D" parent="Layer 3/Frame 0/@Group@45939/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_bkkl5")
+texture = ExtResource("2_8w4ha")
 texture_offset = Vector2(-248.25, -169.75)
 polygon = PackedVector2Array(256.3, 171, 264.8, 171, 264.8, 430.45, 256.3, 430.45)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -98,7 +104,7 @@ end_cap_mode = 2
 [node name="@@45943" type="Polygon2D" parent="Layer 3/Frame 0/@Group@45942/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_bkkl5")
+texture = ExtResource("2_8w4ha")
 texture_offset = Vector2(139, -209.95)
 texture_rotation = 1.5708
 polygon = PackedVector2Array(-26.85, 139, 433.8, 139, 433.8, 171, -26.85, 171)
@@ -125,7 +131,7 @@ end_cap_mode = 2
 [node name="@@45923" type="Polygon2D" parent="Layer 1/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_h6dml")
+texture = ExtResource("3_qfxfx")
 texture_offset = Vector2(-362.25, -520.15)
 polygon = PackedVector2Array(-181.075, 429.2, 1165.5, 429.2, 1165.5, 598.15, -181.1, 598.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -143,7 +149,7 @@ end_cap_mode = 2
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group/@Group@45925"]
 
 [node name="@@45926" type="Polygon2D" parent="Layer 1/Frame 0/Group/@Group@45925/Shape"]
-color = Color(1, 1, 1, 0.2)
+color = Color(0, 0, 0, 0.2)
 polygon = PackedVector2Array(-185.1, 429.2, 1165.5, 429.2, 1165.5, 598.15, -185.125, 598.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -162,7 +168,7 @@ end_cap_mode = 2
 [node name="@@45929" type="Polygon2D" parent="Layer 1/Frame 0/@Group@45928/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_s6bi7")
+texture = ExtResource("4_msn7o")
 texture_offset = Vector2(-273.9, 1212.95)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(1164.9, -381.975, 1164.9, -381.975, 1164.88, 429.2, 1156.88, 429.2, 1156.9, -381.95)
@@ -183,7 +189,7 @@ end_cap_mode = 2
 [node name="@@45932" type="Polygon2D" parent="Layer 1/Frame 0/@Group@45931/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_s6bi7")
+texture = ExtResource("4_msn7o")
 texture_offset = Vector2(-273.9, 1359.95)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(1311.9, -381.975, 1311.9, -381.975, 1311.9, 597.2, 1303.9, 597.2, 1303.9, -381.95)
@@ -204,7 +210,7 @@ end_cap_mode = 2
 [node name="@@45935" type="Polygon2D" parent="Layer 1/Frame 0/@Group@45934/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_rqfy4")
+texture = ExtResource("5_8q5sr")
 texture_offset = Vector2(-197.283, -983.656)
 texture_scale = Vector2(0.999999, 0.999999)
 texture_rotation = 0.785398

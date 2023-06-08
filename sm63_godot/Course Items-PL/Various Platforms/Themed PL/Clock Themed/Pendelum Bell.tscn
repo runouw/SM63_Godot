@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_yffgp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_67sen"]
+
+[sub_resource type="Animation" id="Animation_j5tk7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tgn68"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aj383"]
 _data = {
-"Default": SubResource("Animation_yffgp")
+"Default": SubResource("Animation_j5tk7")
 }
 
 [node name="Pendelum Bell" type="Node2D"]
+script = ExtResource("1_67sen")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Themed PL/Clock Themed/Pendelum Bell.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tgn68")
+"Timeline": SubResource("AnimationLibrary_aj383")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ojr88"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_icvch"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ggf3u"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2bvhr"]
 
-[sub_resource type="Animation" id="Animation_u6qyh"]
+[sub_resource type="Animation" id="Animation_dg4bv"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,16 +43,26 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_udveu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tj5xd"]
 _data = {
-"Default": SubResource("Animation_u6qyh")
+"Default": SubResource("Animation_dg4bv")
 }
 
+[sub_resource type="GDScript" id="GDScript_vycvf"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="9-08 Cam Edge" type="Node2D"]
+script = ExtResource("1_ggf3u")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-08 Kamek (Lava Battle)/9-08 Cam Edge.xml"
+linkage = "9-08CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_udveu")
+"Timeline": SubResource("AnimationLibrary_tj5xd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -70,12 +80,15 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_vycvf")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_ojr88")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
 position = Vector2(-1039.15, -435.9)
-script = ExtResource("2_icvch")
+script = ExtResource("2_2bvhr")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-08 Kamek (Lava Battle)/9-08 CamEdge Wall.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -88,9 +101,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@41503" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_ojr88")]
+[node name="@DOMSymbolInstance@41503" type="Node2D" parent="Layer 2/Frame 1"]
 position = Vector2(-353.15, -435.9)
-script = ExtResource("2_icvch")
+script = ExtResource("2_2bvhr")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-08 Kamek (Lava Battle)/9-08 CamEdge Wall.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

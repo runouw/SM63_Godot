@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_vfh5e"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_wib43"]
+
+[sub_resource type="Animation" id="Animation_vdpqj"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4dkk6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r48sb"]
 _data = {
-"Default": SubResource("Animation_vfh5e")
+"Default": SubResource("Animation_vdpqj")
 }
 
 [node name="LDW - Info Grid GFX Clip" type="Node2D"]
+script = ExtResource("1_wib43")
+source_xml = "res://sm63/LIBRARY/Level Designer Windows/LDW - Info/LDW - Info Grid GFX Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4dkk6")
+"Timeline": SubResource("AnimationLibrary_r48sb")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -33,6 +40,7 @@ libraries = {
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(0, 0.05)
 
 [node name="@@51250" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 color = Color(0, 0, 1, 1)

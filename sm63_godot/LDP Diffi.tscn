@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_8yxak"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_0cjwe"]
+
+[sub_resource type="Animation" id="Animation_vrdqj"]
 length = 0.233333
 loop_mode = 1
 tracks/0/type = "value"
@@ -76,21 +78,33 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dvxsi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6y1kp"]
 _data = {
-"Default": SubResource("Animation_8yxak")
+"Default": SubResource("Animation_vrdqj")
 }
 
+[sub_resource type="GDScript" id="GDScript_w4syx"]
+script/source = "extends Node
+# stop();"
+
 [node name="LDP Diffi" type="Node2D"]
+script = ExtResource("1_0cjwe")
+source_xml = "res://sm63/LIBRARY/LDP Diffi.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dvxsi")
+"Timeline": SubResource("AnimationLibrary_6y1kp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_w4syx")
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 

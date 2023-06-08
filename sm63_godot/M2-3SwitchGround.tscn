@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_ebgji"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_618sn"]
+
+[sub_resource type="Animation" id="Animation_xh5tj"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -52,16 +54,33 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nrqiv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_33528"]
 _data = {
-"Default": SubResource("Animation_ebgji")
+"Default": SubResource("Animation_xh5tj")
 }
 
+[sub_resource type="GDScript" id="GDScript_xmaju"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.Course.BackGFX.SwitchPL == true) {
+# 		gotoAndStop(1);
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# };
+# stop();
+# "
+
 [node name="M2-3SwitchGround" type="Node2D"]
+script = ExtResource("1_618sn")
+source_xml = "res://sm63/LIBRARY/M2-3SwitchGround.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nrqiv")
+"Timeline": SubResource("AnimationLibrary_33528")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -81,6 +100,9 @@ visible = false
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_xmaju")
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false

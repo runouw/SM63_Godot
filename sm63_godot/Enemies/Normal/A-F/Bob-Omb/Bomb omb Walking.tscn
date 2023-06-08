@@ -1,17 +1,17 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=16 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_t3v1n"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gykj6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 1.png" id="3_ftnq5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 3.png" id="4_x5ypa"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 2.png" id="5_ulxlk"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - (8).png" id="6_y1u6a"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 4.png" id="7_jryv6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 5.png" id="8_3v587"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 6.png" id="9_o24i8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 7.png" id="10_c56vw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_it5h0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xv5mj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 1.png" id="3_e1brb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 3.png" id="4_x475s"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 2.png" id="5_8itlo"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - (8).png" id="6_armg7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 4.png" id="7_uyicw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 5.png" id="8_80thu"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 6.png" id="9_cqibb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Walking - 7.png" id="10_uh6em"]
 
-[sub_resource type="Animation" id="Animation_gdrke"]
+[sub_resource type="Animation" id="Animation_2kacj"]
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -170,27 +170,58 @@ tracks/12/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tv1nj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_55qab"]
 _data = {
-"Default": SubResource("Animation_gdrke")
+"Default": SubResource("Animation_2kacj")
 }
 
+[sub_resource type="GDScript" id="GDScript_c7yyd"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 		//
+# 		if (_parent._parent.exploding == true) {
+# 			nextFrame();
+# 			play();
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_fk68h"]
+script/source = "extends Node
+# gotoAndPlay(\"end\");
+# "
+
+[sub_resource type="GDScript" id="GDScript_uvgru"]
+script/source = "extends Node
+# gotoAndPlay(\"end\");
+# "
+
 [node name="Bomb omb Walking" type="Node2D"]
+script = ExtResource("1_it5h0")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Bob-Omb/Bomb omb Walking.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tv1nj")
+"Timeline": SubResource("AnimationLibrary_55qab")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_t3v1n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(10.85, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -208,12 +239,12 @@ texture_filter = 1
 position = Vector2(9.35, -7.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_ftnq5")
+texture = ExtResource("3_e1brb")
 centered = false
 
-[node name="@DOMSymbolInstance@50528" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_t3v1n")]
+[node name="@DOMSymbolInstance@50528" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(1.35, -7.65)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -229,11 +260,11 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_t3v1n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(10.85, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -251,12 +282,12 @@ texture_filter = 1
 position = Vector2(9.35, -7.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_x5ypa")
+texture = ExtResource("4_x475s")
 centered = false
 
-[node name="@DOMSymbolInstance@50530" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_t3v1n")]
+[node name="@DOMSymbolInstance@50530" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(1.35, -7.65)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -272,11 +303,11 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("1_t3v1n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6"]
 position = Vector2(10.85, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -294,12 +325,12 @@ texture_filter = 1
 position = Vector2(9.5, -7.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_ulxlk")
+texture = ExtResource("5_8itlo")
 centered = false
 
-[node name="@DOMSymbolInstance@50532" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("1_t3v1n")]
+[node name="@DOMSymbolInstance@50532" type="Node2D" parent="Layer 1/Frame 6"]
 position = Vector2(1.35, -7.65)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -315,11 +346,11 @@ brightness = 0.0
 [node name="Frame 11" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 11" instance=ExtResource("1_t3v1n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 11"]
 position = Vector2(9.85, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -337,12 +368,12 @@ texture_filter = 1
 position = Vector2(8.35, -7.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_x5ypa")
+texture = ExtResource("4_x475s")
 centered = false
 
-[node name="@DOMSymbolInstance@50534" type="Node2D" parent="Layer 1/Frame 11" instance=ExtResource("1_t3v1n")]
+[node name="@DOMSymbolInstance@50534" type="Node2D" parent="Layer 1/Frame 11"]
 position = Vector2(0.35, -7.65)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -358,11 +389,11 @@ brightness = 0.0
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14" instance=ExtResource("1_t3v1n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14"]
 position = Vector2(10.85, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -375,9 +406,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50535" type="Node2D" parent="Layer 1/Frame 14" instance=ExtResource("1_t3v1n")]
+[node name="@DOMSymbolInstance@50535" type="Node2D" parent="Layer 1/Frame 14"]
 position = Vector2(1.35, -7.65)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -395,17 +426,17 @@ texture_filter = 1
 position = Vector2(9.35, -7.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_y1u6a")
+texture = ExtResource("6_armg7")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16" instance=ExtResource("1_t3v1n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16"]
 position = Vector2(10.85, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -423,12 +454,12 @@ texture_filter = 1
 position = Vector2(9.35, -7.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("7_jryv6")
+texture = ExtResource("7_uyicw")
 centered = false
 
-[node name="@DOMSymbolInstance@50538" type="Node2D" parent="Layer 1/Frame 16" instance=ExtResource("1_t3v1n")]
+[node name="@DOMSymbolInstance@50538" type="Node2D" parent="Layer 1/Frame 16"]
 position = Vector2(1.35, -7.65)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -444,11 +475,11 @@ brightness = 0.0
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21" instance=ExtResource("1_t3v1n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 21"]
 position = Vector2(9.85, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -466,12 +497,12 @@ texture_filter = 1
 position = Vector2(8.35, -7.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_3v587")
+texture = ExtResource("8_80thu")
 centered = false
 
-[node name="@DOMSymbolInstance@50540" type="Node2D" parent="Layer 1/Frame 21" instance=ExtResource("1_t3v1n")]
+[node name="@DOMSymbolInstance@50540" type="Node2D" parent="Layer 1/Frame 21"]
 position = Vector2(0.35, -7.65)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -487,11 +518,11 @@ brightness = 0.0
 [node name="Frame 24" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24" instance=ExtResource("1_t3v1n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24"]
 position = Vector2(9.35, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -509,12 +540,12 @@ texture_filter = 1
 position = Vector2(7.85, -7.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("9_o24i8")
+texture = ExtResource("9_cqibb")
 centered = false
 
-[node name="@DOMSymbolInstance@50542" type="Node2D" parent="Layer 1/Frame 24" instance=ExtResource("1_t3v1n")]
+[node name="@DOMSymbolInstance@50542" type="Node2D" parent="Layer 1/Frame 24"]
 position = Vector2(-0.15, -7.65)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -530,11 +561,11 @@ brightness = 0.0
 [node name="Frame 27" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 27" instance=ExtResource("1_t3v1n")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 27"]
 position = Vector2(9.85, 0)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb-omb Winder Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -552,12 +583,12 @@ texture_filter = 1
 position = Vector2(8.35, -7.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("10_c56vw")
+texture = ExtResource("10_uh6em")
 centered = false
 
-[node name="@DOMSymbolInstance@50544" type="Node2D" parent="Layer 1/Frame 27" instance=ExtResource("1_t3v1n")]
+[node name="@DOMSymbolInstance@50544" type="Node2D" parent="Layer 1/Frame 27"]
 position = Vector2(0.35, -7.65)
-script = ExtResource("2_gykj6")
+script = ExtResource("2_xv5mj")
 path = "res://sm63_godot/Enemies/Normal/A-F/Bob-Omb/YI Styled Bomb omb Fuse Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -574,11 +605,20 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_c7yyd")
+
 [node name="Frame 19" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 19"]
+script = SubResource("GDScript_fk68h")
+
 [node name="Frame 20" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 20"]
+script = SubResource("GDScript_uvgru")
 
 [node name="Frame 27" type="Node2D" parent="Layer 2"]
 visible = false

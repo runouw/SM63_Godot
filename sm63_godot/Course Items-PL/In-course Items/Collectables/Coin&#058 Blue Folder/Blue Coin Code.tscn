@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_k1flf"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_nbcpx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1ouil"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_baq7v"]
 
-[sub_resource type="Animation" id="Animation_jwbrm"]
+[sub_resource type="Animation" id="Animation_6vlkv"]
 length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -295,21 +295,199 @@ tracks/23/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4fbm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_148ji"]
 _data = {
-"Default": SubResource("Animation_jwbrm")
+"Default": SubResource("Animation_6vlkv")
 }
 
+[sub_resource type="GDScript" id="GDScript_203g5"]
+script/source = "extends Node
+# if (bounce == true) {
+# 	disapearcount = 0;
+# 	bouncefunction = function () {
+# 		if (_root.Course.Water.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			yspeed += _root.gravity/3;
+# 			yspeed *= 0.95;
+# 			xspeed *= 0.95;
+# 			// 
+# 		} else {
+# 			yspeed += _root.gravity;
+# 			if (yspeed>0) {
+# 				yspeed *= 0.97;
+# 			}
+# 			//        
+# 		}
+# 		_y += Math.min(Math.max(yspeed, -8), 8);
+# 		_x += Math.min(Math.max(xspeed, -7), 7);
+# 		/*
+# 		yspeed = Math.max(yspeed, -8);
+# 		yspeed = Math.min(yspeed, 8);
+# 		xspeed = Math.max(xspeed, -7);
+# 		xspeed = Math.min(xspeed, 7);
+# 		*/
+# 		//
+# 		if (yspeed>0 && _root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+8)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+8)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			yspeed = _root.groundFriction(-yspeed, 0.5, 1.2);
+# 			xspeed = _root.groundFriction(xspeed, 0.3, 1.1);
+# 		}
+# 		if (xspeed<0 && _root.Course.Platforms.hitTest(((_x-7)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			xspeed = -xspeed*0.6;
+# 			yspeed = _root.groundFriction(yspeed, 0.5, 1.1);
+# 		}
+# 		if (xspeed>0 && _root.Course.Platforms.hitTest(((_x+7)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			xspeed = -xspeed*0.6;
+# 			yspeed = _root.groundFriction(yspeed, 0.5, 1.1);
+# 		}
+# 		if (yspeed<0 && _root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-8)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			yspeed = _root.groundFriction(-yspeed, 0.5, 1.5);
+# 			xspeed = xspeed*0.95;
+# 		}
+# 		//                   
+# 		while (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+8)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+8)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_y--;
+# 		}
+# 		while (_root.Course.Platforms.hitTest(((_x-7)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_x++;
+# 		}
+# 		while (_root.Course.Platforms.hitTest(((_x+7)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_x--;
+# 		}
+# 		while (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-8)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 			_y++;
+# 		}
+# 		//
+# 		disapearcount++;
+# 		if (disapearcount>12) {
+# 			hitcoin = true;
+# 		} else {
+# 			hitcoin = false;
+# 		}
+# 		if (disapearcount>32*9) {
+# 			_alpha = random(100);
+# 			if (disapearcount>32*12) {
+# 				this.removeMovieClip(this);
+# 			}
+# 		}
+# 		//                   
+# 	};
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_sl18w"]
+script/source = "extends Node
+# if (bounce == undefined) {
+# 	bounce = false;
+# 	hitcoin = true;
+# } else {
+# 	hitcoin = false
+# 	bouncefunction();
+# 	gotoAndStop(3);
+# }
+# if (bounce == false) {
+# 	if (_root.Course.coincountnum == undefined) {
+# 		_root.Course.coincountnum = 0;
+# 	} else {
+# 		_root.Course.coincountnum++;
+# 	}
+# 	if (_root[\"coindata\"+_root.playingcourse][0] == undefined) {
+# 		_root[\"coindata\"+_root.playingcourse] = [\"\"];
+# 	}
+# 	coinnum = _root.Course.coincountnum;
+# 	if (_root[\"coindata\"+_root.playingcourse][coinnum] == 1 && _root[\"coindata\"+_root.playingcourse][coinnum] !== undefined) {
+# 		gotoAndStop(\"end\");
+# 	}
+# } else {
+# 	appearcount = 0;
+# 	if (yspeed == undefined) {
+# 		yspeed = -7;
+# 	}
+# 	if (xspeed == undefined) {
+# 		xspeed = Math.random()*4-2;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_fid8k"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 			_visible = true;
+# 			if (bounce == true) {
+# 				if (_root.PauseGame == false) {
+# 					bouncefunction();
+# 				}
+# 			}
+# 			if ((this.hitTest(_root.Course.Char.charClip.body) || this.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y-15)*_root.coursescale/100)+_root.Course._y, true)) && hitcoin == true) {
+# 				_root.WaterHP = 8;
+# 				_root.Course.Char.fallcount = 0;
+# 				_root.hpcoincount += 15;
+# 				_root.coincount += 5;
+# 				_root.Coins += 5;
+# 				_root.Power = Math.min(_root.Power+50, 100);
+# 				onEnterFrame = function () {
+# 					if (_root.PauseGame == false) {
+# 						play();
+# 					} else {
+# 						stop();
+# 					}
+# 				};
+# 				//
+# 				//       
+# 			}
+# 			if (_root.PauseGame == false) {
+# 				clip.play();
+# 			} else {
+# 				clip.stop();
+# 			}
+# 		} else {
+# 			_visible = false;
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_65igt"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"CoinJingle\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# //
+# if (bounce == false) {
+# 	_root[\"coindata\"+_root.playingcourse][coinnum] = 1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_0ymq5"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# if (bounce !== false) {
+# 	this.removeMovieClip();
+# }
+# "
+
 [node name="Blue Coin Code" type="Node2D"]
+script = ExtResource("1_1ouil")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Code.xml"
+linkage = "BlueCoin"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_u4fbm")
+"Timeline": SubResource("AnimationLibrary_148ji")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_203g5")
 
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
 visible = false
@@ -331,9 +509,9 @@ color = Color(1, 0.8, 0, 1)
 polygon = PackedVector2Array(-2.35, -1.85, -2.25, -1.85, -1.9, -1.15, -2.15, -1, -2.15, -1, -2.65, -1.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4" instance=ExtResource("1_k1flf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4"]
 position = Vector2(0.35, 0.35)
-script = ExtResource("2_nbcpx")
+script = ExtResource("2_baq7v")
 path = "res://sm63_godot/Effects/Light Effects Folder/Sparkle Blue.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -343,7 +521,7 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 0, 1, 1)
 brightness = 0.0
 
 [node name="Frame 5" type="Node2D" parent="Layer 3"]
@@ -473,8 +651,8 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_k1flf")]
-script = ExtResource("2_nbcpx")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("2_baq7v")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -490,8 +668,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3" instance=ExtResource("1_k1flf")]
-script = ExtResource("2_nbcpx")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3"]
+script = ExtResource("2_baq7v")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -507,8 +685,8 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 6" instance=ExtResource("1_k1flf")]
-script = ExtResource("2_nbcpx")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 6"]
+script = ExtResource("2_baq7v")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -528,11 +706,23 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_sl18w")
+
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 2"]
+script = SubResource("GDScript_fid8k")
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 3"]
+script = SubResource("GDScript_65igt")
+
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 17"]
+script = SubResource("GDScript_0ymq5")

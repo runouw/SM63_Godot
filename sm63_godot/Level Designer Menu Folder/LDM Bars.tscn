@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_cm80g"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_vyoa3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_sm70r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1mu7s"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_468er"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_64gbh"]
 
-[sub_resource type="Animation" id="Animation_7n7vm"]
+[sub_resource type="Animation" id="Animation_imrx6"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,35 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fq6j0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5bj3"]
 _data = {
-"Default": SubResource("Animation_7n7vm")
+"Default": SubResource("Animation_imrx6")
 }
 
+[sub_resource type="GDScript" id="GDScript_y1lem"]
+script/source = "extends Node
+# cl = \"\";
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true) && _root.MenuAccess !== true) {
+# 		_root.MenuAccess = true;
+# 		ma = true;
+# 	} else if (ma == true && !this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 		ma = false;
+# 		_root.MenuAccess = false;
+# 	}
+# };
+# "
+
 [node name="LDM Bars" type="Node2D"]
+script = ExtResource("1_1mu7s")
+source_xml = "res://sm63/LIBRARY/Level Designer Menu Folder/LDM Bars.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fq6j0")
+"Timeline": SubResource("AnimationLibrary_a5bj3")
 }
 
 [node name="BG" type="Node2D" parent="."]
@@ -65,7 +84,7 @@ libraries = {
 [node name="@@50874" type="Polygon2D" parent="BG/Frame 0/Shape"]
 polygon = PackedVector2Array(-100, -10, 100, -10, 100, 10, -100, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_cm80g")
+script = ExtResource("2_468er")
 matrix = Transform2D(0.244141, 0, 0, 0.0342865, -100, -10.5)
 entries_color = PackedColorArray(0.866667, 0.839216, 0.733333, 1, 0.933333, 0.917647, 0.866667, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -83,9 +102,9 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_vyoa3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-83.45, 0.25)
-script = ExtResource("3_sm70r")
+script = ExtResource("3_64gbh")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM File.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -98,9 +117,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50870" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_vyoa3")]
+[node name="@DOMSymbolInstance@50870" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-6.5, 0.25)
-script = ExtResource("3_sm70r")
+script = ExtResource("3_64gbh")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Tiles.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -113,9 +132,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50871" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_vyoa3")]
+[node name="@DOMSymbolInstance@50871" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(37.05, 0.35)
-script = ExtResource("3_sm70r")
+script = ExtResource("3_64gbh")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Items.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -128,9 +147,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50872" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_vyoa3")]
+[node name="@DOMSymbolInstance@50872" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-45.95, 0.45)
-script = ExtResource("3_sm70r")
+script = ExtResource("3_64gbh")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM View.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -143,9 +162,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50873" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_vyoa3")]
+[node name="@DOMSymbolInstance@50873" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(81.25, 1.1)
-script = ExtResource("3_sm70r")
+script = ExtResource("3_64gbh")
 path = "res://sm63_godot/Level Designer Menu Folder/LDM Help.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -161,3 +180,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_y1lem")

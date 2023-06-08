@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Spray) 1.png" id="1_08d83"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Item (Spray) 1.png" id="2_7t64g"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Item (Spray) 2.png" id="3_qtbyr"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="4_ydowo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_jmke8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Spray) 1.png" id="2_whbht"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Item (Spray) 1.png" id="3_i0b0u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Item (Spray) 2.png" id="4_yq3yp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="5_w7sru"]
 
-[sub_resource type="Animation" id="Animation_qnjqp"]
+[sub_resource type="Animation" id="Animation_8ub3j"]
 length = 3.43333
 loop_mode = 1
 tracks/0/type = "value"
@@ -141,16 +142,57 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6w0qm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fkrwi"]
 _data = {
-"Default": SubResource("Animation_qnjqp")
+"Default": SubResource("Animation_8ub3j")
 }
 
+[sub_resource type="GDScript" id="GDScript_mt3al"]
+script/source = "extends Node
+# stop();
+# _root.GetStarMusic1();
+# onEnterFrame = function () {
+# 	if (_root.Course.Char.air == false) {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_f1lbx"]
+script/source = "extends Node
+# onEnterFrame = null;
+# _root.GetStarMusic2();
+# "
+
+[sub_resource type="GDScript" id="GDScript_crosk"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.ZoomoutCam();
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ia1q1"]
+script/source = "extends Node
+# _root.Blackout();
+# "
+
+[sub_resource type="GDScript" id="GDScript_11vt7"]
+script/source = "extends Node
+# _root.ReturnToCastle();
+# onEnterFrame = null;
+# stop();
+# "
+
 [node name="Luigi (Spray) Star" type="Node2D"]
+script = ExtResource("1_jmke8")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi (Spray) Star.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6w0qm")
+"Timeline": SubResource("AnimationLibrary_fkrwi")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -160,7 +202,7 @@ libraries = {
 [node name="@@14873" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-9.25, -38.5)
-texture = ExtResource("1_08d83")
+texture = ExtResource("2_whbht")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -169,7 +211,7 @@ visible = false
 [node name="@@14874" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-12, -42)
-texture = ExtResource("2_7t64g")
+texture = ExtResource("3_i0b0u")
 centered = false
 
 [node name="Frame 42" type="Node2D" parent="Layer 1"]
@@ -178,7 +220,7 @@ visible = false
 [node name="@@14875" type="Sprite2D" parent="Layer 1/Frame 42"]
 texture_filter = 1
 position = Vector2(-11.15, -31.15)
-texture = ExtResource("3_qtbyr")
+texture = ExtResource("4_yq3yp")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -189,7 +231,7 @@ centered = false
 texture_filter = 1
 position = Vector2(-16.25, -32.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_ydowo")
+texture = ExtResource("5_w7sru")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
@@ -199,7 +241,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-0.25, -26.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_ydowo")
+texture = ExtResource("5_w7sru")
 centered = false
 
 [node name="Frame 42" type="Node2D" parent="Layer 3"]
@@ -208,21 +250,36 @@ visible = false
 [node name="@@14872" type="Sprite2D" parent="Layer 3/Frame 42"]
 texture_filter = 1
 position = Vector2(-6.15, -43.65)
-texture = ExtResource("4_ydowo")
+texture = ExtResource("5_w7sru")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_mt3al")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_f1lbx")
 
 [node name="Frame 42" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 42"]
+script = SubResource("GDScript_crosk")
+
 [node name="Frame 79" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 79"]
+script = SubResource("GDScript_ia1q1")
+
 [node name="Frame 102" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 102"]
+script = SubResource("GDScript_11vt7")

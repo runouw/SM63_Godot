@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 1.png" id="1_kn0at"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 2.png" id="2_norh8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 3.png" id="3_oo7gn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 4.png" id="4_7jb62"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kx4in"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 1.png" id="2_0kwu7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 2.png" id="3_3p26g"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 3.png" id="4_nimgx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fire 4.png" id="5_m3br8"]
 
-[sub_resource type="Animation" id="Animation_nbw33"]
+[sub_resource type="Animation" id="Animation_ilsod"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -57,16 +58,21 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2y566"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gmqjs"]
 _data = {
-"Default": SubResource("Animation_nbw33")
+"Default": SubResource("Animation_ilsod")
 }
 
 [node name="Cinema Flame Animation" type="Node2D"]
+script = ExtResource("1_kx4in")
+source_xml = "res://sm63/LIBRARY/Cinema Flame Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2y566")
+"Timeline": SubResource("AnimationLibrary_gmqjs")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -76,7 +82,7 @@ libraries = {
 [node name="@@5355" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-24, -32)
-texture = ExtResource("1_kn0at")
+texture = ExtResource("2_0kwu7")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -85,7 +91,7 @@ visible = false
 [node name="@@5356" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-24, -32)
-texture = ExtResource("2_norh8")
+texture = ExtResource("3_3p26g")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -94,7 +100,7 @@ visible = false
 [node name="@@5357" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-24, -32)
-texture = ExtResource("3_oo7gn")
+texture = ExtResource("4_nimgx")
 centered = false
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
@@ -103,5 +109,5 @@ visible = false
 [node name="@@5358" type="Sprite2D" parent="Layer 1/Frame 14"]
 texture_filter = 1
 position = Vector2(-24, -32)
-texture = ExtResource("4_7jb62")
+texture = ExtResource("5_m3br8")
 centered = false

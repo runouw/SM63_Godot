@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_pcowj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4u1vk"]
+
+[sub_resource type="Animation" id="Animation_lvjcj"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rc045"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5cx7"]
 _data = {
-"Default": SubResource("Animation_pcowj")
+"Default": SubResource("Animation_lvjcj")
 }
 
 [node name="Thwomp Bplatforms" type="Node2D"]
+script = ExtResource("1_4u1vk")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Thwomps/Thwomp Bplatforms.xml"
+linkage = "ThwompPlatform"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rc045")
+"Timeline": SubResource("AnimationLibrary_l5cx7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=24 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Night-time Sky Wall.png" id="1_xhxq1"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Wall 2.png" id="2_bfeli"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_dllry"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_43i3e"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="5_5a5er"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_t3pyt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Night-time Sky Wall.png" id="2_nn8wd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Wall 2.png" id="3_361ou"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_llu8c"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="5_c5lht"]
 
-[sub_resource type="Animation" id="Animation_700m5"]
+[sub_resource type="Animation" id="Animation_rngdg"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -94,16 +94,1573 @@ tracks/6/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hxkfu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ct2bq"]
 _data = {
-"Default": SubResource("Animation_700m5")
+"Default": SubResource("Animation_rngdg")
 }
 
+[sub_resource type="GDScript" id="GDScript_mfqmt"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"C-13-1\";
+# 	//
+# 	locked = true;
+# 	keytype = 1;
+# 	if ((_root.TotalStars>=32 && _root.CurrentPlayer == \"Mario\") || _root.CheatCastleUnlock == true) {
+# 		removelock = true;
+# 	}
+# 	//  
+# 	doorlockfunction = function () {
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.attackFrame = \"Sign\";
+# 		_root.Course.Char.xspeed = 0;
+# 		//
+# 		if (_root.CurrentPlayer !== \"Mario\" && _root.TotalStars>=32) {
+# 			_root.PlayMessage(\"Your are not my Rival!  Go Away and bring Mario!\");
+# 		} else {
+# 			_root.PlayMessage(\"You need a total of 32 Shine Sprites to unlock this door\");
+# 		}
+# 		_root.Mariosound = new Sound(this);
+# 		_root.Mariosound.attachSound(\"Bowser - Laugh Muffled\");
+# 		_root.Mariosound.start(0, 1);
+# 		_root.Mariosound.setVolume(_root.MarioVolume);
+# 		count = 0;
+# 		onEnterFrame = function () {
+# 			X = _x+_parent._x;
+# 			_root.Course.Char._x += (X-_root.Course.Char._x)/5;
+# 			//
+# 			_root.playpause = true;
+# 			//
+# 			count++;
+# 			if (_root.KeyZ() && count>5) {
+# 				_root.StopMessage();
+# 				//
+# 				count = 0;
+# 				onEnterFrame = function () {
+# 					count++;
+# 					if (count>5) {
+# 						_root.playpause = false;
+# 						_root.Course.Char.attack = false;
+# 						onEnterFrame = null;
+# 						//
+# 						_root.Course.Char.attack = true;
+# 						_root.Course.Char.xspeed = 0;
+# 						_root.Course.Char.attackFrame = \"Door\";
+# 						_root.door = doorplace;
+# 						gotoAndPlay(\"play\");
+# 						//
+# 					}
+# 				};
+# 			}
+# 		};
+# 	};
+# }
+# onClipEvent (enterFrame) {
+# 	if ((_root.TotalStars>=32 && _root.CurrentPlayer == \"Mario\") || _root.CheatCastleUnlock == true) {
+# 		removelock = true;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_eabua"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	graphic = true;
+# 	//
+# 	distance = 32;
+# 	angle = 18;
+# 	thickness = 7;
+# 	bellsize = 15;
+# 	basesize = 9;
+# 	speed = 300;
+# 	offstart = 0;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ysacx"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	//otherstar = \"ss2\";
+# 	yblast = -35;
+# 	xblast = 0;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_sgnuu"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"C-10-3\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_p0u7b"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 21;
+# 	_x += random(30)
+# 	if (_parent.toaddisp10 == undefined) {
+# 		_parent.toaddisp10 = random(2);
+# 	}
+# 	if (_parent.toaddisp10 == 0) {
+# 		Mood = \"Smile\";
+# 		M1Moo = \"Talk\";
+# 		M1Txt = \"That clock over there is unsually large....\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Talk\";
+# 		M2Txt = \"I heard the Princess got it imported over from some strange magical place.\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M3Moo = \"Talk\";
+# 		M3Txt = \"And so the clock has lots of weird, strange properties to it, almost as if there is an entire world inside it!\";
+# 		M3Sta = function () {
+# 			return (true);
+# 		};
+# 		M3End = function () {
+# 			return (BP());
+# 		};
+# 		/*
+# 		M4Moo = \"Talk\";
+# 		M4Txt = \"...But when the results were released....\";
+# 		M4Sta = function () {
+# 			return (true);
+# 		};
+# 		M4End = function () {
+# 			return (BP());
+# 		};
+# 		*/
+# 		M5Moo = \"Mad\";
+# 		M5Txt = \"....Mine didn't get first, in fact, no <b>Pun in Ten did</b>....\";
+# 		M5Sta = function () {
+# 			return (true);
+# 		};
+# 		M5End = function () {
+# 			return (BP());
+# 		};
+# 		
+# 		//
+# 		M6Moo = \"Happy\";
+# 		M6Txt = \".........................\";
+# 		M6Sta = function () {
+# 			return (true);
+# 		};
+# 		M6End = function () {
+# 			return (BP());
+# 		};
+# 		M6F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		};
+# 		//
+# 		M7Moo = \"Crazy\";
+# 		M7Txt = \"<b>.....................Why Aren't you Laughing?!?!?</b>\";
+# 		M7Sta = function () {
+# 			return (true);
+# 		};
+# 		M7End = function () {
+# 			return (BP());
+# 		};
+# 		//M7F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		//};
+# 		//
+# 		//M8Moo = \"Sad\";
+# 		//M8Txt = \"I once looked up to you, \"+_root.CurrentPlayer;
+# 		//M8Sta = function () {
+# 			//return (true);
+# 		//};
+# 		//M8End = function () {
+# 			//return (BP());
+# 		//};
+# 		//M8F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(1)
+# 		//};
+# 		//
+# 		M9Moo = \"Mad\";
+# 		M9Txt = \"I thought you were a nice person!!\";
+# 		M9Sta = function () {
+# 			return (true);
+# 		};
+# 		M9End = function () {
+# 			return (BP());
+# 		};
+# 		M9F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(\"yes\")
+# 		};
+# 		//
+# 		M10Moo = \"Sad\";
+# 		M10Txt = \"And then you come here and Destroyed all my Dreams!\";
+# 		M10Sta = function () {
+# 			return (true);
+# 		};
+# 		M10End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M11Moo = \"Crazy\";
+# 		M11Txt = \"DESTROYED IT!!!!\";
+# 		M11Sta = function () {
+# 			return (true);
+# 		};
+# 		M11End = function () {
+# 			return (BP());
+# 		};
+# 		M11F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\");
+# 		};
+# 		//
+# 		M12Moo = \"Mad\";
+# 		M12Txt = \"......\";
+# 		M12Sta = function () {
+# 			return (true);
+# 		};
+# 		M12End = function () {
+# 			return (BP());
+# 		};
+# 		M12F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"talk\");
+# 		};
+# 		//
+# 		M13Moo = \"Mad\";
+# 		M13Txt = \"...Gee, Thanks for ruining my life...\";
+# 		M13Sta = function () {
+# 			return (true);
+# 		};
+# 		M13End = function () {
+# 			return (BP());
+# 		};
+# 		M13F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 			this._xscale *= -1;
+# 			Mood = \"Mad\";
+# 			StartMood = \"Mad\";
+# 			M1Moo = \"Mad\";
+# 			M1Txt = \"......Go Away!!\";
+# 			M1Sta = function () {
+# 				return (BP());
+# 			};
+# 			M1End = function () {
+# 				return (BP());
+# 			};
+# 			//
+# 			M2Moo = undefined;
+# 			M2Txt = undefined;
+# 			M2Sta = null;
+# 			M2End = null;
+# 		};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_w01ug"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 15;
+# 	if (_parent.toaddisp20 == undefined) {
+# 		_parent.toaddisp20 = random(2);
+# 	}
+# 	if (_parent.toaddisp20 == 0) {
+# 		count2 = 0;
+# 		speed = 2
+# 		OEF2 = function () {
+# 			_x += speed;
+# 			count2++;
+# 			if (count2>60) {
+# 				count2 = 0;
+# 				speed *= -1;
+# 			}
+# 			_xscale = speed*50;
+# 		};
+# 		frame = \"walk\";
+# 		Mood = \"Mad\";
+# 		M1Moo = \"Talk\";
+# 		M1Txt = \"<b>....Right now...... I'm exercising.....</b>\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Talk\";
+# 		M2Txt = \"<b>.......So that when Bowser's Meteor comes........ I can run all the way......... to Bowser's Castle ....</b>\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M3Moo = \"Talk\";
+# 		M3Txt = \"<b>......You know..... just in case you fail....</b>\";
+# 		M3Sta = function () {
+# 		return (true);
+# 		};
+# 		M3End = function () {
+# 		return (BP());
+# 		};
+# 		//
+# 		//M4Moo = \"Mad\";
+# 		//M4Txt = \"But it was an everlasting flame\";
+# 		//M4Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M4End = function () {
+# 		//return (BP());
+# 		//};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_mb5kn"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 27;
+# 	this._xscale = -100;
+# 	Mood = \"Sad\";
+# 	M1Moo = \"Mad\";
+# 	M1Txt = \"Mwahahahaha!!!! What are you doing in my Lair!?\";
+# 	M1Sta = function () {
+# 		return (BP());
+# 	};
+# 	M1End = function () {
+# 		return (BP());
+# 	};
+# 	//
+# 	M2Moo = \"Crazy\";
+# 	M2Txt = \"...You dare Challange the All Powerful <b>MEWTWO</b> to a Poke-Match?!?!?!\";
+# 	M2Sta = function () {
+# 		return (true);
+# 	};
+# 	M2End = function () {
+# 		return (BP());
+# 	};
+# 	//
+# 	M3Moo = \"Mad\";
+# 	M3Txt = \".......Tremble at the face of my all powerful <i>PSYCHIC ABILITIES!!</i>\";
+# 	M3Sta = function () {
+# 		return (true);
+# 	};
+# 	M3End = function () {
+# 		return (BP());
+# 	};
+# 	////M1F = function () {
+# 	//_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\")
+# 	//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 	//};
+# 	//
+# 	M4Moo = \"Mad\";
+# 	M4Txt = \"........I Said <b>Tremble</b>!!!!!              .....For I am MEWTWO!!!!\";
+# 	M4Sta = function () {
+# 		return (true);
+# 	};
+# 	M4End = function () {
+# 		return (BP());
+# 	};
+# 	M4F = function () {
+# 		_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 	};
+# 	//
+# 	M5Moo = \"Crazy\";
+# 	M5Txt = \"....I COMMAND YOU TO OBEY ME NOW!!!!!!!\";
+# 	M5Sta = function () {
+# 		return (true);
+# 	};
+# 	M5End = function () {
+# 		return (BP());
+# 	};
+# 	M5F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 	};
+# 	//
+# 	M6Moo = \"Shocked\";
+# 	M6Txt = \"..........WHAT??     You think that I'm just <i>pretending</i> I'm Mewtwo!?!?!\";
+# 	M6Sta = function () {
+# 		return (true);
+# 	};
+# 	M6End = function () {
+# 		return (BP());
+# 	};
+# 	M6F = function () {
+# 		_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		sped = 8;
+# 		OEF = function () {
+# 			_x += speed;
+# 			speed -= 1;
+# 			if (speed<=0) {
+# 				speed = undefined;
+# 				OEF = null;
+# 			}
+# 		};
+# 	};
+# 	//
+# 	M7Moo = \"Shocked\";
+# 	M7Txt = \"........That I'm <i>not really</i> the MASTER OF THE POKE-UNIVERSE?!?!?!\";
+# 	M7Sta = function () {
+# 		return (true);
+# 	};
+# 	M7End = function () {
+# 		return (BP());
+# 	};
+# 	M7F = function () {
+# 		_root.Course.Char.charClip.frame.gotoAndPlay(\"yes\");
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 	};
+# 	//
+# 	M8Moo = \"Mad\";
+# 	M8Txt = \"...I'LL SHOW YOU!!!!\";
+# 	M8Sta = function () {
+# 		return (true);
+# 	};
+# 	M8End = function () {
+# 		return (BP());
+# 	};
+# 	M8F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 	};
+# 	//
+# 	M9Moo = \"ShadowBall\";
+# 	M9Txt = \"<b>.............SHADOW BALL!!!!!!!!!!!!!!!!!!!!!!!!!!!!</b>\";
+# 	M9Sta = function () {
+# 		return (true);
+# 	};
+# 	M9End = function () {
+# 		//return (iw);
+# 		return (BP());
+# 	};
+# 	M9F = function () {
+# 		_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\");
+# 		//iw = false;
+# 		//depth = _root.Course.FrontGFX.getNextHighestDepth();
+# 		_root.Course.FrontGFX.attachMovie(\"InvertWave\", \"InvertWave\"+depth, depth, {_x:_x, _y:_y, speed:1});
+# 		count2 = 0;
+# 		OEF = function () {
+# 			count2++;
+# 			if (count2>15) {
+# 				_root.Course.FrontGFX.attachMovie(\"InvertWave\", \"InvertWave\"+_root.Course.FrontGFX.getNextHighestDepth(), _root.Course.FrontGFX.getNextHighestDepth(), {_x:_x, _y:_y, speed:1});
+# 				count2 = 0;
+# 			}
+# 			/*if (_root.Course.FrontGFX[\"InvertWave\"+depth]._x == undefined) {
+# 			iw = true;
+# 			OEF = null;
+# 			}*/ 
+# 		};
+# 	};
+# 	//
+# 	M10Moo = \"Confused\";
+# 	M10Txt = \"-fatal-error-occured-.........-forced-shut-down-of-system-........-error-M3W2-occured-\";
+# 	M10Sta = function () {
+# 		return (true);
+# 	};
+# 	M10End = function () {
+# 		return (BP());
+# 	};
+# 	M10F = function () {
+# 		_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		OEF = null;
+# 	};
+# 	//
+# 	M11Moo = \"Mad\";
+# 	M11Txt = \"...Aw Darn it.........Not again........ I ran out of <i>Pokemon Power!!</i>\";
+# 	M11Sta = function () {
+# 		return (true);
+# 	};
+# 	M11End = function () {
+# 		return (BP());
+# 	};
+# 	//
+# 	M12Moo = \"Crazy\";
+# 	M12Txt = \"....TELEPORT!!!!\";
+# 	M12Sta = function () {
+# 		return (true);
+# 	};
+# 	M12End = function () {
+# 		return (BP());
+# 	};
+# 	//
+# 	M13Moo = \"Crazy\";
+# 	M13Txt = \" \";
+# 	M13Sta = function () {
+# 		return (true);
+# 	};
+# 	M13End = function () {
+# 		return (true);
+# 	};
+# 	M13F = function () {
+# 		OEF = function () {
+# 			_alpha -= 6;
+# 			_root.CameraZoom -= 6+3;
+# 			if (_alpha<=0) {
+# 				_root.CameraZoom = 100;
+# 				_root.ToadMessage = \"\";
+# 				_parent.toaddisp1 = true;
+# 				this._y = 500;
+# 				M1Moo = undefined;
+# 				M1Txt = undefined;
+# 				_root.playpause = false;
+# 				_root.Course.Char.attack = false;
+# 				Phase = 9000;
+# 				onEnterFrame = null;
+# 				this.swapDepths(0);
+# 				this.removeMovieClip();
+# 				OEF = null;
+# 			}
+# 		};
+# 	};
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_u6ho5"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 27
+# 	_x += random(30);
+# 	if (_parent.toaddisp10 == undefined) {
+# 		_parent.toaddisp10 = random(2);
+# 	}
+# 	if (_parent.toaddisp10 == 0) {
+# 		//
+# 		count2 = 0;
+# 		OEF = function () {
+# 			count2 += random(4)+2
+# 			if (count2>64) {
+# 				count2 = 0;
+# 				_xscale *= -1;
+# 			}
+# 		};
+# 		//
+# 		Mood = \"Sad\";
+# 		M1Moo = \"Talk\";
+# 		M1Txt = \"Hungry\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Talk\";
+# 		M2Txt = \"Hungry Hungry\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M3Moo = \"Talk\";
+# 		M3Txt = \"Hungry Hungry Hungry\";
+# 		M3Sta = function () {
+# 			return (true);
+# 		};
+# 		M3End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M4Moo = \"Talk\";
+# 		M4Txt = \"Hungry Hungry Hungry Hungry\";
+# 		M4Sta = function () {
+# 			return (true);
+# 		};
+# 		M4End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M5Moo = \"Talk\";
+# 		M5Txt = \"Hungry Hungry Hungry Hungry Hungry\";
+# 		M5Sta = function () {
+# 			return (true);
+# 		};
+# 		M5End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M6Moo = \"Talk\";
+# 		M6Txt = \"Hungry Hungry Hungry Hungry Hungry Hungry\";
+# 		M6Sta = function () {
+# 			return (true);
+# 		};
+# 		M6End = function () {
+# 			return (BP());
+# 		};
+# 		//M6F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		//};
+# 		//
+# 		/*M7Moo = \"Happy\";
+# 		M7Txt = \"<b>Ha! ............  Bet you didn't catch </b>\";
+# 		M7Sta = function () {
+# 		return (true);
+# 		};
+# 		M7End = function () {
+# 		return (BP());
+# 		};*/
+# 		//M7F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		//};
+# 		//
+# 		//M8Moo = \"Sad\";
+# 		//M8Txt = \"I once looked up to you, \"+_root.CurrentPlayer;
+# 		//M8Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M8End = function () {
+# 		//return (BP());
+# 		//};
+# 		//M8F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1)
+# 		//};
+# 		//
+# 		M9Moo = \"Mad\";
+# 		M9Txt = \"I thought you were a nice person!!\";
+# 		M9Sta = function () {
+# 			return (true);
+# 		};
+# 		M9End = function () {
+# 			return (BP());
+# 		};
+# 		M9F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(\"yes\")
+# 		};
+# 		//
+# 		M10Moo = \"Sad\";
+# 		M10Txt = \"And then you come here and Destroyed all my Dreams!\";
+# 		M10Sta = function () {
+# 			return (true);
+# 		};
+# 		M10End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M11Moo = \"Crazy\";
+# 		M11Txt = \"DESTROYED IT!!!!\";
+# 		M11Sta = function () {
+# 			return (true);
+# 		};
+# 		M11End = function () {
+# 			return (BP());
+# 		};
+# 		M11F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\");
+# 		};
+# 		//
+# 		M12Moo = \"Mad\";
+# 		M12Txt = \"......\";
+# 		M12Sta = function () {
+# 			return (true);
+# 		};
+# 		M12End = function () {
+# 			return (BP());
+# 		};
+# 		M12F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"talk\");
+# 		};
+# 		//
+# 		M13Moo = \"Mad\";
+# 		M13Txt = \"...Gee, Thanks for ruining my life...\";
+# 		M13Sta = function () {
+# 			return (true);
+# 		};
+# 		M13End = function () {
+# 			return (BP());
+# 		};
+# 		M13F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 			this._xscale *= -1;
+# 			Mood = \"Mad\";
+# 			StartMood = \"Mad\";
+# 			M1Moo = \"Mad\";
+# 			M1Txt = \"......Go Away!!\";
+# 			M1Sta = function () {
+# 				return (BP());
+# 			};
+# 			M1End = function () {
+# 				return (BP());
+# 			};
+# 			//
+# 			M2Moo = undefined;
+# 			M2Txt = undefined;
+# 			M2Sta = null;
+# 			M2End = null;
+# 		};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_josi4"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 15;
+# 	if (_parent.toaddisp20 == undefined) {
+# 		_parent.toaddisp20 = random(2);
+# 	}
+# 	if (_parent.toaddisp20 == 1) {
+# 		//frame = \"walk\";
+# 		Mood = \"Smile\";
+# 		M1Moo = \"Sad\";
+# 		M1Txt = \"...............................\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Sad\";
+# 		M2Txt = \".................................\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M3Moo = \"Sad\";
+# 		M3Txt = \"....................................\";
+# 		M3Sta = function () {
+# 			return (true);
+# 		};
+# 		M3End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M4Fra = \"walk\"
+# 		M4Moo = \"Happy\";
+# 		M4Txt = \"<b><i>Never gonna    Give    you   up!  </b></i>\";
+# 		M4Sta = function () {
+# 			return (true);
+# 		};
+# 		M4End = function () {
+# 			return (BP());
+# 		};
+# 		M5Moo = \"Happy\";
+# 		M5Txt = \"<b><i>Never gonna    Let   you   down!    </b></i>\";
+# 		M5Sta = function () {
+# 			return (true);
+# 		};
+# 		M5End = function () {
+# 			return (BP());
+# 		};
+# 		M6Fra = \"idle\"
+# 		M6Moo = \"Sad\";
+# 		M6Txt = \"...........................................................................Sorry.....\";
+# 		M6Sta = function () {
+# 			return (true);
+# 		};
+# 		M6End = function () {
+# 			return (BP());
+# 		};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ddok8"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 27
+# 	
+# 	if (random(2) == 0) {
+# 		//
+# 		
+# 		//
+# 		Mood = \"Sad\";
+# 		M1Moo = \"Talk\";
+# 		M1Txt = \"<i>Oooooooooooohh!</i>\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Talk\";
+# 		M2Txt = \"Giant spooky staircase.....<i> Very original Bowser!</i>\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		//M3Moo = \"Talk\";
+# 		//M3Txt = \"Hungry Hungry Hungry\";
+# 		//M3Sta = function () {
+# 			//return (true);
+# 		//};
+# 		//M3End = function () {
+# 			//return (BP());
+# 		//};
+# 		//
+# 		M4Moo = \"Talk\";
+# 		M4Txt = \"Hungry Hungry Hungry Hungry\";
+# 		M4Sta = function () {
+# 			return (true);
+# 		};
+# 		M4End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M5Moo = \"Talk\";
+# 		M5Txt = \"Hungry Hungry Hungry Hungry Hungry\";
+# 		M5Sta = function () {
+# 			return (true);
+# 		};
+# 		M5End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M6Moo = \"Talk\";
+# 		M6Txt = \"Hungry Hungry Hungry Hungry Hungry Hungry\";
+# 		M6Sta = function () {
+# 			return (true);
+# 		};
+# 		M6End = function () {
+# 			return (BP());
+# 		};
+# 		//M6F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		//};
+# 		//
+# 		/*M7Moo = \"Happy\";
+# 		M7Txt = \"<b>Ha! ............  Bet you didn't catch </b>\";
+# 		M7Sta = function () {
+# 		return (true);
+# 		};
+# 		M7End = function () {
+# 		return (BP());
+# 		};*/
+# 		//M7F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		//};
+# 		//
+# 		//M8Moo = \"Sad\";
+# 		//M8Txt = \"I once looked up to you, \"+_root.CurrentPlayer;
+# 		//M8Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M8End = function () {
+# 		//return (BP());
+# 		//};
+# 		//M8F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1)
+# 		//};
+# 		//
+# 		M9Moo = \"Mad\";
+# 		M9Txt = \"I thought you were a nice person!!\";
+# 		M9Sta = function () {
+# 			return (true);
+# 		};
+# 		M9End = function () {
+# 			return (BP());
+# 		};
+# 		M9F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(\"yes\")
+# 		};
+# 		//
+# 		M10Moo = \"Sad\";
+# 		M10Txt = \"And then you come here and Destroyed all my Dreams!\";
+# 		M10Sta = function () {
+# 			return (true);
+# 		};
+# 		M10End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M11Moo = \"Crazy\";
+# 		M11Txt = \"DESTROYED IT!!!!\";
+# 		M11Sta = function () {
+# 			return (true);
+# 		};
+# 		M11End = function () {
+# 			return (BP());
+# 		};
+# 		M11F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\");
+# 		};
+# 		//
+# 		M12Moo = \"Mad\";
+# 		M12Txt = \"......\";
+# 		M12Sta = function () {
+# 			return (true);
+# 		};
+# 		M12End = function () {
+# 			return (BP());
+# 		};
+# 		M12F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"talk\");
+# 		};
+# 		//
+# 		M13Moo = \"Mad\";
+# 		M13Txt = \"...Gee, Thanks for ruining my life...\";
+# 		M13Sta = function () {
+# 			return (true);
+# 		};
+# 		M13End = function () {
+# 			return (BP());
+# 		};
+# 		M13F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 			this._xscale *= -1;
+# 			Mood = \"Mad\";
+# 			StartMood = \"Mad\";
+# 			M1Moo = \"Mad\";
+# 			M1Txt = \"......Go Away!!\";
+# 			M1Sta = function () {
+# 				return (BP());
+# 			};
+# 			M1End = function () {
+# 				return (BP());
+# 			};
+# 			//
+# 			M2Moo = undefined;
+# 			M2Txt = undefined;
+# 			M2Sta = null;
+# 			M2End = null;
+# 		};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_bnj7o"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 1;
+# 	if (random(2) == 0) {
+# 		//
+# 		//
+# 		Mood = \"Sad\";
+# 		M1Moo = \"Talk\";
+# 		M1Txt = \"....I've been waiting here for about 12 hours...\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Mad\";
+# 		M2Txt = \"... But this room apparently only is Night-time....\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		//M3Moo = \"Talk\";
+# 		//M3Txt = \"Hungry Hungry Hungry\";
+# 		//M3Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M3End = function () {
+# 		//return (BP());
+# 		//};
+# 		//
+# 		M4Moo = \"Talk\";
+# 		M4Txt = \"Hungry Hungry Hungry Hungry\";
+# 		M4Sta = function () {
+# 			return (true);
+# 		};
+# 		M4End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		
+# 	} else {
+# 		this._y = 500;
+# 	}
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_tckwx"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 2
+# 	
+# 	if (random(2) == 0) {
+# 		//
+# 		
+# 		//
+# 		Mood = \"Sad\";
+# 		M1Moo = \"Happy\";
+# 		M1Txt = \"I just <i>Love</i> leaning over railings!\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Happy\";
+# 		M2Txt = \"............... Don't you?!\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		//M3Moo = \"Talk\";
+# 		//M3Txt = \"Hungry Hungry Hungry\";
+# 		//M3Sta = function () {
+# 			//return (true);
+# 		//};
+# 		//M3End = function () {
+# 			//return (BP());
+# 		//};
+# 		//
+# 		M4Moo = \"Talk\";
+# 		M4Txt = \"Hungry Hungry Hungry Hungry\";
+# 		M4Sta = function () {
+# 			return (true);
+# 		};
+# 		M4End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M5Moo = \"Talk\";
+# 		M5Txt = \"Hungry Hungry Hungry Hungry Hungry\";
+# 		M5Sta = function () {
+# 			return (true);
+# 		};
+# 		M5End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M6Moo = \"Talk\";
+# 		M6Txt = \"Hungry Hungry Hungry Hungry Hungry Hungry\";
+# 		M6Sta = function () {
+# 			return (true);
+# 		};
+# 		M6End = function () {
+# 			return (BP());
+# 		};
+# 		//M6F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		//};
+# 		//
+# 		/*M7Moo = \"Happy\";
+# 		M7Txt = \"<b>Ha! ............  Bet you didn't catch </b>\";
+# 		M7Sta = function () {
+# 		return (true);
+# 		};
+# 		M7End = function () {
+# 		return (BP());
+# 		};*/
+# 		//M7F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		//};
+# 		//
+# 		//M8Moo = \"Sad\";
+# 		//M8Txt = \"I once looked up to you, \"+_root.CurrentPlayer;
+# 		//M8Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M8End = function () {
+# 		//return (BP());
+# 		//};
+# 		//M8F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1)
+# 		//};
+# 		//
+# 		M9Moo = \"Mad\";
+# 		M9Txt = \"I thought you were a nice person!!\";
+# 		M9Sta = function () {
+# 			return (true);
+# 		};
+# 		M9End = function () {
+# 			return (BP());
+# 		};
+# 		M9F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(\"yes\")
+# 		};
+# 		//
+# 		M10Moo = \"Sad\";
+# 		M10Txt = \"And then you come here and Destroyed all my Dreams!\";
+# 		M10Sta = function () {
+# 			return (true);
+# 		};
+# 		M10End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M11Moo = \"Crazy\";
+# 		M11Txt = \"DESTROYED IT!!!!\";
+# 		M11Sta = function () {
+# 			return (true);
+# 		};
+# 		M11End = function () {
+# 			return (BP());
+# 		};
+# 		M11F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\");
+# 		};
+# 		//
+# 		M12Moo = \"Mad\";
+# 		M12Txt = \"......\";
+# 		M12Sta = function () {
+# 			return (true);
+# 		};
+# 		M12End = function () {
+# 			return (BP());
+# 		};
+# 		M12F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"talk\");
+# 		};
+# 		//
+# 		M13Moo = \"Mad\";
+# 		M13Txt = \"...Gee, Thanks for ruining my life...\";
+# 		M13Sta = function () {
+# 			return (true);
+# 		};
+# 		M13End = function () {
+# 			return (BP());
+# 		};
+# 		M13F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 			this._xscale *= -1;
+# 			Mood = \"Mad\";
+# 			StartMood = \"Mad\";
+# 			M1Moo = \"Mad\";
+# 			M1Txt = \"......Go Away!!\";
+# 			M1Sta = function () {
+# 				return (BP());
+# 			};
+# 			M1End = function () {
+# 				return (BP());
+# 			};
+# 			//
+# 			M2Moo = undefined;
+# 			M2Txt = undefined;
+# 			M2Sta = null;
+# 			M2End = null;
+# 		};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_mtfto"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	staramount = 27
+# 	
+# 	if (random(2) == 0) {
+# 		//
+# 		
+# 		//
+# 		Mood = \"Sad\";
+# 		M1Moo = \"Talk\";
+# 		M1Txt = \"Have you tried out the Endless Stairs yet?\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Mad\";
+# 		M2Txt = \"It is very creepy... you walk up it, and there is <i>no end!!</i>\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M3Moo = \"Talk\";
+# 		M3Txt = \"....Although, with 32 Shine Sprites, you can get rid of that evil spell...\";
+# 		M3Sta = function () {
+# 			return (true);
+# 		};
+# 		M3End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		//M4Moo = \"Talk\";
+# 		//M4Txt = \"Hungry Hungry Hungry Hungry\";
+# 		//M4Sta = function () {
+# 			//return (true);
+# 		//};
+# 		//M4End = function () {
+# 			//return (BP());
+# 		//};
+# 		//
+# 		M5Moo = \"Talk\";
+# 		M5Txt = \"Hungry Hungry Hungry Hungry Hungry\";
+# 		M5Sta = function () {
+# 			return (true);
+# 		};
+# 		M5End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M6Moo = \"Talk\";
+# 		M6Txt = \"Hungry Hungry Hungry Hungry Hungry Hungry\";
+# 		M6Sta = function () {
+# 			return (true);
+# 		};
+# 		M6End = function () {
+# 			return (BP());
+# 		};
+# 		//M6F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		//};
+# 		//
+# 		/*M7Moo = \"Happy\";
+# 		M7Txt = \"<b>Ha! ............  Bet you didn't catch </b>\";
+# 		M7Sta = function () {
+# 		return (true);
+# 		};
+# 		M7End = function () {
+# 		return (BP());
+# 		};*/
+# 		//M7F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		//};
+# 		//
+# 		//M8Moo = \"Sad\";
+# 		//M8Txt = \"I once looked up to you, \"+_root.CurrentPlayer;
+# 		//M8Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M8End = function () {
+# 		//return (BP());
+# 		//};
+# 		//M8F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1)
+# 		//};
+# 		//
+# 		M9Moo = \"Mad\";
+# 		M9Txt = \"I thought you were a nice person!!\";
+# 		M9Sta = function () {
+# 			return (true);
+# 		};
+# 		M9End = function () {
+# 			return (BP());
+# 		};
+# 		M9F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(\"yes\")
+# 		};
+# 		//
+# 		M10Moo = \"Sad\";
+# 		M10Txt = \"And then you come here and Destroyed all my Dreams!\";
+# 		M10Sta = function () {
+# 			return (true);
+# 		};
+# 		M10End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M11Moo = \"Crazy\";
+# 		M11Txt = \"DESTROYED IT!!!!\";
+# 		M11Sta = function () {
+# 			return (true);
+# 		};
+# 		M11End = function () {
+# 			return (BP());
+# 		};
+# 		M11F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\");
+# 		};
+# 		//
+# 		M12Moo = \"Mad\";
+# 		M12Txt = \"......\";
+# 		M12Sta = function () {
+# 			return (true);
+# 		};
+# 		M12End = function () {
+# 			return (BP());
+# 		};
+# 		M12F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"talk\");
+# 		};
+# 		//
+# 		M13Moo = \"Mad\";
+# 		M13Txt = \"...Gee, Thanks for ruining my life...\";
+# 		M13Sta = function () {
+# 			return (true);
+# 		};
+# 		M13End = function () {
+# 			return (BP());
+# 		};
+# 		M13F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 			this._xscale *= -1;
+# 			Mood = \"Mad\";
+# 			StartMood = \"Mad\";
+# 			M1Moo = \"Mad\";
+# 			M1Txt = \"......Go Away!!\";
+# 			M1Sta = function () {
+# 				return (BP());
+# 			};
+# 			M1End = function () {
+# 				return (BP());
+# 			};
+# 			//
+# 			M2Moo = undefined;
+# 			M2Txt = undefined;
+# 			M2Sta = null;
+# 			M2End = null;
+# 		};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_umcmj"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = -100
+# 	
+# 	if (random(2) == 0) {
+# 		//
+# 		
+# 		//
+# 		Mood = \"Sad\";
+# 		M1Moo = \"Talk\";
+# 		M1Txt = \"I heard that underneath a painting of clouds is a secret....\";
+# 		M1Sta = function () {
+# 			return (BP());
+# 		};
+# 		M1End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M2Moo = \"Talk\";
+# 		M2Txt = \"If you stomp, it'll reveal a secret passageway to a secret course....\";
+# 		M2Sta = function () {
+# 			return (true);
+# 		};
+# 		M2End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M3Moo = \"Mad\";
+# 		M3Txt = \"....But there are several different cloud paintings!  Which one is it?!?!\";
+# 		M3Sta = function () {
+# 			return (true);
+# 		};
+# 		M3End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		//M4Moo = \"Talk\";
+# 		//M4Txt = \"Hungry Hungry Hungry Hungry\";
+# 		//M4Sta = function () {
+# 			//return (true);
+# 		//};
+# 		//M4End = function () {
+# 			//return (BP());
+# 		//};
+# 		//
+# 		M5Moo = \"Talk\";
+# 		M5Txt = \"Hungry Hungry Hungry Hungry Hungry\";
+# 		M5Sta = function () {
+# 			return (true);
+# 		};
+# 		M5End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M6Moo = \"Talk\";
+# 		M6Txt = \"Hungry Hungry Hungry Hungry Hungry Hungry\";
+# 		M6Sta = function () {
+# 			return (true);
+# 		};
+# 		M6End = function () {
+# 			return (BP());
+# 		};
+# 		//M6F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(\"no\");
+# 		//};
+# 		//
+# 		/*M7Moo = \"Happy\";
+# 		M7Txt = \"<b>Ha! ............  Bet you didn't catch </b>\";
+# 		M7Sta = function () {
+# 		return (true);
+# 		};
+# 		M7End = function () {
+# 		return (BP());
+# 		};*/
+# 		//M7F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 		//};
+# 		//
+# 		//M8Moo = \"Sad\";
+# 		//M8Txt = \"I once looked up to you, \"+_root.CurrentPlayer;
+# 		//M8Sta = function () {
+# 		//return (true);
+# 		//};
+# 		//M8End = function () {
+# 		//return (BP());
+# 		//};
+# 		//M8F = function () {
+# 		//_root.Course.Char.charClip.frame.gotoAndPlay(1)
+# 		//};
+# 		//
+# 		M9Moo = \"Mad\";
+# 		M9Txt = \"I thought you were a nice person!!\";
+# 		M9Sta = function () {
+# 			return (true);
+# 		};
+# 		M9End = function () {
+# 			return (BP());
+# 		};
+# 		M9F = function () {
+# 			//_root.Course.Char.charClip.frame.gotoAndPlay(\"yes\")
+# 		};
+# 		//
+# 		M10Moo = \"Sad\";
+# 		M10Txt = \"And then you come here and Destroyed all my Dreams!\";
+# 		M10Sta = function () {
+# 			return (true);
+# 		};
+# 		M10End = function () {
+# 			return (BP());
+# 		};
+# 		//
+# 		M11Moo = \"Crazy\";
+# 		M11Txt = \"DESTROYED IT!!!!\";
+# 		M11Sta = function () {
+# 			return (true);
+# 		};
+# 		M11End = function () {
+# 			return (BP());
+# 		};
+# 		M11F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"noo\");
+# 		};
+# 		//
+# 		M12Moo = \"Mad\";
+# 		M12Txt = \"......\";
+# 		M12Sta = function () {
+# 			return (true);
+# 		};
+# 		M12End = function () {
+# 			return (BP());
+# 		};
+# 		M12F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(\"talk\");
+# 		};
+# 		//
+# 		M13Moo = \"Mad\";
+# 		M13Txt = \"...Gee, Thanks for ruining my life...\";
+# 		M13Sta = function () {
+# 			return (true);
+# 		};
+# 		M13End = function () {
+# 			return (BP());
+# 		};
+# 		M13F = function () {
+# 			_root.Course.Char.charClip.frame.gotoAndPlay(1);
+# 			this._xscale *= -1;
+# 			Mood = \"Mad\";
+# 			StartMood = \"Mad\";
+# 			M1Moo = \"Mad\";
+# 			M1Txt = \"......Go Away!!\";
+# 			M1Sta = function () {
+# 				return (BP());
+# 			};
+# 			M1End = function () {
+# 				return (BP());
+# 			};
+# 			//
+# 			M2Moo = undefined;
+# 			M2Txt = undefined;
+# 			M2Sta = null;
+# 			M2End = null;
+# 		};
+# 	} else {
+# 		this._y = 500;
+# 	}
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_55cwa"]
+script/source = "extends Node
+# stop();
+# _root.AreaTextClipF(\"Top of the Castle:\"+newline+\"<i>Star Room</i>\", 1);
+# playedsound = false;
+# _root.Starnamenum = 0;
+# onEnterFrame = function () {
+# 	if (this.warp1.hitTest(_root.Course.Char.charClip.feet)) {
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.xspeed = 0;
+# 		_root.Course.Char.yspeed = 0;
+# 		_root.Course.Char.attackFrame = \"none\";
+# 		warp = true;
+# 		warpnum = 1;
+# 	}
+# 	if (warp == true && _root.warpframe == false) {
+# 		if (warpnum == 1) {
+# 			if (playedsound == false) {
+# 				_root.PaintingSound();
+# 			}
+# 			playedsound = true;
+# 			_root.attachMovie(\"uptransition\", \"uptransition\"+_root.getNextHighestDepth(), _root.getNextHighestDepth(), {_x:_root.screensizeX/2, _y:_root.screensizeY/2});
+# 		}
+# 	}
+# 	if (_root.warpframe == true) {
+# 		if (warpnum == 1) {
+# 			_root.Fluddpow = \"\";
+# 			_root.StopBGsong();
+# 			_root.Restartcoins();
+# 			//_root.Playinglevel = \"\"
+# 			_root.changecourse(\"uptransition2\", \"9-11\", -560, -160, -560, -160, true);
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_utyjy"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
 [node name="C-12 Back GFX" type="Node2D"]
+script = ExtResource("1_t3pyt")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section C & D/C-12 Back GFX.xml"
+linkage = "C-12BackGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hxkfu")
+"Timeline": SubResource("AnimationLibrary_ct2bq")
 }
 
 [node name="Black" type="Node2D" parent="."]
@@ -115,6 +1672,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Black/Frame 0/Group"]
 
 [node name="@@44451" type="Polygon2D" parent="Black/Frame 0/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-887.25, -606.15, 695.1, -606.15, 695.1, 154.05, -887.25, 154.05)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -129,7 +1687,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@44446" type="Polygon2D" parent="Layer 2/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(-237.6, 441.4)
 texture_scale = Vector2(0.555557, 0.555557)
 polygon = PackedVector2Array(241.2, -285.95, 256.7, -285.95, 256.7, 19.4, 241.2, 19.4)
@@ -138,7 +1696,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@44447" type="Polygon2D" parent="Layer 2/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(235.8, -441.4)
 texture_scale = Vector2(0.555557, -0.555557)
 texture_rotation = 3.14159
@@ -148,7 +1706,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@44448" type="Polygon2D" parent="Layer 2/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(241.2, -441.4)
 texture_scale = Vector2(0.555557, -0.555557)
 texture_rotation = 3.14159
@@ -158,7 +1716,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@44449" type="Polygon2D" parent="Layer 2/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(219.6, 441.4)
 texture_scale = Vector2(0.555557, 0.555557)
 polygon = PackedVector2Array(-216, -285.95, 10.8, -285.95, 10.8, 19.4, -216, 19.4)
@@ -167,7 +1725,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@44450" type="Polygon2D" parent="Layer 2/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(-216, -441.4)
 texture_scale = Vector2(0.555557, -0.555557)
 texture_rotation = 3.14159
@@ -187,7 +1745,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@44439" type="Polygon2D" parent="Layer 3/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(-369.25, 384.45)
 texture_scale = Vector2(0.666667, 0.666667)
 polygon = PackedVector2Array(372.25, -381.9, 561.25, -381.9, 561.25, -0.45, 372.25, -0.45, 372.25, -3.35)
@@ -196,7 +1754,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@44440" type="Polygon2D" parent="Layer 3/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(372.25, -384.45)
 texture_scale = Vector2(0.666667, -0.666667)
 texture_rotation = 3.14159
@@ -206,7 +1764,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@44441" type="Polygon2D" parent="Layer 3/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(7.25, 384.45)
 texture_scale = Vector2(0.666667, 0.666667)
 polygon = PackedVector2Array(-4.275, -381.9, 184.75, -381.9, 184.75, -3.35, 97.25, 0.4, 97.25, 0.4, -7.25, -0.45, -7.22738, -3.35)
@@ -215,7 +1773,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 [node name="@@44442" type="Polygon2D" parent="Layer 3/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(-4.25003, -384.45)
 texture_scale = Vector2(0.666667, -0.666667)
 texture_rotation = 3.14159
@@ -225,7 +1783,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@44443" type="Polygon2D" parent="Layer 3/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(382.25, 384.45)
 texture_scale = Vector2(0.666667, 0.666667)
 polygon = PackedVector2Array(-379.25, -381.9, -190.25, -381.9, -190.25, -0.45, -379.25, -0.45, -379.25, -3.35)
@@ -234,7 +1792,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@44444" type="Polygon2D" parent="Layer 3/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(-379.25, -384.45)
 texture_scale = Vector2(0.666667, -0.666667)
 texture_rotation = 3.14159
@@ -244,7 +1802,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@44445" type="Polygon2D" parent="Layer 3/Frame 0/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xhxq1")
+texture = ExtResource("2_nn8wd")
 texture_offset = Vector2(763.25, 383.6)
 texture_scale = Vector2(0.666667, 0.666667)
 polygon = PackedVector2Array(-760.25, -381.9, -571.25, -381.9, -571.25, 0.4, -760.25, 0.4, -760.25, -3.35)
@@ -262,7 +1820,7 @@ position = Vector2(14, 0)
 [node name="@@44406" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_bfeli")
+texture = ExtResource("3_361ou")
 texture_offset = Vector2(1172.5, 25.8)
 polygon = PackedVector2Array(-490.9, -139, -366, -139, -366, 0.4, -490.9, 23.4, -490.9, 23.4, -490.9, 0.4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
@@ -281,7 +1839,7 @@ position = Vector2(14, 0)
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@44408"]
 
 [node name="@@44409" type="Polygon2D" parent="Layer 1/Frame 0/@Group@44408/Shape"]
-color = Color(1, 1, 1, 0.2)
+color = Color(0, 0, 0, 0.2)
 polygon = PackedVector2Array(-490.9, -139, -366, -139, -366, 0.4, -490.9, 0.4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -292,7 +1850,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@44411" type="Polygon2D" parent="Layer 1/Frame 0/@Group@44410/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_bfeli")
+texture = ExtResource("3_361ou")
 texture_offset = Vector2(419.05, 25.8)
 polygon = PackedVector2Array(286.55, -139, 371.45, -139, 371.45, 23.4, 286.55, 23.4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -305,10 +1863,10 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_dllry")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(80, -263)
 scale = Vector2(0.751068, 0.751312)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Star Door.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -320,6 +1878,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_mfqmt")
 
 [node name="@Group@44413" type="Node2D" parent="Layer 1/Frame 0"]
 
@@ -352,7 +1913,7 @@ position = Vector2(50, 0)
 [node name="@@44417" type="Polygon2D" parent="Layer 1/Frame 0/@Group@44416/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_5a5er")
+texture = ExtResource("5_c5lht")
 texture_offset = Vector2(-72.35, 83.65)
 polygon = PackedVector2Array(101.1, -164.25, 101.1, -164.25, 117.735, -160.761, 131.725, -150.3, 140.585, -136.567, 140.585, -136.567, 144.325, -120.5, 144.35, 0, 57.9, 0, 57.9, -120.5, 61.6211, -136.567, 61.6212, -136.567, 70.45, -150.3, 84.4614, -160.761)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)])
@@ -403,10 +1964,10 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="@DOMSymbolInstance@44426" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_dllry")]
+[node name="@DOMSymbolInstance@44426" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(150.45, -68.6)
 scale = Vector2(0.220383, 0.220383)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Themed PL/Clock Themed/Pendulum Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -419,9 +1980,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44427" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@44426"]
+script = SubResource("GDScript_eabua")
+
+[node name="@DOMSymbolInstance@44427" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(151.9, -129.7)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/6-Painting.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -434,9 +1998,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44428" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_dllry")]
+[node name="@DOMSymbolInstance@44428" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-679.15, -155.15)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/Raibow Ride Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -456,7 +2020,7 @@ brightness = 0.0
 [node name="@@44430" type="Polygon2D" parent="Layer 1/Frame 0/@Group@44429/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_bfeli")
+texture = ExtResource("3_361ou")
 texture_offset = Vector2(813, 25.8)
 polygon = PackedVector2Array(-760.25, -75, -571.25, -75, -571.25, 0.4, -760.25, 0.4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -476,7 +2040,7 @@ end_cap_mode = 2
 [node name="@@44433" type="Polygon2D" parent="Layer 1/Frame 0/@Group@44432/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_bfeli")
+texture = ExtResource("3_361ou")
 texture_offset = Vector2(244.65, 27.6)
 polygon = PackedVector2Array(399, -76.85, 560.85, -76.85, 560.85, -1.4, 399, -1.4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -489,10 +2053,10 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="@DOMSymbolInstance@44435" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_dllry")]
+[node name="@DOMSymbolInstance@44435" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(488.85, -126.8)
 scale = Vector2(0.799988, 0.589462)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star BackGFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -505,10 +2069,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44436" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@44435"]
+script = SubResource("GDScript_ysacx")
+
+[node name="@DOMSymbolInstance@44436" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -18.55)
 scale = Vector2(0.751068, 0.751312)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Star Door.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -521,12 +2088,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@44436"]
+script = SubResource("GDScript_sgnuu")
+
 [node name="@Group@44437" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/@Group@44437"]
 
 [node name="@@44438" type="Polygon2D" parent="Layer 1/Frame 0/@Group@44437/Shape"]
-color = Color(1, 1, 1, 0.2)
+color = Color(0, 0, 0, 0.2)
 polygon = PackedVector2Array(286.55, -139, 371.45, -139, 371.45, 2.95, 286.55, 2.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -534,9 +2104,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Frame 0" type="Node2D" parent="Layer 6"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(241.2, -15.35)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -549,10 +2119,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44397" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_p0u7b")
+
+[node name="@DOMSymbolInstance@44397" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(-337.25, -15.3)
 scale = Vector2(1, 1.00119)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -565,9 +2138,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44398" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/@DOMSymbolInstance@44397"]
+script = SubResource("GDScript_w01ug")
+
+[node name="@DOMSymbolInstance@44398" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(-563, -14.35)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -580,9 +2156,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44399" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/@DOMSymbolInstance@44398"]
+script = SubResource("GDScript_mb5kn")
+
+[node name="@DOMSymbolInstance@44399" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(325.9, -152.9)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -595,10 +2174,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44400" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/@DOMSymbolInstance@44399"]
+script = SubResource("GDScript_u6ho5")
+
+[node name="@DOMSymbolInstance@44400" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(-459.55, -99.6)
 scale = Vector2(1, 1.00119)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -611,9 +2193,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44401" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/@DOMSymbolInstance@44400"]
+script = SubResource("GDScript_josi4")
+
+[node name="@DOMSymbolInstance@44401" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(-131.5, -215.9)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -626,9 +2211,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44402" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/@DOMSymbolInstance@44401"]
+script = SubResource("GDScript_ddok8")
+
+[node name="@DOMSymbolInstance@44402" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(-98.5, -15.35)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -641,9 +2229,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44403" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/@DOMSymbolInstance@44402"]
+script = SubResource("GDScript_bnj7o")
+
+[node name="@DOMSymbolInstance@44403" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(184.45, -260.85)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -656,9 +2247,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44404" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/@DOMSymbolInstance@44403"]
+script = SubResource("GDScript_tckwx")
+
+[node name="@DOMSymbolInstance@44404" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(-395.55, -152.9)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -671,9 +2265,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44405" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/@DOMSymbolInstance@44404"]
+script = SubResource("GDScript_mtfto")
+
+[node name="@DOMSymbolInstance@44405" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(369.45, -14.4)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Toad Stuff/Toad Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -685,6 +2282,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 6/Frame 0/@DOMSymbolInstance@44405"]
+script = SubResource("GDScript_umcmj")
 
 [node name="Warps" type="Node2D" parent="."]
 
@@ -693,10 +2293,13 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Warps"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Warps/Frame 1" instance=ExtResource("3_dllry")]
+[node name="AS2" type="Node" parent="Warps/Frame 1"]
+script = SubResource("GDScript_55cwa")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Warps/Frame 1"]
 position = Vector2(474.35, -448.6)
 scale = Vector2(4.39359, 6.59669)
-script = ExtResource("4_43i3e")
+script = ExtResource("4_llu8c")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -708,3 +2311,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Warps/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_utyjy")

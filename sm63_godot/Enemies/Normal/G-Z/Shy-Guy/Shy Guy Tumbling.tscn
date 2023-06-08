@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Tumbling.png" id="1_tnbid"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_iedff"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Tumbling.png" id="2_45emw"]
 
-[sub_resource type="Animation" id="Animation_wxesh"]
+[sub_resource type="Animation" id="Animation_30r3c"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rjyii"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fo0sd"]
 _data = {
-"Default": SubResource("Animation_wxesh")
+"Default": SubResource("Animation_30r3c")
 }
 
 [node name="Shy Guy Tumbling" type="Node2D"]
+script = ExtResource("1_iedff")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Tumbling.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rjyii")
+"Timeline": SubResource("AnimationLibrary_fo0sd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@50740" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -7.5)
-texture = ExtResource("1_tnbid")
+texture = ExtResource("2_45emw")
 centered = false

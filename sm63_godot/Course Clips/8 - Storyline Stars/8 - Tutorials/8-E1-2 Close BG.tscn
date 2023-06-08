@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_c5gyh"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ox8n8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Ground (B-50).png" id="3_kdgyu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xxk3q"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_yovq7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Ground (B-50).png" id="3_47oqh"]
 
-[sub_resource type="Animation" id="Animation_yjjvx"]
+[sub_resource type="Animation" id="Animation_cq06a"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,26 +32,40 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xy06"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wxj71"]
 _data = {
-"Default": SubResource("Animation_yjjvx")
+"Default": SubResource("Animation_cq06a")
 }
 
+[sub_resource type="GDScript" id="GDScript_aviqk"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 210
+# 	polygons = 13
+# 	graphics = true
+# }
+# "
+
 [node name="8-E1-2 Close BG" type="Node2D"]
+script = ExtResource("1_xxk3q")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E1-2 Close BG.xml"
+linkage = "8-E1-2CloseBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_0xy06")
+"Timeline": SubResource("AnimationLibrary_wxj71")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_c5gyh")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(885, -123.95)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ox8n8")
+script = ExtResource("2_yovq7")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -64,6 +78,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_aviqk")
+
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
@@ -75,14 +92,14 @@ brightness = 0.0
 [node name="@@37739" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_kdgyu")
+texture = ExtResource("3_47oqh")
 texture_offset = Vector2(-829.25, 144.65)
 polygon = PackedVector2Array(1162.05, -173.05, 1294.15, -173.05, 1294.15, -163.05, 1047.05, -163.05, 1050.5, -163.35, 336.2, -163.35, 351.25, -163.35, 540.05, -144.65, 294.326, -144.65, 335.528, -163.05, 991.05, -163.05, 1294.15, -163.05, 1294.14, -57.05, 922.05, -57.05, 977.05, -69.05, 977.05, -85.05, 991.05, -124.05, 991.05, -162.75, 132.25, -162.75, 132.25, -162.75, 219.2, -111.1, -361.7, -111.1, -361.7, -130.1, -19.75, -162.35, 294.326, -144.65, 877.2, -144.65, 891.25, -116.65, 891.25, -111.1, 219.2, -111.1, 261.745, -130.1, -361.7, -111.1, 891.25, -111.1, 891.25, -80.05, 922.05, -57.05, -361.7, -57.05, -361.7, -85.05, -361.7, -57.05, 1294.14, -57.05, 1294.13, 202.825, 334, 205.35, -361.7, 205.35, -361.7, 202.825)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21, 22, 23), PackedInt32Array(24, 25, 26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33, 34, 35), PackedInt32Array(36, 37, 38, 39, 40, 41)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_c5gyh")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(1112.45, -335.5)
-script = ExtResource("2_ox8n8")
+script = ExtResource("2_yovq7")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E1-2-2 Color Changing Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

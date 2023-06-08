@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_bo45e"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_e81or"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_0svl8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_hxe27"]
 
-[sub_resource type="Animation" id="Animation_ri1dy"]
+[sub_resource type="Animation" id="Animation_d75ys"]
 length = 3.83333
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,24 +103,35 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2spqt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_crohv"]
 _data = {
-"Default": SubResource("Animation_ri1dy")
+"Default": SubResource("Animation_d75ys")
 }
 
+[sub_resource type="GDScript" id="GDScript_x7o5t"]
+script/source = "extends Node
+# gotoAndPlay(random(30)+_currentframe);
+# this._y += random(10)-5;
+# "
+
 [node name="Water Current Animation" type="Node2D"]
+script = ExtResource("1_0svl8")
+source_xml = "res://sm63/LIBRARY/Effects/Water/Water Blocks/Water Current Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2spqt")
+"Timeline": SubResource("AnimationLibrary_crohv")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_bo45e")]
-script = ExtResource("2_e81or")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_hxe27")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Water Current Item.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -136,9 +147,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9" instance=ExtResource("1_bo45e")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9"]
 position = Vector2(30.5, 0)
-script = ExtResource("2_e81or")
+script = ExtResource("2_hxe27")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Water Current Item.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -154,9 +165,9 @@ brightness = 0.0
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49" instance=ExtResource("1_bo45e")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49"]
 position = Vector2(166.1, 0)
-script = ExtResource("2_e81or")
+script = ExtResource("2_hxe27")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Water Current Item.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -172,9 +183,9 @@ brightness = 0.0
 [node name="Frame 59" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 59" instance=ExtResource("1_bo45e")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 59"]
 position = Vector2(200, 0)
-script = ExtResource("2_e81or")
+script = ExtResource("2_hxe27")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Water Current Item.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -189,6 +200,9 @@ brightness = 0.0
 
 [node name="Frame 60" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 60"]
+script = SubResource("GDScript_x7o5t")
 
 [node name="Frame 114" type="Node2D" parent="Layer 1"]
 visible = false

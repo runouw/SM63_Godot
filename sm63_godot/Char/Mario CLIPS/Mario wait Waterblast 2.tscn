@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_dgxt7"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5hmju"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kqg48"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gg2ci"]
 
-[sub_resource type="Animation" id="Animation_lsvbr"]
+[sub_resource type="Animation" id="Animation_3nxbe"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,27 +19,32 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q0ary"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oufvr"]
 _data = {
-"Default": SubResource("Animation_lsvbr")
+"Default": SubResource("Animation_3nxbe")
 }
 
 [node name="Mario wait Waterblast 2" type="Node2D"]
+script = ExtResource("1_kqg48")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario wait Waterblast 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_q0ary")
+"Timeline": SubResource("AnimationLibrary_oufvr")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_dgxt7")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(8, -10)
 rotation = 1.5708
 scale = Vector2(1, -1)
-script = ExtResource("2_5hmju")
+script = ExtResource("2_gg2ci")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

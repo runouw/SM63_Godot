@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_7xjdf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_f4pro"]
+
+[sub_resource type="Animation" id="Animation_iy6ga"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u6ef1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bb7ce"]
 _data = {
-"Default": SubResource("Animation_7xjdf")
+"Default": SubResource("Animation_iy6ga")
 }
 
 [node name="8-3Tint" type="Node2D"]
+script = ExtResource("1_f4pro")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-3Tint.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_u6ef1")
+"Timeline": SubResource("AnimationLibrary_bb7ce")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

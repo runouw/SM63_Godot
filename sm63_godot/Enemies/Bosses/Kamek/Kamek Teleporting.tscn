@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Teleporting.png" id="1_2n8fm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_23rkr"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Teleporting.png" id="2_bedc5"]
 
-[sub_resource type="Animation" id="Animation_7i8u0"]
+[sub_resource type="Animation" id="Animation_xff56"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7u11i"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2xc6f"]
 _data = {
-"Default": SubResource("Animation_7i8u0")
+"Default": SubResource("Animation_xff56")
 }
 
 [node name="Kamek Teleporting" type="Node2D"]
+script = ExtResource("1_23rkr")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Teleporting.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7u11i")
+"Timeline": SubResource("AnimationLibrary_2xc6f")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@49319" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-16.15, -13.4)
-texture = ExtResource("1_2n8fm")
+texture = ExtResource("2_bedc5")
 centered = false

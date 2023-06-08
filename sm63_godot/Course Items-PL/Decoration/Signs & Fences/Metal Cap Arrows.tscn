@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_vryaf"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_yjyyt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4l4bb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mmi0m"]
 
-[sub_resource type="Animation" id="Animation_tuvul"]
+[sub_resource type="Animation" id="Animation_15wvx"]
 length = 0.433333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,50 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5hx6q"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_13a51"]
 _data = {
-"Default": SubResource("Animation_tuvul")
+"Default": SubResource("Animation_15wvx")
 }
 
+[sub_resource type="GDScript" id="GDScript_m26pj"]
+script/source = "extends Node
+# if (a == undefined) {
+# 	_alpha = 0;
+# 	a = 0;
+# 	onEnterFrame = function () {
+# 		if (_root.Metal == true && a !== 100) {
+# 			a = 100;
+# 			play();
+# 		} else if (a !== 0) {
+# 			a = 0;
+# 		}
+# 		_alpha += (a-_alpha)/5;
+# 	};
+# }
+# "
+
 [node name="Metal Cap Arrows" type="Node2D"]
+script = ExtResource("1_4l4bb")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Decoration/Signs & Fences/Metal Cap Arrows.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5hx6q")
+"Timeline": SubResource("AnimationLibrary_13a51")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_vryaf")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_m26pj")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 rotation = -1.5708
-script = ExtResource("2_yjyyt")
+script = ExtResource("2_mmi0m")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/YI Arrow Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -77,9 +102,9 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_vryaf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
 rotation = -1.5708
-script = ExtResource("2_yjyyt")
+script = ExtResource("2_mmi0m")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/YI Arrow Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -89,15 +114,15 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 1, 1, 1)
 brightness = 0.0
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 12" instance=ExtResource("1_vryaf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 12"]
 rotation = -1.5708
-script = ExtResource("2_yjyyt")
+script = ExtResource("2_mmi0m")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/YI Arrow Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

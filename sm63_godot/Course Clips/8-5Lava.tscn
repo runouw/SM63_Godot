@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_3r46j"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1y664"]
+
+[sub_resource type="Animation" id="Animation_o6aph"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sdw1v"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qw1h8"]
 _data = {
-"Default": SubResource("Animation_3r46j")
+"Default": SubResource("Animation_o6aph")
 }
 
 [node name="8-5Lava" type="Node2D"]
+script = ExtResource("1_1y664")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-5Lava.xml"
+linkage = "8-5Lava"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sdw1v")
+"Timeline": SubResource("AnimationLibrary_qw1h8")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

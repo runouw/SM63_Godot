@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_l08rk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2t8kr"]
+
+[sub_resource type="Animation" id="Animation_qtuht"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r7n46"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_famsi"]
 _data = {
-"Default": SubResource("Animation_l08rk")
+"Default": SubResource("Animation_qtuht")
 }
 
 [node name="LDW - Items Reverse" type="Node2D"]
+script = ExtResource("1_2t8kr")
+source_xml = "res://sm63/LIBRARY/LDW - Items &#034Reverse&#034.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_r7n46")
+"Timeline": SubResource("AnimationLibrary_famsi")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

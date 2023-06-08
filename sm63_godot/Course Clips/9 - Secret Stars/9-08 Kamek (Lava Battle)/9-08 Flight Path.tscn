@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_fhr6t"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gt4j2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3b2at"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8wkpb"]
 
-[sub_resource type="Animation" id="Animation_uvbxb"]
+[sub_resource type="Animation" id="Animation_0dl5o"]
 length = 2.7
 loop_mode = 1
 tracks/0/type = "value"
@@ -163,16 +163,97 @@ tracks/12/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fh168"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2njie"]
 _data = {
-"Default": SubResource("Animation_uvbxb")
+"Default": SubResource("Animation_0dl5o")
 }
 
+[sub_resource type="GDScript" id="GDScript_j4vrw"]
+script/source = "extends Node
+# if (_root.BossCheckpoint !== true) {
+# 	_visible = false;
+# 	_root.Course.Char._x = -400;
+# 	_root.Course.Char._y = -500;
+# 	_root.Course.Char._xscale = -100;
+# 	//
+# 	_root.CharHP = 8;
+# 	_root.Course.Char.attack = true;
+# 	_root.Course.Char.attackFrame = \"SlingStar\";
+# 	//
+# } else {
+# 	gotoAndStop(\"end\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_4bsp6"]
+script/source = "extends Node
+# _root.Course.Char.attack = true;
+# _root.Course.Char.attackFrame = \"SlingStar\";
+# //
+# _root.Course.Char.charClip.frame.gotoAndPlay(\"fling\");
+# //
+# _root.Course.Char._x = -1000;
+# _root.Course.Char._y = -500;
+# _root.Course.Char._xscale = -100;
+# //
+# _root.Course.BackGFX.StartClip._y = 0;
+# _root.Course.BackGFX.StartClip._x = 0;
+# //
+# _root.Camcenter = this;
+# _root.Camspeed = 1;
+# //
+# onEnterFrame = function () {
+# 	_root.Controll = false;
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ycesa"]
+script/source = "extends Node
+# _root.Course.Char.charClip.frame.gotoAndPlay(\"fling\");
+# "
+
+[sub_resource type="GDScript" id="GDScript_qfs42"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	_root.Controll = false;
+# 	if (_root.Course.Char.air == false) {
+# 		play();
+# 		_root.Course.Char.yspeed = 0;
+# 		_root.Course.Char.xspeed = 0;
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.attackFrame = \"bosscinema\";
+# 		_root.playpause = true;
+# 		onEnterFrame = function () {
+# 			_root.Camcenter = this;
+# 			_root.PauseGame = false;
+# 		};
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_u4pr5"]
+script/source = "extends Node
+# onEnterFrame = null;
+# _root.Course.BackGFX.Kamek.play();
+# stop();
+# "
+
 [node name="9-08 Flight Path" type="Node2D"]
+script = ExtResource("1_3b2at")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-08 Kamek (Lava Battle)/9-08 Flight Path.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fh168")
+"Timeline": SubResource("AnimationLibrary_2njie")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -182,11 +263,11 @@ libraries = {
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_fhr6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(-413.7, -490.35)
 rotation = 2.10066
 scale = Vector2(0.999126, 0.999126)
-script = ExtResource("2_gt4j2")
+script = ExtResource("2_8wkpb")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star Path Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -202,11 +283,11 @@ brightness = 0.0
 [node name="Frame 65" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 65" instance=ExtResource("1_fhr6t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 65"]
 position = Vector2(-43.2, -152)
 rotation = 2.88605
 scale = Vector2(0.999135, 0.999135)
-script = ExtResource("2_gt4j2")
+script = ExtResource("2_8wkpb")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star Path Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -245,17 +326,32 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_j4vrw")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_4bsp6")
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 2"]
+script = SubResource("GDScript_ycesa")
+
 [node name="Frame 66" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 66"]
+script = SubResource("GDScript_qfs42")
+
 [node name="Frame 79" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 79"]
+script = SubResource("GDScript_u4pr5")
 
 [node name="Frame 80" type="Node2D" parent="Layer 1"]
 visible = false

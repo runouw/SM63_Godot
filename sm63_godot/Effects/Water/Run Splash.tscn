@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_6t6pa"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vtxru"]
+
+[sub_resource type="Animation" id="Animation_cqkpk"]
 length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -364,16 +366,27 @@ tracks/29/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lfrkf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u1xom"]
 _data = {
-"Default": SubResource("Animation_6t6pa")
+"Default": SubResource("Animation_cqkpk")
 }
 
+[sub_resource type="GDScript" id="GDScript_we8gj"]
+script/source = "extends Node
+# stop();
+# removeMovieClip(this);
+# "
+
 [node name="Run Splash" type="Node2D"]
+script = ExtResource("1_vtxru")
+source_xml = "res://sm63/LIBRARY/Effects/Water/Run Splash.xml"
+linkage = "Run-Splash1"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lfrkf")
+"Timeline": SubResource("AnimationLibrary_u1xom")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -532,6 +545,9 @@ visible = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 17"]
+script = SubResource("GDScript_we8gj")
 
 [node name="Layer 2" type="Node2D" parent="."]
 

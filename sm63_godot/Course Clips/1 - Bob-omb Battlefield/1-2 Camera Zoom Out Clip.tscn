@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_m8lck"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_sbihc"]
+
+[sub_resource type="Animation" id="Animation_qs2y7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qyaey"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ad87e"]
 _data = {
-"Default": SubResource("Animation_m8lck")
+"Default": SubResource("Animation_qs2y7")
 }
 
 [node name="1-2 Camera Zoom Out Clip" type="Node2D"]
+script = ExtResource("1_sbihc")
+source_xml = "res://sm63/LIBRARY/Course Clips/1 - Bob-omb Battlefield/1-2 Camera Zoom Out Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qyaey")
+"Timeline": SubResource("AnimationLibrary_ad87e")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

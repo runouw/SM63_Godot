@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_j0lxi"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_01kr7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mfqna"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8bjvm"]
 
-[sub_resource type="Animation" id="Animation_2fidy"]
+[sub_resource type="Animation" id="Animation_d5bvu"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,43 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n43cb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r3632"]
 _data = {
-"Default": SubResource("Animation_2fidy")
+"Default": SubResource("Animation_d5bvu")
 }
 
+[sub_resource type="GDScript" id="GDScript_abklr"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	starfunction = function () {
+# 		_root.StartNewMusicAndIntroNoVar(\"WingCap - Intro\", \"WingCap - Repeat\");
+# 		if (isNaN(_parent.Time)) {
+# 			_parent.Time = 30;
+# 		}
+# 		_root.PowerTimer = _parent.Time*32;
+# 		_root.WingCap = true;
+# 	};
+# }
+# "
+
 [node name="CapWingCode" type="Node2D"]
+script = ExtResource("1_mfqna")
+source_xml = "res://sm63/LIBRARY/CapWingCode.xml"
+linkage = "CapWingCode"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_n43cb")
+"Timeline": SubResource("AnimationLibrary_r3632")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_j0lxi")]
-script = ExtResource("2_01kr7")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_8bjvm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Power-Ups/Rainbow Star.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -48,3 +67,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_abklr")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_0y0qt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_c3rtq"]
+
+[sub_resource type="Animation" id="Animation_q4a0a"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i2asg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1iev"]
 _data = {
-"Default": SubResource("Animation_0y0qt")
+"Default": SubResource("Animation_q4a0a")
 }
 
 [node name="LDW - Exit Continue Text" type="Node2D"]
+script = ExtResource("1_c3rtq")
+source_xml = "res://sm63/LIBRARY/Level Designer Windows/LDW - Exit Continue Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_i2asg")
+"Timeline": SubResource("AnimationLibrary_w1iev")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_122qh"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_634xi"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="3_norft"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_jjto3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_rwhxo"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="3_2nksm"]
 
-[sub_resource type="Animation" id="Animation_ltb7s"]
+[sub_resource type="Animation" id="Animation_6xcwr"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,32 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p6kvg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1wteq"]
 _data = {
-"Default": SubResource("Animation_ltb7s")
+"Default": SubResource("Animation_6xcwr")
 }
 
+[sub_resource type="GDScript" id="GDScript_okl0o"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Mario SLing Star Spinning" type="Node2D"]
+script = ExtResource("1_jjto3")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario SLing Star Spinning.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_p6kvg")
+"Timeline": SubResource("AnimationLibrary_1wteq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -62,11 +78,11 @@ libraries = {
 
 [node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_122qh")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group"]
 position = Vector2(3.35, -13.6)
 rotation = 3.14159
 scale = Vector2(0.799988, -0.799988)
-script = ExtResource("2_634xi")
+script = ExtResource("2_rwhxo")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -79,9 +95,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15817" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_122qh")]
+[node name="@DOMSymbolInstance@15817" type="Node2D" parent="Layer 1/Frame 0/Group"]
 position = Vector2(1.35, -5.75)
-script = ExtResource("2_634xi")
+script = ExtResource("2_rwhxo")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -99,12 +115,12 @@ texture_filter = 1
 position = Vector2(8, -14.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_norft")
+texture = ExtResource("3_2nksm")
 centered = false
 
-[node name="@DOMSymbolInstance@15819" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_122qh")]
+[node name="@DOMSymbolInstance@15819" type="Node2D" parent="Layer 1/Frame 0/Group"]
 position = Vector2(-1.6, 8.55)
-script = ExtResource("2_634xi")
+script = ExtResource("2_rwhxo")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -117,11 +133,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15820" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_122qh")]
+[node name="@DOMSymbolInstance@15820" type="Node2D" parent="Layer 1/Frame 0/Group"]
 position = Vector2(0.1, -12.35)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_634xi")
+script = ExtResource("2_rwhxo")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -139,11 +155,11 @@ visible = false
 
 [node name="Group" type="Node2D" parent="Layer 1/Frame 14"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14/Group" instance=ExtResource("1_122qh")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14/Group"]
 position = Vector2(3.35, -13.6)
 rotation = 3.14159
 scale = Vector2(0.799988, -0.799988)
-script = ExtResource("2_634xi")
+script = ExtResource("2_rwhxo")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -156,9 +172,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15821" type="Node2D" parent="Layer 1/Frame 14/Group" instance=ExtResource("1_122qh")]
+[node name="@DOMSymbolInstance@15821" type="Node2D" parent="Layer 1/Frame 14/Group"]
 position = Vector2(1.35, -5.75)
-script = ExtResource("2_634xi")
+script = ExtResource("2_rwhxo")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -176,12 +192,12 @@ texture_filter = 1
 position = Vector2(8, -14.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_norft")
+texture = ExtResource("3_2nksm")
 centered = false
 
-[node name="@DOMSymbolInstance@15823" type="Node2D" parent="Layer 1/Frame 14/Group" instance=ExtResource("1_122qh")]
+[node name="@DOMSymbolInstance@15823" type="Node2D" parent="Layer 1/Frame 14/Group"]
 position = Vector2(-1.6, 8.55)
-script = ExtResource("2_634xi")
+script = ExtResource("2_rwhxo")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -194,11 +210,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15824" type="Node2D" parent="Layer 1/Frame 14/Group" instance=ExtResource("1_122qh")]
+[node name="@DOMSymbolInstance@15824" type="Node2D" parent="Layer 1/Frame 14/Group"]
 position = Vector2(0.1, -12.35)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_634xi")
+script = ExtResource("2_rwhxo")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -214,3 +230,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_okl0o")

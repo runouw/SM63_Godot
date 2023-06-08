@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="1_patco"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ves5y"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="2_aph7i"]
 
-[sub_resource type="Animation" id="Animation_l7cai"]
+[sub_resource type="Animation" id="Animation_arbfi"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4bumi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6cd60"]
 _data = {
-"Default": SubResource("Animation_l7cai")
+"Default": SubResource("Animation_arbfi")
 }
 
 [node name="Cinema 2 Scene 3 Star Clip 2" type="Node2D"]
+script = ExtResource("1_ves5y")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Scene 3 Star Clip 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4bumi")
+"Timeline": SubResource("AnimationLibrary_6cd60")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@4292" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-12.5, -17)
-texture = ExtResource("1_patco")
+texture = ExtResource("2_aph7i")
 centered = false

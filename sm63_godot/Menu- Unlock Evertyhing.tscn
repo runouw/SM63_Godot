@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_jvyy1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_j03nd"]
+
+[sub_resource type="Animation" id="Animation_5wlhl"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cdj7w"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_svjqk"]
 _data = {
-"Default": SubResource("Animation_jvyy1")
+"Default": SubResource("Animation_5wlhl")
 }
 
 [node name="Menu- Unlock Evertyhing" type="Node2D"]
+script = ExtResource("1_j03nd")
+source_xml = "res://sm63/LIBRARY/Menu- Unlock Evertyhing.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_cdj7w")
+"Timeline": SubResource("AnimationLibrary_svjqk")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

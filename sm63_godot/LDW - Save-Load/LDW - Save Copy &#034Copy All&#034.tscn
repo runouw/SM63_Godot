@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_ps55y"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xdj3j"]
+
+[sub_resource type="Animation" id="Animation_qeg5q"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vo6nh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qf0rc"]
 _data = {
-"Default": SubResource("Animation_ps55y")
+"Default": SubResource("Animation_qeg5q")
 }
 
 [node name="LDW - Save Copy Copy All" type="Node2D"]
+script = ExtResource("1_xdj3j")
+source_xml = "res://sm63/LIBRARY/LDW - Save-Load/LDW - Save Copy &#034Copy All&#034.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vo6nh")
+"Timeline": SubResource("AnimationLibrary_qf0rc")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

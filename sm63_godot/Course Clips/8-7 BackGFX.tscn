@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_2gwns"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5at1r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_h8j2t"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_m8iin"]
 
-[sub_resource type="Animation" id="Animation_46v7a"]
+[sub_resource type="Animation" id="Animation_a0wgm"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,24 +43,89 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8uaxm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebt62"]
 _data = {
-"Default": SubResource("Animation_46v7a")
+"Default": SubResource("Animation_a0wgm")
 }
 
+[sub_resource type="GDScript" id="GDScript_pmxdx"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	sound = \"Wind Repeat\";
+# 	maxvolume = 50;
+# 	range = 4/100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_etqv2"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"8-2-top\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_368dw"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"8-8\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_1pyur"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"8-9\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_iri1a"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"8-8u\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_xvtan"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"8-9u\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_twirf"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"8-10\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_rrqho"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	sound = \"Wind Repeat\";
+# 	maxvolume = 50;
+# 	range = 4/100;
+# }
+# "
+
 [node name="8-7 BackGFX" type="Node2D"]
+script = ExtResource("1_h8j2t")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-7 BackGFX.xml"
+linkage = "8-7BackGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8uaxm")
+"Timeline": SubResource("AnimationLibrary_ebt62")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_2gwns")]
-script = ExtResource("2_5at1r")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_m8iin")
 path = "res://sm63_godot/Course Clips/8-7BackGFXTint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -81,9 +146,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_2gwns")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-707.4, -877.05)
-script = ExtResource("2_5at1r")
+script = ExtResource("2_m8iin")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Sound FX Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -96,10 +161,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19370" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_2gwns")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_pmxdx")
+
+[node name="@DOMSymbolInstance@19370" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0, -25.3)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_5at1r")
+script = ExtResource("2_m8iin")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-Front Door Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -112,10 +180,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19371" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_2gwns")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/@DOMSymbolInstance@19370"]
+script = SubResource("GDScript_etqv2")
+
+[node name="@DOMSymbolInstance@19371" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-467.95, 20.65)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_5at1r")
+script = ExtResource("2_m8iin")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-Front Door Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -128,10 +199,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19372" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_2gwns")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/@DOMSymbolInstance@19371"]
+script = SubResource("GDScript_368dw")
+
+[node name="@DOMSymbolInstance@19372" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(467.9, 20.6)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_5at1r")
+script = ExtResource("2_m8iin")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-Front Door Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -144,10 +218,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19373" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_2gwns")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/@DOMSymbolInstance@19372"]
+script = SubResource("GDScript_1pyur")
+
+[node name="@DOMSymbolInstance@19373" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-565.95, -577.25)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_5at1r")
+script = ExtResource("2_m8iin")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-Front Door Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -160,10 +237,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19374" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_2gwns")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/@DOMSymbolInstance@19373"]
+script = SubResource("GDScript_iri1a")
+
+[node name="@DOMSymbolInstance@19374" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(562, -577.3)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_5at1r")
+script = ExtResource("2_m8iin")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-Front Door Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -176,10 +256,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19375" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_2gwns")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/@DOMSymbolInstance@19374"]
+script = SubResource("GDScript_xvtan")
+
+[node name="@DOMSymbolInstance@19375" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-1, -607.25)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_5at1r")
+script = ExtResource("2_m8iin")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-Front Door Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -192,9 +275,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19376" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_2gwns")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/@DOMSymbolInstance@19375"]
+script = SubResource("GDScript_twirf")
+
+[node name="@DOMSymbolInstance@19376" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(707.4, -877)
-script = ExtResource("2_5at1r")
+script = ExtResource("2_m8iin")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Sound FX Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -206,3 +292,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/@DOMSymbolInstance@19376"]
+script = SubResource("GDScript_rrqho")

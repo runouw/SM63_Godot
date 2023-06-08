@@ -1,17 +1,17 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 2.png" id="1_awawt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 3.png" id="2_6lp7s"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 4.png" id="3_74u6r"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 5.png" id="4_3k685"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 6.png" id="5_2c6nc"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 7.png" id="6_ce3ps"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 8.png" id="7_nn8ra"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 9.png" id="8_wgv7x"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="9_1dd8k"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="10_4o8iv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8hn6t"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 2.png" id="2_3mwtf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 3.png" id="3_kos8x"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 4.png" id="4_6ud5g"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 5.png" id="5_1i5ya"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 6.png" id="6_mo6av"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 7.png" id="7_c50cy"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 8.png" id="8_h4fkf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Walking (Hover) 9.png" id="9_en4wt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="10_qhsc6"]
 
-[sub_resource type="Animation" id="Animation_m2176"]
+[sub_resource type="Animation" id="Animation_hs4dg"]
 length = 2.66667
 loop_mode = 1
 tracks/0/type = "value"
@@ -219,16 +219,61 @@ tracks/16/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5fpt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhnda"]
 _data = {
-"Default": SubResource("Animation_m2176")
+"Default": SubResource("Animation_hs4dg")
 }
 
+[sub_resource type="GDScript" id="GDScript_y1tlf"]
+script/source = "extends Node
+# frame = 1;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		oldframe = frame;
+# 		frame += _root.Course.Char.xspeed;
+# 		if (((frame>10 && frame<=20) && !(oldframe>10 && oldframe<=20)) || ((frame>50 && frame<=60) && !(oldframe>50 && oldframe<=60))) {
+# 			var walksound:Sound = new Sound(this);
+# 			walksound.attachSound(_root.StepSound);
+# 			walksound.start(0, 1);
+# 			walksound.setVolume(_root.MarioVolume);
+# 			panX = _root.Course.Char._x;
+# 			panX *= 1;
+# 			panX = Math.min(100, panX);
+# 			panX = Math.max(-100, panX);
+# 			walksound.setPan(panX);
+# 		}
+# 		if (_root.Course.Char.Ice == true) {
+# 			frame -= _root.Course.Char.xspeed/2;
+# 			if (Key.isDown(Key.RIGHT)) {
+# 				frame += 3;
+# 			}
+# 			if (Key.isDown(Key.LEFT)) {
+# 				frame -= 3;
+# 			}
+# 		}
+# 		gotoAndStop(Math.round(frame)*1/1);
+# 		if (frame>=80) {
+# 			frame = 1;
+# 		}
+# 		if (frame<=0) {
+# 			frame = 80;
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Mario Walking (Hover)" type="Node2D"]
+script = ExtResource("1_8hn6t")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Walking (Hover).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_v5fpt")
+"Timeline": SubResource("AnimationLibrary_xhnda")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -238,7 +283,7 @@ libraries = {
 [node name="@@15928" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-10, -41)
-texture = ExtResource("1_awawt")
+texture = ExtResource("2_3mwtf")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -247,7 +292,7 @@ visible = false
 [node name="@@15929" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-9, -40)
-texture = ExtResource("2_6lp7s")
+texture = ExtResource("3_kos8x")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
@@ -256,7 +301,7 @@ visible = false
 [node name="@@15930" type="Sprite2D" parent="Layer 1/Frame 19"]
 texture_filter = 1
 position = Vector2(-9, -42)
-texture = ExtResource("3_74u6r")
+texture = ExtResource("4_6ud5g")
 centered = false
 
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
@@ -265,7 +310,7 @@ visible = false
 [node name="@@15931" type="Sprite2D" parent="Layer 1/Frame 29"]
 texture_filter = 1
 position = Vector2(-13, -43)
-texture = ExtResource("4_3k685")
+texture = ExtResource("5_1i5ya")
 centered = false
 
 [node name="Frame 39" type="Node2D" parent="Layer 1"]
@@ -274,7 +319,7 @@ visible = false
 [node name="@@15932" type="Sprite2D" parent="Layer 1/Frame 39"]
 texture_filter = 1
 position = Vector2(-8.5, -41)
-texture = ExtResource("5_2c6nc")
+texture = ExtResource("6_mo6av")
 centered = false
 
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
@@ -283,7 +328,7 @@ visible = false
 [node name="@@15933" type="Sprite2D" parent="Layer 1/Frame 49"]
 texture_filter = 1
 position = Vector2(-8.5, -40)
-texture = ExtResource("6_ce3ps")
+texture = ExtResource("7_c50cy")
 centered = false
 
 [node name="Frame 59" type="Node2D" parent="Layer 1"]
@@ -292,7 +337,7 @@ visible = false
 [node name="@@15934" type="Sprite2D" parent="Layer 1/Frame 59"]
 texture_filter = 1
 position = Vector2(-8.5, -41)
-texture = ExtResource("7_nn8ra")
+texture = ExtResource("8_h4fkf")
 centered = false
 
 [node name="Frame 69" type="Node2D" parent="Layer 1"]
@@ -301,18 +346,18 @@ visible = false
 [node name="@@15935" type="Sprite2D" parent="Layer 1/Frame 69"]
 texture_filter = 1
 position = Vector2(-12, -43)
-texture = ExtResource("8_wgv7x")
+texture = ExtResource("9_en4wt")
 centered = false
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("9_1dd8k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(2, -25.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("10_4o8iv")
+script = ExtResource("10_qhsc6")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -328,11 +373,11 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 9" instance=ExtResource("9_1dd8k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 9"]
 position = Vector2(2, -25.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("10_4o8iv")
+script = ExtResource("10_qhsc6")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -348,11 +393,11 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 19" instance=ExtResource("9_1dd8k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 19"]
 position = Vector2(2, -26.9)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("10_4o8iv")
+script = ExtResource("10_qhsc6")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -368,11 +413,11 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 29" instance=ExtResource("9_1dd8k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 29"]
 position = Vector2(2, -26.9)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("10_4o8iv")
+script = ExtResource("10_qhsc6")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -388,11 +433,11 @@ brightness = 0.0
 [node name="Frame 39" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 39" instance=ExtResource("9_1dd8k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 39"]
 position = Vector2(2.5, -25.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("10_4o8iv")
+script = ExtResource("10_qhsc6")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -408,11 +453,11 @@ brightness = 0.0
 [node name="Frame 49" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 49" instance=ExtResource("9_1dd8k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 49"]
 position = Vector2(2.5, -25.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("10_4o8iv")
+script = ExtResource("10_qhsc6")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -428,11 +473,11 @@ brightness = 0.0
 [node name="Frame 59" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 59" instance=ExtResource("9_1dd8k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 59"]
 position = Vector2(2.5, -25.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("10_4o8iv")
+script = ExtResource("10_qhsc6")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -448,11 +493,11 @@ brightness = 0.0
 [node name="Frame 69" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 69" instance=ExtResource("9_1dd8k")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 69"]
 position = Vector2(2.25, -26.4)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("10_4o8iv")
+script = ExtResource("10_qhsc6")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -468,3 +513,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_y1tlf")

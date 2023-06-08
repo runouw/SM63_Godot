@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_lxqrm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_q3ycd"]
+
+[sub_resource type="Animation" id="Animation_cax0p"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3abd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3uq2w"]
 _data = {
-"Default": SubResource("Animation_lxqrm")
+"Default": SubResource("Animation_cax0p")
 }
 
 [node name="9-10 Cam Edge" type="Node2D"]
+script = ExtResource("1_q3ycd")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10 Cam Edge.xml"
+linkage = "9-10CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w3abd")
+"Timeline": SubResource("AnimationLibrary_3uq2w")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

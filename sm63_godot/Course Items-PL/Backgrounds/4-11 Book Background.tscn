@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_oyyhx"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_t56t7"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_vbcfc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_iltvb"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_x7ivh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_qcgts"]
 
-[sub_resource type="Animation" id="Animation_dkcfn"]
+[sub_resource type="Animation" id="Animation_wjo0i"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -56,16 +56,59 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ihp0m"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ft62u"]
 _data = {
-"Default": SubResource("Animation_dkcfn")
+"Default": SubResource("Animation_wjo0i")
 }
 
+[sub_resource type="GDScript" id="GDScript_ks10i"]
+script/source = "extends Node
+# m1.gotoAndStop(random(6)+1)
+# m2.gotoAndStop(random(6)+1)
+# onEnterFrame = function () {
+# 	if (_root.BGquality == \"HIGH\" || _root.BGquality == \"MEDIUM\") {
+# 		gotoAndStop(1);
+# 		m1._x += 3;
+# 		m1._rotation += 3;
+# 		if (m1._x>=320) {
+# 			m1._x = -330;
+# 			m1.gotoAndStop(random(6)+1);
+# 		}
+# 		m2._x -= 3;
+# 		m1._rotation -= 3;
+# 		if (m2._x<=-320) {
+# 			m2._x = 330;
+# 			m2.gotoAndStop(random(6)+1);
+# 		}
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_gexvj"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation+=2
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_e2n0f"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation+=2
+# }"
+
 [node name="4-11 Book Background" type="Node2D"]
+script = ExtResource("1_iltvb")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/4-11 Book Background.xml"
+linkage = "4-11BG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ihp0m")
+"Timeline": SubResource("AnimationLibrary_ft62u")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -77,9 +120,9 @@ libraries = {
 [node name="@@46467" type="Polygon2D" parent="Layer 3/Frame 0/Shape"]
 polygon = PackedVector2Array(-224.5, -150, 225.5, -150, 225.5, 150, -224.5, 150)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_oyyhx")
+script = ExtResource("2_x7ivh")
 matrix = Transform2D(0, 0.183105, -0.350677, 0, -0.05, 0)
-entries_color = PackedColorArray(1, 1, 1, 1, 0.211765, 0.145098, 0.321569, 1)
+entries_color = PackedColorArray(0, 0, 0, 1, 0.211765, 0.145098, 0.321569, 1)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
@@ -94,9 +137,12 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_t56t7")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_ks10i")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-330, -70)
-script = ExtResource("3_vbcfc")
+script = ExtResource("3_qcgts")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/4-11 Background Books.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -109,9 +155,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@46466" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_t56t7")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_gexvj")
+
+[node name="@DOMSymbolInstance@46466" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(330, 70)
-script = ExtResource("3_vbcfc")
+script = ExtResource("3_qcgts")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/4-11 Background Books.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -123,3 +172,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@46466"]
+script = SubResource("GDScript_e2n0f")

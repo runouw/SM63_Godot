@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_hfmu6"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_nwic4"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Gold Frame.png" id="3_rs36t"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_n8f5d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_pxwyf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Gold Frame.png" id="3_vlota"]
 
-[sub_resource type="Animation" id="Animation_ca3lg"]
+[sub_resource type="Animation" id="Animation_5dwp0"]
 length = 3.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -104,25 +104,59 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vx3ju"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dq4la"]
 _data = {
-"Default": SubResource("Animation_ca3lg")
+"Default": SubResource("Animation_5dwp0")
 }
 
+[sub_resource type="GDScript" id="GDScript_7co81"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_yvaxk"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false && _root.KeyUP() && !_root.KeyLEFT() && !_root.KeyRIGHT()) {
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.xspeed = 0;
+# 		_root.Course.Char.attackFrame = \"Painting\";
+# 		onEnterFrame = function () {
+# 			_root.Camcenter = this;
+# 		};
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_s11e6"]
+script/source = "extends Node
+# _root.gotoCourseSelect(5);
+# //_root.StartLethalLavaLand();
+# "
+
 [node name="Lethal Lava Land Painting" type="Node2D"]
+script = ExtResource("1_n8f5d")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/Lethal Lava Land Painting.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vx3ju")
+"Timeline": SubResource("AnimationLibrary_dq4la")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_hfmu6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, 20)
-script = ExtResource("2_nwic4")
+script = ExtResource("2_pxwyf")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/5-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -138,9 +172,9 @@ brightness = 0.0
 [node name="Frame 30" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 30" instance=ExtResource("1_hfmu6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 30"]
 position = Vector2(0, 20)
-script = ExtResource("2_nwic4")
+script = ExtResource("2_pxwyf")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/5-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -156,9 +190,9 @@ brightness = 0.0
 [node name="Frame 35" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 35" instance=ExtResource("1_hfmu6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 35"]
 position = Vector2(0, 20)
-script = ExtResource("2_nwic4")
+script = ExtResource("2_pxwyf")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/5-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -174,9 +208,9 @@ brightness = 0.75
 [node name="Frame 40" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 40" instance=ExtResource("1_hfmu6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 40"]
 position = Vector2(0, 20)
-script = ExtResource("2_nwic4")
+script = ExtResource("2_pxwyf")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/5-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -193,10 +227,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_hfmu6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-0.5, 77)
 scale = Vector2(0.944016, 0.637497)
-script = ExtResource("2_nwic4")
+script = ExtResource("2_pxwyf")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -209,11 +243,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_7co81")
+
 [node name="@@45137" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-46, -31)
 scale = Vector2(0.547623, 0.547791)
-texture = ExtResource("3_rs36t")
+texture = ExtResource("3_vlota")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -223,5 +260,11 @@ centered = false
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_yvaxk")
+
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 99"]
+script = SubResource("GDScript_s11e6")

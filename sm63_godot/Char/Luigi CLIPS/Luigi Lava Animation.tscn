@@ -1,21 +1,21 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=19 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_bqg6r"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_eiyso"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava - 1.png" id="3_aeagl"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava - 2.png" id="4_8piwy"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava - 3.png" id="5_ddi5k"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava - 4.png" id="6_s61pw"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 1.png" id="7_6i0v3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 2.png" id="8_5htya"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 3.png" id="9_k0ri8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 4.png" id="10_5yv6s"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 5.png" id="11_l6rfh"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 6.png" id="12_mie20"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 7.png" id="13_00gmt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 8.png" id="14_yc1cg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1iydp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_70log"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava - 1.png" id="3_841qp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava - 2.png" id="4_rrbm2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava - 3.png" id="5_fuseo"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava - 4.png" id="6_blm54"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 1.png" id="7_4xab2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 2.png" id="8_3b6w6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 3.png" id="9_t42jp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 4.png" id="10_41ndj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 5.png" id="11_c2q26"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 6.png" id="12_ytngu"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 7.png" id="13_4kue5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Lava Run - 8.png" id="14_84hc5"]
 
-[sub_resource type="Animation" id="Animation_tfcri"]
+[sub_resource type="Animation" id="Animation_wm0c5"]
 length = 0.733333
 loop_mode = 1
 tracks/0/type = "value"
@@ -439,25 +439,137 @@ tracks/34/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ja7q6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pn0k5"]
 _data = {
-"Default": SubResource("Animation_tfcri")
+"Default": SubResource("Animation_wm0c5")
 }
 
+[sub_resource type="GDScript" id="GDScript_pinv0"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Luigi - Cry\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# count = 0;
+# slowdowncount = 1;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		//
+# 		if (_root.Course.Char._xscale<0) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed/2), 0)/2;
+# 		} else {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed/2), 0)/2;
+# 		}
+# 		//
+# 		if (_root.Course.Char.air == true) {
+# 			//_root.Course.Char.xspeed *= 0.95;
+# 			if (_root.KeyRIGHT() && _root.Controll == true) {
+# 				_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airwalkspeed)/(_root.airmaxWalkspeed), 0);
+# 				_root.Course.Char._xscale = -100;
+# 			}
+# 			if (_root.KeyLEFT() && _root.Controll == true) {
+# 				_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airwalkspeed)/(_root.airmaxWalkspeed), 0);
+# 				_root.Course.Char._xscale = 100;
+# 			}
+# 			//                                                         
+# 			if (_root.KeyTapRIGHT() && !_root.KeyRIGHT() && _root.Controll == true) {
+# 				_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed), 0)/2;
+# 				_root.Course.Char._xscale = -100;
+# 			}
+# 			if (_root.KeyTapLEFT() && !_root.KeyLEFT() && _root.Controll == true) {
+# 				_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed), 0)/2;
+# 				_root.Course.Char._xscale = 100;
+# 			}
+# 		}
+# 		if (_root.Course.Char.yspeed<0 && _root.Course.Char.air == true) {
+# 			if (_currentframe>4) {
+# 				gotoAndStop(4);
+# 			}
+# 			_root.Course.Char.yspeed -= (_root.gravity/2);
+# 		} else if (_currentframe>4 && _root.Course.Char.air == true) {
+# 			gotoAndStop(5);
+# 		}
+# 		if (_currentframe<4) {
+# 			play();
+# 		}
+# 		if (_root.Course.Char.air == false && _root.Course.Char.yspeed>-3) {
+# 			if (_currentframe<6) {
+# 				gotoAndPlay(6);
+# 			} else {
+# 				play();
+# 			}
+# 			//    
+# 			if ((_root.KeyRIGHT() || _root.KeyTapRIGHT()) && _root.Controll == true) {
+# 				_root.Course.Char._xscale = -100;
+# 			}
+# 			if ((_root.KeyLEFT() || _root.KeyTapLEFT()) && _root.Controll == true) {
+# 				_root.Course.Char._xscale = 100;
+# 			}
+# 			if (_root.KeyUP() && _root.Controll == true) {
+# 				_root.Course.Char.yspeed /= 2;
+# 				_root.Course.Char.yspeed -= _root.jumpspeed/1.5;
+# 			}
+# 			//      
+# 			tellTarget (_root.Course.Char) {
+# 				slowdowncount += 0.05;
+# 				if (_xscale<0) {
+# 					if (Ice == true) {
+# 						xspeed += (_root.walkspeed*1.2/this.slowdowncount)/_root.IceAccel;
+# 					} else if (Puddle == true) {
+# 						xspeed += (_root.walkspeed*1.2/this.slowdowncount)/_root.PuddleAccel;
+# 					} else {
+# 						xspeed += (_root.walkspeed*1.2);
+# 					}
+# 				} else if (_xscale>0) {
+# 					if (Ice == true) {
+# 						xspeed -= (_root.walkspeed*1.2/this.slowdowncount)/_root.IceAccel;
+# 					} else if (Puddle == true) {
+# 						xspeed -= (_root.walkspeed*1.2/this.slowdowncount)/_root.PuddleAccel;
+# 					} else {
+# 						xspeed -= (_root.walkspeed*1.2/this.slowdowncount);
+# 					}
+# 				}
+# 			}
+# 			//_root.Course.Char.xspeed *= 0.95;  
+# 			//_root.Course.Char.yspeed /= 3;
+# 			//_root.Course.Char.yspeed -= 7-(groundcount*1.5);
+# 		}
+# 		if (count++>32*3.5 || _root.Course.Char.Water == true || _root.Course.Char.Puddle == true) {
+# 			_root.Course.Char.attack = false;
+# 		}
+# 		//if (count++>300 || _root.Course.Char.yspeed>3 || (_root.Course.Char.yspeed>-5 && _root.KeyDOWN())) {                                               
+# 		//_root.Course.Char.attack = false;
+# 		//}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_51nyp"]
+script/source = "extends Node
+# gotoAndPlay(\"repeat\");
+# "
+
 [node name="Luigi Lava Animation" type="Node2D"]
+script = ExtResource("1_1iydp")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Lava Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ja7q6")
+"Timeline": SubResource("AnimationLibrary_pn0k5")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(4.45, -18.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -473,9 +585,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3"]
 position = Vector2(4.45, -17.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -491,9 +603,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4"]
 position = Vector2(4.45, -18.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -509,9 +621,9 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 7" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 7"]
 position = Vector2(4.45, -18.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -527,9 +639,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 9" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 9"]
 position = Vector2(3.45, -19.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -545,9 +657,9 @@ brightness = 0.0
 [node name="Frame 11" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 11" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 11"]
 position = Vector2(4.45, -18.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -563,9 +675,9 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 13" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 13"]
 position = Vector2(4.45, -17.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -581,9 +693,9 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 15" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 15"]
 position = Vector2(4.45, -18.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -599,9 +711,9 @@ brightness = 0.0
 [node name="Frame 17" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 17" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 17"]
 position = Vector2(3.45, -19.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -617,9 +729,9 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 19" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 19"]
 position = Vector2(3.45, -18.95)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -641,7 +753,7 @@ texture_filter = 1
 position = Vector2(7, -31.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_aeagl")
+texture = ExtResource("3_841qp")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
@@ -652,7 +764,7 @@ texture_filter = 1
 position = Vector2(8, -30.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_8piwy")
+texture = ExtResource("4_rrbm2")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
@@ -663,7 +775,7 @@ texture_filter = 1
 position = Vector2(7.4, -30.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_ddi5k")
+texture = ExtResource("5_fuseo")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 3"]
@@ -674,7 +786,7 @@ texture_filter = 1
 position = Vector2(8.4, -29.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_s61pw")
+texture = ExtResource("6_blm54")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 3"]
@@ -685,7 +797,7 @@ texture_filter = 1
 position = Vector2(8.05, -30.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("7_6i0v3")
+texture = ExtResource("7_4xab2")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 3"]
@@ -696,7 +808,7 @@ texture_filter = 1
 position = Vector2(8.05, -31.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_5htya")
+texture = ExtResource("8_3b6w6")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 3"]
@@ -707,7 +819,7 @@ texture_filter = 1
 position = Vector2(8.55, -32.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("9_k0ri8")
+texture = ExtResource("9_t42jp")
 centered = false
 
 [node name="Frame 11" type="Node2D" parent="Layer 3"]
@@ -718,7 +830,7 @@ texture_filter = 1
 position = Vector2(8.55, -31.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("10_5yv6s")
+texture = ExtResource("10_41ndj")
 centered = false
 
 [node name="Frame 13" type="Node2D" parent="Layer 3"]
@@ -729,7 +841,7 @@ texture_filter = 1
 position = Vector2(8.05, -30.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("11_l6rfh")
+texture = ExtResource("11_c2q26")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 3"]
@@ -740,7 +852,7 @@ texture_filter = 1
 position = Vector2(8.55, -31.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("12_mie20")
+texture = ExtResource("12_ytngu")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 3"]
@@ -751,7 +863,7 @@ texture_filter = 1
 position = Vector2(7.9, -32.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("13_00gmt")
+texture = ExtResource("13_4kue5")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 3"]
@@ -762,16 +874,16 @@ texture_filter = 1
 position = Vector2(8.55, -31.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("14_yc1cg")
+texture = ExtResource("14_84hc5")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(1.5, -4.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -787,9 +899,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3"]
 position = Vector2(1.5, -3.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -805,9 +917,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 4" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 4"]
 position = Vector2(1.5, -4.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -823,9 +935,9 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 7" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 7"]
 position = Vector2(1.5, -4.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -841,9 +953,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 9" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 9"]
 position = Vector2(0.5, -5.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -859,9 +971,9 @@ brightness = 0.0
 [node name="Frame 11" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 11" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 11"]
 position = Vector2(1.5, -4.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -877,9 +989,9 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 13" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 13"]
 position = Vector2(1.5, -3.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -895,9 +1007,9 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 15" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 15"]
 position = Vector2(1.5, -4.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -913,9 +1025,9 @@ brightness = 0.0
 [node name="Frame 17" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 17" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 17"]
 position = Vector2(0.5, -5.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -931,9 +1043,9 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 19" instance=ExtResource("1_bqg6r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 19"]
 position = Vector2(0.5, -4.65)
-script = ExtResource("2_eiyso")
+script = ExtResource("2_70log")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -950,8 +1062,14 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_pinv0")
+
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 21"]
+script = SubResource("GDScript_51nyp")

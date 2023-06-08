@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_nqgdt"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_br6qp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rqnlj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xybca"]
 
-[sub_resource type="Animation" id="Animation_248c2"]
+[sub_resource type="Animation" id="Animation_a486e"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -151,25 +151,102 @@ tracks/11/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l08fl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8k016"]
 _data = {
-"Default": SubResource("Animation_248c2")
+"Default": SubResource("Animation_a486e")
 }
 
+[sub_resource type="GDScript" id="GDScript_u52vb"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_alpha = 0
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_83gwq"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_alpha = 0
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_cedvd"]
+script/source = "extends Node
+# FN = function () {
+# 	onEnterFrame = function () {
+# 		if (saveto._alpha>0) {
+# 			saveto._alpha -= 4;
+# 		} else {
+# 			onEnterFrame = function () {
+# 				if (_currentframe<10) {
+# 					nextFrame();
+# 				}
+# 				yes._alpha += 4;
+# 				no._alpha += 4;
+# 				if (yes._alpha>=100 && yes._alpha !== undefined) {
+# 					yes._alpha = 100;
+# 					no._alpha = 100;
+# 					onEnterFrame = null;
+# 				}
+# 			};
+# 		}
+# 	};
+# };
+# No = function () {
+# 	onEnterFrame = function () {
+# 		if (yes._alpha>0) {
+# 			yes._alpha -= 4;
+# 			no._alpha -= 4;
+# 		} else {
+# 			onEnterFrame = function () {
+# 				prevFrame();
+# 				saveto._alpha += 4;
+# 				if (saveto._alpha>=100) {
+# 					saveto._alpha = 100;
+# 					onEnterFrame = null;
+# 				}
+# 			};
+# 		}
+# 	};
+# };
+# Yes = function () {
+# 	_parent.FSave(filenum);
+# 	onEnterFrame = function () {
+# 		if (yes._alpha>0) {
+# 			yes._alpha -= 4;
+# 			no._alpha -= 4;
+# 		} else {
+# 			onEnterFrame = function () {
+# 				nextFrame();
+# 				if (_currentframe>=20) {
+# 					onEnterFrame = null;
+# 				}
+# 			};
+# 		}
+# 	};
+# };
+# stop();
+# "
+
 [node name="LDW - Save Save To - Clip" type="Node2D"]
+script = ExtResource("1_rqnlj")
+source_xml = "res://sm63/LIBRARY/LDW - Save-Load/LDW - Save Save To - Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_l08fl")
+"Timeline": SubResource("AnimationLibrary_8k016")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_nqgdt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 0.05)
-script = ExtResource("2_br6qp")
+script = ExtResource("2_xybca")
 path = "res://sm63_godot/LDW - Save-Load/LDW - Save Save To.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -186,9 +263,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_nqgdt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(-15, 9.65)
-script = ExtResource("2_br6qp")
+script = ExtResource("2_xybca")
 path = "res://sm63_godot/LDW - Save-Load/LDW - Save Save Yes.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -201,9 +278,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@50851" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_nqgdt")]
+[node name="AS2" type="Node" parent="Layer 4/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_u52vb")
+
+[node name="@DOMSymbolInstance@50851" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(15, 9.4)
-script = ExtResource("2_br6qp")
+script = ExtResource("2_xybca")
 path = "res://sm63_godot/LDW - Save-Load/LDW - Save Save No.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -215,6 +295,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 0/@DOMSymbolInstance@50851"]
+script = SubResource("GDScript_83gwq")
 
 [node name="Layer 3" type="Node2D" parent="."]
 
@@ -248,3 +331,6 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_cedvd")

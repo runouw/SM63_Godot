@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_kyp2g"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_pgoyt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_e81vt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_kslkt"]
 
-[sub_resource type="Animation" id="Animation_5flog"]
+[sub_resource type="Animation" id="Animation_c738j"]
 length = 3.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,24 +79,49 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8eq4g"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mm8ok"]
 _data = {
-"Default": SubResource("Animation_5flog")
+"Default": SubResource("Animation_c738j")
 }
 
+[sub_resource type="GDScript" id="GDScript_civtv"]
+script/source = "extends Node
+# stop();
+# if (speed == undefined) {
+# 	speed = 3;
+# }
+# onEnterFrame = function () {
+# 	for (i=0; i<speed; i++) {
+# 		nextFrame();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_m7a34"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# this.removeMovieClip(this);
+# "
+
 [node name="Invert Wave Effect Clip" type="Node2D"]
+script = ExtResource("1_e81vt")
+source_xml = "res://sm63/LIBRARY/Effects/Other/Invert Wave Effect Clip.xml"
+linkage = "InvertWave"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8eq4g")
+"Timeline": SubResource("AnimationLibrary_mm8ok")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_kyp2g")]
-script = ExtResource("2_pgoyt")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_kslkt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Force Field Circle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -112,9 +137,9 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_kyp2g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
 scale = Vector2(1.63638, 1.63638)
-script = ExtResource("2_pgoyt")
+script = ExtResource("2_kslkt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Force Field Circle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -130,9 +155,9 @@ brightness = 0.0
 [node name="Frame 89" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 89" instance=ExtResource("1_kyp2g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 89"]
 scale = Vector2(9.0909, 9.0909)
-script = ExtResource("2_pgoyt")
+script = ExtResource("2_kslkt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Force Field Circle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -148,9 +173,9 @@ brightness = 0.0
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 99" instance=ExtResource("1_kyp2g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 99"]
 scale = Vector2(10, 10)
-script = ExtResource("2_pgoyt")
+script = ExtResource("2_kslkt")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Force Field Circle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -167,5 +192,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_civtv")
+
 [node name="Frame 99" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 99"]
+script = SubResource("GDScript_m7a34")

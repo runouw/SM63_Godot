@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_0dsfb"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_dq6mm"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_gn54p"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_jxofa"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_j4m2u"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_o4qhe"]
 
-[sub_resource type="Animation" id="Animation_vrf3g"]
+[sub_resource type="Animation" id="Animation_4mlr1"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,39 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_x6hrt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yywqo"]
 _data = {
-"Default": SubResource("Animation_vrf3g")
+"Default": SubResource("Animation_4mlr1")
 }
 
+[sub_resource type="GDScript" id="GDScript_ijjgx"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		xs = 120;
+# 	} else {
+# 		xs = 100;
+# 	}
+# 	_xscale += (xs-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (xs == 120) {
+# 		_root.TestLevel();
+# 	}
+# };
+# "
+
 [node name="LD Play Level Button" type="Node2D"]
+script = ExtResource("1_jxofa")
+source_xml = "res://sm63/LIBRARY/LD Play Level Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_x6hrt")
+"Timeline": SubResource("AnimationLibrary_yywqo")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -65,7 +88,7 @@ libraries = {
 [node name="@@8752" type="Polygon2D" parent="Layer 4/Frame 0/Shape"]
 polygon = PackedVector2Array(-50.525, -13.475, 51, -13.475, 51, 15.5, -50.525, 15.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_0dsfb")
+script = ExtResource("2_j4m2u")
 matrix = Transform2D(-0.0619659, 0, 0, -0.0176544, 0, -10.9)
 entries_color = PackedColorArray(1, 1, 1, 1, 0.0352941, 1, 0.0352941, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -83,8 +106,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("2_dq6mm")]
-script = ExtResource("3_gn54p")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
+script = ExtResource("3_o4qhe")
 path = "res://sm63_godot/LD Play Level Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,3 +123,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ijjgx")

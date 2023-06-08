@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=18 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 4.png" id="1_08wxo"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 5.png" id="2_wwxaq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 6.png" id="3_ac4c5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 7.png" id="4_jub6x"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 8.png" id="5_dxh84"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 9.png" id="6_hatcf"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 1.png" id="7_lvjkx"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 2.png" id="8_vx2kg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 3.png" id="9_3bme8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_65l7d"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 4.png" id="2_gamyj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 5.png" id="3_oawyj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 6.png" id="4_i28gh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 7.png" id="5_qdmrx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 8.png" id="6_3utc0"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 9.png" id="7_8p3fj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 1.png" id="8_eht1c"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 2.png" id="9_1j7ie"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 3.png" id="10_v554x"]
 
-[sub_resource type="Animation" id="Animation_77srv"]
+[sub_resource type="Animation" id="Animation_askko"]
 length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -242,16 +243,51 @@ tracks/18/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8kbsx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iu7j4"]
 _data = {
-"Default": SubResource("Animation_77srv")
+"Default": SubResource("Animation_askko")
 }
 
+[sub_resource type="GDScript" id="GDScript_kpa5s"]
+script/source = "extends Node
+# wingdive = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_nste6"]
+script/source = "extends Node
+# wingdive = true"
+
+[sub_resource type="GDScript" id="GDScript_lkecw"]
+script/source = "extends Node
+# wingdive = false;
+# "
+
+[sub_resource type="GDScript" id="GDScript_6cu7y"]
+script/source = "extends Node
+# wingdive = true"
+
+[sub_resource type="GDScript" id="GDScript_ci6nq"]
+script/source = "extends Node
+# wingdive = false;
+# "
+
 [node name="Goonie Flying" type="Node2D"]
+script = ExtResource("1_65l7d")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Flying.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8kbsx")
+"Timeline": SubResource("AnimationLibrary_iu7j4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -261,7 +297,7 @@ libraries = {
 [node name="@@50662" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-15, -15)
-texture = ExtResource("1_08wxo")
+texture = ExtResource("2_gamyj")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -270,7 +306,7 @@ visible = false
 [node name="@@50663" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-15, -20.5)
-texture = ExtResource("2_wwxaq")
+texture = ExtResource("3_oawyj")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -279,7 +315,7 @@ visible = false
 [node name="@@50664" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-16, -12.5)
-texture = ExtResource("3_ac4c5")
+texture = ExtResource("4_i28gh")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -288,7 +324,7 @@ visible = false
 [node name="@@50665" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-16, -13.5)
-texture = ExtResource("3_ac4c5")
+texture = ExtResource("4_i28gh")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -297,7 +333,7 @@ visible = false
 [node name="@@50666" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-19, -2)
-texture = ExtResource("4_jub6x")
+texture = ExtResource("5_qdmrx")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
@@ -306,7 +342,7 @@ visible = false
 [node name="@@50667" type="Sprite2D" parent="Layer 1/Frame 7"]
 texture_filter = 1
 position = Vector2(-19, -3)
-texture = ExtResource("4_jub6x")
+texture = ExtResource("5_qdmrx")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
@@ -315,7 +351,7 @@ visible = false
 [node name="@@50668" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(-18, -4)
-texture = ExtResource("5_dxh84")
+texture = ExtResource("6_3utc0")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -324,7 +360,7 @@ visible = false
 [node name="@@50669" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-18, -5)
-texture = ExtResource("5_dxh84")
+texture = ExtResource("6_3utc0")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
@@ -333,7 +369,7 @@ visible = false
 [node name="@@50670" type="Sprite2D" parent="Layer 1/Frame 10"]
 texture_filter = 1
 position = Vector2(-15, -6)
-texture = ExtResource("6_hatcf")
+texture = ExtResource("7_8p3fj")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -342,7 +378,7 @@ visible = false
 [node name="@@50671" type="Sprite2D" parent="Layer 1/Frame 12"]
 texture_filter = 1
 position = Vector2(-16, -4.5)
-texture = ExtResource("7_lvjkx")
+texture = ExtResource("8_eht1c")
 centered = false
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
@@ -351,7 +387,7 @@ visible = false
 [node name="@@50672" type="Sprite2D" parent="Layer 1/Frame 14"]
 texture_filter = 1
 position = Vector2(-19, -4)
-texture = ExtResource("8_vx2kg")
+texture = ExtResource("9_1j7ie")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
@@ -360,7 +396,7 @@ visible = false
 [node name="@@50673" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-19, -2)
-texture = ExtResource("8_vx2kg")
+texture = ExtResource("9_1j7ie")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
@@ -369,7 +405,7 @@ visible = false
 [node name="@@50674" type="Sprite2D" parent="Layer 1/Frame 16"]
 texture_filter = 1
 position = Vector2(-18, -8.5)
-texture = ExtResource("9_3bme8")
+texture = ExtResource("10_v554x")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
@@ -378,21 +414,36 @@ visible = false
 [node name="@@50675" type="Sprite2D" parent="Layer 1/Frame 17"]
 texture_filter = 1
 position = Vector2(-18, -6.5)
-texture = ExtResource("9_3bme8")
+texture = ExtResource("10_v554x")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_kpa5s")
+
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 6"]
+script = SubResource("GDScript_nste6")
 
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 7"]
+script = SubResource("GDScript_lkecw")
+
 [node name="Frame 14" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 14"]
+script = SubResource("GDScript_6cu7y")
+
 [node name="Frame 15" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 15"]
+script = SubResource("GDScript_ci6nq")

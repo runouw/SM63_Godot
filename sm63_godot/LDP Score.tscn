@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ixx1g"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_dh8bg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1hha3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ru0ad"]
 
-[sub_resource type="Animation" id="Animation_va4bl"]
+[sub_resource type="Animation" id="Animation_qtuf8"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,37 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yh0rk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6diar"]
 _data = {
-"Default": SubResource("Animation_va4bl")
+"Default": SubResource("Animation_qtuf8")
 }
 
+[sub_resource type="GDScript" id="GDScript_4ayg7"]
+script/source = "extends Node
+# stop();
+# if(_parent.VotedScore == true){
+# 	gotoAndStop(2);
+# }"
+
 [node name="LDP Score" type="Node2D"]
+script = ExtResource("1_1hha3")
+source_xml = "res://sm63/LIBRARY/LDP Score.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_yh0rk")
+"Timeline": SubResource("AnimationLibrary_6diar")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ixx1g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-15, 0)
-script = ExtResource("2_dh8bg")
+script = ExtResource("2_ru0ad")
 path = "res://sm63_godot/LFP Voteihn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -74,8 +86,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@8895" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ixx1g")]
-script = ExtResource("2_dh8bg")
+[node name="@DOMSymbolInstance@8895" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_ru0ad")
 path = "res://sm63_godot/LFP Voteihn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -88,9 +100,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@8896" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ixx1g")]
+[node name="@DOMSymbolInstance@8896" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(15, 0)
-script = ExtResource("2_dh8bg")
+script = ExtResource("2_ru0ad")
 path = "res://sm63_godot/LFP Voteihn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -103,9 +115,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@8897" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ixx1g")]
+[node name="@DOMSymbolInstance@8897" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(30, 0)
-script = ExtResource("2_dh8bg")
+script = ExtResource("2_ru0ad")
 path = "res://sm63_godot/LFP Voteihn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -118,9 +130,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@8898" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ixx1g")]
+[node name="@DOMSymbolInstance@8898" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(45, 0)
-script = ExtResource("2_dh8bg")
+script = ExtResource("2_ru0ad")
 path = "res://sm63_godot/LFP Voteihn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -133,9 +145,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@8899" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ixx1g")]
+[node name="@DOMSymbolInstance@8899" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(60, 0)
-script = ExtResource("2_dh8bg")
+script = ExtResource("2_ru0ad")
 path = "res://sm63_godot/LFP Voteihn.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -151,6 +163,9 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_4ayg7")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

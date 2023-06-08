@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_mpdqe"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mop6h"]
+
+[sub_resource type="Animation" id="Animation_72ydf"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8rhod"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ipfa2"]
 _data = {
-"Default": SubResource("Animation_mpdqe")
+"Default": SubResource("Animation_72ydf")
 }
 
 [node name="Pause New Fludd" type="Node2D"]
+script = ExtResource("1_mop6h")
+source_xml = "res://sm63/LIBRARY/Pause New &#034Fludd&#034.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8rhod")
+"Timeline": SubResource("AnimationLibrary_ipfa2")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

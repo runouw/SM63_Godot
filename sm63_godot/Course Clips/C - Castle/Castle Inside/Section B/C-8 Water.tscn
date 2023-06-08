@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_iyq8w"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6ljg8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6dmvl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_87b0r"]
 
-[sub_resource type="Animation" id="Animation_03x6e"]
+[sub_resource type="Animation" id="Animation_775nn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,58 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3xg1l"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uyxdy"]
 _data = {
-"Default": SubResource("Animation_03x6e")
+"Default": SubResource("Animation_775nn")
 }
 
+[sub_resource type="GDScript" id="GDScript_62mi0"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 1800;
+# 	polygons = 180;
+# 	count = 0;
+# 	Y = 0;
+# 	_y = Y+20;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (_root.C8Switch == true) {
+# 			Y -= 0.5;
+# 		} else {
+# 			Y += 0.5;
+# 		}
+# 		Y = Math.max(Y, -150);
+# 		Y = Math.min(Y, 0);
+# 		_y = Y+20;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_q62v6"]
+script/source = "extends Node
+# //_visible = false;
+# "
+
 [node name="C-8 Water" type="Node2D"]
+script = ExtResource("1_6dmvl")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 Water.xml"
+linkage = "C-8Water"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3xg1l")
+"Timeline": SubResource("AnimationLibrary_uyxdy")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_iyq8w")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(514.75, 25)
-script = ExtResource("2_6ljg8")
+script = ExtResource("2_87b0r")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -79,10 +112,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Water(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Water(Mask)/Frame 0" instance=ExtResource("1_iyq8w")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Water(Mask)/Frame 0"]
 position = Vector2(-163.5, 19.95)
 scale = Vector2(1, 1.00139)
-script = ExtResource("2_6ljg8")
+script = ExtResource("2_87b0r")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -95,6 +128,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Water(Mask)/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_62mi0")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_q62v6")

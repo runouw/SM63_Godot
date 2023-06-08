@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_5y4wt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6kms4"]
+
+[sub_resource type="Animation" id="Animation_cjqhu"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,48 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5xwol"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0vxp1"]
 _data = {
-"Default": SubResource("Animation_5y4wt")
+"Default": SubResource("Animation_cjqhu")
 }
 
+[sub_resource type="GDScript" id="GDScript_20wo0"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		sc = 120;
+# 		gotoAndStop(3);
+# 	} else {
+# 		sc = 100;
+# 		gotoAndStop(2);
+# 	}
+# 	if (_parent.Mode == \"On\") {
+# 		gotoAndStop(4);
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		_root.MuteBGMusic = true;
+# 		_root.StopBGsong();
+# 		_parent.Mode = \"On\";
+# 	}
+# };
+# stop();
+# "
+
 [node name="Menu -  On" type="Node2D"]
+script = ExtResource("1_6kms4")
+source_xml = "res://sm63/LIBRARY/Menu -  &#034On&#034.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5xwol")
+"Timeline": SubResource("AnimationLibrary_0vxp1")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -118,6 +152,9 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_20wo0")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_apeme"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_o4jrg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mjfwn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_p5j7q"]
 
-[sub_resource type="Animation" id="Animation_nipob"]
+[sub_resource type="Animation" id="Animation_nyg87"]
 length = 15.0
 loop_mode = 1
 tracks/0/type = "value"
@@ -163,25 +163,54 @@ tracks/12/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r2xk8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ipkm"]
 _data = {
-"Default": SubResource("Animation_nipob")
+"Default": SubResource("Animation_nyg87")
 }
 
+[sub_resource type="GDScript" id="GDScript_7asc7"]
+script/source = "extends Node
+# stop();
+# played = false;
+# landedon = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (played == true) {
+# 			play();
+# 		}
+# 		if (landedon == true && _root.Course.Char.yspeed>=-3) {
+# 			played = true;
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_3law2"]
+script/source = "extends Node
+# gotoAndStop(1);
+# "
+
 [node name="M3-2 Carpet PL Path" type="Node2D"]
+script = ExtResource("1_mjfwn")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL Path.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_r2xk8")
+"Timeline": SubResource("AnimationLibrary_3ipkm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_apeme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(1, -2.2)
-script = ExtResource("2_o4jrg")
+script = ExtResource("2_p5j7q")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -197,9 +226,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_apeme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(1, -2.2)
-script = ExtResource("2_o4jrg")
+script = ExtResource("2_p5j7q")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -215,9 +244,9 @@ brightness = 0.0
 [node name="Frame 97" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 97" instance=ExtResource("1_apeme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 97"]
 position = Vector2(172.8, -2.2)
-script = ExtResource("2_o4jrg")
+script = ExtResource("2_p5j7q")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -233,9 +262,9 @@ brightness = 0.0
 [node name="Frame 293" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 293" instance=ExtResource("1_apeme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 293"]
 position = Vector2(828.05, -81.8)
-script = ExtResource("2_o4jrg")
+script = ExtResource("2_p5j7q")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -251,9 +280,9 @@ brightness = 0.0
 [node name="Frame 393" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 393" instance=ExtResource("1_apeme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 393"]
 position = Vector2(888.75, -234.25)
-script = ExtResource("2_o4jrg")
+script = ExtResource("2_p5j7q")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -269,9 +298,9 @@ brightness = 0.0
 [node name="Frame 420" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 420" instance=ExtResource("1_apeme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 420"]
 position = Vector2(888.75, -234.25)
-script = ExtResource("2_o4jrg")
+script = ExtResource("2_p5j7q")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -287,9 +316,9 @@ brightness = 0.0
 [node name="Frame 434" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 434" instance=ExtResource("1_apeme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 434"]
 position = Vector2(888.75, -234.25)
-script = ExtResource("2_o4jrg")
+script = ExtResource("2_p5j7q")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -308,9 +337,9 @@ visible = false
 [node name="Frame 436" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 436" instance=ExtResource("1_apeme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 436"]
 position = Vector2(1, -2.2)
-script = ExtResource("2_o4jrg")
+script = ExtResource("2_p5j7q")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -326,9 +355,9 @@ brightness = 0.0
 [node name="Frame 449" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 449" instance=ExtResource("1_apeme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 449"]
 position = Vector2(1, -2.2)
-script = ExtResource("2_o4jrg")
+script = ExtResource("2_p5j7q")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 Carpet PL.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -365,5 +394,11 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_7asc7")
+
 [node name="Frame 449" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 449"]
+script = SubResource("GDScript_3law2")

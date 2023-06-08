@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_1g1by"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_sayyd"]
+
+[sub_resource type="Animation" id="Animation_rndbc"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_res1y"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j0qbt"]
 _data = {
-"Default": SubResource("Animation_1g1by")
+"Default": SubResource("Animation_rndbc")
 }
 
 [node name="BC-2Lava" type="Node2D"]
+script = ExtResource("1_sayyd")
+source_xml = "res://sm63/LIBRARY/BC-2Lava.xml"
+linkage = "BC-2Lava"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_res1y")
+"Timeline": SubResource("AnimationLibrary_j0qbt")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 2.png" id="1_mq5la"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 1.png" id="2_euqvk"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 1.png" id="3_wm2t6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="4_cg4uo"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 21.png" id="5_kv5co"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 14.png" id="6_wfjcc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hno3l"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 2.png" id="2_mitjt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 1.png" id="3_y1i42"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 1.png" id="4_3dlxd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="5_27jae"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 21.png" id="6_sgghi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 14.png" id="7_gg7ub"]
 
-[sub_resource type="Animation" id="Animation_slycb"]
+[sub_resource type="Animation" id="Animation_tu5ws"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -59,16 +60,38 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ybei5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jetfs"]
 _data = {
-"Default": SubResource("Animation_slycb")
+"Default": SubResource("Animation_tu5ws")
 }
 
+[sub_resource type="GDScript" id="GDScript_nqd1g"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_b6m81"]
+script/source = "extends Node
+# _parent._parent.attack = false;
+# _parent._parent._xscale *= -1;
+# "
+
 [node name="Bowser Turn around" type="Node2D"]
+script = ExtResource("1_hno3l")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bowser Turn around.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ybei5")
+"Timeline": SubResource("AnimationLibrary_jetfs")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -83,25 +106,25 @@ texture_filter = 1
 position = Vector2(-10.1, -11.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_mq5la")
+texture = ExtResource("2_mitjt")
 centered = false
 
 [node name="@@49002" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-20.9, -28.5)
-texture = ExtResource("2_euqvk")
+texture = ExtResource("3_y1i42")
 centered = false
 
 [node name="@@49003" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(3.9, -8.65)
-texture = ExtResource("3_wm2t6")
+texture = ExtResource("4_3dlxd")
 centered = false
 
 [node name="@@49004" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-31, -31.5)
-texture = ExtResource("4_cg4uo")
+texture = ExtResource("5_27jae")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -110,13 +133,13 @@ visible = false
 [node name="@@49005" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-23.5, -24.65)
-texture = ExtResource("5_kv5co")
+texture = ExtResource("6_sgghi")
 centered = false
 
 [node name="@@49006" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(12.35, -8.1)
-texture = ExtResource("1_mq5la")
+texture = ExtResource("2_mitjt")
 centered = false
 
 [node name="@@49007" type="Sprite2D" parent="Layer 1/Frame 2"]
@@ -124,18 +147,24 @@ texture_filter = 1
 position = Vector2(-8.65, -9.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_mq5la")
+texture = ExtResource("2_mitjt")
 centered = false
 
 [node name="@@49008" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-12.15, -34.65)
-texture = ExtResource("6_wfjcc")
+texture = ExtResource("7_gg7ub")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_nqd1g")
+
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 4"]
+script = SubResource("GDScript_b6m81")

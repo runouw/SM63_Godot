@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_k3c2u"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mn0cl"]
+
+[sub_resource type="Animation" id="Animation_y7j6c"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,41 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vqso"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tso2k"]
 _data = {
-"Default": SubResource("Animation_k3c2u")
+"Default": SubResource("Animation_y7j6c")
 }
 
+[sub_resource type="GDScript" id="GDScript_6x7ls"]
+script/source = "extends Node
+# if (_parent.picture == false) {
+# 	stop();
+# } else {
+# 	gotoAndStop(2);
+# 	this.attachMovie(\"PictureClip\", \"PictureClip\", 0, {_xscale:9, _yscale:9, mini:true});
+# 	count = 0;
+# 	onEnterFrame = function () {
+# 		if (count++>3) {
+# 			this.PictureClip._width = 25;
+# 			this.PictureClip._yscale = this.PictureClip._xscale;
+# 			onEnterFrame = null;
+# 			delete onEnterFrame;
+# 		}
+# 	};
+# 	PictureClip.gotoAndStop(_parent.signmessage);
+# }
+# "
+
 [node name="Sign Image Clip" type="Node2D"]
+script = ExtResource("1_mn0cl")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Decoration/Signs & Fences/Coded Sign/Sign Image Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3vqso")
+"Timeline": SubResource("AnimationLibrary_tso2k")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -71,3 +98,6 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_6x7ls")

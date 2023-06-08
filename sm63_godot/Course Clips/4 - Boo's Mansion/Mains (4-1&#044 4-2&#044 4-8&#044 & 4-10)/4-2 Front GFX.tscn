@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Haunted Railing.png" id="1_1mjak"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_2oc7h"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_0a5mr"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Mesh Fence.png" id="4_ylv48"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_anher"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Haunted Railing.png" id="2_epwcf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_v83b6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Mesh Fence.png" id="4_d685m"]
 
-[sub_resource type="Animation" id="Animation_a3vk2"]
+[sub_resource type="Animation" id="Animation_nv26r"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -21,16 +21,74 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q00je"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rwbfn"]
 _data = {
-"Default": SubResource("Animation_a3vk2")
+"Default": SubResource("Animation_nv26r")
 }
 
+[sub_resource type="GDScript" id="GDScript_46j0y"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	walk = \"front\";
+# 	doorplace = \"4-1-1\";
+# 	doortype = 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_myms7"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	walk = \"front\";
+# 	doorplace = \"4-1-1\";
+# 	doortype = 5;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_6eyv8"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = 100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_pyvgp"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = -100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_fry5n"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = 100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_owueo"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = 100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_n8hkw"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = 100;
+# }
+# "
+
 [node name="4-2 Front GFX" type="Node2D"]
+script = ExtResource("1_anher")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-2 Front GFX.xml"
+linkage = "4-2FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_q00je")
+"Timeline": SubResource("AnimationLibrary_rwbfn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -42,7 +100,7 @@ libraries = {
 [node name="@@29417" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1mjak")
+texture = ExtResource("2_epwcf")
 texture_offset = Vector2(114.7, 878.95)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(-468.9, -878.95, -91.1, -878.95, -91.1, -854.95, -468.9, -854.95)
@@ -51,16 +109,16 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@29418" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1mjak")
+texture = ExtResource("2_epwcf")
 texture_offset = Vector2(-508.3, 878.95)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(154.1, -878.95, 536.05, -878.95, 536.05, -854.95, 154.1, -854.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(15, -25.2)
 scale = Vector2(2.25, 2.25)
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -73,11 +131,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29419" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_46j0y")
+
+[node name="@DOMSymbolInstance@29419" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-15, -25.2)
 rotation = 3.14159
 scale = Vector2(2.25, -2.25)
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Main Door Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -90,9 +151,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29420" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29419"]
+script = SubResource("GDScript_myms7")
+
+[node name="@DOMSymbolInstance@29420" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(184.45, -70)
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -105,9 +169,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29421" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29420"]
+script = SubResource("GDScript_6eyv8")
+
+[node name="@DOMSymbolInstance@29421" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-280.5, -102)
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -120,9 +187,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29422" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29421"]
+script = SubResource("GDScript_pyvgp")
+
+[node name="@DOMSymbolInstance@29422" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-193.45, -431)
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -135,9 +205,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29423" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29422"]
+script = SubResource("GDScript_fry5n")
+
+[node name="@DOMSymbolInstance@29423" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-117.95, -703.5)
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -150,9 +223,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29424" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29423"]
+script = SubResource("GDScript_owueo")
+
+[node name="@DOMSymbolInstance@29424" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(148, -681.45)
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -164,6 +240,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@29424"]
+script = SubResource("GDScript_n8hkw")
 
 [node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
 
@@ -172,7 +251,7 @@ brightness = 0.0
 [node name="@@29425" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_ylv48")
+texture = ExtResource("4_d685m")
 texture_offset = Vector2(491.475, 347.72)
 texture_scale = Vector2(0.999999, 0.999999)
 texture_rotation = -0.785398
@@ -182,7 +261,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@29426" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_ylv48")
+texture = ExtResource("4_d685m")
 texture_offset = Vector2(540.689, 504.202)
 texture_scale = Vector2(0.999999, 0.999999)
 texture_rotation = -0.785398
@@ -197,9 +276,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="@DOMSymbolInstance@29428" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="@DOMSymbolInstance@29428" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(189.3, -730.6)
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Invis Cap Arrows.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -212,9 +291,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29429" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="@DOMSymbolInstance@29429" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(189.3, -700.6)
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Invis Cap Arrows.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -227,10 +306,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29430" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="@DOMSymbolInstance@29430" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-166.45, -700.6)
 rotation = 3.14159
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Invis Cap Arrows.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -243,10 +322,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@29431" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_2oc7h")]
+[node name="@DOMSymbolInstance@29431" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-166.45, -730.6)
 rotation = 3.14159
-script = ExtResource("3_0a5mr")
+script = ExtResource("3_v83b6")
 path = "res://sm63_godot/Course Items-PL/Decoration/Signs & Fences/Invis Cap Arrows.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

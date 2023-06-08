@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_u0p3v"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3begq"]
+
+[sub_resource type="Animation" id="Animation_mtnat"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m834t"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ffxys"]
 _data = {
-"Default": SubResource("Animation_u0p3v")
+"Default": SubResource("Animation_mtnat")
 }
 
 [node name="8-E5-1BPlatforms" type="Node2D"]
+script = ExtResource("1_3begq")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-1BPlatforms.xml"
+linkage = "8-E5-1BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_m834t")
+"Timeline": SubResource("AnimationLibrary_ffxys")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

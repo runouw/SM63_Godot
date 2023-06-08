@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_30pea"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_718ea"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_m70wm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vg3ik"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_ki6q1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_0n3te"]
 
-[sub_resource type="Animation" id="Animation_pkfgi"]
+[sub_resource type="Animation" id="Animation_eun7g"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -116,16 +116,28 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_x0xsp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qp1e0"]
 _data = {
-"Default": SubResource("Animation_pkfgi")
+"Default": SubResource("Animation_eun7g")
 }
 
+[sub_resource type="GDScript" id="GDScript_n75si"]
+script/source = "extends Node
+# stop();
+# //insert coding for how many stars are collected
+# gotoAndStop(_root.starcount+1);
+# "
+
 [node name="Star Select Shine Effects" type="Node2D"]
+script = ExtResource("1_vg3ik")
+source_xml = "res://sm63/LIBRARY/Star Select Shine Effects.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_x0xsp")
+"Timeline": SubResource("AnimationLibrary_qp1e0")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -137,7 +149,7 @@ libraries = {
 [node name="@@13932" type="Polygon2D" parent="Layer 3/Frame 0/Shape"]
 polygon = PackedVector2Array(-5.975, -38.65, 453.025, -38.65, 453.025, 50.35, -5.975, 50.35)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_30pea")
+script = ExtResource("2_ki6q1")
 matrix = Transform2D(0, -0.0543213, 0.280151, 0, 223.7, 5.85)
 entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 entries_ratio = PackedFloat32Array(0, 0.211765, 0.290196, 0.521569, 0.72549, 0.835294, 1)
@@ -151,7 +163,7 @@ visible = false
 [node name="@@13933" type="Polygon2D" parent="Layer 3/Frame 5/Shape"]
 polygon = PackedVector2Array(-5.975, -38.65, 453.025, -38.65, 453.025, 50.35, -5.975, 50.35)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_30pea")
+script = ExtResource("2_ki6q1")
 matrix = Transform2D(0, -0.0543213, 0.280151, 0, 223.7, 5.85)
 entries_color = PackedColorArray(1, 1, 1, 1, 1, 0.937255, 0.701961, 1, 0.996078, 0.890196, 0.470588, 1, 1, 1, 1, 1, 0.996078, 0.890196, 0.470588, 1, 0.996078, 0.921569, 0.639216, 1, 1, 1, 1, 1)
 entries_ratio = PackedFloat32Array(0, 0.211765, 0.282353, 0.521569, 0.745098, 0.835294, 1)
@@ -164,9 +176,9 @@ spread_method_reflect = false
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_718ea")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(15, -19.5)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -179,9 +191,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13890" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13890" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-25.2, 29.65)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -194,9 +206,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13891" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13891" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-34.7, -18.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -212,9 +224,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("2_718ea")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(15, -19.5)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -227,9 +239,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13892" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13892" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-54.7, -14.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -242,9 +254,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13893" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13893" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-25.2, 29.65)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -257,9 +269,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13894" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13894" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(55, 24)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -272,9 +284,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13895" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13895" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-55.2, 29.65)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -287,9 +299,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13896" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13896" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-29.7, -14.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -305,9 +317,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_718ea")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(15, -19.5)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -320,9 +332,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13897" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13897" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(-54.7, -14.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -335,9 +347,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13898" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13898" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(-54.95, 25.1)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -350,9 +362,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13899" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13899" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(-25.2, 29.65)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -365,9 +377,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13900" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13900" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(15, 20.5)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -380,9 +392,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13901" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13901" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(55, -24)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -395,9 +407,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13902" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13902" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(-34.7, -18.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -410,9 +422,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13903" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13903" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(-79.7, -24.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -425,9 +437,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13904" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13904" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(-79.95, 15.1)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -443,9 +455,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(15, -19.5)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -458,9 +470,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13905" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13905" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-54.7, -14.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -473,9 +485,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13906" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13906" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-54.95, 25.1)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -488,9 +500,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13907" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13907" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-25.2, 29.65)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -503,9 +515,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13908" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13908" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-74.7, 17.6)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -518,9 +530,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13909" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13909" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-74.7, -12.4)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -533,9 +545,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13910" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13910" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(15, 20.5)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -548,9 +560,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13911" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13911" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(55, 24)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -563,9 +575,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13912" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13912" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(55, -24)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -578,9 +590,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13913" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13913" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-34.7, -18.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -593,9 +605,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13914" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13914" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-94.7, 12.6)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -608,9 +620,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13915" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13915" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-94.7, -27.4)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -626,9 +638,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(15, -19.5)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -641,9 +653,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13916" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13916" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-54.7, -14.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -656,9 +668,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13917" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13917" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-54.95, 25.1)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -671,9 +683,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13918" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13918" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-25.2, 24.65)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -686,9 +698,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13919" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13919" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-74.7, 17.6)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -701,9 +713,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13920" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13920" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-74.7, -12.4)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -716,9 +728,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13921" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13921" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(15, 20.5)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -731,9 +743,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13922" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13922" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(55, 24)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -746,9 +758,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13923" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13923" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(55, -24)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -761,9 +773,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13924" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13924" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-34.7, -18.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -776,9 +788,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13925" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13925" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(100, 24)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -791,9 +803,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13926" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13926" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(100, -24)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -806,9 +818,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13927" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13927" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-104.7, -24.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -821,9 +833,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13928" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13928" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-104.95, 23.1)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -836,9 +848,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13929" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13929" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-124.7, 22.1)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -851,9 +863,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13930" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13930" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-124.7, -17.9)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -866,9 +878,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13931" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("2_718ea")]
+[node name="@DOMSymbolInstance@13931" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(-89.7, 6.1)
-script = ExtResource("3_m70wm")
+script = ExtResource("3_0n3te")
 path = "res://sm63_godot/Star Select Shine Effect 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -884,3 +896,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_n75si")

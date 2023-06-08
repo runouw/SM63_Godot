@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
-[sub_resource type="Animation" id="Animation_x6e1q"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_x8eb4"]
+
+[sub_resource type="Animation" id="Animation_mhiin"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -76,16 +78,31 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_unj7b"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2hxp5"]
 _data = {
-"Default": SubResource("Animation_x6e1q")
+"Default": SubResource("Animation_mhiin")
 }
 
+[sub_resource type="GDScript" id="GDScript_5f3qe"]
+script/source = "extends Node
+# gotoAndStop(\"end\");
+# "
+
+[sub_resource type="GDScript" id="GDScript_jyfjk"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="LDP Transitio" type="Node2D"]
+script = ExtResource("1_x8eb4")
+source_xml = "res://sm63/LIBRARY/LDP Transitio.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_unj7b")
+"Timeline": SubResource("AnimationLibrary_2hxp5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -95,7 +112,7 @@ libraries = {
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="@@8913" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
-color = Color(1, 1, 1, 0.101961)
+color = Color(0, 0, 0, 0.101961)
 polygon = PackedVector2Array(-225, -150.025, 225, -150.025, 225, 149.975, -225, 149.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -105,6 +122,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 9"]
 
 [node name="@@8914" type="Polygon2D" parent="Layer 1/Frame 9/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-225, -150.025, 225, -150.025, 225, 149.975, -225, 149.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -122,8 +140,14 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_5f3qe")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 19"]
+script = SubResource("GDScript_jyfjk")

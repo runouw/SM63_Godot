@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_k86lu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mp7ul"]
+
+[sub_resource type="Animation" id="Animation_2s1v6"]
 length = 4.83333
 loop_mode = 1
 tracks/0/type = "value"
@@ -196,16 +198,21 @@ tracks/15/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_84id3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u3rep"]
 _data = {
-"Default": SubResource("Animation_k86lu")
+"Default": SubResource("Animation_2s1v6")
 }
 
 [node name="LDItemPlatforms" type="Node2D"]
+script = ExtResource("1_mp7ul")
+source_xml = "res://sm63/LIBRARY/LDItemPlatforms.xml"
+linkage = "LDItemPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_84id3")
+"Timeline": SubResource("AnimationLibrary_u3rep")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -226,6 +233,7 @@ visible = false
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 39"]
+position = Vector2(0, 20)
 
 [node name="@@8814" type="Polygon2D" parent="Layer 2/Frame 39/Shape"]
 color = Color(0, 1, 0, 1)
@@ -246,6 +254,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 41"]
+position = Vector2(0, 20)
 
 [node name="@@8816" type="Polygon2D" parent="Layer 2/Frame 41/Shape"]
 color = Color(0, 1, 0, 1)

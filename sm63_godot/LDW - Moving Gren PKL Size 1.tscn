@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Small PF.png" id="1_hispx"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Med PL.png" id="2_rsqsk"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Large PL.png" id="3_atxsn"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="4_syef5"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="5_hdxcf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_wilht"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Small PF.png" id="2_t8hgr"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Med PL.png" id="3_kxklo"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Green Large PL.png" id="4_b7j7p"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="5_5hcmv"]
 
-[sub_resource type="Animation" id="Animation_xahpf"]
+[sub_resource type="Animation" id="Animation_ynfe7"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -106,16 +106,59 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ayaua"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bg7qw"]
 _data = {
-"Default": SubResource("Animation_xahpf")
+"Default": SubResource("Animation_ynfe7")
 }
 
+[sub_resource type="GDScript" id="GDScript_tw2mi"]
+script/source = "extends Node
+# // 2"
+
+[sub_resource type="GDScript" id="GDScript_2adep"]
+script/source = "extends Node
+# // 3"
+
+[sub_resource type="GDScript" id="GDScript_vw2s0"]
+script/source = "extends Node
+# s = _name.charAt(1);
+# xc._alpha = 0;
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 		hl = true;
+# 		sc = 120;
+# 	} else {
+# 		hl = false;
+# 		sc = 100;
+# 	}
+# 	if (_parent.sizevar == s) {
+# 		xc._alpha += (100-xc._alpha)/2;
+# 	} else {
+# 		xc._alpha += (0-xc._alpha)/2;
+# 	}
+# 	_xscale += (sc-_xscale)/3;
+# 	_yscale = _xscale;
+# 	txt._xscale += (sc-txt._xscale)/3;
+# 	txt._yscale = txt._xscale;
+# };
+# onMouseDown = function () {
+# 	if (hl == true) {
+# 		_parent.sizevar = s;
+# 	}
+# };
+# gotoAndStop(s);
+# "
+
 [node name="LDW - Moving Gren PKL Size 1" type="Node2D"]
+script = ExtResource("1_wilht")
+source_xml = "res://sm63/LIBRARY/LDW - Moving Gren PKL Size 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ayaua")
+"Timeline": SubResource("AnimationLibrary_bg7qw")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -134,7 +177,7 @@ end_cap_mode = 2
 [node name="@@12101" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-16, -8)
-texture = ExtResource("1_hispx")
+texture = ExtResource("2_t8hgr")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -143,7 +186,7 @@ visible = false
 [node name="@@12102" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-24, -8)
-texture = ExtResource("2_rsqsk")
+texture = ExtResource("3_kxklo")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -152,15 +195,15 @@ visible = false
 [node name="@@12103" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-32, -8)
-texture = ExtResource("3_atxsn")
+texture = ExtResource("4_b7j7p")
 centered = false
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("4_syef5")]
-script = ExtResource("5_hdxcf")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
+script = ExtResource("5_5hcmv")
 path = "res://sm63_godot/LDW Moving Gren PL xc.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -179,15 +222,16 @@ position = Vector2(6.7, 1.5)
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 0/Group"]
 
 [node name="@@12097" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-6.05, -6.55, -4.5, -6.55, -4.5, -3.75, -8.9, -3.75, -8.9, -4.05, -7.25, -4.95, -8.9, -3.75, -6.4, -3.75, -8.9, -2.3, -8.9, -2.3, -6.4, -3.75, -4.5, -3.75, -4.5, 3.5, -6.4, 3.5, -6.4, -2.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13, 14)])
 
 [node name="Frame 1" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1" instance=ExtResource("4_syef5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1"]
 scale = Vector2(1.47058, 1)
-script = ExtResource("5_hdxcf")
+script = ExtResource("5_5hcmv")
 path = "res://sm63_godot/LDW Moving Gren PL xc.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -199,6 +243,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_tw2mi")
 
 [node name="Group" type="Node2D" parent="Layer 4/Frame 1"]
 position = Vector2(30.75, -24.95)
@@ -206,15 +253,16 @@ position = Vector2(30.75, -24.95)
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 1/Group"]
 
 [node name="@@12098" type="Polygon2D" parent="Layer 4/Frame 1/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-30.6, 19.95, -30.6, 19.95, -28.25, 20.75, -27.91, 21.55, -33.29, 21.55, -32.85, 20.65, -33.29, 21.55, -30.65, 21.55, -31.6, 21.9, -32, 23.1, -32, 23.1, -33.95, 22.9, -33.4611, 21.9, -30.65, 21.55, -27.91, 21.55, -27.4, 22.75, -27.65, 24, -28.45, 25.3, -29.7, 26.6, -30.85, 27.7, -31.25, 28.2, -33.5342, 28.2, -33.5, 28.1, -31.35, 25.7, -29.75, 24.05, -29.35, 22.85, -29.7, 21.9, -33.5342, 28.2, -27.4, 28.2, -27.4, 30, -34.15, 30)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26), PackedInt32Array(27, 28, 29, 30)])
 
 [node name="Frame 2" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2" instance=ExtResource("4_syef5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2"]
 scale = Vector2(1.94118, 1)
-script = ExtResource("5_hdxcf")
+script = ExtResource("5_5hcmv")
 path = "res://sm63_godot/LDW Moving Gren PL xc.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -227,18 +275,25 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_2adep")
+
 [node name="Group" type="Node2D" parent="Layer 4/Frame 2"]
 position = Vector2(39.1, -41.55)
 
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 2/Group"]
 
 [node name="@@12099" type="Polygon2D" parent="Layer 4/Frame 2/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-39.25, 36.45, -39.25, 36.45, -36.95, 37.35, -36.6742, 38, -41.9155, 38, -41.75, 37.6, -40.75, 36.75, -41.9155, 38, -39.3, 38, -40.15, 38.35, -40.55, 39.35, -40.55, 39.35, -42.35, 39.05, -42.0397, 38.3, -39.3, 38, -36.6742, 38, -36.25, 39, -37.7, 41.1, -36.5088, 41.85, -39.9813, 41.85, -39.8, 40.4, -38.6, 40.1, -38.2, 39.1, -38.5, 38.3, -39.9813, 41.85, -39.1, 41.85, -40, 42, -40, 42, -39.9938, 41.95, -39.1, 41.85, -36.5088, 41.85, -36.35, 41.95, -35.8, 43.5, -36.5111, 45.1, -39.2, 45.1, -38.2, 44.65, -37.8, 43.4, -38.15, 42.25, -38.8625, 41.95, -40.6, 43.6, -40.6, 43.6, -40.15, 44.7, -39.2, 45.1, -41.8402, 45.1, -42.45, 43.85, -41.8402, 45.1, -36.5111, 45.1, -36.8, 45.75, -39.2, 46.65, -39.2, 46.65, -41.45, 45.9, -41.5232, 45.75)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17, 18, 19, 20, 21, 22, 23), PackedInt32Array(24, 25, 26, 27, 28), PackedInt32Array(29, 30, 31, 32, 33, 34, 35, 36, 37, 38), PackedInt32Array(39, 40, 41, 42, 43, 44), PackedInt32Array(45, 46, 47, 48, 49, 50, 51)])
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_vw2s0")
 
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false

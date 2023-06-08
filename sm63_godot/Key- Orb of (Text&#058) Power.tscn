@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_k50ia"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_c4mn1"]
+
+[sub_resource type="Animation" id="Animation_fp0w7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m0tlp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_urvgo"]
 _data = {
-"Default": SubResource("Animation_k50ia")
+"Default": SubResource("Animation_fp0w7")
 }
 
 [node name="Key- Orb of (Text) Power" type="Node2D"]
+script = ExtResource("1_c4mn1")
+source_xml = "res://sm63/LIBRARY/Key- Orb of (Text&#058) Power.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_m0tlp")
+"Timeline": SubResource("AnimationLibrary_urvgo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

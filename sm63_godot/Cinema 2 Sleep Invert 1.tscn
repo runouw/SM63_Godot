@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_ksxfo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_of5em"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_qfcor"]
 
-[sub_resource type="Animation" id="Animation_tq7y4"]
+[sub_resource type="Animation" id="Animation_g6tqv"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2r165"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_edqgf"]
 _data = {
-"Default": SubResource("Animation_tq7y4")
+"Default": SubResource("Animation_g6tqv")
 }
 
 [node name="Cinema 2 Sleep Invert 1" type="Node2D"]
+script = ExtResource("1_of5em")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Sleep Invert 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2r165")
+"Timeline": SubResource("AnimationLibrary_edqgf")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,8 +45,8 @@ libraries = {
 [node name="@@4297" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(0, -28.9, 0, -28.9, 11.075, -26.7875, 20.4, -20.45, 26.775, -11.0875, 26.775, -11.0875, 28.9, 0, 26.775, 11.075, 26.775, 11.075, 20.4, 20.4, 11.075, 26.775, 0, 28.9, 0, 28.9, -11.0875, 26.775, -20.45, 20.4, -26.7875, 11.075, -26.7875, 11.075, -28.9, 0, -26.7875, -11.0875, -26.7875, -11.0875, -20.45, -20.45, -11.0875, -26.7875)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21)])
-script = ExtResource("1_ksxfo")
+script = ExtResource("2_qfcor")
 matrix = Transform2D(0.0344086, 0, 0, 0.0344086, 0, 0)
-entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+entries_color = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0)
 entries_ratio = PackedFloat32Array(0, 0.819608, 1)
 focal_point_ratio = 0.0

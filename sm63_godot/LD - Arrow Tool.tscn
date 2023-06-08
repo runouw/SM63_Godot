@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_tdg2k"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_j40q0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_v8y2x"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_clu7n"]
 
-[sub_resource type="Animation" id="Animation_fkn4g"]
+[sub_resource type="Animation" id="Animation_luhn5"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,16 +67,57 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yexei"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nsiu3"]
 _data = {
-"Default": SubResource("Animation_fkn4g")
+"Default": SubResource("Animation_luhn5")
 }
 
+[sub_resource type="GDScript" id="GDScript_255jb"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	gotoAndStop(2);
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false) && _root.MWindow1 == true) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	if ((_root.PlaceMode == \"TileSelect\" && _root.sideframe == \"PlaceTiles\") || (_root.PlaceMode == \"ItemSelect\" && _root.sideframe == \"PlaceItems\")) {
+# 		sc = Math.max(110, sc);
+# 		gotoAndStop(3);
+# 	}
+# 	_xscale += (sc-_xscale)/3;
+# 	_yscale = _xscale;
+# 	txt._xscale += (sc-txt._xscale)/3;
+# 	txt._yscale = txt._xscale;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		_parent.moved.Selected = undefined;
+# 		if (_root.sideframe == \"PlaceTiles\") {
+# 			_root.PlaceMode = \"TileSelect\";
+# 			_root.PlacingTile = undefined;
+# 		} else {
+# 			_root.PlaceMode = \"ItemSelect\";
+# 		}
+# 		//
+# 		_root.M.Window1frame = undefined;
+# 		_root.M.Window1._y = 1000;
+# 		_root.M.Window1.gotoAndStop(\"blank\");
+# 		//
+# 	}
+# };
+# "
+
 [node name="LD - Arrow Tool" type="Node2D"]
+script = ExtResource("1_v8y2x")
+source_xml = "res://sm63/LIBRARY/LD - Arrow Tool.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_yexei")
+"Timeline": SubResource("AnimationLibrary_nsiu3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -148,8 +189,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_tdg2k")]
-script = ExtResource("2_j40q0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
+script = ExtResource("2_clu7n")
 path = "res://sm63_godot/LD - Arrow Tool Deselect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -165,3 +206,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_255jb")

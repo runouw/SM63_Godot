@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Shell - 1.png" id="1_n04am"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Shell - 2.png" id="2_e1l5o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2bhyi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Shell - 1.png" id="2_1jtv5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Shell - 2.png" id="3_f70a3"]
 
-[sub_resource type="Animation" id="Animation_j6dn8"]
+[sub_resource type="Animation" id="Animation_wyaki"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,16 +68,38 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qdvgg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rky48"]
 _data = {
-"Default": SubResource("Animation_j6dn8")
+"Default": SubResource("Animation_wyaki")
 }
 
+[sub_resource type="GDScript" id="GDScript_71wew"]
+script/source = "extends Node
+# frame = 1;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		frame += Math.abs(_parent._parent.xspeed);
+# 		while (frame>20) {
+# 			frame -= 20;
+# 		}
+# 		frame = Math.max(frame, 1);
+# 		gotoAndStop(Math.round(frame));
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Shell Spin" type="Node2D"]
+script = ExtResource("1_2bhyi")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Shell Spin.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qdvgg")
+"Timeline": SubResource("AnimationLibrary_rky48")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -86,7 +109,7 @@ libraries = {
 [node name="@@50701" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -7.5)
-texture = ExtResource("1_n04am")
+texture = ExtResource("2_1jtv5")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -95,7 +118,7 @@ visible = false
 [node name="@@50702" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-8, -7.5)
-texture = ExtResource("2_e1l5o")
+texture = ExtResource("3_f70a3")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
@@ -106,7 +129,7 @@ texture_filter = 1
 position = Vector2(8, -7.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_e1l5o")
+texture = ExtResource("3_f70a3")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
@@ -117,9 +140,12 @@ texture_filter = 1
 position = Vector2(8, -7.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_n04am")
+texture = ExtResource("2_1jtv5")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_71wew")

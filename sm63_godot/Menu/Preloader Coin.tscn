@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_emcni"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_vat7x"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tr3cc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0k3l1"]
 
-[sub_resource type="Animation" id="Animation_tew1e"]
+[sub_resource type="Animation" id="Animation_onemo"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -175,16 +175,42 @@ tracks/13/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6evbj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p1ktk"]
 _data = {
-"Default": SubResource("Animation_tew1e")
+"Default": SubResource("Animation_onemo")
 }
 
+[sub_resource type="GDScript" id="GDScript_anius"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	_x -= 3;
+# 	if (_x<-20) {
+# 		_x = 500;
+# 	}
+# 	if ((_x-_parent.mario._x)<5 && _x<450 && (_root.preloader.mario._currentframe<=22 || _root.preloader.mario._currentframe>=26)) {
+# 		_root.TotalCoins++;
+# 		play();
+# 		onEnterFrame = null;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_o7qrf"]
+script/source = "extends Node
+# this.removeMovieClip(this);
+# "
+
 [node name="Preloader Coin" type="Node2D"]
+script = ExtResource("1_tr3cc")
+source_xml = "res://sm63/LIBRARY/Menu/Preloader Coin.xml"
+linkage = "PreloaderCoin"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6evbj")
+"Timeline": SubResource("AnimationLibrary_p1ktk")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -195,6 +221,8 @@ libraries = {
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 2"]
+position = Vector2(-1, -1.25)
+scale = Vector2(0.5, 0.5)
 
 [node name="@@51496" type="Polygon2D" parent="Layer 3/Frame 2/Shape"]
 color = Color(1, 1, 0, 1)
@@ -205,6 +233,8 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 3"]
+position = Vector2(-0.75, -2.25)
+scale = Vector2(0.5, 0.5)
 
 [node name="@@51497" type="Polygon2D" parent="Layer 3/Frame 3/Shape"]
 color = Color(1, 1, 0, 1)
@@ -248,8 +278,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_emcni")]
-script = ExtResource("2_vat7x")
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_anius")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_0k3l1")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -265,8 +298,8 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_emcni")]
-script = ExtResource("2_vat7x")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("2_0k3l1")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -282,9 +315,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_emcni")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0, -10)
-script = ExtResource("2_vat7x")
+script = ExtResource("2_0k3l1")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -302,6 +335,9 @@ visible = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 7"]
+script = SubResource("GDScript_o7qrf")
 
 [node name="Layer 2" type="Node2D" parent="."]
 

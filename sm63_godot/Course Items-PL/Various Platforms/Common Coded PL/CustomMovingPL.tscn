@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_8t8ob"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_07rwg"]
+
+[sub_resource type="Animation" id="Animation_odkto"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ff8sg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7825i"]
 _data = {
-"Default": SubResource("Animation_8t8ob")
+"Default": SubResource("Animation_odkto")
 }
 
 [node name="CustomMovingPL" type="Node2D"]
+script = ExtResource("1_07rwg")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Common Coded PL/CustomMovingPL.xml"
+linkage = "CustomMovingPL"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ff8sg")
+"Timeline": SubResource("AnimationLibrary_7825i")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

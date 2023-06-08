@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_brgic"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_1pfq1"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_l85yc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_td8lu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3h52n"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_2527t"]
 
-[sub_resource type="Animation" id="Animation_1qadd"]
+[sub_resource type="Animation" id="Animation_ogm04"]
 length = 45.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -116,25 +116,47 @@ tracks/8/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ph3c"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q3n2s"]
 _data = {
-"Default": SubResource("Animation_1qadd")
+"Default": SubResource("Animation_ogm04")
 }
 
+[sub_resource type="GDScript" id="GDScript_pcbx4"]
+script/source = "extends Node
+# nospin = true;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_i711m"]
+script/source = "extends Node
+# stop()
+# onEnterFrame = null"
+
 [node name="BC-1BG" type="Node2D"]
+script = ExtResource("1_td8lu")
+source_xml = "res://sm63/LIBRARY/BC-1BG.xml"
+linkage = "BC-1BG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6ph3c")
+"Timeline": SubResource("AnimationLibrary_q3n2s")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-74.05, 128.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -147,9 +169,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@337" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@337" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-74.05, 148.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -162,9 +184,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@338" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@338" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-94.05, 148.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -177,9 +199,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@339" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@339" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-94.05, 128.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -192,9 +214,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@340" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@340" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-94.05, 108.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -207,9 +229,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@341" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@341" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-74.05, 108.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -222,9 +244,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@342" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@342" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-54.05, 108.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -237,9 +259,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@343" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@343" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-54.05, 128.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -252,9 +274,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@344" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@344" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-54.05, 148.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -267,9 +289,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@345" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@345" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-6.55, 108.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor Falling.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -282,9 +304,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@346" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@346" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(13.45, 108.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor Falling.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -297,9 +319,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@347" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@347" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(13.45, 128.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor Falling.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -312,9 +334,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@348" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@348" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-6.55, 128.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor Falling.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -327,9 +349,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@349" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@349" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-94.05, 88.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -342,9 +364,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@350" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@350" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-74.05, 88.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -357,9 +379,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@351" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@351" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-54.05, 88.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -372,9 +394,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@352" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@352" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-94.05, 68.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -387,9 +409,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@353" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@353" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-74.05, 68.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -402,9 +424,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.3
 
-[node name="@DOMSymbolInstance@354" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_brgic")]
+[node name="@DOMSymbolInstance@354" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-54.05, 68.6)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Mini Meteor.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -426,7 +448,7 @@ brightness = -0.3
 [node name="@@335" type="Polygon2D" parent="Layer 4/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_l85yc")
+texture = ExtResource("3_2527t")
 texture_offset = Vector2(81.9, 0.9)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(-92.925, -21.425, -29.425, -21.425, -29.4, 298.1, -92.9, 298.1)
@@ -443,9 +465,9 @@ end_cap_mode = 2
 [node name="Frame 89" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 89" instance=ExtResource("1_brgic")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 89"]
 position = Vector2(-61.15, 138.35)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/BC Tower Crumble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -461,9 +483,9 @@ brightness = 0.0
 [node name="Frame 142" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 142" instance=ExtResource("1_brgic")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 142"]
 position = Vector2(-61.15, 138.35)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/BC Tower Crumble.tscn"
 red_multiplier = 0.960938
 green_multiplier = 0.960938
@@ -479,9 +501,9 @@ brightness = 0.0
 [node name="Frame 607" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 607" instance=ExtResource("1_brgic")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 607"]
 position = Vector2(-61.15, 138.35)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/BC Tower Crumble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -491,16 +513,16 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.4
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
 
 [node name="Meteore" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Meteore"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Meteore/Frame 0" instance=ExtResource("1_brgic")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Meteore/Frame 0"]
 position = Vector2(-104.85, -163.25)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Meteor Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -516,9 +538,9 @@ brightness = 0.0
 [node name="Frame 1358" type="Node2D" parent="Meteore"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Meteore/Frame 1358" instance=ExtResource("1_brgic")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Meteore/Frame 1358"]
 position = Vector2(3.15, 15.75)
-script = ExtResource("2_1pfq1")
+script = ExtResource("2_3h52n")
 path = "res://sm63_godot/Meteor Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -535,5 +557,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_pcbx4")
+
 [node name="Frame 1358" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 1358"]
+script = SubResource("GDScript_i711m")

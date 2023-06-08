@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_pr4v6"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mk70l"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 2 - 7.png" id="3_h6a6x"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 1 - 3.png" id="4_6u7qp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xp2sf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_uwuqi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 2 - 7.png" id="3_u53ah"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 1 - 3.png" id="4_1dbay"]
 
-[sub_resource type="Animation" id="Animation_s2od6"]
+[sub_resource type="Animation" id="Animation_d185w"]
 length = 1.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -141,25 +141,60 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6yy5q"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2xwbe"]
 _data = {
-"Default": SubResource("Animation_s2od6")
+"Default": SubResource("Animation_d185w")
 }
 
+[sub_resource type="GDScript" id="GDScript_m54dy"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	_root.Course.Char.yspeed = Math.max(0, _root.Course.Char.yspeed);
+# };
+# if (_parent.Skipturn == true) {
+# 	gotoAndPlay(5);
+# 	_parent.Skipturn = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_fvyxx"]
+script/source = "extends Node
+# if (_root.Fluddpow !== \"\") {
+# 	gotoAndPlay(_currentframe+3);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ktuhm"]
+script/source = "extends Node
+# _root.Blackout();
+# "
+
+[sub_resource type="GDScript" id="GDScript_0nu8m"]
+script/source = "extends Node
+# _root.DoorTrasition(_root.door);
+# stop();
+# "
+
 [node name="Mario (none) door" type="Node2D"]
+script = ExtResource("1_xp2sf")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (none) door.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6yy5q")
+"Timeline": SubResource("AnimationLibrary_2xwbe")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_pr4v6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-1.5, 12)
-script = ExtResource("2_mk70l")
+script = ExtResource("2_uwuqi")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -180,7 +215,7 @@ texture_filter = 1
 position = Vector2(8.5, -16)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_h6a6x")
+texture = ExtResource("3_u53ah")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -189,12 +224,12 @@ visible = false
 [node name="@@15453" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-8, -16)
-texture = ExtResource("4_6u7qp")
+texture = ExtResource("4_1dbay")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_pr4v6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-0.5, 0.45)
-script = ExtResource("2_mk70l")
+script = ExtResource("2_uwuqi")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Backwards.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -210,9 +245,9 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_pr4v6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
 position = Vector2(0, -0.55)
-script = ExtResource("2_mk70l")
+script = ExtResource("2_uwuqi")
 path = "res://sm63_godot/Char/Mario CLIPS/Overworld Mario - 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -228,10 +263,10 @@ brightness = 0.0
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16" instance=ExtResource("1_pr4v6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16"]
 position = Vector2(0, -1.3)
 scale = Vector2(0.888885, 0.888885)
-script = ExtResource("2_mk70l")
+script = ExtResource("2_uwuqi")
 path = "res://sm63_godot/Char/Mario CLIPS/Overworld Mario - 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -247,10 +282,10 @@ brightness = 0.0
 [node name="Frame 28" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 28" instance=ExtResource("1_pr4v6")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 28"]
 position = Vector2(0, -2)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("2_mk70l")
+script = ExtResource("2_uwuqi")
 path = "res://sm63_godot/Char/Mario CLIPS/Overworld Mario - 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -270,11 +305,23 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_m54dy")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_fvyxx")
 
 [node name="Frame 29" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 29"]
+script = SubResource("GDScript_ktuhm")
+
 [node name="Frame 41" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 41"]
+script = SubResource("GDScript_0nu8m")

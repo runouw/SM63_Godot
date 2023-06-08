@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_3b4st"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_swpwt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_p61qf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gf5nq"]
 
-[sub_resource type="Animation" id="Animation_0vjye"]
+[sub_resource type="Animation" id="Animation_s3yeq"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,30 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qqrad"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rbuo1"]
 _data = {
-"Default": SubResource("Animation_0vjye")
+"Default": SubResource("Animation_s3yeq")
 }
 
 [node name="Intro Movie 2 Scene 2 Course" type="Node2D"]
+script = ExtResource("1_p61qf")
+source_xml = "res://sm63/LIBRARY/Intro Movie 2 Scene 2 Course.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qqrad")
+"Timeline": SubResource("AnimationLibrary_rbuo1")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_3b4st")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 scale = Vector2(0.999985, 0.999954)
-script = ExtResource("2_swpwt")
+script = ExtResource("2_gf5nq")
 path = "res://sm63_godot/Cinema 2 Castle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

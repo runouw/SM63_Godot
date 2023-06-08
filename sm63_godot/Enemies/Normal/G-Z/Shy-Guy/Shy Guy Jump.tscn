@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Jumping - 1.png" id="1_b2bul"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Jumping - 3.png" id="2_h3ruk"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Jumping - 2.png" id="3_hq2tn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7n7v7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Jumping - 1.png" id="2_ujbki"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Jumping - 3.png" id="3_jplul"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Jumping - 2.png" id="4_ffsn6"]
 
-[sub_resource type="Animation" id="Animation_pl78y"]
+[sub_resource type="Animation" id="Animation_cx821"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -80,16 +81,40 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mamf6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6qewm"]
 _data = {
-"Default": SubResource("Animation_pl78y")
+"Default": SubResource("Animation_cx821")
 }
 
+[sub_resource type="GDScript" id="GDScript_0keaq"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_parent._parent.yspeed>3) {
+# 		nextFrame();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_0jc6o"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_parent._parent.yspeed<3) {
+# 		prevFrame();
+# 	}
+# };
+# "
+
 [node name="Shy Guy Jump" type="Node2D"]
+script = ExtResource("1_7n7v7")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Jump.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_mamf6")
+"Timeline": SubResource("AnimationLibrary_6qewm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -99,7 +124,7 @@ libraries = {
 [node name="@@50727" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -9)
-texture = ExtResource("1_b2bul")
+texture = ExtResource("2_ujbki")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -108,7 +133,7 @@ visible = false
 [node name="@@50728" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-10.5, -8)
-texture = ExtResource("2_h3ruk")
+texture = ExtResource("3_jplul")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -117,7 +142,7 @@ visible = false
 [node name="@@50729" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-10.5, -8)
-texture = ExtResource("3_hq2tn")
+texture = ExtResource("4_ffsn6")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -127,5 +152,11 @@ centered = false
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_0keaq")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_0jc6o")

@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (body) - 3.png" id="1_73nr6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (body) - 1.png" id="2_xc5ck"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_cr2ga"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_kt7qw"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (crown) - 1.png" id="5_b4jee"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 7.png" id="6_wk2g0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_f3snf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (body) - 3.png" id="2_b7be8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (body) - 1.png" id="3_dwaqv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_e4ntk"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (crown) - 1.png" id="5_3n3ke"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo (mouth) - 7.png" id="6_nosdu"]
 
-[sub_resource type="Animation" id="Animation_k1ymi"]
+[sub_resource type="Animation" id="Animation_a705p"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -71,16 +71,37 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rqob7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2b5do"]
 _data = {
-"Default": SubResource("Animation_k1ymi")
+"Default": SubResource("Animation_a705p")
 }
 
+[sub_resource type="GDScript" id="GDScript_qb8h8"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_parent._parent._parent.movedir !== \"up\") {
+# 		play();
+# 		onEnterFrame = null;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_lxl2f"]
+script/source = "extends Node
+# _parent.gotoAndStop(_parent._parent._parent.movedir);
+# "
+
 [node name="King Boo Move Up" type="Node2D"]
+script = ExtResource("1_f3snf")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Boo/King Boo Move Up.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_rqob7")
+"Timeline": SubResource("AnimationLibrary_2b5do")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -90,7 +111,7 @@ libraries = {
 [node name="@@50464" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-56, -48)
-texture = ExtResource("1_73nr6")
+texture = ExtResource("2_b7be8")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -99,16 +120,16 @@ visible = false
 [node name="@@50465" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-58, -48)
-texture = ExtResource("2_xc5ck")
+texture = ExtResource("3_dwaqv")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("3_cr2ga")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-15.65, -22.7)
-script = ExtResource("4_kt7qw")
+script = ExtResource("4_e4ntk")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/Boo Eyes 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -124,18 +145,24 @@ brightness = 0.0
 [node name="@@50462" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-14.15, -66.5)
-texture = ExtResource("5_b4jee")
+texture = ExtResource("5_3n3ke")
 centered = false
 
 [node name="@@50463" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-36.65, -10.65)
-texture = ExtResource("6_wk2g0")
+texture = ExtResource("6_nosdu")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_qb8h8")
+
 [node name="Frame 4" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 4"]
+script = SubResource("GDScript_lxl2f")

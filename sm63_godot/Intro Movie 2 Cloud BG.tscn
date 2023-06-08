@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cloud Background 1 Bit.png" id="1_5g3g5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_j3mqf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cloud Background 1 Bit.png" id="2_3ipqj"]
 
-[sub_resource type="Animation" id="Animation_ki6rk"]
+[sub_resource type="Animation" id="Animation_6rjkg"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q5ypp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1by2"]
 _data = {
-"Default": SubResource("Animation_ki6rk")
+"Default": SubResource("Animation_6rjkg")
 }
 
 [node name="Intro Movie 2 Cloud BG" type="Node2D"]
+script = ExtResource("1_j3mqf")
+source_xml = "res://sm63/LIBRARY/Intro Movie 2 Cloud BG.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_q5ypp")
+"Timeline": SubResource("AnimationLibrary_l1by2")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -41,12 +47,12 @@ position = Vector2(0, 30)
 texture_filter = 1
 position = Vector2(-384, -187.5)
 scale = Vector2(1.5, 1.69684)
-texture = ExtResource("1_5g3g5")
+texture = ExtResource("2_3ipqj")
 centered = false
 
 [node name="@@6246" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(0, -187.5)
 scale = Vector2(1.5, 1.69684)
-texture = ExtResource("1_5g3g5")
+texture = ExtResource("2_3ipqj")
 centered = false

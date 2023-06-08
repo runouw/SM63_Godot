@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_shvfu"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_u1vhd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_e88th"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_q5cex"]
 
-[sub_resource type="Animation" id="Animation_fbep6"]
+[sub_resource type="Animation" id="Animation_5thk1"]
 length = 1.53333
 loop_mode = 1
 tracks/0/type = "value"
@@ -139,27 +139,32 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nfofe"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hwbk0"]
 _data = {
-"Default": SubResource("Animation_fbep6")
+"Default": SubResource("Animation_5thk1")
 }
 
 [node name="FXFlash2  ri" type="Node2D"]
+script = ExtResource("1_e88th")
+source_xml = "res://sm63/LIBRARY/FXFlash2  ri.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nfofe")
+"Timeline": SubResource("AnimationLibrary_hwbk0")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_shvfu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-0.15, 0.1)
 rotation = -1.5708
 scale = Vector2(0.25, 0.25)
-script = ExtResource("2_u1vhd")
+script = ExtResource("2_q5cex")
 path = "res://sm63_godot/FXFlash2 Clip     ri.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -175,9 +180,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_shvfu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0.85, 0.1)
-script = ExtResource("2_u1vhd")
+script = ExtResource("2_q5cex")
 path = "res://sm63_godot/FXFlash2 Clip     ri.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -193,11 +198,11 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8" instance=ExtResource("1_shvfu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8"]
 position = Vector2(0.1, 0.1)
 rotation = 2.09439
 scale = Vector2(1.5, 1.5)
-script = ExtResource("2_u1vhd")
+script = ExtResource("2_q5cex")
 path = "res://sm63_godot/FXFlash2 Clip     ri.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -213,11 +218,11 @@ brightness = 0.0
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 12" instance=ExtResource("1_shvfu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 12"]
 position = Vector2(0.05, 0.05)
 rotation = -0.26485
 scale = Vector2(0.874265, 0.874279)
-script = ExtResource("2_u1vhd")
+script = ExtResource("2_q5cex")
 path = "res://sm63_godot/FXFlash2 Clip     ri.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -233,11 +238,11 @@ brightness = 0.0
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16" instance=ExtResource("1_shvfu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 16"]
 position = Vector2(-0.15, 0.1)
 rotation = -1.5708
 scale = Vector2(0.25, 0.25)
-script = ExtResource("2_u1vhd")
+script = ExtResource("2_q5cex")
 path = "res://sm63_godot/FXFlash2 Clip     ri.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -258,6 +263,7 @@ visible = false
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 0"]
+scale = Vector2(2, 2)
 
 [node name="@@6146" type="Line2D" parent="Layer 3/Frame 0/Shape"]
 width = 1.0
@@ -270,6 +276,7 @@ end_cap_mode = 2
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 3/Frame 9"]
+scale = Vector2(0.799988, 0.799988)
 
 [node name="@@6147" type="Line2D" parent="Layer 3/Frame 9/Shape"]
 width = 1.0

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_gikgh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xca0x"]
+
+[sub_resource type="Animation" id="Animation_djbes"]
 length = 0.233333
 loop_mode = 1
 tracks/0/type = "value"
@@ -112,16 +114,70 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u0dpw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tq6q3"]
 _data = {
-"Default": SubResource("Animation_gikgh")
+"Default": SubResource("Animation_djbes")
 }
 
+[sub_resource type="GDScript" id="GDScript_c47s0"]
+script/source = "extends Node
+# al = 50;
+# //
+# _alpha = 50;
+# //
+# onEnterFrame = function () {
+# 	if (_parent.greyness.aa == 0) {
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 			sc = 120;
+# 			al = 100;
+# 		} else {
+# 			sc = 100;
+# 			al = 50;
+# 		}
+# 		if (_parent.dir == _name) {
+# 			gotoAndStop(_name+\"2\");
+# 			sc = 125;
+# 			al = 100;
+# 		} else {
+# 			gotoAndStop(_name);
+# 		}
+# 		_xscale += (sc-_xscale)/2;
+# 		_yscale = _xscale;
+# 		_alpha += (al-_alpha)/2;
+# 		//
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		_xscale = 140;
+# 		_yscale = 140;
+# 		_parent.dir = _name;
+# 	}
+# };
+# if (_parent.dir == undefined) {
+# 	_parent.dir = \"Both\";
+# }
+# if (_parent.dir == _name) {
+# 	gotoAndStop(_name+\"2\");
+# 	_alpha = 100;
+# 	_xscale = 120;
+# 	_yscale = 120;
+# } else {
+# 	gotoAndStop(_name);
+# }
+# //_root.BGquality == \"LOW\"
+# "
+
 [node name="LDW - Window Bullet Direction" type="Node2D"]
+script = ExtResource("1_xca0x")
+source_xml = "res://sm63/LIBRARY/LDW - Window Bullet Direction.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_u0dpw")
+"Timeline": SubResource("AnimationLibrary_tq6q3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -243,6 +299,9 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_c47s0")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

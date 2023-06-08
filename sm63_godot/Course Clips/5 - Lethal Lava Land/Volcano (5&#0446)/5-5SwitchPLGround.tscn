@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_bfqrk"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0bsc3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_78jej"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_r18uk"]
 
-[sub_resource type="Animation" id="Animation_goaa2"]
+[sub_resource type="Animation" id="Animation_av8qr"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,24 +55,41 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2q723"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hn6ma"]
 _data = {
-"Default": SubResource("Animation_goaa2")
+"Default": SubResource("Animation_av8qr")
 }
 
+[sub_resource type="GDScript" id="GDScript_q44u8"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.Course.BackGFX.SwitchPL == true) {
+# 		gotoAndStop(1);
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# };
+# stop();
+# "
+
 [node name="5-5SwitchPLGround" type="Node2D"]
+script = ExtResource("1_78jej")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5SwitchPLGround.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2q723")
+"Timeline": SubResource("AnimationLibrary_hn6ma")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_bfqrk")]
-script = ExtResource("2_0bsc3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_r18uk")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5SwitchGFXClip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -82,7 +99,7 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 0.4, 0, 1)
 brightness = 0.0
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -91,6 +108,9 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_q44u8")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

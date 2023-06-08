@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_rk8nq"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_wlxbp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lvnes"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_q74y3"]
 
-[sub_resource type="Animation" id="Animation_gegbx"]
+[sub_resource type="Animation" id="Animation_1dik5"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +31,48 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6a5l0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3pvld"]
 _data = {
-"Default": SubResource("Animation_gegbx")
+"Default": SubResource("Animation_1dik5")
 }
 
+[sub_resource type="GDScript" id="GDScript_58lyj"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 280;
+# 	WaterDeepness = 40;
+# 	polygons = 28;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_b3kap"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 210;
+# 	WaterDeepness = 40;
+# 	polygons = 20;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_qyutb"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 800;
+# 	WaterDeepness = 600;
+# 	polygons = 80;
+# }
+# "
+
 [node name="9-04 Water" type="Node2D"]
+script = ExtResource("1_lvnes")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-04 Frosty Land/9-04 Water.xml"
+linkage = "9-04Water"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6a5l0")
+"Timeline": SubResource("AnimationLibrary_3pvld")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,10 +86,10 @@ color = Color(0.156863, 0.501961, 0.843137, 0.501961)
 polygon = PackedVector2Array(3086.8, 255, 4571.5, 255, 4571.5, 943.15, 3086.8, 943.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_rk8nq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(3683.9, 215.1)
 scale = Vector2(1, 1.00278)
-script = ExtResource("2_wlxbp")
+script = ExtResource("2_q74y3")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -70,10 +102,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@40393" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_rk8nq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_58lyj")
+
+[node name="@DOMSymbolInstance@40393" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(4233.9, 215.1)
 scale = Vector2(1, 1.00278)
-script = ExtResource("2_wlxbp")
+script = ExtResource("2_q74y3")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -86,10 +121,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@40394" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_rk8nq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@40393"]
+script = SubResource("GDScript_b3kap")
+
+[node name="@DOMSymbolInstance@40394" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(592.5, 160.95)
 scale = Vector2(1, 1.00278)
-script = ExtResource("2_wlxbp")
+script = ExtResource("2_q74y3")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -101,6 +139,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@40394"]
+script = SubResource("GDScript_qyutb")
 
 [node name="Layer 2" type="Node2D" parent="."]
 

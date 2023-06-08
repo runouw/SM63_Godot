@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_6qdtk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5hi3e"]
+
+[sub_resource type="Animation" id="Animation_jadon"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,35 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6yuck"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qgo57"]
 _data = {
-"Default": SubResource("Animation_6qdtk")
+"Default": SubResource("Animation_jadon")
 }
 
+[sub_resource type="GDScript" id="GDScript_a2t11"]
+script/source = "extends Node
+# if (scale == 1) {
+# 	_xscale = 100;
+# }
+# if (scale == 2) {
+# 	_xscale = 150;
+# }
+# if (scale == 3) {
+# 	_xscale = 200;
+# }
+# stop();
+# "
+
 [node name="Moving Green Code" type="Node2D"]
+script = ExtResource("1_5hi3e")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Common Coded PL/Green PL/Moving Green Code.xml"
+linkage = "GreenPLcode"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6yuck")
+"Timeline": SubResource("AnimationLibrary_qgo57")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +75,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_a2t11")

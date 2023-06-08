@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_hikv5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rnhqe"]
+
+[sub_resource type="Animation" id="Animation_ocpb2"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2nj0c"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5amc7"]
 _data = {
-"Default": SubResource("Animation_hikv5")
+"Default": SubResource("Animation_ocpb2")
 }
 
 [node name="M3-2 BPlatforms" type="Node2D"]
+script = ExtResource("1_rnhqe")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-2 BPlatforms.xml"
+linkage = "M3-2BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2nj0c")
+"Timeline": SubResource("AnimationLibrary_5amc7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

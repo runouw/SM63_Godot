@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Sand.png" id="1_oqvmw"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brick.png" id="2_iy0ay"]
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="3_8wmx7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mif7t"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Sand.png" id="2_xapig"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brick.png" id="3_ipjrc"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="4_j2ho2"]
 
-[sub_resource type="Animation" id="Animation_oqm1h"]
+[sub_resource type="Animation" id="Animation_c12tx"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +33,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ghxr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h08oj"]
 _data = {
-"Default": SubResource("Animation_oqm1h")
+"Default": SubResource("Animation_c12tx")
 }
 
 [node name="M1-1 Front GFX Alpha" type="Node2D"]
+script = ExtResource("1_mif7t")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Front GFX Alpha.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1ghxr")
+"Timeline": SubResource("AnimationLibrary_h08oj")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -53,7 +59,7 @@ libraries = {
 [node name="@@45626" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_oqvmw")
+texture = ExtResource("2_xapig")
 texture_offset = Vector2(-199.3, -130.3)
 polygon = PackedVector2Array(-128.3, -131.15, 128.175, -131.15, 127.773, -117.65, 127.35, -104.15, 126.35, -100.4, 121.65, -86.15, 120.5, -68.25, 120.2, -57.3, 124.3, -47.15, 127.55, -39, 133.1, -27.25, 135.4, -21, 141.8, -2.15, 145.85, 0.75, 159.85, 5.75, 163.8, 6.45, 165.45, 6.525, 165.45, 7.85, -160.7, 7.85, -159.95, 7.05, -150.5, -5.35, -144, -21.1, -143.45, -24.2, -141.688, -35.7125, -139.2, -47.15, -134.488, -66.475, -129.75, -87.05, -127.25, -104.15, -127.275, -114.65, -127.55, -125.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29)])
@@ -83,7 +89,7 @@ end_cap_mode = 2
 [node name="@@45621" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_iy0ay")
+texture = ExtResource("3_ipjrc")
 texture_offset = Vector2(-12.15, 122.15)
 polygon = PackedVector2Array(-140.25, -9.1, 139.7, -9.1, 161.7, 7.9, -161.7, 9.1, -161.7, 9.1, -160.286, 7.9)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
@@ -91,7 +97,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 [node name="@@45622" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-120.45, -136.9, -100.45, -136.9, -100.45, -9.1, -120.45, -9.1, -120.45, -132.325, 60.65, -132.325, 60.65, -132.325, 93.675, -9.1, 72.95, -9.1, 41.325, -127.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9)])
-script = ExtResource("3_8wmx7")
+script = ExtResource("4_j2ho2")
 matrix = Transform2D(0, -0.0736084, 0.0751953, 0, 83.35, -77)
 entries_color = PackedColorArray(0.333333, 0.333333, 0.333333, 1, 0.54902, 0.54902, 0.54902, 0)
 entries_ratio = PackedFloat32Array(0, 1)

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_aoh2l"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7f1df"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ftxhq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_a34pu"]
 
-[sub_resource type="Animation" id="Animation_r07sj"]
+[sub_resource type="Animation" id="Animation_onkd4"]
 length = 0.466667
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,25 +67,92 @@ tracks/4/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b8i1q"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tc7ag"]
 _data = {
-"Default": SubResource("Animation_r07sj")
+"Default": SubResource("Animation_onkd4")
 }
 
+[sub_resource type="GDScript" id="GDScript_toxou"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_yobjm"]
+script/source = "extends Node
+# count = 0;
+# wait = 32;
+# duration = 800;
+# // Activated Sound fx
+# if (sound == true) {
+# 	_root.Mariosound = new Sound(this);
+# 	_root.Mariosound.attachSound(\"Tick\");
+# 	_root.Mariosound.start(0, 1);
+# 	_root.Mariosound.setVolume(_root.MarioVolume);
+# }
+# //  
+# onEnterFrame = function () {
+# 	count++;
+# 	if ((count/wait) == Math.round(count/wait) && count<=duration && sound == true) {
+# 		if (count>(1/2)*duration) {
+# 			wait = 16;
+# 			if (count>(3/4)*duration) {
+# 				wait = 8;
+# 				play();
+# 			}
+# 			if (count>(9/10)*duration) {
+# 				wait = 4;
+# 				play();
+# 			}
+# 		}
+# 		_root.Mariosound = new Sound(this);
+# 		_root.Mariosound.attachSound(\"Tick\");
+# 		_root.Mariosound.start(0, 1);
+# 		_root.Mariosound.setVolume(_root.MarioVolume);
+# 	} else if (count>duration) {
+# 		wait = duration;
+# 		if (_currentframe>=10) {
+# 			gotoAndStop(9);
+# 		}
+# 		prevFrame();
+# 		if (_currentframe<=1) {
+# 			count = 0;
+# 			stop();
+# 			//_root.Course.Platforms[itemname].removeMovieClip();
+# 			onEnterFrame = null;
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_0brsa"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_cwrps"]
+script/source = "extends Node
+# gotoAndStop(11);
+# "
+
 [node name="7-2 Rotating Triangles GFX" type="Node2D"]
+script = ExtResource("1_ftxhq")
+source_xml = "res://sm63/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Rotating Triangles GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_b8i1q")
+"Timeline": SubResource("AnimationLibrary_tc7ag")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(278.45, -82.1)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -98,9 +165,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35292" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35292" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(398.45, -82.1)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -113,9 +180,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35293" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35293" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(518.45, -82.1)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -128,9 +195,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35294" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35294" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(97.45, -135.5)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -143,9 +210,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35295" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35295" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(157.45, -85.5)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -158,9 +225,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35296" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35296" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(37.45, -85.5)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -173,9 +240,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35297" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35297" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(-32.55, 4.5)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -188,9 +255,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35298" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35298" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(643.45, -118.05)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -203,9 +270,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35299" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35299" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(713.45, -198.05)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -218,9 +285,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35300" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35300" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(653.45, -278.05)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -233,9 +300,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35301" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35301" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(783.45, -278.05)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -248,9 +315,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35302" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35302" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(713.45, -358.05)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -263,9 +330,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35303" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35303" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(621.45, -403.1)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -278,9 +345,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35304" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35304" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(531.45, -423.1)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -293,9 +360,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35305" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35305" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(401.45, -443.1)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -308,9 +375,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@35306" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_aoh2l")]
+[node name="@DOMSymbolInstance@35306" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(251.45, -473.1)
-script = ExtResource("2_7f1df")
+script = ExtResource("2_a34pu")
 path = "res://sm63_godot/Course Clips/7-2Rotatin Triangles Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -327,11 +394,23 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 8"]
 
+[node name="AS2" type="Node" parent="Layer 8/Frame 0"]
+script = SubResource("GDScript_toxou")
+
 [node name="Frame 9" type="Node2D" parent="Layer 8"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 8/Frame 9"]
+script = SubResource("GDScript_yobjm")
 
 [node name="Frame 10" type="Node2D" parent="Layer 8"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 8/Frame 10"]
+script = SubResource("GDScript_0brsa")
+
 [node name="Frame 13" type="Node2D" parent="Layer 8"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 8/Frame 13"]
+script = SubResource("GDScript_cwrps")

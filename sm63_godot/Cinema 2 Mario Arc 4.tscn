@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 3.png" id="1_lwc5i"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1dkgc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 3.png" id="2_ialrt"]
 
-[sub_resource type="Animation" id="Animation_y8yc3"]
+[sub_resource type="Animation" id="Animation_2j2hm"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_37rot"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_unx1l"]
 _data = {
-"Default": SubResource("Animation_y8yc3")
+"Default": SubResource("Animation_2j2hm")
 }
 
 [node name="Cinema 2 Mario Arc 4" type="Node2D"]
+script = ExtResource("1_1dkgc")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Mario Arc 4.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_37rot")
+"Timeline": SubResource("AnimationLibrary_unx1l")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,7 +57,7 @@ texture_filter = 1
 position = Vector2(9.5, -16)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_lwc5i")
+texture = ExtResource("2_ialrt")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
@@ -62,5 +68,5 @@ texture_filter = 1
 position = Vector2(69.5, -16)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_lwc5i")
+texture = ExtResource("2_ialrt")
 centered = false

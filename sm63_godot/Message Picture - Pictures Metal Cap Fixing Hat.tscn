@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (None) - Fixing Hat - 1.png" id="1_w7qd0"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (None) - Fixing Hat - 2.png" id="2_pqtqf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2ltda"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (None) - Fixing Hat - 1.png" id="2_meboq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (None) - Fixing Hat - 2.png" id="3_g8hpe"]
 
-[sub_resource type="Animation" id="Animation_rfntq"]
+[sub_resource type="Animation" id="Animation_k1rqt"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ltrpq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7viy"]
 _data = {
-"Default": SubResource("Animation_rfntq")
+"Default": SubResource("Animation_k1rqt")
 }
 
 [node name="Message Picture - Pictures Metal Cap Fixing Hat" type="Node2D"]
+script = ExtResource("1_2ltda")
+source_xml = "res://sm63/LIBRARY/Message Picture - Pictures Metal Cap Fixing Hat.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ltrpq")
+"Timeline": SubResource("AnimationLibrary_l7viy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -50,7 +56,7 @@ libraries = {
 [node name="@@13276" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-11, -17)
-texture = ExtResource("1_w7qd0")
+texture = ExtResource("2_meboq")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -59,5 +65,5 @@ visible = false
 [node name="@@13277" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-12, -18)
-texture = ExtResource("2_pqtqf")
+texture = ExtResource("3_g8hpe")
 centered = false

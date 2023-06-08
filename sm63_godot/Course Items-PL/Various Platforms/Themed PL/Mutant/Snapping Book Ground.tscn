@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_0wrvi"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8tsd0"]
+
+[sub_resource type="Animation" id="Animation_vfrku"]
 length = 10.8667
 loop_mode = 1
 tracks/0/type = "value"
@@ -292,16 +294,26 @@ tracks/23/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ry7p6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a83ai"]
 _data = {
-"Default": SubResource("Animation_0wrvi")
+"Default": SubResource("Animation_vfrku")
 }
 
+[sub_resource type="GDScript" id="GDScript_shsrl"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Snapping Book Ground" type="Node2D"]
+script = ExtResource("1_8tsd0")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Themed PL/Mutant/Snapping Book Ground.xml"
+linkage = "BookGround"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ry7p6")
+"Timeline": SubResource("AnimationLibrary_a83ai")
 }
 
 [node name="@Bottom Pages@48249" type="Node2D" parent="."]
@@ -1005,3 +1017,6 @@ end_cap_mode = 2
 [node name="Cody" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Cody"]
+
+[node name="AS2" type="Node" parent="Cody/Frame 0"]
+script = SubResource("GDScript_shsrl")

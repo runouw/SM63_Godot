@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_g4t07"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_iurrf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2p88t"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_m325c"]
 
-[sub_resource type="Animation" id="Animation_fu0hx"]
+[sub_resource type="Animation" id="Animation_18g2a"]
 length = 1.06667
 loop_mode = 1
 tracks/0/type = "value"
@@ -127,16 +127,61 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pyhv1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3cu6f"]
 _data = {
-"Default": SubResource("Animation_fu0hx")
+"Default": SubResource("Animation_18g2a")
 }
 
+[sub_resource type="GDScript" id="GDScript_a7r1g"]
+script/source = "extends Node
+# gotoAndStop(\"nes\");
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_oc10g"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Mario-Faint\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_cce4g"]
+script/source = "extends Node
+# _root.Course.Char.attackFrame = \"Respawn\";
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_ng8yc"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# _root.bgsong.stop();
+# //
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Mario-Fall\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# //
+# _root.Course.FrontGFX.attachMovie(\"MarioDeathGFX\", \"MarioDeathGFX\"+_root.Course.FrontGFX.getNextHighestDepth(), _root.Course.FrontGFX.getNextHighestDepth(), {_x:_root.Course.Char._x-_root.Course.FrontGFX._x, _y:_root.Course.Char._y-_root.Course.FrontGFX._y});
+# "
+
 [node name="Mario (none) Faint" type="Node2D"]
+script = ExtResource("1_2p88t")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (none) Faint.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pyhv1")
+"Timeline": SubResource("AnimationLibrary_3cu6f")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -150,9 +195,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_g4t07")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-6, 18)
-script = ExtResource("2_iurrf")
+script = ExtResource("2_m325c")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -168,9 +213,9 @@ brightness = 0.0
 [node name="Frame 28" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 28" instance=ExtResource("1_g4t07")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 28"]
 position = Vector2(-6, 18)
-script = ExtResource("2_iurrf")
+script = ExtResource("2_m325c")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -189,9 +234,9 @@ visible = false
 [node name="Frame 31" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 31" instance=ExtResource("1_g4t07")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 31"]
 position = Vector2(-3, 4.55)
-script = ExtResource("2_iurrf")
+script = ExtResource("2_m325c")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Fiant GFX Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -208,11 +253,23 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_a7r1g")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_oc10g")
 
 [node name="Frame 29" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 29"]
+script = SubResource("GDScript_cce4g")
+
 [node name="Frame 30" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 30"]
+script = SubResource("GDScript_ng8yc")

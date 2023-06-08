@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_wqxfp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_260nb"]
+
+[sub_resource type="Animation" id="Animation_ihx8a"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,51 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_683iw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xo3py"]
 _data = {
-"Default": SubResource("Animation_wqxfp")
+"Default": SubResource("Animation_ihx8a")
 }
 
+[sub_resource type="GDScript" id="GDScript_23fiy"]
+script/source = "extends Node
+# //if(_parent.Mode = \"play\"){
+# //gotoAndStop(5);
+# //}
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true) && _parent.Mode !== \"none\") {
+# 		sc = 105;
+# 		gotoAndStop(4);
+# 	} else {
+# 		if (_parent.Mode == \"none\") {
+# 			gotoAndStop(2);
+# 		} else {
+# 			gotoAndStop(3);
+# 		}
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (sc == 105) {
+# 		_xscale = 130;
+# 		_yscale = 130;
+# 		_parent.Mode = \"none\";
+# 		_parent.StopSong();
+# 	}
+# };
+# "
+
 [node name="Menu - Sound Test Pause" type="Node2D"]
+script = ExtResource("1_260nb")
+source_xml = "res://sm63/LIBRARY/Menu - Sound Test Pause.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_683iw")
+"Timeline": SubResource("AnimationLibrary_xo3py")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -142,6 +179,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="@Shape@13225" type="Node2D" parent="Layer 1/Frame 3"]
+scale = Vector2(1.5, 1.5)
 
 [node name="@@13226" type="Polygon2D" parent="Layer 1/Frame 3/@Shape@13225"]
 color = Color(1, 0, 0, 1)
@@ -151,6 +189,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_23fiy")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

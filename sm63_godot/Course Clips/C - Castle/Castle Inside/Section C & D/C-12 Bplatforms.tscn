@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_815cm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u5l0l"]
+
+[sub_resource type="Animation" id="Animation_hyebn"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -52,16 +54,32 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1hky8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r6t70"]
 _data = {
-"Default": SubResource("Animation_815cm")
+"Default": SubResource("Animation_hyebn")
 }
 
+[sub_resource type="GDScript" id="GDScript_g5py1"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.Course.Char.air == false) {
+# 		gotoAndStop(2);
+# 		onEnterFrame = null;
+# 	}
+# };
+# "
+
 [node name="C-12 Bplatforms" type="Node2D"]
+script = ExtResource("1_u5l0l")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section C & D/C-12 Bplatforms.xml"
+linkage = "C-12BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1hky8")
+"Timeline": SubResource("AnimationLibrary_r6t70")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -69,6 +87,7 @@ libraries = {
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
+position = Vector2(50, 100)
 
 [node name="@@44453" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 color = Color(0, 1, 1, 1)
@@ -79,6 +98,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 1"]
+position = Vector2(50, 0)
 
 [node name="@@44454" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
 color = Color(0, 1, 1, 1)
@@ -99,3 +119,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_g5py1")

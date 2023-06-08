@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_jgns0"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_iq068"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_bgtwl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_uqceg"]
 
-[sub_resource type="Animation" id="Animation_r8jrd"]
+[sub_resource type="Animation" id="Animation_nu4ah"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,54 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fc6k8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3iep3"]
 _data = {
-"Default": SubResource("Animation_r8jrd")
+"Default": SubResource("Animation_nu4ah")
 }
 
+[sub_resource type="GDScript" id="GDScript_2yl45"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	color = Math.round(_root.TotalStars*1.5)+25;
+# 	color2 = Math.abs(100-color);
+# 	myColor = new Color(this);
+# 	colorTrans = new Object();
+# 	colorTrans = {ra:(color*0.5)+50-(color2/3), rb:0, ga:(color*0.5)+50-(color2/3), gb:0, ba:(color*0.5)+50-(color2/3), bb:0, aa:100, ab:0};
+# 	myColor.setTransform(colorTrans);
+# }
+# onClipEvent (enterFrame) {
+# 	color += Math.round(((_root.TotalStars*1.5)+25)-color)/7;
+# 	if (_root.CheatCastleRestore == true) {
+# 		color = 100;
+# 	}
+# 	color = Math.max(color, 0);
+# 	color = Math.min(color, 100);
+# 	color2 = Math.abs(100-color);
+# 	// color = percent of stars obained
+# 	// color 2  = percent of stars not yet obtained
+# 	colorTrans = {ra:(color*0.75)+25-(color2/5), rb:0, ga:(color*0.9)+10-(color2/3), gb:0, ba:(color*0.9)+10-(color2/3), bb:0, aa:100, ab:0};
+# 	myColor.setTransform(colorTrans);
+# }
+# "
+
 [node name="Bowser Battle 2 Cinema Dark BG" type="Node2D"]
+script = ExtResource("1_bgtwl")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 2 Cinema Dark BG.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fc6k8")
+"Timeline": SubResource("AnimationLibrary_3iep3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_jgns0")]
-script = ExtResource("2_iq068")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_uqceg")
 path = "res://sm63_godot/Intro Movie Scene 2 Background.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -48,3 +78,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_2yl45")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_a1h21"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_o6k05"]
+
+[sub_resource type="Animation" id="Animation_2lekq"]
 length = 0.233333
 loop_mode = 1
 tracks/0/type = "value"
@@ -100,16 +102,55 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7g154"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n1vo7"]
 _data = {
-"Default": SubResource("Animation_a1h21")
+"Default": SubResource("Animation_2lekq")
 }
 
+[sub_resource type="GDScript" id="GDScript_hen3y"]
+script/source = "extends Node
+# num = Number(_name);
+# gotoAndStop(num+2);
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		xs = 140;
+# 	} else {
+# 		xs = 100;
+# 	}
+# 	//make if code here vvv
+# 	if (currentvoteisthis == true) {
+# 		xs = 95;
+# 		_alpha += (50-_alpha)/2;
+# 	} else {
+# 		_alpha += (100-_alpha)/2;
+# 	}
+# 	_xscale += (xs-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (xs == 140) {
+# 		_xscale = 200;
+# 		//
+# 		_parent._parent.voteani.cli.play();
+# 		_parent._parent.voteani.cli.num = num;
+# 		_parent._parent.voteani.cli._x = num*15;
+# 		//
+# 		
+# 		//_parent.N(\"LD\");
+# 	}
+# };
+# "
+
 [node name="LFP Voteihn" type="Node2D"]
+script = ExtResource("1_o6k05")
+source_xml = "res://sm63/LIBRARY/LFP Voteihn.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7g154")
+"Timeline": SubResource("AnimationLibrary_n1vo7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -176,6 +217,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_hen3y")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

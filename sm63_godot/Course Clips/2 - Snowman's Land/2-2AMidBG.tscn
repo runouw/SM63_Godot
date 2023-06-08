@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_58shy"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_y6vgq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_uiski"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_qphi6"]
 
-[sub_resource type="Animation" id="Animation_kvxgy"]
+[sub_resource type="Animation" id="Animation_m7gvi"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,26 +19,31 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yjkdc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ly16"]
 _data = {
-"Default": SubResource("Animation_kvxgy")
+"Default": SubResource("Animation_m7gvi")
 }
 
 [node name="2-2AMidBG" type="Node2D"]
+script = ExtResource("1_uiski")
+source_xml = "res://sm63/LIBRARY/Course Clips/2 - Snowman's Land/2-2AMidBG.xml"
+linkage = "2-2AMidBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_yjkdc")
+"Timeline": SubResource("AnimationLibrary_8ly16")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58shy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 30)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_y6vgq")
+script = ExtResource("2_qphi6")
 path = "res://sm63_godot/Course Clips/2 - Snowman's Land/2-2AMidBGTint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -48,5 +53,5 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.5
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0.8, 0.8, 0.8, 1)
 brightness = 0.0

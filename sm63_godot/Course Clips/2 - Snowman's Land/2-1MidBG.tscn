@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_nrb73"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ierp8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_j62ao"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_yhb28"]
 
-[sub_resource type="Animation" id="Animation_laisx"]
+[sub_resource type="Animation" id="Animation_eq5us"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,26 +31,31 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ocb2h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5t8nm"]
 _data = {
-"Default": SubResource("Animation_laisx")
+"Default": SubResource("Animation_eq5us")
 }
 
 [node name="2-1MidBG" type="Node2D"]
+script = ExtResource("1_j62ao")
+source_xml = "res://sm63/LIBRARY/Course Clips/2 - Snowman's Land/2-1MidBG.xml"
+linkage = "2-1MidBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ocb2h")
+"Timeline": SubResource("AnimationLibrary_5t8nm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_nrb73")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(127.95, -2.05)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ierp8")
+script = ExtResource("2_yhb28")
 path = "res://sm63_godot/Course Clips/2 - Snowman's Land/2-1MidBGTint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -60,7 +65,7 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.5
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0.8, 0.8, 0.8, 1)
 brightness = 0.0
 
 [node name="Layer 2" type="Node2D" parent="."]

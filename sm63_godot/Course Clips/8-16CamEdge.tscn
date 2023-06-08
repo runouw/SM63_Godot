@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_edr4i"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nm6er"]
+
+[sub_resource type="Animation" id="Animation_vfq5i"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4714a"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ocqo7"]
 _data = {
-"Default": SubResource("Animation_edr4i")
+"Default": SubResource("Animation_vfq5i")
 }
 
 [node name="8-16CamEdge" type="Node2D"]
+script = ExtResource("1_nm6er")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-16CamEdge.xml"
+linkage = "8-16CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4714a")
+"Timeline": SubResource("AnimationLibrary_ocqo7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_3k2vd"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_ubs6n"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_d23cw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gd500"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_v3phu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_vt7q4"]
 
-[sub_resource type="Animation" id="Animation_cl7qy"]
+[sub_resource type="Animation" id="Animation_jqxtr"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,57 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qrm2g"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_exxa5"]
 _data = {
-"Default": SubResource("Animation_cl7qy")
+"Default": SubResource("Animation_jqxtr")
 }
 
+[sub_resource type="GDScript" id="GDScript_2cxl0"]
+script/source = "extends Node
+# //filenum = 1, 2, or 3
+# sin = 0;
+# sin2 = 0;
+# rotplus = 0;
+# Y = _y;
+# onEnterFrame = function () {
+# 	if (_parent._parent.greyness._alpha<50 && _alpha>50) {
+# 		sin += 0.05;
+# 		sin2 += 0.03;
+# 		_y = (2*Math.sin(sin2))+Y;
+# 		this._rotation = -rotplus+(2*Math.sin(sin));
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 			rotplus += (5-rotplus)/3;
+# 			_xscale += (120-_xscale)/3;
+# 			txt._xscale += (120-txt._xscale)/3;
+# 		} else {
+# 			rotplus += (0-rotplus)/3;
+# 			_xscale += (100-_xscale)/3;
+# 			txt._xscale += (100-txt._xscale)/3;
+# 		}
+# 		_yscale = _xscale;
+# 		txt._yscale = txt._xscale;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false) && _parent._parent.greyness._alpha<20  && _alpha>50) {
+# 		_xscale = 200;
+# 		_yscale = 200;
+# 		_parent.Yes();
+# 	}
+# };
+# //System.setClipboard
+# "
+
 [node name="LDW - Save Save Yes" type="Node2D"]
+script = ExtResource("1_gd500")
+source_xml = "res://sm63/LIBRARY/LDW - Save-Load/LDW - Save Save Yes.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qrm2g")
+"Timeline": SubResource("AnimationLibrary_exxa5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -65,7 +106,7 @@ libraries = {
 [node name="@@50854" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-12.075, -8.075, 12.075, -8.075, 12.075, 7.975, -12.075, 7.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_3k2vd")
+script = ExtResource("2_v3phu")
 matrix = Transform2D(0, 0.0490875, -0.0157318, 0, -0.55, -18.9)
 entries_color = PackedColorArray(0.992157, 0.443137, 0.443137, 1, 0.882353, 0.00784314, 0.0156863, 1, 0.494118, 0.00392157, 0.00392157, 1)
 entries_ratio = PackedFloat32Array(0, 0.321569, 1)
@@ -83,8 +124,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_ubs6n")]
-script = ExtResource("3_d23cw")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("3_vt7q4")
 path = "res://sm63_godot/LDW - Save-Load/LDW - Save Save &#034Yes&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,3 +141,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_2cxl0")

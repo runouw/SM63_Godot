@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_74rju"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xhbs7"]
+
+[sub_resource type="Animation" id="Animation_ayyb5"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gsmlw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1bdr3"]
 _data = {
-"Default": SubResource("Animation_74rju")
+"Default": SubResource("Animation_ayyb5")
 }
 
 [node name="Cinema 1 Toad Text" type="Node2D"]
+script = ExtResource("1_xhbs7")
+source_xml = "res://sm63/LIBRARY/Cinema 1 Toad Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gsmlw")
+"Timeline": SubResource("AnimationLibrary_1bdr3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

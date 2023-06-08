@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_3axu0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_l2ela"]
+
+[sub_resource type="Animation" id="Animation_pxvua"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1vu8t"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lm8po"]
 _data = {
-"Default": SubResource("Animation_3axu0")
+"Default": SubResource("Animation_pxvua")
 }
 
 [node name="Options Low Text" type="Node2D"]
+script = ExtResource("1_l2ela")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Options/Options Low Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1vu8t")
+"Timeline": SubResource("AnimationLibrary_lm8po")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

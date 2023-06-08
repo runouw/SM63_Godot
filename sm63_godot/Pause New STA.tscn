@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Blue Shine.png" id="1_l0jbi"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Yellow Shine.png" id="2_wwblu"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_h80fo"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_vgmd4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_axugu"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Blue Shine.png" id="2_gjhg4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Yellow Shine.png" id="3_qy7al"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_y1opx"]
 
-[sub_resource type="Animation" id="Animation_6p5fq"]
+[sub_resource type="Animation" id="Animation_jddgx"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -57,16 +57,48 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jg0l5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6d825"]
 _data = {
-"Default": SubResource("Animation_6p5fq")
+"Default": SubResource("Animation_jddgx")
 }
 
+[sub_resource type="GDScript" id="GDScript_5tr1f"]
+script/source = "extends Node
+# if (shine == true) {
+# 	gotoAndStop(4);
+# } else if (_root.Star[_name] == true) {
+# 	gotoAndStop(3);
+# } else {
+# 	gotoAndStop(2);
+# }
+# //(_name = number) 
+# if (_root.CheatStarToggle==true) {
+# 	onMouseDown = function () {
+# 		if (Math.abs(_xmouse)<10 && Math.abs(_ymouse)<10) {
+# 			_root.Star[_name] = !_root.Star[_name];
+# 			//
+# 			_root.CalculateStars();
+# 			//
+# 			if (_root.Star[_name] == true) {
+# 				gotoAndStop(3);
+# 			} else {
+# 				gotoAndStop(2);
+# 			}
+# 		}
+# 	};
+# }
+# "
+
 [node name="Pause New STA" type="Node2D"]
+script = ExtResource("1_axugu")
+source_xml = "res://sm63/LIBRARY/Pause New STA.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_jg0l5")
+"Timeline": SubResource("AnimationLibrary_6d825")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -76,7 +108,7 @@ libraries = {
 [node name="@@13582" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-7, -7.5)
-texture = ExtResource("1_l0jbi")
+texture = ExtResource("2_gjhg4")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -85,14 +117,14 @@ visible = false
 [node name="@@13583" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-7, -7.5)
-texture = ExtResource("2_wwblu")
+texture = ExtResource("3_qy7al")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("3_h80fo")]
-script = ExtResource("4_vgmd4")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
+script = ExtResource("4_y1opx")
 path = "res://sm63_godot/Pause New STA STa.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -108,3 +140,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_5tr1f")

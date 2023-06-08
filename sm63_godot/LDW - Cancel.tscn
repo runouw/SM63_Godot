@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_ccdjt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_xmo4h"]
+
+[sub_resource type="Animation" id="Animation_x3e46"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,43 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_445p8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bgftq"]
 _data = {
-"Default": SubResource("Animation_ccdjt")
+"Default": SubResource("Animation_x3e46")
 }
 
+[sub_resource type="GDScript" id="GDScript_8none"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 		hl = true;
+# 		sc = 120;
+# 	} else {
+# 		hl = false;
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/3;
+# 	_yscale = _xscale;
+# 	//txt._xscale += (sc-txt._xscale)/3;
+# 	//txt._yscale = txt._xscale;
+# };
+# onMouseDown = function () {
+# 	if (hl == true) {
+# 		_parent.CancelF();
+# 	}
+# };
+# "
+
 [node name="LDW - Cancel" type="Node2D"]
+script = ExtResource("1_xmo4h")
+source_xml = "res://sm63/LIBRARY/LDW - Cancel.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_445p8")
+"Timeline": SubResource("AnimationLibrary_bgftq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -76,3 +105,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_8none")

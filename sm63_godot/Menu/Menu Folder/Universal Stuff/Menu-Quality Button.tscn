@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_mk6k4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_cygqx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_wvc6t"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_d0xko"]
 
-[sub_resource type="Animation" id="Animation_blgbr"]
+[sub_resource type="Animation" id="Animation_2b4ke"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,25 +67,109 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qs1ty"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yj02r"]
 _data = {
-"Default": SubResource("Animation_blgbr")
+"Default": SubResource("Animation_2b4ke")
 }
 
+[sub_resource type="GDScript" id="GDScript_cf7xo"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(39)+1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_vgnji"]
+script/source = "extends Node
+# ywave = random(90);
+# Y = this._y;
+# r = 0;
+# if (_parent._currentframe>20) {
+# 	cl = true;
+# 	rewinding = true;
+# 	_alpha = 0;
+# 	this._xscale = 300;
+# 	this._yscale = 300;
+# }
+# onEnterFrame = function () {
+# 	if (bg.hitTest(_root._xmouse, _root._ymouse, true) && _root.m.clicked !== true) {
+# 		hl = true;
+# 	} else {
+# 		hl = false;
+# 	}
+# 	if (cl == true && rewinding !== true) {
+# 		this._xscale += (300-this._xscale)/10;
+# 		txt._xscale += (125-txt._xscale)/5;
+# 		txt._yscale += (125-txt._yscale)/4;
+# 		_alpha -= 5;
+# 		if (_alpha<=0) {
+# 			StopCoding();
+# 		}
+# 	}
+# 	if (cl == true && rewinding == true) {
+# 		this._xscale += (100-this._xscale)/10;
+# 		txt._xscale += (100-txt._xscale)/5;
+# 		txt._yscale += (100-txt._yscale)/4;
+# 		_alpha += 5;
+# 		if (_alpha>=100) {
+# 			rewinding = false;
+# 			cl = false;
+# 		}
+# 	}
+# 	if (hl == true && cl !== true) {
+# 		this._xscale += (125-this._xscale)/4;
+# 		txt._xscale += (125-txt._xscale)/5;
+# 		txt._yscale += (125-txt._yscale)/4;
+# 		ywave -= 0.035;
+# 	} else if (cl !== true) {
+# 		this._xscale += (100-this._xscale)/4;
+# 		txt._xscale += (100-txt._xscale)/5;
+# 		txt._yscale += (100-txt._yscale)/4;
+# 	}
+# 	//                                                 
+# 	this._yscale = this._xscale;
+# 	//
+# 	ywave += 0.035;
+# 	this._y = Y+Math.sin(ywave)*4;
+# };
+# onMouseDown = function () {
+# 	if (hl == true && cl !== true && _root.m.clicked !== true) {
+# 		//_root.m.clicked = true;
+# 		_root.m.Mode = \"Quality\";
+# 		cl = true;
+# 		_parent.HL = \"defined\";
+# 		onMouseDown = null;
+# 		//_root.m.TransitionF(\"Start\");
+# 	}
+# };
+# //
+# StopCoding = function () {
+# 	onEnterFrame = null;
+# 	onMouseDown = null;
+# 	gotoAndStop(2);
+# };
+# stop();
+# "
+
 [node name="Menu-Quality Button" type="Node2D"]
+script = ExtResource("1_wvc6t")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Universal Stuff/Menu-Quality Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qs1ty")
+"Timeline": SubResource("AnimationLibrary_yj02r")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_mk6k4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 scale = Vector2(0.787598, 0.749573)
-script = ExtResource("2_cygqx")
+script = ExtResource("2_d0xko")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu Button BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -98,6 +182,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_cf7xo")
+
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
@@ -105,8 +192,8 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_mk6k4")]
-script = ExtResource("2_cygqx")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("2_d0xko")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Menu Quality Text.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -125,3 +212,6 @@ visible = false
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_vgnji")

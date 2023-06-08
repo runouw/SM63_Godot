@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_fatcr"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xegjs"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_m30qh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ewqy8"]
 
-[sub_resource type="Animation" id="Animation_htin3"]
+[sub_resource type="Animation" id="Animation_a7ofa"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,26 +103,83 @@ tracks/7/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qiovp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0tact"]
 _data = {
-"Default": SubResource("Animation_htin3")
+"Default": SubResource("Animation_a7ofa")
 }
 
+[sub_resource type="GDScript" id="GDScript_jgfes"]
+script/source = "extends Node
+# if (_root.M.CourseMode == undefined) {
+# 	_root.M.CourseMode = 1;
+# }
+# gotoAndStop(_root.M.CourseMode+1);
+# onEnterFrame = function () {
+# 	if (_parent.greyness.aa == 0) {
+# 		_root.M.CourseMode = _currentframe-1;
+# 		if (_currentframe == 2) {
+# 			tri1._alpha += (0-tri1._alpha)/3;
+# 		} else {
+# 			tri1._alpha += (100-tri1._alpha)/3;
+# 		}
+# 		if (_currentframe == 4) {
+# 			tri2._alpha += (0-tri2._alpha)/3;
+# 		} else {
+# 			tri2._alpha += (100-tri2._alpha)/3;
+# 		}
+# 		//
+# 		if (tri1.hitTest(_root._xmouse, _root._ymouse, false) && tri1._alpha>=99) {
+# 			tri1.sc = 130;
+# 		} else {
+# 			tri1.sc = 100;
+# 		}
+# 		tri1._xscale += (tri1.sc-tri1._xscale)/3;
+# 		tri1._yscale = tri1._xscale;
+# 		//
+# 		if (tri2.hitTest(_root._xmouse, _root._ymouse, false) && tri2._alpha>=99) {
+# 			tri2.sc = 130;
+# 		} else {
+# 			tri2.sc = 100;
+# 		}
+# 		tri2._xscale += (tri2.sc-tri2._xscale)/3;
+# 		tri2._yscale = tri2._xscale;
+# 		//
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 			bg._alpha += (50-bg._alpha)/3;
+# 		} else {
+# 			bg._alpha += (0-bg._alpha)/3;
+# 		}
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (tri2.sc == 130) {
+# 		nextFrame();
+# 	} else if (tri1.sc == 130) {
+# 		prevFrame();
+# 	}
+# };
+# "
+
 [node name="LDW - Info Mode" type="Node2D"]
+script = ExtResource("1_m30qh")
+source_xml = "res://sm63/LIBRARY/Level Designer Windows/LDW - Info/LDW - Info Mode.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qiovp")
+"Timeline": SubResource("AnimationLibrary_0tact")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_fatcr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(0.8, -2.3)
 scale = Vector2(1.04396, 1.00308)
-script = ExtResource("2_xegjs")
+script = ExtResource("2_ewqy8")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info BG BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -152,9 +209,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_fatcr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(149.55, 10.9)
-script = ExtResource("2_xegjs")
+script = ExtResource("2_ewqy8")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Arrow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -167,10 +224,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51263" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_fatcr")]
+[node name="@DOMSymbolInstance@51263" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(149.55, 0.9)
 scale = Vector2(1, -1)
-script = ExtResource("2_xegjs")
+script = ExtResource("2_ewqy8")
 path = "res://sm63_godot/Level Designer Windows/LDW - Info/LDW - Info Arrow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -186,6 +243,9 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_jgfes")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

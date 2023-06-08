@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=26 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_nw7ng"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_02bgn"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_dpbgd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ic5kc"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_s68ct"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_qp5vp"]
 
-[sub_resource type="Animation" id="Animation_0paok"]
+[sub_resource type="Animation" id="Animation_0gr4k"]
 length = 2.96667
 loop_mode = 1
 tracks/0/type = "value"
@@ -392,16 +392,276 @@ tracks/31/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8k2k7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bynmx"]
 _data = {
-"Default": SubResource("Animation_0paok")
+"Default": SubResource("Animation_0gr4k")
 }
 
+[sub_resource type="GDScript" id="GDScript_aucoa"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	if (_parent.side == \"Right\") {
+# 		_rotation += 4.5;
+# 	} else if (_parent.side == \"Left\") {
+# 		_rotation -= 4.5;
+# 	} else {
+# 		_rotation += 4.5/2;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_80x6o"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	if (_parent.side == \"Right\") {
+# 		rotation = 45;
+# 	} else if (_parent.side !== \"Both\") {
+# 		rotation = -45;
+# 	} else {
+# 		rotation = 45/2;
+# 	}
+# 	_rotation = rotation;
+# 	rotspeed = 0;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.KeyTapLEFT()) {
+# 		rotspeed -= 0.5;
+# 	}
+# 	if (_root.KeyTapRIGHT()) {
+# 		rotspeed += 0.5;
+# 	}
+# 	if (_root.KeyLEFT()) {
+# 		rotspeed -= 1;
+# 	}
+# 	if (_root.KeyRIGHT()) {
+# 		rotspeed += 1;
+# 	}
+# 	if (_root.KeySPACE()) {
+# 		_parent.play();
+# 		_parent.rotdirection = _rotation;
+# 	}
+# 	rotation += rotspeed;
+# 	_rotation = rotation;
+# 	if (_parent.side == \"Right\") {
+# 		_rotation = Math.max(0, _rotation);
+# 		_rotation = Math.min(75, _rotation);
+# 	} else if (_parent.side !== \"Both\") {
+# 		_rotation = Math.min(0, _rotation);
+# 		_rotation = Math.max(-75, _rotation);
+# 	} else {
+# 		_rotation = Math.max(-75, _rotation);
+# 		_rotation = Math.min(75, _rotation);
+# 	}
+# 	rotation = _rotation;
+# 	rotspeed = _root.groundFriction(rotspeed, 0.5, 1.1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ic15f"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_rotation = _parent.rotdirection;
+# 	_yscale = 90;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_3gty6"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_rotation = _parent.rotdirection;
+# 	_yscale = 80;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_el62x"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_rotation = _parent.rotdirection;
+# 	_yscale = 90;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_61r3p"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_rotation = _parent.rotdirection;
+# 	_yscale = 100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_05ugr"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_rotation = _parent.rotdirection;
+# 	_yscale = 110;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_di52o"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_rotation = _parent.rotdirection;
+# 	_yscale = 105;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_uj6c3"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_rotation = _parent.rotdirection;
+# 	_yscale = 100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ris6j"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_rotation = _parent.rotdirection;
+# }
+# onClipEvent (enterFrame) {
+# 	_parent.rotdirection = _root.groundFriction(_parent.rotdirection, 3, 1.2);
+# 	_rotation = _parent.rotdirection;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_mkx87"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_rotation = _parent.rotdirection;
+# }
+# onClipEvent (enterFrame) {
+# 	_y += 3;
+# 	_yscale -= 10;
+# 	_yscale = Math.max(_yscale, 0);
+# 	_yscale = Math.min(_yscale, 100);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_bvhuw"]
+script/source = "extends Node
+# if (side == undefined) {
+# 	side = \"Right\";
+# }
+# if (Xpower == undefined) {
+# 	Xpower = 35;
+# }
+# if (Ypower == undefined) {
+# 	Ypower = 25;
+# }
+# if (cannonsetup == false) {
+# 	gotoAndStop(2);
+# } else {
+# 	play();
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_t0bnu"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (this.box.hitTest(_root.Course.Char.charClip.feet) && Math.abs(_root.Course.Char.xspeed)<7 && cannonsetup == true) {
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.xspeed = 0;
+# 		_root.Course.Char.yspeed = 0;
+# 		_root.Course.Char.attackFrame = \"none\";
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_dpj1c"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_qn0c2"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	//
+# 	_root.Course.Char._x = _x+_parent._x
+# 	_root.Course.Char._y = _y+_parent._y
+# 	_root.Course.Char.attack = true;
+# 	_root.Course.Char.xspeed = 0;
+# 	_root.Course.Char.yspeed = 0;
+# 	_root.Course.Char.attackFrame = \"none\";
+# };
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"cannon1\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_pm3rf"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"cannon2\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);"
+
+[sub_resource type="GDScript" id="GDScript_rkawf"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"cannon3\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# stop();
+# savezoom = _root.CameraZoom;
+# _root.CameraZoom = 50;
+# "
+
+[sub_resource type="GDScript" id="GDScript_dps2s"]
+script/source = "extends Node
+# _root.Course.Char.attack = true;
+# _root.Course.Char.xspeed = Math.sin(_root.angleToRadians(rotdirection))*Xpower;
+# _root.Course.Char.yspeed = -Math.cos(_root.angleToRadians(rotdirection))*Ypower;
+# if (side == \"Right\") {
+# 	_root.Course.Char._xscale = -100;
+# } else if (side !== \"Both\") {
+# 	_root.Course.Char._xscale = 100;
+# }
+# _root.Course.Char._x = _x+_parent._x;
+# _root.Course.Char._y = _y+_parent._y;
+# //
+# _root.Course.Char._y -= 20;
+# _root.Course.Char._y -= Math.cos(_root.angleToRadians(rotdirection))*30;
+# _root.Course.Char._x += Math.sin(_root.angleToRadians(rotdirection))*30;
+# _root.Course.Char.air = true;
+# _root.Course.Char.attackFrame = \"Dive\";
+# //
+# _root.CameraZoom = savezoom;
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_kmq3b"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Cannon Shot\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# //
+# onEnterFrame = null;
+# "
+
+[sub_resource type="GDScript" id="GDScript_g8252"]
+script/source = "extends Node
+# gotoAndStop(3);
+# "
+
 [node name="Cannon (main) Clip" type="Node2D"]
+script = ExtResource("1_ic5kc")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Cannon/Cannon (main) Clip.xml"
+linkage = "CannonClip"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8k2k7")
+"Timeline": SubResource("AnimationLibrary_bynmx")
 }
 
 [node name="Cannon" type="Node2D" parent="."]
@@ -419,7 +679,7 @@ position = Vector2(0, 68.5)
 [node name="@@47664" type="Polygon2D" parent="Cannon/Frame 3/Group/Shape"]
 polygon = PackedVector2Array(-11.95, -73.475, 13.05, -73.475, 13.05, -13.475, 3.86354, -4.1974, 3.86354, -4.1974, 3.86354, -4.1974, -4.46979, -4.1974, -11.95, -13.475)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-script = ExtResource("1_nw7ng")
+script = ExtResource("2_s68ct")
 matrix = Transform2D(0.0152588, 0, 0, 0.0366211, 0.55, -43.45)
 entries_color = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.101961, 0.101961, 0.101961, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -443,7 +703,7 @@ visible = false
 [node name="@@47666" type="Polygon2D" parent="Cannon/Frame 28/Group/Shape"]
 polygon = PackedVector2Array(-11.95, -77.475, 13.05, -77.475, 13.05, -17.475, 3.86354, -8.1974, 3.86354, -8.1974, 3.86354, -8.1974, -4.46979, -8.1974, -11.95, -17.475)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-script = ExtResource("1_nw7ng")
+script = ExtResource("2_s68ct")
 matrix = Transform2D(0.0152588, 0, 0, 0.0366211, 0.55, -47.45)
 entries_color = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.101961, 0.101961, 0.101961, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -460,9 +720,9 @@ end_cap_mode = 2
 [node name="Frame 42" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 42" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 42"]
 position = Vector2(0.6, -26)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -474,13 +734,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 42/DOMSymbolInstance"]
+script = SubResource("GDScript_aucoa")
 
 [node name="Frame 52" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 52" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 52"]
 position = Vector2(0.35, -27)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -492,13 +755,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 52/DOMSymbolInstance"]
+script = SubResource("GDScript_80x6o")
 
 [node name="Frame 53" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 53" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 53"]
 position = Vector2(0.35, -27.2)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -510,13 +776,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 53/DOMSymbolInstance"]
+script = SubResource("GDScript_ic15f")
 
 [node name="Frame 54" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 54" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 54"]
 position = Vector2(0.35, -27.2)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -528,13 +797,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 54/DOMSymbolInstance"]
+script = SubResource("GDScript_3gty6")
 
 [node name="Frame 55" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 55" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 55"]
 position = Vector2(0.35, -27.2)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -546,13 +818,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 55/DOMSymbolInstance"]
+script = SubResource("GDScript_el62x")
 
 [node name="Frame 56" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 56" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 56"]
 position = Vector2(0.35, -27.2)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -564,13 +839,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 56/DOMSymbolInstance"]
+script = SubResource("GDScript_61r3p")
 
 [node name="Frame 57" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 57" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 57"]
 position = Vector2(0.35, -27.2)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -582,13 +860,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 57/DOMSymbolInstance"]
+script = SubResource("GDScript_05ugr")
 
 [node name="Frame 58" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 58" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 58"]
 position = Vector2(0.35, -27.2)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -600,13 +881,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 58/DOMSymbolInstance"]
+script = SubResource("GDScript_di52o")
 
 [node name="Frame 59" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 59" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 59"]
 position = Vector2(0.35, -27.2)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -618,13 +902,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 59/DOMSymbolInstance"]
+script = SubResource("GDScript_uj6c3")
 
 [node name="Frame 65" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 65" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 65"]
 position = Vector2(0.35, -27.2)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -636,13 +923,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 65/DOMSymbolInstance"]
+script = SubResource("GDScript_ris6j")
 
 [node name="Frame 77" type="Node2D" parent="Cannon"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 77" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Cannon/Frame 77"]
 position = Vector2(0.35, -27.2)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -654,6 +944,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Cannon/Frame 77/DOMSymbolInstance"]
+script = SubResource("GDScript_mkx87")
 
 [node name="Frame 88" type="Node2D" parent="Cannon"]
 visible = false
@@ -669,7 +962,7 @@ visible = false
 [node name="@@47662" type="Polygon2D" parent="Layer 5/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(-11.95, -77.475, 13.05, -77.475, 13.05, -17.475, 3.86354, -8.1974, 3.86354, -8.1974, 3.86354, -8.1974, -4.46979, -8.1974, -11.95, -17.475)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7)])
-script = ExtResource("1_nw7ng")
+script = ExtResource("2_s68ct")
 matrix = Transform2D(0.0152588, 0, 0, 0.0366211, 0.55, -47.45)
 entries_color = PackedColorArray(0.215686, 0.215686, 0.215686, 1, 0.101961, 0.101961, 0.101961, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -683,9 +976,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(0.3, -27.65)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Question Mark.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -701,9 +994,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 1" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 1"]
 position = Vector2(-1.05, -17.3)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Locked Cannon Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -722,9 +1015,9 @@ visible = false
 [node name="Frame 3" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3"]
 position = Vector2(0.3, 42.35)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Question Mark.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -740,9 +1033,9 @@ brightness = 0.0
 [node name="Frame 28" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 28" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 28"]
 position = Vector2(0.3, -27.65)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Question Mark.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -758,9 +1051,9 @@ brightness = 0.0
 [node name="Frame 77" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 77" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 77"]
 position = Vector2(0.3, -27.65)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Question Mark.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -776,9 +1069,9 @@ brightness = 0.0
 [node name="Frame 87" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 87" instance=ExtResource("2_02bgn")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 87"]
 position = Vector2(0.3, 12.35)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Cannon/Cannon Question Mark.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -802,6 +1095,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 7(Mask)/Frame 0"]
 
 [node name="@@47660" type="Polygon2D" parent="Layer 7(Mask)/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-61.85, -98.8, 62.15, -98.8, 62.15, -17.8, -61.85, -17.8, -15.85, -17.8, 16.9, -17.8, 16.9, -12.3, -15.85, -12.3)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 
@@ -817,13 +1111,19 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_bvhuw")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("2_02bgn")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_t0bnu")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2"]
 position = Vector2(-0.15, 7.6)
 scale = Vector2(0.566422, 1.27039)
-script = ExtResource("3_dpbgd")
+script = ExtResource("3_qp5vp")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -836,20 +1136,41 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_dpj1c")
+
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 3"]
+script = SubResource("GDScript_qn0c2")
 
 [node name="Frame 41" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 41"]
+script = SubResource("GDScript_pm3rf")
+
 [node name="Frame 52" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 52"]
+script = SubResource("GDScript_rkawf")
 
 [node name="Frame 53" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 53"]
+script = SubResource("GDScript_dps2s")
+
 [node name="Frame 54" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 54"]
+script = SubResource("GDScript_kmq3b")
+
 [node name="Frame 88" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 88"]
+script = SubResource("GDScript_g8252")

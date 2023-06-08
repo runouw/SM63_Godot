@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_jvahb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fctiv"]
+
+[sub_resource type="Animation" id="Animation_sruvg"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ex6cq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qgrge"]
 _data = {
-"Default": SubResource("Animation_jvahb")
+"Default": SubResource("Animation_sruvg")
 }
 
 [node name="LDSB Drag Bar Barrr" type="Node2D"]
+script = ExtResource("1_fctiv")
+source_xml = "res://sm63/LIBRARY/LDSB Drag Bar Barrr.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ex6cq")
+"Timeline": SubResource("AnimationLibrary_qgrge")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

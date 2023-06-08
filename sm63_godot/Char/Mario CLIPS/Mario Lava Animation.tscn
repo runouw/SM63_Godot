@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_yr5fu"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4hvnt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 6.png" id="3_mlu6q"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 7.png" id="4_dkfor"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 8.png" id="5_7fyrn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dkqha"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_asf0m"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 6.png" id="3_kxv3l"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 7.png" id="4_7126j"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 8.png" id="5_ys4it"]
 
-[sub_resource type="Animation" id="Animation_w77ae"]
+[sub_resource type="Animation" id="Animation_fyudk"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -202,25 +202,102 @@ tracks/15/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hvox0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iji5o"]
 _data = {
-"Default": SubResource("Animation_w77ae")
+"Default": SubResource("Animation_fyudk")
 }
 
+[sub_resource type="GDScript" id="GDScript_wajjf"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"mario-fire\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# count = 0;
+# groundcount = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		_root.Course.Char.hurtfallcount = 0;
+# 		play();
+# 		//
+# 		if (_root.Course.Char._xscale<0) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed/2), 0)/2;
+# 		} else {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed/2), 0)/2;
+# 		}
+# 		//
+# 		//_root.Course.Char.xspeed *= 0.95;
+# 		if (_root.KeyRIGHT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airwalkspeed)/(_root.airmaxWalkspeed), 0);
+# 			_root.Course.Char._xscale = -100;
+# 		}
+# 		if (_root.KeyLEFT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airwalkspeed)/(_root.airmaxWalkspeed), 0);
+# 			_root.Course.Char._xscale = 100;
+# 		}
+# 		//                                 
+# 		if (_root.KeyTapRIGHT() && !_root.KeyRIGHT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed), 0)/2;
+# 			_root.Course.Char._xscale = -100;
+# 		}
+# 		if (_root.KeyTapLEFT() && !_root.KeyLEFT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed), 0)/2;
+# 			_root.Course.Char._xscale = 100;
+# 		}
+# 		if (_root.Course.Char.yspeed<0 && groundcount<=0 && _root.Course.Char.yspeed<0) {
+# 			_root.Course.Char.yspeed -= (_root.gravity/2);
+# 		} else {
+# 			if (groundcount<2 && _root.Course.Char.yspeed<0) {
+# 				_root.Course.Char.yspeed -= (_root.gravity/3);
+# 			}
+# 		}
+# 		if (_root.Course.Char.air == false && _root.Course.Char.yspeed>-3) {
+# 			groundcount++;
+# 			//         
+# 			if (_root.Course.Char._xscale<0) {
+# 				_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airwalkspeed)/(_root.airmaxtapWalkspeed*3), 0)*4;
+# 			} else {
+# 				_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airwalkspeed)/(_root.airmaxtapWalkspeed*3), 0)*4;
+# 			}
+# 			_root.Course.Char.yspeed /= 3;
+# 			_root.Course.Char.yspeed -= 7-(groundcount*1.5);
+# 		}
+# 		if (count++>300 || (groundcount>=2 && _root.Course.Char.yspeed>-3) || _root.Course.Char.Water == true) {
+# 			_root.Course.Char.attack = false;
+# 		}
+# 		//if (count++>300 || _root.Course.Char.yspeed>3 || (_root.Course.Char.yspeed>-5 && _root.KeyDOWN())) {                       
+# 		//_root.Course.Char.attack = false;
+# 		//}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_pdmv3"]
+script/source = "extends Node
+# gotoAndPlay(\"repeat\");
+# "
+
 [node name="Mario Lava Animation" type="Node2D"]
+script = ExtResource("1_dkqha")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Lava Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hvox0")
+"Timeline": SubResource("AnimationLibrary_iji5o")
 }
 
 [node name="Layer 5" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yr5fu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(4.45, -18.95)
-script = ExtResource("2_4hvnt")
+script = ExtResource("2_asf0m")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -236,9 +313,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3" instance=ExtResource("1_yr5fu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3"]
 position = Vector2(4.45, -17.95)
-script = ExtResource("2_4hvnt")
+script = ExtResource("2_asf0m")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -254,9 +331,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5" instance=ExtResource("1_yr5fu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5"]
 position = Vector2(4.45, -18.95)
-script = ExtResource("2_4hvnt")
+script = ExtResource("2_asf0m")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -272,9 +349,9 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 6" instance=ExtResource("1_yr5fu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 6"]
 position = Vector2(4.45, -17.95)
-script = ExtResource("2_4hvnt")
+script = ExtResource("2_asf0m")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -294,7 +371,7 @@ brightness = 0.0
 [node name="@@15759" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-7.15, -27.65)
-texture = ExtResource("3_mlu6q")
+texture = ExtResource("3_kxv3l")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -303,7 +380,7 @@ visible = false
 [node name="@@15760" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-7, -29.5)
-texture = ExtResource("4_dkfor")
+texture = ExtResource("4_7126j")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -312,7 +389,7 @@ visible = false
 [node name="@@15761" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-7.15, -32.65)
-texture = ExtResource("5_7fyrn")
+texture = ExtResource("5_ys4it")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -321,7 +398,7 @@ visible = false
 [node name="@@15762" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-8, -30.5)
-texture = ExtResource("4_dkfor")
+texture = ExtResource("4_7126j")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -330,16 +407,16 @@ visible = false
 [node name="@@15763" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-7.15, -32.65)
-texture = ExtResource("5_7fyrn")
+texture = ExtResource("5_ys4it")
 centered = false
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_yr5fu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(1.5, -4.65)
-script = ExtResource("2_4hvnt")
+script = ExtResource("2_asf0m")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -355,9 +432,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3" instance=ExtResource("1_yr5fu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3"]
 position = Vector2(1.5, -3.65)
-script = ExtResource("2_4hvnt")
+script = ExtResource("2_asf0m")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -373,9 +450,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 5" instance=ExtResource("1_yr5fu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 5"]
 position = Vector2(1.5, -4.65)
-script = ExtResource("2_4hvnt")
+script = ExtResource("2_asf0m")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -391,9 +468,9 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 6" instance=ExtResource("1_yr5fu")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 6"]
 position = Vector2(1.5, -3.65)
-script = ExtResource("2_4hvnt")
+script = ExtResource("2_asf0m")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -410,8 +487,14 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_wajjf")
+
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 7"]
+script = SubResource("GDScript_pdmv3")

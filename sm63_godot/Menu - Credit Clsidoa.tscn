@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ark5w"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_jxaqc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_662t2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_06gcj"]
 
-[sub_resource type="Animation" id="Animation_0eexw"]
+[sub_resource type="Animation" id="Animation_3tox5"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,25 +31,82 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wq46d"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfoom"]
 _data = {
-"Default": SubResource("Animation_0eexw")
+"Default": SubResource("Animation_3tox5")
 }
 
+[sub_resource type="GDScript" id="GDScript_j1d6y"]
+script/source = "extends Node
+# ywave = random(90);
+# rwave = random(90);
+# Y = this._y;
+# R = _rotation;
+# r = 0;
+# onEnterFrame = function () {
+# 	if (bg.hitTest(_root._xmouse, _root._ymouse, true) && _parent.clicked !== true) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/4;
+# 	_yscale = _xscale;
+# 	txt._xscale += (sc-txt._xscale)/4;
+# 	txt._yscale = txt._xscale;
+# 	//
+# 	ywave += 0.035;
+# 	rwave += 0.025;
+# 	this._y = Y+Math.sin(ywave)*6;
+# 	this._rotation = R+Math.sin(rwave)*_xscale/20;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120 && _parent.clicked !== true) {
+# 		//transition coding here
+# 		_parent.clicked = true;
+# 		_parent.TransitionF(\"Credits\");
+# 		sc = 120;
+# 		_xscale = 150;
+# 		_yscale = 150;
+# 		r = 0;
+# 		rspeed = 12;
+# 		onEnterFrame = function () {
+# 			r += rspeed;
+# 			rspeed *= 0.97;
+# 			if (sc>10) {
+# 				sc -= 10;
+# 			}
+# 			_xscale += (sc-_xscale)/4;
+# 			_yscale = _xscale;
+# 			//
+# 			ywave += 0.035;
+# 			rwave += 0.025;
+# 			this._y = Y+Math.sin(ywave)*6;
+# 			this._rotation = R+r+Math.sin(rwave)*_xscale/20;
+# 		};
+# 		onMouseDown = null;
+# 	}
+# };
+# "
+
 [node name="Menu - Credit Clsidoa" type="Node2D"]
+script = ExtResource("1_662t2")
+source_xml = "res://sm63/LIBRARY/Menu - Credit Clsidoa.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wq46d")
+"Timeline": SubResource("AnimationLibrary_pfoom")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ark5w")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 scale = Vector2(1.11765, 0.637924)
-script = ExtResource("2_jxaqc")
+script = ExtResource("2_06gcj")
 path = "res://sm63_godot/Menu - &#034Level Designer Button&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -62,9 +119,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@13212" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ark5w")]
+[node name="@DOMSymbolInstance@13212" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -0.3)
-script = ExtResource("2_jxaqc")
+script = ExtResource("2_06gcj")
 path = "res://sm63_godot/Menu - &#034Credtishfsgaafgd&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -80,3 +137,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_j1d6y")

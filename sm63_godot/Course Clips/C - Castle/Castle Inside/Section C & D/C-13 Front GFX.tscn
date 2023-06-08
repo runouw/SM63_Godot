@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_268a2"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_lg8in"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lr2ln"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0d1ho"]
 
-[sub_resource type="Animation" id="Animation_t13ci"]
+[sub_resource type="Animation" id="Animation_dwpl5"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,26 +67,47 @@ tracks/4/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kashj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dd6xu"]
 _data = {
-"Default": SubResource("Animation_t13ci")
+"Default": SubResource("Animation_dwpl5")
 }
 
+[sub_resource type="GDScript" id="GDScript_1o1qj"]
+script/source = "extends Node
+# stop()
+# if (_root.BowserKey3 == true) {
+# 	nextFrame();
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ctm3p"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	doorplace = \"8-12-Warp\";
+# 	walk = \"warppipe\";
+# }
+# "
+
 [node name="C-13 Front GFX" type="Node2D"]
+script = ExtResource("1_lr2ln")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 Front GFX.xml"
+linkage = "C-13FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kashj")
+"Timeline": SubResource("AnimationLibrary_dd6xu")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_268a2")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(1130.25, -248.15)
 scale = Vector2(0.787338, 0.769272)
-script = ExtResource("2_lg8in")
+script = ExtResource("2_0d1ho")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star FrontGFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -99,9 +120,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@44620" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_268a2")]
+[node name="@DOMSymbolInstance@44620" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(1067.45, -181.5)
-script = ExtResource("2_lg8in")
+script = ExtResource("2_0d1ho")
 path = "res://sm63_godot/C-13 WarpPipe.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -121,9 +142,12 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_268a2")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_1o1qj")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(746.7, -334.45)
-script = ExtResource("2_lg8in")
+script = ExtResource("2_0d1ho")
 path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 Front GFX Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -143,10 +167,10 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2" instance=ExtResource("1_268a2")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2"]
 position = Vector2(1066.45, -215.1)
 scale = Vector2(1.3887, 1)
-script = ExtResource("2_lg8in")
+script = ExtResource("2_0d1ho")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Transportation/Doors/Invisible Door.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -158,3 +182,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_ctm3p")

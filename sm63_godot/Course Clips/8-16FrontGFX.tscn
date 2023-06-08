@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="1_dw3ps"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_phmne"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_butaw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1cae6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="2_x5o28"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_gp5r7"]
 
-[sub_resource type="Animation" id="Animation_wlj7p"]
+[sub_resource type="Animation" id="Animation_rydn7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,28 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmm34"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uih5v"]
 _data = {
-"Default": SubResource("Animation_wlj7p")
+"Default": SubResource("Animation_rydn7")
 }
 
+[sub_resource type="GDScript" id="GDScript_i86iy"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	difficulty = 3;
+# }
+# "
+
 [node name="8-16FrontGFX" type="Node2D"]
+script = ExtResource("1_1cae6")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-16FrontGFX.xml"
+linkage = "8-16FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wmm34")
+"Timeline": SubResource("AnimationLibrary_uih5v")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,7 +65,7 @@ libraries = {
 [node name="@@18837" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_dw3ps")
+texture = ExtResource("2_x5o28")
 texture_offset = Vector2(-17.35, -39.35)
 polygon = PackedVector2Array(-239.1, 23, 240.85, 23, 240.85, 35.8, 189.85, 86, -191.1, 86, -239.1, 36.425, -239.1, 35.8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
@@ -66,9 +78,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_phmne")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(129.55, 23)
-script = ExtResource("3_butaw")
+script = ExtResource("3_gp5r7")
 path = "res://sm63_godot/Enemies/Bosses/Bowser/Clips/Bowser Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -81,13 +93,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_i86iy")
+
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_phmne")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(-34.4, -511.9)
-script = ExtResource("3_butaw")
+script = ExtResource("3_gp5r7")
 path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,9 +115,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18830" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_phmne")]
+[node name="@DOMSymbolInstance@18830" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(20.6, -456.9)
-script = ExtResource("3_butaw")
+script = ExtResource("3_gp5r7")
 path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -115,9 +130,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18831" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_phmne")]
+[node name="@DOMSymbolInstance@18831" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(75.6, -511.9)
-script = ExtResource("3_butaw")
+script = ExtResource("3_gp5r7")
 path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -130,9 +145,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18832" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_phmne")]
+[node name="@DOMSymbolInstance@18832" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(20.6, -566.9)
-script = ExtResource("3_butaw")
+script = ExtResource("3_gp5r7")
 path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -145,9 +160,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18833" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_phmne")]
+[node name="@DOMSymbolInstance@18833" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(60.6, -471.9)
-script = ExtResource("3_butaw")
+script = ExtResource("3_gp5r7")
 path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -160,9 +175,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18834" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_phmne")]
+[node name="@DOMSymbolInstance@18834" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(60.6, -551.9)
-script = ExtResource("3_butaw")
+script = ExtResource("3_gp5r7")
 path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -175,9 +190,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18835" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_phmne")]
+[node name="@DOMSymbolInstance@18835" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(-19.4, -471.9)
-script = ExtResource("3_butaw")
+script = ExtResource("3_gp5r7")
 path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -190,9 +205,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@18836" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("2_phmne")]
+[node name="@DOMSymbolInstance@18836" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(-19.4, -551.9)
-script = ExtResource("3_butaw")
+script = ExtResource("3_gp5r7")
 path = "res://sm63_godot/Course Clips/8-Randomized Metoer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

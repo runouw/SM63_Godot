@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=16 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_aumc3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_cdc56"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Blue 2.png" id="3_nwou2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6ji4l"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3qx18"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Blue 2.png" id="3_5ysal"]
 
-[sub_resource type="Animation" id="Animation_4x5ym"]
+[sub_resource type="Animation" id="Animation_um8wo"]
 length = 5.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -368,16 +368,130 @@ tracks/29/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_og3j8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03e7e"]
 _data = {
-"Default": SubResource("Animation_4x5ym")
+"Default": SubResource("Animation_um8wo")
 }
 
+[sub_resource type="GDScript" id="GDScript_2wrs4"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_iv6ts"]
+script/source = "extends Node
+# _root.bgsong.stop();
+# saveY = _root.Course.Char.yspeed;
+# saveX = _root.Course.Char.xspeed;
+# onEnterFrame = function () {
+# 	_root.Camcenter = _parent;
+# 	_root.playpause = true;
+# 	_root.PauseGame = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_my7un"]
+script/source = "extends Node
+# _root.bgSoundFX.stop();
+# _root.bgSoundFX = new Sound();
+# _root.bgSoundFX.attachSound(\"StarAppear\");
+# _root.bgSoundFX.start(0, 1);
+# _root.bgSoundFX.setVolume(100);
+# alphacount = 0;
+# onEnterFrame = function () {
+# 	_root.playpause = true;
+# 	_root.Camcenter = _parent;
+# 	alphacount += 3;
+# 	alphacount = Math.min(alphacount, 100);
+# 	this.attachMovie(\"ChargeLight\", \"ChargeLight\"+this.getNextHighestDepth(), this.getNextHighestDepth(), {_x:0, _y:0, _rotation:random(360), _alpha:alphacount});
+# 	_root.PauseGame = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_eh6uh"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.playpause = true;
+# 	_root.Camcenter = _parent;
+# 	alphacount -= 5;
+# 	alphacount = Math.min(alphacount, 100);
+# 	this.attachMovie(\"ChargeLight\", \"ChargeLight\"+this.getNextHighestDepth(), this.getNextHighestDepth(), {_x:0, _y:0, _rotation:random(360), _alpha:alphacount});
+# 	_root.PauseGame = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_q71t2"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.playpause = true;
+# 	_root.Camcenter = _parent;
+# 	_root.PauseGame = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_5ym37"]
+script/source = "extends Node
+# if (_root.MuteBGMusic !== true) {
+# 	_root.PlayBGSong(_root.SongRepeat);
+# 	//_root.bgsong.start(0, 999);
+# }
+# // 
+# onEnterFrame = function () {
+# 	_root.playpause = true;
+# 	_root.PauseGame = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_618x3"]
+script/source = "extends Node
+# _root.playpause = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_htv72"]
+script/source = "extends Node
+# _root.Course.Char.yspeed = saveY;
+# _root.Course.Char.xspeed = saveX;
+# if (_root.Course.Char.attack !== \"Dive\") {
+# 	_root.Course.Char.attack = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_pslbk"]
+script/source = "extends Node
+# //
+# if (_root.Star[_parent.starnum] == true) {
+# 	if (_parent.alternateoldframe !== true) {
+# 		play();
+# 	} else {
+# 		_parent.gotoAndStop(1);
+# 		_parent._alpha = 50;
+# 	}
+# } else {
+# 	_parent.gotoAndStop(1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_dbnfv"]
+script/source = "extends Node
+# _parent.gotoAndStop(1);"
+
 [node name="Invisible Shine Sprite Animation" type="Node2D"]
+script = ExtResource("1_6ji4l")
+source_xml = "res://sm63/LIBRARY/Menu/Stars/Invisible Shine Sprite Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_og3j8")
+"Timeline": SubResource("AnimationLibrary_03e7e")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -387,8 +501,8 @@ libraries = {
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (no Code).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -404,8 +518,8 @@ brightness = 0.0
 [node name="Frame 48" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 48" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 48"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (no Code).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -421,8 +535,8 @@ brightness = 0.0
 [node name="Frame 88" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 88" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 88"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (no Code).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -438,8 +552,8 @@ brightness = 0.0
 [node name="Frame 106" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 106" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 106"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (no Code).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -455,8 +569,8 @@ brightness = 0.0
 [node name="Frame 119" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 119" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 119"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (no Code).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -475,15 +589,15 @@ visible = false
 [node name="@@52932" type="Sprite2D" parent="Layer 3/Frame 149"]
 texture_filter = 1
 position = Vector2(-13.5, -16)
-texture = ExtResource("3_nwou2")
+texture = ExtResource("3_5ysal")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Menu/Stars/Invis Star Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -499,8 +613,8 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Menu/Stars/Invis Star Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -516,8 +630,8 @@ brightness = 0.0
 [node name="Frame 48" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 48" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 48"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Menu/Stars/Invis Star Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -533,8 +647,8 @@ brightness = 0.0
 [node name="Frame 88" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 88" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 88"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Menu/Stars/Invis Star Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -550,8 +664,8 @@ brightness = 0.0
 [node name="Frame 106" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 106" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 106"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Menu/Stars/Invis Star Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -567,8 +681,8 @@ brightness = 0.0
 [node name="Frame 149" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 149" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 149"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (no Code).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -584,8 +698,8 @@ brightness = 0.0
 [node name="Frame 159" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 159" instance=ExtResource("1_aumc3")]
-script = ExtResource("2_cdc56")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 159"]
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip (no Code).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -605,10 +719,10 @@ brightness = 0.0
 [node name="Frame 60" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 60" instance=ExtResource("1_aumc3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 60"]
 position = Vector2(-0.05, -0.05)
 scale = Vector2(0.399994, 0.399994)
-script = ExtResource("2_cdc56")
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -624,10 +738,10 @@ brightness = 0.0
 [node name="Frame 106" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 106" instance=ExtResource("1_aumc3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 106"]
 position = Vector2(-0.05, -0.05)
 scale = Vector2(1.59998, 1.59998)
-script = ExtResource("2_cdc56")
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -643,11 +757,11 @@ brightness = 0.0
 [node name="Frame 149" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 149" instance=ExtResource("1_aumc3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 149"]
 position = Vector2(-0.05, -0.05)
 rotation = 1.5708
 scale = Vector2(1.59998, 1.59998)
-script = ExtResource("2_cdc56")
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -663,10 +777,10 @@ brightness = 0.0
 [node name="Frame 159" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 159" instance=ExtResource("1_aumc3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 159"]
 position = Vector2(-0.05, -0.05)
 rotation = 3.14159
-script = ExtResource("2_cdc56")
+script = ExtResource("2_3qx18")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 0.0
 green_multiplier = 0.0
@@ -683,11 +797,20 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_2wrs4")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_iv6ts")
+
 [node name="Frame 29" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 29"]
+script = SubResource("GDScript_my7un")
 
 [node name="Frame 48" type="Node2D" parent="Layer 2"]
 visible = false
@@ -695,20 +818,41 @@ visible = false
 [node name="Frame 88" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 88"]
+script = SubResource("GDScript_eh6uh")
+
 [node name="Frame 106" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 106"]
+script = SubResource("GDScript_q71t2")
 
 [node name="Frame 126" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 126"]
+script = SubResource("GDScript_5ym37")
+
 [node name="Frame 139" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 139"]
+script = SubResource("GDScript_618x3")
 
 [node name="Frame 140" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 140"]
+script = SubResource("GDScript_htv72")
+
 [node name="Frame 149" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 149"]
+script = SubResource("GDScript_pslbk")
+
 [node name="Frame 159" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 159"]
+script = SubResource("GDScript_dbnfv")

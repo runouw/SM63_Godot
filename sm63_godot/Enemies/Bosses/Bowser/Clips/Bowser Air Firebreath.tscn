@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=17 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 23.png" id="1_tf24l"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 16.png" id="2_lpqve"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 20.png" id="3_ty0fx"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="4_3asgl"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 4.png" id="5_dhnre"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 8.png" id="6_emxto"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 3.png" id="7_ximqj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 4.png" id="8_fdmpj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 10.png" id="9_rlc0o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dsdhs"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 23.png" id="2_lsg8t"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 16.png" id="3_fcjmy"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 20.png" id="4_x7xys"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="5_wc8qw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 4.png" id="6_hhsse"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 8.png" id="7_t52ai"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 3.png" id="8_qcw1j"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 4.png" id="9_n52sx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 10.png" id="10_8665b"]
 
-[sub_resource type="Animation" id="Animation_mwc8p"]
+[sub_resource type="Animation" id="Animation_ogi4g"]
 length = 0.7
 loop_mode = 1
 tracks/0/type = "value"
@@ -170,16 +171,88 @@ tracks/12/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a20t6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qvh46"]
 _data = {
-"Default": SubResource("Animation_mwc8p")
+"Default": SubResource("Animation_ogi4g")
 }
 
+[sub_resource type="GDScript" id="GDScript_jib3x"]
+script/source = "extends Node
+# if (_parent._parent.HP == 3) {
+# 	randomnum = 1+random(2);
+# 	if (random(2) == 1 && random(2) == 1) {
+# 		randomnum++;
+# 	}
+# }
+# if (_parent._parent.HP == 2) {
+# 	randomnum = 1+random(3);
+# 	if (random(2) == 1 && random(2) == 1) {
+# 		randomnum = 3;
+# 	}
+# }
+# if (_parent._parent.HP == 1) {
+# 	randomnum = 2+random(2);
+# 	if (random(2) == 1 && random(2) == 1) {
+# 		randomnum = 1;
+# 	}
+# }
+# randomnum = Math.min(randomnum, 3);
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_hrteu"]
+script/source = "extends Node
+# randomnum = random(2)+1;
+# if (randomnum == 1) {
+# 	if (_parent._parent._xscale>0) {
+# 		_root.Course.BackGFX.attachMovie(\"BowserFire1\", \"BowserFire\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:_parent._parent._x-25, _y:_parent._parent._y-30, bounce:true, frame:2, rotation:random(10)-5});
+# 	} else {
+# 		_root.Course.BackGFX.attachMovie(\"BowserFire1\", \"BowserFire\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:_parent._parent._x+25, _y:_parent._parent._y-30, bounce:true, frame:2, rotation:180+random(10)-5});
+# 	}
+# } else {
+# 	if (_parent._parent._xscale>0) {
+# 		_root.Course.BackGFX.attachMovie(\"BowserFire1\", \"BowserFire\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:_parent._parent._x-25, _y:_parent._parent._y-30, bounce:false, rotation:random(20)-15});
+# 	} else {
+# 		_root.Course.BackGFX.attachMovie(\"BowserFire1\", \"BowserFire\"+_root.Course.BackGFX.getNextHighestDepth(), _root.Course.BackGFX.getNextHighestDepth(), {_x:_parent._parent._x+25, _y:_parent._parent._y-30, bounce:false, rotation:180+random(20)-15});
+# 	}
+# }
+# if (_parent._parent.HP == 2) {
+# 	gotoAndPlay(\"skip1\");
+# }
+# if (_parent._parent.HP == 1) {
+# 	gotoAndPlay(\"skip2\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_m64fl"]
+script/source = "extends Node
+# randomnum--;
+# if (randomnum>0) {
+# 	gotoAndPlay(\"repeat\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_dq0wn"]
+script/source = "extends Node
+# _parent._parent.attack = false;
+# "
+
 [node name="Bowser Air Firebreath" type="Node2D"]
+script = ExtResource("1_dsdhs")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Bowser/Clips/Bowser Air Firebreath.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_a20t6")
+"Timeline": SubResource("AnimationLibrary_qvh46")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -191,25 +264,25 @@ texture_filter = 1
 position = Vector2(-10.85, -13.95)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_tf24l")
+texture = ExtResource("2_lsg8t")
 centered = false
 
 [node name="@@49042" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-17.6, -28.8)
-texture = ExtResource("2_lpqve")
+texture = ExtResource("3_fcjmy")
 centered = false
 
 [node name="@@49043" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1.35, -12.95)
-texture = ExtResource("3_ty0fx")
+texture = ExtResource("4_x7xys")
 centered = false
 
 [node name="@@49044" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-35.4, -35.2)
-texture = ExtResource("4_3asgl")
+texture = ExtResource("5_wc8qw")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -218,7 +291,7 @@ visible = false
 [node name="@@49045" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-21.05, -2.15)
-texture = ExtResource("5_dhnre")
+texture = ExtResource("6_hhsse")
 centered = false
 
 [node name="@@49046" type="Sprite2D" parent="Layer 1/Frame 2"]
@@ -226,19 +299,19 @@ texture_filter = 1
 position = Vector2(-23.85, -25.8)
 rotation = -0.138976
 scale = Vector2(0.999597, 0.999597)
-texture = ExtResource("2_lpqve")
+texture = ExtResource("3_fcjmy")
 centered = false
 
 [node name="@@49047" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-3.2, -7.95)
-texture = ExtResource("6_emxto")
+texture = ExtResource("7_t52ai")
 centered = false
 
 [node name="@@49048" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-41, -33.55)
-texture = ExtResource("7_ximqj")
+texture = ExtResource("8_qcw1j")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -247,7 +320,7 @@ visible = false
 [node name="@@49049" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-20.05, -2.15)
-texture = ExtResource("5_dhnre")
+texture = ExtResource("6_hhsse")
 centered = false
 
 [node name="@@49050" type="Sprite2D" parent="Layer 1/Frame 4"]
@@ -255,19 +328,19 @@ texture_filter = 1
 position = Vector2(-23.85, -25.8)
 rotation = -0.138976
 scale = Vector2(0.999597, 0.999597)
-texture = ExtResource("2_lpqve")
+texture = ExtResource("3_fcjmy")
 centered = false
 
 [node name="@@49051" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-2.2, -7.95)
-texture = ExtResource("6_emxto")
+texture = ExtResource("7_t52ai")
 centered = false
 
 [node name="@@49052" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-42, -33.55)
-texture = ExtResource("7_ximqj")
+texture = ExtResource("8_qcw1j")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -276,7 +349,7 @@ visible = false
 [node name="@@49053" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-21.05, -4.15)
-texture = ExtResource("5_dhnre")
+texture = ExtResource("6_hhsse")
 centered = false
 
 [node name="@@49054" type="Sprite2D" parent="Layer 1/Frame 6"]
@@ -284,19 +357,19 @@ texture_filter = 1
 position = Vector2(-27, -23.85)
 rotation = -0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("2_lpqve")
+texture = ExtResource("3_fcjmy")
 centered = false
 
 [node name="@@49055" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-43.05, -31.95)
-texture = ExtResource("8_fdmpj")
+texture = ExtResource("9_n52sx")
 centered = false
 
 [node name="@@49056" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-3.55, -9.55)
-texture = ExtResource("9_rlc0o")
+texture = ExtResource("10_8665b")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
@@ -305,7 +378,7 @@ visible = false
 [node name="@@49057" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-21.05, -2.15)
-texture = ExtResource("5_dhnre")
+texture = ExtResource("6_hhsse")
 centered = false
 
 [node name="@@49058" type="Sprite2D" parent="Layer 1/Frame 15"]
@@ -313,19 +386,19 @@ texture_filter = 1
 position = Vector2(-23.85, -25.8)
 rotation = -0.138976
 scale = Vector2(0.999597, 0.999597)
-texture = ExtResource("2_lpqve")
+texture = ExtResource("3_fcjmy")
 centered = false
 
 [node name="@@49059" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-3.2, -7.95)
-texture = ExtResource("6_emxto")
+texture = ExtResource("7_t52ai")
 centered = false
 
 [node name="@@49060" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-41, -33.55)
-texture = ExtResource("7_ximqj")
+texture = ExtResource("8_qcw1j")
 centered = false
 
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
@@ -336,36 +409,42 @@ texture_filter = 1
 position = Vector2(-10.85, -13.95)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_tf24l")
+texture = ExtResource("2_lsg8t")
 centered = false
 
 [node name="@@49062" type="Sprite2D" parent="Layer 1/Frame 17"]
 texture_filter = 1
 position = Vector2(-17.6, -28.8)
-texture = ExtResource("2_lpqve")
+texture = ExtResource("3_fcjmy")
 centered = false
 
 [node name="@@49063" type="Sprite2D" parent="Layer 1/Frame 17"]
 texture_filter = 1
 position = Vector2(-1.35, -12.95)
-texture = ExtResource("3_ty0fx")
+texture = ExtResource("4_x7xys")
 centered = false
 
 [node name="@@49064" type="Sprite2D" parent="Layer 1/Frame 17"]
 texture_filter = 1
 position = Vector2(-35.4, -35.2)
-texture = ExtResource("4_3asgl")
+texture = ExtResource("5_wc8qw")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_jib3x")
+
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 6"]
+script = SubResource("GDScript_hrteu")
 
 [node name="Frame 8" type="Node2D" parent="Layer 3"]
 visible = false
@@ -376,5 +455,11 @@ visible = false
 [node name="Frame 16" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 16"]
+script = SubResource("GDScript_m64fl")
+
 [node name="Frame 20" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 20"]
+script = SubResource("GDScript_dq0wn")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Fall - 5.png" id="1_fp0eh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_inrw7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Fall - 5.png" id="2_s1vh5"]
 
-[sub_resource type="Animation" id="Animation_wgm66"]
+[sub_resource type="Animation" id="Animation_q1jjt"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h6jkn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_07gye"]
 _data = {
-"Default": SubResource("Animation_wgm66")
+"Default": SubResource("Animation_q1jjt")
 }
 
 [node name="Mario Jumping Out of Painting" type="Node2D"]
+script = ExtResource("1_inrw7")
+source_xml = "res://sm63/LIBRARY/Char/Mario Jumping Out of Painting.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_h6jkn")
+"Timeline": SubResource("AnimationLibrary_07gye")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@14373" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-10.5, -15)
-texture = ExtResource("1_fp0eh")
+texture = ExtResource("2_s1vh5")
 centered = false

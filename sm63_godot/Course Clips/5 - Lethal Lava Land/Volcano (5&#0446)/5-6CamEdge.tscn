@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_8r05t"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xofna"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kshqp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7d6fr"]
 
-[sub_resource type="Animation" id="Animation_4i6rw"]
+[sub_resource type="Animation" id="Animation_k0544"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +31,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gjnaf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gj3ic"]
 _data = {
-"Default": SubResource("Animation_4i6rw")
+"Default": SubResource("Animation_k0544")
 }
 
 [node name="5-6CamEdge" type="Node2D"]
+script = ExtResource("1_kshqp")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-6CamEdge.xml"
+linkage = "5-6CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gjnaf")
+"Timeline": SubResource("AnimationLibrary_gj3ic")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -58,9 +63,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_8r05t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0, 34.1)
-script = ExtResource("2_xofna")
+script = ExtResource("2_7d6fr")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-6CamLava.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

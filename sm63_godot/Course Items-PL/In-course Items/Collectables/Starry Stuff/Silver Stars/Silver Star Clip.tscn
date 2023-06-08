@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_mrcha"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_su3bg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_07efv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2yjkh"]
 
-[sub_resource type="Animation" id="Animation_wqj0v"]
+[sub_resource type="Animation" id="Animation_eesdq"]
 length = 1.63333
 loop_mode = 1
 tracks/0/type = "value"
@@ -403,16 +403,85 @@ tracks/32/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n15tk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tvv1y"]
 _data = {
-"Default": SubResource("Animation_wqj0v")
+"Default": SubResource("Animation_eesdq")
 }
 
+[sub_resource type="GDScript" id="GDScript_btn0p"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# "
+
+[sub_resource type="GDScript" id="GDScript_mg5so"]
+script/source = "extends Node
+# if (_root.Course.coincountnum == undefined) {
+# 	_root.Course.coincountnum = 0;
+# } else {
+# 	_root.Course.coincountnum++;
+# }
+# if (_root[\"coindata\"+_root.playingcourse][0] == undefined) {
+# 	_root[\"coindata\"+_root.playingcourse] = [\"\"];
+# }
+# coinnum = _root.Course.coincountnum;
+# if (_root[\"coindata\"+_root.playingcourse][coinnum] == 1 && _root[\"coindata\"+_root.playingcourse][coinnum] !== undefined) {
+# 	gotoAndStop(\"end\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_wryxt"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 		_visible = true;
+# 		if (this.box.hitTest(_root.Course.Char.charClip.body)) {
+# 			_root[\"coindata\"+_root.playingcourse][coinnum] = 1;
+# 			play();
+# 			_root.WaterHP += 3;
+# 			_root.WaterHP = Math.min(_root.WaterHP, 8);
+# 			_root.SilverStars++;
+# 			cointext = _root.SilverStars;
+# 			onEnterFrame = function () {
+# 				if (_root.PauseGame == false) {
+# 					play();
+# 				} else {
+# 					stop();
+# 				}
+# 			};
+# 		}
+# 		if (_root.PauseGame == false) {
+# 			clip.play();
+# 		} else {
+# 			clip.stop();
+# 		}
+# 	} else {
+# 		_visible = false;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_qwpsh"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"ItemAppears\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# //
+# _root[\"coindata\"+_root.playingcourse][coinnum] = 1
+# "
+
 [node name="Silver Star Clip" type="Node2D"]
+script = ExtResource("1_07efv")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Silver Stars/Silver Star Clip.xml"
+linkage = "SilverStar"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_n15tk")
+"Timeline": SubResource("AnimationLibrary_tvv1y")
 }
 
 [node name="Layer 5" type="Node2D" parent="."]
@@ -569,8 +638,8 @@ visible = false
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3" instance=ExtResource("1_mrcha")]
-script = ExtResource("2_su3bg")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 3"]
+script = ExtResource("2_2yjkh")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Silver Stars/Silver Star Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -586,9 +655,9 @@ brightness = 0.0
 [node name="Frame 42" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 42" instance=ExtResource("1_mrcha")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 42"]
 position = Vector2(0, -103)
-script = ExtResource("2_su3bg")
+script = ExtResource("2_2yjkh")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Silver Stars/Silver Star Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -608,10 +677,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_mrcha")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-0.05, 0.05)
 scale = Vector2(0.999207, 0.999207)
-script = ExtResource("2_su3bg")
+script = ExtResource("2_2yjkh")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Silver Stars/Silver Star GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -636,14 +705,17 @@ visible = false
 [node name="Frame 48" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 48"]
+script = SubResource("GDScript_btn0p")
+
 [node name="Layer 6" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 6"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("1_mrcha")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(0, 0.95)
 scale = Vector2(0.509247, 2)
-script = ExtResource("2_su3bg")
+script = ExtResource("2_2yjkh")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -659,10 +731,10 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 3" instance=ExtResource("1_mrcha")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 3"]
 position = Vector2(-0.1, 0)
 scale = Vector2(0.999207, 0.999207)
-script = ExtResource("2_su3bg")
+script = ExtResource("2_2yjkh")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -678,10 +750,10 @@ brightness = 0.0
 [node name="Frame 42" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 42" instance=ExtResource("1_mrcha")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 42"]
 position = Vector2(-0.1, -100)
 scale = Vector2(0.999207, 0.999207)
-script = ExtResource("2_su3bg")
+script = ExtResource("2_2yjkh")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -701,11 +773,20 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_mg5so")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_wryxt")
+
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 3"]
+script = SubResource("GDScript_qwpsh")
 
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false

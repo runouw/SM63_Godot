@@ -11,7 +11,7 @@ uniform bool spreadMethodReflect = false;
 varying vec2 vert;
 
 void vertex() {
-	vert = VERTEX.xy / 100.0;
+	vert = VERTEX.xy / 2000.0;
 }
 
 void fragment() {
@@ -20,5 +20,5 @@ void fragment() {
 	// this is faster than an if statement
 	uv.x = mix(uv.x, abs(mod((uv.x + 0.5) * 2.0, 2.0) - 1.0), float(spreadMethodReflect));
 	
-	COLOR = texture(gradientTexture, vec2(uv.x, 0.5));
+	COLOR *= texture(gradientTexture, vec2(uv.x, 0.5));
 }

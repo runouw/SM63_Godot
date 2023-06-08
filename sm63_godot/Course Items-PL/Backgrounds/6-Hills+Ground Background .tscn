@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_py20p"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_kvv55"]
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="3_7iy64"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/BG Hills Tree Repeat.png" id="4_nxicw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_f4qgm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ce5wn"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="3_8c3fg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/BG Hills Tree Repeat.png" id="4_mo0wf"]
 
-[sub_resource type="Animation" id="Animation_asv2n"]
+[sub_resource type="Animation" id="Animation_oag02"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -45,26 +45,31 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8hufx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0uvh"]
 _data = {
-"Default": SubResource("Animation_asv2n")
+"Default": SubResource("Animation_oag02")
 }
 
 [node name="6-Hills+Ground Background " type="Node2D"]
+script = ExtResource("1_f4qgm")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/6-Hills+Ground Background .xml"
+linkage = "GrassandHillsBG2"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8hufx")
+"Timeline": SubResource("AnimationLibrary_r0uvh")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_py20p")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-303.25, 110)
 scale = Vector2(0.871719, 0.871719)
-script = ExtResource("2_kvv55")
+script = ExtResource("2_ce5wn")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/BG Hills Vectored.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -77,10 +82,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@46479" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_py20p")]
+[node name="@DOMSymbolInstance@46479" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-33.25, 118)
 scale = Vector2(0.824677, 0.824677)
-script = ExtResource("2_kvv55")
+script = ExtResource("2_ce5wn")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/BG Hills Vectored.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -93,10 +98,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@46480" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_py20p")]
+[node name="@DOMSymbolInstance@46480" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(206.75, 118)
 scale = Vector2(0.858887, 0.858887)
-script = ExtResource("2_kvv55")
+script = ExtResource("2_ce5wn")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/BG Hills Vectored.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -126,14 +131,14 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@46475" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(-381.05, 67.6, 585.425, 67.6, 585.425, 116.425, -381.05, 116.425, -381.05, 96.575)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
-script = ExtResource("3_7iy64")
+script = ExtResource("3_8c3fg")
 matrix = Transform2D(0, -0.0193176, 0.160339, 0, 68.3, 82.1)
 entries_color = PackedColorArray(0.188235, 0.345098, 0.12549, 1, 0.203922, 0.376471, 0.156863, 1)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
 [node name="@@46476" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
-script = ExtResource("3_7iy64")
+script = ExtResource("3_8c3fg")
 matrix = Transform2D(0, -0.0114594, 0.109863, 0, 69.2, 106.5)
 entries_color = PackedColorArray(0, 0.32549, 0, 1, 0.188235, 0.376471, 0.156863, 1, 0.0117647, 0.329412, 0.00784314, 1, 0.188235, 0.345098, 0.12549, 1)
 entries_ratio = PackedFloat32Array(0, 0.345098, 0.619608, 1)
@@ -142,14 +147,14 @@ spread_method_reflect = false
 [node name="@@46477" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(-542.55, 67.6, -381.05, 67.6, -381.05, 116.425, -542.55, 116.425, -542.55, 96.575)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
-script = ExtResource("3_7iy64")
+script = ExtResource("3_8c3fg")
 matrix = Transform2D(0, -0.0193176, 0.334122, 0, 557.45, 82.1)
 entries_color = PackedColorArray(0.188235, 0.345098, 0.12549, 1, 0.203922, 0.376471, 0.156863, 1)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
 [node name="@@46478" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
-script = ExtResource("3_7iy64")
+script = ExtResource("3_8c3fg")
 matrix = Transform2D(0, -0.0114594, 0.228943, 0, 559.3, 106.5)
 entries_color = PackedColorArray(0, 0.32549, 0, 1, 0.188235, 0.376471, 0.156863, 1, 0.0117647, 0.329412, 0.00784314, 1, 0.188235, 0.345098, 0.12549, 1)
 entries_ratio = PackedFloat32Array(0, 0.345098, 0.619608, 1)
@@ -167,7 +172,7 @@ position = Vector2(-18.7, 140)
 [node name="@@46473" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_nxicw")
+texture = ExtResource("4_mo0wf")
 texture_offset = Vector2(4.05, -31.95)
 polygon = PackedVector2Array(-544.975, 31.95, 582.35, 31.95, 582.35, 69.95, -544.975, 69.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])

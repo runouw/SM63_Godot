@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Ground.png" id="1_3nv5h"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Menu Folder/Options/YI Jungle Ground-Medium.png" id="2_xsiab"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Menu Folder/Options/YI Jungle Ground-Best.png" id="3_slyea"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Menu Folder/Options/YI Jungle Ground-Low.png" id="4_03ojy"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="5_e4x3a"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_uhe5g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7nb3e"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Ground/YI Jungle/YI Jungle Ground.png" id="2_pxe1v"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Menu Folder/Options/YI Jungle Ground-Medium.png" id="3_1jyjo"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Menu Folder/Options/YI Jungle Ground-Best.png" id="4_gytk4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Menu/Menu Folder/Options/YI Jungle Ground-Low.png" id="5_bk816"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_5pme5"]
 
-[sub_resource type="Animation" id="Animation_qlowg"]
+[sub_resource type="Animation" id="Animation_m2tfx"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -59,16 +59,45 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tldcg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_udjkn"]
 _data = {
-"Default": SubResource("Animation_qlowg")
+"Default": SubResource("Animation_m2tfx")
 }
 
+[sub_resource type="GDScript" id="GDScript_177td"]
+script/source = "extends Node
+# realqual = _root._quality;
+# onEnterFrame = function () {
+# 	if (qual !== undefined) {
+# 		if (tempqual == undefined) {
+# 			tempqual = _root._quality;
+# 		}
+# 		_root._quality = qual;
+# 	} else if (tempqual !== undefined) {
+# 		_root._quality = tempqual;
+# 		tempqual = undefined;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (qual !== undefined) {
+# 		_root._quality = qual;
+# 		realqual = qual;
+# 		qual = undefined;
+# 	}
+# 	tempqual = undefined;
+# };
+# "
+
 [node name="Menu Options Quallity Clip" type="Node2D"]
+script = ExtResource("1_7nb3e")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Options/Menu Options Quallity Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tldcg")
+"Timeline": SubResource("AnimationLibrary_udjkn")
 }
 
 [node name="Mario" type="Node2D" parent="."]
@@ -85,36 +114,36 @@ libraries = {
 texture_filter = 1
 position = Vector2(0, -32)
 scale = Vector2(2, 2)
-texture = ExtResource("1_3nv5h")
+texture = ExtResource("2_pxe1v")
 centered = false
 
 [node name="@@51856" type="Sprite2D" parent="Ground/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-64, -32)
 scale = Vector2(2, 2)
-texture = ExtResource("2_xsiab")
+texture = ExtResource("3_1jyjo")
 centered = false
 
 [node name="@@51857" type="Sprite2D" parent="Ground/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(64, -32)
-texture = ExtResource("3_slyea")
+texture = ExtResource("4_gytk4")
 centered = false
 
 [node name="@@51858" type="Sprite2D" parent="Ground/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-128, -32)
 scale = Vector2(2, 2)
-texture = ExtResource("4_03ojy")
+texture = ExtResource("5_bk816")
 centered = false
 
 [node name="Text" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Text"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 0" instance=ExtResource("5_e4x3a")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Text/Frame 0"]
 position = Vector2(-98.9, 33.65)
-script = ExtResource("6_uhe5g")
+script = ExtResource("6_5pme5")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Options Low.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -127,9 +156,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51852" type="Node2D" parent="Text/Frame 0" instance=ExtResource("5_e4x3a")]
+[node name="@DOMSymbolInstance@51852" type="Node2D" parent="Text/Frame 0"]
 position = Vector2(-30.65, 5.75)
-script = ExtResource("6_uhe5g")
+script = ExtResource("6_5pme5")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Options Medium.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -142,9 +171,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51853" type="Node2D" parent="Text/Frame 0" instance=ExtResource("5_e4x3a")]
+[node name="@DOMSymbolInstance@51853" type="Node2D" parent="Text/Frame 0"]
 position = Vector2(38.75, 40.2)
-script = ExtResource("6_uhe5g")
+script = ExtResource("6_5pme5")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Options High.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -157,9 +186,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51854" type="Node2D" parent="Text/Frame 0" instance=ExtResource("5_e4x3a")]
+[node name="@DOMSymbolInstance@51854" type="Node2D" parent="Text/Frame 0"]
 position = Vector2(101.2, 8.25)
-script = ExtResource("6_uhe5g")
+script = ExtResource("6_5pme5")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Options Best.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -175,3 +204,6 @@ brightness = 0.0
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_177td")

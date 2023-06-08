@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_gtcxe"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_rbpqx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_452sw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_hfrma"]
 
-[sub_resource type="Animation" id="Animation_twehr"]
+[sub_resource type="Animation" id="Animation_ouxhd"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,26 +103,116 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_68yln"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bikup"]
 _data = {
-"Default": SubResource("Animation_twehr")
+"Default": SubResource("Animation_ouxhd")
 }
 
+[sub_resource type="GDScript" id="GDScript_mjit1"]
+script/source = "extends Node
+# if (started == undefined) {
+# 	started = false;
+# }
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.KeySPACE() && _root.PauseGame == false && _root.playpause == false && _root.Power>0 && _root.WaterAmount>0 && (_root.Fluddpow == \"H\" || _root.Fluddpow == \"T\") && (_root.Course.Char.attack == false || (_root.Course.Char.attack == true && (_root.Course.Char.attackFrame == \"Dive\" || _root.Course.Char.attackFrame == \"frontflip\")))) {
+# 		if (started == false) {
+# 			watersoundclip = new Sound(this);
+# 			watersoundclip.attachSound(\"fluddrepeat\");
+# 			watersoundclip.start(0, 1);
+# 			watersoundclip.setVolume(_root.MarioVolume/1.5);
+# 			//
+# 			watersoundclip.onSoundComplete = function() {
+# 				//clip = new Sound(this);
+# 				watersoundclip.attachSound(\"fluddrepeat\");
+# 				watersoundclip.start(0, 1);
+# 				watersoundclip.setVolume(_root.MarioVolume/1.5);
+# 				watersoundclip.setPan(panX);
+# 			};
+# 		}
+# 		started = true;
+# 	} else {
+# 		if (started == true) {
+# 			watersoundclip.stop();
+# 		}
+# 		started = false;
+# 		watersoundclip.onSoundComplete = null;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ok1b2"]
+script/source = "extends Node
+# if (started == undefined) {
+# 	started = false;
+# }
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.KeySPACE() && _root.PauseGame == false && _root.playpause == false && _root.Power>0 && _root.WaterAmount>0 && (_root.Fluddpow == \"H\" || _root.Fluddpow == \"T\") && (_root.Course.Char.attack == false || (_root.Course.Char.attack == true && (_root.Course.Char.attackFrame == \"Dive\" || _root.Course.Char.attackFrame == \"frontflip\")))) {
+# 		if (started == false) {
+# 			watersoundclip = new Sound(this);
+# 			watersoundclip.attachSound(\"fluddrepeat\");
+# 			watersoundclip.start(0, 1);
+# 			watersoundclip.setVolume(_root.MarioVolume/1.5);
+# 			//
+# 			watersoundclip.onSoundComplete = function() {
+# 				//clip = new Sound(this);
+# 				watersoundclip.attachSound(\"fluddrepeat\");
+# 				watersoundclip.start(0, 1);
+# 				watersoundclip.setVolume(_root.MarioVolume/1.5);
+# 				watersoundclip.setPan(panX);
+# 			};
+# 		}
+# 		started = true;
+# 	} else {
+# 		if (started == true) {
+# 			watersoundclip.stop();
+# 		}
+# 		started = false;
+# 		watersoundclip.onSoundComplete = null;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_l370c"]
+script/source = "extends Node
+# // luigi"
+
+[sub_resource type="GDScript" id="GDScript_pc3ya"]
+script/source = "extends Node
+# // luigi"
+
+[sub_resource type="GDScript" id="GDScript_mwsoq"]
+script/source = "extends Node
+# // luigi"
+
+[sub_resource type="GDScript" id="GDScript_f6s1w"]
+script/source = "extends Node
+# // luigi"
+
 [node name="Char Main" type="Node2D"]
+script = ExtResource("1_452sw")
+source_xml = "res://sm63/LIBRARY/Char/-&#061-&#061MaRiO&#061-&#061-/CHARACTER CLIP/Char Main.xml"
+linkage = "Char"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_68yln")
+"Timeline": SubResource("AnimationLibrary_bikup")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_gtcxe")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_mjit1")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -3)
 scale = Vector2(1, 1.00116)
-script = ExtResource("2_rbpqx")
+script = ExtResource("2_hfrma")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Main.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -138,10 +228,10 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_gtcxe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(0, -3)
 scale = Vector2(1, 1.00116)
-script = ExtResource("2_rbpqx")
+script = ExtResource("2_hfrma")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Main.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -157,9 +247,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_gtcxe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-0.35, -3.35)
-script = ExtResource("2_rbpqx")
+script = ExtResource("2_hfrma")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Main.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -175,10 +265,10 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_gtcxe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(0, -3)
 scale = Vector2(1, 1.00116)
-script = ExtResource("2_rbpqx")
+script = ExtResource("2_hfrma")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Main.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -194,9 +284,12 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_gtcxe")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 4"]
+script = SubResource("GDScript_ok1b2")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 scale = Vector2(1, 1.00116)
-script = ExtResource("2_rbpqx")
+script = ExtResource("2_hfrma")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Main.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -208,13 +301,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 4/DOMSymbolInstance"]
+script = SubResource("GDScript_l370c")
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_gtcxe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 scale = Vector2(1, 1.00116)
-script = ExtResource("2_rbpqx")
+script = ExtResource("2_hfrma")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Main.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -226,13 +322,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 5/DOMSymbolInstance"]
+script = SubResource("GDScript_pc3ya")
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("1_gtcxe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6"]
 scale = Vector2(1, 1.00116)
-script = ExtResource("2_rbpqx")
+script = ExtResource("2_hfrma")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Main.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -244,13 +343,16 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 6/DOMSymbolInstance"]
+script = SubResource("GDScript_mwsoq")
 
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_gtcxe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
 scale = Vector2(1, 1.00116)
-script = ExtResource("2_rbpqx")
+script = ExtResource("2_hfrma")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Main.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -262,3 +364,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 7/DOMSymbolInstance"]
+script = SubResource("GDScript_f6s1w")

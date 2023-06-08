@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_6odlg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_18ei6"]
+
+[sub_resource type="Animation" id="Animation_4fmyb"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,28 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8iaa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cjns2"]
 _data = {
-"Default": SubResource("Animation_6odlg")
+"Default": SubResource("Animation_4fmyb")
 }
 
+[sub_resource type="GDScript" id="GDScript_3oe20"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_y = _root.Course.FrontGFX.lava._y;
+# };
+# "
+
 [node name="5-6 Lava Ground" type="Node2D"]
+script = ExtResource("1_18ei6")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-6 Lava Ground.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_e8iaa")
+"Timeline": SubResource("AnimationLibrary_cjns2")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +68,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_3oe20")

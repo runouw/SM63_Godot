@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_ui5vy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hkcgu"]
+
+[sub_resource type="Animation" id="Animation_raylq"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sweis"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i2c2i"]
 _data = {
-"Default": SubResource("Animation_ui5vy")
+"Default": SubResource("Animation_raylq")
 }
 
 [node name="9-10 Bplatforms" type="Node2D"]
+script = ExtResource("1_hkcgu")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10 Bplatforms.xml"
+linkage = "9-10BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sweis")
+"Timeline": SubResource("AnimationLibrary_i2c2i")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

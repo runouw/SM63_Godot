@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_h3uqr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3ysfw"]
+
+[sub_resource type="Animation" id="Animation_ufenm"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,30 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1grth"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3sswq"]
 _data = {
-"Default": SubResource("Animation_h3uqr")
+"Default": SubResource("Animation_ufenm")
 }
 
+[sub_resource type="GDScript" id="GDScript_wqbdd"]
+script/source = "extends Node
+# if (_root.TotalStars >= 64) {
+# 	gotoAndStop(3);
+# } else {
+# 	gotoAndStop(2);
+# }
+# "
+
 [node name="Credits Wutrisngfd" type="Node2D"]
+script = ExtResource("1_3ysfw")
+source_xml = "res://sm63/LIBRARY/Credits Wutrisngfd.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1grth")
+"Timeline": SubResource("AnimationLibrary_3sswq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -92,6 +108,9 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_wqbdd")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

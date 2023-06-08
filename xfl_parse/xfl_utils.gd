@@ -37,10 +37,8 @@ static func _generate_DOMSymbolItem_scene(path: String, DOMSymbolItem: XMLNode) 
 	
 	var new_node := Process_DOMSymbolItem.new(path)
 	
-	new_node.set_script(null)
-	
 	var packed_scene = PackedScene.new()
-	packed_scene.pack(new_node)
+	packed_scene.pack(new_node.root_node)
 	var error := ResourceSaver.save(packed_scene, output_path)
 	if error != OK:
 		print("Error saving ", error)

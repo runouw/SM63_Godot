@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_7b6g3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4jfoq"]
+
+[sub_resource type="Animation" id="Animation_jpoqf"]
 length = 3.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,29 @@ tracks/4/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b7owh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jfdmo"]
 _data = {
-"Default": SubResource("Animation_7b6g3")
+"Default": SubResource("Animation_jpoqf")
 }
 
+[sub_resource type="GDScript" id="GDScript_gxa43"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	frame = Math.round(_root.Powerpercent);
+# 	gotoAndStop(frame);
+# };
+# "
+
 [node name="Fludd Power Level" type="Node2D"]
+script = ExtResource("1_4jfoq")
+source_xml = "res://sm63/LIBRARY/Char/HUD CLIPS (& BITS)/Fludd Power Level.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_b7owh")
+"Timeline": SubResource("AnimationLibrary_jfdmo")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -115,3 +130,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_gxa43")

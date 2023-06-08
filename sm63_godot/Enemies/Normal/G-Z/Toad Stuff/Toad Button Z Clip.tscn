@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_0ucfv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_0bdle"]
+
+[sub_resource type="Animation" id="Animation_be6up"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,21 +18,34 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lnjsn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_osw7e"]
 _data = {
-"Default": SubResource("Animation_0ucfv")
+"Default": SubResource("Animation_be6up")
 }
 
+[sub_resource type="GDScript" id="GDScript_7jc10"]
+script/source = "extends Node
+# onEnterFrame = function(){
+# 	this._xscale = _parent._parent._xscale}"
+
 [node name="Toad Button Z Clip" type="Node2D"]
+script = ExtResource("1_0bdle")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Button Z Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lnjsn")
+"Timeline": SubResource("AnimationLibrary_osw7e")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_7jc10")
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 

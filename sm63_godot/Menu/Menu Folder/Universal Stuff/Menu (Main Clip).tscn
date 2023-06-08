@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_wdr2v"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_yyl4u"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_oq35g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_gy17j"]
 
-[sub_resource type="Animation" id="Animation_87k6u"]
+[sub_resource type="Animation" id="Animation_3ufxk"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -235,24 +235,96 @@ tracks/18/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dk23o"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dnia1"]
 _data = {
-"Default": SubResource("Animation_87k6u")
+"Default": SubResource("Animation_3ufxk")
 }
 
+[sub_resource type="GDScript" id="GDScript_8ve7q"]
+script/source = "extends Node
+# on (release) {
+# 	_root.CurrentPlayer = \"Luigi\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_4grkf"]
+script/source = "extends Node
+# on (release) {
+# 	_root.CurrentPlayer = \"Mario\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_cx4b0"]
+script/source = "extends Node
+# this._name = \"m\";
+# TransitionF = function (framy) {
+# 	//_root.DeleteFile(_parent.HL)
+# 	if (framy == \"Delete\") {
+# 		depth = this.getNextHighestDepth();
+# 		this.attachMovie(\"MenuRedTrans\", \"MenuRedTrans\", depth, {trans:true, _x:0, _y:0});
+# 		//this.attachMovie(\"MenuRedTrans\", \"MenuRedTrans\"+depth, depth, {trans:true, _x:0, _y:0});
+# 	} else if (framy == \"Play\") {
+# 		depth = this.getNextHighestDepth();
+# 		this.attachMovie(\"MenuBlackTrans\", \"MenuBlackTrans\"+depth, depth, {trans:true, _x:0, _y:0});
+# 	} else {
+# 		depth = this.getNextHighestDepth();
+# 		//this.attachMovie(\"MenuTransition\", \"MenuTransition\"+depth, depth, {trans:true, _x:-500, _y:75});
+# 		this.attachMovie(\"MenuTransition\", \"MenuTransition\"+depth, depth, {trans:true, _x:0, _y:200});
+# 		//depth2 = this.getNextHighestDepth();
+# 		//this.attachMovie(\"MenuTransition\", \"MenuTransition\"+depth2, depth2, {trans:true, _x:500, _y:-75});
+# 		GSF = function () {
+# 			gotoAndStop(framy);
+# 			clicked = false;
+# 		};
+# 	}
+# };
+# //
+# SpecialDeleteFile = function (file) {
+# 	//_root.DeleteFile(file);
+# 	//trace(file)
+# 	//trace(\"target is \"+_root.m.filem[file]);
+# 	///_root.m.filem[file].Delete();
+# 	//trace(\"target's frame:\"+_root.m.filem[file].em._currentframe);
+# 	_root.m.filem.HL = undefined;
+# 	_root.m.filem[file].em.gotoAndPlay(2);
+# 	//trace(\"target's frame:\"+_root.m.filem[file].em._currentframe);
+# 	//trace(\"HL:\"+_root.m.filem.HL);
+# };
+# //
+# Message = function (a, color, important) {
+# 	if (messageonscreen == undefined) {
+# 		messageonscreen = 0;
+# 	}
+# 	if (messageonscreen<3 || important !== false) {
+# 		if (color == undefined) {
+# 			color = red;
+# 		}
+# 		depth = _root.m.getNextHighestDepth();
+# 		_root.m.attachMovie(\"MenuMessage\", \"MenuMessage\"+depth, depth, {_x:0, _y:200, txt:a, color:color});
+# 		messageonscreen++;
+# 	}
+# };
+# stop();
+# "
+
 [node name="Menu (Main Clip)" type="Node2D"]
+script = ExtResource("1_oq35g")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Universal Stuff/Menu (Main Clip).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dk23o")
+"Timeline": SubResource("AnimationLibrary_dnia1")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_wdr2v")]
-script = ExtResource("2_yyl4u")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/BG/Menu Background Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -268,8 +340,8 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 7" instance=ExtResource("1_wdr2v")]
-script = ExtResource("2_yyl4u")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 7"]
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/BG/Menu Background Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -295,11 +367,11 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wdr2v")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-135.75, 47)
 rotation = -0.100392
 scale = Vector2(0.999662, 0.999662)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Story Button 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -312,11 +384,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51934" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51934" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(135, 33.9)
 rotation = 0.2618
 scale = Vector2(1, 1)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Menu-Options Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -329,9 +401,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51935" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51935" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(20.85, 96.5)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Extras/Menu-Extra Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -344,10 +416,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51936" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51936" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -65.3)
 scale = Vector2(0.599991, 0.599991)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -363,10 +435,10 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_wdr2v")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-125.45, -120.55)
 scale = Vector2(1.03334, 1.03334)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu-Story Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -379,9 +451,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51937" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51937" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-84.3, 21.25)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Story/Menu Story Frame.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -394,10 +466,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51938" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51938" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-4.75, -228.05)
 scale = Vector2(0.118332, 0.227249)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Xtra/Xtra Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -407,13 +479,16 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0, 1, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51939" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_wdr2v")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 1/@DOMSymbolInstance@51938"]
+script = SubResource("GDScript_8ve7q")
+
+[node name="@DOMSymbolInstance@51939" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-27.25, -228.05)
 scale = Vector2(0.118332, 0.227249)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Xtra/Xtra Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -423,8 +498,11 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1/@DOMSymbolInstance@51939"]
+script = SubResource("GDScript_4grkf")
 
 [node name="Group" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(67.05, -124)
@@ -432,6 +510,7 @@ position = Vector2(67.05, -124)
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 1/Group"]
 
 [node name="@@51940" type="Polygon2D" parent="Layer 1/Frame 1/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-101.65, -112.75, -96.9, -112.75, -96.0119, -109.4, -101.65, -109.4, -91.2, -112.75, -86.45, -112.75, -86.45, -109.4, -92.0881, -109.4, -101.65, -109.4, -98.7, -109.4, -98.7, -97, -101.65, -97, -101.65, -102, -98.7, -109.4, -96.0119, -109.4, -94.05, -102, -96.8202, -102, -92.0881, -109.4, -89.4, -109.4, -91.25, -102, -94.05, -102, -89.4, -109.4, -86.45, -109.4, -86.45, -97, -89.4, -97, -89.4, -102, -96.8202, -102, -91.25, -102, -92.5, -97, -95.55, -97)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25), PackedInt32Array(26, 27, 28, 29)])
 
@@ -441,16 +520,17 @@ position = Vector2(136.05, -151)
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 1/@Group@51941"]
 
 [node name="@@51942" type="Polygon2D" parent="Layer 1/Frame 1/@Group@51941/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-147.05, -84.6, -143.9, -84.6, -143.9, -71.65, -147.05, -71.65, -147.05, -71.65, -136, -71.65, -136, -69, -147.05, -69)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_wdr2v")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-108.95, -100.55)
 scale = Vector2(2.35757, 2.35757)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Extras/Menu Extra Button 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -463,9 +543,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51943" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51943" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(167.45, -109.5)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu-Back Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -478,9 +558,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51944" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51944" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(0, 107.4)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu - SoundTest Box.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -493,9 +573,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51945" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51945" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-87.9, -16.2)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu - LD Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -508,9 +588,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51946" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51946" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(96.75, -13.7)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu - Credit Clsidoa.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -523,9 +603,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51947" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51947" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(-115.85, 51.8)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Share Levels at.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -538,9 +618,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51948" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51948" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(102.35, 52.3)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Share Levels at s.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -556,9 +636,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_wdr2v")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(167.45, -109.5)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu-Back Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -571,10 +651,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51949" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51949" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(-95.9, -113.05)
 scale = Vector2(2.20172, 2.20172)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Menu- Options Button 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -587,10 +667,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51950" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51950" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(-58, 1)
 scale = Vector2(1.00053, 1)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Options/Menu Options Quality Main Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -603,9 +683,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51951" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51951" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(-105.7, -1.7)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu - Auto Quality.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -618,9 +698,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51952" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51952" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(0, -49.9)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu - Mute Music.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -633,9 +713,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51953" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51953" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(107.4, -1.7)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu - BG Quality.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -651,9 +731,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_wdr2v")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(167.45, -109.5)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu-Back Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -666,9 +746,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51954" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51954" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(-6.75, 27.75)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Credits Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -687,9 +767,9 @@ visible = false
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_wdr2v")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
 position = Vector2(167.45, -109.5)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/Menu-Back Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -702,9 +782,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51955" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51955" type="Node2D" parent="Layer 1/Frame 7"]
 position = Vector2(-5.5, -32)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu - Unlock Everything.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -717,9 +797,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51956" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_wdr2v")]
+[node name="@DOMSymbolInstance@51956" type="Node2D" parent="Layer 1/Frame 7"]
 position = Vector2(-5.5, 56)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Menu - Toggle Stars.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -758,9 +838,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_wdr2v")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(-30.45, 259)
-script = ExtResource("2_yyl4u")
+script = ExtResource("2_gy17j")
 path = "res://sm63_godot/Cheat Menu.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -779,3 +859,6 @@ visible = false
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_cx4b0")

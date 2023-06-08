@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_e3dmd"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ff3he"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_iip3i"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_1ubyv"]
 
-[sub_resource type="Animation" id="Animation_w2gof"]
+[sub_resource type="Animation" id="Animation_acxjw"]
 length = 4.0
 loop_mode = 1
 tracks/0/type = "value"
@@ -487,16 +487,32 @@ tracks/39/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iiex0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pqr8q"]
 _data = {
-"Default": SubResource("Animation_w2gof")
+"Default": SubResource("Animation_acxjw")
 }
 
+[sub_resource type="GDScript" id="GDScript_rder6"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="1- Moving Clouds" type="Node2D"]
+script = ExtResource("1_iip3i")
+source_xml = "res://sm63/LIBRARY/Course Clips/1 - Bob-omb Battlefield/Areas 1-3 & 1-5/1- Moving Clouds.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iiex0")
+"Timeline": SubResource("AnimationLibrary_pqr8q")
 }
 
 [node name="Layer 6" type="Node2D" parent="."]
@@ -506,10 +522,10 @@ libraries = {
 [node name="Frame 48" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 48" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 48"]
 position = Vector2(1330, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -525,10 +541,10 @@ brightness = 0.0
 [node name="Frame 87" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 87" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 87"]
 position = Vector2(-70, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -544,10 +560,10 @@ brightness = 0.0
 [node name="Frame 95" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 95" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 95"]
 position = Vector2(-270, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -567,10 +583,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(1330, -690)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -586,10 +602,10 @@ brightness = 0.0
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 49"]
 position = Vector2(-70, -690)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -605,10 +621,10 @@ brightness = 0.0
 [node name="Frame 59" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 59" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 59"]
 position = Vector2(-270, -690)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -627,10 +643,10 @@ visible = false
 [node name="Frame 85" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 85" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 85"]
 position = Vector2(1330, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -646,10 +662,10 @@ brightness = 0.0
 [node name="Frame 119" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 119" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 119"]
 position = Vector2(109.5, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -666,10 +682,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 7"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 0" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 0"]
 position = Vector2(73.6, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -685,10 +701,10 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 4" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 4"]
 position = Vector2(-70, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -704,10 +720,10 @@ brightness = 0.0
 [node name="Frame 12" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 12" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 12"]
 position = Vector2(-270, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -726,10 +742,10 @@ visible = false
 [node name="Frame 97" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 97" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 97"]
 position = Vector2(1298.3, -334.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -745,10 +761,10 @@ brightness = 0.0
 [node name="Frame 119" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 119" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 119"]
 position = Vector2(697.05, -334.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -765,10 +781,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(669.75, -334.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -784,10 +800,10 @@ brightness = 0.0
 [node name="Frame 20" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 20" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 20"]
 position = Vector2(98.3, -334.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -803,10 +819,10 @@ brightness = 0.0
 [node name="Frame 28" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 28" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 28"]
 position = Vector2(-61.7, -334.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -822,10 +838,10 @@ brightness = 0.0
 [node name="Frame 58" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 58" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 58"]
 position = Vector2(1330, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -841,10 +857,10 @@ brightness = 0.0
 [node name="Frame 97" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 97" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 97"]
 position = Vector2(-70, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -860,10 +876,10 @@ brightness = 0.0
 [node name="Frame 105" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 105" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 105"]
 position = Vector2(-270, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -883,10 +899,10 @@ brightness = 0.0
 [node name="Frame 24" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 24" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 24"]
 position = Vector2(1298.3, -374.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -902,10 +918,10 @@ brightness = 0.0
 [node name="Frame 66" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 66" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 66"]
 position = Vector2(98.3, -374.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -921,10 +937,10 @@ brightness = 0.0
 [node name="Frame 74" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 74" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 74"]
 position = Vector2(-61.7, -374.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -944,10 +960,10 @@ brightness = 0.0
 [node name="Frame 14" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 14" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 14"]
 position = Vector2(1318.3, -430.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -963,10 +979,10 @@ brightness = 0.0
 [node name="Frame 61" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 61" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 61"]
 position = Vector2(-161.7, -430.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -982,10 +998,10 @@ brightness = 0.0
 [node name="Frame 67" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 67" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 67"]
 position = Vector2(-321.7, -430.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1001,10 +1017,10 @@ brightness = 0.0
 [node name="Frame 69" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 69" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 69"]
 position = Vector2(1298.3, -334.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1020,10 +1036,10 @@ brightness = 0.0
 [node name="Frame 111" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 111" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 111"]
 position = Vector2(98.3, -334.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1039,10 +1055,10 @@ brightness = 0.0
 [node name="Frame 119" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 119" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 119"]
 position = Vector2(-61.7, -334.1)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1062,10 +1078,10 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 4" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 4"]
 position = Vector2(1330, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1081,10 +1097,10 @@ brightness = 0.0
 [node name="Frame 43" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 43" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 43"]
 position = Vector2(-70, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1100,10 +1116,10 @@ brightness = 0.0
 [node name="Frame 51" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 51" instance=ExtResource("1_e3dmd")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 51"]
 position = Vector2(-270, -490)
 scale = Vector2(2, 2)
-script = ExtResource("2_ff3he")
+script = ExtResource("2_1ubyv")
 path = "res://sm63_godot/Course Items-PL/Various Platforms/Non-Coded PL/Escalar/Cloud PLatform Clip 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1122,3 +1138,6 @@ visible = false
 [node name="Layer 8" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 8"]
+
+[node name="AS2" type="Node" parent="Layer 8/Frame 0"]
+script = SubResource("GDScript_rder6")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_08l45"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8huw3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hliur"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_i8ayq"]
 
-[sub_resource type="Animation" id="Animation_7xjrq"]
+[sub_resource type="Animation" id="Animation_y50k7"]
 length = 1.63333
 loop_mode = 1
 tracks/0/type = "value"
@@ -415,16 +415,112 @@ tracks/33/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gfkp8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vg7s7"]
 _data = {
-"Default": SubResource("Animation_7xjrq")
+"Default": SubResource("Animation_y50k7")
 }
 
+[sub_resource type="GDScript" id="GDScript_5pbuo"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 2;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_54o0m"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 2;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_6xda2"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# "
+
+[sub_resource type="GDScript" id="GDScript_2h8do"]
+script/source = "extends Node
+# if (_root.Course.coincountnum == undefined) {
+# 	_root.Course.coincountnum = 0;
+# } else {
+# 	_root.Course.coincountnum++;
+# }
+# if (_root[\"coindata\"+_root.playingcourse][0] == undefined) {
+# 	_root[\"coindata\"+_root.playingcourse] = [\"\"];
+# }
+# coinnum = _root.Course.coincountnum;
+# if (_root[\"coindata\"+_root.playingcourse][coinnum] == 1 && _root[\"coindata\"+_root.playingcourse][coinnum] !== undefined) {
+# 	gotoAndStop(\"end\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_tvejd"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 		_visible = true;
+# 		if (this.box.hitTest(_root.Course.Char.charClip.body)) {
+# 			_root[\"coindata\"+_root.playingcourse][coinnum] = 1;
+# 			play();
+# 			_root.RedCoins++;
+# 			_root.WaterHP += 2;
+# 			_root.WaterHP = Math.min(_root.WaterHP, 8);
+# 			cointext = _root.RedCoins;
+# 			_root.Course.Char.fallcount = 0;
+# 			_root.hpcoincount += 5;
+# 			_root.coincount += 2;
+# 			_root.Coins += 2;
+# 			onEnterFrame = function () {
+# 				if (_root.PauseGame == false) {
+# 					play();
+# 				} else {
+# 					stop();
+# 				}
+# 			};
+# 		}
+# 		if (_root.PauseGame == false) {
+# 			clip.play();
+# 		} else {
+# 			clip.stop();
+# 		}
+# 	} else {
+# 		_visible = false;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_qxa3f"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"CoinJingle\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# //
+# _root[\"coindata\"+_root.playingcourse][coinnum] = 1
+# "
+
+[sub_resource type="GDScript" id="GDScript_doh4f"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"CoinJingle\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# //
+# "
+
 [node name="Red Coin Code" type="Node2D"]
+script = ExtResource("1_hliur")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Red Folder/Red Coin Code.xml"
+linkage = "RedCoin"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gfkp8")
+"Timeline": SubResource("AnimationLibrary_vg7s7")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -578,8 +674,8 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_08l45")]
-script = ExtResource("2_8huw3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
+script = ExtResource("2_i8ayq")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Red Folder/Red Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -595,8 +691,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3" instance=ExtResource("1_08l45")]
-script = ExtResource("2_8huw3")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 3"]
+script = ExtResource("2_i8ayq")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Red Folder/Red Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -612,9 +708,9 @@ brightness = 0.0
 [node name="Frame 10" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 10" instance=ExtResource("1_08l45")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 10"]
 position = Vector2(0, -10)
-script = ExtResource("2_8huw3")
+script = ExtResource("2_i8ayq")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Red Folder/Red Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -634,10 +730,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_08l45")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(-1, -1)
 scale = Vector2(0.399994, 0.399994)
-script = ExtResource("2_8huw3")
+script = ExtResource("2_i8ayq")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 0.0
 green_multiplier = 0.0
@@ -649,14 +745,17 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 5/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_5pbuo")
 
 [node name="Frame 3" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3" instance=ExtResource("1_08l45")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3"]
 position = Vector2(-1, -1)
 scale = Vector2(0.399994, 0.399994)
-script = ExtResource("2_8huw3")
+script = ExtResource("2_i8ayq")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 0.0
 green_multiplier = 0.0
@@ -669,14 +768,17 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 5/Frame 3/DOMSymbolInstance"]
+script = SubResource("GDScript_54o0m")
+
 [node name="Frame 10" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 10" instance=ExtResource("1_08l45")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 10"]
 position = Vector2(-1, -11)
 rotation = 3.14159
 scale = Vector2(0.399994, 0.399994)
-script = ExtResource("2_8huw3")
+script = ExtResource("2_i8ayq")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 0.0
 green_multiplier = 0.0
@@ -696,10 +798,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_08l45")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -0.1)
 scale = Vector2(0.395874, 1.56252)
-script = ExtResource("2_8huw3")
+script = ExtResource("2_i8ayq")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -727,15 +829,30 @@ visible = false
 [node name="Frame 48" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 48"]
+script = SubResource("GDScript_6xda2")
+
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_2h8do")
+
 [node name="Frame 2" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 2"]
+script = SubResource("GDScript_tvejd")
 
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 3"]
+script = SubResource("GDScript_qxa3f")
+
 [node name="Frame 4" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 4"]
+script = SubResource("GDScript_doh4f")

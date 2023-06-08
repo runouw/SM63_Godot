@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_4ryw4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_n8fmc"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_rieuw"]
 
-[sub_resource type="Animation" id="Animation_edh1r"]
+[sub_resource type="Animation" id="Animation_mwns1"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -54,16 +55,55 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dl2f8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tec63"]
 _data = {
-"Default": SubResource("Animation_edh1r")
+"Default": SubResource("Animation_mwns1")
 }
 
+[sub_resource type="GDScript" id="GDScript_ttahe"]
+script/source = "extends Node
+# num = 5;
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 		sc = 105;
+# 		gotoAndStop(3);
+# 	} else {
+# 		gotoAndStop(2);
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	_rotation += (0-_rotation)/2;
+# 	if (hold == true && sc == 105) {
+# 		if (count == 0 || (count>10 && count%2 == 0)) {
+# 			_parent.rot += num;
+# 			_rotation = num*2;
+# 			//_xscale = 130;
+# 		}
+# 		count++;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (sc == 105) {
+# 		hold = true;
+# 		count = 0;
+# 	}
+# };
+# onMouseUp = function () {
+# 	hold = false;
+# };
+# "
+
 [node name="LDW - ItemRot Button right" type="Node2D"]
+script = ExtResource("1_n8fmc")
+source_xml = "res://sm63/LIBRARY/LDW - ItemRot Button right.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dl2f8")
+"Timeline": SubResource("AnimationLibrary_tec63")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -75,7 +115,7 @@ libraries = {
 [node name="@@12080" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-0.3, -20.275, -0.3, -20.275, 15.625, -13.675, 17.2085, -10.225, -0.3, -10.225, -0.3, -13.675, -0.275, -10.225, 17.2085, -10.225, 22.2, 0.65, 12.15, 0.65, 8.575, -6.6, 5.2, 0.65, 12.15, 0.65, 12.15, 0.65, 5.2, 0.65, 12.15, 0.65, 28, 0.65, 28, 0.65, 12.15, 0.65, 5.2, 0.65, 28, 0.65, 17.475, 11.625, 17.475, 11.625)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(19, 20, 21, 22)])
-script = ExtResource("1_4ryw4")
+script = ExtResource("2_rieuw")
 matrix = Transform2D(-0.0267792, 0, 0, 0.0266876, 0.95, 2.9)
 entries_color = PackedColorArray(1, 1, 0.0352941, 1, 1, 1, 1, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -97,7 +137,7 @@ visible = false
 [node name="@@12082" type="Polygon2D" parent="Layer 1/Frame 2/Shape"]
 polygon = PackedVector2Array(-0.3, -20.275, -0.3, -20.275, 15.625, -13.675, 17.2085, -10.225, -0.3, -10.225, -0.3, -13.675, -0.275, -10.225, 17.2085, -10.225, 22.2, 0.65, 12.15, 0.65, 8.575, -6.6, 5.2, 0.65, 12.15, 0.65, 12.15, 0.65, 5.2, 0.65, 12.15, 0.65, 28, 0.65, 28, 0.65, 12.15, 0.65, 5.2, 0.65, 28, 0.65, 17.475, 11.625, 17.475, 11.625)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(19, 20, 21, 22)])
-script = ExtResource("1_4ryw4")
+script = ExtResource("2_rieuw")
 matrix = Transform2D(-0.0267792, 0, 0, 0.0266876, 0.95, 2.9)
 entries_color = PackedColorArray(0.992157, 0.992157, 0.00784314, 1, 1, 1, 0.368627, 1)
 entries_ratio = PackedFloat32Array(0.196078, 1)
@@ -114,6 +154,9 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ttahe")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

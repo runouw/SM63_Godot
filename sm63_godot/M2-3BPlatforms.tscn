@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_m2m2l"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_o8wn7"]
+
+[sub_resource type="Animation" id="Animation_gndus"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wx5hi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8s6tb"]
 _data = {
-"Default": SubResource("Animation_m2m2l")
+"Default": SubResource("Animation_gndus")
 }
 
 [node name="M2-3BPlatforms" type="Node2D"]
+script = ExtResource("1_o8wn7")
+source_xml = "res://sm63/LIBRARY/M2-3BPlatforms.xml"
+linkage = "M2-3BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wx5hi")
+"Timeline": SubResource("AnimationLibrary_8s6tb")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 5 - 5.png" id="1_i4xd6"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_gomv8"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_sijf0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_bwuuw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 5 - 5.png" id="2_3yfja"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_pobx0"]
 
-[sub_resource type="Animation" id="Animation_vc2lc"]
+[sub_resource type="Animation" id="Animation_vs4gp"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hb7hc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwnky"]
 _data = {
-"Default": SubResource("Animation_vc2lc")
+"Default": SubResource("Animation_vs4gp")
 }
 
 [node name="Luigi Sign" type="Node2D"]
+script = ExtResource("1_bwuuw")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Sign.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hb7hc")
+"Timeline": SubResource("AnimationLibrary_bwnky")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,12 +44,12 @@ libraries = {
 [node name="@@15203" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-7, -20)
-texture = ExtResource("1_i4xd6")
+texture = ExtResource("2_3yfja")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_gomv8")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, 0.7)
-script = ExtResource("3_sijf0")
+script = ExtResource("3_pobx0")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Backwards.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

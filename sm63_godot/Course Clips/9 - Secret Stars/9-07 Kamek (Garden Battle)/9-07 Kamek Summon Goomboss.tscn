@@ -1,15 +1,15 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=20 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_a3ut0"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5edxo"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 1.png" id="3_noi8o"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 2.png" id="4_jqmhd"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Idle - 1.png" id="5_3kh5g"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 1.png" id="6_0nbm2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 2.png" id="7_lh6te"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 3.png" id="8_dk38b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5xfj5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7nl8p"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 1.png" id="3_thgud"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 2.png" id="4_6r6yh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Idle - 1.png" id="5_ifk1w"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 1.png" id="6_wpjux"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 2.png" id="7_5tqds"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Walk 3.png" id="8_eq80n"]
 
-[sub_resource type="Animation" id="Animation_gia0h"]
+[sub_resource type="Animation" id="Animation_0ibuj"]
 length = 10.3667
 loop_mode = 1
 tracks/0/type = "value"
@@ -985,27 +985,138 @@ tracks/80/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iqoir"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_de3ar"]
 _data = {
-"Default": SubResource("Animation_gia0h")
+"Default": SubResource("Animation_0ibuj")
 }
 
+[sub_resource type="GDScript" id="GDScript_rtqd2"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.Course.Char.air == false && count++>(32*3) && _root.playpause == false) {
+# 		play();
+# 		//
+# 		_root.Course.Char.yspeed = 0;
+# 		_root.Course.Char.xspeed = 0;
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.attackFrame = \"bosscinema\";
+# 		onEnterFrame = function () {
+# 			_root.Camcenter = _root.Course.BackGFX.Target1;
+# 			_root.PauseGame = false;
+# 			_root.playpause = true;
+# 		};
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_457uf"]
+script/source = "extends Node
+# _root.Course.BackGFX.StartClip._y = _root.Course.BackGFX.restart1._y;
+# _root.Course.BackGFX.StartClip._x = _root.Course.BackGFX.restart1._x;
+# _root.BossCheckpoint = true;
+# "
+
+[sub_resource type="GDScript" id="GDScript_b1itg"]
+script/source = "extends Node
+# //_root.PlayMessage(\"I've wasted enough time here. So I'll leave you trapped here with my goomba's!\");
+# //
+# _root.Course.Char.yspeed = 0;
+# _root.Course.Char.xspeed = 0;
+# _root.Course.Char.attack = true;
+# _root.Course.Char.attackFrame = \"bosscinema\";
+# "
+
+[sub_resource type="GDScript" id="GDScript_phjrq"]
+script/source = "extends Node
+# stop();
+# //_root.PlayMessage(\"Gah! \"+_root.CurrentPlayer+\" What are you doing here?!? You might mess up my Master's plans, so I'll have to kill you now!\");
+# _root.CinemaMessageFrame = 2;
+# _root.CinemaMessage = \"<b><i>Kamek:</i></b> I've wasted enough time here. So I'll leave you trapped here with my goomba's!\";
+# lastframeZ = _root.KeyZ();
+# //
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.KeyZ() == true && lastframeZ !== true && _root.CinemaMessageFinished == true) {
+# 		_root.CinemaMessage = \"\";
+# 		//_root.CinemaMessage = \"Some mroe text\";
+# 		//_root.CinemaMessageFrame = 3;
+# 		onEnterFrame = function () {
+# 			_root.Camcenter = _root.Course.BackGFX.Target1;
+# 			_root.PauseGame = false;
+# 			_root.playpause = true;
+# 		};
+# 		play();
+# 	}
+# 	lastframeZ = _root.KeyZ();
+# 	//
+# 	_root.Camcenter = this;
+# 	_root.PauseGame = false;
+# 	_root.playpause = true;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_3mvto"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.Camcenter = _root.Course.BackGFX.Target4;
+# 	_root.PauseGame = false;
+# 	_root.playpause = true;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_wn1lo"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	speed = 3
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_n0v3j"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	speed = 6
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_txqtf"]
+script/source = "extends Node
+# _root.StopBGsong();
+# _root.StartBoss64Music();
+# "
+
+[sub_resource type="GDScript" id="GDScript_vnbqv"]
+script/source = "extends Node
+# stop();
+# _root.Course.Char.attack = false;
+# _root.Course.Char.attackFrame = \"\";
+# _root.playpause = false;
+# _root.Course.BackGFX.gotoAndStop(5);
+# onEnterFrame = null;
+# "
+
 [node name="9-07 Kamek Summon Goomboss" type="Node2D"]
+script = ExtResource("1_5xfj5")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Summon Goomboss.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iqoir")
+"Timeline": SubResource("AnimationLibrary_de3ar")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-648.15, -140.95)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1021,11 +1132,11 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-621.15, -125)
 rotation = -2.67386
 scale = Vector2(0.998651, -0.998664)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1041,11 +1152,11 @@ brightness = 0.0
 [node name="Frame 24" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 24"]
 position = Vector2(-282.2, -29)
 rotation = -3.13628
 scale = Vector2(0.999953, -0.999953)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1066,7 +1177,7 @@ texture_filter = 1
 position = Vector2(-261.95, -47.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_noi8o")
+texture = ExtResource("3_thgud")
 centered = false
 
 [node name="Frame 26" type="Node2D" parent="Layer 1"]
@@ -1077,7 +1188,7 @@ texture_filter = 1
 position = Vector2(-258.95, -47.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_noi8o")
+texture = ExtResource("3_thgud")
 centered = false
 
 [node name="Frame 27" type="Node2D" parent="Layer 1"]
@@ -1088,7 +1199,7 @@ texture_filter = 1
 position = Vector2(-258.65, -49)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_jqmhd")
+texture = ExtResource("4_6r6yh")
 centered = false
 
 [node name="Frame 28" type="Node2D" parent="Layer 1"]
@@ -1099,7 +1210,7 @@ texture_filter = 1
 position = Vector2(-257.65, -49)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_jqmhd")
+texture = ExtResource("4_6r6yh")
 centered = false
 
 [node name="Frame 30" type="Node2D" parent="Layer 1"]
@@ -1110,7 +1221,7 @@ texture_filter = 1
 position = Vector2(-256.65, -49)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_jqmhd")
+texture = ExtResource("4_6r6yh")
 centered = false
 
 [node name="Frame 32" type="Node2D" parent="Layer 1"]
@@ -1121,7 +1232,7 @@ texture_filter = 1
 position = Vector2(-253.95, -47.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_noi8o")
+texture = ExtResource("3_thgud")
 centered = false
 
 [node name="Frame 36" type="Node2D" parent="Layer 1"]
@@ -1132,7 +1243,7 @@ texture_filter = 1
 position = Vector2(-253, -46.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_3kh5g")
+texture = ExtResource("5_ifk1w")
 centered = false
 
 [node name="Frame 39" type="Node2D" parent="Layer 1"]
@@ -1143,7 +1254,7 @@ texture_filter = 1
 position = Vector2(-252.95, -45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_0nbm2")
+texture = ExtResource("6_wpjux")
 centered = false
 
 [node name="Frame 41" type="Node2D" parent="Layer 1"]
@@ -1154,7 +1265,7 @@ texture_filter = 1
 position = Vector2(-252.95, -46.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("7_lh6te")
+texture = ExtResource("7_5tqds")
 centered = false
 
 [node name="Frame 47" type="Node2D" parent="Layer 1"]
@@ -1165,7 +1276,7 @@ texture_filter = 1
 position = Vector2(-252.95, -45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_0nbm2")
+texture = ExtResource("6_wpjux")
 centered = false
 
 [node name="Frame 50" type="Node2D" parent="Layer 1"]
@@ -1176,7 +1287,7 @@ texture_filter = 1
 position = Vector2(-253, -46.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_3kh5g")
+texture = ExtResource("5_ifk1w")
 centered = false
 
 [node name="Frame 63" type="Node2D" parent="Layer 1"]
@@ -1187,7 +1298,7 @@ texture_filter = 1
 position = Vector2(-253.95, -47.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_noi8o")
+texture = ExtResource("3_thgud")
 centered = false
 
 [node name="Frame 66" type="Node2D" parent="Layer 1"]
@@ -1198,7 +1309,7 @@ texture_filter = 1
 position = Vector2(-256.65, -49)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_jqmhd")
+texture = ExtResource("4_6r6yh")
 centered = false
 
 [node name="Frame 74" type="Node2D" parent="Layer 1"]
@@ -1210,7 +1321,7 @@ position = Vector2(-264.9, -49)
 rotation = 3.14159
 scale = Vector2(1, -1.01617)
 skew = -0.178633
-texture = ExtResource("4_jqmhd")
+texture = ExtResource("4_6r6yh")
 centered = false
 
 [node name="Frame 76" type="Node2D" parent="Layer 1"]
@@ -1221,17 +1332,17 @@ texture_filter = 1
 position = Vector2(-253.95, -47.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_noi8o")
+texture = ExtResource("3_thgud")
 centered = false
 
 [node name="Frame 78" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 78" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 78"]
 position = Vector2(-268.15, -27)
 rotation = -3.13628
 scale = Vector2(0.999953, -0.999953)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1247,11 +1358,11 @@ brightness = 0.0
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 99" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 99"]
 position = Vector2(201.85, -127)
 rotation = 2.8851
 scale = Vector2(0.999952, -0.999952)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1270,11 +1381,11 @@ visible = false
 [node name="Frame 109" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 109" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 109"]
 position = Vector2(185.75, 22.55)
 rotation = -0.00531033
 scale = Vector2(0.999953, 0.999953)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1290,11 +1401,11 @@ brightness = 0.0
 [node name="Frame 152" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 152" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 152"]
 position = Vector2(-630.95, -18.45)
 rotation = -0.00531033
 scale = Vector2(0.999953, 0.999953)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1313,11 +1424,11 @@ visible = false
 [node name="Frame 167" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 167" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 167"]
 position = Vector2(-630.95, 11.55)
 rotation = -3.13628
 scale = Vector2(0.999953, -0.999953)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1333,11 +1444,11 @@ brightness = 0.0
 [node name="Frame 206" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 206" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 206"]
 position = Vector2(169.05, -8.45)
 rotation = -3.13628
 scale = Vector2(0.999953, -0.999953)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1356,9 +1467,9 @@ visible = false
 [node name="Frame 254" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 254" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 254"]
 position = Vector2(-138.65, 124.35)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomboss Transformation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1374,9 +1485,9 @@ brightness = 0.0
 [node name="Frame 273" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 273" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 273"]
 position = Vector2(-138.65, 124.35)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomboss Transformation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1395,15 +1506,15 @@ visible = false
 [node name="@@41248" type="Sprite2D" parent="Layer 1/Frame 283"]
 texture_filter = 1
 position = Vector2(-170.65, 85.85)
-texture = ExtResource("8_dk38b")
+texture = ExtResource("8_eq80n")
 centered = false
 
 [node name="Frame 291" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 291" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 291"]
 position = Vector2(-138.65, 124.35)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomboss Transformation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1422,7 +1533,7 @@ visible = false
 [node name="@@41249" type="Sprite2D" parent="Layer 1/Frame 297"]
 texture_filter = 1
 position = Vector2(-170.65, 85.85)
-texture = ExtResource("8_dk38b")
+texture = ExtResource("8_eq80n")
 centered = false
 
 [node name="Frame 310" type="Node2D" parent="Layer 1"]
@@ -1462,9 +1573,9 @@ visible = false
 [node name="Frame 193" type="Node2D" parent="Guide Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Guide Layer 1/Frame 193" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Guide Layer 1/Frame 193"]
 position = Vector2(-84.45, 12.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1484,9 +1595,9 @@ brightness = 0.0
 [node name="Frame 124" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 124" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 124"]
 position = Vector2(-90.5, 15.5)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1505,9 +1616,9 @@ visible = false
 [node name="Frame 192" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 192" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 192"]
 position = Vector2(-105.45, 12.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1527,9 +1638,9 @@ brightness = 0.0
 [node name="Frame 125" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 125" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 125"]
 position = Vector2(-112.5, 14.5)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1548,9 +1659,9 @@ visible = false
 [node name="Frame 191" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 191" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 191"]
 position = Vector2(-125.45, 13.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1570,9 +1681,9 @@ brightness = 0.0
 [node name="Frame 126" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 126" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 126"]
 position = Vector2(-133, 14.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1591,9 +1702,9 @@ visible = false
 [node name="Frame 190" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 190" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 190"]
 position = Vector2(-147.45, 14.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1613,9 +1724,9 @@ brightness = 0.0
 [node name="Frame 127" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 127" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 127"]
 position = Vector2(-160.45, 13.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1634,9 +1745,9 @@ visible = false
 [node name="Frame 189" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 189" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 189"]
 position = Vector2(-172.45, 16.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1656,9 +1767,9 @@ brightness = 0.0
 [node name="Frame 129" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 129" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 129"]
 position = Vector2(-187.45, 20.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1677,9 +1788,9 @@ visible = false
 [node name="Frame 188" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 188" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 188"]
 position = Vector2(-194.45, 13.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/FX Kamek Sparkle effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1785,9 +1896,9 @@ end_cap_mode = 2
 [node name="Frame 70" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 70" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 70"]
 position = Vector2(-137.5, 153.45)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1803,9 +1914,9 @@ brightness = 0.0
 [node name="Frame 139" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 139" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 139"]
 position = Vector2(-137.5, 153.45)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1821,9 +1932,9 @@ brightness = 0.0
 [node name="Frame 149" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 149" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 149"]
 position = Vector2(-137.5, 153.45)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1839,9 +1950,9 @@ brightness = 0.5
 [node name="Frame 159" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 159" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 159"]
 position = Vector2(-137.5, 153.45)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1857,9 +1968,9 @@ brightness = 0.0
 [node name="Frame 203" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 203" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 203"]
 position = Vector2(-137.5, 153.45)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1875,9 +1986,9 @@ brightness = 0.0
 [node name="Frame 214" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 214" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 214"]
 position = Vector2(-137.5, 153.45)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1893,9 +2004,9 @@ brightness = 0.5
 [node name="Frame 224" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 224" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 224"]
 position = Vector2(-137.5, 153.45)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1911,9 +2022,9 @@ brightness = 0.0
 [node name="Frame 234" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 234" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 234"]
 position = Vector2(-137.5, 153.45)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1929,10 +2040,10 @@ brightness = 0.5
 [node name="Frame 254" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 254" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 254"]
 position = Vector2(-137.5, 118.45)
 scale = Vector2(5, 5)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 0.101563
 green_multiplier = 0.101563
@@ -1948,10 +2059,10 @@ brightness = 0.0
 [node name="Frame 273" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 273" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 273"]
 position = Vector2(-137.5, 83.45)
 scale = Vector2(10, 10)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.tscn"
 red_multiplier = 0.0
 green_multiplier = 0.0
@@ -1971,24 +2082,39 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_rtqd2")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_457uf")
 
 [node name="Frame 38" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 38"]
+script = SubResource("GDScript_b1itg")
+
 [node name="Frame 43" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 43"]
+script = SubResource("GDScript_phjrq")
 
 [node name="Frame 64" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 64"]
+script = SubResource("GDScript_3mvto")
+
 [node name="Frame 69" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 69" instance=ExtResource("1_a3ut0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 69"]
 position = Vector2(-142.55, 153.9)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2001,11 +2127,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@41218" type="Node2D" parent="Layer 2/Frame 69" instance=ExtResource("1_a3ut0")]
+[node name="@DOMSymbolInstance@41218" type="Node2D" parent="Layer 2/Frame 69"]
 position = Vector2(-138.55, 151.9)
 rotation = -0.785398
 scale = Vector2(1, 1)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2018,11 +2144,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@41219" type="Node2D" parent="Layer 2/Frame 69" instance=ExtResource("1_a3ut0")]
+[node name="@DOMSymbolInstance@41219" type="Node2D" parent="Layer 2/Frame 69"]
 position = Vector2(-140.55, 154.9)
 rotation = 0.2618
 scale = Vector2(1, 1)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2035,11 +2161,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@41220" type="Node2D" parent="Layer 2/Frame 69" instance=ExtResource("1_a3ut0")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 69/@DOMSymbolInstance@41219"]
+script = SubResource("GDScript_wn1lo")
+
+[node name="@DOMSymbolInstance@41220" type="Node2D" parent="Layer 2/Frame 69"]
 position = Vector2(-140.5, 154.95)
 rotation = 0.785405
 scale = Vector2(1.58623, 1.58622)
-script = ExtResource("2_5edxo")
+script = ExtResource("2_7nl8p")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2052,11 +2181,20 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 69/@DOMSymbolInstance@41220"]
+script = SubResource("GDScript_n0v3j")
+
 [node name="Frame 100" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 234" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 234"]
+script = SubResource("GDScript_txqtf")
+
 [node name="Frame 310" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 310"]
+script = SubResource("GDScript_vnbqv")

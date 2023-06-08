@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Log Side.png" id="1_scn2v"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gfkof"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/YI Log Side.png" id="2_xgqms"]
 
-[sub_resource type="Animation" id="Animation_p8v0k"]
+[sub_resource type="Animation" id="Animation_ae6ik"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -66,16 +67,73 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hr078"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_smgko"]
 _data = {
-"Default": SubResource("Animation_p8v0k")
+"Default": SubResource("Animation_ae6ik")
 }
 
+[sub_resource type="GDScript" id="GDScript_witrk"]
+script/source = "extends Node
+# stop();
+# if (scale == undefined) {
+# 	scale = 1;
+# }
+# gotoAndStop(Math.round(scale));
+# depth = _root.Course.BPlatforms.getNextHighestDepth();
+# _root.Course.BPlatforms.attachMovie(\"LogPL\", \"LogPL\"+depth, depth, {_x:_x, _y:_y, speedY:speedY, speedX:speedX, landedon:false, _xscale:_xscale});
+# rotspeed = 0;
+# land = false;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false && Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 		rotspeed = _root.groundFriction(rotspeed, 0.15, 1.05);
+# 		distance = (_root.Course.Char._x-(_x+_parent._x))/this.scale;
+# 		tellTarget (_root.Course.BPlatforms[\"LogPL\"+depth]) {
+# 			if (this.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				//
+# 				_root.changestep = 3;
+# 				_root.StepSound = \"step-wetwood\";
+# 				//
+# 				land = true;
+# 				_root.Course.Char._x += _rotation/7;
+# 				//
+# 				this.rotspeed += (this.distance/5)/(((this.scale-1)/2)+1);
+# 				this.rotspeed -= _rotation-(_root.groundFriction(_rotation, 0.3/this.scale, (0.07/this.scale)+1));
+# 			} else {
+# 				if (land == true) {
+# 					_root.Course.Char.xspeed += ((_rotation/5)-_root.Course.Char.xspeed)/3;
+# 					if (_root.Course.Char.yspeed<-3) {
+# 						this.rotspeed += (this.distance*2)/(((this.scale-1)/2)+1);
+# 					}
+# 				}
+# 				land = false;
+# 				this.rotspeed -= _rotation-(_root.groundFriction(_rotation, 1/this.scale, (0.12/this.scale)+1));
+# 			}
+# 			_rotation += (this.rotspeed)/20;
+# 			if (_rotation>=80 || _rotation<=-80) {
+# 				this.rotspeed *= -0.7;
+# 			}
+# 			_rotation = Math.max(_rotation, -80);
+# 			_rotation = Math.min(_rotation, 80);
+# 			//
+# 			_xscale = this.scale*100;
+# 			//_yscale = this.scale*100;
+# 			//
+# 			this._rotation = _rotation;
+# 		}
+# 	}
+# };
+# "
+
 [node name="Tipping Log" type="Node2D"]
+script = ExtResource("1_gfkof")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Coded Wooden PL/Tipping Log.xml"
+linkage = "TippingLog"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hr078")
+"Timeline": SubResource("AnimationLibrary_smgko")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -85,7 +143,7 @@ libraries = {
 [node name="@@47759" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-41, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -96,13 +154,13 @@ visible = false
 [node name="@@47760" type="Sprite2D" parent="Layer 1/Frame 1/Group"]
 texture_filter = 1
 position = Vector2(-79, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="@@47761" type="Sprite2D" parent="Layer 1/Frame 1/Group"]
 texture_filter = 1
 position = Vector2(-3, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -113,19 +171,19 @@ visible = false
 [node name="@@47762" type="Sprite2D" parent="Layer 1/Frame 2/Group"]
 texture_filter = 1
 position = Vector2(-117, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="@@47763" type="Sprite2D" parent="Layer 1/Frame 2/Group"]
 texture_filter = 1
 position = Vector2(-41, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="@@47764" type="Sprite2D" parent="Layer 1/Frame 2/Group"]
 texture_filter = 1
 position = Vector2(35, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -137,27 +195,30 @@ position = Vector2(-38.5, 0)
 [node name="@@47765" type="Sprite2D" parent="Layer 1/Frame 3/Group"]
 texture_filter = 1
 position = Vector2(-155.5, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="@@47766" type="Sprite2D" parent="Layer 1/Frame 3/Group"]
 texture_filter = 1
 position = Vector2(-79.5, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="@@47767" type="Sprite2D" parent="Layer 1/Frame 3/Group"]
 texture_filter = 1
 position = Vector2(-3.5, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="@@47768" type="Sprite2D" parent="Layer 1/Frame 3/Group"]
 texture_filter = 1
 position = Vector2(73.5, -15)
-texture = ExtResource("1_scn2v")
+texture = ExtResource("2_xgqms")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_witrk")

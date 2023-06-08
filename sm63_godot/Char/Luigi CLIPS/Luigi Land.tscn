@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_gbu6a"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0il64"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_jsveo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0ws0s"]
 
-[sub_resource type="Animation" id="Animation_q48od"]
+[sub_resource type="Animation" id="Animation_say8b"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,25 +55,54 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_igam3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s3bw4"]
 _data = {
-"Default": SubResource("Animation_q48od")
+"Default": SubResource("Animation_say8b")
 }
 
+[sub_resource type="GDScript" id="GDScript_ca1cq"]
+script/source = "extends Node
+# stop();
+# count = -1;
+# count2 = _root.Course.Char.landtime;
+# //
+# //var walksound:Sound = new Sound(this);
+# //walksound.attachSound(\"Mario-Step\");
+# //walksound.start(0, 1);
+# //walksound.setVolume(_root.MarioVolume/2);
+# //
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (count++>count2 || _root.Course.Char.air == true) {
+# 			_root.Course.Char.attack = false;
+# 		}
+# 		if (_root.KeyUp() && animation._currentframe<5) {
+# 			animation.gotoAndPlay(\"land\");
+# 		}
+# 	} else {
+# 	}
+# };
+# "
+
 [node name="Luigi Land" type="Node2D"]
+script = ExtResource("1_jsveo")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Land.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_igam3")
+"Timeline": SubResource("AnimationLibrary_s3bw4")
 }
 
 [node name="Layer 8" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 8"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 0" instance=ExtResource("1_gbu6a")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 0"]
 position = Vector2(2.45, -6.85)
-script = ExtResource("2_0il64")
+script = ExtResource("2_0ws0s")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -90,9 +119,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_gbu6a")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, -3)
-script = ExtResource("2_0il64")
+script = ExtResource("2_0ws0s")
 path = "res://sm63_godot/Char/Luigi CLIPS/Luigi Land Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -109,9 +138,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 6"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("1_gbu6a")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(0.75, 3.95)
-script = ExtResource("2_0il64")
+script = ExtResource("2_0ws0s")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -127,3 +156,6 @@ brightness = 0.0
 [node name="Layer 5" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
+
+[node name="AS2" type="Node" parent="Layer 5/Frame 0"]
+script = SubResource("GDScript_ca1cq")

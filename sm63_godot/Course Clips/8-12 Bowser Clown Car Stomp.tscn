@@ -1,14 +1,14 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 21.png" id="1_bphb6"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_drd75"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_wyiwj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 25.png" id="4_uxn2e"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 27.png" id="5_uq7qw"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 14.png" id="6_hy7d1"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 13.png" id="7_d2eip"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mti4j"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 21.png" id="2_f1g5i"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_p52vc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 25.png" id="4_u23yt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 27.png" id="5_wiu7h"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 14.png" id="6_gs6sm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 13.png" id="7_1dhj0"]
 
-[sub_resource type="Animation" id="Animation_6uepw"]
+[sub_resource type="Animation" id="Animation_l8q8n"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -132,16 +132,38 @@ tracks/9/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nud4d"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_thm54"]
 _data = {
-"Default": SubResource("Animation_6uepw")
+"Default": SubResource("Animation_l8q8n")
 }
 
+[sub_resource type="GDScript" id="GDScript_w3fbu"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_vo681"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# "
+
 [node name="8-12 Bowser Clown Car Stomp" type="Node2D"]
+script = ExtResource("1_mti4j")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-12 Bowser Clown Car Stomp.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nud4d")
+"Timeline": SubResource("AnimationLibrary_thm54")
 }
 
 [node name="Bowser Body - 21" type="Node2D" parent="."]
@@ -151,16 +173,16 @@ libraries = {
 [node name="@@18333" type="Sprite2D" parent="Bowser Body - 21/Frame 0"]
 texture_filter = 1
 position = Vector2(-26.85, -41.55)
-texture = ExtResource("1_bphb6")
+texture = ExtResource("2_f1g5i")
 centered = false
 
 [node name="8-12 Clown Car Base (Plus Expressions)" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="8-12 Clown Car Base (Plus Expressions)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="8-12 Clown Car Base (Plus Expressions)/Frame 0" instance=ExtResource("2_drd75")]
+[node name="DOMSymbolInstance" type="Node2D" parent="8-12 Clown Car Base (Plus Expressions)/Frame 0"]
 position = Vector2(0, 20.9)
-script = ExtResource("3_wyiwj")
+script = ExtResource("3_p52vc")
 path = "res://sm63_godot/Course Clips/8-12 Clown Car Base (Plus Expressions).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -180,7 +202,7 @@ brightness = 0.0
 [node name="@@18331" type="Sprite2D" parent="Bowser Arm - 25/Frame 0"]
 texture_filter = 1
 position = Vector2(-29.65, -27.5)
-texture = ExtResource("4_uxn2e")
+texture = ExtResource("4_u23yt")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Bowser Arm - 25"]
@@ -189,7 +211,7 @@ visible = false
 [node name="@@18332" type="Sprite2D" parent="Bowser Arm - 25/Frame 2"]
 texture_filter = 1
 position = Vector2(-29.65, -28.5)
-texture = ExtResource("4_uxn2e")
+texture = ExtResource("4_u23yt")
 centered = false
 
 [node name="Bowser Arm - 27" type="Node2D" parent="."]
@@ -201,7 +223,7 @@ texture_filter = 1
 position = Vector2(28, -27.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_uq7qw")
+texture = ExtResource("5_wiu7h")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Bowser Arm - 27"]
@@ -212,7 +234,7 @@ texture_filter = 1
 position = Vector2(28, -28.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_uq7qw")
+texture = ExtResource("5_wiu7h")
 centered = false
 
 [node name="Bowser Head - 14" type="Node2D" parent="."]
@@ -222,7 +244,7 @@ centered = false
 [node name="@@18327" type="Sprite2D" parent="Bowser Head - 14/Frame 0"]
 texture_filter = 1
 position = Vector2(-15.5, -51.55)
-texture = ExtResource("6_hy7d1")
+texture = ExtResource("6_gs6sm")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Bowser Head - 14"]
@@ -231,12 +253,18 @@ visible = false
 [node name="@@18328" type="Sprite2D" parent="Bowser Head - 14/Frame 2"]
 texture_filter = 1
 position = Vector2(-15.5, -51)
-texture = ExtResource("7_d2eip")
+texture = ExtResource("7_1dhj0")
 centered = false
 
 [node name="Layer 7" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 7"]
 
+[node name="AS2" type="Node" parent="Layer 7/Frame 0"]
+script = SubResource("GDScript_w3fbu")
+
 [node name="Frame 3" type="Node2D" parent="Layer 7"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 7/Frame 3"]
+script = SubResource("GDScript_vo681")

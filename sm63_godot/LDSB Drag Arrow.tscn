@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_48pv7"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_0lhdi"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_ae178"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tpt8o"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_nxa0y"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_jid7r"]
 
-[sub_resource type="Animation" id="Animation_qcof3"]
+[sub_resource type="Animation" id="Animation_elbd5"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,48 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eoi70"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cacw2"]
 _data = {
-"Default": SubResource("Animation_qcof3")
+"Default": SubResource("Animation_elbd5")
 }
 
+[sub_resource type="GDScript" id="GDScript_0us5e"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse) && _root.MWindow1 == true && _parent.held !== true && _parent.tabbing !== true) {
+# 		sc = 110;
+# 		arr._alpha += (100-arr._alpha)/2;
+# 	} else {
+# 		sc = 100;
+# 		arr._alpha += (50-arr._alpha)/2;
+# 	}
+# 	//_xscale += (sc-_xscale)/2;
+# 	//_yscale = _xscale;
+# 	if (held == true) {
+# 		//_parent.Y += 3*this._yscale/100;
+# 		_parent.drag._y += -2*this._yscale/100;
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (sc == 110) {
+# 		held = true;
+# 	}
+# };
+# onMouseUp = function () {
+# 	held = false;
+# };
+# "
+
 [node name="LDSB Drag Arrow" type="Node2D"]
+script = ExtResource("1_tpt8o")
+source_xml = "res://sm63/LIBRARY/LDSB Drag Arrow.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_eoi70")
+"Timeline": SubResource("AnimationLibrary_cacw2")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,7 +85,7 @@ libraries = {
 [node name="@@8927" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-6.025, -6, 5.975, -6, 5.975, 6, -6.025, 6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_48pv7")
+script = ExtResource("2_nxa0y")
 matrix = Transform2D(0.0103455, 0, 0, 0.0103455, 0, 0)
 entries_color = PackedColorArray(0.866667, 0.839216, 0.733333, 1, 0.933333, 0.917647, 0.866667, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -67,8 +99,8 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_0lhdi")]
-script = ExtResource("3_ae178")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("3_jid7r")
 path = "res://sm63_godot/LDSB Drag Arrow Arrow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -84,3 +116,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_0us5e")

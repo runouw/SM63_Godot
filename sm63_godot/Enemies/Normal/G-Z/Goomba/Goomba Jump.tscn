@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 1.png" id="1_spom3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 2.png" id="2_lo4p6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 3.png" id="3_2ha37"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 4.png" id="4_2ov8b"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_0041y"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 1.png" id="2_rgc5s"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 2.png" id="3_rqd4u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 3.png" id="4_dl850"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 4.png" id="5_8c1ue"]
 
-[sub_resource type="Animation" id="Animation_x05n2"]
+[sub_resource type="Animation" id="Animation_cyd0d"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -81,16 +82,32 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0bkox"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r7ehc"]
 _data = {
-"Default": SubResource("Animation_x05n2")
+"Default": SubResource("Animation_cyd0d")
 }
 
+[sub_resource type="GDScript" id="GDScript_bog2k"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_parent._parent.yspeed>0) {
+# 		nextFrame();
+# 		onEnterFrame = null;
+# 	}
+# };
+# "
+
 [node name="Goomba Jump" type="Node2D"]
+script = ExtResource("1_0041y")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/Goomba Jump.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_0bkox")
+"Timeline": SubResource("AnimationLibrary_r7ehc")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -100,7 +117,7 @@ libraries = {
 [node name="@@50598" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("1_spom3")
+texture = ExtResource("2_rgc5s")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -109,7 +126,7 @@ visible = false
 [node name="@@50599" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-8, -10)
-texture = ExtResource("2_lo4p6")
+texture = ExtResource("3_rqd4u")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -118,7 +135,7 @@ visible = false
 [node name="@@50600" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-8, -11)
-texture = ExtResource("3_2ha37")
+texture = ExtResource("4_dl850")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -127,7 +144,7 @@ visible = false
 [node name="@@50601" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-9, -9)
-texture = ExtResource("4_2ov8b")
+texture = ExtResource("5_8c1ue")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -136,3 +153,6 @@ centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_bog2k")

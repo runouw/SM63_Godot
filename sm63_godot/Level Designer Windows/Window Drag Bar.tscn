@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_0n4c8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dv00t"]
+
+[sub_resource type="Animation" id="Animation_1jxra"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,75 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1wr3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0rt5s"]
 _data = {
-"Default": SubResource("Animation_0n4c8")
+"Default": SubResource("Animation_1jxra")
 }
 
+[sub_resource type="GDScript" id="GDScript_e1442"]
+script/source = "extends Node
+# stop();
+# tempparentwidt;
+# onEnterFrame = function () {
+# 	if (tempparentwidt !== _parent.widt) {
+# 		this._width = _parent.widt-10;
+# 		tempparentwidt = _parent.widt;
+# 	}
+# 	if (_parent.greyness._alpha>95) {
+# 		drag = false;
+# 	}
+# 	if (drag == true) {
+# 		//_parent._x += _xmouse-lastx;
+# 		//_parent._y += _ymouse-lasty;
+# 		_parent._x = Math.min(Math.max(_root._xmouse-lastx, 1-(_parent._width)+20), 449-20);
+# 		_parent._y = Math.min(Math.max(_root._ymouse-lasty, 3), 300-20);
+# 		//lastx = _xmouse;
+# 		//lasty = _ymouse;
+# 	}
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false) && _parent.greyness._alpha<50) {
+# 		gotoAndStop(2);
+# 	} else {
+# 		gotoAndStop(1);
+# 	}
+# };
+# onMouseDown = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		drag = true;
+# 		lastx = _root._xmouse-_parent._x;
+# 		lasty = _root._ymouse-_parent._y;
+# 	}
+# };
+# onMouseUp = function () {
+# 	drag = false;
+# };
+# /*sc = 100;
+# onEnterFrame = function () {
+# if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# sc = 120;
+# } else {
+# sc = 100;
+# }
+# _xscale += (sc-_xscale)/3;
+# _yscale = _xscale;
+# };
+# onMouseDown = function () {
+# if (sc == 120) {
+# _parent.removeMovieClip();
+# }
+# };
+# */
+# "
+
 [node name="Window Drag Bar" type="Node2D"]
+script = ExtResource("1_dv00t")
+source_xml = "res://sm63/LIBRARY/Level Designer Windows/Window Drag Bar.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_i1wr3")
+"Timeline": SubResource("AnimationLibrary_0rt5s")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -114,3 +175,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_e1442")

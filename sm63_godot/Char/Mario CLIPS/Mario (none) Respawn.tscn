@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_h2jqe"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_gvhyy"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_5ihfc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_6ifyv"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_78aiw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_sjq7y"]
 
-[sub_resource type="Animation" id="Animation_da4ph"]
+[sub_resource type="Animation" id="Animation_gxthw"]
 length = 1.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -140,16 +140,69 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7hrg5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ra47w"]
 _data = {
-"Default": SubResource("Animation_da4ph")
+"Default": SubResource("Animation_gxthw")
 }
 
+[sub_resource type="GDScript" id="GDScript_ao8ml"]
+script/source = "extends Node
+# _root.Course.Char._y = _root.StartY;
+# _root.Course.Char._x = _root.StartX;
+# onEnterFrame = function () {
+# 	_root.Camspeed = 1;
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_h4neb"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_xakry"]
+script/source = "extends Node
+# _root.CharHP = 8;
+# _root.WaterHP = 8;
+# _root.WaterAmount = _root.TotalWater/2;
+# _root.Power = 0;
+# //if (_root.CharLives<=0) {
+# 	//_root.gotoAndStop(\"GameOver\");
+# 	//_root.RemoveCourse();
+# //}
+# "
+
+[sub_resource type="GDScript" id="GDScript_x8fb6"]
+script/source = "extends Node
+# //_root.PlayBGSong(_root.SongRepeat);
+# "
+
+[sub_resource type="GDScript" id="GDScript_gltfk"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# _root.Course.Char.blink = _root.respawnblink;
+# "
+
 [node name="Mario (none) Respawn" type="Node2D"]
+script = ExtResource("1_6ifyv")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (none) Respawn.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7hrg5")
+"Timeline": SubResource("AnimationLibrary_ra47w")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -164,7 +217,7 @@ visible = false
 [node name="@@15416" type="Polygon2D" parent="Layer 2/Frame 14/Shape"]
 polygon = PackedVector2Array(2.2, -4.35, 2.2, -4.35, 16.7, -2.75, 22.7, 1.15, 22.7, 1.15, 16.7, 5.05, 2.2, 6.65, 2.2, 6.65, -12.3, 5.05, -18.3, 1.15, -18.3, 1.15, -12.3, -2.75, -18.3, 1.15, -18.3, 1.15, -18.3, 1.15, -18.3, 1.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15)])
-script = ExtResource("1_h2jqe")
+script = ExtResource("2_78aiw")
 matrix = Transform2D(0, 0.00671387, -0.0250244, 0, 2.2, 1.15)
 entries_color = PackedColorArray(0.913725, 0.956863, 0.47451, 0, 0.968627, 1, 0.835294, 0)
 entries_ratio = PackedFloat32Array(0, 0.0784314)
@@ -178,7 +231,7 @@ visible = false
 [node name="@@15417" type="Polygon2D" parent="Layer 2/Frame 29/Shape"]
 polygon = PackedVector2Array(2.2, -4.35, 2.2, -4.35, 16.7, -2.75, 22.7, 1.15, 22.7, 1.15, 16.7, 5.05, 2.2, 6.65, 2.2, 6.65, -12.3, 5.05, -18.3, 1.15, -18.3, 1.15, -12.3, -2.75, -18.3, 1.15, -18.3, 1.15, -18.3, 1.15, -18.3, 1.15)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15)])
-script = ExtResource("1_h2jqe")
+script = ExtResource("2_78aiw")
 matrix = Transform2D(0, 0.00671387, -0.0250244, 0, 2.2, 1.15)
 entries_color = PackedColorArray(0.913725, 0.956863, 0.47451, 1, 0.968627, 1, 0.835294, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -191,9 +244,9 @@ spread_method_reflect = false
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14" instance=ExtResource("2_gvhyy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 14"]
 position = Vector2(0, -100.05)
-script = ExtResource("3_5ihfc")
+script = ExtResource("3_sjq7y")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -209,9 +262,9 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29" instance=ExtResource("2_gvhyy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29"]
 position = Vector2(0, -0.05)
-script = ExtResource("3_5ihfc")
+script = ExtResource("3_sjq7y")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -228,14 +281,29 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_ao8ml")
+
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 2"]
+script = SubResource("GDScript_h4neb")
 
 [node name="Frame 13" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 13"]
+script = SubResource("GDScript_xakry")
+
 [node name="Frame 14" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 14"]
+script = SubResource("GDScript_x8fb6")
+
 [node name="Frame 44" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 44"]
+script = SubResource("GDScript_gltfk")

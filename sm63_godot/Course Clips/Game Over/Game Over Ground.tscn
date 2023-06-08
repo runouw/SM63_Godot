@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_t5k4f"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_piftg"]
+
+[sub_resource type="Animation" id="Animation_ye16y"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ct77"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vllrq"]
 _data = {
-"Default": SubResource("Animation_t5k4f")
+"Default": SubResource("Animation_ye16y")
 }
 
 [node name="Game Over Ground" type="Node2D"]
+script = ExtResource("1_piftg")
+source_xml = "res://sm63/LIBRARY/Course Clips/Game Over/Game Over Ground.xml"
+linkage = "GameOverPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3ct77")
+"Timeline": SubResource("AnimationLibrary_vllrq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

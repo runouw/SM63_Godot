@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_cf8j4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_q8vj7"]
+
+[sub_resource type="Animation" id="Animation_3cydd"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,26 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_45sba"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ch42u"]
 _data = {
-"Default": SubResource("Animation_cf8j4")
+"Default": SubResource("Animation_3cydd")
 }
 
+[sub_resource type="GDScript" id="GDScript_t1pqy"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="9-07Platforms" type="Node2D"]
+script = ExtResource("1_q8vj7")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07Platforms.xml"
+linkage = "9-07Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_45sba")
+"Timeline": SubResource("AnimationLibrary_ch42u")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -66,6 +78,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), Packe
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_t1pqy")
 
 [node name="Group" type="Node2D" parent="Layer 2/Frame 0"]
 

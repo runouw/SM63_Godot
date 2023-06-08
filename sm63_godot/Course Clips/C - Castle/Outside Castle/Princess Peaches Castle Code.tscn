@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_64ic2"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_saewj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Princess Peachs Castle (optimized).png" id="3_js5x7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ivdqc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8qwxv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Princess Peachs Castle (optimized).png" id="3_xp8cm"]
 
-[sub_resource type="Animation" id="Animation_cbk2h"]
+[sub_resource type="Animation" id="Animation_tutye"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,25 +44,76 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7x1tk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6vtr5"]
 _data = {
-"Default": SubResource("Animation_cbk2h")
+"Default": SubResource("Animation_tutye")
 }
 
+[sub_resource type="GDScript" id="GDScript_4gngr"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(8)+1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_3cbar"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(8)+1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_jrm1w"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(8)+1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_3c7rl"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(8)+1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_bkb28"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(8)+1);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_pxqc1"]
+script/source = "extends Node
+# //onEnterFrame = function () {
+# //if (_root._quality == \"LOW\") {
+# //gotoAndStop(2);
+# //} else {
+# gotoAndStop(1);
+# //}
+# //};
+# "
+
 [node name="Princess Peaches Castle Code" type="Node2D"]
+script = ExtResource("1_ivdqc")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Princess Peaches Castle Code.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7x1tk")
+"Timeline": SubResource("AnimationLibrary_6vtr5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_64ic2")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -142.35)
-script = ExtResource("2_saewj")
+script = ExtResource("2_8qwxv")
 path = "res://sm63_godot/Course Clips/C - Castle/Outside Castle/Princess Peaches Castle (Vectors).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -82,12 +133,12 @@ visible = false
 texture_filter = 1
 position = Vector2(-372.75, -419.75)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_js5x7")
+texture = ExtResource("3_xp8cm")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_64ic2")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-318, -130.55)
-script = ExtResource("2_saewj")
+script = ExtResource("2_8qwxv")
 path = "res://sm63_godot/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Flag Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,9 +151,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@45115" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_64ic2")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_4gngr")
+
+[node name="@DOMSymbolInstance@45115" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(339, -130.55)
-script = ExtResource("2_saewj")
+script = ExtResource("2_8qwxv")
 path = "res://sm63_godot/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Flag Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -115,9 +169,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@45116" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_64ic2")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 1/@DOMSymbolInstance@45115"]
+script = SubResource("GDScript_3cbar")
+
+[node name="@DOMSymbolInstance@45116" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(304, -123.55)
-script = ExtResource("2_saewj")
+script = ExtResource("2_8qwxv")
 path = "res://sm63_godot/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Flag Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -130,9 +187,12 @@ tint_multiplier = 0.2
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@45117" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_64ic2")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 1/@DOMSymbolInstance@45116"]
+script = SubResource("GDScript_jrm1w")
+
+[node name="@DOMSymbolInstance@45117" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(-284, -123.55)
-script = ExtResource("2_saewj")
+script = ExtResource("2_8qwxv")
 path = "res://sm63_godot/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Flag Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -145,9 +205,12 @@ tint_multiplier = 0.2
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@45118" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_64ic2")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 1/@DOMSymbolInstance@45117"]
+script = SubResource("GDScript_3c7rl")
+
+[node name="@DOMSymbolInstance@45118" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(10, -421.5)
-script = ExtResource("2_saewj")
+script = ExtResource("2_8qwxv")
 path = "res://sm63_godot/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Castle Flag Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -159,7 +222,13 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1/@DOMSymbolInstance@45118"]
+script = SubResource("GDScript_bkb28")
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_pxqc1")

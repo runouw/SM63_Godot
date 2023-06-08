@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_x56ra"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_0b575"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_1wt6i"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_cvkux"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_8ss6c"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_vdf1g"]
 
-[sub_resource type="Animation" id="Animation_s8laq"]
+[sub_resource type="Animation" id="Animation_wgnbs"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pcn76"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0h4ji"]
 _data = {
-"Default": SubResource("Animation_s8laq")
+"Default": SubResource("Animation_wgnbs")
 }
 
 [node name="Credits Clip" type="Node2D"]
+script = ExtResource("1_cvkux")
+source_xml = "res://sm63/LIBRARY/Credits Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pcn76")
+"Timeline": SubResource("AnimationLibrary_0h4ji")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -53,7 +58,7 @@ libraries = {
 [node name="@@6094" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-155, -100, 155, -100, 155, 100, -155, 100)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_x56ra")
+script = ExtResource("2_8ss6c")
 matrix = Transform2D(0.225159, 0, 0, 0.225159, 0, 0)
 entries_color = PackedColorArray(0.0117647, 0.568627, 0, 1, 0.176471, 0.784314, 0, 0.701961)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -63,10 +68,10 @@ focal_point_ratio = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_0b575")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-154.95, -100)
 scale = Vector2(0.999817, 1)
-script = ExtResource("3_1wt6i")
+script = ExtResource("3_vdf1g")
 path = "res://sm63_godot/Credits Mask.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

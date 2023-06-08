@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 2.png" id="1_76241"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_u11wm"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_03ssp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nxrys"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 2.png" id="2_d4msk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_3kakx"]
 
-[sub_resource type="Animation" id="Animation_w1i53"]
+[sub_resource type="Animation" id="Animation_agm15"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_esact"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s8xqm"]
 _data = {
-"Default": SubResource("Animation_w1i53")
+"Default": SubResource("Animation_agm15")
 }
 
 [node name="Mario (None) Air - 2" type="Node2D"]
+script = ExtResource("1_nxrys")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (None) Air - 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_esact")
+"Timeline": SubResource("AnimationLibrary_s8xqm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,14 +44,14 @@ libraries = {
 [node name="@@15317" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-9.5, -16)
-texture = ExtResource("1_76241")
+texture = ExtResource("2_d4msk")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_u11wm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(5.1, -9.4)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("3_03ssp")
+script = ExtResource("3_3kakx")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

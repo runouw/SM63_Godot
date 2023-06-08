@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_nqv7y"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ij542"]
+
+[sub_resource type="Animation" id="Animation_erf4g"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,26 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_munsh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c7txe"]
 _data = {
-"Default": SubResource("Animation_nqv7y")
+"Default": SubResource("Animation_erf4g")
 }
 
+[sub_resource type="GDScript" id="GDScript_ilkg8"]
+script/source = "extends Node
+# gotoAndStop(random(4)+1);
+# "
+
 [node name="9-10-2 Water Current Item" type="Node2D"]
+script = ExtResource("1_ij542")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Water Current Item.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_munsh")
+"Timeline": SubResource("AnimationLibrary_c7txe")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -140,3 +152,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ilkg8")

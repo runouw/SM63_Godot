@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_2s7at"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_te1a2"]
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_p0bhf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rrh8d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mw2ai"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="3_8r6j7"]
 
-[sub_resource type="Animation" id="Animation_m2acm"]
+[sub_resource type="Animation" id="Animation_4rhsd"]
 length = 1.66667
 loop_mode = 1
 tracks/0/type = "value"
@@ -332,24 +332,71 @@ tracks/26/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qw6vs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sr6qr"]
 _data = {
-"Default": SubResource("Animation_m2acm")
+"Default": SubResource("Animation_4rhsd")
 }
 
+[sub_resource type="GDScript" id="GDScript_ypbkv"]
+script/source = "extends Node
+# _root.CinemaMessageFrame = 1;
+# _root.CinemaMessage = \"\";"
+
+[sub_resource type="GDScript" id="GDScript_wy7q7"]
+script/source = "extends Node
+# stop();
+# _root.bgsong.onSoundComplete = null;
+# _root.bgsong.stop();
+# _root.bgsong = new Sound(this);
+# _root.bgsong.attachSound(\"Melty Molten Galaxy - Intro\");
+# _root.bgsong.start(0, 1);
+# _root.bgsong.setVolume(100);
+# _root.bgsong.onSoundComplete = function() {
+# 	_root.bgsong.attachSound(\"Melty Molten Galaxy - Repeat\");
+# 	_root.bgsong.start(0, 999);
+# 	_root.bgsong.setVolume(100);
+# 	_root.bgsong.onSoundComplete = null;
+# };"
+
+[sub_resource type="GDScript" id="GDScript_yp1s4"]
+script/source = "extends Node
+# stop();"
+
+[sub_resource type="GDScript" id="GDScript_8resv"]
+script/source = "extends Node
+# //_root.changecourse(\"uptransition2\", \"9-08\", 0, 0, 0, 0, true);
+# _root.StartChar(\"9-08\", 0, 0, 0, 0, 100, _root.CurrentPlayer, \"\", \"lefttransition2\", true);
+# _root.onEnterFrame = function() {
+# 	_root.CharCode();
+# };
+# _root.gotoAndStop(\"Courseframe\");
+# "
+
+[sub_resource type="GDScript" id="GDScript_dlmke"]
+script/source = "extends Node
+# Skip = function () {
+# 	gotoAndStop(\"end\");
+# };
+# _root.BGSpeed = 0.5;"
+
 [node name="9-08 Cinema Clip" type="Node2D"]
+script = ExtResource("1_rrh8d")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-08 Cinema Clip.xml"
+linkage = "9-08CinemaClip"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qw6vs")
+"Timeline": SubResource("AnimationLibrary_sr6qr")
 }
 
 [node name="Layer 7" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 7"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 0" instance=ExtResource("1_2s7at")]
-script = ExtResource("2_te1a2")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 0"]
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/5-1 BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -369,9 +416,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 8"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 0" instance=ExtResource("1_2s7at")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 0"]
 scale = Vector2(1.00002, 1)
-script = ExtResource("2_te1a2")
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Course Clips/9-08 Cinema Clip Background.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -391,9 +438,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 9"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 0" instance=ExtResource("1_2s7at")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 0"]
 position = Vector2(0, -0.45)
-script = ExtResource("2_te1a2")
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Kamek Battle 2 Cinema Course.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -429,6 +476,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 4/Frame 31"]
 
 [node name="@@20667" type="Polygon2D" parent="Layer 4/Frame 31/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-230, -153, 236.95, -153, 236.95, 156.95, -230, 156.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -449,10 +497,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Frame 17" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 17" instance=ExtResource("1_2s7at")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 17"]
 position = Vector2(-45.35, 34.75)
 scale = Vector2(0.46582, 0.46582)
-script = ExtResource("2_te1a2")
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Kamek Battle 2 Cinema.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -468,9 +516,9 @@ brightness = 0.0
 [node name="Frame 31" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 31" instance=ExtResource("1_2s7at")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 31"]
 position = Vector2(-123.15, 21.85)
-script = ExtResource("2_te1a2")
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Kamek Battle 2 Cinema.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -486,9 +534,9 @@ brightness = 0.0
 [node name="Frame 46" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 46" instance=ExtResource("1_2s7at")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 46"]
 position = Vector2(-73.7, 58.35)
-script = ExtResource("2_te1a2")
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Kamek Battle 2 Cinema.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -513,7 +561,7 @@ visible = false
 [node name="@@20663" type="Polygon2D" parent="Layer 5/Frame 17/Shape"]
 polygon = PackedVector2Array(-231, -154, 243.95, -154, 243.95, 158.95, -231, 158.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_p0bhf")
+script = ExtResource("3_8r6j7")
 matrix = Transform2D(0.347229, 0, 0, 0.347229, 6.85, -39.65)
 entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
 entries_ratio = PackedFloat32Array(0.47451, 1)
@@ -527,7 +575,7 @@ visible = false
 [node name="@@20664" type="Polygon2D" parent="Layer 5/Frame 31/Shape"]
 polygon = PackedVector2Array(-231, -154, 243.95, -154, 243.95, 158.95, -231, 158.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_p0bhf")
+script = ExtResource("3_8r6j7")
 matrix = Transform2D(0.347229, 0, 0, 0.347229, 6.85, -39.65)
 entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.501961)
 entries_ratio = PackedFloat32Array(0.47451, 1)
@@ -541,7 +589,7 @@ visible = false
 [node name="@@20665" type="Polygon2D" parent="Layer 5/Frame 46/Shape"]
 polygon = PackedVector2Array(-231, -154, 243.95, -154, 243.95, 158.95, -231, 158.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("3_p0bhf")
+script = ExtResource("3_8r6j7")
 matrix = Transform2D(0.347229, 0, 0, 0.347229, 6.85, -39.65)
 entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
 entries_ratio = PackedFloat32Array(0.47451, 1)
@@ -551,9 +599,9 @@ focal_point_ratio = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 6"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("1_2s7at")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(9, 101.95)
-script = ExtResource("2_te1a2")
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Cinema Message Clip (Press Z).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -572,9 +620,9 @@ visible = false
 [node name="Frame 18" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 18" instance=ExtResource("1_2s7at")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 18"]
 position = Vector2(9, -98.05)
-script = ExtResource("2_te1a2")
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Cinema Message Clip (Press Z).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -591,8 +639,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_2s7at")]
-script = ExtResource("2_te1a2")
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_ypbkv")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Effects/Transitions/transition from up.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -608,22 +659,34 @@ brightness = 0.0
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 16"]
+script = SubResource("GDScript_wy7q7")
+
 [node name="Frame 17" type="Node2D" parent="Layer 1"]
 visible = false
 
 [node name="Frame 31" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 31"]
+script = SubResource("GDScript_yp1s4")
+
 [node name="Frame 49" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 49"]
+script = SubResource("GDScript_8resv")
 
 [node name="Layer 10" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 10"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 0" instance=ExtResource("1_2s7at")]
+[node name="AS2" type="Node" parent="Layer 10/Frame 0"]
+script = SubResource("GDScript_dlmke")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 0"]
 position = Vector2(225, 150)
-script = ExtResource("2_te1a2")
+script = ExtResource("2_mw2ai")
 path = "res://sm63_godot/Skip Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

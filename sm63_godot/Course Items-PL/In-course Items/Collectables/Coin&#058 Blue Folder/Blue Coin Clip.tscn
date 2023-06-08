@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Animation.png" id="1_op3fg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Bitmap 580.png" id="2_lktf8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Bitmap 581.png" id="3_k7kf3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Bitmap 582.png" id="4_pj66r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3ow4e"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Animation.png" id="2_l11a8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Bitmap 580.png" id="3_8m11g"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Bitmap 581.png" id="4_km4kl"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Bitmap 582.png" id="5_vyqf3"]
 
-[sub_resource type="Animation" id="Animation_i0r18"]
+[sub_resource type="Animation" id="Animation_f0yg3"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -57,16 +58,21 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4668e"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cl21t"]
 _data = {
-"Default": SubResource("Animation_i0r18")
+"Default": SubResource("Animation_f0yg3")
 }
 
 [node name="Blue Coin Clip" type="Node2D"]
+script = ExtResource("1_3ow4e")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Coin&#058 Blue Folder/Blue Coin Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4668e")
+"Timeline": SubResource("AnimationLibrary_cl21t")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -76,7 +82,7 @@ libraries = {
 [node name="@@46938" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-7, -10)
-texture = ExtResource("1_op3fg")
+texture = ExtResource("2_l11a8")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -85,7 +91,7 @@ visible = false
 [node name="@@46939" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-7, -10)
-texture = ExtResource("2_lktf8")
+texture = ExtResource("3_8m11g")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -94,7 +100,7 @@ visible = false
 [node name="@@46940" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-8, -10)
-texture = ExtResource("3_k7kf3")
+texture = ExtResource("4_km4kl")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -103,5 +109,5 @@ visible = false
 [node name="@@46941" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-7, -10)
-texture = ExtResource("4_pj66r")
+texture = ExtResource("5_vyqf3")
 centered = false

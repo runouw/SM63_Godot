@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_orpme"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_btk2w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5ngm6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_yse3o"]
 
-[sub_resource type="Animation" id="Animation_yjawj"]
+[sub_resource type="Animation" id="Animation_8mjll"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +31,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_g8rod"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_goa8s"]
 _data = {
-"Default": SubResource("Animation_yjawj")
+"Default": SubResource("Animation_8mjll")
 }
 
 [node name="BC-2CamEdge" type="Node2D"]
+script = ExtResource("1_5ngm6")
+source_xml = "res://sm63/LIBRARY/BC-2CamEdge.xml"
+linkage = "BC-2CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_g8rod")
+"Timeline": SubResource("AnimationLibrary_goa8s")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -58,9 +63,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_orpme")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(251.95, -95.75)
-script = ExtResource("2_btk2w")
+script = ExtResource("2_yse3o")
 path = "res://sm63_godot/BC-Side Lava.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -70,5 +75,5 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0.4, 0.4, 0.4, 1)
 brightness = 0.0

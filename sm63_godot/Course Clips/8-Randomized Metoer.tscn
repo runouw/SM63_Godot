@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_dwjjy"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_npdxh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1ejhk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ypyg7"]
 
-[sub_resource type="Animation" id="Animation_b6yn2"]
+[sub_resource type="Animation" id="Animation_sobiw"]
 length = 1.76667
 loop_mode = 1
 tracks/0/type = "value"
@@ -727,16 +727,106 @@ tracks/59/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xqheh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xducn"]
 _data = {
-"Default": SubResource("Animation_b6yn2")
+"Default": SubResource("Animation_sobiw")
 }
 
+[sub_resource type="GDScript" id="GDScript_t85xk"]
+script/source = "extends Node
+# Explode = function () {
+# 	if (Math.abs(_root.Course.Char._x-(_x+_parent._x))<500 && Math.abs(_root.Course.Char._y-(_y+_parent._y))<400) {
+# 		_root.bgsoundFX = new Sound(this);
+# 		_root.bgsoundFX.attachSound(\"Explode9\");
+# 		_root.bgsoundFX.start(0, 1);
+# 		_root.bgsoundFX.setVolume(_root.BgVolume);
+# 	}
+# 	_parent.attachMovie(\"MiniMiniMeteor\", \"MiniMiniMeteor\"+_parent.getNextHighestDepth(), _parent.getNextHighestDepth(), {_x:_x, _y:_y, count:300});
+# 	_parent.attachMovie(\"MiniMiniMeteor\", \"MiniMiniMeteor\"+_parent.getNextHighestDepth(), _parent.getNextHighestDepth(), {_x:_x, _y:_y, count:300});
+# 	_parent.attachMovie(\"MiniMiniMeteor\", \"MiniMiniMeteor\"+_parent.getNextHighestDepth(), _parent.getNextHighestDepth(), {_x:_x, _y:_y, count:300});
+# 	xspeed = 0;
+# 	yspeed = 0;
+# 	this.play();
+# 	onEnterFrame = function () {
+# 		if (_root.PauseGame !== true) {
+# 			if (this.body.hitTest(_root.Course.Char.charClip.body)) {
+# 				if ((_root.Course.Char.attackFrame !== \"SlingStar\" && _root.Course.Char.attackFrame !== \"JumpSpin\") || _root.Course.Char.attack == false) {
+# 					if (_root.Course.Char._x>_x+_parent._x) {
+# 						_root.MarioHit(1, 90, -5, 7, 7, \"\");
+# 					} else {
+# 						_root.MarioHit(1, 90, -5, -7, 7, \"\");
+# 					}
+# 				}
+# 			}
+# 			play();
+# 		} else {
+# 			stop();
+# 		}
+# 	};
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_27pgt"]
+script/source = "extends Node
+# stop();
+# //Re = function () {
+# _rotation = random(360);
+# rotspeed = (random(10)-5)/2;
+# speed = 3+Math.random()*2;
+# //dir = 7;
+# _y = -_root.Course.BackGFX._y-500-random(500);
+# _x = -_root.Course.BackGFX._x+Math.random()*1000-500;
+# mariox = _root.Course.Char._x-_root.Course.BackGFX._x;
+# marioy = _root.Course.Char._y-_root.Course.BackGFX._y;
+# //
+# dy = _y-marioy;
+# dx = _x-mariox;
+# rot = Math.atan2(dy, dx+Math.random()*1000-500);
+# yspeed = -Math.sin(rot)*speed;
+# xspeed = -Math.cos(rot)*speed;
+# _alpha = 100;
+# bcount = 100+random(1000);
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		_rotation += rotspeed;
+# 		_x += xspeed;
+# 		_y += yspeed;
+# 		//
+# 		if (this.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			if ((_root.Course.Char.attackFrame !== \"SlingStar\" && _root.Course.Char.attackFrame !== \"JumpSpin\") || _root.Course.Char.attack == false) {
+# 				if (_root.Course.Char._x>_x+_parent._x) {
+# 					_root.MarioHit(1, 90, -5, 7, 7, \"\");
+# 				} else {
+# 					_root.MarioHit(1, 90, -5, -7, 7, \"\");
+# 				}
+# 			}
+# 			Explode();
+# 		}
+# 		if (count++>bcount) {
+# 			Explode();
+# 		}
+# 		//           
+# 	}
+# };
+# //};
+# "
+
+[sub_resource type="GDScript" id="GDScript_mv5eu"]
+script/source = "extends Node
+# gotoAndStop(3);
+# "
+
 [node name="8-Randomized Metoer" type="Node2D"]
+script = ExtResource("1_1ejhk")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-Randomized Metoer.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xqheh")
+"Timeline": SubResource("AnimationLibrary_xducn")
 }
 
 [node name="Layer 11" type="Node2D" parent="."]
@@ -746,10 +836,10 @@ libraries = {
 [node name="Frame 3" type="Node2D" parent="Layer 11"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 11/Frame 3" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 11/Frame 3"]
 position = Vector2(-0.05, -0.05)
 scale = Vector2(2, 2)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -765,10 +855,10 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 11"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 11/Frame 15" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 11/Frame 15"]
 position = Vector2(-0.05, -0.05)
 scale = Vector2(2, 2)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -797,10 +887,10 @@ visible = false
 [node name="Frame 4" type="Node2D" parent="Layer 10"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 4" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 10/Frame 4"]
 position = Vector2(0.1, 0.35)
 scale = Vector2(3, 3)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 5 Clip (Circle Explosion).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -813,8 +903,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20477" type="Node2D" parent="Layer 10/Frame 4" instance=ExtResource("1_dwjjy")]
-script = ExtResource("2_npdxh")
+[node name="@DOMSymbolInstance@20477" type="Node2D" parent="Layer 10/Frame 4"]
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -843,9 +933,9 @@ visible = false
 [node name="Frame 10" type="Node2D" parent="Layer 9"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 10" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 10"]
 position = Vector2(-5.15, -8.65)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -858,9 +948,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20475" type="Node2D" parent="Layer 9/Frame 10" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20475" type="Node2D" parent="Layer 9/Frame 10"]
 position = Vector2(-5.15, 1.35)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -873,10 +963,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20476" type="Node2D" parent="Layer 9/Frame 10" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20476" type="Node2D" parent="Layer 9/Frame 10"]
 position = Vector2(-2.9, -1.65)
 scale = Vector2(3, 3)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 5 Clip (Circle Explosion).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -905,9 +995,9 @@ visible = false
 [node name="Frame 6" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 6" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 6"]
 position = Vector2(9.6, -2.15)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 3 Clip (Small 2).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -920,9 +1010,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20472" type="Node2D" parent="Layer 8/Frame 6" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20472" type="Node2D" parent="Layer 8/Frame 6"]
 position = Vector2(-7.15, 1.75)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 3 Clip (Small 2).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -935,8 +1025,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20473" type="Node2D" parent="Layer 8/Frame 6" instance=ExtResource("1_dwjjy")]
-script = ExtResource("2_npdxh")
+[node name="@DOMSymbolInstance@20473" type="Node2D" parent="Layer 8/Frame 6"]
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -949,10 +1039,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20474" type="Node2D" parent="Layer 8/Frame 6" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20474" type="Node2D" parent="Layer 8/Frame 6"]
 position = Vector2(0.1, 3.35)
 scale = Vector2(3, 3)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 5 Clip (Circle Explosion).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -975,10 +1065,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-0.05, -0.05)
 scale = Vector2(2, 2)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -997,9 +1087,9 @@ visible = false
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(2.35, 1.35)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1012,8 +1102,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20470" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_dwjjy")]
-script = ExtResource("2_npdxh")
+[node name="@DOMSymbolInstance@20470" type="Node2D" parent="Layer 1/Frame 5"]
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1026,10 +1116,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20471" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20471" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(0.1, 0.35)
 scale = Vector2(3, 3)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 5 Clip (Circle Explosion).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1064,9 +1154,9 @@ visible = false
 [node name="Frame 12" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 12" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 12"]
 position = Vector2(-10, 10)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1098,9 +1188,9 @@ visible = false
 [node name="Frame 14" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 14" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 14"]
 position = Vector2(10, -10)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1132,9 +1222,9 @@ visible = false
 [node name="Frame 16" type="Node2D" parent="Layer 6"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 16" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 16"]
 position = Vector2(10, 10)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1166,10 +1256,10 @@ visible = false
 [node name="Frame 7" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 7" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 7"]
 position = Vector2(-0.4, 0.35)
 scale = Vector2(1.67308, 1.67308)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1182,10 +1272,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20466" type="Node2D" parent="Layer 7/Frame 7" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20466" type="Node2D" parent="Layer 7/Frame 7"]
 position = Vector2(4.1, 6.35)
 scale = Vector2(2.39996, 2.39996)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 5 Clip (Circle Explosion).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1198,9 +1288,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20467" type="Node2D" parent="Layer 7/Frame 7" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20467" type="Node2D" parent="Layer 7/Frame 7"]
 position = Vector2(-8.7, -12.65)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 3 Clip (Small 2).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1213,8 +1303,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20468" type="Node2D" parent="Layer 7/Frame 7" instance=ExtResource("1_dwjjy")]
-script = ExtResource("2_npdxh")
+[node name="@DOMSymbolInstance@20468" type="Node2D" parent="Layer 7/Frame 7"]
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1227,10 +1317,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20469" type="Node2D" parent="Layer 7/Frame 7" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20469" type="Node2D" parent="Layer 7/Frame 7"]
 position = Vector2(0.1, -8.65)
 scale = Vector2(3, 3)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 5 Clip (Circle Explosion).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1262,10 +1352,10 @@ visible = false
 [node name="Frame 9" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9" instance=ExtResource("1_dwjjy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 9"]
 position = Vector2(0.1, -7.65)
 scale = Vector2(1.91994, 1.91994)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 5 Clip (Circle Explosion).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1278,9 +1368,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20463" type="Node2D" parent="Layer 3/Frame 9" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20463" type="Node2D" parent="Layer 3/Frame 9"]
 position = Vector2(18.6, 5.85)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 3 Clip (Small 2).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1293,8 +1383,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20464" type="Node2D" parent="Layer 3/Frame 9" instance=ExtResource("1_dwjjy")]
-script = ExtResource("2_npdxh")
+[node name="@DOMSymbolInstance@20464" type="Node2D" parent="Layer 3/Frame 9"]
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 2 Clip (Small 1).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1307,10 +1397,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@20465" type="Node2D" parent="Layer 3/Frame 9" instance=ExtResource("1_dwjjy")]
+[node name="@DOMSymbolInstance@20465" type="Node2D" parent="Layer 3/Frame 9"]
 position = Vector2(-49.9, 7.35)
 scale = Vector2(2.25, 2.25)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Explosion 5 Clip (Circle Explosion).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1336,13 +1426,19 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_t85xk")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2" instance=ExtResource("1_dwjjy")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_27pgt")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 2"]
 position = Vector2(0, 17.5)
 scale = Vector2(0.619354, 0.6194)
-script = ExtResource("2_npdxh")
+script = ExtResource("2_ypyg7")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1357,3 +1453,6 @@ brightness = 0.0
 
 [node name="Frame 51" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 51"]
+script = SubResource("GDScript_mv5eu")

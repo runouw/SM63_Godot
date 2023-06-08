@@ -1,20 +1,20 @@
 [gd_scene load_steps=16 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_on8qe"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_qe8i7"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 2.png" id="3_n41l5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 9.png" id="4_bfngs"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 2.png" id="5_xajvf"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 1.png" id="6_0ywjv"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 10.png" id="7_lldtq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 7.png" id="8_p1rri"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Idle - 2.png" id="9_pggbr"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 1.png" id="10_teybp"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 2.png" id="11_7vj6m"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 1.png" id="12_guyxu"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 2.png" id="13_n7axm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vn135"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_sosch"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 2.png" id="3_einw4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 9.png" id="4_vamh8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 2.png" id="5_fv8pg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 1.png" id="6_u3vn4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 10.png" id="7_xqux2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 7.png" id="8_e8cpj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Idle - 2.png" id="9_y7rgu"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 1.png" id="10_n2p58"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Stopping - 2.png" id="11_sci30"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 1.png" id="12_cqrd7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Talking - 2.png" id="13_4h4cd"]
 
-[sub_resource type="Animation" id="Animation_u3d6g"]
+[sub_resource type="Animation" id="Animation_bkjax"]
 length = 11.3333
 loop_mode = 1
 tracks/0/type = "value"
@@ -282,26 +282,31 @@ tracks/21/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvnrq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ix18b"]
 _data = {
-"Default": SubResource("Animation_u3d6g")
+"Default": SubResource("Animation_bkjax")
 }
 
 [node name="Cinema 2 Airship Clip" type="Node2D"]
+script = ExtResource("1_vn135")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Airship Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xvnrq")
+"Timeline": SubResource("AnimationLibrary_ix18b")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_on8qe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(361.15, 354.5)
 scale = Vector2(1.00006, 1.00006)
-script = ExtResource("2_qe8i7")
+script = ExtResource("2_sosch")
 path = "res://sm63_godot/Cinema 2 Airship.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -318,11 +323,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_on8qe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(-285.75, -72.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_qe8i7")
+script = ExtResource("2_sosch")
 path = "res://sm63_godot/Cinema2 Bowser Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -343,13 +348,13 @@ texture_filter = 1
 position = Vector2(-259.1, -103.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_n41l5")
+texture = ExtResource("3_einw4")
 centered = false
 
 [node name="@@3540" type="Sprite2D" parent="Layer 5/Frame 227"]
 texture_filter = 1
 position = Vector2(-270.1, -82)
-texture = ExtResource("4_bfngs")
+texture = ExtResource("4_vamh8")
 centered = false
 
 [node name="@@3541" type="Sprite2D" parent="Layer 5/Frame 227"]
@@ -357,7 +362,7 @@ texture_filter = 1
 position = Vector2(-250.45, -108.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_xajvf")
+texture = ExtResource("5_fv8pg")
 centered = false
 
 [node name="@@3542" type="Sprite2D" parent="Layer 5/Frame 227"]
@@ -365,7 +370,7 @@ texture_filter = 1
 position = Vector2(-284, -85.25)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_0ywjv")
+texture = ExtResource("6_u3vn4")
 centered = false
 
 [node name="Frame 231" type="Node2D" parent="Layer 5"]
@@ -374,7 +379,7 @@ visible = false
 [node name="@@3543" type="Sprite2D" parent="Layer 5/Frame 231"]
 texture_filter = 1
 position = Vector2(-270.45, -83.65)
-texture = ExtResource("7_lldtq")
+texture = ExtResource("7_xqux2")
 centered = false
 
 [node name="@@3544" type="Sprite2D" parent="Layer 5/Frame 231"]
@@ -382,7 +387,7 @@ texture_filter = 1
 position = Vector2(-259.1, -103.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_n41l5")
+texture = ExtResource("3_einw4")
 centered = false
 
 [node name="@@3545" type="Sprite2D" parent="Layer 5/Frame 231"]
@@ -390,7 +395,7 @@ texture_filter = 1
 position = Vector2(-284, -85.25)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_0ywjv")
+texture = ExtResource("6_u3vn4")
 centered = false
 
 [node name="@@3546" type="Sprite2D" parent="Layer 5/Frame 231"]
@@ -398,7 +403,7 @@ texture_filter = 1
 position = Vector2(-252.6, -109.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_p1rri")
+texture = ExtResource("8_e8cpj")
 centered = false
 
 [node name="Frame 249" type="Node2D" parent="Layer 5"]
@@ -409,13 +414,13 @@ texture_filter = 1
 position = Vector2(-259.1, -103.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_n41l5")
+texture = ExtResource("3_einw4")
 centered = false
 
 [node name="@@3548" type="Sprite2D" parent="Layer 5/Frame 249"]
 texture_filter = 1
 position = Vector2(-270.1, -82)
-texture = ExtResource("4_bfngs")
+texture = ExtResource("4_vamh8")
 centered = false
 
 [node name="@@3549" type="Sprite2D" parent="Layer 5/Frame 249"]
@@ -423,7 +428,7 @@ texture_filter = 1
 position = Vector2(-250.45, -108.65)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_xajvf")
+texture = ExtResource("5_fv8pg")
 centered = false
 
 [node name="@@3550" type="Sprite2D" parent="Layer 5/Frame 249"]
@@ -431,17 +436,17 @@ texture_filter = 1
 position = Vector2(-284, -85.25)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_0ywjv")
+texture = ExtResource("6_u3vn4")
 centered = false
 
 [node name="Frame 253" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 253" instance=ExtResource("1_on8qe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 253"]
 position = Vector2(-285.75, -72.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_qe8i7")
+script = ExtResource("2_sosch")
 path = "res://sm63_godot/Cinema2 Bowser Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -458,9 +463,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_on8qe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(306.35, 283.85)
-script = ExtResource("2_qe8i7")
+script = ExtResource("2_sosch")
 path = "res://sm63_godot/Cinema 2 Moving Koopa 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -473,9 +478,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@3536" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_on8qe")]
+[node name="@DOMSymbolInstance@3536" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-107, 176.45)
-script = ExtResource("2_qe8i7")
+script = ExtResource("2_sosch")
 path = "res://sm63_godot/Cinema 2 Moving Koopa 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -488,9 +493,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@3537" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_on8qe")]
+[node name="@DOMSymbolInstance@3537" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-321, 176.45)
-script = ExtResource("2_qe8i7")
+script = ExtResource("2_sosch")
 path = "res://sm63_godot/Cinema 2 Moving Koopa 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -503,11 +508,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@3538" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_on8qe")]
+[node name="@DOMSymbolInstance@3538" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(26, 284.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_qe8i7")
+script = ExtResource("2_sosch")
 path = "res://sm63_godot/Cinema 2 Moving Koopa 1.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -524,10 +529,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_on8qe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(361.25, 354.5)
 scale = Vector2(1.00031, 1)
-script = ExtResource("2_qe8i7")
+script = ExtResource("2_sosch")
 path = "res://sm63_godot/Cinema 2 Airship Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -550,7 +555,7 @@ visible = false
 [node name="@@3523" type="Sprite2D" parent="Layer 4/Frame 146"]
 texture_filter = 1
 position = Vector2(204.95, 82.85)
-texture = ExtResource("9_pggbr")
+texture = ExtResource("9_y7rgu")
 centered = false
 
 [node name="Frame 193" type="Node2D" parent="Layer 4"]
@@ -559,7 +564,7 @@ visible = false
 [node name="@@3524" type="Sprite2D" parent="Layer 4/Frame 193"]
 texture_filter = 1
 position = Vector2(-134, -83.15)
-texture = ExtResource("9_pggbr")
+texture = ExtResource("9_y7rgu")
 centered = false
 
 [node name="Frame 194" type="Node2D" parent="Layer 4"]
@@ -568,7 +573,7 @@ visible = false
 [node name="@@3525" type="Sprite2D" parent="Layer 4/Frame 194"]
 texture_filter = 1
 position = Vector2(-138, -85.65)
-texture = ExtResource("10_teybp")
+texture = ExtResource("10_n2p58")
 centered = false
 
 [node name="Frame 195" type="Node2D" parent="Layer 4"]
@@ -577,7 +582,7 @@ visible = false
 [node name="@@3526" type="Sprite2D" parent="Layer 4/Frame 195"]
 texture_filter = 1
 position = Vector2(-141, -86.65)
-texture = ExtResource("10_teybp")
+texture = ExtResource("10_n2p58")
 centered = false
 
 [node name="Frame 197" type="Node2D" parent="Layer 4"]
@@ -586,7 +591,7 @@ visible = false
 [node name="@@3527" type="Sprite2D" parent="Layer 4/Frame 197"]
 texture_filter = 1
 position = Vector2(-142, -86.65)
-texture = ExtResource("10_teybp")
+texture = ExtResource("10_n2p58")
 centered = false
 
 [node name="Frame 199" type="Node2D" parent="Layer 4"]
@@ -595,7 +600,7 @@ visible = false
 [node name="@@3528" type="Sprite2D" parent="Layer 4/Frame 199"]
 texture_filter = 1
 position = Vector2(-139.65, -88)
-texture = ExtResource("11_7vj6m")
+texture = ExtResource("11_sci30")
 centered = false
 
 [node name="Frame 202" type="Node2D" parent="Layer 4"]
@@ -604,7 +609,7 @@ visible = false
 [node name="@@3529" type="Sprite2D" parent="Layer 4/Frame 202"]
 texture_filter = 1
 position = Vector2(-144, -86.65)
-texture = ExtResource("10_teybp")
+texture = ExtResource("10_n2p58")
 centered = false
 
 [node name="Frame 204" type="Node2D" parent="Layer 4"]
@@ -613,7 +618,7 @@ visible = false
 [node name="@@3530" type="Sprite2D" parent="Layer 4/Frame 204"]
 texture_filter = 1
 position = Vector2(-143, -85.15)
-texture = ExtResource("9_pggbr")
+texture = ExtResource("9_y7rgu")
 centered = false
 
 [node name="Frame 212" type="Node2D" parent="Layer 4"]
@@ -622,7 +627,7 @@ visible = false
 [node name="@@3531" type="Sprite2D" parent="Layer 4/Frame 212"]
 texture_filter = 1
 position = Vector2(-143, -84.25)
-texture = ExtResource("12_guyxu")
+texture = ExtResource("12_cqrd7")
 centered = false
 
 [node name="Frame 216" type="Node2D" parent="Layer 4"]
@@ -631,7 +636,7 @@ visible = false
 [node name="@@3532" type="Sprite2D" parent="Layer 4/Frame 216"]
 texture_filter = 1
 position = Vector2(-143, -85.15)
-texture = ExtResource("13_n7axm")
+texture = ExtResource("13_4h4cd")
 centered = false
 
 [node name="Frame 222" type="Node2D" parent="Layer 4"]
@@ -640,7 +645,7 @@ visible = false
 [node name="@@3533" type="Sprite2D" parent="Layer 4/Frame 222"]
 texture_filter = 1
 position = Vector2(-143, -84.25)
-texture = ExtResource("12_guyxu")
+texture = ExtResource("12_cqrd7")
 centered = false
 
 [node name="Frame 224" type="Node2D" parent="Layer 4"]
@@ -649,7 +654,7 @@ visible = false
 [node name="@@3534" type="Sprite2D" parent="Layer 4/Frame 224"]
 texture_filter = 1
 position = Vector2(-143, -84.25)
-texture = ExtResource("12_guyxu")
+texture = ExtResource("12_cqrd7")
 centered = false
 
 [node name="Frame 229" type="Node2D" parent="Layer 4"]
@@ -658,5 +663,5 @@ visible = false
 [node name="@@3535" type="Sprite2D" parent="Layer 4/Frame 229"]
 texture_filter = 1
 position = Vector2(-143, -85.15)
-texture = ExtResource("9_pggbr")
+texture = ExtResource("9_y7rgu")
 centered = false

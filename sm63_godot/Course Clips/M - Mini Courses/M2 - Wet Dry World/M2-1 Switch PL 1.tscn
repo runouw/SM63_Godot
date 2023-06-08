@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Switch Brick.png" id="1_qk311"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vcfmb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Switch Brick.png" id="2_a1cmo"]
 
-[sub_resource type="Animation" id="Animation_5f75h"]
+[sub_resource type="Animation" id="Animation_bc54u"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -42,16 +43,78 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3mi6d"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0kc04"]
 _data = {
-"Default": SubResource("Animation_5f75h")
+"Default": SubResource("Animation_bc54u")
 }
 
+[sub_resource type="GDScript" id="GDScript_j3ult"]
+script/source = "extends Node
+# stop();
+# _alpha = 0;
+# count = 0;
+# wait = 32;
+# //duration = 400;
+# duration = 320
+# onEnterFrame = null;
+# "
+
+[sub_resource type="GDScript" id="GDScript_r730p"]
+script/source = "extends Node
+# depth = _root.Course.Platforms.getNextHighestDepth();
+# itemname = \"M2-1-SPL1\"+depth;
+# _root.Course.Platforms.attachMovie(\"M2-1-SPL1\", itemname, depth, {});
+# // Activated Sound fx
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Tick\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# //
+# onEnterFrame = function () {
+# 	if (_alpha<=100 && count<duration) {
+# 		_alpha += 20;
+# 		_alpha = Math.min(_alpha, 100);
+# 	}
+# 	count++;
+# 	if ((count/wait) == Math.round(count/wait)) {
+# 		if (count>(1/2)*duration) {
+# 			wait = 16;
+# 			if (count>(3/4)*duration) {
+# 				wait = 8;
+# 				_alpha = 60;
+# 			}
+# 			if (count>(9/10)*duration) {
+# 				wait = 4;
+# 				_alpha = 40;
+# 			}
+# 		}
+# 		_root.Mariosound = new Sound(this);
+# 		_root.Mariosound.attachSound(\"Tick\");
+# 		_root.Mariosound.start(0, 1);
+# 		_root.Mariosound.setVolume(_root.MarioVolume);
+# 	}
+# 	if (count>duration) {
+# 		wait = duration;
+# 		_alpha -= 10;
+# 		if (_alpha<=0) {
+# 			count = 0;
+# 			_root.Course.Platforms[itemname].removeMovieClip();
+# 			prevFrame();
+# 		}
+# 	}
+# };
+# "
+
 [node name="M2-1 Switch PL 1" type="Node2D"]
+script = ExtResource("1_vcfmb")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-1 Switch PL 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3mi6d")
+"Timeline": SubResource("AnimationLibrary_0kc04")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -65,7 +128,7 @@ libraries = {
 [node name="@@45948" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-95, 24.2)
 polygon = PackedVector2Array(95, -24.2, 126.35, -24.2, 126.35, 7.8, 95, 7.8, 95, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -73,7 +136,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@45949" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-63.65, 24.2)
 polygon = PackedVector2Array(63.65, -24.2, 95, -24.2, 95, 7.8, 63.65, 7.8, 63.65, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -81,7 +144,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@45950" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-190.3, 24.2)
 polygon = PackedVector2Array(190.3, -24.2, 221.65, -24.2, 221.65, 7.8, 190.3, 7.8, 190.3, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -89,7 +152,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@45951" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-158.95, 24.2)
 polygon = PackedVector2Array(158.95, -24.2, 190.3, -24.2, 190.3, 7.8, 158.95, 7.8, 158.95, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -97,7 +160,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@45952" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-426.7, 44.2)
 polygon = PackedVector2Array(426.7, -44.2, 458.05, -44.2, 458.05, -24.2, 426.7, -24.2, 426.7, -24.2, 458.05, -24.2, 458.05, -12.2, 426.7, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
@@ -105,7 +168,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@45953" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-458.05, 44.2)
 polygon = PackedVector2Array(458.05, -44.2, 489.4, -44.2, 489.4, -24.2, 458.05, -24.2, 458.05, -24.2, 489.4, -24.2, 489.4, -12.2, 458.05, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
@@ -113,7 +176,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@45954" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-585, 140.2)
 polygon = PackedVector2Array(585, -140.2, 616.35, -140.2, 616.35, -76.2, 585, -76.2, 585, -108.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -121,7 +184,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@45955" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-616.35, 140.2)
 polygon = PackedVector2Array(616.35, -140.2, 647.7, -140.2, 647.7, -108.2, 616.35, -108.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -129,13 +192,13 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@45956" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-585, 108.2)
 
 [node name="@@45957" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-522.3, 76.2)
 polygon = PackedVector2Array(522.3, -76.2, 553.65, -76.2, 553.65, -44.2, 522.3, -44.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -143,7 +206,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@45958" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-250, 24.2)
 polygon = PackedVector2Array(250, -24.2, 281.35, -24.2, 281.35, 7.8, 250, 7.8, 250, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -151,7 +214,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@45959" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-352.05, 24.2)
 polygon = PackedVector2Array(352.05, -24.2, 383.4, -24.2, 383.4, 7.8, 352.05, 7.8, 352.05, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -159,7 +222,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@45960" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-320.05, 24.2)
 polygon = PackedVector2Array(320.05, -24.2, 351.4, -24.2, 351.4, 7.8, 320.05, 7.8, 320.05, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
@@ -167,7 +230,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@45961" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-553.65, 44.2)
 polygon = PackedVector2Array(553.65, -44.2, 585, -44.2, 585, -24.2, 553.65, -24.2, 553.65, -24.2, 585, -24.2, 585, -12.2, 553.65, -12.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
@@ -175,7 +238,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@45962" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-473.6, 184.2)
 polygon = PackedVector2Array(473.6, -184.2, 504.95, -184.2, 504.95, -152.2, 473.6, -152.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -183,7 +246,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@45963" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-504.95, 184.2)
 polygon = PackedVector2Array(504.95, -184.2, 536.3, -184.2, 536.3, -152.2, 504.95, -152.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -191,7 +254,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@45964" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-680.35, 236.2)
 polygon = PackedVector2Array(680.35, -236.2, 711.7, -236.2, 711.7, -204.2, 680.35, -204.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -199,7 +262,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@45965" type="Polygon2D" parent="Layer 3/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_qk311")
+texture = ExtResource("2_a1cmo")
 texture_offset = Vector2(-648.35, 312.2)
 polygon = PackedVector2Array(648.35, -312.2, 679.7, -312.2, 679.7, -280.2, 648.35, -280.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -224,5 +287,11 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_j3ult")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_r730p")

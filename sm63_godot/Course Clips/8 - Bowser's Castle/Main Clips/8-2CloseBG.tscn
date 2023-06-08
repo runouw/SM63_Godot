@@ -1,14 +1,14 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_yx67c"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6xlx4"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="3_66qa2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/YI Window Stained Glass.png" id="4_6u20o"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/Haunted Window.png" id="5_bc8ir"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="6_rsoi2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Bowser Door.png" id="7_qb177"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_n2mhb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0ne1k"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Brown-Red Stone.png" id="3_h2bai"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/YI Window Stained Glass.png" id="4_83ndi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Other/Haunted Window.png" id="5_vce2a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="6_qm0dm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Bowser Door.png" id="7_bvp2w"]
 
-[sub_resource type="Animation" id="Animation_2lcjy"]
+[sub_resource type="Animation" id="Animation_46x76"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -108,25 +108,59 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8jswa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ofbh"]
 _data = {
-"Default": SubResource("Animation_2lcjy")
+"Default": SubResource("Animation_46x76")
 }
 
+[sub_resource type="GDScript" id="GDScript_26ws3"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	rotspeed = 0.1;
+# 	gotoAndPlay(70);
+# 
+# }
+# onClipEvent (enterFrame) {
+# 	_rotation += rotspeed;
+# 	count += 1;
+# 	if (count>118) {
+# 		rotspeed *= -1;
+# 		count = 0;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_5l3bj"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.BGquality == \"HIGH\" || _root.BGquality == \"MEDIUM\") {
+# 		gotoAndStop(1);
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# };
+# "
+
 [node name="8-2CloseBG" type="Node2D"]
+script = ExtResource("1_n2mhb")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Bowser's Castle/Main Clips/8-2CloseBG.xml"
+linkage = "8-2CloseBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8jswa")
+"Timeline": SubResource("AnimationLibrary_6ofbh")
 }
 
 [node name="Tower" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Tower"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Tower/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Tower/Frame 0"]
 position = Vector2(192.85, 114)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Course Clips/8-2CloseBGTint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -151,7 +185,7 @@ visible = false
 [node name="@@36386" type="Polygon2D" parent="Castle/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_66qa2")
+texture = ExtResource("3_h2bai")
 texture_offset = Vector2(-1814.2, -213.8)
 texture_scale = Vector2(1.25002, 1.25002)
 polygon = PackedVector2Array(831.075, -162.475, 831.075, -162.475, 872.7, -91.275, 872.7, -49.2, 786.8, -49.2, 786.8, -86.8, 786.825, -86.825, 789.428, -91.275, 786.8, -49.2, 872.7, -49.2, 872.7, 298.95, 786.8, 298.95, 786.8, 11.325)
@@ -160,7 +194,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), Pa
 [node name="@@36387" type="Polygon2D" parent="Castle/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_66qa2")
+texture = ExtResource("3_h2bai")
 texture_offset = Vector2(-126.05, -251.85)
 texture_scale = Vector2(1.56255, 1.56255)
 polygon = PackedVector2Array(-660.45, -49.2, -660.45, -49.2, -625.075, 11.325, -695.85, 11.325, -451.65, -49.2, -451.65, -49.2, -416.275, 11.325, -487.05, 11.325, -695.85, 11.325, -625.1, 11.325, -625.075, 160, -696.625, 160, -695.875, 11.35, -487.05, 11.325, -416.3, 11.325, -417.85, 143.2, -487.075, 143.2, -487.075, 11.35, -487.075, 143.2, -418.425, 143.2, -418.625, 160, -487.075, 160, -696.625, 160, -418.325, 160, -418.325, 357.075, -696.625, 357.075, -696.625, 298.95)
@@ -189,7 +223,7 @@ position = Vector2(-636.95, -38.7)
 texture_filter = 1
 position = Vector2(435.4, 119.7)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36391" type="Sprite2D" parent="Castle/Frame 0/Group"]
@@ -197,14 +231,14 @@ texture_filter = 1
 position = Vector2(454.6, 119.7)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36392" type="Sprite2D" parent="Castle/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(505.4, 119.7)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36393" type="Sprite2D" parent="Castle/Frame 0/Group"]
@@ -212,14 +246,14 @@ texture_filter = 1
 position = Vector2(524.6, 119.7)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36394" type="Sprite2D" parent="Castle/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(585.4, 119.7)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36395" type="Sprite2D" parent="Castle/Frame 0/Group"]
@@ -227,14 +261,14 @@ texture_filter = 1
 position = Vector2(604.6, 119.7)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36396" type="Sprite2D" parent="Castle/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(645.4, 119.7)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36397" type="Sprite2D" parent="Castle/Frame 0/Group"]
@@ -242,14 +276,14 @@ texture_filter = 1
 position = Vector2(664.6, 119.7)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36398" type="Sprite2D" parent="Castle/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(435.4, 179.7)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36399" type="Sprite2D" parent="Castle/Frame 0/Group"]
@@ -257,14 +291,14 @@ texture_filter = 1
 position = Vector2(454.6, 179.7)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36400" type="Sprite2D" parent="Castle/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(505.4, 179.7)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36401" type="Sprite2D" parent="Castle/Frame 0/Group"]
@@ -272,14 +306,14 @@ texture_filter = 1
 position = Vector2(524.6, 179.7)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36402" type="Sprite2D" parent="Castle/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(585.4, 179.7)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36403" type="Sprite2D" parent="Castle/Frame 0/Group"]
@@ -287,14 +321,14 @@ texture_filter = 1
 position = Vector2(604.6, 179.7)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36404" type="Sprite2D" parent="Castle/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(645.4, 179.7)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36405" type="Sprite2D" parent="Castle/Frame 0/Group"]
@@ -302,42 +336,42 @@ texture_filter = 1
 position = Vector2(664.6, 179.7)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36406" type="Sprite2D" parent="Castle/Frame 0"]
 texture_filter = 1
 position = Vector2(-464.9, 79.25)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36407" type="Sprite2D" parent="Castle/Frame 0"]
 texture_filter = 1
 position = Vector2(-464.9, -0.75)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36408" type="Sprite2D" parent="Castle/Frame 0"]
 texture_filter = 1
 position = Vector2(-674.9, 79.25)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36409" type="Sprite2D" parent="Castle/Frame 0"]
 texture_filter = 1
 position = Vector2(-674.9, -0.75)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Castle/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Castle/Frame 0"]
 position = Vector2(-765.45, 274.9)
 rotation = -0.24157
 scale = Vector2(0.559128, 0.559128)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Bobbing Pole.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -350,6 +384,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Castle/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_26ws3")
+
 [node name="@Group@36410" type="Node2D" parent="Castle/Frame 0"]
 
 [node name="Shape" type="Node2D" parent="Castle/Frame 0/@Group@36410"]
@@ -357,7 +394,7 @@ brightness = 0.0
 [node name="@@36411" type="Polygon2D" parent="Castle/Frame 0/@Group@36410/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("6_rsoi2")
+texture = ExtResource("6_qm0dm")
 texture_offset = Vector2(-124.5, 281.2)
 texture_scale = Vector2(1.6, 1.6)
 polygon = PackedVector2Array(143.65, -500.05, 143.65, -500.05, 184.2, -448.85, 184.2, -380.95, 258.75, -301.95, 258.75, -230.95, 98.3, -230.95, 98.3, -452.4, -143.35, -360.05, -143.35, -360.05, -97.8, -316.875, -97.8, -230.95, -183.7, -230.95, -183.7, -312.4, -183.675, -312.425, -179.907, -316.875, 368.75, -314.95, 368.75, -314.95, 395.75, -248.95, 395.75, -162.95, 337.75, -162.95, 337.75, -249.95, 367.546, -312.425, -183.7, -230.95, 258.75, -230.95, 258.75, -211.786, -183.7, -211.786, -183.7, -211.786, -46.7709, -211.786, -63.2909, -210.506, -80.3006, -200.227, -97.8, -180.95, -97.8, 274.25, -183.7, 274.25, -183.7, -211.768, -46.7709, -211.786, 258.75, -211.786, 258.75, -211.768, -46.7348, -211.768, -46.7348, -211.768, 46.0418, -211.768, 26.8612, -203.909, 6.8, -187.15, 6.8, 273.95, -15.2, 273.95, -15.2, -187.35, -30.7406, -204.067, -44.5749, -210.728, 46.0418, -211.768, 258.75, -211.768, 258.75, -162.95, 98.3, -162.95, 98.3, -181.95, 81.7612, -200.789, 64.3418, -210.728, 98.3, -162.95, 395.75, -162.95, 395.75, -138.516, 98.3, -138.516, 98.3, -138.516, 292.654, -138.516, 276.02, -128.994, 258.75, -109.95, 258.75, 274.25, 98.3, 274.25, 98.3, -128.994, 308.654, -138.516, 395.75, -138.516, 395.75, 273.95, 338.75, 273.95, 338.75, -109.95, 324.02, -128.994, -183.7, 274.25, -97.8, 274.25, -97.8, 274.3, -183.7, 274.3)
@@ -381,7 +418,7 @@ position = Vector2(100, -200)
 texture_filter = 1
 position = Vector2(357.3, -245.1)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36415" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
@@ -389,14 +426,14 @@ texture_filter = 1
 position = Vector2(376.5, -245.1)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36416" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
 texture_filter = 1
 position = Vector2(357.3, -185.1)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36417" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
@@ -404,14 +441,14 @@ texture_filter = 1
 position = Vector2(376.5, -185.1)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36418" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
 texture_filter = 1
 position = Vector2(357.3, -95.1)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36419" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
@@ -419,14 +456,14 @@ texture_filter = 1
 position = Vector2(376.5, -95.1)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36420" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
 texture_filter = 1
 position = Vector2(357.3, -35.1)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36421" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
@@ -434,14 +471,14 @@ texture_filter = 1
 position = Vector2(376.5, -35.1)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36422" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
 texture_filter = 1
 position = Vector2(-149.6, -313.1)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36423" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
@@ -449,14 +486,14 @@ texture_filter = 1
 position = Vector2(-130.4, -313.1)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36424" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
 texture_filter = 1
 position = Vector2(-149.6, -253.1)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36425" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
@@ -464,14 +501,14 @@ texture_filter = 1
 position = Vector2(-130.4, -253.1)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36426" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
 texture_filter = 1
 position = Vector2(-149.6, -163.1)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36427" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
@@ -479,14 +516,14 @@ texture_filter = 1
 position = Vector2(-130.4, -163.1)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36428" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
 texture_filter = 1
 position = Vector2(-149.6, -103.1)
 scale = Vector2(0.639984, 0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="@@36429" type="Sprite2D" parent="Castle/Frame 0/@Group@36413/Group"]
@@ -494,7 +531,7 @@ texture_filter = 1
 position = Vector2(-130.4, -103.1)
 rotation = 3.14159
 scale = Vector2(0.639984, -0.639984)
-texture = ExtResource("4_6u20o")
+texture = ExtResource("4_83ndi")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Castle"]
@@ -508,35 +545,35 @@ visible = false
 texture_filter = 1
 position = Vector2(519.75, -39.9)
 scale = Vector2(0.599991, 0.599991)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36364" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(566.15, -39.9)
 scale = Vector2(0.599991, 0.599991)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36365" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(519.75, 36.1)
 scale = Vector2(0.599991, 0.599991)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36366" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(566.15, 36.1)
 scale = Vector2(0.599991, 0.599991)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36367" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(538.8, 56.55)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("7_qb177")
+texture = ExtResource("7_bvp2w")
 centered = false
 
 [node name="@@36368" type="Sprite2D" parent="Layer 2/Frame 0"]
@@ -544,49 +581,49 @@ texture_filter = 1
 position = Vector2(564, 56.55)
 rotation = 3.14159
 scale = Vector2(0.799988, -0.799988)
-texture = ExtResource("7_qb177")
+texture = ExtResource("7_bvp2w")
 centered = false
 
 [node name="@@36369" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(519.75, -107.1)
 scale = Vector2(0.599991, 0.599991)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36370" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(566.15, -107.1)
 scale = Vector2(0.599991, 0.599991)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36371" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(644.2, 4.15)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36372" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(644.2, -75.85)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36373" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(434.2, 4.15)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36374" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(434.2, -75.85)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="Group" type="Node2D" parent="Layer 2/Frame 0"]
@@ -596,70 +633,70 @@ position = Vector2(100, -200)
 texture_filter = 1
 position = Vector2(130.5, -449.55)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36376" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(130.5, -329.55)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36377" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(180.5, -329.55)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36378" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(130.5, -219.55)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36379" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(180.5, -219.55)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36380" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(130.5, -109.55)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36381" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(180.5, -109.55)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36382" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(130.5, -9.55)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36383" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(180.5, -9.55)
 scale = Vector2(0.719986, 0.719986)
-texture = ExtResource("5_bc8ir")
+texture = ExtResource("5_vce2a")
 centered = false
 
 [node name="@@36384" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(69.4, -256.55)
 scale = Vector2(0.799988, 0.799988)
-texture = ExtResource("7_qb177")
+texture = ExtResource("7_bvp2w")
 centered = false
 
 [node name="@@36385" type="Sprite2D" parent="Layer 2/Frame 0/Group"]
@@ -667,7 +704,7 @@ texture_filter = 1
 position = Vector2(94.6, -256.55)
 rotation = 3.14159
 scale = Vector2(0.799988, -0.799988)
-texture = ExtResource("7_qb177")
+texture = ExtResource("7_bvp2w")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
@@ -686,10 +723,10 @@ color = Color(0.741176, 0, 0, 1)
 polygon = PackedVector2Array(-375.7, 262.7, 615.75, 262.7, 615.75, 370.95, -375.7, 370.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(483.7, 259.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -702,10 +739,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@36355" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="@DOMSymbolInstance@36355" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(355.7, 259.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -718,10 +755,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@36356" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="@DOMSymbolInstance@36356" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(228, 259.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -734,10 +771,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@36357" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="@DOMSymbolInstance@36357" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(100, 259.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -750,10 +787,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@36358" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="@DOMSymbolInstance@36358" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(-28, 259.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -766,10 +803,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@36359" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="@DOMSymbolInstance@36359" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(-155.7, 259.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -782,10 +819,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@36360" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="@DOMSymbolInstance@36360" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(-283.7, 259.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -798,10 +835,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@36361" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="@DOMSymbolInstance@36361" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(-411.7, 259.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -814,10 +851,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@36362" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_yx67c")]
+[node name="@DOMSymbolInstance@36362" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(110.8, 372.7)
 scale = Vector2(0.212997, 5.67229)
-script = ExtResource("2_6xlx4")
+script = ExtResource("2_0ne1k")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -833,3 +870,6 @@ brightness = 0.0
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_5l3bj")

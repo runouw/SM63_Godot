@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_2l2hv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_e8jws"]
+
+[sub_resource type="Animation" id="Animation_ng2ev"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_saipn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_74g3h"]
 _data = {
-"Default": SubResource("Animation_2l2hv")
+"Default": SubResource("Animation_ng2ev")
 }
 
 [node name="6-1-2 Platfmrs" type="Node2D"]
+script = ExtResource("1_e8jws")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2 Platfmrs.xml"
+linkage = "6-1-2Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_saipn")
+"Timeline": SubResource("AnimationLibrary_74g3h")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

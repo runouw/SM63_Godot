@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_8temo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_wy0vq"]
+
+[sub_resource type="Animation" id="Animation_ducq1"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -88,16 +90,29 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hgcoa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4sdvd"]
 _data = {
-"Default": SubResource("Animation_8temo")
+"Default": SubResource("Animation_ducq1")
 }
 
+[sub_resource type="GDScript" id="GDScript_oqu50"]
+script/source = "extends Node
+# if (small == true) {
+# 	gotoAndStop(6);
+# }
+# gotoAndStop(random(5)+1);
+# "
+
 [node name="Giant Book 2" type="Node2D"]
+script = ExtResource("1_wy0vq")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Themed PL/Mutant/Giant Book 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hgcoa")
+"Timeline": SubResource("AnimationLibrary_4sdvd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -298,3 +313,6 @@ end_cap_mode = 2
 [node name="Codster" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Codster"]
+
+[node name="AS2" type="Node" parent="Codster/Frame 0"]
+script = SubResource("GDScript_oqu50")

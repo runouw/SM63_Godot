@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_mi8jm"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_uocw6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_u8mkp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5dovs"]
 
-[sub_resource type="Animation" id="Animation_7dves"]
+[sub_resource type="Animation" id="Animation_a7t0h"]
 length = 4.9
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +55,21 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lhw6n"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_63mop"]
 _data = {
-"Default": SubResource("Animation_7dves")
+"Default": SubResource("Animation_a7t0h")
 }
 
 [node name="C-13 Meteor (Graphic)" type="Node2D"]
+script = ExtResource("1_u8mkp")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 Meteor (Graphic).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lhw6n")
+"Timeline": SubResource("AnimationLibrary_63mop")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -103,10 +108,10 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_mi8jm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(111.95, -2)
 scale = Vector2(0.892487, 0.892487)
-script = ExtResource("2_uocw6")
+script = ExtResource("2_5dovs")
 path = "res://sm63_godot/Effects/Meteor Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -122,10 +127,10 @@ brightness = 0.0
 [node name="Frame 146" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 146" instance=ExtResource("1_mi8jm")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 146"]
 position = Vector2(109, 1.5)
 rotation = 3.14159
-script = ExtResource("2_uocw6")
+script = ExtResource("2_5dovs")
 path = "res://sm63_godot/Effects/Meteor Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

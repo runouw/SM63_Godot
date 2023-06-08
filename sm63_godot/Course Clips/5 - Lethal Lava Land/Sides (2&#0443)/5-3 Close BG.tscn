@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Faded Brick.png" id="1_3aseu"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Volcano Rock 1.png" id="2_2nfj2"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_21xoc"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_46gyl"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Blue Stone.png" id="5_jj6sg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_yb18a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Faded Brick.png" id="2_4hoet"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Volcano Rock 1.png" id="3_bryvj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_418a3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Blue Stone.png" id="5_uhjnt"]
 
-[sub_resource type="Animation" id="Animation_5yd76"]
+[sub_resource type="Animation" id="Animation_fxc53"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -58,16 +58,21 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fsfgx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oryv2"]
 _data = {
-"Default": SubResource("Animation_5yd76")
+"Default": SubResource("Animation_fxc53")
 }
 
 [node name="5-3 Close BG" type="Node2D"]
+script = ExtResource("1_yb18a")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Sides (2&#0443)/5-3 Close BG.xml"
+linkage = "5-3CloseBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fsfgx")
+"Timeline": SubResource("AnimationLibrary_oryv2")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -81,7 +86,7 @@ libraries = {
 [node name="@@31762" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_3aseu")
+texture = ExtResource("2_4hoet")
 texture_offset = Vector2(55, -40.35)
 texture_scale = Vector2(2.56, 2.56)
 polygon = PackedVector2Array(-183.15, -222.95, -182.275, -222.95, -183.15, -218.95, -183.15, -218.95)
@@ -90,7 +95,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@31763" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_3aseu")
+texture = ExtResource("2_4hoet")
 texture_offset = Vector2(239.65, 109.65)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(-224.2, -419.3, -113, -419.3, -143.275, -378.175, -194.45, -378.175, -183.15, -378.175, -158.45, -378.175, -158.45, -222.95, -183.15, -222.95, -182.275, -222.95, -158.45, -222.95, -158.45, 59.15, -183.15, 59.15, -183.15, -218.95)
@@ -111,7 +116,7 @@ end_cap_mode = 2
 [node name="@@31766" type="Polygon2D" parent="Layer 4/Frame 0/@Group@31765/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_2nfj2")
+texture = ExtResource("3_bryvj")
 texture_offset = Vector2(762.6, 108.6)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(-822.825, -346.925, -822.825, -346.925, -804.782, -338, -786.9, -332, -788.585, -328.609, -839.811, -328.609, -823.752, -345.925, -699.925, -345.925, -699.925, -345.925, -692.367, -328.609, -747.573, -328.609, -747.5, -329.175, -731.505, -332.274, -715.646, -337.857, -715.368, -338, -786.9, -332, -786.9, -332, -767.1, -328.759, -788.51, -328.759, -788.304, -329.175, -747.5, -329.175, -747.5, -329.175, -747.553, -328.759, -767.1, -328.759, -788.51, -328.759, -747.553, -328.759, -749.475, -313.825, -750, -299.25, -749.925, -285.425, -749.181, -262.336, -746.947, -241.103, -743.225, -221.725, -740.119, -210.381, -736.25, -198.75, -732.85, -189.844, -728.1, -178.175, -723.106, -165.962, -719.775, -157.425, -715.6, -145.462, -712.175, -133.875, -707.703, -113.703, -704.619, -91.7194, -702.925, -67.925, -702.938, -56.225, -703.528, -40.55, -703.528, -40.55, -703.625, -37.975, -703.875, -22.0562, -703.1, -11.45, -703.1, -11.45, -702.925, -9.05, -699.962, 1.49375, -693.225, 16.625, -687.5, 28.45, -686.075, 31.975, -674.908, 45.125, -670.117, 57.6667, -671.7, 69.6, -671.62, 75.6969, -670.66, 92.2708, -668.82, 119.322, -666.1, 156.85, -883.45, 156.85, -883.628, 93.394, -883.715, 77.4018, -883.8, 71.9, -885.8, 56.325, -884.244, 41.8444, -879.578, 25.9694, -871.8, 8.7, -862.175, -8.675, -861.005, -11.45, -861.005, -11.45, -857.8, -19.05, -854.775, -36.95, -853.084, -40.55, -853.084, -40.55, -846.8, -53.925, -840.1, -63.625, -834.462, -72.9438, -829.65, -82.8, -823.591, -99.7453, -819.262, -118.581, -816.666, -139.308, -815.8, -161.925, -815.903, -175.828, -816.211, -192.203, -816.725, -211.05, -816.563, -233.319, -815.225, -251.175, -811.444, -271.675, -805.05, -292.425, -797.242, -311.189, -788.585, -328.609, -839.811, -328.609, -788.585, -328.609, -797.242, -311.189, -805.05, -292.425, -811.444, -271.675, -815.225, -251.175, -816.563, -233.319, -816.725, -211.05, -816.211, -192.203, -815.903, -175.828, -815.8, -161.925, -816.666, -139.308, -819.262, -118.581, -823.591, -99.7453, -829.65, -82.8, -834.462, -72.9438, -840.1, -63.625, -846.8, -53.925, -854.775, -36.95, -857.8, -19.05, -861.005, -11.45, -861.005, -11.45, -862.175, -8.675, -871.8, 8.7, -879.578, 25.9694, -884.244, 41.8444, -885.8, 56.325, -883.8, 71.9, -883.715, 77.4018, -883.628, 93.394, -883.45, 156.85, -1120.05, 156.85, -1107.39, 109.704, -1097.31, 75.6638, -1089.8, 54.7291, -1084.88, 46.9, -1072.32, 36.425, -1062.6, 21.875, -1054.19, 19.0939, -1033.67, 16.2023, -1001.05, 13.2, -984.475, 5.15, -982.925, 4.5, -974.375, 1.075, -962.8, -3.075, -957.407, -11.45, -957.407, -11.45, -957.375, -11.5, -954.284, -21.5754, -946.425, -40.55, -941.181, -73.677, -936.12, -98.2651, -931.243, -114.314, -926.55, -121.825, -917.72, -129.181, -912.675, -136.15, -906.569, -146.219, -898.8, -153.925, -887.786, -164.519, -879.378, -177.636, -873.575, -193.275, -871.181, -204.444, -869.5, -217.35, -868.706, -228.275, -868.025, -242.95, -866.083, -258.548, -861.675, -268.35, -857.086, -278.901, -854.575, -296.75, -850.394, -311.884, -841.774, -325.506, -747.573, -328.609, -692.367, -328.609, -691.013, -325.506, -684.825, -309.6, -679.787, -293.919, -673.925, -272.925, -670.8, -264.237, -665.375, -253.375, -658.231, -240.794, -653.1, -231.35, -646.819, -218.081, -642.475, -205.875, -639.4, -190.863, -638.925, -175.925, -638.639, -154.511, -635.356, -134.619, -629.077, -116.248, -619.8, -99.4, -606.436, -82.925, -589.311, -67.8, -568.425, -54.025, -554.45, -46.5375, -541.723, -40.55, -541.723, -40.55, -538.375, -38.975, -527.269, -34.2062, -509.55, -26.85, -495.131, -20.7625, -485.025, -16.1, -476.6, -11.45, -460.786, 3.03331, -446.579, 27.105, -433.979, 60.765, -422.986, 104.013, -413.6, 156.85, -666.1, 156.85, -668.82, 119.322, -670.66, 92.2708, -671.62, 75.6969, -671.7, 69.6, -670.117, 57.6667, -674.908, 45.125, -686.075, 31.975, -687.5, 28.45, -693.225, 16.625, -699.962, 1.49375, -702.925, -9.05, -703.875, -22.0562, -703.625, -37.975, -703.528, -40.55, -703.528, -40.55, -702.938, -56.225, -702.925, -67.925, -704.619, -91.7194, -707.703, -113.703, -712.175, -133.875, -715.6, -145.462, -719.775, -157.425, -723.106, -165.962, -728.1, -178.175, -732.85, -189.844, -736.25, -198.75, -740.119, -210.381, -743.225, -221.725, -746.947, -241.103, -749.181, -262.336, -749.925, -285.425, -750, -299.25, -749.475, -313.825, -747.972, -325.506)
@@ -145,9 +150,9 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Castle"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Castle/Frame 0" instance=ExtResource("3_21xoc")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Castle/Frame 0"]
 position = Vector2(-118.65, 35.35)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Sides (2&#0443)/5-3 Close BG Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -168,7 +173,7 @@ position = Vector2(-1, 9)
 [node name="@@31754" type="Polygon2D" parent="Castle/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_jj6sg")
+texture = ExtResource("5_uhjnt")
 texture_offset = Vector2(114, 129)
 texture_scale = Vector2(1.45455, 1.45455)
 polygon = PackedVector2Array(-86.1, -179.5, -86.1, -179.5, -60.1, -150.5, -60.1, -107, -114.1, -107, -114.1, -151)
@@ -177,7 +182,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
 [node name="@@31755" type="Polygon2D" parent="Castle/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_jj6sg")
+texture = ExtResource("5_uhjnt")
 texture_offset = Vector2(10.3, -23.7)
 texture_scale = Vector2(1.63177, 1.63177)
 polygon = PackedVector2Array(-10.1, 23, 28.9, 23, 28.9, 42, -10.1, 42)
@@ -186,7 +191,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@31756" type="Polygon2D" parent="Castle/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_jj6sg")
+texture = ExtResource("5_uhjnt")
 texture_offset = Vector2(10.3, 66.3)
 texture_scale = Vector2(1.63177, 1.63177)
 polygon = PackedVector2Array(-10.1, -67, 8.85, -67, 8.85, -48, -10.1, -48)
@@ -247,10 +252,10 @@ color = Color(0.6, 0, 0, 1)
 polygon = PackedVector2Array(-1505.32, 54.1, 214.15, 54.1, 214.175, 201.35, -1505.32, 201.35)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0/Group" instance=ExtResource("3_21xoc")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0/Group"]
 position = Vector2(-933.3, 46.55)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -263,10 +268,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.2
 
-[node name="@DOMSymbolInstance@31746" type="Node2D" parent="Layer 3/Frame 0/Group" instance=ExtResource("3_21xoc")]
+[node name="@DOMSymbolInstance@31746" type="Node2D" parent="Layer 3/Frame 0/Group"]
 position = Vector2(-741.3, 46.55)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -279,10 +284,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.2
 
-[node name="@DOMSymbolInstance@31747" type="Node2D" parent="Layer 3/Frame 0/Group" instance=ExtResource("3_21xoc")]
+[node name="@DOMSymbolInstance@31747" type="Node2D" parent="Layer 3/Frame 0/Group"]
 position = Vector2(-551.55, 46.55)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -295,10 +300,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.2
 
-[node name="@DOMSymbolInstance@31748" type="Node2D" parent="Layer 3/Frame 0/Group" instance=ExtResource("3_21xoc")]
+[node name="@DOMSymbolInstance@31748" type="Node2D" parent="Layer 3/Frame 0/Group"]
 position = Vector2(-168.3, 46.55)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -311,10 +316,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.2
 
-[node name="@DOMSymbolInstance@31749" type="Node2D" parent="Layer 3/Frame 0/Group" instance=ExtResource("3_21xoc")]
+[node name="@DOMSymbolInstance@31749" type="Node2D" parent="Layer 3/Frame 0/Group"]
 position = Vector2(23.7, 46.55)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -327,10 +332,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.2
 
-[node name="@DOMSymbolInstance@31750" type="Node2D" parent="Layer 3/Frame 0/Group" instance=ExtResource("3_21xoc")]
+[node name="@DOMSymbolInstance@31750" type="Node2D" parent="Layer 3/Frame 0/Group"]
 position = Vector2(-360.3, 46.55)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -343,10 +348,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.2
 
-[node name="@DOMSymbolInstance@31751" type="Node2D" parent="Layer 3/Frame 0/Group" instance=ExtResource("3_21xoc")]
+[node name="@DOMSymbolInstance@31751" type="Node2D" parent="Layer 3/Frame 0/Group"]
 position = Vector2(-1125.3, 46.55)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -359,10 +364,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.2
 
-[node name="@DOMSymbolInstance@31752" type="Node2D" parent="Layer 3/Frame 0/Group" instance=ExtResource("3_21xoc")]
+[node name="@DOMSymbolInstance@31752" type="Node2D" parent="Layer 3/Frame 0/Group"]
 position = Vector2(-1315.3, 46.55)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -375,10 +380,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.2
 
-[node name="@DOMSymbolInstance@31753" type="Node2D" parent="Layer 3/Frame 0/Group" instance=ExtResource("3_21xoc")]
+[node name="@DOMSymbolInstance@31753" type="Node2D" parent="Layer 3/Frame 0/Group"]
 position = Vector2(-1505.3, 46.55)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("4_46gyl")
+script = ExtResource("4_418a3")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

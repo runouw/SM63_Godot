@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_2gv51"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5ikr5"]
+
+[sub_resource type="Animation" id="Animation_1jwak"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f5t0w"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7bhd"]
 _data = {
-"Default": SubResource("Animation_2gv51")
+"Default": SubResource("Animation_1jwak")
 }
 
 [node name="Website Link Button" type="Node2D"]
+script = ExtResource("1_5ikr5")
+source_xml = "res://sm63/LIBRARY/Website Link Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_f5t0w")
+"Timeline": SubResource("AnimationLibrary_u7bhd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

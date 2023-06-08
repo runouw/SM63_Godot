@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_b5kvr"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_6uhjg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_giomv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4trwv"]
 
-[sub_resource type="Animation" id="Animation_oebuc"]
+[sub_resource type="Animation" id="Animation_sawqt"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,30 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iati3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ceerp"]
 _data = {
-"Default": SubResource("Animation_oebuc")
+"Default": SubResource("Animation_sawqt")
 }
 
 [node name="Intro Movie 2 Scene 3 Course" type="Node2D"]
+script = ExtResource("1_giomv")
+source_xml = "res://sm63/LIBRARY/Intro Movie 2 Scene 3 Course.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iati3")
+"Timeline": SubResource("AnimationLibrary_ceerp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_b5kvr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-0.25, 0)
-script = ExtResource("2_6uhjg")
+script = ExtResource("2_4trwv")
 path = "res://sm63_godot/Intro Moive 2 Scene 3 Stuff.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

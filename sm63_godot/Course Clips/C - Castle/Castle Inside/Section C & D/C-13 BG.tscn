@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_yw71g"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_itn50"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qafwd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_t7qtq"]
 
-[sub_resource type="Animation" id="Animation_yma4c"]
+[sub_resource type="Animation" id="Animation_eyth4"]
 length = 9.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -235,16 +235,76 @@ tracks/18/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r12fb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_58db2"]
 _data = {
-"Default": SubResource("Animation_yma4c")
+"Default": SubResource("Animation_eyth4")
 }
 
+[sub_resource type="GDScript" id="GDScript_gwic4"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_5wovm"]
+script/source = "extends Node
+# this.createEmptyMovieClip(\"soundclip\", _root.getNextHighestDepth());
+# distancevolume = 0;
+# soundclip = new Sound(this);
+# soundclip.attachSound(\"VolcanoErupting\");
+# soundclip.start(0, 9);
+# soundclip.setVolume((_root.MarioVolume/100)*distancevolume);
+# soundclip.setPan(panX);
+# onEnterFrame = function () {
+# 	distancevolume += 1;
+# 	distancevolume = Math.min(distancevolume, 75);
+# 	soundclip.setVolume((_root.MarioVolume/100)*distancevolume);
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_osm0s"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	distancevolume -= 5;
+# 	soundclip.setVolume((_root.MarioVolume/100)*distancevolume);
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_qc6ee"]
+script/source = "extends Node
+# _root.FarBackground.play();
+# "
+
+[sub_resource type="GDScript" id="GDScript_ici1j"]
+script/source = "extends Node
+# _root.attachMovie(\"downtransition\", \"downtransition\"+_root.getNextHighestDepth(), _root.getNextHighestDepth(), {_x:_root.screensizeX/2, _y:_root.screensizeY/2});
+# // Insert Bowsers Transition!!
+# "
+
+[sub_resource type="GDScript" id="GDScript_1mabi"]
+script/source = "extends Node
+# soundclip.stop();
+# _root.Fluddpow = \"\";
+# _root.StopBGsong();
+# //_root.Playinglevel = \"\"
+# _root.lvl8keyA = false;
+# _root.lvl8keyB = false;
+# _root.lvl8keyC = false;
+# _root.lvl8keyD = false;
+# _root.lvl8keyE = false;
+# _root.Playinglevel = 8;
+# _root.changecourse(\"righttransition2\", \"8-1\", 0, 0, 0, 0, true);
+# "
+
 [node name="C-13 BG" type="Node2D"]
+script = ExtResource("1_qafwd")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 BG.xml"
+linkage = "C-13BG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_r12fb")
+"Timeline": SubResource("AnimationLibrary_58db2")
 }
 
 [node name="Layer 5" type="Node2D" parent="."]
@@ -254,9 +314,9 @@ libraries = {
 [node name="Frame 159" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 159" instance=ExtResource("1_yw71g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 159"]
 position = Vector2(-21.85, -430.7)
-script = ExtResource("2_itn50")
+script = ExtResource("2_t7qtq")
 path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 Meteor (Graphic).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -272,9 +332,9 @@ brightness = 0.0
 [node name="Frame 212" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 212" instance=ExtResource("1_yw71g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 212"]
 position = Vector2(-21.85, -275.7)
-script = ExtResource("2_itn50")
+script = ExtResource("2_t7qtq")
 path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 Meteor (Graphic).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -290,9 +350,9 @@ brightness = 0.0
 [node name="Frame 265" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 265" instance=ExtResource("1_yw71g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 265"]
 position = Vector2(-21.85, -120.7)
-script = ExtResource("2_itn50")
+script = ExtResource("2_t7qtq")
 path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 Meteor (Graphic).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -309,9 +369,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_yw71g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(92.1, -138.6)
-script = ExtResource("2_itn50")
+script = ExtResource("2_t7qtq")
 path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 BC Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -327,9 +387,9 @@ brightness = 0.0
 [node name="Frame 159" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 159" instance=ExtResource("1_yw71g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 159"]
 position = Vector2(92.1, -138.6)
-script = ExtResource("2_itn50")
+script = ExtResource("2_t7qtq")
 path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 BC Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -345,9 +405,9 @@ brightness = 0.0
 [node name="Frame 212" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 212" instance=ExtResource("1_yw71g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 212"]
 position = Vector2(92.1, 16.4)
-script = ExtResource("2_itn50")
+script = ExtResource("2_t7qtq")
 path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 BC Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -363,9 +423,9 @@ brightness = 0.0
 [node name="Frame 265" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 265" instance=ExtResource("1_yw71g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 265"]
 position = Vector2(92.1, 171.4)
-script = ExtResource("2_itn50")
+script = ExtResource("2_t7qtq")
 path = "res://sm63_godot/Course Clips/C - Castle/Castle Inside/Section C & D/C-13 BC Graphic.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -382,14 +442,17 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_gwic4")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_yw71g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(526.35, -104)
 rotation = 1.309
 scale = Vector2(0.500008, -0.500008)
-script = ExtResource("2_itn50")
+script = ExtResource("2_t7qtq")
 path = "res://sm63_godot/Char/SlingStar Mario Spin Slow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -405,11 +468,11 @@ brightness = 0.0
 [node name="Frame 152" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 152" instance=ExtResource("1_yw71g")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 152"]
 position = Vector2(-108.1, 14)
 rotation = 0.523515
 scale = Vector2(0.10527, -0.10527)
-script = ExtResource("2_itn50")
+script = ExtResource("2_t7qtq")
 path = "res://sm63_godot/Char/SlingStar Mario Spin Slow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -428,8 +491,14 @@ visible = false
 [node name="Frame 159" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 159"]
+script = SubResource("GDScript_5wovm")
+
 [node name="Frame 260" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 260"]
+script = SubResource("GDScript_osm0s")
 
 [node name="Guide Layer 1" type="Node2D" parent="."]
 
@@ -457,8 +526,17 @@ visible = false
 [node name="Frame 159" type="Node2D" parent="Guide Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Guide Layer 1/Frame 159"]
+script = SubResource("GDScript_qc6ee")
+
 [node name="Frame 265" type="Node2D" parent="Guide Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Guide Layer 1/Frame 265"]
+script = SubResource("GDScript_ici1j")
+
 [node name="Frame 275" type="Node2D" parent="Guide Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Guide Layer 1/Frame 275"]
+script = SubResource("GDScript_1mabi")

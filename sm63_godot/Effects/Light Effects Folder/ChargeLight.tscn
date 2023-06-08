@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_b5sug"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_s63d8"]
+
+[sub_resource type="Animation" id="Animation_t8ene"]
 length = 0.366667
 loop_mode = 1
 tracks/0/type = "value"
@@ -76,16 +78,26 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_336tu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_248o4"]
 _data = {
-"Default": SubResource("Animation_b5sug")
+"Default": SubResource("Animation_t8ene")
 }
 
+[sub_resource type="GDScript" id="GDScript_rywhh"]
+script/source = "extends Node
+# this.removeMovieClip(this);
+# "
+
 [node name="ChargeLight" type="Node2D"]
+script = ExtResource("1_s63d8")
+source_xml = "res://sm63/LIBRARY/Effects/Light Effects Folder/ChargeLight.xml"
+linkage = "ChargeLight"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_336tu")
+"Timeline": SubResource("AnimationLibrary_248o4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -128,3 +140,6 @@ visible = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 10"]
+script = SubResource("GDScript_rywhh")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_qbk6f"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kbo3c"]
+
+[sub_resource type="Animation" id="Animation_rw0l8"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jo6v"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ughef"]
 _data = {
-"Default": SubResource("Animation_qbk6f")
+"Default": SubResource("Animation_rw0l8")
 }
 
 [node name="9-10-2 Ground" type="Node2D"]
+script = ExtResource("1_kbo3c")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Ground.xml"
+linkage = "9-10-2Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4jo6v")
+"Timeline": SubResource("AnimationLibrary_ughef")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

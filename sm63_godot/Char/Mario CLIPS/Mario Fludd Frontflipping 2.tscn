@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_r63k4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8cklt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 1.png" id="3_0w8xu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_wqcvc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_r6c1b"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (none) - 1.png" id="3_lseuu"]
 
-[sub_resource type="Animation" id="Animation_cq05b"]
+[sub_resource type="Animation" id="Animation_h1rgr"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nwhbr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o6iwl"]
 _data = {
-"Default": SubResource("Animation_cq05b")
+"Default": SubResource("Animation_h1rgr")
 }
 
 [node name="Mario Fludd Frontflipping 2" type="Node2D"]
+script = ExtResource("1_wqcvc")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Fludd Frontflipping 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nwhbr")
+"Timeline": SubResource("AnimationLibrary_o6iwl")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,9 +44,9 @@ libraries = {
 [node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.6, 0.45)
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_r63k4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group"]
 position = Vector2(0.75, -1.8)
-script = ExtResource("2_8cklt")
+script = ExtResource("2_r6c1b")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -57,12 +62,12 @@ brightness = 0.0
 [node name="@@15548" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-13.4, -13.1)
-texture = ExtResource("3_0w8xu")
+texture = ExtResource("3_lseuu")
 centered = false
 
-[node name="@DOMSymbolInstance@15549" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("1_r63k4")]
+[node name="@DOMSymbolInstance@15549" type="Node2D" parent="Layer 1/Frame 0/Group"]
 position = Vector2(-2.25, 10.25)
-script = ExtResource("2_8cklt")
+script = ExtResource("2_r6c1b")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="1_mpdck"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Blue 2.png" id="2_cbqst"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_udla7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="2_0anag"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Blue 2.png" id="3_t01id"]
 
-[sub_resource type="Animation" id="Animation_k5o6w"]
+[sub_resource type="Animation" id="Animation_agkyn"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +56,52 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6hcj6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ufamt"]
 _data = {
-"Default": SubResource("Animation_k5o6w")
+"Default": SubResource("Animation_agkyn")
 }
 
+[sub_resource type="GDScript" id="GDScript_vta0j"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	if (_parent.sm._currentframe == 3) {
+# 		al = 100;
+# 		gotoAndStop(2);
+# 	} else {
+# 		sc = 75;
+# 		al = 50;
+# 		gotoAndStop(3);
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	_alpha += (al-_alpha)/2;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		_xscale = 140;
+# 		_yscale = 140;
+# 		_parent.sm.gotoAndStop(\"blank\");
+# 		_parent.sm.gotoAndStop(2);
+# 	}
+# };
+# gotoAndStop(2);
+# "
+
 [node name="Pause New SCtoSS" type="Node2D"]
+script = ExtResource("1_udla7")
+source_xml = "res://sm63/LIBRARY/Pause New SCtoSS.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6hcj6")
+"Timeline": SubResource("AnimationLibrary_ufamt")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -89,7 +126,7 @@ end_cap_mode = 2
 [node name="@@13381" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-13.5, -16)
-texture = ExtResource("1_mpdck")
+texture = ExtResource("2_0anag")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -113,12 +150,15 @@ end_cap_mode = 2
 [node name="@@13384" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-13.5, -16)
-texture = ExtResource("2_cbqst")
+texture = ExtResource("3_t01id")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_vta0j")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

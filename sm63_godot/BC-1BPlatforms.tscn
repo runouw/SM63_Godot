@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_ivc7r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_h7aan"]
+
+[sub_resource type="Animation" id="Animation_urvxs"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_31g05"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6fcee"]
 _data = {
-"Default": SubResource("Animation_ivc7r")
+"Default": SubResource("Animation_urvxs")
 }
 
 [node name="BC-1BPlatforms" type="Node2D"]
+script = ExtResource("1_h7aan")
+source_xml = "res://sm63/LIBRARY/BC-1BPlatforms.xml"
+linkage = "BC-1BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_31g05")
+"Timeline": SubResource("AnimationLibrary_6fcee")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

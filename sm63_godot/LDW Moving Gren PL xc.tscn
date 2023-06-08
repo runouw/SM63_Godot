@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_m8yk4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4ljew"]
+
+[sub_resource type="Animation" id="Animation_1lla5"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pvjtf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_orsop"]
 _data = {
-"Default": SubResource("Animation_m8yk4")
+"Default": SubResource("Animation_1lla5")
 }
 
 [node name="LDW Moving Gren PL xc" type="Node2D"]
+script = ExtResource("1_4ljew")
+source_xml = "res://sm63/LIBRARY/LDW Moving Gren PL xc.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pvjtf")
+"Timeline": SubResource("AnimationLibrary_orsop")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

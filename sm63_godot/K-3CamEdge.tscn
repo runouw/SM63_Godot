@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_6cklo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7houc"]
+
+[sub_resource type="Animation" id="Animation_8ps33"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1p4he"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lxsnj"]
 _data = {
-"Default": SubResource("Animation_6cklo")
+"Default": SubResource("Animation_8ps33")
 }
 
 [node name="K-3CamEdge" type="Node2D"]
+script = ExtResource("1_7houc")
+source_xml = "res://sm63/LIBRARY/K-3CamEdge.xml"
+linkage = "K-3CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1p4he")
+"Timeline": SubResource("AnimationLibrary_lxsnj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

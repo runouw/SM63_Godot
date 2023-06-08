@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_1umji"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0r1bu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pcpkk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_eok73"]
 
-[sub_resource type="Animation" id="Animation_ctl0o"]
+[sub_resource type="Animation" id="Animation_0rsca"]
 length = 10.0
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,24 +55,40 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r43hv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6q34o"]
 _data = {
-"Default": SubResource("Animation_ctl0o")
+"Default": SubResource("Animation_0rsca")
 }
 
+[sub_resource type="GDScript" id="GDScript_vl18i"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	frame = Math.round(-(_root.Course.Char._y-_root.Course.BackGFX._y)/4);
+# 	frame = Math.min(frame, 300);
+# 	frame = Math.max(frame, 1);
+# 	gotoAndStop(frame);
+# };
+# "
+
 [node name="K-1 FarBG" type="Node2D"]
+script = ExtResource("1_pcpkk")
+source_xml = "res://sm63/LIBRARY/K-1 FarBG.xml"
+linkage = "K-1FarBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_r43hv")
+"Timeline": SubResource("AnimationLibrary_6q34o")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_1umji")]
-script = ExtResource("2_0r1bu")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_eok73")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/5-1 BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -89,11 +105,14 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_vl18i")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_1umji")]
-script = ExtResource("2_0r1bu")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
+script = ExtResource("2_eok73")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/5-1 BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -109,8 +128,8 @@ brightness = 0.0
 [node name="Frame 299" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 299" instance=ExtResource("1_1umji")]
-script = ExtResource("2_0r1bu")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 299"]
+script = ExtResource("2_eok73")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/5-1 BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

@@ -1,19 +1,19 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=36 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_gpm35"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_offe0"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/NSMB Cave BG (Back).png" id="3_p43oj"]
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="4_7qwh0"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cloud BG Bottom Half.png" id="5_icp8j"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cloud BG Top Half.png" id="6_unc6s"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cloud BG Bottom Half 2.png" id="7_c4qrn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 3 - 7.png" id="8_rj6di"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 5.png" id="9_g7r1m"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Fall - 5.png" id="10_1vutl"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="11_5bwqt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Gold Frame.png" id="12_x6qf5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qdd0r"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_pbw5i"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/NSMB Cave BG (Back).png" id="3_ptigs"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="4_yoj4a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cloud BG Bottom Half.png" id="5_5mvv1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cloud BG Top Half.png" id="6_olvet"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Cloud BG Bottom Half 2.png" id="7_7ftrf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 3 - 7.png" id="8_ipohi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 5.png" id="9_y3tp4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Fall - 5.png" id="10_o55cm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="11_0om75"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Castle Constructors/Gold Frame.png" id="12_1ry1a"]
 
-[sub_resource type="Animation" id="Animation_g8qi4"]
+[sub_resource type="Animation" id="Animation_gci8k"]
 length = 79.5667
 loop_mode = 1
 tracks/0/type = "value"
@@ -2801,16 +2801,209 @@ tracks/231/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_o270h"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7eed5"]
 _data = {
-"Default": SubResource("Animation_g8qi4")
+"Default": SubResource("Animation_gci8k")
 }
 
+[sub_resource type="GDScript" id="GDScript_t6jv2"]
+script/source = "extends Node
+# _root.bgsong.onSoundComplete = null;
+# _root.bgsong.stop();
+# _root.bgsong = new Sound(_root);
+# _root.bgsong.attachSound(\"TitleScreenTheme\");
+# _root.bgsong.start(0, 1);
+# _root.bgsong.setVolume(100);
+# //
+# starttime = 0;
+# endtime = _root.bgsong.duration;
+# frame = 0;
+# count = 0;
+# stop();
+# onEnterFrame = function () {
+# 	position = _root.bgsong.position-starttime;
+# 	lastframe = frame;
+# 	frame = (1-((endtime-(starttime+position))/(endtime-starttime)))*(1106);
+# 	trace(\"Position \"+position);
+# 	trace(\"Frame \"+frame);
+# 	while (_currentframe<frame) {
+# 		
+# 		nextFrame();
+# 	}
+# 	if(lastframe >= frame || isNaN(frame)){
+# 		// to work on computers with no sound card...
+# 		count++;
+# 		if(count > 32){
+# 			nextFrame();
+# 		}
+# 	}
+# 	if (_root.bgsong.position>=endtime) {
+# 		play();
+# 		onEnterFrame = null;
+# 	}
+# 	//gotoAndStop(frame+45);  
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_mredk"]
+script/source = "extends Node
+# _root.bgsong.onSoundComplete = null;
+# _root.bgsong.stop();
+# _root.bgsong = new Sound(_root);
+# _root.bgsong.attachSound(\"TitleScreenTheme\");
+# _root.bgsong.start(0, 1);
+# _root.bgsong.setVolume(100);
+# //
+# starttime = 0;
+# endtime = _root.bgsong.duration;
+# stop();
+# onEnterFrame = function () {
+# 	position = _root.bgsong.position-starttime;
+# 	frame = (1-((endtime-(starttime+position))/(endtime-starttime)))*(1106);
+# 	trace(\"Position \"+position);
+# 	trace(\"Frame \"+frame);
+# 	while (_currentframe<frame) {
+# 		nextFrame();
+# 	}
+# 	if (_root.bgsong.position>=endtime) {
+# 		play();
+# 		onEnterFrame = null;
+# 	}
+# 	//gotoAndStop(frame+45);  
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_y3nm5"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_s6upg"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_pc3gm"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ra52v"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_irpc2"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_yhthf"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 1;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_rw5p8"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();
+# _root.StartCreditsCourse(\"9-04\", 0, 0, 0, 0, 100);
+# this.swapDepths(_root.getNextHighestDepth());"
+
+[sub_resource type="GDScript" id="GDScript_rv2bq"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();
+# _root.StartCreditsCourse(\"5-1\", 0, 0, 0, 0, 100);
+# this.swapDepths(_root.getNextHighestDepth());"
+
+[sub_resource type="GDScript" id="GDScript_eh32f"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();
+# _root.StartCreditsCourse(\"6-6\", 0, 0, 0, 0, 100);
+# this.swapDepths(_root.getNextHighestDepth());"
+
+[sub_resource type="GDScript" id="GDScript_e83e2"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();
+# _root.StartCreditsCourse(\"5-5\", 0, 0, 0, 0, 100);
+# this.swapDepths(_root.getNextHighestDepth());"
+
+[sub_resource type="GDScript" id="GDScript_1pa77"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();
+# _root.StartCreditsCourse(\"BC-2\", 0, 0, 0, 0, 100);
+# this.swapDepths(_root.getNextHighestDepth());"
+
+[sub_resource type="GDScript" id="GDScript_47gcv"]
+script/source = "extends Node
+# _root.StartCreditsCourse(\"1-1\", 0, 0, 0, 0, 100);
+# this.swapDepths(_root.getNextHighestDepth());"
+
+[sub_resource type="GDScript" id="GDScript_dv6rl"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();
+# _root.StartCreditsCourse(\"3-1\", 0, 0, 0, 0, 100);
+# this.swapDepths(_root.getNextHighestDepth());"
+
+[sub_resource type="GDScript" id="GDScript_5mvpb"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();
+# _root.StartCreditsCourse(\"M1-1\", 0, 0, 0, 0, 100);
+# this.swapDepths(_root.getNextHighestDepth());"
+
+[sub_resource type="GDScript" id="GDScript_62vfi"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();
+# _root.StartCreditsCourse(\"9-05\", 0, 0, 0, 0, 100);
+# this.swapDepths(_root.getNextHighestDepth());"
+
+[sub_resource type="GDScript" id="GDScript_p5wqw"]
+script/source = "extends Node
+# gotoAndPlay(\"repeat\");
+# _root.bgsong.stop();
+# _root.bgsong = new Sound(_root);
+# _root.bgsong.attachSound(\"TitleScreenTheme\");
+# _root.bgsong.start(2.58, 1);
+# _root.bgsong.setVolume(100);"
+
+[sub_resource type="GDScript" id="GDScript_0maii"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();"
+
+[sub_resource type="GDScript" id="GDScript_ih6ey"]
+script/source = "extends Node
+# _root.RemoveCreditsCourse();"
+
+[sub_resource type="GDScript" id="GDScript_buflt"]
+script/source = "extends Node
+# gotoAndPlay(\"repeat\");
+# _root.bgsong.stop();
+# _root.bgsong = new Sound(_root);
+# _root.bgsong.attachSound(\"TitleScreenTheme\");
+# _root.bgsong.start(2.58, 1);
+# _root.bgsong.setVolume(100);"
+
 [node name="Tite Screen Animation" type="Node2D"]
+script = ExtResource("1_qdd0r")
+source_xml = "res://sm63/LIBRARY/Menu/Movies/Tite Screen Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_o270h")
+"Timeline": SubResource("AnimationLibrary_7eed5")
 }
 
 [node name="Music" type="Node2D" parent="."]
@@ -2820,8 +3013,14 @@ libraries = {
 [node name="Frame 1" type="Node2D" parent="Music"]
 visible = false
 
+[node name="AS2" type="Node" parent="Music/Frame 1"]
+script = SubResource("GDScript_t6jv2")
+
 [node name="Frame 1173" type="Node2D" parent="Music"]
 visible = false
+
+[node name="AS2" type="Node" parent="Music/Frame 1173"]
+script = SubResource("GDScript_mredk")
 
 [node name="Frame 2386" type="Node2D" parent="Music"]
 visible = false
@@ -2833,10 +3032,10 @@ visible = false
 [node name="Frame 340" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 340" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 340"]
 position = Vector2(-0.05, 0.05)
 scale = Vector2(1.00002, 1)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Areas 1-1 & 1-2/1-1 Back Graphics.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2849,8 +3048,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52707" type="Node2D" parent="More Layers/Frame 340" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="@DOMSymbolInstance@52707" type="Node2D" parent="More Layers/Frame 340"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/1 - Bob-omb Battlefield/Areas 1-1 & 1-2/1-1 Front Graphics.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2869,9 +3068,9 @@ visible = false
 [node name="Frame 583" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 583" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 583"]
 scale = Vector2(0.999985, 1)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/3 - Hazy Maze Cave/Areas 3-1 & 3-2/3-1 Back Graphics.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2890,9 +3089,9 @@ visible = false
 [node name="Frame 843" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 843" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 843"]
 scale = Vector2(1.00002, 0.999908)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Back GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2905,9 +3104,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52708" type="Node2D" parent="More Layers/Frame 843" instance=ExtResource("1_gpm35")]
+[node name="@DOMSymbolInstance@52708" type="Node2D" parent="More Layers/Frame 843"]
 scale = Vector2(1, 1.00006)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Front GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2926,9 +3125,9 @@ visible = false
 [node name="Frame 883" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 883" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 883"]
 scale = Vector2(1.00247, 1)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-05 Blast to the Stratosphere/9-05 Back GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2941,9 +3140,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52709" type="Node2D" parent="More Layers/Frame 883" instance=ExtResource("1_gpm35")]
+[node name="@DOMSymbolInstance@52709" type="Node2D" parent="More Layers/Frame 883"]
 position = Vector2(-0.25, -0.1)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-05 Blast to the Stratosphere/9-05 Front GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2962,10 +3161,10 @@ visible = false
 [node name="Frame 914" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 914" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 914"]
 position = Vector2(0.15, 0)
 scale = Vector2(1, 1.00044)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-04 Frosty Land/9-04 Back GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2978,10 +3177,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52710" type="Node2D" parent="More Layers/Frame 914" instance=ExtResource("1_gpm35")]
+[node name="@DOMSymbolInstance@52710" type="Node2D" parent="More Layers/Frame 914"]
 position = Vector2(0, -0.15)
 scale = Vector2(1.00002, 1.00053)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-04 Frosty Land/9-04 Front GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3000,9 +3199,9 @@ visible = false
 [node name="Frame 943" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 943" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 943"]
 scale = Vector2(1.00002, 1.00005)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Back GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3021,10 +3220,10 @@ visible = false
 [node name="Frame 972" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 972" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 972"]
 position = Vector2(-0.1, 0.1)
 scale = Vector2(1.00049, 1.00047)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/6-6BackGFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3037,8 +3236,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52711" type="Node2D" parent="More Layers/Frame 972" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="@DOMSymbolInstance@52711" type="Node2D" parent="More Layers/Frame 972"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/6-6FrontGFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3057,8 +3256,8 @@ visible = false
 [node name="Frame 1001" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1001" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1001"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5BackGFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3071,8 +3270,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52712" type="Node2D" parent="More Layers/Frame 1001" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="@DOMSymbolInstance@52712" type="Node2D" parent="More Layers/Frame 1001"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5FrontGFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3091,8 +3290,8 @@ visible = false
 [node name="Frame 1021" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1021" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1021"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/BC-2FrontGFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3105,8 +3304,8 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52713" type="Node2D" parent="More Layers/Frame 1021" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="@DOMSymbolInstance@52713" type="Node2D" parent="More Layers/Frame 1021"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/BC-2BackGFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3125,9 +3324,9 @@ visible = false
 [node name="Frame 1035" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1035" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1035"]
 scale = Vector2(1.21094, 1.19986)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3146,9 +3345,9 @@ visible = false
 [node name="Frame 1173" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1173" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1173"]
 scale = Vector2(1.21094, 1.19986)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3164,8 +3363,8 @@ brightness = 0.0
 [node name="Frame 1196" type="Node2D" parent="More Layers"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1196" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="More Layers/Frame 1196"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3189,7 +3388,7 @@ position = Vector2(0, -3.5)
 [node name="@@52714" type="Polygon2D" parent="More Layers/Frame 1219/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_p43oj")
+texture = ExtResource("3_ptigs")
 texture_offset = Vector2(285.25, 149.6)
 texture_scale = Vector2(0.666667, 0.666667)
 polygon = PackedVector2Array(-255.5, -148.6, 255.5, -148.6, 255.5, 155.6, -255.5, 155.6, -255.5, 63.4)
@@ -3198,7 +3397,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
 [node name="@@52715" type="Polygon2D" parent="More Layers/Frame 1219/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_p43oj")
+texture = ExtResource("3_ptigs")
 texture_offset = Vector2(285.25, -279.4)
 texture_scale = Vector2(0.666667, -0.666667)
 
@@ -3212,6 +3411,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer/Frame 340"]
 
 [node name="@@52698" type="Polygon2D" parent="Layer/Frame 340/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-326.95, -214, 272.8, -214, 272.8, 233.85, -326.95, 233.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -3224,6 +3424,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer/Frame 583"]
 
 [node name="@@52699" type="Polygon2D" parent="Layer/Frame 583/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-302.95, -194, 296.8, -194, 296.8, 203.85, -302.95, 203.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -3236,6 +3437,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer/Frame 843"]
 
 [node name="@@52700" type="Polygon2D" parent="Layer/Frame 843/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-247, -168, 262.85, -168, 262.85, 173.85, -247, 173.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -3248,6 +3450,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer/Frame 883"]
 
 [node name="@@52701" type="Polygon2D" parent="Layer/Frame 883/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-247, -168, 262.85, -168, 262.85, 173.85, -247, 173.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -3260,6 +3463,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer/Frame 914"]
 
 [node name="@@52702" type="Polygon2D" parent="Layer/Frame 914/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-247, -168, 262.85, -168, 262.85, 173.85, -247, 173.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -3272,6 +3476,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer/Frame 943"]
 
 [node name="@@52703" type="Polygon2D" parent="Layer/Frame 943/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-247, -168, 262.85, -168, 262.85, 173.85, -247, 173.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -3284,6 +3489,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer/Frame 972"]
 
 [node name="@@52704" type="Polygon2D" parent="Layer/Frame 972/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-247, -168, 262.85, -168, 262.85, 173.85, -247, 173.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -3296,6 +3502,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer/Frame 1001"]
 
 [node name="@@52705" type="Polygon2D" parent="Layer/Frame 1001/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-247, -168, 262.85, -168, 262.85, 173.85, -247, 173.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -3308,6 +3515,7 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer/Frame 1021"]
 
 [node name="@@52706" type="Polygon2D" parent="Layer/Frame 1021/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-247, -168, 262.85, -168, 262.85, 173.85, -247, 173.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -3317,9 +3525,9 @@ visible = false
 [node name="Frame 1070" type="Node2D" parent="Layer"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer/Frame 1070" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer/Frame 1070"]
 position = Vector2(-15.2, 63.7)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3335,10 +3543,10 @@ brightness = 0.0
 [node name="Frame 1103" type="Node2D" parent="Layer"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer/Frame 1103" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer/Frame 1103"]
 position = Vector2(-15.2, 43.7)
 scale = Vector2(0.899994, 0.899994)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3371,7 +3579,7 @@ position = Vector2(-275, -200)
 [node name="@@52691" type="Polygon2D" parent="Background/Frame 0/Group/Group/Shape"]
 polygon = PackedVector2Array(49.975, 50, 499.975, 50, 499.975, 350, 49.975, 350)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("4_7qwh0")
+script = ExtResource("4_yoj4a")
 matrix = Transform2D(0, -0.1772, 1.30833, 0, -164.25, 195.15)
 entries_color = PackedColorArray(0.776471, 0.807843, 0.972549, 1, 0.847059, 0.878431, 0.972549, 1, 0.909804, 0.929412, 0.992157, 1, 0.721569, 0.752941, 0.972549, 1, 0.376471, 0.470588, 0.784314, 1)
 entries_ratio = PackedFloat32Array(0, 0.0941176, 0.219608, 0.658824, 1)
@@ -3384,7 +3592,7 @@ spread_method_reflect = false
 [node name="@@52693" type="Polygon2D" parent="Background/Frame 0/Group/@Group@52692/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_icp8j")
+texture = ExtResource("5_5mvv1")
 texture_offset = Vector2(225, -27)
 polygon = PackedVector2Array(-225, 27, 225, 27, 225, 97, -225, 97)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -3396,7 +3604,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@52695" type="Polygon2D" parent="Background/Frame 0/Group/@Group@52694/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("6_unc6s")
+texture = ExtResource("6_olvet")
 texture_offset = Vector2(225, 40)
 polygon = PackedVector2Array(-225, -39, 225, -39, 225, 29, -225, 29)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -3408,7 +3616,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@52697" type="Polygon2D" parent="Background/Frame 0/Group/@Group@52696/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("7_c4qrn")
+texture = ExtResource("7_7ftrf")
 texture_offset = Vector2(6, -77)
 polygon = PackedVector2Array(-225.025, 77, 224.975, 77, 224.975, 140, -225.025, 140)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -3425,10 +3633,10 @@ visible = false
 [node name="Frame 1035" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1035" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1035"]
 position = Vector2(1.65, -116)
 scale = Vector2(1.00003, 0.999908)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Peaches Castle (Movie).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3444,10 +3652,10 @@ brightness = 0.0
 [node name="Frame 1070" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1070" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1070"]
 position = Vector2(1.65, -116)
 scale = Vector2(1.00003, 0.999908)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Peaches Castle (Movie).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3463,10 +3671,10 @@ brightness = 0.0
 [node name="Frame 1103" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1103" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1103"]
 position = Vector2(3.65, -46)
 scale = Vector2(0.750031, 0.749939)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Peaches Castle (Movie).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3482,9 +3690,9 @@ brightness = 0.0
 [node name="Frame 1104" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1104" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1104"]
 scale = Vector2(1.21094, 1.19986)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3500,10 +3708,10 @@ brightness = 0.0
 [node name="Frame 1173" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1173" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1173"]
 position = Vector2(180.45, -3.55)
 scale = Vector2(0.25, 0.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Bomb-omb Battle Field Mountain.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3519,10 +3727,10 @@ brightness = 0.0
 [node name="Frame 1195" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1195" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1195"]
 position = Vector2(-29.55, -3.55)
 scale = Vector2(0.25, 0.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Bomb-omb Battle Field Mountain.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3538,10 +3746,10 @@ brightness = 0.0
 [node name="Frame 1196" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1196" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1196"]
 position = Vector2(-67.9, 115.05)
 scale = Vector2(0.25, 0.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Snowman Course.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3557,10 +3765,10 @@ brightness = 0.0
 [node name="Frame 1218" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1218" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1218"]
 position = Vector2(-297.9, 115.05)
 scale = Vector2(0.25, 0.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Snowman Course.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3576,10 +3784,10 @@ brightness = 0.0
 [node name="Frame 1219" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1219" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1219"]
 position = Vector2(-214.25, 52.1)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Title Screen Animation Hazy Thing.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3595,10 +3803,10 @@ brightness = 0.0
 [node name="Frame 1235" type="Node2D" parent="Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1235" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background/Frame 1235"]
 position = Vector2(-394.25, 52.1)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Title Screen Animation Hazy Thing.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3618,9 +3826,9 @@ brightness = 0.0
 [node name="Frame 1085" type="Node2D" parent="@Close Background@52690"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="@Close Background@52690/Frame 1085" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="@Close Background@52690/Frame 1085"]
 position = Vector2(5, 39.95)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/transparent Bowser Image.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3636,10 +3844,10 @@ brightness = 0.0
 [node name="Frame 1102" type="Node2D" parent="@Close Background@52690"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="@Close Background@52690/Frame 1102" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="@Close Background@52690/Frame 1102"]
 position = Vector2(5, -40.05)
 scale = Vector2(3, 3)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/transparent Bowser Image.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3668,7 +3876,7 @@ visible = false
 [node name="@@52685" type="Sprite2D" parent="@Mario@52684/Frame 1035"]
 texture_filter = 1
 position = Vector2(-7.65, 31.35)
-texture = ExtResource("8_rj6di")
+texture = ExtResource("8_ipohi")
 centered = false
 
 [node name="Frame 1070" type="Node2D" parent="@Mario@52684"]
@@ -3677,7 +3885,7 @@ visible = false
 [node name="@@52686" type="Sprite2D" parent="@Mario@52684/Frame 1070"]
 texture_filter = 1
 position = Vector2(-9.65, 33.35)
-texture = ExtResource("9_g7r1m")
+texture = ExtResource("9_y3tp4")
 centered = false
 
 [node name="Frame 1084" type="Node2D" parent="@Mario@52684"]
@@ -3687,7 +3895,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-19.65, -22.65)
 scale = Vector2(2, 2)
-texture = ExtResource("9_g7r1m")
+texture = ExtResource("9_y3tp4")
 centered = false
 
 [node name="Frame 1085" type="Node2D" parent="@Mario@52684"]
@@ -3697,7 +3905,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-21, -24)
 scale = Vector2(2, 2)
-texture = ExtResource("10_1vutl")
+texture = ExtResource("10_o55cm")
 centered = false
 
 [node name="Frame 1103" type="Node2D" parent="@Mario@52684"]
@@ -3707,7 +3915,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-21, -4)
 scale = Vector2(2, 2)
-texture = ExtResource("10_1vutl")
+texture = ExtResource("10_o55cm")
 centered = false
 
 [node name="Frame 1104" type="Node2D" parent="@Mario@52684"]
@@ -3726,10 +3934,10 @@ visible = false
 [node name="Group" type="Node2D" parent="Layer 20/Frame 1035"]
 position = Vector2(40.5, -14.1)
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 20/Frame 1035/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 20/Frame 1035/Group"]
 position = Vector2(0, -13.1)
 scale = Vector2(3.19995, 3.19995)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3742,12 +3950,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52678" type="Node2D" parent="Layer 20/Frame 1035/Group" instance=ExtResource("1_gpm35")]
+[node name="AS2" type="Node" parent="Layer 20/Frame 1035/Group/DOMSymbolInstance"]
+script = SubResource("GDScript_y3nm5")
+
+[node name="@DOMSymbolInstance@52678" type="Node2D" parent="Layer 20/Frame 1035/Group"]
 position = Vector2(0, -13.1)
 rotation = -0.785377
 scale = Vector2(2, 2.00005)
 skew = -2.16961e-05
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3757,14 +3968,17 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 1, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 20/Frame 1035/Group/@DOMSymbolInstance@52678"]
+script = SubResource("GDScript_s6upg")
 
 [node name="@@52679" type="Sprite2D" parent="Layer 20/Frame 1035"]
 texture_filter = 1
 position = Vector2(-24, -45.1)
 scale = Vector2(2, 2)
-texture = ExtResource("11_5bwqt")
+texture = ExtResource("11_0om75")
 centered = false
 
 [node name="Frame 1085" type="Node2D" parent="Layer 20"]
@@ -3776,10 +3990,10 @@ visible = false
 position = Vector2(3.25, -13.6)
 scale = Vector2(0.5, 0.5)
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 20/Frame 1085/Group/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 20/Frame 1085/Group/Group"]
 position = Vector2(-17, -13.1)
 scale = Vector2(1.59998, 1.59998)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3792,12 +4006,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52680" type="Node2D" parent="Layer 20/Frame 1085/Group/Group" instance=ExtResource("1_gpm35")]
+[node name="AS2" type="Node" parent="Layer 20/Frame 1085/Group/Group/DOMSymbolInstance"]
+script = SubResource("GDScript_pc3gm")
+
+[node name="@DOMSymbolInstance@52680" type="Node2D" parent="Layer 20/Frame 1085/Group/Group"]
 position = Vector2(-17, -13.1)
 rotation = -0.785377
 scale = Vector2(1, 1.00002)
 skew = -2.16961e-05
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3807,13 +4024,16 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 1, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 20/Frame 1085/Group/Group/@DOMSymbolInstance@52680"]
+script = SubResource("GDScript_ra52v")
 
 [node name="@@52681" type="Sprite2D" parent="Layer 20/Frame 1085/Group"]
 texture_filter = 1
 position = Vector2(-29, -29.1)
-texture = ExtResource("11_5bwqt")
+texture = ExtResource("11_0om75")
 centered = false
 
 [node name="Frame 1103" type="Node2D" parent="Layer 20"]
@@ -3826,10 +4046,10 @@ position = Vector2(0, 20)
 position = Vector2(3.25, 6.4)
 scale = Vector2(0.5, 0.5)
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 20/Frame 1103/Group/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 20/Frame 1103/Group/Group"]
 position = Vector2(-17, 6.9)
 scale = Vector2(1.59998, 1.59998)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3842,12 +4062,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@52682" type="Node2D" parent="Layer 20/Frame 1103/Group/Group" instance=ExtResource("1_gpm35")]
+[node name="AS2" type="Node" parent="Layer 20/Frame 1103/Group/Group/DOMSymbolInstance"]
+script = SubResource("GDScript_irpc2")
+
+[node name="@DOMSymbolInstance@52682" type="Node2D" parent="Layer 20/Frame 1103/Group/Group"]
 position = Vector2(-17, 6.9)
 rotation = -0.785377
 scale = Vector2(1, 1.00002)
 skew = -2.16961e-05
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3857,13 +4080,16 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 1, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 20/Frame 1103/Group/Group/@DOMSymbolInstance@52682"]
+script = SubResource("GDScript_yhthf")
 
 [node name="@@52683" type="Sprite2D" parent="Layer 20/Frame 1103/Group"]
 texture_filter = 1
 position = Vector2(-29, -9.1)
-texture = ExtResource("11_5bwqt")
+texture = ExtResource("11_0om75")
 centered = false
 
 [node name="Frame 1104" type="Node2D" parent="Layer 20"]
@@ -3879,9 +4105,9 @@ visible = false
 [node name="Frame 1035" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1035" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1035"]
 scale = Vector2(1.21094, 1.19986)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3897,9 +4123,9 @@ brightness = 0.0
 [node name="Frame 1046" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1046" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1046"]
 scale = Vector2(1.21094, 1.19986)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3918,9 +4144,9 @@ visible = false
 [node name="Frame 1173" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1173" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1173"]
 scale = Vector2(1.21094, 1.19986)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3936,9 +4162,9 @@ brightness = 0.0
 [node name="Frame 1184" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1184" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1184"]
 scale = Vector2(1.21094, 1.19986)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3954,9 +4180,9 @@ brightness = 0.0
 [node name="Frame 1195" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1195" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1195"]
 scale = Vector2(1.21094, 1.19986)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Cloud Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3972,8 +4198,8 @@ brightness = 0.0
 [node name="Frame 1196" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1196" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1196"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3989,8 +4215,8 @@ brightness = 0.0
 [node name="Frame 1207" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1207" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1207"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4006,8 +4232,8 @@ brightness = 0.0
 [node name="Frame 1218" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1218" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1218"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/2 - Snowman's Land/2-1 BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4023,8 +4249,8 @@ brightness = 0.0
 [node name="Frame 1219" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1219" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1219"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Cave BG (Movie) Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4040,8 +4266,8 @@ brightness = 0.0
 [node name="Frame 1227" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1227" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1227"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Cave BG (Movie) Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4057,8 +4283,8 @@ brightness = 0.0
 [node name="Frame 1235" type="Node2D" parent="Background transition"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1235" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Background transition/Frame 1235"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Cave BG (Movie) Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4078,9 +4304,9 @@ brightness = 0.0
 [node name="Frame 32" type="Node2D" parent="Close Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 32" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 32"]
 position = Vector2(-15.2, 198.7)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4096,9 +4322,9 @@ brightness = 0.0
 [node name="Frame 37" type="Node2D" parent="Close Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 37" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 37"]
 position = Vector2(-15.2, 98.7)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4114,9 +4340,9 @@ brightness = 0.0
 [node name="Frame 45" type="Node2D" parent="Close Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 45" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 45"]
 position = Vector2(-15.2, 78.7)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4132,9 +4358,9 @@ brightness = 0.0
 [node name="Frame 80" type="Node2D" parent="Close Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 80" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 80"]
 position = Vector2(-15.2, 63.7)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4150,9 +4376,9 @@ brightness = 0.0
 [node name="Frame 81" type="Node2D" parent="Close Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 81" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 81"]
 position = Vector2(-175.2, 33.7)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4168,9 +4394,9 @@ brightness = 0.0
 [node name="Frame 302" type="Node2D" parent="Close Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 302" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 302"]
 position = Vector2(84.8, -21.3)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4186,10 +4412,10 @@ brightness = 0.0
 [node name="Frame 339" type="Node2D" parent="Close Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 339" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 339"]
 position = Vector2(84.8, 168.7)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4235,9 +4461,9 @@ visible = false
 [node name="Frame 1104" type="Node2D" parent="Close Background"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1104" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1104"]
 position = Vector2(-15.2, 63.7)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4259,12 +4485,12 @@ rotation = 0.195367
 scale = Vector2(1.01939, 1)
 skew = -0.195367
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1173/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1173/Group"]
 position = Vector2(316.25, -6.55)
 rotation = 0.195372
 scale = Vector2(1.52909, 1.5)
 skew = -0.195372
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/1- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4283,7 +4509,7 @@ position = Vector2(233.4, -87.9)
 rotation = 0.195367
 scale = Vector2(0.980879, 0.757645)
 skew = -0.195367
-texture = ExtResource("12_x6qf5")
+texture = ExtResource("12_1ry1a")
 centered = false
 
 [node name="Frame 1184" type="Node2D" parent="Close Background"]
@@ -4291,10 +4517,10 @@ visible = false
 
 [node name="Group" type="Node2D" parent="Close Background/Frame 1184"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1184/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1184/Group"]
 position = Vector2(1, -12.85)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/1- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4311,7 +4537,7 @@ brightness = 0.0
 texture_filter = 1
 position = Vector2(-81.85, -77.8)
 scale = Vector2(0.962219, 0.757645)
-texture = ExtResource("12_x6qf5")
+texture = ExtResource("12_1ry1a")
 centered = false
 
 [node name="Frame 1195" type="Node2D" parent="Close Background"]
@@ -4323,12 +4549,12 @@ rotation = -0.17388
 scale = Vector2(0.687506, 1)
 skew = 0.17388
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1195/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1195/Group"]
 position = Vector2(-289.65, -8.05)
 rotation = -0.173886
 scale = Vector2(1.03127, 1.5)
 skew = 0.173886
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/1- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4347,7 +4573,7 @@ position = Vector2(-330.85, -61)
 rotation = -0.173894
 scale = Vector2(0.481613, 0.700516)
 skew = 0.173894
-texture = ExtResource("12_x6qf5")
+texture = ExtResource("12_1ry1a")
 centered = false
 
 [node name="Frame 1196" type="Node2D" parent="Close Background"]
@@ -4359,12 +4585,12 @@ rotation = 0.256078
 scale = Vector2(1.08967, 1.5)
 skew = -0.256078
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1196/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1196/Group"]
 position = Vector2(280, 15.05)
 rotation = 0.256078
 scale = Vector2(1.08967, 1.5)
 skew = -0.256078
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/2- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4383,7 +4609,7 @@ position = Vector2(230.35, -52.4)
 rotation = 0.256069
 scale = Vector2(0.611003, 0.647537)
 skew = -0.256069
-texture = ExtResource("12_x6qf5")
+texture = ExtResource("12_1ry1a")
 centered = false
 
 [node name="Frame 1207" type="Node2D" parent="Close Background"]
@@ -4393,10 +4619,10 @@ visible = false
 position = Vector2(-564, 55.9)
 scale = Vector2(1.5, 1.5)
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1207/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1207/Group"]
 position = Vector2(0, 0.05)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/2- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4413,7 +4639,7 @@ brightness = 0.0
 texture_filter = 1
 position = Vector2(-70.65, -54.4)
 scale = Vector2(0.84108, 0.647537)
-texture = ExtResource("12_x6qf5")
+texture = ExtResource("12_1ry1a")
 centered = false
 
 [node name="Frame 1218" type="Node2D" parent="Close Background"]
@@ -4425,12 +4651,12 @@ rotation = -0.305962
 scale = Vector2(1.12775, 1.5)
 skew = 0.305962
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1218/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1218/Group"]
 position = Vector2(-300, 15.05)
 rotation = -0.305962
 scale = Vector2(1.12775, 1.5)
 skew = 0.305962
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/2- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4449,7 +4675,7 @@ position = Vector2(-350.65, -23.4)
 rotation = -0.30597
 scale = Vector2(0.632351, 0.647537)
 skew = 0.30597
-texture = ExtResource("12_x6qf5")
+texture = ExtResource("12_1ry1a")
 centered = false
 
 [node name="Frame 1219" type="Node2D" parent="Close Background"]
@@ -4457,12 +4683,12 @@ visible = false
 
 [node name="Group" type="Node2D" parent="Close Background/Frame 1219"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1219/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1219/Group"]
 position = Vector2(292, 19.05)
 rotation = 0.157116
 scale = Vector2(1.28227, 1.30371)
 skew = -0.157116
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/3-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4481,7 +4707,7 @@ position = Vector2(227.55, -79.6)
 rotation = 0.157131
 scale = Vector2(0.752774, 0.829117)
 skew = -0.157131
-texture = ExtResource("12_x6qf5")
+texture = ExtResource("12_1ry1a")
 centered = false
 
 [node name="Frame 1227" type="Node2D" parent="Close Background"]
@@ -4493,12 +4719,12 @@ rotation = -0.143134
 scale = Vector2(1.01033, 1)
 skew = 0.143134
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1227/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1227/Group"]
 position = Vector2(2, 18.8)
 rotation = 0.0143002
 scale = Vector2(1.26661, 1.30371)
 skew = -0.0143002
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/3-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4517,7 +4743,7 @@ position = Vector2(-62.45, -70.55)
 rotation = 0.014324
 scale = Vector2(0.743576, 0.829117)
 skew = -0.0143241
-texture = ExtResource("12_x6qf5")
+texture = ExtResource("12_1ry1a")
 centered = false
 
 [node name="Frame 1235" type="Node2D" parent="Close Background"]
@@ -4529,12 +4755,12 @@ rotation = -0.380777
 scale = Vector2(1.07715, 1)
 skew = 0.380777
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1235/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Close Background/Frame 1235/Group"]
 position = Vector2(-288, 38.2)
 rotation = -0.237333
 scale = Vector2(1.303, 1.30371)
 skew = 0.237333
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/3-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4553,7 +4779,7 @@ position = Vector2(-352.45, -34.65)
 rotation = -0.237325
 scale = Vector2(0.764941, 0.829117)
 skew = 0.237325
-texture = ExtResource("12_x6qf5")
+texture = ExtResource("12_1ry1a")
 centered = false
 
 [node name="Mario" type="Node2D" parent="."]
@@ -4572,17 +4798,32 @@ visible = false
 [node name="Frame 914" type="Node2D" parent="Mario"]
 visible = false
 
+[node name="AS2" type="Node" parent="Mario/Frame 914"]
+script = SubResource("GDScript_rw5p8")
+
 [node name="Frame 943" type="Node2D" parent="Mario"]
 visible = false
+
+[node name="AS2" type="Node" parent="Mario/Frame 943"]
+script = SubResource("GDScript_rv2bq")
 
 [node name="Frame 972" type="Node2D" parent="Mario"]
 visible = false
 
+[node name="AS2" type="Node" parent="Mario/Frame 972"]
+script = SubResource("GDScript_eh32f")
+
 [node name="Frame 1001" type="Node2D" parent="Mario"]
 visible = false
 
+[node name="AS2" type="Node" parent="Mario/Frame 1001"]
+script = SubResource("GDScript_e83e2")
+
 [node name="Frame 1021" type="Node2D" parent="Mario"]
 visible = false
+
+[node name="AS2" type="Node" parent="Mario/Frame 1021"]
+script = SubResource("GDScript_1pa77")
 
 [node name="Frame 1035" type="Node2D" parent="Mario"]
 visible = false
@@ -4590,7 +4831,7 @@ visible = false
 [node name="@@52668" type="Sprite2D" parent="Mario/Frame 1035"]
 texture_filter = 1
 position = Vector2(-7.65, 31.35)
-texture = ExtResource("8_rj6di")
+texture = ExtResource("8_ipohi")
 centered = false
 
 [node name="Frame 1069" type="Node2D" parent="Mario"]
@@ -4602,9 +4843,9 @@ visible = false
 [node name="Frame 1173" type="Node2D" parent="Mario"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Mario/Frame 1173" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Mario/Frame 1173"]
 position = Vector2(0, -23)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Title Screen/Title Screen Mario Spinning.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4620,9 +4861,9 @@ brightness = 0.0
 [node name="Frame 1235" type="Node2D" parent="Mario"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Mario/Frame 1235" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Mario/Frame 1235"]
 position = Vector2(0, 47)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Title Screen/Title Screen Mario Spinning.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4650,10 +4891,10 @@ position = Vector2(-160.95, 7)
 [node name="Group" type="Node2D" parent="Level/Frame 81/Group/Group"]
 position = Vector2(-160.95, 7)
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Level/Frame 81/Group/Group/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Level/Frame 81/Group/Group/Group"]
 position = Vector2(-405.8, 112)
 scale = Vector2(0.500015, 0.5)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Peaches Castle (Movie).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4677,10 +4918,10 @@ position = Vector2(657.9, -60.9)
 [node name="Group" type="Node2D" parent="Level/Frame 302/Group/Group"]
 position = Vector2(657.9, -60.9)
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Level/Frame 302/Group/Group/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Level/Frame 302/Group/Group/Group"]
 position = Vector2(413.05, 44.1)
 scale = Vector2(0.500015, 0.5)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Peaches Castle (Movie).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4708,10 +4949,10 @@ scale = Vector2(2, 2)
 position = Vector2(1478.6, -144.75)
 scale = Vector2(2, 2)
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Level/Frame 339/Group/Group/Group" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Level/Frame 339/Group/Group/Group"]
 position = Vector2(988.9, 65.25)
 scale = Vector2(1.00003, 1)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Peaches Castle (Movie).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4743,10 +4984,10 @@ visible = false
 [node name="Frame 340" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 340" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 340"]
 position = Vector2(108, 103.95)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4762,10 +5003,10 @@ brightness = 0.0
 [node name="Frame 528" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 528" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 528"]
 position = Vector2(788.15, 87)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4781,10 +5022,10 @@ brightness = 0.0
 [node name="Frame 533" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 533" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 533"]
 position = Vector2(302.1, 51)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4800,10 +5041,10 @@ brightness = 0.0
 [node name="Frame 547" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 547" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 547"]
 position = Vector2(754.25, -89)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4819,10 +5060,10 @@ brightness = 0.0
 [node name="Frame 559" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 559" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 559"]
 position = Vector2(1092.05, 70.6)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4838,10 +5079,10 @@ brightness = 0.0
 [node name="Frame 583" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 583" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 583"]
 position = Vector2(-57.9, 12.95)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4857,10 +5098,10 @@ brightness = 0.0
 [node name="Frame 660" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 660" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 660"]
 position = Vector2(-5.45, 623.3)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4876,10 +5117,10 @@ brightness = 0.0
 [node name="Frame 665" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 665" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 665"]
 position = Vector2(4.15, 673.3)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4895,10 +5136,10 @@ brightness = 0.0
 [node name="Frame 671" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 671" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 671"]
 position = Vector2(42.1, 706.95)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4914,10 +5155,10 @@ brightness = 0.0
 [node name="Frame 791" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 791" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 791"]
 position = Vector2(872.05, 651.05)
 scale = Vector2(1.25, 1.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4933,10 +5174,10 @@ brightness = 0.0
 [node name="Frame 794" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 794" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 794"]
 position = Vector2(866.7, 744.7)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4952,10 +5193,10 @@ brightness = 0.0
 [node name="Frame 806" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 806" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 806"]
 position = Vector2(1206.55, 690.85)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4971,10 +5212,10 @@ brightness = 0.0
 [node name="Frame 818" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 818" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 818"]
 position = Vector2(1456.45, 908.65)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -4990,10 +5231,10 @@ brightness = 0.0
 [node name="Frame 829" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 829" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 829"]
 position = Vector2(1456.45, 908.65)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5009,10 +5250,10 @@ brightness = 0.0
 [node name="Frame 837" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 837" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 837"]
 position = Vector2(1456.45, 908.65)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5028,10 +5269,10 @@ brightness = 0.0
 [node name="Frame 842" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 842" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 842"]
 position = Vector2(1456.45, 908.65)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5047,10 +5288,10 @@ brightness = -1.0
 [node name="Frame 844" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 844" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 844"]
 position = Vector2(80.05, 0.05)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5066,10 +5307,10 @@ brightness = 0.0
 [node name="Frame 882" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 882" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 882"]
 position = Vector2(581.7, 0.05)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5085,10 +5326,10 @@ brightness = 0.0
 [node name="Frame 883" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 883" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 883"]
 position = Vector2(851.75, -498.85)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5104,10 +5345,10 @@ brightness = 0.0
 [node name="Frame 912" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 912" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 912"]
 position = Vector2(1478.25, -554.65)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5123,10 +5364,10 @@ brightness = 0.0
 [node name="Frame 913" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 913" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 913"]
 position = Vector2(1309.55, -504.85)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5142,10 +5383,10 @@ brightness = 0.0
 [node name="Frame 914" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 914" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 914"]
 position = Vector2(1221.6, -51)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5161,10 +5402,10 @@ brightness = 0.0
 [node name="Frame 942" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 942" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 942"]
 position = Vector2(709.75, 5)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5180,10 +5421,10 @@ brightness = 0.0
 [node name="Frame 943" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 943" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 943"]
 position = Vector2(188, -27)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5199,10 +5440,10 @@ brightness = 0.0
 [node name="Frame 971" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 971" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 971"]
 position = Vector2(487.9, -150.9)
 scale = Vector2(1.25, 1.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5218,10 +5459,10 @@ brightness = 0.0
 [node name="Frame 972" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 972" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 972"]
 position = Vector2(1311.8, -1610.7)
 scale = Vector2(1.25, 1.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5237,10 +5478,10 @@ brightness = 0.0
 [node name="Frame 1000" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1000" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1000"]
 position = Vector2(1259.55, -2319.05)
 scale = Vector2(1.25, 1.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5256,10 +5497,10 @@ brightness = 0.0
 [node name="Frame 1001" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1001" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1001"]
 position = Vector2(1341.6, 137)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5275,10 +5516,10 @@ brightness = 0.0
 [node name="Frame 1020" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1020" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1020"]
 position = Vector2(1101.6, 101)
 scale = Vector2(0.625, 0.625)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5294,10 +5535,10 @@ brightness = 0.0
 [node name="Frame 1021" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1021" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1021"]
 position = Vector2(-975, 259.05)
 scale = Vector2(1.25, 1.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5313,10 +5554,10 @@ brightness = 0.0
 [node name="Frame 1034" type="Node2D" parent="Layer 16"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1034" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 16/Frame 1034"]
 position = Vector2(-975, 179.05)
 scale = Vector2(1.25, 1.25)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/CreditsStageCam.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5359,9 +5600,9 @@ visible = false
 [node name="Frame 64" type="Node2D" parent="Start Clip"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Start Clip/Frame 64" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Start Clip/Frame 64"]
 position = Vector2(0, 100.65)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Start Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5377,9 +5618,9 @@ brightness = 0.0
 [node name="Frame 1173" type="Node2D" parent="Start Clip"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Start Clip/Frame 1173" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Start Clip/Frame 1173"]
 position = Vector2(0, 100.65)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Menu/Start Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5409,10 +5650,10 @@ visible = false
 [node name="Frame 43" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 43" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 43"]
 position = Vector2(0, -10)
 scale = Vector2(0.0313568, 0.0324097)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5428,10 +5669,10 @@ brightness = 0.0
 [node name="Frame 52" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 52" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 52"]
 position = Vector2(0, -10)
 scale = Vector2(1.12038, 1.12038)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5447,10 +5688,10 @@ brightness = 0.0
 [node name="Frame 54" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 54" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 54"]
 position = Vector2(0, -10)
 scale = Vector2(1.05997, 1.05997)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5466,10 +5707,10 @@ brightness = 0.0
 [node name="Frame 57" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 57" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 57"]
 position = Vector2(0, -10)
 scale = Vector2(0.97937, 0.97937)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5485,10 +5726,10 @@ brightness = 0.0
 [node name="Frame 59" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 59" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 59"]
 position = Vector2(0, -10)
 scale = Vector2(0.988205, 0.988205)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5504,9 +5745,9 @@ brightness = 0.0
 [node name="Frame 62" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 62" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 62"]
 position = Vector2(0, -10)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5522,9 +5763,9 @@ brightness = 0.0
 [node name="Frame 302" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 302" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 302"]
 position = Vector2(0, -10)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5540,10 +5781,10 @@ brightness = 0.0
 [node name="Frame 323" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 323" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 323"]
 position = Vector2(-138.95, -89)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5559,9 +5800,9 @@ brightness = 0.0
 [node name="Frame 1104" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 1104" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 1104"]
 position = Vector2(0, -10)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5577,10 +5818,10 @@ brightness = 0.0
 [node name="Frame 1173" type="Node2D" parent="Title"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 1173" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Title/Frame 1173"]
 position = Vector2(-138.95, -89)
 scale = Vector2(0.375, 0.375)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Xtra/Title&#058 &#034Super Mario Sunshine 128&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5600,9 +5841,9 @@ brightness = 0.0
 [node name="Frame 43" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 43" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 43"]
 position = Vector2(0, -30)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Light Effects (Clip).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5618,9 +5859,9 @@ brightness = 0.0
 [node name="Frame 52" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 52" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 52"]
 position = Vector2(0, -30)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Light Effects (Clip).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5636,9 +5877,9 @@ brightness = 0.0
 [node name="Frame 302" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 302" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 302"]
 position = Vector2(0, -30)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Light Effects (Clip).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5654,9 +5895,9 @@ brightness = 0.0
 [node name="Frame 323" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 323" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 323"]
 position = Vector2(-142.95, -105)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Light Effects (Clip).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5675,9 +5916,9 @@ visible = false
 [node name="Frame 1104" type="Node2D" parent="Layer 8"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 1104" instance=ExtResource("1_gpm35")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 8/Frame 1104"]
 position = Vector2(0, -30)
-script = ExtResource("2_offe0")
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Light Effects Folder/Light Effects (Clip).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5700,20 +5941,35 @@ visible = false
 [node name="Frame 340" type="Node2D" parent="Layer 13"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 13/Frame 340"]
+script = SubResource("GDScript_47gcv")
+
 [node name="Frame 583" type="Node2D" parent="Layer 13"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 13/Frame 583"]
+script = SubResource("GDScript_dv6rl")
 
 [node name="Frame 843" type="Node2D" parent="Layer 13"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 13/Frame 843"]
+script = SubResource("GDScript_5mvpb")
+
 [node name="Frame 883" type="Node2D" parent="Layer 13"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 13/Frame 883"]
+script = SubResource("GDScript_62vfi")
 
 [node name="Frame 914" type="Node2D" parent="Layer 13"]
 visible = false
 
 [node name="Frame 1104" type="Node2D" parent="Layer 13"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 13/Frame 1104"]
+script = SubResource("GDScript_p5wqw")
 
 [node name="Frame 1173" type="Node2D" parent="Layer 13"]
 visible = false
@@ -5725,8 +5981,8 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Top Stuff"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Top Stuff/Frame 0" instance=ExtResource("1_gpm35")]
-script = ExtResource("2_offe0")
+[node name="DOMSymbolInstance" type="Node2D" parent="Top Stuff/Frame 0"]
+script = ExtResource("2_pbw5i")
 path = "res://sm63_godot/Effects/Transitions/Star In.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -5748,6 +6004,9 @@ visible = false
 [node name="Frame 1035" type="Node2D" parent="Top Stuff"]
 visible = false
 
+[node name="AS2" type="Node" parent="Top Stuff/Frame 1035"]
+script = SubResource("GDScript_0maii")
+
 [node name="Frame 1070" type="Node2D" parent="Top Stuff"]
 visible = false
 
@@ -5756,6 +6015,9 @@ visible = false
 
 [node name="Frame 1173" type="Node2D" parent="Top Stuff"]
 visible = false
+
+[node name="AS2" type="Node" parent="Top Stuff/Frame 1173"]
+script = SubResource("GDScript_ih6ey")
 
 [node name="Frame 1179" type="Node2D" parent="Top Stuff"]
 visible = false
@@ -5769,6 +6031,9 @@ visible = false
 [node name="Frame 2386" type="Node2D" parent="Top Stuff"]
 visible = false
 
+[node name="AS2" type="Node" parent="Top Stuff/Frame 2386"]
+script = SubResource("GDScript_buflt")
+
 [node name="Layer 14" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 14"]
@@ -5779,5 +6044,6 @@ position = Vector2(-225, -150)
 [node name="Shape" type="Node2D" parent="Layer 14/Frame 0/Group"]
 
 [node name="@@52667" type="Polygon2D" parent="Layer 14/Frame 0/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-75, -37.5, 525, -37.5, 525, -0.025, -75, -0.025, -75, -0.025, 0, -0.025, 0, 299.975, -75, 299.975, 450, -0.025, 525, -0.025, 525, 299.975, 450, 299.975, -75, 299.975, 525, 299.975, 525, 337.5, -75, 337.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15)])

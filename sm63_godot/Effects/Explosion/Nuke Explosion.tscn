@@ -1,17 +1,17 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 1.png" id="1_oath8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 2.png" id="2_31giv"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 3.png" id="3_lngqs"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 4.png" id="4_6ghi2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 5.png" id="5_lfe0i"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 6.png" id="6_lwk75"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 7.png" id="7_guvwt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 8.png" id="8_yjmaj"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="9_uftff"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="10_qfo36"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_homvc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 1.png" id="2_py78n"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 2.png" id="3_46boc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 3.png" id="4_jxoky"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 4.png" id="5_3ndql"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 5.png" id="6_tla8a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 6.png" id="7_pfiim"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 7.png" id="8_jr6kp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Explosion/Explosions Bits/Nuke Explosion - 8.png" id="9_7amdj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="10_3c8uh"]
 
-[sub_resource type="Animation" id="Animation_078pd"]
+[sub_resource type="Animation" id="Animation_hhhml"]
 length = 0.566667
 loop_mode = 1
 tracks/0/type = "value"
@@ -267,16 +267,38 @@ tracks/20/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6a4io"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8jo87"]
 _data = {
-"Default": SubResource("Animation_078pd")
+"Default": SubResource("Animation_hhhml")
 }
 
+[sub_resource type="GDScript" id="GDScript_0nalg"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_5rw7b"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = null;
+# "
+
 [node name="Nuke Explosion" type="Node2D"]
+script = ExtResource("1_homvc")
+source_xml = "res://sm63/LIBRARY/Effects/Explosion/Nuke Explosion.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_6a4io")
+"Timeline": SubResource("AnimationLibrary_8jo87")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -286,7 +308,7 @@ libraries = {
 [node name="@@48594" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8.5, -8.5)
-texture = ExtResource("1_oath8")
+texture = ExtResource("2_py78n")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -295,7 +317,7 @@ visible = false
 [node name="@@48595" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-20.5, -20.5)
-texture = ExtResource("2_31giv")
+texture = ExtResource("3_46boc")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -304,7 +326,7 @@ visible = false
 [node name="@@48596" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-32.5, -33)
-texture = ExtResource("3_lngqs")
+texture = ExtResource("4_jxoky")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -313,7 +335,7 @@ visible = false
 [node name="@@48597" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-45, -45)
-texture = ExtResource("4_6ghi2")
+texture = ExtResource("5_3ndql")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
@@ -322,7 +344,7 @@ visible = false
 [node name="@@48598" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(-55.5, -60)
-texture = ExtResource("5_lfe0i")
+texture = ExtResource("6_tla8a")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
@@ -331,7 +353,7 @@ visible = false
 [node name="@@48599" type="Sprite2D" parent="Layer 1/Frame 10"]
 texture_filter = 1
 position = Vector2(-58.5, -63)
-texture = ExtResource("6_lwk75")
+texture = ExtResource("7_pfiim")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -340,7 +362,7 @@ visible = false
 [node name="@@48600" type="Sprite2D" parent="Layer 1/Frame 12"]
 texture_filter = 1
 position = Vector2(-58.5, -63)
-texture = ExtResource("7_guvwt")
+texture = ExtResource("8_jr6kp")
 centered = false
 
 [node name="Frame 14" type="Node2D" parent="Layer 1"]
@@ -349,7 +371,7 @@ visible = false
 [node name="@@48601" type="Sprite2D" parent="Layer 1/Frame 14"]
 texture_filter = 1
 position = Vector2(-3, -7.5)
-texture = ExtResource("8_yjmaj")
+texture = ExtResource("9_7amdj")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 1"]
@@ -359,10 +381,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("9_uftff")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, 7.55)
 scale = Vector2(0.265427, 0.26564)
-script = ExtResource("10_qfo36")
+script = ExtResource("10_3c8uh")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -381,10 +403,10 @@ visible = false
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2" instance=ExtResource("9_uftff")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2"]
 position = Vector2(0, 17.5)
 scale = Vector2(0.619324, 0.619827)
-script = ExtResource("10_qfo36")
+script = ExtResource("10_3c8uh")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -403,10 +425,10 @@ visible = false
 [node name="Frame 4" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4" instance=ExtResource("9_uftff")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4"]
 position = Vector2(0, 30.4)
 scale = Vector2(1.15019, 1.15028)
-script = ExtResource("10_qfo36")
+script = ExtResource("10_3c8uh")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -425,10 +447,10 @@ visible = false
 [node name="Frame 6" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 6" instance=ExtResource("9_uftff")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 6"]
 position = Vector2(0, 37.85)
 scale = Vector2(1.41563, 1.41574)
-script = ExtResource("10_qfo36")
+script = ExtResource("10_3c8uh")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -447,10 +469,10 @@ visible = false
 [node name="Frame 8" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 8" instance=ExtResource("9_uftff")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 8"]
 position = Vector2(0, 45.7)
 scale = Vector2(1.76955, 1.76968)
-script = ExtResource("10_qfo36")
+script = ExtResource("10_3c8uh")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -470,5 +492,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_0nalg")
+
 [node name="Frame 16" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 16"]
+script = SubResource("GDScript_5rw7b")

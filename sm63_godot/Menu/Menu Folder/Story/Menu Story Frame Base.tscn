@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Wood Block.png" id="1_5nlvt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_l1jpi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Wood Block.png" id="2_c84il"]
 
-[sub_resource type="Animation" id="Animation_hahu6"]
+[sub_resource type="Animation" id="Animation_1p4bi"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gocq2"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pn7ld"]
 _data = {
-"Default": SubResource("Animation_hahu6")
+"Default": SubResource("Animation_1p4bi")
 }
 
 [node name="Menu Story Frame Base" type="Node2D"]
+script = ExtResource("1_l1jpi")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Story/Menu Story Frame Base.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gocq2")
+"Timeline": SubResource("AnimationLibrary_pn7ld")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@51925" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_5nlvt")
+texture = ExtResource("2_c84il")
 texture_offset = Vector2(140.195, 2.96599)
 texture_scale = Vector2(0.666666, 0.666666)
 texture_rotation = -0.2618

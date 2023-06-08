@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 1.png" id="1_yvuwp"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 2.png" id="2_5jpv3"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 3.png" id="3_afi3x"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 4.png" id="4_xxaww"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 5.png" id="5_ig1i6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 6.png" id="6_nhg7q"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 7.png" id="7_q1u31"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 8.png" id="8_v03om"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_yeaqw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 1.png" id="2_647p1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 2.png" id="3_lnb7g"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 3.png" id="4_spjt2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 4.png" id="5_8wah2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 5.png" id="6_4wjmr"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 6.png" id="7_fyshr"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 7.png" id="8_ukhk8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Walk - 8.png" id="9_6fh2l"]
 
-[sub_resource type="Animation" id="Animation_yy3rm"]
+[sub_resource type="Animation" id="Animation_dg048"]
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -121,16 +122,32 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tewy1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gxcqr"]
 _data = {
-"Default": SubResource("Animation_yy3rm")
+"Default": SubResource("Animation_dg048")
 }
 
+[sub_resource type="GDScript" id="GDScript_n7xdw"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Koopa Walk Animation" type="Node2D"]
+script = ExtResource("1_yeaqw")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa Walk Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tewy1")
+"Timeline": SubResource("AnimationLibrary_gxcqr")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -140,7 +157,7 @@ libraries = {
 [node name="@@50693" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-11, -15)
-texture = ExtResource("1_yvuwp")
+texture = ExtResource("2_647p1")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -149,7 +166,7 @@ visible = false
 [node name="@@50694" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-11.5, -14.5)
-texture = ExtResource("2_5jpv3")
+texture = ExtResource("3_lnb7g")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -158,7 +175,7 @@ visible = false
 [node name="@@50695" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-11.5, -13.5)
-texture = ExtResource("3_afi3x")
+texture = ExtResource("4_spjt2")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -167,7 +184,7 @@ visible = false
 [node name="@@50696" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-11.5, -14.5)
-texture = ExtResource("4_xxaww")
+texture = ExtResource("5_8wah2")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -176,7 +193,7 @@ visible = false
 [node name="@@50697" type="Sprite2D" parent="Layer 1/Frame 12"]
 texture_filter = 1
 position = Vector2(-11.5, -15)
-texture = ExtResource("5_ig1i6")
+texture = ExtResource("6_4wjmr")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
@@ -185,7 +202,7 @@ visible = false
 [node name="@@50698" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-11.5, -15.5)
-texture = ExtResource("6_nhg7q")
+texture = ExtResource("7_fyshr")
 centered = false
 
 [node name="Frame 18" type="Node2D" parent="Layer 1"]
@@ -194,7 +211,7 @@ visible = false
 [node name="@@50699" type="Sprite2D" parent="Layer 1/Frame 18"]
 texture_filter = 1
 position = Vector2(-11.5, -13.5)
-texture = ExtResource("7_q1u31")
+texture = ExtResource("8_ukhk8")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -203,9 +220,12 @@ visible = false
 [node name="@@50700" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(-11, -14)
-texture = ExtResource("8_v03om")
+texture = ExtResource("9_6fh2l")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_n7xdw")

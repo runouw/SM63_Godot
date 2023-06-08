@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_xls40"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xs1mj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lvvpo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_grljp"]
 
-[sub_resource type="Animation" id="Animation_f3uyp"]
+[sub_resource type="Animation" id="Animation_asxxd"]
 length = 0.233333
 loop_mode = 1
 tracks/0/type = "value"
@@ -115,24 +115,86 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qi0cr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qrace"]
 _data = {
-"Default": SubResource("Animation_f3uyp")
+"Default": SubResource("Animation_asxxd")
 }
 
+[sub_resource type="GDScript" id="GDScript_u6lgq"]
+script/source = "extends Node
+# frame = random(6)+1;
+# diff = random(5);
+# count = 0;
+# count2 = 0;
+# scale = random(40)+80;
+# maxxspeed = (diff/5)+0.4;
+# xspeed = maxxspeed;
+# waittime = random(25)+50;
+# num = random(2)+1;
+# if (num == 1) {
+# 	movedir = \"right\";
+# } else {
+# 	movedir = \"left\";
+# }
+# _yscale = scale;
+# _xscale = scale;
+# wave = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		// New Var
+# 		if (_root.BGquality == \"LOW\" || _root.Detailquality == \"LOW\") {
+# 			gotoAndStop(7);
+# 		} else {
+# 			gotoAndStop(frame);
+# 			wave += maxxspeed/5;
+# 			//
+# 			clip._y = Math.sin(wave)*5;
+# 			//
+# 			if (xspeed>0) {
+# 				_xscale = scale;
+# 			} else {
+# 				_xscale = -scale;
+# 			}
+# 			count++;
+# 			if (count>waittime) {
+# 				if (movedir == \"right\") {
+# 					movedir = \"left\";
+# 				} else {
+# 					movedir = \"right\";
+# 				}
+# 				count = 0;
+# 			}
+# 			if (movedir == \"right\") {
+# 				xspeed += 0.1;
+# 			} else {
+# 				xspeed -= 0.1;
+# 			}
+# 			xspeed = Math.max(-maxxspeed, xspeed);
+# 			xspeed = Math.min(maxxspeed, xspeed);
+# 			_x += xspeed;
+# 		}
+# 	}
+# };
+# "
+
 [node name="Butterfly Code" type="Node2D"]
+script = ExtResource("1_lvvpo")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Butterflies/Butterfly Code.xml"
+linkage = "ButterflyCode"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qi0cr")
+"Timeline": SubResource("AnimationLibrary_qrace")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_xls40")]
-script = ExtResource("2_xs1mj")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_grljp")
 path = "res://sm63_godot/Enemies/Normal/A-F/Butterflies/YI Butterfly Animation.tscn"
 red_multiplier = 0.5
 green_multiplier = 0.898438
@@ -148,8 +210,8 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_xls40")]
-script = ExtResource("2_xs1mj")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("2_grljp")
 path = "res://sm63_godot/Enemies/Normal/A-F/Butterflies/YI Butterfly Animation.tscn"
 red_multiplier = 0.898438
 green_multiplier = 1.0
@@ -165,8 +227,8 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_xls40")]
-script = ExtResource("2_xs1mj")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
+script = ExtResource("2_grljp")
 path = "res://sm63_godot/Enemies/Normal/A-F/Butterflies/YI Butterfly Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 0.699219
@@ -182,8 +244,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_xls40")]
-script = ExtResource("2_xs1mj")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
+script = ExtResource("2_grljp")
 path = "res://sm63_godot/Enemies/Normal/A-F/Butterflies/YI Butterfly Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 0.699219
@@ -199,8 +261,8 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_xls40")]
-script = ExtResource("2_xs1mj")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
+script = ExtResource("2_grljp")
 path = "res://sm63_godot/Enemies/Normal/A-F/Butterflies/YI Butterfly Animation.tscn"
 red_multiplier = 0.5
 green_multiplier = 1.0
@@ -216,8 +278,8 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_xls40")]
-script = ExtResource("2_xs1mj")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
+script = ExtResource("2_grljp")
 path = "res://sm63_godot/Enemies/Normal/A-F/Butterflies/YI Butterfly Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -236,6 +298,9 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_u6lgq")
 
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
 visible = false

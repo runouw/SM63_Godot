@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Flying - 2.png" id="1_fns8w"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Flying - 1.png" id="2_ht7wt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_c0qji"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Flying - 2.png" id="2_wajrx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Flying - 1.png" id="3_1qf04"]
 
-[sub_resource type="Animation" id="Animation_44k4p"]
+[sub_resource type="Animation" id="Animation_mpd5f"]
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,16 +44,32 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xw1nm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wpm7u"]
 _data = {
-"Default": SubResource("Animation_44k4p")
+"Default": SubResource("Animation_mpd5f")
 }
 
+[sub_resource type="GDScript" id="GDScript_fh3dl"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="9-07 Kamek Flying Idle" type="Node2D"]
+script = ExtResource("1_c0qji")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Kamek Flying Idle.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xw1nm")
+"Timeline": SubResource("AnimationLibrary_wpm7u")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -62,7 +79,7 @@ libraries = {
 [node name="@@41188" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-20.5, -12.65)
-texture = ExtResource("1_fns8w")
+texture = ExtResource("2_wajrx")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -71,9 +88,12 @@ visible = false
 [node name="@@41189" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-20.5, -12.65)
-texture = ExtResource("2_ht7wt")
+texture = ExtResource("3_1qf04")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_fh3dl")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_1jl20"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_a4smo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_bmp4q"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_dj6ql"]
 
-[sub_resource type="Animation" id="Animation_y0jg8"]
+[sub_resource type="Animation" id="Animation_4manu"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,26 +31,40 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtx8y"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ljt4u"]
 _data = {
-"Default": SubResource("Animation_y0jg8")
+"Default": SubResource("Animation_4manu")
 }
 
+[sub_resource type="GDScript" id="GDScript_nmcgj"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 3200;
+# 	polygons = 150;
+# 	WaterDeepness = 800;
+# }
+# "
+
 [node name="9-02 Water Clip" type="Node2D"]
+script = ExtResource("1_bmp4q")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Water Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wtx8y")
+"Timeline": SubResource("AnimationLibrary_ljt4u")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_1jl20")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-273, 126.95)
 scale = Vector2(1, 1.00278)
-script = ExtResource("2_a4smo")
+script = ExtResource("2_dj6ql")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -63,13 +77,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_nmcgj")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_1jl20")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 scale = Vector2(1, 0.999741)
-script = ExtResource("2_a4smo")
+script = ExtResource("2_dj6ql")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Wave.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

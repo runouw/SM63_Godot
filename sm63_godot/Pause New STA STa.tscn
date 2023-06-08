@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Yellow Shine.png" id="1_gf20h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_iyl5q"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Small Yellow Shine.png" id="2_qot7w"]
 
-[sub_resource type="Animation" id="Animation_3om7a"]
+[sub_resource type="Animation" id="Animation_wpbxc"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_opyfe"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jfhpy"]
 _data = {
-"Default": SubResource("Animation_3om7a")
+"Default": SubResource("Animation_wpbxc")
 }
 
 [node name="Pause New STA STa" type="Node2D"]
+script = ExtResource("1_iyl5q")
+source_xml = "res://sm63/LIBRARY/Pause New STA STa.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_opyfe")
+"Timeline": SubResource("AnimationLibrary_jfhpy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@13581" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-7, -7.5)
-texture = ExtResource("1_gf20h")
+texture = ExtResource("2_qot7w")
 centered = false

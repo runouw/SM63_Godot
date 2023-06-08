@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_2nmm3"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_kn2b8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_poy8n"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_irk3f"]
 
-[sub_resource type="Animation" id="Animation_8mpt3"]
+[sub_resource type="Animation" id="Animation_w8id1"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,25 +55,48 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yhlay"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lyjsg"]
 _data = {
-"Default": SubResource("Animation_8mpt3")
+"Default": SubResource("Animation_w8id1")
 }
 
+[sub_resource type="GDScript" id="GDScript_7cdcv"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 500;
+# 	polygons = 40;
+# 	rot = 90;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_jux1g"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 500;
+# 	polygons = 40;
+# 	rot = -90;
+# }
+# "
+
 [node name="5-7 Water" type="Node2D"]
+script = ExtResource("1_poy8n")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/5-7 Water.xml"
+linkage = "5-7Water"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_yhlay")
+"Timeline": SubResource("AnimationLibrary_lyjsg")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_2nmm3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-3.35, -31.25)
-script = ExtResource("2_kn2b8")
+script = ExtResource("2_irk3f")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -91,10 +114,10 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1(Mask)/Frame 0" instance=ExtResource("1_2nmm3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1(Mask)/Frame 0"]
 position = Vector2(-182.6, -389.2)
 rotation = 1.5708
-script = ExtResource("2_kn2b8")
+script = ExtResource("2_irk3f")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -107,13 +130,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1(Mask)/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_7cdcv")
+
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_2nmm3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(-3.35, -31.25)
-script = ExtResource("2_kn2b8")
+script = ExtResource("2_irk3f")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -131,11 +157,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3(Mask)/Frame 0" instance=ExtResource("1_2nmm3")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3(Mask)/Frame 0"]
 position = Vector2(182.6, 50.8)
 rotation = -1.5708
 scale = Vector2(1, 1.00139)
-script = ExtResource("2_kn2b8")
+script = ExtResource("2_irk3f")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -147,3 +173,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 3(Mask)/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_jux1g")

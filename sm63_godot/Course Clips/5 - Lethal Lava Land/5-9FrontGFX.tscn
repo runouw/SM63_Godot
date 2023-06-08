@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Volcano Rock 3.png" id="1_het07"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lnahh"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Volcano Rock 3.png" id="2_7o76d"]
 
-[sub_resource type="Animation" id="Animation_fqi8h"]
+[sub_resource type="Animation" id="Animation_gp5ol"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_envfw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8sk7t"]
 _data = {
-"Default": SubResource("Animation_fqi8h")
+"Default": SubResource("Animation_gp5ol")
 }
 
 [node name="5-9FrontGFX" type="Node2D"]
+script = ExtResource("1_lnahh")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/5-9FrontGFX.xml"
+linkage = "5-9FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_envfw")
+"Timeline": SubResource("AnimationLibrary_8sk7t")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -50,7 +56,7 @@ position = Vector2(21.8, -4.2)
 [node name="@@30952" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_het07")
+texture = ExtResource("2_7o76d")
 texture_offset = Vector2(167.8, -71.1)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(-81.925, 87.275, 93.2, 87.275, 89.45, 101.675, 85.025, 108.65, 82.3975, 110.9, -77.866, 110.9, -78.275, 110.075, -80.6344, 100.794, -77.866, 110.9, -62.725, 110.9, -63.1, 111.275, -65.9, 115.7, -72.1, 122.15, -72.1, 122.15, -72.475, 121.775, -77.6801, 111.275, -62.725, 110.9, 82.3975, 110.9, 80.675, 112.375, 77.525, 114.65, 77.2245, 116.525, -58.7406, 116.525, -62.4594, 111.275, -58.7406, 116.525, 26.9, 116.525, 20.8, 118.525, 19.2986, 124.025, -53.4281, 124.025, -58.6344, 116.675, 26.9, 116.525, 77.2245, 116.525, 76.9, 118.55, 76.3504, 120.275, 32.301, 120.275, 30.4, 117.7, 29.875, 116.675, 32.301, 120.275, 70.6, 120.275, 69.05, 121.325, 68.5303, 124.4, 35.3463, 124.4, 32.9101, 121.1, 70.6, 120.275, 76.3504, 120.275, 75.275, 123.65, 75.275, 123.65, 74.525, 123.275, 72.7, 121.1, -53.4281, 124.025, -36.65, 124.025, -42.575, 129.4, -50.35, 136.025, -50.35, 136.025, -53.375, 124.1, -36.65, 124.025, 19.2986, 124.025, 18.275, 127.775, -33.1434, 127.775, -34.6, 125.425, -36.5402, 124.1, 35.3463, 124.4, 55.025, 124.4, 50.675, 129.05, 46.4, 137.9, 46.4, 137.9, 41.575, 132.025, 35.9, 125.15, 55.025, 124.4, 68.5303, 124.4, 68.15, 126.65, 63.625, 127.4, 59.525, 128.15, 59.525, 128.15, 55.925, 125.15, -33.1434, 127.775, -5.15, 127.775, -11.6, 129.1, -13.15, 132.55, -14.125, 137.45, -18.625, 143, -18.625, 143, -18.85, 142.775, -20.375, 136.675, -26.35, 132.65, -32.725, 128.45, -32.9109, 128.15, -5.15, 127.775, 18.275, 127.775, 10.775, 132.275, 4.6, 133.675, -0.475, 134.9, -0.475, 134.9, -3.125, 131.35, -4.93759, 128.15)

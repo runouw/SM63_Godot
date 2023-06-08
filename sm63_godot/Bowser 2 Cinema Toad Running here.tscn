@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_yn8n4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_da8aw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mwoue"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3we0c"]
 
-[sub_resource type="Animation" id="Animation_25nfd"]
+[sub_resource type="Animation" id="Animation_rrgk5"]
 length = 1.9
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,27 +79,38 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xhqgc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uadbb"]
 _data = {
-"Default": SubResource("Animation_25nfd")
+"Default": SubResource("Animation_rrgk5")
 }
 
+[sub_resource type="GDScript" id="GDScript_6nm4b"]
+script/source = "extends Node
+# stop();
+# _parent.toadrun = true;
+# "
+
 [node name="Bowser 2 Cinema Toad Running here" type="Node2D"]
+script = ExtResource("1_mwoue")
+source_xml = "res://sm63/LIBRARY/Bowser 2 Cinema Toad Running here.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xhqgc")
+"Timeline": SubResource("AnimationLibrary_uadbb")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_yn8n4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(1.15, 8.45)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_da8aw")
+script = ExtResource("2_3we0c")
 path = "res://sm63_godot/Cinema Toad Walk Sad.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -115,11 +126,11 @@ brightness = 0.0
 [node name="Frame 42" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 42" instance=ExtResource("1_yn8n4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 42"]
 position = Vector2(-181.4, -42.1)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_da8aw")
+script = ExtResource("2_3we0c")
 path = "res://sm63_godot/Cinema Toad Walk Sad.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -135,11 +146,11 @@ brightness = 0.0
 [node name="Frame 55" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 55" instance=ExtResource("1_yn8n4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 55"]
 position = Vector2(-211.85, -50.55)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_da8aw")
+script = ExtResource("2_3we0c")
 path = "res://sm63_godot/Cinema Toad Walk Sad.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -155,11 +166,11 @@ brightness = 0.0
 [node name="Frame 56" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 56" instance=ExtResource("1_yn8n4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 56"]
 position = Vector2(-212.4, -45.05)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_da8aw")
+script = ExtResource("2_3we0c")
 path = "res://sm63_godot/Cinema Toad Mad.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -178,3 +189,6 @@ brightness = 0.0
 
 [node name="Frame 56" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 56"]
+script = SubResource("GDScript_6nm4b")

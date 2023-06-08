@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi Falling - 3.png" id="1_r62vr"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_gqamb"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_qs7i0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hojjv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi Falling - 3.png" id="2_4hpym"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_e8phl"]
 
-[sub_resource type="Animation" id="Animation_no4dh"]
+[sub_resource type="Animation" id="Animation_4wfwi"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a2tw7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23bwe"]
 _data = {
-"Default": SubResource("Animation_no4dh")
+"Default": SubResource("Animation_4wfwi")
 }
 
 [node name="Luigi (none) air 1" type="Node2D"]
+script = ExtResource("1_hojjv")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi (none) air 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_a2tw7")
+"Timeline": SubResource("AnimationLibrary_23bwe")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -41,14 +46,14 @@ texture_filter = 1
 position = Vector2(12.35, -20.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_r62vr")
+texture = ExtResource("2_4hpym")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_gqamb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(6.6, -13.9)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("3_qs7i0")
+script = ExtResource("3_e8phl")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

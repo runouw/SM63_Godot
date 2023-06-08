@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 3.png" id="1_yfkn2"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 6.png" id="2_lrqb4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_sbxsf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 3.png" id="2_1ygi4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 6.png" id="3_15jlj"]
 
-[sub_resource type="Animation" id="Animation_qwpfy"]
+[sub_resource type="Animation" id="Animation_eebcj"]
 length = 0.333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -115,16 +116,36 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8y828"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tsg41"]
 _data = {
-"Default": SubResource("Animation_qwpfy")
+"Default": SubResource("Animation_eebcj")
 }
 
+[sub_resource type="GDScript" id="GDScript_23yg0"]
+script/source = "extends Node
+# stop()"
+
+[sub_resource type="GDScript" id="GDScript_5yyqi"]
+script/source = "extends Node
+# stop()"
+
+[sub_resource type="GDScript" id="GDScript_ofa5i"]
+script/source = "extends Node
+# if (random(2) == 0) {
+# 	gotoAndPlay(6);
+# }
+# "
+
 [node name="Toad Talk Head Blink" type="Node2D"]
+script = ExtResource("1_sbxsf")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Talk Head Blink.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8y828")
+"Timeline": SubResource("AnimationLibrary_tsg41")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -134,7 +155,7 @@ libraries = {
 [node name="@@50828" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-9, -9.5)
-texture = ExtResource("1_yfkn2")
+texture = ExtResource("2_1ygi4")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -143,7 +164,7 @@ visible = false
 [node name="@@50829" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-9, -9.5)
-texture = ExtResource("2_lrqb4")
+texture = ExtResource("3_15jlj")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
@@ -152,7 +173,7 @@ visible = false
 [node name="@@50830" type="Sprite2D" parent="Layer 1/Frame 7"]
 texture_filter = 1
 position = Vector2(-9, -9.5)
-texture = ExtResource("1_yfkn2")
+texture = ExtResource("2_1ygi4")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -162,11 +183,17 @@ centered = false
 [node name="Frame 4" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 4"]
+script = SubResource("GDScript_23yg0")
+
 [node name="Frame 5" type="Node2D" parent="Layer 3"]
 visible = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 7"]
+script = SubResource("GDScript_5yyqi")
 
 [node name="Frame 8" type="Node2D" parent="Layer 3"]
 visible = false
@@ -174,3 +201,6 @@ visible = false
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ofa5i")

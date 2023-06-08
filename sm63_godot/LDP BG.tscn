@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_b0efi"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hawlx"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_r03kg"]
 
-[sub_resource type="Animation" id="Animation_2tlmi"]
+[sub_resource type="Animation" id="Animation_412cl"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tm57t"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kb1yj"]
 _data = {
-"Default": SubResource("Animation_2tlmi")
+"Default": SubResource("Animation_412cl")
 }
 
 [node name="LDP BG" type="Node2D"]
+script = ExtResource("1_hawlx")
+source_xml = "res://sm63/LIBRARY/LDP BG.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tm57t")
+"Timeline": SubResource("AnimationLibrary_kb1yj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@8836" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-225, -150, 225, -150, 225, 150, -225, 150)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_b0efi")
+script = ExtResource("2_r03kg")
 matrix = Transform2D(0.274658, 0, 0, 0.183105, 0, 0)
 entries_color = PackedColorArray(1, 0, 0, 1, 0.701961, 0, 0, 1)
 entries_ratio = PackedFloat32Array(0, 1)

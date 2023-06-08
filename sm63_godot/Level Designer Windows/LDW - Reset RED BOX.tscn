@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_2lux6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_e2xd2"]
+
+[sub_resource type="Animation" id="Animation_ugw50"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,41 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w110s"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4rrk8"]
 _data = {
-"Default": SubResource("Animation_2lux6")
+"Default": SubResource("Animation_ugw50")
 }
 
+[sub_resource type="GDScript" id="GDScript_u5dup"]
+script/source = "extends Node
+# num = 4;
+# onEnterFrame = function () {
+# 	this._alpha += (aa-_alpha)/num;
+# 	if ((aa == 0 && this._alpha<=2)) {
+# 		this.removeMovieClip();
+# 	}
+# 	if (_root.M.Window1.frame !== \"Reset\") {
+# 		aa = -5
+# 	}
+# 	if (this._alpha>=98) {
+# 		_root.LDDeleteF();
+# 		aa = -10;
+# 		num = 30;
+# 	}
+# 	//(98.828125>=55) false   
+# };
+# "
+
 [node name="LDW - Reset RED BOX" type="Node2D"]
+script = ExtResource("1_e2xd2")
+source_xml = "res://sm63/LIBRARY/Level Designer Windows/LDW - Reset RED BOX.xml"
+linkage = "LDWResetScreenFilter"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w110s")
+"Timeline": SubResource("AnimationLibrary_4rrk8")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +81,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_u5dup")

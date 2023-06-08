@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Boo/YI Boo 1.png" id="1_xw7oe"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Boo/YI Boo 2.png" id="2_u8qb6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ue84u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Boo/YI Boo 1.png" id="2_x3lk3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Boo/YI Boo 2.png" id="3_kvjus"]
 
-[sub_resource type="Animation" id="Animation_7bvcc"]
+[sub_resource type="Animation" id="Animation_ip78l"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +56,26 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vqtmd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nh0ey"]
 _data = {
-"Default": SubResource("Animation_7bvcc")
+"Default": SubResource("Animation_ip78l")
 }
 
+[sub_resource type="GDScript" id="GDScript_lef6f"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Ghost Frames" type="Node2D"]
+script = ExtResource("1_ue84u")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Boo/Ghost Frames.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vqtmd")
+"Timeline": SubResource("AnimationLibrary_nh0ey")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -74,7 +85,7 @@ libraries = {
 [node name="@@50554" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-16, -16)
-texture = ExtResource("1_xw7oe")
+texture = ExtResource("2_x3lk3")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -83,7 +94,7 @@ visible = false
 [node name="@@50555" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-16, -16)
-texture = ExtResource("2_u8qb6")
+texture = ExtResource("3_kvjus")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -92,9 +103,12 @@ visible = false
 [node name="@@50556" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-16, -16)
-texture = ExtResource("1_xw7oe")
+texture = ExtResource("2_x3lk3")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_lef6f")

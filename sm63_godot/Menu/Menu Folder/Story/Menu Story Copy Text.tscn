@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_yne0l"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_137jw"]
+
+[sub_resource type="Animation" id="Animation_0hdl4"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ccncc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_00g07"]
 _data = {
-"Default": SubResource("Animation_yne0l")
+"Default": SubResource("Animation_0hdl4")
 }
 
 [node name="Menu Story Copy Text" type="Node2D"]
+script = ExtResource("1_137jw")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Story/Menu Story Copy Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ccncc")
+"Timeline": SubResource("AnimationLibrary_00g07")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

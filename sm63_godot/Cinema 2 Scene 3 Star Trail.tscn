@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_4ypky"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fab3v"]
+
+[sub_resource type="Animation" id="Animation_r6hie"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_k0xh4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jmdid"]
 _data = {
-"Default": SubResource("Animation_4ypky")
+"Default": SubResource("Animation_r6hie")
 }
 
 [node name="Cinema 2 Scene 3 Star Trail" type="Node2D"]
+script = ExtResource("1_fab3v")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Scene 3 Star Trail.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_k0xh4")
+"Timeline": SubResource("AnimationLibrary_jmdid")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

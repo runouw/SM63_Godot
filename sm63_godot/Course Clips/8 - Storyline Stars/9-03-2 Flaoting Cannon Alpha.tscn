@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Metal Tile.png" id="1_kii2w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_a1weg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Metal Tile.png" id="2_fveta"]
 
-[sub_resource type="Animation" id="Animation_h8xlh"]
+[sub_resource type="Animation" id="Animation_w3w45"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wfol0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8fhtf"]
 _data = {
-"Default": SubResource("Animation_h8xlh")
+"Default": SubResource("Animation_w3w45")
 }
 
 [node name="9-03-2 Flaoting Cannon Alpha" type="Node2D"]
+script = ExtResource("1_a1weg")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/9-03-2 Flaoting Cannon Alpha.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wfol0")
+"Timeline": SubResource("AnimationLibrary_8fhtf")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@36959" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_kii2w")
+texture = ExtResource("2_fveta")
 texture_offset = Vector2(16, 19.25)
 polygon = PackedVector2Array(-32, -14.6, 32, -14.6, 32, 16, -32, 16)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])

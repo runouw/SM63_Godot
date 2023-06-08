@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_32puu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mupnj"]
+
+[sub_resource type="Animation" id="Animation_s81su"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5kek6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2p10y"]
 _data = {
-"Default": SubResource("Animation_32puu")
+"Default": SubResource("Animation_s81su")
 }
 
 [node name="M1-1 Cam Edge" type="Node2D"]
+script = ExtResource("1_mupnj")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Cam Edge.xml"
+linkage = "M1-1CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5kek6")
+"Timeline": SubResource("AnimationLibrary_2p10y")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

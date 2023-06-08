@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Snow Repeat Large.png" id="1_38c2y"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_g17q8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Snow Repeat Large.png" id="2_sxbuv"]
 
-[sub_resource type="Animation" id="Animation_netr0"]
+[sub_resource type="Animation" id="Animation_uiufv"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,21 +31,37 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7npc1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8go00"]
 _data = {
-"Default": SubResource("Animation_netr0")
+"Default": SubResource("Animation_uiufv")
 }
 
+[sub_resource type="GDScript" id="GDScript_l6ptn"]
+script/source = "extends Node
+# stop();
+# if (_parent._xscale == -50) {
+# 	this.gotoAndStop(2);
+# }
+# "
+
 [node name="2-1SnowmanDisappearance" type="Node2D"]
+script = ExtResource("1_g17q8")
+source_xml = "res://sm63/LIBRARY/Course Clips/2 - Snowman's Land/2-1SnowmanDisappearance.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7npc1")
+"Timeline": SubResource("AnimationLibrary_8go00")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_l6ptn")
 
 [node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-219.3, 529.3)
@@ -54,7 +71,7 @@ position = Vector2(-219.3, 529.3)
 [node name="@@24107" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_38c2y")
+texture = ExtResource("2_sxbuv")
 texture_offset = Vector2(-400.6, 432.85)
 texture_scale = Vector2(1.18519, 1.18519)
 polygon = PackedVector2Array(432.25, -529.3, 432.25, -529.3, 456.148, -527.445, 478.226, -521.873, 498.485, -512.583, 516.925, -499.575, 532.281, -483.933, 543.25, -466.756, 549.831, -448.045, 552.025, -427.8, 549.928, -407.999, 549.925, -407.991, 543.636, -389.666, 533.15, -372.8, 525.665, -364.205, 516.925, -356.05, 508.251, -349.305, 499.15, -343.425, 478.714, -333.91, 456.414, -328.202, 432.25, -326.3, 432.25, -326.3, 408.082, -328.202, 385.774, -333.91, 365.325, -343.425, 356.211, -349.305, 347.525, -356.05, 338.79, -364.195, 331.3, -372.775, 320.814, -389.65, 314.522, -407.991, 312.425, -427.8, 314.619, -448.045, 321.2, -466.756, 332.169, -483.933, 347.525, -499.575, 365.985, -512.583, 386.259, -521.873, 408.348, -527.445)
@@ -63,7 +80,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@24108" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_38c2y")
+texture = ExtResource("2_sxbuv")
 texture_offset = Vector2(-390.1, 274.55)
 texture_scale = Vector2(0.888889, 0.888889)
 polygon = PackedVector2Array(533.15, -372.8, 533.15, -372.8, 545.15, -363.5, 565.625, -342.644, 576.062, -326.3, 432.25, -326.3, 456.414, -328.202, 478.714, -333.91, 499.15, -343.425, 508.251, -349.305, 516.925, -356.05, 525.665, -364.205, 533.128, -372.775, 331.3, -372.775, 331.3, -372.775, 338.79, -364.195, 347.525, -356.05, 356.211, -349.305, 365.325, -343.425, 385.774, -333.91, 408.082, -328.202, 432.25, -326.3, 288.413, -326.3, 298.85, -342.644, 319.325, -363.5, 320.236, -364.205, 288.413, -326.3, 576.062, -326.3, 580.25, -319.742, 589.025, -294.794, 591.95, -267.8, 589.417, -242.618, 589.414, -242.609, 581.819, -219.208, 569.155, -197.568, 551.425, -177.7, 545.15, -172.125, 533.597, -163.136, 521.475, -155.3, 501.272, -145.312, 479.671, -138.178, 456.672, -133.899, 432.275, -132.475, 432.275, -132.475, 407.87, -133.899, 384.861, -138.178, 363.245, -145.312, 343.025, -155.3, 330.89, -163.136, 319.325, -172.125, 313.075, -177.675, 295.334, -197.547, 282.662, -219.192, 275.059, -242.609, 272.525, -267.8, 275.45, -294.794, 284.225, -319.742)
@@ -72,7 +89,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@24109" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_38c2y")
+texture = ExtResource("2_sxbuv")
 texture_offset = Vector2(-376.05, 36.8)
 texture_scale = Vector2(0.666667, 0.666667)
 polygon = PackedVector2Array(551.425, -177.7, 551.425, -177.7, 567.496, -167.301, 582.825, -155.375, 605.289, -133.352, 605.934, -132.475, 432.275, -132.475, 456.672, -133.899, 479.671, -138.178, 501.272, -145.312, 521.475, -155.3, 533.597, -163.136, 545.15, -172.125, 551.397, -177.675, 313.075, -177.675, 313.075, -177.675, 319.325, -172.125, 330.89, -163.136, 343.025, -155.3, 363.245, -145.312, 384.861, -138.178, 407.87, -133.899, 432.275, -132.475, 258.591, -132.475, 259.236, -133.352, 281.7, -155.375, 297.02, -167.285, 304.499, -172.125, 258.591, -132.475, 605.934, -132.475, 622.761, -109.583, 635.241, -84.068, 642.729, -56.807, 642.729, -56.807, 645.225, -27.8, 642.729, 1.207, 635.241, 28.468, 635.241, 28.468, 622.761, 53.983, 605.289, 77.752, 605.289, 77.752, 582.825, 99.775, 567.417, 111.756, 551.25, 122.2, 529.846, 133.162, 507.249, 141.688, 483.459, 147.778, 458.476, 151.432, 432.3, 152.65, 432.3, 152.65, 406.125, 151.432, 381.14, 147.778, 357.345, 141.688, 334.74, 133.162, 313.325, 122.2, 297.133, 111.756, 281.7, 99.775, 259.236, 77.752, 259.236, 77.752, 241.764, 53.983, 229.284, 28.468, 229.284, 28.468, 221.796, 1.207, 219.3, -27.8, 221.796, -56.807, 221.796, -56.807, 229.284, -84.068, 241.764, -109.583)

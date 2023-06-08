@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Walk.png" id="1_xnjng"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hbul4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Penguins/Penguin Walk.png" id="2_wlqap"]
 
-[sub_resource type="Animation" id="Animation_abnne"]
+[sub_resource type="Animation" id="Animation_vlfhn"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_46blc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16ofd"]
 _data = {
-"Default": SubResource("Animation_abnne")
+"Default": SubResource("Animation_vlfhn")
 }
 
 [node name="Penguin Idle" type="Node2D"]
+script = ExtResource("1_hbul4")
+source_xml = "res://sm63/LIBRARY/Penguin Idle.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_46blc")
+"Timeline": SubResource("AnimationLibrary_16ofd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,5 +45,5 @@ texture_filter = 1
 position = Vector2(8.5, -9)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_xnjng")
+texture = ExtResource("2_wlqap")
 centered = false

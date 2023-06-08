@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_3vnty"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xsro0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_asxlq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_a8bck"]
 
-[sub_resource type="Animation" id="Animation_e141a"]
+[sub_resource type="Animation" id="Animation_iutqo"]
 length = 1.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -187,25 +187,44 @@ tracks/14/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8gtkn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ykms"]
 _data = {
-"Default": SubResource("Animation_e141a")
+"Default": SubResource("Animation_iutqo")
 }
 
+[sub_resource type="GDScript" id="GDScript_uo8kc"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"1up\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_cdlbu"]
+script/source = "extends Node
+# this.removeMovieClip(this);
+# stop();
+# "
+
 [node name="1Up Animation" type="Node2D"]
+script = ExtResource("1_asxlq")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1Up Animation.xml"
+linkage = "1upAnimation"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8gtkn")
+"Timeline": SubResource("AnimationLibrary_0ykms")
 }
 
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Graphics"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 0" instance=ExtResource("1_3vnty")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 0"]
 position = Vector2(0, -40)
-script = ExtResource("2_xsro0")
+script = ExtResource("2_a8bck")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1 up Glow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -221,9 +240,12 @@ brightness = 0.0
 [node name="Frame 12" type="Node2D" parent="Graphics"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 12" instance=ExtResource("1_3vnty")]
+[node name="AS2" type="Node" parent="Graphics/Frame 12"]
+script = SubResource("GDScript_uo8kc")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 12"]
 position = Vector2(0, -40)
-script = ExtResource("2_xsro0")
+script = ExtResource("2_a8bck")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1 up Glow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -239,9 +261,9 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Graphics"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 13" instance=ExtResource("1_3vnty")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 13"]
 position = Vector2(0, -40.3)
-script = ExtResource("2_xsro0")
+script = ExtResource("2_a8bck")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1 up Glow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -257,9 +279,9 @@ brightness = 0.0
 [node name="Frame 38" type="Node2D" parent="Graphics"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 38" instance=ExtResource("1_3vnty")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Graphics/Frame 38"]
 position = Vector2(0, -50)
-script = ExtResource("2_xsro0")
+script = ExtResource("2_a8bck")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1 up Glow.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -279,9 +301,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_3vnty")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0, -40)
-script = ExtResource("2_xsro0")
+script = ExtResource("2_a8bck")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1-Up Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -297,9 +319,9 @@ brightness = 0.0
 [node name="Frame 12" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 12" instance=ExtResource("1_3vnty")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 12"]
 position = Vector2(0, -40)
-script = ExtResource("2_xsro0")
+script = ExtResource("2_a8bck")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1-Up Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -315,11 +337,11 @@ brightness = 0.0
 [node name="Frame 13" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 13" instance=ExtResource("1_3vnty")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 13"]
 position = Vector2(0, -40.3)
 rotation = 0.174644
 scale = Vector2(0.999441, 0.999441)
-script = ExtResource("2_xsro0")
+script = ExtResource("2_a8bck")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1-Up Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -335,9 +357,9 @@ brightness = 0.0
 [node name="Frame 38" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 38" instance=ExtResource("1_3vnty")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 38"]
 position = Vector2(0, -50)
-script = ExtResource("2_xsro0")
+script = ExtResource("2_a8bck")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/1-Up Mushroom/1-Up Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -440,3 +462,6 @@ visible = false
 
 [node name="Frame 39" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 39"]
+script = SubResource("GDScript_cdlbu")

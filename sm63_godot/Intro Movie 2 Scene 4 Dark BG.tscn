@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_sle5x"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_f0rti"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2l62q"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_bjkxv"]
 
-[sub_resource type="Animation" id="Animation_ig2bh"]
+[sub_resource type="Animation" id="Animation_hx3q5"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,33 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_g0l08"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dd062"]
 _data = {
-"Default": SubResource("Animation_ig2bh")
+"Default": SubResource("Animation_hx3q5")
 }
 
+[sub_resource type="GDScript" id="GDScript_8a0dm"]
+script/source = "extends Node
+# //"
+
 [node name="Intro Movie 2 Scene 4 Dark BG" type="Node2D"]
+script = ExtResource("1_2l62q")
+source_xml = "res://sm63/LIBRARY/Intro Movie 2 Scene 4 Dark BG.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_g0l08")
+"Timeline": SubResource("AnimationLibrary_dd062")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_sle5x")]
-script = ExtResource("2_f0rti")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_bjkxv")
 path = "res://sm63_godot/Intro Movie Scene 2 Background.tscn"
 red_multiplier = 0.449219
 green_multiplier = 0.398438
@@ -48,3 +57,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_8a0dm")

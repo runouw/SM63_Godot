@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 5.png" id="1_ask8o"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 4 (Walk 2).png" id="2_402ar"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 5 (Walk 3).png" id="3_ff8fw"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 6 (Walk 4).png" id="4_tglrc"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 3 (Walk 1).png" id="5_pb4jk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_apw4l"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 5.png" id="2_nsgu1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 4 (Walk 2).png" id="3_ptluy"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 5 (Walk 3).png" id="4_cghsk"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 6 (Walk 4).png" id="5_hxcpk"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 3 (Walk 1).png" id="6_6k6dg"]
 
-[sub_resource type="Animation" id="Animation_o5enb"]
+[sub_resource type="Animation" id="Animation_p6i18"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -130,16 +131,21 @@ tracks/9/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1o02l"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uxlaw"]
 _data = {
-"Default": SubResource("Animation_o5enb")
+"Default": SubResource("Animation_p6i18")
 }
 
 [node name="Cinema Toad Walk Sad" type="Node2D"]
+script = ExtResource("1_apw4l")
+source_xml = "res://sm63/LIBRARY/Cinema Toad Walk Sad.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1o02l")
+"Timeline": SubResource("AnimationLibrary_uxlaw")
 }
 
 [node name="Head 2" type="Node2D" parent="."]
@@ -152,7 +158,7 @@ visible = false
 [node name="@@5453" type="Sprite2D" parent="Head 2/Frame 15"]
 texture_filter = 1
 position = Vector2(-9, -24.15)
-texture = ExtResource("1_ask8o")
+texture = ExtResource("2_nsgu1")
 centered = false
 
 [node name="Body" type="Node2D" parent="."]
@@ -162,7 +168,7 @@ centered = false
 [node name="@@5449" type="Sprite2D" parent="Body/Frame 0"]
 texture_filter = 1
 position = Vector2(-6.5, -5.5)
-texture = ExtResource("2_402ar")
+texture = ExtResource("3_ptluy")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Body"]
@@ -171,7 +177,7 @@ visible = false
 [node name="@@5450" type="Sprite2D" parent="Body/Frame 5"]
 texture_filter = 1
 position = Vector2(-9, -8.5)
-texture = ExtResource("3_ff8fw")
+texture = ExtResource("4_cghsk")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Body"]
@@ -180,7 +186,7 @@ visible = false
 [node name="@@5451" type="Sprite2D" parent="Body/Frame 10"]
 texture_filter = 1
 position = Vector2(-6.5, -5.5)
-texture = ExtResource("4_tglrc")
+texture = ExtResource("5_hxcpk")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Body"]
@@ -189,7 +195,7 @@ visible = false
 [node name="@@5452" type="Sprite2D" parent="Body/Frame 15"]
 texture_filter = 1
 position = Vector2(-7, -8)
-texture = ExtResource("5_pb4jk")
+texture = ExtResource("6_6k6dg")
 centered = false
 
 [node name="Head" type="Node2D" parent="."]
@@ -199,7 +205,7 @@ centered = false
 [node name="@@5446" type="Sprite2D" parent="Head/Frame 0"]
 texture_filter = 1
 position = Vector2(-9.15, -22.4)
-texture = ExtResource("1_ask8o")
+texture = ExtResource("2_nsgu1")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Head"]
@@ -208,7 +214,7 @@ visible = false
 [node name="@@5447" type="Sprite2D" parent="Head/Frame 5"]
 texture_filter = 1
 position = Vector2(-9.15, -24.4)
-texture = ExtResource("1_ask8o")
+texture = ExtResource("2_nsgu1")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Head"]
@@ -217,7 +223,7 @@ visible = false
 [node name="@@5448" type="Sprite2D" parent="Head/Frame 10"]
 texture_filter = 1
 position = Vector2(-9.15, -22.4)
-texture = ExtResource("1_ask8o")
+texture = ExtResource("2_nsgu1")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Head"]

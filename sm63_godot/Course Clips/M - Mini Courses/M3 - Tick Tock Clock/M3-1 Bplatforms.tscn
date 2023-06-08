@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_w3bpv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tanv4"]
+
+[sub_resource type="Animation" id="Animation_6yqce"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qn6hs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yuf1l"]
 _data = {
-"Default": SubResource("Animation_w3bpv")
+"Default": SubResource("Animation_6yqce")
 }
 
 [node name="M3-1 Bplatforms" type="Node2D"]
+script = ExtResource("1_tanv4")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M3 - Tick Tock Clock/M3-1 Bplatforms.xml"
+linkage = "M3-1BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qn6hs")
+"Timeline": SubResource("AnimationLibrary_yuf1l")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

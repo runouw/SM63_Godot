@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_jiyta"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_c44sr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qi4oe"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_sqe3r"]
 
-[sub_resource type="Animation" id="Animation_rrg6w"]
+[sub_resource type="Animation" id="Animation_k6cws"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -175,25 +175,323 @@ tracks/13/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kwm6x"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1msx"]
 _data = {
-"Default": SubResource("Animation_rrg6w")
+"Default": SubResource("Animation_k6cws")
 }
 
+[sub_resource type="GDScript" id="GDScript_ortlp"]
+script/source = "extends Node
+# if (rotation == undefined) {
+# 	rotation = 0;
+# }
+# if (speed == undefined) {
+# 	speed = 5+Math.random()*5;
+# }
+# if (explodesize == undefined) {
+# 	explodesize = \"small\";
+# }
+# if (color == undefined) {
+# 	color = {ra:100, rb:0, ga:100, gb:0, ba:100, bb:0, aa:100, ab:0};
+# }
+# if (explodecolor == undefined) {
+# 	explodecolor = {ra:100, rb:0, ga:100, gb:0, ba:100, bb:0, aa:100, ab:0};
+# }
+# if (bounce == undefined) {
+# 	bounce = false;
+# }
+# if (bounceboost == undefined) {
+# 	bounceboost = 0;
+# }
+# if (follow == undefined) {
+# 	follow = false;
+# }
+# if (bouncemax == undefined) {
+# 	bouncemax = 3;
+# }
+# if (frame == undefined) {
+# 	frame = 1;
+# }
+# if (lifetime == undefined) {
+# 	lifetime = _root.framerate*3;
+# }
+# clip.gotoAndStop(frame);
+# bouncecount = 0;
+# count = 0;
+# //                   
+# myColor = new Color(this);
+# colorTrans = new Object();
+# colorTrans = color;
+# myColor.setTransform(colorTrans);
+# //
+# _rotation = rotation;
+# yspeed = -Math.sin(_root.angleToRadians(rotation))*speed;
+# xspeed = -Math.cos(_root.angleToRadians(rotation))*speed;
+# "
+
+[sub_resource type="GDScript" id="GDScript_wdpk7"]
+script/source = "extends Node
+# stop();
+# rotspeed = 0;
+# rot = 0;
+# rot2 = 0;
+# if (rotdiv == undefined) {
+# 	rotdiv = 10;
+# }
+# if (rotmaxspeed == undefined) {
+# 	rotmaxspeed = 3;
+# }
+# hitwall = function (hitwallnum) {
+# 	if (bounce == false || bouncecount>=bouncemax) {
+# 		if (hitwallnum == 0) {
+# 			rotation = 0;
+# 			_rotation = 0;
+# 			while ((_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+2)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_y--;
+# 			}
+# 		}
+# 		if (hitwallnum == 1) {
+# 			rotation = -90;
+# 			_rotation = -90;
+# 			while ((_root.Course.Platforms.hitTest(((_x+7)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_x--;
+# 			}
+# 		}
+# 		if (hitwallnum == 2) {
+# 			rotation = 90;
+# 			_rotation = 90;
+# 			while ((_root.Course.Platforms.hitTest(((_x-7)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_x++;
+# 			}
+# 		}
+# 		if (hitwallnum == 3) {
+# 			rotation = 180;
+# 			_rotation = 180;
+# 			while ((_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-12)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_y++;
+# 			}
+# 		}
+# 		myColor = new Color(this);
+# 		colorTrans = new Object();
+# 		colorTrans = explodecolor;
+# 		myColor.setTransform(colorTrans);
+# 		if (explodesize == \"small\") {
+# 			explodesize = \"ground\";
+# 		}
+# 		gotoAndStop(explodesize);
+# 	} else {
+# 		bouncecount += random(2)+1;
+# 		if (hitwallnum == 0) {
+# 			yspeed = -yspeed*0.7;
+# 			yspeed -= bounceboost;
+# 			while ((_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+2)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_y--;
+# 			}
+# 		}
+# 		if (hitwallnum == 1) {
+# 			xspeed = -Math.abs(xspeed*0.7);
+# 			xspeed -= bounceboost/4;
+# 			while ((_root.Course.Platforms.hitTest(((_x+7)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_x--;
+# 			}
+# 		}
+# 		if (hitwallnum == 2) {
+# 			xspeed = Math.abs(xspeed*0.7);
+# 			xspeed += bounceboost/4;
+# 			while ((_root.Course.Platforms.hitTest(((_x-7)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_x++;
+# 			}
+# 		}
+# 		if (hitwallnum == 3) {
+# 			yspeed = -yspeed*0.7;
+# 			yspeed += bounceboost/4;
+# 			while ((_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-12)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				_y++;
+# 			}
+# 		}
+# 		if (follow == true) {
+# 			_rotation = Math.atan2(-yspeed, -xspeed)*180/Math.PI;
+# 		}
+# 	}
+# };
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		_rotation = rotation;
+# 		if (follow == true) {
+# 			rot2 = _root.radiansToAngle(Math.atan2(-(_root.Course.Char._y-(_y+_parent._y)), -(_root.Course.Char._x-(_x+_parent._x))));
+# 			if (rot>0) {
+# 				rot = rot2;
+# 				if (rot<-90) {
+# 					rotation -= 360;
+# 				}
+# 				rotspeed = (rot-rotation)/rotdiv;
+# 			} else {
+# 				rot = rot2;
+# 				if (rot>90) {
+# 					rotation += 360;
+# 				}
+# 				rotspeed = (rot-rotation)/rotdiv;
+# 			}
+# 			if (rotation>520) {
+# 				rotation -= 360;
+# 			}
+# 			if (rotation<-520) {
+# 				rotation += 360;
+# 			}
+# 			rotspeed = _root.groundFriction(rotspeed, 0.1, 1.15);
+# 			rotspeed = Math.min(rotspeed, rotmaxspeed);
+# 			rotspeed = Math.max(rotspeed, -rotmaxspeed);
+# 			rotation += rotspeed;
+# 			//   
+# 			_rotation = rotation;
+# 			//_root.moveObjectFromAngle(speed, rotation, this);
+# 			yspeed = -Math.sin(_root.angleToRadians(rotation))*speed;
+# 			xspeed = -Math.cos(_root.angleToRadians(rotation))*speed;
+# 		} else if (bounce == false) {
+# 			yspeed = -Math.sin(_root.angleToRadians(rotation))*speed;
+# 			xspeed = -Math.cos(_root.angleToRadians(rotation))*speed;
+# 		} else {
+# 			yspeed += _root.gravity/2;
+# 			yspeed = Math.min(yspeed, 10);
+# 			//
+# 			rotation = _root.radiansToAngle(Math.atan2(-yspeed, -xspeed));
+# 			_rotation = rotation;
+# 		}
+# 		repeats = Math.floor((Math.abs(yspeed)+Math.abs(xspeed))/8)+1;
+# 		for (i=0; i<repeats; i++) {
+# 			//
+# 			if ((_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true))) {
+# 				hitwall(0);
+# 			}
+# 			if (_root.Course.Platforms.hitTest(((_x+10)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-5)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				hitwall(1);
+# 			}
+# 			if (_root.Course.Platforms.hitTest(((_x-10)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-5)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				hitwall(2);
+# 			}
+# 			if (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-10)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				hitwall(3);
+# 			}
+# 			//  
+# 			_x += xspeed/repeats;
+# 			_y += yspeed/repeats;
+# 		}
+# 		if (this.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			rotation = 0;
+# 			_rotation = 0;
+# 			myColor = new Color(this);
+# 			colorTrans = new Object();
+# 			colorTrans = explodecolor;
+# 			myColor.setTransform(colorTrans);
+# 			gotoAndStop(explodesize);
+# 		}
+# 		count++;
+# 		if (count>_root.framerate*30) {
+# 			this.removeMovieClip(this);
+# 		}
+# 		if (bounce == true) {
+# 			if (count>lifetime) {
+# 				rotation = 0;
+# 				_rotation = 0;
+# 				myColor = new Color(this);
+# 				colorTrans = new Object();
+# 				colorTrans = explodecolor;
+# 				myColor.setTransform(colorTrans);
+# 				gotoAndStop(explodesize);
+# 			}
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_m8bcc"]
+script/source = "extends Node
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.clip.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			if (_root.Course.Char._x>_x+_parent._x) {
+# 				_root.MarioHit(1, 90, -3, 5, 7, \"\");
+# 			} else {
+# 				_root.MarioHit(1, 90, -3, -5, 7, \"\");
+# 			}
+# 		}
+# 		count++;
+# 		if (count>20) {
+# 			this.removeMovieClip(this);
+# 		}
+# 	}
+# };
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"Explosion\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);"
+
+[sub_resource type="GDScript" id="GDScript_odbfb"]
+script/source = "extends Node
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.clip.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			if (_root.Course.Char._x>_x+_parent._x) {
+# 				_root.MarioHit(2, 90, -9, 9, 7, \"\");
+# 			} else {
+# 				_root.MarioHit(2, 90, -9, -9, 7, \"\");
+# 			}
+# 		}
+# 		count++;
+# 		if (count>20) {
+# 			this.removeMovieClip(this);
+# 		}
+# 	}
+# };
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"Explode9\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);"
+
+[sub_resource type="GDScript" id="GDScript_j4do3"]
+script/source = "extends Node
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (this.clip.body.hitTest(_root.Course.Char.charClip.body)) {
+# 			if (_root.Course.Char._x>_x+_parent._x) {
+# 				_root.MarioHit(1, 90, -13, 3, 7, \"\");
+# 			} else {
+# 				_root.MarioHit(1, 90, -13, -3, 7, \"\");
+# 			}
+# 		}
+# 		count++;
+# 		if (count>20) {
+# 			this.removeMovieClip(this);
+# 		}
+# 	}
+# };
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"Explosion\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);"
+
 [node name="Bowser Fireball 1" type="Node2D"]
+script = ExtResource("1_qi4oe")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bowser Fireball 1.xml"
+linkage = "BowserFire1"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kwm6x")
+"Timeline": SubResource("AnimationLibrary_s1msx")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_jiyta")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(10, 0)
-script = ExtResource("2_c44sr")
+script = ExtResource("2_sqe3r")
 path = "res://sm63_godot/Bowser Fireball Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -209,8 +507,8 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_jiyta")]
-script = ExtResource("2_c44sr")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
+script = ExtResource("2_sqe3r")
 path = "res://sm63_godot/Effects/Explosion/Small Explosion.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -226,8 +524,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_jiyta")]
-script = ExtResource("2_c44sr")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
+script = ExtResource("2_sqe3r")
 path = "res://sm63_godot/Effects/Explosion/Nuke Explosion.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -243,9 +541,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_jiyta")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0, -10)
-script = ExtResource("2_c44sr")
+script = ExtResource("2_sqe3r")
 path = "res://sm63_godot/Effects/Explosion/Ground Explosion.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -265,10 +563,10 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_jiyta")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
 position = Vector2(0, 4.05)
 scale = Vector2(0.212311, 0.141373)
-script = ExtResource("2_c44sr")
+script = ExtResource("2_sqe3r")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -294,14 +592,29 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_ortlp")
+
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 1"]
+script = SubResource("GDScript_wdpk7")
 
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 2"]
+script = SubResource("GDScript_m8bcc")
+
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 3"]
+script = SubResource("GDScript_odbfb")
+
 [node name="Frame 4" type="Node2D" parent="Layer 3"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 4"]
+script = SubResource("GDScript_j4do3")

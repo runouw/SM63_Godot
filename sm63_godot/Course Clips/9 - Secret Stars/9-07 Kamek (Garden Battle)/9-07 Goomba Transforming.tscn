@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 1.png" id="1_nyh4u"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_o5cgj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goomba/YI Style Goomba - 1.png" id="2_f6b3x"]
 
-[sub_resource type="Animation" id="Animation_iyc5c"]
+[sub_resource type="Animation" id="Animation_h8alg"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hyyub"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7v7ri"]
 _data = {
-"Default": SubResource("Animation_iyc5c")
+"Default": SubResource("Animation_h8alg")
 }
 
 [node name="9-07 Goomba Transforming" type="Node2D"]
+script = ExtResource("1_o5cgj")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Goomba Transforming.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hyyub")
+"Timeline": SubResource("AnimationLibrary_7v7ri")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@41156" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -9)
-texture = ExtResource("1_nyh4u")
+texture = ExtResource("2_f6b3x")
 centered = false

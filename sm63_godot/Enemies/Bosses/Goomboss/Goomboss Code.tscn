@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_xt4vt"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_v0rwg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_if78h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0qp05"]
 
-[sub_resource type="Animation" id="Animation_rtsyl"]
+[sub_resource type="Animation" id="Animation_0yixg"]
 length = 0.166667
 loop_mode = 1
 tracks/0/type = "value"
@@ -79,25 +79,249 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xpjs1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7ocn"]
 _data = {
-"Default": SubResource("Animation_rtsyl")
+"Default": SubResource("Animation_0yixg")
 }
 
+[sub_resource type="GDScript" id="GDScript_ymmsd"]
+script/source = "extends Node
+# if (loaded == undefined) {
+# 	wide = 55;
+# 	tall = 70;
+# 	xspeed = -5;
+# 	yspeed = 0;
+# 	air = false;
+# 	action = undefined;
+# 	braincount = 0;
+# 	num = 0;
+# 	frame = 1;
+# 	lastaction = \"none\";
+# 	superjumptimer = 50;
+# 	//Stomped = false;
+# 	inv = true;
+# 	//
+# 	hp = 1;
+# 	// RL v
+# 	SompedFunction = function () {
+# 		//Stomped = true;
+# 		if (inv == false) {
+# 			if (hp<3) {
+# 				action = \"stomped\";
+# 				frame = 4;
+# 			} else {
+# 				gotoAndStop(5);
+# 				onEnterFrame = function () {
+# 					gotoAndStop(5);
+# 					if (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 						while (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 							_y--;
+# 						}
+# 					} else {
+# 						_y += 3;
+# 					}
+# 				};
+# 			}
+# 		}
+# 	};
+# 	// RL ^^^
+# 	onEnterFrame = function () {
+# 		if(hp == 1){
+# 			_root.TextHint = \"Hint: Press Z in the air to ground pound!\"
+# 		}
+# 		if (_root.PauseGame == false) {
+# 			// AI engine D:
+# 			marioX = _root.Course.Char._x-_root.Course.BackGFX._x-_x;
+# 			marioY = _root.Course.Char._y-_root.Course.BackGFX._y-_y;
+# 			//
+# 			if (this.head.hitTest(_root.Course.Char.charClip.feet) && _root.Course.Char.attack == true && _root.Course.Char.attackFrame == \"Ground\" && _root.Course.Char.yspeed>0) {
+# 				SompedFunction();
+# 			} else if (this.head.hitTest(_root.Course.Char.charClip.feet) && (_root.Course.Char.attackFrame !== \"Ground\" || attack == false)) {
+# 				_root.Course.Char.yspeed /= 2;
+# 				_root.Course.Char.yspeed -= 9;
+# 				_root.Course.Char.xspeed -= _xscale/50;
+# 			} else if (this.body.hitTest(_root.Course.Char.charClip.body) && action !== \"stomped\") {
+# 				if (marioX>0) {
+# 					_root.MarioHit(1, 90, -3, 5, 7, \"\");
+# 				} else {
+# 					_root.MarioHit(1, 90, -3, -5, 7, \"\");
+# 				}
+# 			}
+# 			//                      
+# 			_root.Course.Enemyhurt.attachMovie(\"EnemyHurtBox\", \"Box\"+_root.Course.Enemyhurt.getNextHighestDepth(), _root.Course.Enemyhurt.getNextHighestDepth(), {_x:_x, _y:_y-35, _yscale:40, _xscale:30, time:2});
+# 			//    
+# 			if (action == undefined && air == false) {
+# 				braincount = 0;
+# 				num += random(2)+1;
+# 				if (num>10) {
+# 					num = random(3)+1;
+# 				}
+# 				superjumptimer += random(2)+hp;
+# 				if (superjumptimer>64) {
+# 					superjumptimer = 0;
+# 					num = 10;
+# 				}
+# 				if (num<9) {
+# 					if (marioX>0) {
+# 						if (_xscale>0) {
+# 							num = 9;
+# 							inv = false;
+# 						} else {
+# 							inv = false;
+# 							action = \"Right\";
+# 						}
+# 					}
+# 					if (marioX<0) {
+# 						if (_xscale<0) {
+# 							num = 9;
+# 							inv = false;
+# 						} else {
+# 							inv = false;
+# 							action = \"Left\";
+# 						}
+# 					}
+# 				}
+# 				if (num == 9) {
+# 					frame = 3;
+# 					gotoAndStop(1);
+# 					action = \"jump\";
+# 					air = true;
+# 					num++;
+# 				} else if (num == 10) {
+# 					gotoAndStop(1);
+# 					action = \"Super Jump\";
+# 					air = true;
+# 					count = 0;
+# 					county = 0;
+# 					num++;
+# 				}
+# 			}
+# 			//                                                                    
+# 			if (action == \"Right\") {
+# 				//_xscale = -100;
+# 				frame = 1;
+# 				xspeed += ((4+hp)-xspeed)/7;
+# 				braincount++;
+# 			} else if (action == \"Left\") {
+# 				//_xscale = 100;
+# 				frame = 1;
+# 				xspeed += (-(4+hp)-xspeed)/7;
+# 				braincount++;
+# 			}
+# 			if (braincount>=30) {
+# 				braincount = 0;
+# 				lastaction = action;
+# 				action = undefined;
+# 			}
+# 			if (action == \"Super Jump\") {
+# 				frame = 2;
+# 				if (_y<-450 && count<=50) {
+# 					_y = -450;
+# 					yspeed = 0;
+# 				}
+# 				count++;
+# 				if (count>85) {
+# 					action = \"Fall\";
+# 					yspeed = Math.max(yspeed, 10);
+# 				} else if (count>45) {
+# 					xspeed = Math.min(Math.max((marioX)/5, -4), 4);
+# 					if (marioX>3) {
+# 						xspeed += 1.5;
+# 					}
+# 					if (marioX<-3) {
+# 						xspeed -= 1.5;
+# 					}
+# 				}
+# 			} else if (action == \"Fell\") {
+# 				county++;
+# 				if (county>20) {
+# 					county = 0;
+# 					lastaction = action;
+# 					action = undefined;
+# 				}
+# 			}
+# 			if (action == \"Super Jump\" && _y<=-300) {
+# 				_root.Course.FrontGFX.Shadow._alpha += 20;
+# 				_root.Course.FrontGFX.Shadow._alpha = Math.min(_root.Course.FrontGFX.Shadow._alpha, 100);
+# 				_root.Course.FrontGFX.Shadow._x = _x;
+# 				_root.Course.FrontGFX.Shadow._y = 0;
+# 			} else {
+# 				_root.Course.FrontGFX.Shadow._alpha -= 10;
+# 				_root.Course.FrontGFX.Shadow._alpha = Math.max(_root.Course.FrontGFX.Shadow._alpha, 0);
+# 				_root.Course.FrontGFX.Shadow._x = _x;
+# 				_root.Course.FrontGFX.Shadow._y = 0;
+# 			}
+# 			//                                           
+# 			// ^ AI :D ^
+# 			if (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				if (air == true && yspeed>0 && action !== \"Fall\" && action !== \"stomped\") {
+# 					lastaction = action;
+# 					action = undefined;
+# 				} else if (action == \"Fall\") {
+# 					action = \"Fell\";
+# 				}
+# 				yspeed = Math.min(yspeed, 0);
+# 				air = false;
+# 			} else {
+# 				air = true;
+# 			}
+# 			if (air == true && action !== \"Super Jump\") {
+# 				yspeed++;
+# 			}
+# 			// Walls                                                                                                                                           
+# 			if (yspeed>-3) {
+# 				while (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y+3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true) && !_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 					_y++;
+# 				}
+# 			}
+# 			while (_root.Course.Platforms.hitTest(((_x)*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-3)*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				_y--;
+# 			}
+# 			while (_root.Course.Platforms.hitTest(((_x-(wide/2))*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-(tall/2))*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				_x++;
+# 				xspeed = Math.max(xspeed, -xspeed*0.7);
+# 			}
+# 			while (_root.Course.Platforms.hitTest(((_x+(wide/2))*_root.coursescale/100)+(_parent._x*_root.coursescale/100)+_root.Course._x, ((_y-(tall/2))*_root.coursescale/100)+(_parent._y*_root.coursescale/100)+_root.Course._y, true)) {
+# 				_x--;
+# 				xspeed = Math.min(xspeed, -xspeed*0.7);
+# 			}
+# 			// ^ Walls ^
+# 			yspeed = Math.min(yspeed, 15);
+# 			_x += xspeed;
+# 			_y += yspeed;
+# 			gotoAndStop(frame);
+# 			if (frame == 1) {
+# 				if (Math.abs(xspeed)>1) {
+# 					clip.play();
+# 				}
+# 			}
+# 			xspeed *= 0.9;
+# 			Stomped = false;
+# 		}
+# 	};
+# 	loaded = true;
+# }
+# "
+
 [node name="Goomboss Code" type="Node2D"]
+script = ExtResource("1_if78h")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Goomboss/Goomboss Code.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xpjs1")
+"Timeline": SubResource("AnimationLibrary_u7ocn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_xt4vt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -37)
-script = ExtResource("2_v0rwg")
+script = ExtResource("2_0qp05")
 path = "res://sm63_godot/Enemies/Bosses/Goomboss/Goomboss Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -113,9 +337,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_xt4vt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
 position = Vector2(0, -37)
-script = ExtResource("2_v0rwg")
+script = ExtResource("2_0qp05")
 path = "res://sm63_godot/Enemies/Bosses/Goomboss/Goomboss Super Jump.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -131,9 +355,9 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_xt4vt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(0.35, -36.65)
-script = ExtResource("2_v0rwg")
+script = ExtResource("2_0qp05")
 path = "res://sm63_godot/Enemies/Bosses/Goomboss/Goomboss Jump.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -149,9 +373,9 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_xt4vt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
 position = Vector2(0.7, -36.5)
-script = ExtResource("2_v0rwg")
+script = ExtResource("2_0qp05")
 path = "res://sm63_godot/Enemies/Bosses/Goomboss/Goomboss Hurt.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -167,9 +391,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_xt4vt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0.7, -36.5)
-script = ExtResource("2_v0rwg")
+script = ExtResource("2_0qp05")
 path = "res://sm63_godot/Enemies/Bosses/Goomboss/Goomboss Defeated.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -186,10 +410,13 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_xt4vt")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ymmsd")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(2.5, -49.5)
 scale = Vector2(0.353851, 0.212067)
-script = ExtResource("2_v0rwg")
+script = ExtResource("2_0qp05")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -202,10 +429,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@49289" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_xt4vt")]
+[node name="@DOMSymbolInstance@49289" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(3.5, -5.05)
 scale = Vector2(0.530792, 0.531265)
-script = ExtResource("2_v0rwg")
+script = ExtResource("2_0qp05")
 path = "res://sm63_godot/Xtra/Lineless Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

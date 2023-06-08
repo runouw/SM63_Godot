@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_u174s"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ct15f"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi Jumping - 3.png" id="3_ui2xm"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Dive.png" id="4_sc003"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vrftf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_vqxms"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi Jumping - 3.png" id="3_ywrvi"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Dive.png" id="4_ecqdk"]
 
-[sub_resource type="Animation" id="Animation_vp5n3"]
+[sub_resource type="Animation" id="Animation_2oyle"]
 length = 0.333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -441,27 +441,245 @@ tracks/35/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nrah0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_51f8b"]
 _data = {
-"Default": SubResource("Animation_vp5n3")
+"Default": SubResource("Animation_2oyle")
 }
 
+[sub_resource type="GDScript" id="GDScript_nbu7h"]
+script/source = "extends Node
+# //
+# "
+
+[sub_resource type="GDScript" id="GDScript_u2i1a"]
+script/source = "extends Node
+# //
+# "
+
+[sub_resource type="GDScript" id="GDScript_e1uml"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_riqdx"]
+script/source = "extends Node
+# //"
+
+[sub_resource type="GDScript" id="GDScript_r2wnd"]
+script/source = "extends Node
+# rotation = 0;
+# rotspeed = 0;
+# rot2 = 0;
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (_root.Course.Char.air == true) {
+# 			rot2 = -_root.radiansToAngle(Math.atan2(_root.Course.Char.yspeed, -_root.Course.Char.xspeed));
+# 			rot2 += 10;
+# 		}
+# 		if (_root.Course.Char._xscale<0) {
+# 			rot2 = -_root.radiansToAngle(Math.atan2(_root.Course.Char.yspeed, _root.Course.Char.xspeed));
+# 			rot2 -= 10;
+# 		}
+# 		if (!_root.Course.Platforms.hitTest(((_root.Course.Char._x)*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+5)*_root.coursescale/100)+_root.Course._y, true) && !_root.Course.BPlatforms.hitTest(((_root.Course.Char._x)*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y+3)*_root.coursescale/100)+_root.Course._y, true)) {
+# 			if (air == false) {
+# 				air = true;
+# 				if (groundrot<0) {
+# 					_root.Course.Char.yspeed -= Math.sin(groundrot)*_root.Course.Char.xspeed*0.75;
+# 				}
+# 				_rotation = groundrot*(_root.Course.Char._xscale/100);
+# 				rotation = groundrot*(_root.Course.Char._xscale/100);
+# 			}
+# 			//                                         
+# 			if (rot>0) {
+# 				rot = rot2;
+# 				if (rot<-90) {
+# 					rotation -= 360;
+# 				}
+# 				rotspeed = (rot-rotation)/10;
+# 			} else {
+# 				rot = rot2;
+# 				if (rot>90) {
+# 					rotation += 360;
+# 				}
+# 				rotspeed = (rot-rotation)/10;
+# 			}
+# 			if (rotation>520) {
+# 				rotation -= 360;
+# 			}
+# 			if (rotation<-520) {
+# 				rotation += 360;
+# 			}
+# 			rotspeed = _root.groundFriction(rotspeed, 0.1, 1.15);
+# 			rotspeed = Math.min(rotspeed, 15);
+# 			rotspeed = Math.max(rotspeed, -15);
+# 			rotation += rotspeed;
+# 			_rotation = rotation;
+# 			air = true;
+# 			//
+# 		} else {
+# 			if (air == undefined || air == true) {
+# 				rotation = 0;
+# 				_rotation = 0;
+# 				air = false;
+# 			}
+# 			rotation = _rotation*(_root.Course.Char._xscale/100);
+# 			distance = 5;
+# 			frontpointX = _root.Course.Char._x-(Math.cos(_root.angleToRadians(rotation))*distance);
+# 			frontpointY = _root.Course.Char._y-(Math.sin(_root.angleToRadians(rotation))*distance);
+# 			//frontpointX = _root.Course.Char._x-10;
+# 			//frontpointY = _root.Course.Char._y-1;
+# 			coint = 0;
+# 			while (!_root.Course.Platforms.hitTest(((frontpointX)*_root.coursescale/100)+_root.Course._x, ((frontpointY)*_root.coursescale/100)+_root.Course._y, true) && !_root.Course.BPlatforms.hitTest(((frontpointX)*_root.coursescale/100)+_root.Course._x, ((frontpointY)*_root.coursescale/100)+_root.Course._y, true) && (_root.Course.Platforms.hitTest(((frontpointX)*_root.coursescale/100)+_root.Course._x, ((frontpointY+25)*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((frontpointX)*_root.coursescale/100)+_root.Course._x, ((frontpointY+15)*_root.coursescale/100)+_root.Course._y, true))) {
+# 				frontpointY += 0.5;
+# 				count++;
+# 				if (count>50) {
+# 					break;
+# 				}
+# 			}
+# 			coint = 0;
+# 			while (_root.Course.Platforms.hitTest(((frontpointX)*_root.coursescale/100)+_root.Course._x, ((frontpointY)*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((frontpointX)*_root.coursescale/100)+_root.Course._x, ((frontpointY)*_root.coursescale/100)+_root.Course._y, true)) {
+# 				frontpointY -= 0.5;
+# 				count++;
+# 				if (count>50) {
+# 					break;
+# 				}
+# 			}
+# 			backpointX = _root.Course.Char._x+(Math.cos(_root.angleToRadians(rotation))*distance);
+# 			backpointY = _root.Course.Char._y-(Math.sin(_root.angleToRadians(rotation))*distance);
+# 			//backpointX = _root.Course.Char._x+10;
+# 			//backpointY = _root.Course.Char._y-1;
+# 			coint = 0;
+# 			while (!_root.Course.Platforms.hitTest(((backpointX)*_root.coursescale/100)+_root.Course._x, ((backpointY)*_root.coursescale/100)+_root.Course._y, true) && !_root.Course.BPlatforms.hitTest(((backpointX)*_root.coursescale/100)+_root.Course._x, ((backpointY)*_root.coursescale/100)+_root.Course._y, true) && (_root.Course.Platforms.hitTest(((backpointX)*_root.coursescale/100)+_root.Course._x, ((backpointY+25)*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((backpointX)*_root.coursescale/100)+_root.Course._x, ((backpointY+15)*_root.coursescale/100)+_root.Course._y, true))) {
+# 				backpointY += 0.5;
+# 				count++;
+# 				if (count>50) {
+# 					break;
+# 				}
+# 			}
+# 			coint = 0;
+# 			while (_root.Course.Platforms.hitTest(((backpointX)*_root.coursescale/100)+_root.Course._x, ((backpointY)*_root.coursescale/100)+_root.Course._y, true) || _root.Course.BPlatforms.hitTest(((backpointX)*_root.coursescale/100)+_root.Course._x, ((backpointY)*_root.coursescale/100)+_root.Course._y, true)) {
+# 				backpointY -= 0.5;
+# 				count++;
+# 				if (count>50) {
+# 					break;
+# 				}
+# 			}
+# 			//_root.Course.attachMovie(\"redX\", \"redX\"+_root.Course.getNextHighestDepth(), _root.Course.getNextHighestDepth(), {_x:frontpointX, _y:frontpointY});
+# 			//_root.Course.attachMovie(\"redX\", \"redX\"+_root.Course.getNextHighestDepth(), _root.Course.getNextHighestDepth(), {_x:backpointX, _y:backpointY});
+# 			rotation = _root.radiansToAngle(Math.atan2(backpointY-frontpointY, backpointX-frontpointX));
+# 			//if (rotation>groundrot && groundrot<0 && _root.Course.Char.xspeed*(-_root.Course.Char._xscale/100)>5) {
+# 			//_root.Course.Char.yspeed = -1;
+# 			//_root.Course.Char._y -= 1;
+# 			//}
+# 			groundrot = rotation;
+# 			_rotation = rotation*(_root.Course.Char._xscale/100)*0.9;
+# 			speedslide = Math.sin(_root.angleToRadians(rotation));
+# 			//speedslide *= 0.5;
+# 			speedslide = Math.max(speedslide, -1);
+# 			speedslide = Math.min(speedslide, 1);
+# 			//_root.Course.Char.xspeed *= 0.95;
+# 			if (_root.Course.Char.Ice == true) {
+# 				_root.Course.Char.xspeed += speedslide*0.75;
+# 			} else if (_root.Course.Char.Puddle == true) {
+# 				_root.Course.Char.xspeed += speedslide*0.9;
+# 			} else {
+# 				_root.Course.Char.xspeed += speedslide;
+# 			}
+# 		}
+# 		_root.DiveRot = _rotation;
+# 		if (_root.KeyRIGHT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/8;
+# 		}
+# 		if (_root.KeyLEFT() && _root.Controll == true) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airwalkspeed)/(_root.airmaxWalkspeed/3), 0)/8;
+# 		}
+# 		//                       
+# 		if (_root.KeyTapRIGHT()) {
+# 			_root.Course.Char.xspeed -= Math.min((_root.Course.Char.xspeed-_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0)/5;
+# 		}
+# 		if (_root.KeyTapLEFT()) {
+# 			_root.Course.Char.xspeed -= Math.max((_root.Course.Char.xspeed+_root.airtapspeed)/(_root.airmaxtapWalkspeed/3), 0)/5;
+# 		}
+# 		if (!_root.KeyDOWN()) {
+# 		}
+# 		if (_root.KeyUP() && _root.Course.Char.air == false && Math.abs(_root.Course.Char.xspeed)<5 && ((_root.Course.Char._xscale>0 && _root.KeyRIGHT()) || (_root.Course.Char._xscale<0 && _root.KeyLEFT()))) {
+# 			tellTarget (_root.Course.Char) {
+# 				attack = true;
+# 				attackFrame = \"backflip\";
+# 				xspeed *= 0.75;
+# 				if (_xscale<0) {
+# 					xspeed -= (xspeed+30)/5;
+# 				} else {
+# 					xspeed -= (xspeed-30)/5;
+# 				}
+# 				yspeed = Math.min(-_root.jumpspeed-2, yspeed);
+# 			}
+# 		}
+# 		if (_currentframe>2 && _root.KeyUP() && _root.Course.Char.air == false && Math.abs(_root.Course.Char.xspeed)>3 && Math.abs(rotation)<25 && ((_root.Course.Char._xscale>0 && !_root.KeyRIGHT()) || (_root.Course.Char._xscale<0 && !_root.KeyLEFT())) && !(Math.abs(rotation)>15 && Ice == true)) {
+# 			tellTarget (_root.Course.Char) {
+# 				attack = true;
+# 				attackFrame = \"diveflip\";
+# 				if (_xscale<0) {
+# 					xspeed -= (xspeed-15)/5;
+# 				} else {
+# 					xspeed -= (xspeed+15)/5;
+# 				}
+# 				yspeed = Math.min(-_root.jumpspeed/1.5, yspeed);
+# 			}
+# 		}
+# 		if ((_root.Course.Char.Ice == true && Math.abs(rotation)<=3) || (Math.abs(rotation)<=15)) {
+# 			if (_root.KeyUP() && _root.Course.Char.air == false && Math.abs(_root.Course.Char.xspeed)<3) {
+# 				play();
+# 			}
+# 			if (_root.Course.Char.air == false && Math.abs(_root.Course.Char.xspeed)<1 && !_root.KeyDOWN()) {
+# 				play();
+# 			}
+# 		}
+# 		if (_root.Course.Char.Water == true && _root.Course.Char.air == true && _root.Metal !== true) {
+# 			play();
+# 		}
+# 		count++;
+# 		if (count == 3 && _root.Course.Char.air == true && (Math.abs(_root.Course.Char.yspeed)+Math.abs(_root.Course.Char.xspeed))>7 && _root.Course.Char.yspeed<0 && _root.Course.Char.Water == false && _root.WingCap == true) {
+# 			flying = true;
+# 		}
+# 		if (count>20 && _root.Course.Char.air == true && flying == true && _root.WingCap == true) {
+# 			_root.Course.Char.attackFrame = \"Flying\";
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_nkmu4"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_odc34"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# "
+
 [node name="Luigi (Hover) Diving" type="Node2D"]
+script = ExtResource("1_vrftf")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi (Hover) Diving.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nrah0")
+"Timeline": SubResource("AnimationLibrary_51f8b")
 }
 
 [node name="Layer 5" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(1.2, -9.85)
 rotation = -0.523598
 scale = Vector2(1, 1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -477,11 +695,11 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 1" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 1"]
 position = Vector2(-3.2, 0.1)
 rotation = -1.309
 scale = Vector2(1, 1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -497,10 +715,10 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 2" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 2"]
 position = Vector2(-7, -1.4)
 rotation = -1.5708
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -516,11 +734,11 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 4" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 4"]
 position = Vector2(-5, -4.5)
 rotation = -1.309
 scale = Vector2(1, 1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -536,11 +754,11 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 5"]
 position = Vector2(-4.5, -8.75)
 rotation = -0.785387
 scale = Vector2(1.00001, 1.00001)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -556,11 +774,11 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 6" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 6"]
 position = Vector2(0.85, -8.95)
 rotation = -0.52359
 scale = Vector2(1.00002, 1.00002)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -576,12 +794,12 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 7" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 7"]
 position = Vector2(1.1, -9.2)
 rotation = -0.261781
 scale = Vector2(1.00001, 1.00002)
 skew = -1.4782e-05
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -597,12 +815,12 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 8" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 8"]
 position = Vector2(1.35, -9.45)
 rotation = 1.52586e-05
 scale = Vector2(1.00002, 1.00002)
 skew = -1.52588e-05
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -624,7 +842,7 @@ texture_filter = 1
 position = Vector2(0.3, -26)
 rotation = 2.618
 scale = Vector2(1, -1)
-texture = ExtResource("3_ui2xm")
+texture = ExtResource("3_ywrvi")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
@@ -635,7 +853,7 @@ texture_filter = 1
 position = Vector2(19.05, -3.75)
 rotation = -2.87979
 scale = Vector2(1, -1)
-texture = ExtResource("4_sc003")
+texture = ExtResource("4_ecqdk")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
@@ -646,7 +864,7 @@ texture_filter = 1
 position = Vector2(17.85, -7.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_sc003")
+texture = ExtResource("4_ecqdk")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
@@ -657,7 +875,7 @@ texture_filter = 1
 position = Vector2(17.85, -7.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_sc003")
+texture = ExtResource("4_ecqdk")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
@@ -668,7 +886,7 @@ texture_filter = 1
 position = Vector2(20.05, -5.75)
 rotation = -2.87979
 scale = Vector2(1, -1)
-texture = ExtResource("4_sc003")
+texture = ExtResource("4_ecqdk")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
@@ -679,7 +897,7 @@ texture_filter = 1
 position = Vector2(19.4, -3.6)
 rotation = -2.618
 scale = Vector2(1, -1)
-texture = ExtResource("4_sc003")
+texture = ExtResource("4_ecqdk")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
@@ -690,7 +908,7 @@ texture_filter = 1
 position = Vector2(-0.25, -25.75)
 rotation = 2.618
 scale = Vector2(1, -1)
-texture = ExtResource("3_ui2xm")
+texture = ExtResource("3_ywrvi")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
@@ -701,7 +919,7 @@ texture_filter = 1
 position = Vector2(5.05, -26.45)
 rotation = 2.87979
 scale = Vector2(1, -1)
-texture = ExtResource("3_ui2xm")
+texture = ExtResource("3_ywrvi")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 2"]
@@ -712,18 +930,18 @@ texture_filter = 1
 position = Vector2(10, -24.35)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_ui2xm")
+texture = ExtResource("3_ywrvi")
 centered = false
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(4.7, 2.1)
 rotation = -0.523598
 scale = Vector2(1, 1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -739,11 +957,11 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1"]
 position = Vector2(7.65, 6.1)
 rotation = -1.309
 scale = Vector2(1, 1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -759,10 +977,10 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 2"]
 position = Vector2(5.05, 1.55)
 rotation = -1.5708
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -778,11 +996,11 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4"]
 position = Vector2(5.9, 1.45)
 rotation = -1.309
 scale = Vector2(1, 1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -798,11 +1016,11 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 5" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 5"]
 position = Vector2(2, 1.85)
 rotation = -0.785387
 scale = Vector2(1.00001, 1.00001)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -818,11 +1036,11 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 6" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 6"]
 position = Vector2(4.4, 2.95)
 rotation = -0.52359
 scale = Vector2(1.00002, 1.00002)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -838,12 +1056,12 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 7" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 7"]
 position = Vector2(1.5, 3.25)
 rotation = -0.261781
 scale = Vector2(1.00001, 1.00002)
 skew = -1.4782e-05
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -859,12 +1077,12 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 8" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 8"]
 position = Vector2(-1.5, 2.7)
 rotation = 1.52586e-05
 scale = Vector2(1.00002, 1.00002)
 skew = -1.52588e-05
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Side Front.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -881,11 +1099,11 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(5.3, -13.95)
 rotation = 1.0472
 scale = Vector2(1, -1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -898,14 +1116,17 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_nbu7h")
+
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(-3.2, -5.7)
 rotation = 0.2618
 scale = Vector2(1, -1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -921,10 +1142,10 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 2"]
 position = Vector2(-8.5, -7)
 scale = Vector2(1, -1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -937,14 +1158,17 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_u2i1a")
+
 [node name="Frame 4" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 4"]
 position = Vector2(-5, -10.3)
 rotation = 0.2618
 scale = Vector2(1, -1)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -960,11 +1184,11 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 5" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 5"]
 position = Vector2(-1.6, -13.75)
 rotation = 0.785409
 scale = Vector2(1.00001, -1.00001)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -977,14 +1201,17 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 5/DOMSymbolInstance"]
+script = SubResource("GDScript_e1uml")
+
 [node name="Frame 6" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 6" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 6"]
 position = Vector2(4.95, -13.05)
 rotation = 1.04721
 scale = Vector2(1.00002, -1.00002)
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1000,12 +1227,12 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 7" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 7"]
 position = Vector2(6.2, -12.05)
 rotation = 1.309
 scale = Vector2(1.00002, -1.00001)
 skew = 1.46627e-05
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1018,15 +1245,18 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 3/Frame 7/DOMSymbolInstance"]
+script = SubResource("GDScript_riqdx")
+
 [node name="Frame 8" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 8" instance=ExtResource("1_u174s")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 8"]
 position = Vector2(7, -10.9)
 rotation = 1.5708
 scale = Vector2(1.00002, -1.00002)
 skew = 1.52588e-05
-script = ExtResource("2_ct15f")
+script = ExtResource("2_vqxms")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Wait WaterBlast.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1043,8 +1273,17 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_r2wnd")
+
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 2"]
+script = SubResource("GDScript_nkmu4")
+
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 9"]
+script = SubResource("GDScript_odc34")

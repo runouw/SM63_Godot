@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Turbo Nozzle Box.png" id="1_rrdfc"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_2i1n0"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_8h4sy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lb4rg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Turbo Nozzle Box.png" id="2_lkq4x"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_s88fc"]
 
-[sub_resource type="Animation" id="Animation_ng53o"]
+[sub_resource type="Animation" id="Animation_pxedo"]
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -248,16 +248,77 @@ tracks/19/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gdoye"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yi04d"]
 _data = {
-"Default": SubResource("Animation_ng53o")
+"Default": SubResource("Animation_pxedo")
 }
 
+[sub_resource type="GDScript" id="GDScript_2najr"]
+script/source = "extends Node
+# if (_root.BowserKey1 == true || _root.CheatCastleUnlock == true || _root.PlayingLevelDesigner == true) {
+# 	stop();
+# } else {
+# 	_alpha = 50;
+# 	gotoAndStop(\"gone\");
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_wg1l8"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	if (this.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, (_root.Course.Char._y*_root.coursescale/100)+_root.Course._y, true) && _root.Course.Char.yspeed>0) {
+# 		_parent.play();
+# 		_root.Course.Char.yspeed = -6;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_0djfw"]
+script/source = "extends Node
+# _root.FluddArray[_root.Playinglevel][3] = true;
+# _root.SaveFluddT = true;
+# //_root.SaveFile();
+# //
+# _parent.attachMovie(\"Tnozzle\", \"Hnozzle\"+_parent.getNextHighestDepth(), _parent.getNextHighestDepth(), {_x:_x, _y:_y+10});
+# //
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Nozzle Box Break\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_qos5l"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		count++;
+# 		if (count>300) {
+# 			gotoAndStop(1);
+# 			onEnterFrame = null;
+# 		}
+# 	}
+# };
+# "
+
 [node name="Turbo Nozzle Box Clip" type="Node2D"]
+script = ExtResource("1_lb4rg")
+source_xml = "res://sm63/LIBRARY/Char/Fludd CLIPS/Turbo Nozzle Box Clip.xml"
+linkage = "TurboNozzleBox"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gdoye")
+"Timeline": SubResource("AnimationLibrary_yi04d")
 }
 
 [node name="Layer 7" type="Node2D" parent="."]
@@ -271,7 +332,7 @@ libraries = {
 [node name="@@14586" type="Polygon2D" parent="Layer 7/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(-12.4, -7.95, 12.6, -7.95, 12.6, 20, -12.4, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -286,7 +347,7 @@ visible = false
 [node name="@@14587" type="Polygon2D" parent="Layer 7/Frame 1/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(-12.4, -7.95, 12.6, -7.95, 12.6, 20, -12.4, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -299,11 +360,12 @@ position = Vector2(0, 16.4)
 scale = Vector2(1, 0.180679)
 
 [node name="Shape" type="Node2D" parent="Layer 7/Frame 9/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@14588" type="Polygon2D" parent="Layer 7/Frame 9/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(-12.4, -7.95, 12.6, -7.95, 12.6, 20, -12.4, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -322,7 +384,7 @@ visible = false
 [node name="@@14583" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(-16, -7.95, -12.4, -7.95, -12.4, 20, -16, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -337,7 +399,7 @@ visible = false
 [node name="@@14584" type="Polygon2D" parent="Layer 4/Frame 1/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(-16, -7.95, -12.4, -7.95, -12.4, 20, -16, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -355,7 +417,7 @@ scale = Vector2(0.99997, 0.99997)
 [node name="@@14585" type="Polygon2D" parent="Layer 4/Frame 9/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(-16, -7.95, -12.4, -7.95, -12.4, 20, -16, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -374,7 +436,7 @@ visible = false
 [node name="@@14580" type="Polygon2D" parent="Layer 6/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(12.6, -7.95, 16, -7.95, 16, 20, 12.6, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -389,7 +451,7 @@ visible = false
 [node name="@@14581" type="Polygon2D" parent="Layer 6/Frame 1/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(12.6, -7.95, 16, -7.95, 16, 20, 12.6, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -403,11 +465,12 @@ rotation = 1.54398
 scale = Vector2(0.999902, 0.999902)
 
 [node name="Shape" type="Node2D" parent="Layer 6/Frame 9/Group"]
+scale = Vector2(1, 1)
 
 [node name="@@14582" type="Polygon2D" parent="Layer 6/Frame 9/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(12.6, -7.95, 16, -7.95, 16, 20, 12.6, 20)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -426,7 +489,7 @@ visible = false
 [node name="@@14577" type="Polygon2D" parent="Layer 5/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(-16, -20, 16, -20, 16, -7.95, -16, -7.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -441,7 +504,7 @@ visible = false
 [node name="@@14578" type="Polygon2D" parent="Layer 5/Frame 1/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(-16, -20, 16, -20, 16, -7.95, -16, -7.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -458,7 +521,7 @@ scale = Vector2(1, 0.331955)
 [node name="@@14579" type="Polygon2D" parent="Layer 5/Frame 9/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 texture_offset = Vector2(16, 20)
 polygon = PackedVector2Array(-16, -20, 16, -20, 16, -7.95, -16, -7.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -470,10 +533,13 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_2i1n0")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_2najr")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0, -14)
 scale = Vector2(0.603775, 1)
-script = ExtResource("3_8h4sy")
+script = ExtResource("3_s88fc")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -486,11 +552,20 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_wg1l8")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_0djfw")
+
 [node name="Frame 10" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 10"]
+script = SubResource("GDScript_qos5l")
 
 [node name="Frame 11" type="Node2D" parent="Layer 2"]
 visible = false
@@ -498,5 +573,5 @@ visible = false
 [node name="@@14576" type="Sprite2D" parent="Layer 2/Frame 11"]
 texture_filter = 1
 position = Vector2(-16, -20)
-texture = ExtResource("1_rrdfc")
+texture = ExtResource("2_lkq4x")
 centered = false

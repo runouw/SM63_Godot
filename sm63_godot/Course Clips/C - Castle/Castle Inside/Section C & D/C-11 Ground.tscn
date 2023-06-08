@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_j62uy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_67xbc"]
+
+[sub_resource type="Animation" id="Animation_rouc2"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_epomw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hne1t"]
 _data = {
-"Default": SubResource("Animation_j62uy")
+"Default": SubResource("Animation_rouc2")
 }
 
 [node name="C-11 Ground" type="Node2D"]
+script = ExtResource("1_67xbc")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section C & D/C-11 Ground.xml"
+linkage = "C-11Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_epomw")
+"Timeline": SubResource("AnimationLibrary_hne1t")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

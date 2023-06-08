@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fireball F1 copy.png" id="1_arvwr"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fireball F2 copy.png" id="2_ci5lc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7pu6q"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fireball F1 copy.png" id="2_0o0ax"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Fireball F2 copy.png" id="3_2ac3v"]
 
-[sub_resource type="Animation" id="Animation_erjcr"]
+[sub_resource type="Animation" id="Animation_wt3p2"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -67,16 +68,32 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wigpp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0i0a1"]
 _data = {
-"Default": SubResource("Animation_erjcr")
+"Default": SubResource("Animation_wt3p2")
 }
 
+[sub_resource type="GDScript" id="GDScript_acr7b"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Bowser Fireball Animation" type="Node2D"]
+script = ExtResource("1_7pu6q")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bowser Fireball Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wigpp")
+"Timeline": SubResource("AnimationLibrary_0i0a1")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -86,7 +103,7 @@ libraries = {
 [node name="@@48916" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-25, -7)
-texture = ExtResource("1_arvwr")
+texture = ExtResource("2_0o0ax")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -95,7 +112,7 @@ visible = false
 [node name="@@48917" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-25, -6)
-texture = ExtResource("2_ci5lc")
+texture = ExtResource("3_2ac3v")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -105,7 +122,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-25, 7)
 scale = Vector2(1, -1)
-texture = ExtResource("1_arvwr")
+texture = ExtResource("2_0o0ax")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -115,9 +132,12 @@ visible = false
 texture_filter = 1
 position = Vector2(-25, 6)
 scale = Vector2(1, -1)
-texture = ExtResource("2_ci5lc")
+texture = ExtResource("3_2ac3v")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_acr7b")

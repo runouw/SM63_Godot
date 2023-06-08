@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_y11ip"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_701qn"]
+
+[sub_resource type="Animation" id="Animation_dlm26"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_utshd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gmy77"]
 _data = {
-"Default": SubResource("Animation_y11ip")
+"Default": SubResource("Animation_dlm26")
 }
 
 [node name="LDSB Drag Arrow Arrow" type="Node2D"]
+script = ExtResource("1_701qn")
+source_xml = "res://sm63/LIBRARY/LDSB Drag Arrow Arrow.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_utshd")
+"Timeline": SubResource("AnimationLibrary_gmy77")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -38,7 +45,7 @@ scale = Vector2(0.599991, 0.599991)
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group"]
 
 [node name="@@8925" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
-color = Color(1, 1, 1, 0.498039)
+color = Color(0, 0, 0, 0.498039)
 polygon = PackedVector2Array(0, -6.175, 0, -6.175, 5.01684, -1.175, -5.05068, -1.175, -5.05068, -1.175, 0, -1.175, -7.475, 6.225, -7.475, 6.225, -7.475, 1.225, 0, -1.175, 5.01684, -1.175, 7.45, 1.25, 7.45, 6.25, 7.45, 6.25, 2.40808, 1.225)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13, 14)])
 

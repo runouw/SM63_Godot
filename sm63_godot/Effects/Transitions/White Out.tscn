@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_6e7er"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1pxvp"]
+
+[sub_resource type="Animation" id="Animation_735tv"]
 length = 1.13333
 loop_mode = 1
 tracks/0/type = "value"
@@ -64,16 +66,26 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_d1fwr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3eb1f"]
 _data = {
-"Default": SubResource("Animation_6e7er")
+"Default": SubResource("Animation_735tv")
 }
 
+[sub_resource type="GDScript" id="GDScript_gro6e"]
+script/source = "extends Node
+# this.removeMovieClip(this);
+# "
+
 [node name="White Out" type="Node2D"]
+script = ExtResource("1_1pxvp")
+source_xml = "res://sm63/LIBRARY/Effects/Transitions/White Out.xml"
+linkage = "Whiteout"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_d1fwr")
+"Timeline": SubResource("AnimationLibrary_3eb1f")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -105,3 +117,6 @@ visible = false
 
 [node name="Frame 33" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 33"]
+script = SubResource("GDScript_gro6e")

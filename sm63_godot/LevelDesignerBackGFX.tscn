@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_26q1f"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hpkrt"]
+
+[sub_resource type="Animation" id="Animation_kmm6k"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,25 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xb4q5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfq8d"]
 _data = {
-"Default": SubResource("Animation_26q1f")
+"Default": SubResource("Animation_kmm6k")
 }
 
+[sub_resource type="GDScript" id="GDScript_fbkew"]
+script/source = "extends Node
+# stop();"
+
 [node name="LevelDesignerBackGFX" type="Node2D"]
+script = ExtResource("1_hpkrt")
+source_xml = "res://sm63/LIBRARY/LevelDesignerBackGFX.xml"
+linkage = "LevelDesignerBackGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xb4q5")
+"Timeline": SubResource("AnimationLibrary_pfq8d")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -46,3 +57,6 @@ libraries = {
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_fbkew")

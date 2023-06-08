@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_6ad6o"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_wfsg8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_yn3fl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_fyn00"]
 
-[sub_resource type="Animation" id="Animation_q5mgq"]
+[sub_resource type="Animation" id="Animation_1mpcy"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,29 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7uml"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wx4gy"]
 _data = {
-"Default": SubResource("Animation_q5mgq")
+"Default": SubResource("Animation_1mpcy")
 }
 
 [node name="8-13BG" type="Node2D"]
+script = ExtResource("1_yn3fl")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-13BG.xml"
+linkage = "8-13BG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_l7uml")
+"Timeline": SubResource("AnimationLibrary_wx4gy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6ad6o")]
-script = ExtResource("2_wfsg8")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_fyn00")
 path = "res://sm63_godot/Course Clips/8-13BGTint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -46,5 +51,5 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 0.6
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(0.2, 0.2, 0.2, 1)
 brightness = 0.0

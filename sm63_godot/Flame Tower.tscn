@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Flame Tower 1.png" id="1_iw1ou"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Flame Tower 2.png" id="2_f5xt6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Flame Tower 3.png" id="3_b1wrv"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Flame Tower 4.png" id="4_l18lm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_sx8wl"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Flame Tower 1.png" id="2_2ashm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Flame Tower 2.png" id="3_qsilj"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Flame Tower 3.png" id="4_lsvnu"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Effects/Effects-Bits/Flame Tower 4.png" id="5_ik3hb"]
 
-[sub_resource type="Animation" id="Animation_u54du"]
+[sub_resource type="Animation" id="Animation_c7c7j"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -69,16 +70,32 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eayel"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cha5f"]
 _data = {
-"Default": SubResource("Animation_u54du")
+"Default": SubResource("Animation_c7c7j")
 }
 
+[sub_resource type="GDScript" id="GDScript_8iadh"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="Flame Tower" type="Node2D"]
+script = ExtResource("1_sx8wl")
+source_xml = "res://sm63/LIBRARY/Flame Tower.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_eayel")
+"Timeline": SubResource("AnimationLibrary_cha5f")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -88,7 +105,7 @@ libraries = {
 [node name="@@6165" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-24, -48)
-texture = ExtResource("1_iw1ou")
+texture = ExtResource("2_2ashm")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -97,7 +114,7 @@ visible = false
 [node name="@@6166" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-24, -48)
-texture = ExtResource("2_f5xt6")
+texture = ExtResource("3_qsilj")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -106,7 +123,7 @@ visible = false
 [node name="@@6167" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-24, -48)
-texture = ExtResource("3_b1wrv")
+texture = ExtResource("4_lsvnu")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -115,9 +132,12 @@ visible = false
 [node name="@@6168" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-24, -47.5)
-texture = ExtResource("4_l18lm")
+texture = ExtResource("5_ik3hb")
 centered = false
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_8iadh")

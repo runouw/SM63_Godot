@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_q5fxq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ksoo1"]
+
+[sub_resource type="Animation" id="Animation_h5ddx"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,34 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_beg6i"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ug7a"]
 _data = {
-"Default": SubResource("Animation_q5fxq")
+"Default": SubResource("Animation_h5ddx")
 }
 
+[sub_resource type="GDScript" id="GDScript_dtc15"]
+script/source = "extends Node
+# stop();
+# _alpha = 0;
+# onEnterFrame = function () {
+# 	if (_alpha<=0) {
+# 		gotoAndStop(1);
+# 	} else {
+# 		gotoAndStop(2);
+# 	}
+# };
+# "
+
 [node name="Screen Filter Clip" type="Node2D"]
+script = ExtResource("1_ksoo1")
+source_xml = "res://sm63/LIBRARY/Screen Filter Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_beg6i")
+"Timeline": SubResource("AnimationLibrary_7ug7a")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -62,9 +82,13 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 1"]
 
 [node name="@@13847" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-225.025, -150, 224.975, -150, 224.975, 150, -225.025, 150)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_dtc15")

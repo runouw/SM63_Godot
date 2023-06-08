@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_etbuh"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_sghxp"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_43u3f"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_efggp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_1wowm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="3_k8dbm"]
 
-[sub_resource type="Animation" id="Animation_omqus"]
+[sub_resource type="Animation" id="Animation_w8ay1"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,21 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b8fvs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6cqws"]
 _data = {
-"Default": SubResource("Animation_omqus")
+"Default": SubResource("Animation_w8ay1")
 }
 
 [node name="8-8FrontGFX" type="Node2D"]
+script = ExtResource("1_efggp")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-8FrontGFX.xml"
+linkage = "8-8FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_b8fvs")
+"Timeline": SubResource("AnimationLibrary_6cqws")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -105,9 +110,9 @@ color = Color(0.741176, 0, 0, 1)
 polygon = PackedVector2Array(-716.5, 36.45, -150.525, 36.45, -150.525, 108.95, -716.5, 108.95)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_etbuh")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-717.5, 28.45)
-script = ExtResource("2_sghxp")
+script = ExtResource("2_1wowm")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -120,9 +125,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19584" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_etbuh")]
+[node name="@DOMSymbolInstance@19584" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-465.5, 28.45)
-script = ExtResource("2_sghxp")
+script = ExtResource("2_1wowm")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -135,9 +140,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19585" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_etbuh")]
+[node name="@DOMSymbolInstance@19585" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-214.5, 28.45)
-script = ExtResource("2_sghxp")
+script = ExtResource("2_1wowm")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -159,9 +164,9 @@ color = Color(0.741176, 0, 0, 1)
 polygon = PackedVector2Array(-584.05, -458.25, -347.1, -458.25, -347.1, -385.75, -584.05, -385.75)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="@DOMSymbolInstance@19588" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_etbuh")]
+[node name="@DOMSymbolInstance@19588" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-599, -468.25)
-script = ExtResource("2_sghxp")
+script = ExtResource("2_1wowm")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -184,9 +189,9 @@ color = Color(0.741176, 0, 0, 1)
 polygon = PackedVector2Array(-778.5, -1292.2, -274.1, -1292.2, -274.1, -1252.55, -778.5, -1252.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
-[node name="@DOMSymbolInstance@19591" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_etbuh")]
+[node name="@DOMSymbolInstance@19591" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-772.9, -2518.55)
-script = ExtResource("2_sghxp")
+script = ExtResource("2_1wowm")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -199,9 +204,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19592" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_etbuh")]
+[node name="@DOMSymbolInstance@19592" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-520.9, -2518.55)
-script = ExtResource("2_sghxp")
+script = ExtResource("2_1wowm")
 path = "res://sm63_godot/Effects/Lava-Fire/Lava Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -330,10 +335,10 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Yra"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Yra/Frame 0" instance=ExtResource("1_etbuh")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Yra/Frame 0"]
 position = Vector2(-299.55, 86.4)
 scale = Vector2(0.182999, 3.37749)
-script = ExtResource("2_sghxp")
+script = ExtResource("2_1wowm")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -346,10 +351,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19575" type="Node2D" parent="Yra/Frame 0" instance=ExtResource("1_etbuh")]
+[node name="@DOMSymbolInstance@19575" type="Node2D" parent="Yra/Frame 0"]
 position = Vector2(-469, -406.05)
 scale = Vector2(0.0542603, 3.05498)
-script = ExtResource("2_sghxp")
+script = ExtResource("2_1wowm")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -362,10 +367,10 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@19576" type="Node2D" parent="Yra/Frame 0" instance=ExtResource("1_etbuh")]
+[node name="@DOMSymbolInstance@19576" type="Node2D" parent="Yra/Frame 0"]
 position = Vector2(-553.8, -2476.65)
 scale = Vector2(0.126495, 2.7791)
-script = ExtResource("2_sghxp")
+script = ExtResource("2_1wowm")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Lava FG Ray.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -389,7 +394,7 @@ brightness = 0.0
 [node name="@@19572" type="Polygon2D" parent="Bkcri/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_43u3f")
+texture = ExtResource("3_k8dbm")
 texture_offset = Vector2(303.25, -5.2)
 polygon = PackedVector2Array(-885.9, -2920.6, 220, -2920.6, 220, -2717.5, -885.9, -2717.5, -885.9, -2717.5, -704.05, -2717.5, -704.05, -2617.55, -885.9, -2617.55, -169.1, -2717.5, 220, -2717.5, 220, -2474.55, -169.1, -2474.55, -169.1, -2617.55, -885.9, -2617.55, -575.1, -2617.55, -575.1, -2600.55, -592.05, -2586.55, -885.9, -2586.55, -885.9, -2600.55, -885.9, -2586.55, -770.05, -2586.55, -785.05, -2571.55, -785.05, -2522.55, -885.9, -2522.55, -885.9, -2585.55, -286.1, -2585.55, -223.1, -2585.55, -223.1, -2555.55, -255.1, -2522.55, -255.1, -2490.55, -286.1, -2490.55, -286.1, -2571.55, -885.9, -2522.55, -704.05, -2522.55, -704.05, -2490.55, -885.9, -2490.55, -885.9, -2490.55, -255.1, -2490.55, -255.1, -2474.55, -273.1, -2458.55, -885.9, -2458.55, -885.9, -2474.55, -169.1, -2474.55, 220, -2474.55, 220, -828.55, -169.1, -828.55, -169.1, -2458.55, -885.9, -2458.55, -704.05, -2458.55, -704.05, -888.55, -885.9, -888.55, -885.9, -1030.7, -885.9, -888.55, -317.1, -888.55, -317.1, -860.55, -349.1, -829.55, -885.9, -829.55, -885.9, -860.55, -885.9, -829.55, -464.1, -829.55, -464.1, -828.55, -885.9, -828.55, -885.9, -828.55, -704.05, -828.55, -704.05, -396.6, -885.9, -396.6, -885.9, -651.6, -492.1, -828.55, -464.1, -828.55, -464.1, -619.55, -479.1, -602.55, -479.1, -602.55, -492.1, -618.55, -492.1, -651.6, -169.1, -828.55, 220, -828.55, 220, -651.6, -169.1, -651.6, -639.05, -651.6, -574.05, -651.6, -574.05, -425.6, -607.05, -425.6, -607.05, -587.6, -639.05, -619.75, -367.1, -651.6, 220, -651.6, 220, -617.6, -367.1, -617.6, -367.1, -619.75, -367.1, -617.6, -304.1, -617.6, -336.1, -585.6, -336.1, -425.6, -367.1, -425.6, -367.1, -602.55, -169.1, -617.6, 220, -617.6, 220, -120.6, -105.1, -120.6, -169.1, -187.6, -169.1, -602.55, -607.05, -425.6, -336.1, -425.6, -336.1, -394.6, -367.1, -362.65, -573.05, -362.65, -607.05, -396.6, -885.9, -396.6, -704.05, -396.6, -704.05, -282.575, -338.1, -282.55, -338.1, -249.6, -368.1, -216.6, -885.9, -216.6, -885.9, -394.6, -885.9, -216.6, -704.05, -216.6, -704.05, -8.6, -885.9, -8.6, -885.9, -187.6, 5.4, -120.6, 220, -120.6, 220, 5.2, 62.9, 5.2, 62.9, -61.6, -885.9, -8.6, -629.05, -8.6, -629.05, 71.4, -885.9, 71.4, -885.9, 5.2, -172.1, 5.2, 220, 5.2, 220, 71.4, -172.1, 71.4, -885.9, 71.4, 220, 71.4, 220, 193.7, -885.9, 193.7)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17, 18), PackedInt32Array(19, 20, 21, 22, 23, 24), PackedInt32Array(25, 26, 27, 28, 29, 30, 31), PackedInt32Array(32, 33, 34, 35), PackedInt32Array(36, 37, 38, 39, 40, 41), PackedInt32Array(42, 43, 44, 45, 46), PackedInt32Array(47, 48, 49, 50, 51), PackedInt32Array(52, 53, 54, 55, 56, 57), PackedInt32Array(58, 59, 60, 61), PackedInt32Array(62, 63, 64, 65, 66), PackedInt32Array(67, 68, 69, 70, 71, 72, 73), PackedInt32Array(74, 75, 76, 77), PackedInt32Array(78, 79, 80, 81, 82, 83), PackedInt32Array(84, 85, 86, 87, 88), PackedInt32Array(89, 90, 91, 92, 93, 94), PackedInt32Array(95, 96, 97, 98, 99, 100), PackedInt32Array(101, 102, 103, 104, 105, 106), PackedInt32Array(107, 108, 109, 110, 111, 112, 113, 114), PackedInt32Array(115, 116, 117, 118, 119), PackedInt32Array(120, 121, 122, 123, 124), PackedInt32Array(125, 126, 127, 128, 129), PackedInt32Array(130, 131, 132, 133), PackedInt32Array(134, 135, 136, 137)])

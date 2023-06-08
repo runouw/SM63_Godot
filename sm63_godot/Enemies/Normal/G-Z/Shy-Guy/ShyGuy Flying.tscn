@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Fly.png" id="1_oa5oh"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_i4gxy"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_c3cbc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3vxki"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy - Red - Fly.png" id="2_1gdcy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_60v53"]
 
-[sub_resource type="Animation" id="Animation_n6gta"]
+[sub_resource type="Animation" id="Animation_wyvdq"]
 length = 1.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -80,16 +80,32 @@ tracks/5/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eew5m"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rrlmb"]
 _data = {
-"Default": SubResource("Animation_n6gta")
+"Default": SubResource("Animation_wyvdq")
 }
 
+[sub_resource type="GDScript" id="GDScript_f46du"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="ShyGuy Flying" type="Node2D"]
+script = ExtResource("1_3vxki")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/ShyGuy Flying.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_eew5m")
+"Timeline": SubResource("AnimationLibrary_rrlmb")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -101,12 +117,12 @@ libraries = {
 [node name="@@50745" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-8, -13.5)
-texture = ExtResource("1_oa5oh")
+texture = ExtResource("2_1gdcy")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group" instance=ExtResource("2_i4gxy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0/Group"]
 position = Vector2(-1, -15.5)
-script = ExtResource("3_c3cbc")
+script = ExtResource("3_60v53")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Blade.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -128,12 +144,12 @@ position = Vector2(0, -0.25)
 [node name="@@50746" type="Sprite2D" parent="Layer 1/Frame 9/Group"]
 texture_filter = 1
 position = Vector2(-8, -11.25)
-texture = ExtResource("1_oa5oh")
+texture = ExtResource("2_1gdcy")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9/Group" instance=ExtResource("2_i4gxy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9/Group"]
 position = Vector2(-1, -13.25)
-script = ExtResource("3_c3cbc")
+script = ExtResource("3_60v53")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Blade.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -155,12 +171,12 @@ position = Vector2(0, 2.5)
 [node name="@@50747" type="Sprite2D" parent="Layer 1/Frame 19/Group"]
 texture_filter = 1
 position = Vector2(-8, -8.5)
-texture = ExtResource("1_oa5oh")
+texture = ExtResource("2_1gdcy")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19/Group" instance=ExtResource("2_i4gxy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19/Group"]
 position = Vector2(-1, -10.5)
-script = ExtResource("3_c3cbc")
+script = ExtResource("3_60v53")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Blade.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -181,12 +197,12 @@ visible = false
 [node name="@@50748" type="Sprite2D" parent="Layer 1/Frame 29/Group"]
 texture_filter = 1
 position = Vector2(-8, -11)
-texture = ExtResource("1_oa5oh")
+texture = ExtResource("2_1gdcy")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29/Group" instance=ExtResource("2_i4gxy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29/Group"]
 position = Vector2(-1, -13)
-script = ExtResource("3_c3cbc")
+script = ExtResource("3_60v53")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Blade.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -208,12 +224,12 @@ position = Vector2(0, -2.5)
 [node name="@@50749" type="Sprite2D" parent="Layer 1/Frame 39/Group"]
 texture_filter = 1
 position = Vector2(-8, -13.5)
-texture = ExtResource("1_oa5oh")
+texture = ExtResource("2_1gdcy")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 39/Group" instance=ExtResource("2_i4gxy")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 39/Group"]
 position = Vector2(-1, -15.5)
-script = ExtResource("3_c3cbc")
+script = ExtResource("3_60v53")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Blade.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -229,3 +245,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_f46du")

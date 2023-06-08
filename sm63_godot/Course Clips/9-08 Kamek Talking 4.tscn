@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 4 - Talking - 2.png" id="1_3dg0r"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 4 - Talking - 3.png" id="2_d14ei"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nppas"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 4 - Talking - 2.png" id="2_yxfik"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing 4 - Talking - 3.png" id="3_tfoph"]
 
-[sub_resource type="Animation" id="Animation_em88h"]
+[sub_resource type="Animation" id="Animation_jaqjd"]
 length = 0.233333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7wrs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p11gy"]
 _data = {
-"Default": SubResource("Animation_em88h")
+"Default": SubResource("Animation_jaqjd")
 }
 
 [node name="9-08 Kamek Talking 4" type="Node2D"]
+script = ExtResource("1_nppas")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-08 Kamek Talking 4.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_p7wrs")
+"Timeline": SubResource("AnimationLibrary_p11gy")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -52,7 +58,7 @@ texture_filter = 1
 position = Vector2(18, -29)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_3dg0r")
+texture = ExtResource("2_yxfik")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -63,5 +69,5 @@ texture_filter = 1
 position = Vector2(17.5, -30)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_d14ei")
+texture = ExtResource("3_tfoph")
 centered = false

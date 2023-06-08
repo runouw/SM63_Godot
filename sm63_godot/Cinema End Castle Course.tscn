@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_bcxux"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_vkpeo"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qd1fn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_dik6g"]
 
-[sub_resource type="Animation" id="Animation_riggl"]
+[sub_resource type="Animation" id="Animation_a7lig"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,29 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_k8vhv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ekavt"]
 _data = {
-"Default": SubResource("Animation_riggl")
+"Default": SubResource("Animation_a7lig")
 }
 
 [node name="Cinema End Castle Course" type="Node2D"]
+script = ExtResource("1_qd1fn")
+source_xml = "res://sm63/LIBRARY/Cinema End Castle Course.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_k8vhv")
+"Timeline": SubResource("AnimationLibrary_ekavt")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_bcxux")]
-script = ExtResource("2_vkpeo")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_dik6g")
 path = "res://sm63_godot/Cinema End Castle Stuff.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

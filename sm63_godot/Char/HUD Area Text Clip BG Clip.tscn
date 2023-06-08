@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_35pnl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kadm5"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_jvayp"]
 
-[sub_resource type="Animation" id="Animation_2j4u1"]
+[sub_resource type="Animation" id="Animation_ds4oi"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hl781"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asvdh"]
 _data = {
-"Default": SubResource("Animation_2j4u1")
+"Default": SubResource("Animation_ds4oi")
 }
 
 [node name="HUD Area Text Clip BG Clip" type="Node2D"]
+script = ExtResource("1_kadm5")
+source_xml = "res://sm63/LIBRARY/Char/HUD Area Text Clip BG Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_hl781")
+"Timeline": SubResource("AnimationLibrary_asvdh")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@14284" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-150.025, -24.1, 149.975, -24.1, 149.975, 23.9, -150.025, 23.9)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_35pnl")
+script = ExtResource("2_jvayp")
 matrix = Transform2D(0.183105, 0, 0, 0.0292969, 0, -0.05)
 entries_color = PackedColorArray(1, 1, 1, 0, 0.956863, 0.00784314, 0.00784314, 0.501961, 0.92549, 0.00784314, 0.00784314, 0.501961, 1, 1, 1, 0)
 entries_ratio = PackedFloat32Array(0, 0.0392157, 0.960784, 1)

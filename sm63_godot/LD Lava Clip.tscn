@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 1.png" id="1_03e78"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 2.png" id="2_5fscp"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 3.png" id="3_s0sa8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 4.png" id="4_ydfto"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 5.png" id="5_33mqi"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 6.png" id="6_ohsm5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 7.png" id="7_ldrvn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 8.png" id="8_pwltj"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2my8y"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 1.png" id="2_n0sm6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 2.png" id="3_bucf7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 3.png" id="4_4mstn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 4.png" id="5_g8oq3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 5.png" id="6_nbwdp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 6.png" id="7_b8w04"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 7.png" id="8_hb6qp"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMB1 Lava - 8.png" id="9_trm02"]
 
-[sub_resource type="Animation" id="Animation_7h5k6"]
+[sub_resource type="Animation" id="Animation_3imgu"]
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
@@ -121,16 +122,32 @@ tracks/8/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yavc8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rg3up"]
 _data = {
-"Default": SubResource("Animation_7h5k6")
+"Default": SubResource("Animation_3imgu")
 }
 
+[sub_resource type="GDScript" id="GDScript_wjeyb"]
+script/source = "extends Node
+# if (g == undefined) {
+# 	g = true;
+# 	gotoAndPlay(random(24));
+# 	if (random(2) == 0) {
+# 		_xscale *= -1;
+# 	}
+# }
+# "
+
 [node name="LD Lava Clip" type="Node2D"]
+script = ExtResource("1_2my8y")
+source_xml = "res://sm63/LIBRARY/LD Lava Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_yavc8")
+"Timeline": SubResource("AnimationLibrary_rg3up")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -140,7 +157,7 @@ libraries = {
 [node name="@@8742" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("1_03e78")
+texture = ExtResource("2_n0sm6")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -149,7 +166,7 @@ visible = false
 [node name="@@8743" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("2_5fscp")
+texture = ExtResource("3_bucf7")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -158,7 +175,7 @@ visible = false
 [node name="@@8744" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("3_s0sa8")
+texture = ExtResource("4_4mstn")
 centered = false
 
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
@@ -167,7 +184,7 @@ visible = false
 [node name="@@8745" type="Sprite2D" parent="Layer 1/Frame 9"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("4_ydfto")
+texture = ExtResource("5_g8oq3")
 centered = false
 
 [node name="Frame 12" type="Node2D" parent="Layer 1"]
@@ -176,7 +193,7 @@ visible = false
 [node name="@@8746" type="Sprite2D" parent="Layer 1/Frame 12"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("5_33mqi")
+texture = ExtResource("6_nbwdp")
 centered = false
 
 [node name="Frame 15" type="Node2D" parent="Layer 1"]
@@ -185,7 +202,7 @@ visible = false
 [node name="@@8747" type="Sprite2D" parent="Layer 1/Frame 15"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("6_ohsm5")
+texture = ExtResource("7_b8w04")
 centered = false
 
 [node name="Frame 18" type="Node2D" parent="Layer 1"]
@@ -194,7 +211,7 @@ visible = false
 [node name="@@8748" type="Sprite2D" parent="Layer 1/Frame 18"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("7_ldrvn")
+texture = ExtResource("8_hb6qp")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -203,9 +220,12 @@ visible = false
 [node name="@@8749" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(-8, -8)
-texture = ExtResource("8_pwltj")
+texture = ExtResource("9_trm02")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_wjeyb")

@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_6lim6"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_ebtfw"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_gkh8d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_o8qeq"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_6pfkx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_33q0v"]
 
-[sub_resource type="Animation" id="Animation_3etnv"]
+[sub_resource type="Animation" id="Animation_5mo14"]
 length = 0.366667
 loop_mode = 1
 tracks/0/type = "value"
@@ -152,16 +152,31 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_srdrv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_maxnc"]
 _data = {
-"Default": SubResource("Animation_3etnv")
+"Default": SubResource("Animation_5mo14")
 }
 
+[sub_resource type="GDScript" id="GDScript_ewrcl"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_wsxhb"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Message Pop-up Clip" type="Node2D"]
+script = ExtResource("1_o8qeq")
+source_xml = "res://sm63/LIBRARY/Menu/Pause Menu/Message Pop-up Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_srdrv")
+"Timeline": SubResource("AnimationLibrary_maxnc")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -176,7 +191,7 @@ visible = false
 [node name="@@52719" type="Polygon2D" parent="Layer 1/Frame 1/Shape"]
 polygon = PackedVector2Array(187.5, 117.55, 212.5, 117.55, 212.5, 132.55, 187.5, 132.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_6lim6")
+script = ExtResource("2_6pfkx")
 matrix = Transform2D(0.0215759, 0, 0, 0.0129395, 200, 125.05)
 entries_color = PackedColorArray(0.2, 0.2, 0.2, 0.752941, 0.101961, 0.101961, 0.101961, 0.901961, 0.0352941, 0.0352941, 0.0352941, 0.752941)
 entries_ratio = PackedFloat32Array(0, 0.698039, 0.819608)
@@ -198,7 +213,7 @@ visible = false
 [node name="@@52721" type="Polygon2D" parent="Layer 1/Frame 5/Shape"]
 polygon = PackedVector2Array(49.975, 24.975, 400, 24.975, 400, 274.975, 49.975, 274.975)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_6lim6")
+script = ExtResource("2_6pfkx")
 matrix = Transform2D(0.302063, 0, 0, 0.215759, 225, 149.95)
 entries_color = PackedColorArray(0.2, 0.2, 0.2, 0.752941, 0.101961, 0.101961, 0.101961, 0.901961, 0.0352941, 0.0352941, 0.0352941, 0.752941)
 entries_ratio = PackedFloat32Array(0, 0.698039, 0.819608)
@@ -220,7 +235,7 @@ visible = false
 [node name="@@52723" type="Polygon2D" parent="Layer 1/Frame 10/Shape"]
 polygon = PackedVector2Array(187.5, 117.55, 212.5, 117.55, 212.5, 132.55, 187.5, 132.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_6lim6")
+script = ExtResource("2_6pfkx")
 matrix = Transform2D(0.0215759, 0, 0, 0.0129395, 200, 125.05)
 entries_color = PackedColorArray(0.2, 0.2, 0.2, 0.752941, 0.101961, 0.101961, 0.101961, 0.901961, 0.0352941, 0.0352941, 0.0352941, 0.752941)
 entries_ratio = PackedFloat32Array(0, 0.698039, 0.819608)
@@ -241,9 +256,9 @@ end_cap_mode = 2
 [node name="Frame 5" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 5" instance=ExtResource("2_ebtfw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 5"]
 position = Vector2(229.05, 262.7)
-script = ExtResource("3_gkh8d")
+script = ExtResource("3_33q0v")
 path = "res://sm63_godot/Menu/Message Pop-Up Space alphizer.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -263,11 +278,17 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ewrcl")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 5"]
+script = SubResource("GDScript_wsxhb")
 
 [node name="Frame 6" type="Node2D" parent="Layer 2"]
 visible = false

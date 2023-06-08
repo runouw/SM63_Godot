@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_ir8a2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_bdcnh"]
+
+[sub_resource type="Animation" id="Animation_0xbke"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8jqgo"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_etjrj"]
 _data = {
-"Default": SubResource("Animation_ir8a2")
+"Default": SubResource("Animation_0xbke")
 }
 
 [node name="8-4InvisGround" type="Node2D"]
+script = ExtResource("1_bdcnh")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-4InvisGround.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_8jqgo")
+"Timeline": SubResource("AnimationLibrary_etjrj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

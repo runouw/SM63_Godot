@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_q0sgp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ub3t6"]
+
+[sub_resource type="Animation" id="Animation_r4blk"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7b180"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjch3"]
 _data = {
-"Default": SubResource("Animation_q0sgp")
+"Default": SubResource("Animation_r4blk")
 }
 
 [node name="1-4 Ground 2" type="Node2D"]
+script = ExtResource("1_ub3t6")
+source_xml = "res://sm63/LIBRARY/Course Clips/1 - Bob-omb Battlefield/Area 1-4/1-4 Ground 2.xml"
+linkage = "1-4BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7b180")
+"Timeline": SubResource("AnimationLibrary_mjch3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

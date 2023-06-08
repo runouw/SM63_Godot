@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_85l51"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7yfp4"]
+
+[sub_resource type="Animation" id="Animation_neefq"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lew7m"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uknib"]
 _data = {
-"Default": SubResource("Animation_85l51")
+"Default": SubResource("Animation_neefq")
 }
 
 [node name="2-2 Edge" type="Node2D"]
+script = ExtResource("1_7yfp4")
+source_xml = "res://sm63/LIBRARY/Course Clips/2 - Snowman's Land/2-2 Edge.xml"
+linkage = "2-2Edge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lew7m")
+"Timeline": SubResource("AnimationLibrary_uknib")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

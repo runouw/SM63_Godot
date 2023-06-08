@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_ssn6c"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_43fr4"]
+
+[sub_resource type="Animation" id="Animation_vj68p"]
 length = 1.06667
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_x0t3v"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tc80p"]
 _data = {
-"Default": SubResource("Animation_ssn6c")
+"Default": SubResource("Animation_vj68p")
 }
 
 [node name="7- Cruising Ship Top" type="Node2D"]
+script = ExtResource("1_43fr4")
+source_xml = "res://sm63/LIBRARY/Course Clips/7- Cruising Ship Top.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_x0t3v")
+"Timeline": SubResource("AnimationLibrary_tc80p")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_leag2"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0sk12"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hdw7s"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_nx2ro"]
 
-[sub_resource type="Animation" id="Animation_2flmq"]
+[sub_resource type="Animation" id="Animation_ht7xy"]
 length = 1.63333
 loop_mode = 1
 tracks/0/type = "value"
@@ -163,16 +163,126 @@ tracks/12/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_oi6fv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y63e2"]
 _data = {
-"Default": SubResource("Animation_2flmq")
+"Default": SubResource("Animation_ht7xy")
 }
 
+[sub_resource type="GDScript" id="GDScript_108s7"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	if (_x>330 && _x<370 && _root.TotalCoins>=90) {
+# 		_x += (350-_x)/5;
+# 	} else {
+# 		_x += 4;
+# 		if (_x>500) {
+# 			_x = -50;
+# 		}
+# 	}
+# 	if (_root.TotalCoins>=25 && _currentframe<=15 && _root.block1 == false && _x>80 && _x<100) {
+# 		_root.block1 = true;
+# 		_parent.block1.gotoAndPlay(2);
+# 		gotoAndPlay(\"jump\");
+# 	}
+# 	if (_root.TotalCoins>=50 && _currentframe<=15 && _root.block2 == false && _x>205 && _x<225) {
+# 		_root.block2 = true;
+# 		_parent.block2.play();
+# 		gotoAndPlay(\"jump\");
+# 	}
+# 	if (_root.TotalCoins>=75 && _currentframe<=15 && _root.block3 == false && _x>330 && _x<350) {
+# 		_root.block3 = true;
+# 		_parent.block3.gotoAndPlay(2);
+# 		gotoAndPlay(\"jump\");
+# 	}
+# 	if (_root.block3 == true && _root.TotalCoins>=90 && _x>330 && _x<370 && _currentframe<=17) {
+# 		gotoAndStop(\"end\");
+# 	}
+# 	if (_root.TotalCoins>=90 && (_root.percentloaded-_root.TotalCoins)>=0 && _root.block3count<10 && _x>330 && _x<370 && (_currentframe<=17 || _currentframe>=32)) {
+# 		_root.block3count += 1;
+# 		_parent.block3.gotoAndPlay(2);
+# 		gotoAndPlay(\"jump\");
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_o7scv"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	block = false;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.block1 == true) {
+# 		block = true;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_xhq2c"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	block = false;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.block2 == true) {
+# 		block = true;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_gyesg"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	block = false;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.block3count>=10) {
+# 		block = true;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_uxhgt"]
+script/source = "extends Node
+# stop();
+# lastcoin = 0;
+# percent = 0;
+# onEnterFrame = function () {
+# 	lastcoin++;
+# 	if (percent<_root.percentloaded && percent<87 && lastcoin>=2) {
+# 		lastcoin = 0;
+# 		percent++;
+# 		depth = _root.percentloaded;
+# 		attachMovie(\"PreloaderCoin\", \"Coin\"+_root.percentloaded, this.getNextHighestDepth(), {_x:500, _y:210});
+# 	}
+# 	//     
+# 	if (_root.percentloaded>=100 && _root.TotalCoins>=100) {
+# 		onEnterFrame = null;
+# 		play();
+# 	}
+# };
+# Skip = function () {
+# 	if (_root.percentloaded>=100) {
+# 		onEnterFrame = null;
+# 		_root.play();
+# 		Skip = null;
+# 	}
+# };"
+
+[sub_resource type="GDScript" id="GDScript_7uukr"]
+script/source = "extends Node
+# _root.play();
+# "
+
 [node name="Preloader Mario Running" type="Node2D"]
+script = ExtResource("1_hdw7s")
+source_xml = "res://sm63/LIBRARY/Menu/Preloader Mario Running.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_oi6fv")
+"Timeline": SubResource("AnimationLibrary_y63e2")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -187,11 +297,11 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_leag2")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-10, 210)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("2_0sk12")
+script = ExtResource("2_nx2ro")
 path = "res://sm63_godot/Menu/Preloader Mario Running Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -204,17 +314,21 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_108s7")
+
 [node name="Group" type="Node2D" parent="Layer 1/Frame 0"]
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0/Group"]
 
 [node name="@@51521" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(24.2, 85.95, 35.7, 85.95, 35.7, 88.85, 24.2, 88.85, 24.2, 90.95, 35.7, 90.95, 35.7, 93.85, 24.2, 93.85)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 
-[node name="@DOMSymbolInstance@51522" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_leag2")]
+[node name="@DOMSymbolInstance@51522" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(12, 89.45)
-script = ExtResource("2_0sk12")
+script = ExtResource("2_nx2ro")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Yellow Folder/Gold Coin Animation.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -234,9 +348,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_leag2")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(100, 161.3)
-script = ExtResource("2_0sk12")
+script = ExtResource("2_nx2ro")
 path = "res://sm63_godot/Menu/Preloader Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -249,9 +363,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51518" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_leag2")]
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_o7scv")
+
+[node name="@DOMSymbolInstance@51518" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(225, 161.3)
-script = ExtResource("2_0sk12")
+script = ExtResource("2_nx2ro")
 path = "res://sm63_godot/Menu/Preloader Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -264,9 +381,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@51519" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_leag2")]
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/@DOMSymbolInstance@51518"]
+script = SubResource("GDScript_xhq2c")
+
+[node name="@DOMSymbolInstance@51519" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(350, 161.3)
-script = ExtResource("2_0sk12")
+script = ExtResource("2_nx2ro")
 path = "res://sm63_godot/Menu/Preloader Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -278,6 +398,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/@DOMSymbolInstance@51519"]
+script = SubResource("GDScript_gyesg")
 
 [node name="Frame 18" type="Node2D" parent="Layer 3"]
 visible = false
@@ -290,6 +413,7 @@ visible = false
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 10"]
+position = Vector2(0, -30)
 
 [node name="@@51515" type="Polygon2D" parent="Layer 2/Frame 10/Shape"]
 color = Color(1, 1, 1, 0)
@@ -300,6 +424,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 2/Frame 18"]
+position = Vector2(0, -30)
 
 [node name="@@51516" type="Polygon2D" parent="Layer 2/Frame 18/Shape"]
 polygon = PackedVector2Array(0, -0.025, 450, -0.025, 450, 299.975, 0, 299.975)
@@ -322,19 +447,25 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_uxhgt")
+
 [node name="Frame 18" type="Node2D" parent="Layer 4"]
 visible = false
 
 [node name="Frame 48" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 48"]
+script = SubResource("GDScript_7uukr")
+
 [node name="Layer 5" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_leag2")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(450.2, 271.95)
-script = ExtResource("2_0sk12")
+script = ExtResource("2_nx2ro")
 path = "res://sm63_godot/Skip Button (preloader).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

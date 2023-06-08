@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/1 - Bob-omb Battlefield/Area 1-4/GBBE 1.png" id="1_3psyk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_v53m8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Clips/1 - Bob-omb Battlefield/Area 1-4/GBBE 1.png" id="2_0jhpd"]
 
-[sub_resource type="Animation" id="Animation_bl50j"]
+[sub_resource type="Animation" id="Animation_icdvr"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pa3w3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_byc23"]
 _data = {
-"Default": SubResource("Animation_bl50j")
+"Default": SubResource("Animation_icdvr")
 }
 
 [node name="Bolwing Ball (No Code)" type="Node2D"]
+script = ExtResource("1_v53m8")
+source_xml = "res://sm63/LIBRARY/Course Clips/Bolwing Ball (No Code).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pa3w3")
+"Timeline": SubResource("AnimationLibrary_byc23")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@20720" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-40.5, -40)
-texture = ExtResource("1_3psyk")
+texture = ExtResource("2_0jhpd")
 centered = false

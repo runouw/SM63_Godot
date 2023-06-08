@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Greengoop.png" id="1_ygcpq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_02iba"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Greengoop.png" id="2_vn7n8"]
 
-[sub_resource type="Animation" id="Animation_j0y7s"]
+[sub_resource type="Animation" id="Animation_3oltk"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u36uy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ux11s"]
 _data = {
-"Default": SubResource("Animation_j0y7s")
+"Default": SubResource("Animation_3oltk")
 }
 
 [node name="BC-3EndTower trewg" type="Node2D"]
+script = ExtResource("1_02iba")
+source_xml = "res://sm63/LIBRARY/BC-3EndTower trewg.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_u36uy")
+"Timeline": SubResource("AnimationLibrary_ux11s")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,7 +45,7 @@ libraries = {
 [node name="@@1852" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_ygcpq")
+texture = ExtResource("2_vn7n8")
 texture_offset = Vector2(-89.1679, 16.8691)
 texture_scale = Vector2(1.00046, 1.00046)
 texture_rotation = -0.140125

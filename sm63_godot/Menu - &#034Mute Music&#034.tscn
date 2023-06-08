@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_mc1sy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3xbtf"]
+
+[sub_resource type="Animation" id="Animation_aw1vi"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ukwao"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mkfmo"]
 _data = {
-"Default": SubResource("Animation_mc1sy")
+"Default": SubResource("Animation_aw1vi")
 }
 
 [node name="Menu - Mute Music" type="Node2D"]
+script = ExtResource("1_3xbtf")
+source_xml = "res://sm63/LIBRARY/Menu - &#034Mute Music&#034.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ukwao")
+"Timeline": SubResource("AnimationLibrary_mkfmo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

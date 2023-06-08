@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_8nh77"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_g5mdl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8fsxq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_q56wq"]
 
-[sub_resource type="Animation" id="Animation_xuhl5"]
+[sub_resource type="Animation" id="Animation_sf41c"]
 length = 36.8667
 loop_mode = 1
 tracks/0/type = "value"
@@ -271,24 +271,132 @@ tracks/21/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_s31vb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_252lo"]
 _data = {
-"Default": SubResource("Animation_xuhl5")
+"Default": SubResource("Animation_sf41c")
 }
 
+[sub_resource type="GDScript" id="GDScript_0tnlb"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false && count++>3) {
+# 		if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.air == false && _root.Course.Char.yspeed>-3 && _root.Course.Char.attack == false) {
+# 			//
+# 			_root.PlayMessage(\"Bwahahahahaha!! Mario, you may have made it this far in my trap, but you'll never get past my Evil Elevator!!\");
+# 			play();
+# 			//
+# 			_root.Course.Char.yspeed = 0;
+# 			_root.Course.Char.xspeed = 0;
+# 			_root.Course.Char.attack = true;
+# 			_root.Course.Char.attackFrame = \"bosscinema\";
+# 			onEnterFrame = function () {
+# 				if (_root.PauseGame == false) {
+# 					_root.playpause = true;
+# 				}
+# 			};
+# 		}
+# 	}
+# 	count = Math.min(count, 5);
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_c30rg"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_fbkxg"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	_root.playpause = true;
+# 	// 
+# 	if (!_root.KeyZ()) {
+# 		SPACE = false;
+# 	}
+# 	if (_root.KeyZ() && SPACE == false) {
+# 		_root.StopMessage();
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_gvlkl"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# _root.Course.Char.attackFrame = \"\";
+# _root.playpause = false;
+# onEnterFrame = null;
+# _root.Course.FrontGFX.gotoAndStop(2);
+# "
+
+[sub_resource type="GDScript" id="GDScript_wglkq"]
+script/source = "extends Node
+# played = false;
+# landedon = false;
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (played == true) {
+# 			play();
+# 		}
+# 		if (landedon == true && _root.Course.Char.yspeed>=-3) {
+# 			played = true;
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_jcf7o"]
+script/source = "extends Node
+# played = false;
+# landedon = false;
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		if (played == true) {
+# 			play();
+# 		}
+# 		if ((landedon == true && _root.Course.Char.yspeed>=-3) || _root.Course.Char._y-_root.Course.BackGFX._y>-1000) {
+# 			played = true;
+# 		}
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_qurtu"]
+script/source = "extends Node
+# onEnterFrame = null;
+# gotoAndStop(\"repeat\");
+# "
+
 [node name="8-E2-1 Thwomp Elevator Path" type="Node2D"]
+script = ExtResource("1_8fsxq")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator Path.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_s31vb")
+"Timeline": SubResource("AnimationLibrary_252lo")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_8nh77")]
-script = ExtResource("2_g5mdl")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -304,8 +412,8 @@ brightness = 0.0
 [node name="Frame 12" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 12" instance=ExtResource("1_8nh77")]
-script = ExtResource("2_g5mdl")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 12"]
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -321,9 +429,9 @@ brightness = 0.0
 [node name="Frame 14" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 14" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 14"]
 position = Vector2(-2, 0)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -339,9 +447,9 @@ brightness = 0.0
 [node name="Frame 16" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 16" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 16"]
 position = Vector2(0.8, -0.2)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -357,9 +465,9 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 19" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 19"]
 position = Vector2(0, -0.5)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -375,9 +483,9 @@ brightness = 0.0
 [node name="Frame 49" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 49" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 49"]
 position = Vector2(0, -20.2)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -393,9 +501,9 @@ brightness = 0.0
 [node name="Frame 504" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 504" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 504"]
 position = Vector2(0, -618.3)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -411,9 +519,9 @@ brightness = 0.0
 [node name="Frame 534" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 534" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 534"]
 position = Vector2(0, -637)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -429,9 +537,9 @@ brightness = 0.0
 [node name="Frame 582" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 582" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 582"]
 position = Vector2(0, -637)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -447,9 +555,9 @@ brightness = 0.0
 [node name="Frame 584" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 584" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 584"]
 position = Vector2(-2, -637)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -465,9 +573,9 @@ brightness = 0.0
 [node name="Frame 586" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 586" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 586"]
 position = Vector2(2, -637)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -483,9 +591,9 @@ brightness = 0.0
 [node name="Frame 589" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 589" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 589"]
 position = Vector2(0, -637)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -501,9 +609,9 @@ brightness = 0.0
 [node name="Frame 619" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 619" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 619"]
 position = Vector2(0, -618.3)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -519,9 +627,9 @@ brightness = 0.0
 [node name="Frame 1074" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1074" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1074"]
 position = Vector2(0, -20.2)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -537,9 +645,9 @@ brightness = 0.0
 [node name="Frame 1104" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1104" instance=ExtResource("1_8nh77")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1104"]
 position = Vector2(0, -0.5)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/8-E2-1 Thwomp Elevator.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -556,10 +664,13 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_8nh77")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_0tnlb")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0, -30)
 scale = Vector2(3.49052, 0.937485)
-script = ExtResource("2_g5mdl")
+script = ExtResource("2_q56wq")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -572,20 +683,38 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_c30rg")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 5"]
+script = SubResource("GDScript_fbkxg")
+
 [node name="Frame 11" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 11"]
+script = SubResource("GDScript_gvlkl")
 
 [node name="Frame 12" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 12"]
+script = SubResource("GDScript_wglkq")
+
 [node name="Frame 582" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 582"]
+script = SubResource("GDScript_jcf7o")
+
 [node name="Frame 1105" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1105"]
+script = SubResource("GDScript_qurtu")

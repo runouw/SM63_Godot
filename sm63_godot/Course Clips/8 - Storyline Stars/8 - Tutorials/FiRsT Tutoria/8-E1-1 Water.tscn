@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_82t0t"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0d4n4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1m07a"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_sb2x3"]
 
-[sub_resource type="Animation" id="Animation_3nv0m"]
+[sub_resource type="Animation" id="Animation_riapj"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,25 +55,60 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xxl1o"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v4lk6"]
 _data = {
-"Default": SubResource("Animation_3nv0m")
+"Default": SubResource("Animation_riapj")
 }
 
+[sub_resource type="GDScript" id="GDScript_3vma2"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 120;
+# 	polygons = 14;
+# 	graphics = true;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_5pjcv"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 410;
+# 	polygons = 40;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_n7838"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 100;
+# 	polygons = 11;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ehndp"]
+script/source = "extends Node
+# //_visible = false;
+# "
+
 [node name="8-E1-1 Water" type="Node2D"]
+script = ExtResource("1_1m07a")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Water.xml"
+linkage = "8-E1-1Water"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xxl1o")
+"Timeline": SubResource("AnimationLibrary_v4lk6")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_82t0t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(169.7, 158.75)
-script = ExtResource("2_0d4n4")
+script = ExtResource("2_sb2x3")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -85,15 +120,18 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_3vma2")
 
 [node name="Layer 4" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_82t0t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 position = Vector2(448, 158.75)
 scale = Vector2(1, 1.00139)
-script = ExtResource("2_0d4n4")
+script = ExtResource("2_sb2x3")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -105,15 +143,18 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_5pjcv")
 
 [node name="Layer 9" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 9"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 0" instance=ExtResource("1_82t0t")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 9/Frame 0"]
 position = Vector2(941, 158.75)
 scale = Vector2(1, 1.00139)
-script = ExtResource("2_0d4n4")
+script = ExtResource("2_sb2x3")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -126,6 +167,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 9/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_n7838")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ehndp")

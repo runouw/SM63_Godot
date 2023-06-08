@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 3.png" id="1_weq2j"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nu1ul"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 3.png" id="2_4gmrh"]
 
-[sub_resource type="Animation" id="Animation_oi123"]
+[sub_resource type="Animation" id="Animation_i6ql7"]
 length = 0.9
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sj2hs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbinu"]
 _data = {
-"Default": SubResource("Animation_oi123")
+"Default": SubResource("Animation_i6ql7")
 }
 
 [node name="Bowser Battle 3 Mario Jump Arc 1" type="Node2D"]
+script = ExtResource("1_nu1ul")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 3 Mario Jump Arc 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sj2hs")
+"Timeline": SubResource("AnimationLibrary_lbinu")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,7 +57,7 @@ texture_filter = 1
 position = Vector2(-18.05, -4.6)
 rotation = -0.785398
 scale = Vector2(1, 1)
-texture = ExtResource("1_weq2j")
+texture = ExtResource("2_4gmrh")
 centered = false
 
 [node name="Frame 26" type="Node2D" parent="Layer 1"]
@@ -62,5 +68,5 @@ texture_filter = 1
 position = Vector2(-118.65, 0.2)
 rotation = -1.0472
 scale = Vector2(1, 1)
-texture = ExtResource("1_weq2j")
+texture = ExtResource("2_4gmrh")
 centered = false

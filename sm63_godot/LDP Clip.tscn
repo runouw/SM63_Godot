@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_lo6wi"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_mluw7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nbsxf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ar6b7"]
 
-[sub_resource type="Animation" id="Animation_ux8xr"]
+[sub_resource type="Animation" id="Animation_rt4ya"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -163,24 +163,121 @@ tracks/12/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ul6g"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_btfj6"]
 _data = {
-"Default": SubResource("Animation_ux8xr")
+"Default": SubResource("Animation_rt4ya")
 }
 
+[sub_resource type="GDScript" id="GDScript_7j8cq"]
+script/source = "extends Node
+# // blah this is a diffrent moveiclip adobe/macromedia!!"
+
+[sub_resource type="GDScript" id="GDScript_hk0tk"]
+script/source = "extends Node
+# N = function (fr) {
+# 	//load link
+# 	fra = fr;
+# 	trans.gotoAndPlay(2);
+# 	count = 0;
+# 	onEnterFrame = function () {
+# 		count++;
+# 		if (count>=10) {
+# 			if (fra == \"LD\") {
+# 				//transition to LD
+# 				_root.LDMenuFrame = 1;
+# 				_root.EraseLevel();
+# 				_root.CreateLevelDesigner();
+# 			}
+# 			if (fra == \"Lev\") {
+# 				//transition to level description page
+# 				_root.LDMenuFrame = 2;
+# 				gotoAndStop(\"Lev\");
+# 			}
+# 			if (fra == \"TS\") {
+# 				_root.LDMenuFrame = 1;
+# 				_root.gotoAndStop(\"Title\");
+# 			}
+# 			if (fra == \"Sha\") {
+# 				gotoAndStop(\"Sha\");
+# 			}
+# 			onEnterFrame = null;
+# 		}
+# 	};
+# };
+# stop();
+# if (firstrun == undefined) {
+# 	if (_root.LDMenuFrame !== undefined) {
+# 		gotoAndStop(_root.LDMenuFrame);
+# 	}
+# 	//   
+# 	firstrun = true;
+# }
+# if (_root.Page == undefined) {
+# 	_root.Page = 0;
+# 	_root.Order = \"newest\";
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_0u1nf"]
+script/source = "extends Node
+# Stats = LDResults[SelectedLevel].split(\",\");
+# iD.text = Stats[0];
+# Name.text = Stats[1];
+# Author.text = Stats[2];
+# Score.text = \"Score: \"+Stats[3];
+# Diff.text = \"Difficulty: \"+Stats[4];
+# "
+
+[sub_resource type="GDScript" id="GDScript_1dq88"]
+script/source = "extends Node
+# _root.PlayLevelFromCode = function(code) {
+# 	_root.TileArray = [];
+# 	_root.GridXSize = 50;
+# 	_root.GridYSize = 30;
+# 	_root.LDItemArray = [];
+# 	//
+# 	avar = \"\";
+# 	//
+# 	code = code.split(\"~\");
+# 	_root.GridXSize = Number(code[0].split('x')[0]);
+# 	_root.GridYSize = Number(code[0].split('x')[1]);
+# 	_root.LDMusic = Number(code[3]);
+# 	_root.LDCourseBG = Number(code[4]);
+# 	_root.LDCourseName = unescape(String(code[5]));
+# 	_root.TileArray = _root.ExpandNumbers(code[1]);
+# 	_root.LDItemArray = code[2].split(\"|\");
+# 	for (i=0; i<_root.LDItemArray.length; i++) {
+# 		_root.LDItemArray[i] = _root.LDItemArray[i].split(\",\");
+# 	}
+# 	//
+# 	MaxX = _root.GridXSize;
+# 	MaxY = _root.GridYSize;
+# 	//
+# 	_root.TestLevel();
+# };
+# _root.EraseLevel();
+# _root.LoadCourseFromCode(_root.LoadedCode);
+# //_root.PlayLevelFromCode(_root.LoadedCode);
+# "
+
 [node name="LDP Clip" type="Node2D"]
+script = ExtResource("1_nbsxf")
+source_xml = "res://sm63/LIBRARY/LDP Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5ul6g")
+"Timeline": SubResource("AnimationLibrary_btfj6")
 }
 
 [node name="BG" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="BG"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="BG/Frame 0" instance=ExtResource("1_lo6wi")]
-script = ExtResource("2_mluw7")
+[node name="DOMSymbolInstance" type="Node2D" parent="BG/Frame 0"]
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/Menu/Menu Folder/Universal Stuff/BG/Menu Background Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -197,9 +294,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_lo6wi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0, -63)
-script = ExtResource("2_mluw7")
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/LDP Table.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -215,9 +312,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1" instance=ExtResource("1_lo6wi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 1"]
 position = Vector2(149.5, -87.15)
-script = ExtResource("2_mluw7")
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/LDP Title Screen.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -230,6 +327,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_7j8cq")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
 
@@ -237,9 +337,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_lo6wi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-132.95, -126.15)
-script = ExtResource("2_mluw7")
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/LDP Create Level Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -252,9 +352,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@8842" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_lo6wi")]
+[node name="@DOMSymbolInstance@8842" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-111.95, 128.05)
-script = ExtResource("2_mluw7")
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/LDP Share Button.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -267,9 +367,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@8843" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_lo6wi")]
+[node name="@DOMSymbolInstance@8843" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(131.5, 126.05)
-script = ExtResource("2_mluw7")
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/LDP Load Cln.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -282,9 +382,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@8844" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_lo6wi")]
+[node name="@DOMSymbolInstance@8844" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(149.5, -127.15)
-script = ExtResource("2_mluw7")
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/LDP Title Screen.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -300,9 +400,9 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_lo6wi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
 position = Vector2(-1.6, 8.35)
-script = ExtResource("2_mluw7")
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/LDP Page 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -321,9 +421,9 @@ visible = false
 [node name="Frame 3" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 3" instance=ExtResource("1_lo6wi")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 3"]
 position = Vector2(-0.25, 0.25)
-script = ExtResource("2_mluw7")
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/LD share level clipeth.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -340,8 +440,8 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Blackgr"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Blackgr/Frame 0" instance=ExtResource("1_lo6wi")]
-script = ExtResource("2_mluw7")
+[node name="DOMSymbolInstance" type="Node2D" parent="Blackgr/Frame 0"]
+script = ExtResource("2_ar6b7")
 path = "res://sm63_godot/LDP Transitio.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -358,11 +458,20 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
+[node name="AS2" type="Node" parent="Layer 5/Frame 0"]
+script = SubResource("GDScript_hk0tk")
+
 [node name="Frame 1" type="Node2D" parent="Layer 5"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 5/Frame 1"]
+script = SubResource("GDScript_0u1nf")
+
 [node name="Frame 2" type="Node2D" parent="Layer 5"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 5/Frame 2"]
+script = SubResource("GDScript_1dq88")
 
 [node name="Frame 3" type="Node2D" parent="Layer 5"]
 visible = false

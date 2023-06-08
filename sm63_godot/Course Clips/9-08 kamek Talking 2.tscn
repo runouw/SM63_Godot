@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Talking - 1.png" id="1_5e8ig"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Talking - 2.png" id="2_oaihb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_wqknn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Talking - 1.png" id="2_osj3y"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Kamek/Kamek Standing - Talking - 2.png" id="3_i8kcp"]
 
-[sub_resource type="Animation" id="Animation_cgyty"]
+[sub_resource type="Animation" id="Animation_bcr32"]
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cq8ge"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0yqdc"]
 _data = {
-"Default": SubResource("Animation_cgyty")
+"Default": SubResource("Animation_bcr32")
 }
 
 [node name="9-08 kamek Talking 2" type="Node2D"]
+script = ExtResource("1_wqknn")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-08 kamek Talking 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_cq8ge")
+"Timeline": SubResource("AnimationLibrary_0yqdc")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -50,7 +56,7 @@ libraries = {
 [node name="@@20718" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-18.5, -14.5)
-texture = ExtResource("1_5e8ig")
+texture = ExtResource("2_osj3y")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
@@ -59,5 +65,5 @@ visible = false
 [node name="@@20719" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-19.5, -15.5)
-texture = ExtResource("2_oaihb")
+texture = ExtResource("3_i8kcp")
 centered = false

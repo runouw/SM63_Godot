@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_d3gj3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2wwep"]
+
+[sub_resource type="Animation" id="Animation_cqcnb"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,48 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vvyxy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbtin"]
 _data = {
-"Default": SubResource("Animation_d3gj3")
+"Default": SubResource("Animation_cqcnb")
 }
 
+[sub_resource type="GDScript" id="GDScript_rptiy"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		xs = 120;
+# 		gotoAndStop(3);
+# 	} else {
+# 		xs = 100;
+# 		gotoAndStop(2);
+# 	}
+# 	_xscale += (xs-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (xs == 120) {
+# 		if(_root.Order == \"name\"){
+# 			_root.Order = \"name2\";
+# 		}else{
+# 			_root.Order = \"name\";
+# 		}
+# 		_parent.Refresh();
+# 		//_parent.N(\"Sha\");
+# 	}
+# };
+# stop()
+# "
+
 [node name="LDP Nme" type="Node2D"]
+script = ExtResource("1_2wwep")
+source_xml = "res://sm63/LIBRARY/LDP Nme.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vvyxy")
+"Timeline": SubResource("AnimationLibrary_lbtin")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -76,3 +110,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_rptiy")

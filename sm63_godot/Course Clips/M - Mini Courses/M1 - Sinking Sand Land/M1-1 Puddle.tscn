@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_yq2eh"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_np3l3"]
+
+[sub_resource type="Animation" id="Animation_xov71"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,26 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tey0t"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1nskt"]
 _data = {
-"Default": SubResource("Animation_yq2eh")
+"Default": SubResource("Animation_xov71")
 }
 
+[sub_resource type="GDScript" id="GDScript_816gw"]
+script/source = "extends Node
+# _visible = false;
+# "
+
 [node name="M1-1 Puddle" type="Node2D"]
+script = ExtResource("1_np3l3")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Puddle.xml"
+linkage = "M1-1Puddle"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tey0t")
+"Timeline": SubResource("AnimationLibrary_1nskt")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +66,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_816gw")

@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_87l76"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_vfdlg"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_omr0n"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hbppp"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_o0mqp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_y0cur"]
 
-[sub_resource type="Animation" id="Animation_5cq6i"]
+[sub_resource type="Animation" id="Animation_iyxay"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -68,16 +68,74 @@ tracks/4/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dlney"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0ela"]
 _data = {
-"Default": SubResource("Animation_5cq6i")
+"Default": SubResource("Animation_iyxay")
 }
 
+[sub_resource type="GDScript" id="GDScript_jq3cc"]
+script/source = "extends Node
+# Mode = \"Off\";
+# //_root.MuteBGMusic
+# if (_root.MuteBGMusic == true) {
+# 	Mode = \"On\";
+# } else {
+# 	Mode = \"Off\";
+# }
+# al = 50;
+# sc = 75;
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		al = 100;
+# 		sc = 100;
+# 	} else {
+# 		al = 50;
+# 		sc = 75;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	_alpha += (al-_alpha)/2;
+# 	//_root.var = Mode
+# 	//_root.StopBGsong();
+# 	//} else {
+# 	//_root.PlayMusicAndIntro();
+# 	/*if (Mode == \"On\") {
+# 	_root.MuteBGMusic = true;
+# 	_root.StopBGsong();
+# 	} else {
+# 	_root.MuteBGMusic = false;
+# 	_root.PlayMusicAndIntro();
+# 	}*/
+# };
+# onMouseDown = function () {
+# 	if (sc == 100) {
+# 		if (ON.sc == 100 && OFF.sc == 100) {
+# 			_xscale = 110;
+# 			_yscale = 110;
+# 			if (Mode == \"On\") {
+# 				Mode = \"Off\";
+# 				_root.MuteBGMusic = false;
+# 				_root.PlayMusicAndIntro();
+# 			} else {
+# 				Mode = \"On\";
+# 				_root.MuteBGMusic = true;
+# 				_root.StopBGsong();
+# 			}
+# 		}
+# 	}
+# };
+# "
+
 [node name="Menu - Mute Music" type="Node2D"]
+script = ExtResource("1_hbppp")
+source_xml = "res://sm63/LIBRARY/Menu - Mute Music.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dlney")
+"Timeline": SubResource("AnimationLibrary_f0ela")
 }
 
 [node name="BG" type="Node2D" parent="."]
@@ -89,7 +147,7 @@ libraries = {
 [node name="@@13215" type="Polygon2D" parent="BG/Frame 0/Shape"]
 polygon = PackedVector2Array(-106.55, -24.1, 106.55, -24.1, 106.55, 24.1, -106.55, 24.1)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_87l76")
+script = ExtResource("2_o0mqp")
 matrix = Transform2D(0.133667, 0, 0, 0.0354004, -27, 1)
 entries_color = PackedColorArray(0.8, 0, 0, 1, 1, 0.313726, 0, 1, 0.635294, 0, 0, 1, 1, 0.133333, 0.133333, 1)
 entries_ratio = PackedFloat32Array(0, 0.580392, 0.67451, 1)
@@ -107,9 +165,9 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Onoff"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Onoff/Frame 0" instance=ExtResource("2_vfdlg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Onoff/Frame 0"]
 position = Vector2(75.7, 8.05)
-script = ExtResource("3_omr0n")
+script = ExtResource("3_y0cur")
 path = "res://sm63_godot/Menu -  &#034Off&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -126,9 +184,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Box"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Box/Frame 0" instance=ExtResource("2_vfdlg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Box/Frame 0"]
 position = Vector2(74.75, -10.1)
-script = ExtResource("3_omr0n")
+script = ExtResource("3_y0cur")
 path = "res://sm63_godot/Menu -  &#034On&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -145,9 +203,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_vfdlg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-23.45, 0.45)
-script = ExtResource("3_omr0n")
+script = ExtResource("3_y0cur")
 path = "res://sm63_godot/Menu - &#034Mute Music&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -163,3 +221,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_jq3cc")

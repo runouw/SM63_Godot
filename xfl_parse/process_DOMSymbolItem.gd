@@ -1,14 +1,11 @@
 class_name Process_DOMSymbolItem
-extends Node2D
+extends Object
 
-var SymbolInstance := preload("res://xfl_parse/symbol/symbol_instance.tscn")
+const DEBUG_separate_polygons: bool = false
+const max_bezier_subdivide_cuts: int = 5
+const bezier_pixels_per_cut: float = 5.0
 
-var DEBUG_separate_polygons: bool = false
-var max_bezier_subdivide_cuts: int = 5
-var bezier_pixels_per_cut: float = 5.0
-
-var linkage: String = ""
-var linkage_export: bool = false
+var root_node: Node2D
 
 var animation: Animation
 
@@ -26,14 +23,18 @@ func _init(path: String):
 		print("NOT DOMSymbolItem!")
 		return
 	
+	root_node = Node2D.new()
+	root_node.set_script(load("res://xfl_parse/symbol_item/symbol_item.gd"))
+	root_node.source_xml = path
+	
 	# name = model.root.attributes.get("name", "")
-	linkage_export = model.root.attributes.get("linkageExportForAS", "false") == "true"
-	linkage = model.root.attributes.get("linkageIdentifier", "")
+	root_node.linkage_export = model.root.attributes.get("linkageExportForAS", "false") == "true"
+	root_node.linkage = model.root.attributes.get("linkageIdentifier", "")
 	
 	var timeline_tag = model.root.first_child_with_tag("timeline")
 	if timeline_tag:
 		var DOMTimeline_tag = timeline_tag.first_child_with_tag("DOMTimeline")
-		name = DOMTimeline_tag.attributes.get("name", "")
+		root_node.name = DOMTimeline_tag.attributes.get("name", "")
 	
 	var animation_lib = AnimationLibrary.new()
 	animation = Animation.new()
@@ -44,14 +45,14 @@ func _init(path: String):
 	animation_player.name = "Timeline"
 	animation_player.add_animation_library("Timeline", animation_lib)
 	
-	add_child(animation_player)
-	animation_player.owner = self
+	root_node.add_child(animation_player)
+	animation_player.owner = root_node
 	
 	model.root.recurse_callback_with_tag("DOMLayer", _process_DOMLayer)
 	
 	animation_lib.add_animation("Default", animation)
 	# animation_player.autoplay = "Timeline/Default"
-	move_child(animation_player, 0)
+	root_node.move_child(animation_player, 0)
 
 
 func _process_DOMLayer(DOMLayer: XMLNode):
@@ -62,9 +63,9 @@ func _process_DOMLayer(DOMLayer: XMLNode):
 		layer_node.visible = false
 		layer_node.name += "(Mask)"
 	
-	add_child(layer_node)
-	move_child(layer_node, 0)
-	layer_node.owner = self
+	root_node.add_child(layer_node)
+	root_node.move_child(layer_node, 0)
+	layer_node.owner = root_node
 	
 	DOMLayer.recurse_callback_with_tag("DOMFrame", func(DOMFrame: XMLNode):
 		var frame_index = int(DOMFrame.attributes.get("index", "0"))
@@ -75,12 +76,16 @@ func _process_DOMLayer(DOMLayer: XMLNode):
 		var frame_node = Node2D.new()
 		frame_node.name = "Frame %d" % frame_index
 		layer_node.add_child(frame_node)
-		frame_node.owner = self
+		frame_node.owner = root_node
 		frame_node.visible = frame_index == 0
+		
+		var Actionscript_tag := DOMFrame.first_child_with_tag("Actionscript")
+		if Actionscript_tag:
+			_process_actionscript(Actionscript_tag, frame_node)
 		
 		var track_index = animation.add_track(Animation.TYPE_VALUE)
 		animation.value_track_set_update_mode(track_index, Animation.UPDATE_DISCRETE)
-		animation.track_set_path(track_index, NodePath(str(self.get_path_to(frame_node)) + ":visible"))
+		animation.track_set_path(track_index, NodePath(str(root_node.get_path_to(frame_node)) + ":visible"))
 		if frame_index > 0:
 			animation.track_insert_key(track_index, 0.0, false)
 		animation.track_insert_key(track_index, float(frame_index) / 30.0, true)
@@ -93,6 +98,20 @@ func _process_DOMLayer(DOMLayer: XMLNode):
 		if elements_tag:
 			_process_elements(elements_tag.children, frame_node)
 	)
+
+func _process_actionscript(Actionscript_tag: XMLNode, target: Node2D):
+	var script_tag := Actionscript_tag.first_child_with_tag("script")
+	if script_tag:
+		var script_node := Node.new()
+		script_node.name = "AS2"
+		
+		var script = GDScript.new()
+		var text_arr = script_tag.c_data.split("\n")
+		script.source_code = "extends Node\n# " + "\n# ".join(text_arr)
+		script_node.set_script(script)
+		
+		target.add_child(script_node)
+		script_node.owner = root_node
 
 
 func _process_elements(elements: Array[XMLNode], parent_node: Node2D):
@@ -114,7 +133,7 @@ func _process_DOMGroup(DOMGroup: XMLNode, parent_node: Node2D):
 	var group_node = Node2D.new()
 	group_node.name = "Group"
 	parent_node.add_child(group_node)
-	group_node.owner = self
+	group_node.owner = root_node
 	
 	for xml_child in DOMGroup.children:
 		if xml_child.name == "matrix":
@@ -125,15 +144,18 @@ func _process_DOMGroup(DOMGroup: XMLNode, parent_node: Node2D):
 
 
 func _process_DOMSymbolInstance(DOMSymbolInstance: XMLNode, parent_node: Node2D):
-	var symbol_node := SymbolInstance.instantiate()
+	var symbol_node: Node2D = Node2D.new()
+	symbol_node.set_script(load("res://xfl_parse/symbol/symbol_instance.gd"))
 	symbol_node.path = XFLUtils.fix_symbol_path(DOMSymbolInstance.attributes.get("libraryItemName", ""))
 	symbol_node.name = "DOMSymbolInstance"
 	parent_node.add_child(symbol_node)
-	symbol_node.owner = self
+	symbol_node.owner = root_node
 	
 	for xml_child in DOMSymbolInstance.children:
 		if xml_child.name == "matrix":
 			symbol_node.transform = _matrix_to_Transform2D_Instances(xml_child)
+		if xml_child.name == "Actionscript":
+			_process_actionscript(xml_child, symbol_node)
 	
 	var filters := DOMSymbolInstance.first_child_with_tag("filters")
 	if filters:
@@ -157,6 +179,8 @@ func _handle_color(color: XMLNode, node: Node2D):
 	
 	node.tint_multiplier = float(color.attributes.get("tintMultiplier", "0"))
 	node.brightness = float(color.attributes.get("brightness", "0"))
+	
+	node.tint_color = Color.from_string(color.attributes.get("tintColor", "#000000"), Color.WHITE)
 
 
 func _matrix_to_Transform2D_Fills(matrix_node: XMLNode) -> Transform2D:
@@ -208,10 +232,11 @@ func _process_DOMBitmapInstance(node_DOMBitmapInstance: XMLNode, layer_node: Nod
 	sprite.centered = false
 	
 	layer_node.add_child(sprite)
-	sprite.owner = self
+	sprite.owner = root_node
 
 
 func _process_DOMShape(node_DOMShape: XMLNode, layer_node: Node2D):
+	var matrix: XMLNode = node_DOMShape.first_child_with_tag("matrix")
 	var fills: XMLNode = node_DOMShape.first_child_with_tag("fills")
 	var strokes: XMLNode = node_DOMShape.first_child_with_tag("strokes")
 	var edges: XMLNode = node_DOMShape.first_child_with_tag("edges")
@@ -221,7 +246,13 @@ func _process_DOMShape(node_DOMShape: XMLNode, layer_node: Node2D):
 	var shape_node := Node2D.new()
 	shape_node.name = "Shape"
 	layer_node.add_child(shape_node)
-	shape_node.owner = self
+	shape_node.owner = root_node
+	
+	if matrix:
+		# interesting that this replaces the parent transform...?
+		# is that because "group" isn't a real object in flash, but used for construction of the tree?
+		# TODO: might have to do this trick to DOMBitmapInstance and DOMSymbolInstance too...
+		shape_node.transform = layer_node.transform.affine_inverse() * _matrix_to_Transform2D_Instances(matrix)
 	
 	if fills:
 		fillStyles = fills.all_children_with_tag("FillStyle")
@@ -276,7 +307,7 @@ func _apply_fillStyle(fills_node: XMLNode, target: Polygon2D):
 		target.texture_scale = transform.get_scale()
 	
 	if solid_fill:
-		target.color = Color.from_string(solid_fill.attributes.get("color", "#FFFFFF"), Color.WHITE)
+		target.color = Color.from_string(solid_fill.attributes.get("color", "#000000"), Color.WHITE)
 		target.color.a = float(solid_fill.attributes.get("alpha", 1.0))
 	
 	if radial_gradient:
@@ -291,7 +322,7 @@ func _apply_fillStyle(fills_node: XMLNode, target: Polygon2D):
 		var entries = radial_gradient.all_children_with_tag("GradientEntry")
 		
 		for entry in entries:
-			var color := Color.from_string(entry.attributes.get("color", "#FFFFFF"), Color.WHITE)
+			var color := Color.from_string(entry.attributes.get("color", "#000000"), Color.WHITE)
 			color.a = float(entry.attributes.get("alpha", "1.0"))
 			
 			entries_color.append(color)
@@ -310,7 +341,7 @@ func _apply_fillStyle(fills_node: XMLNode, target: Polygon2D):
 		var entries = linear_gradient.all_children_with_tag("GradientEntry")
 		
 		for entry in entries:
-			var color := Color.from_string(entry.attributes.get("color", "#FFFFFF"), Color.WHITE)
+			var color := Color.from_string(entry.attributes.get("color", "#000000"), Color.WHITE)
 			color.a = float(entry.attributes.get("alpha", "1.0"))
 			
 			entries_color.append(color)
@@ -413,7 +444,7 @@ func _read_edge_commands(edge_node: XMLNode, layer_node: Node2D) -> Array[DOMSha
 #	var shape_container := Node2D.new()
 #	shape_container.name = "Edge"
 #	layer_node.add_child(shape_container)
-#	shape_container.owner = self
+#	shape_container.owner = root_node
 #
 #	# debug printout
 #	for edge in raw_edges:
@@ -421,7 +452,7 @@ func _read_edge_commands(edge_node: XMLNode, layer_node: Node2D) -> Array[DOMSha
 #		debug_lines.width = 1
 #		debug_lines.points = PackedVector2Array([edge.a, edge.b])
 #		shape_container.add_child(debug_lines)
-#		debug_lines.owner = self
+#		debug_lines.owner = root_node
 	
 	return raw_edges
 
@@ -573,7 +604,7 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 			polygon_node.polygon = generated_polygon.points
 			
 			shape_node.add_child(polygon_node)
-			polygon_node.owner = self
+			polygon_node.owner = root_node
 	else:
 		# group by fillStyle
 		for fillStyle in range(fillStyles.size()):
@@ -582,7 +613,7 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 			_apply_fillStyle(fillStyles[fillStyle], polygon_node)
 			
 			shape_node.add_child(polygon_node)
-			polygon_node.owner = self
+			polygon_node.owner = root_node
 			
 			var polygon_verts := PackedVector2Array()
 			var polygon_indices: Array[PackedInt32Array] = []
@@ -617,7 +648,7 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 				line_node.add_point(Vector2.ONE * NAN)
 			
 		shape_node.add_child(line_node)
-		line_node.owner = self
+		line_node.owner = root_node
 
 
 func _mostly_same(a: Vector2, b: Vector2):

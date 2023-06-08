@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Slide (Hover).png" id="1_86c1o"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Hover) 2.png" id="2_1r0ic"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_vib74"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Slide (Hover).png" id="2_jcvd6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Hover) 2.png" id="3_gou6r"]
 
-[sub_resource type="Animation" id="Animation_fsskq"]
+[sub_resource type="Animation" id="Animation_iv2jp"]
 length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -91,16 +92,37 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_awbe6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p67fg"]
 _data = {
-"Default": SubResource("Animation_fsskq")
+"Default": SubResource("Animation_iv2jp")
 }
 
+[sub_resource type="GDScript" id="GDScript_6y3o2"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_u35e1"]
+script/source = "extends Node
+# _root.Course.Char.attack = false;
+# "
+
 [node name="Mario (hover) Diveflip" type="Node2D"]
+script = ExtResource("1_vib74")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (hover) Diveflip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_awbe6")
+"Timeline": SubResource("AnimationLibrary_p67fg")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -112,7 +134,7 @@ texture_filter = 1
 position = Vector2(11.45, -15.7)
 rotation = 2.97841
 scale = Vector2(0.999468, -0.999468)
-texture = ExtResource("1_86c1o")
+texture = ExtResource("2_jcvd6")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
@@ -123,7 +145,7 @@ texture_filter = 1
 position = Vector2(7.05, -21.9)
 rotation = 2.72387
 scale = Vector2(0.998617, -0.998617)
-texture = ExtResource("1_86c1o")
+texture = ExtResource("2_jcvd6")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
@@ -134,7 +156,7 @@ texture_filter = 1
 position = Vector2(-11.45, 20.9)
 rotation = -2.25902
 scale = Vector2(0.994995, 0.994995)
-texture = ExtResource("2_1r0ic")
+texture = ExtResource("3_gou6r")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 2"]
@@ -145,7 +167,7 @@ texture_filter = 1
 position = Vector2(28.55, -2.35)
 rotation = 2.06786
 scale = Vector2(0.9938, 0.9938)
-texture = ExtResource("2_1r0ic")
+texture = ExtResource("3_gou6r")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 2"]
@@ -156,12 +178,18 @@ texture_filter = 1
 position = Vector2(-8.65, -29.1)
 rotation = 0.0331884
 scale = Vector2(0.993269, 0.993269)
-texture = ExtResource("2_1r0ic")
+texture = ExtResource("3_gou6r")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_6y3o2")
+
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 8"]
+script = SubResource("GDScript_u35e1")

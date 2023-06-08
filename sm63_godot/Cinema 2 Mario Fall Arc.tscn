@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Hurt Ground - 2.png" id="1_pl3sx"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Hurt Ground - 3.png" id="2_8rgy2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tqfhx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Hurt Ground - 2.png" id="2_3ykq3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Hurt Ground - 3.png" id="3_u3hfg"]
 
-[sub_resource type="Animation" id="Animation_kkfyi"]
+[sub_resource type="Animation" id="Animation_4phyq"]
 length = 1.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +56,21 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i3k2n"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x2opo"]
 _data = {
-"Default": SubResource("Animation_kkfyi")
+"Default": SubResource("Animation_4phyq")
 }
 
 [node name="Cinema 2 Mario Fall Arc" type="Node2D"]
+script = ExtResource("1_tqfhx")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Mario Fall Arc.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_i3k2n")
+"Timeline": SubResource("AnimationLibrary_x2opo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -74,7 +80,7 @@ libraries = {
 [node name="@@4167" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-12, -16.5)
-texture = ExtResource("1_pl3sx")
+texture = ExtResource("2_3ykq3")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
@@ -83,7 +89,7 @@ visible = false
 [node name="@@4168" type="Sprite2D" parent="Layer 1/Frame 10"]
 texture_filter = 1
 position = Vector2(-22, -16.5)
-texture = ExtResource("1_pl3sx")
+texture = ExtResource("2_3ykq3")
 centered = false
 
 [node name="Frame 11" type="Node2D" parent="Layer 1"]
@@ -92,7 +98,7 @@ visible = false
 [node name="@@4169" type="Sprite2D" parent="Layer 1/Frame 11"]
 texture_filter = 1
 position = Vector2(-22.5, -13.5)
-texture = ExtResource("2_8rgy2")
+texture = ExtResource("3_u3hfg")
 centered = false
 
 [node name="Frame 44" type="Node2D" parent="Layer 1"]
@@ -103,5 +109,5 @@ texture_filter = 1
 position = Vector2(-50.6, -10.1)
 rotation = -0.2618
 scale = Vector2(1, 1)
-texture = ExtResource("2_8rgy2")
+texture = ExtResource("3_u3hfg")
 centered = false

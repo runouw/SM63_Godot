@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_bv61t"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_joun4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gcw72"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_cs3a1"]
 
-[sub_resource type="Animation" id="Animation_x482x"]
+[sub_resource type="Animation" id="Animation_dyksc"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,29 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kah0s"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtjt5"]
 _data = {
-"Default": SubResource("Animation_x482x")
+"Default": SubResource("Animation_dyksc")
 }
 
 [node name="Sling Star Animation" type="Node2D"]
+script = ExtResource("1_gcw72")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Sling Star/Sling Star Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kah0s")
+"Timeline": SubResource("AnimationLibrary_gtjt5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_bv61t")]
-script = ExtResource("2_joun4")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_cs3a1")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Sling Star/Sling Star GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

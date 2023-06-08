@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 2.png" id="1_6qjnk"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 13.png" id="2_jegbt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 14.png" id="3_b6uof"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 10.png" id="4_qi7sp"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="5_t4q10"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 1.png" id="6_d6y0d"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_b0ri4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 2.png" id="2_bph7f"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 13.png" id="3_8mbgt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 14.png" id="4_40k3o"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Body - 10.png" id="5_50fjb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Head - 1.png" id="6_ian8r"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bits/Bowser Arm - 1.png" id="7_4r51y"]
 
-[sub_resource type="Animation" id="Animation_6pdrm"]
+[sub_resource type="Animation" id="Animation_uf8jb"]
 length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -143,16 +144,46 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fkoeo"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2n8fm"]
 _data = {
-"Default": SubResource("Animation_6pdrm")
+"Default": SubResource("Animation_uf8jb")
 }
 
+[sub_resource type="GDScript" id="GDScript_syvwa"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		_parent._parent._x -= (_parent._parent._xscale/100)*2;
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_vkhga"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"BowserStep\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_0ptou"]
+script/source = "extends Node
+# _parent._parent.attack = false;
+# "
+
 [node name="Bowser Step" type="Node2D"]
+script = ExtResource("1_b0ri4")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/Bowser/Bowser Step.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fkoeo")
+"Timeline": SubResource("AnimationLibrary_2n8fm")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -164,7 +195,7 @@ texture_filter = 1
 position = Vector2(-25.7, 0.85)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_6qjnk")
+texture = ExtResource("2_bph7f")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 4"]
@@ -175,7 +206,7 @@ texture_filter = 1
 position = Vector2(-25.7, 1.85)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_6qjnk")
+texture = ExtResource("2_bph7f")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -185,7 +216,7 @@ centered = false
 [node name="@@48997" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-29.55, 20)
-texture = ExtResource("2_jegbt")
+texture = ExtResource("3_8mbgt")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 3"]
@@ -194,7 +225,7 @@ visible = false
 [node name="@@48998" type="Sprite2D" parent="Layer 3/Frame 4"]
 texture_filter = 1
 position = Vector2(-29.55, 20)
-texture = ExtResource("3_b6uof")
+texture = ExtResource("4_40k3o")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -204,13 +235,13 @@ centered = false
 [node name="@@48993" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-37.2, -18)
-texture = ExtResource("4_qi7sp")
+texture = ExtResource("5_50fjb")
 centered = false
 
 [node name="@@48994" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-51.5, -24.65)
-texture = ExtResource("5_t4q10")
+texture = ExtResource("6_ian8r")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 2"]
@@ -219,13 +250,13 @@ visible = false
 [node name="@@48995" type="Sprite2D" parent="Layer 2/Frame 4"]
 texture_filter = 1
 position = Vector2(-37.2, -18)
-texture = ExtResource("4_qi7sp")
+texture = ExtResource("5_50fjb")
 centered = false
 
 [node name="@@48996" type="Sprite2D" parent="Layer 2/Frame 4"]
 texture_filter = 1
 position = Vector2(-51.5, -23.65)
-texture = ExtResource("5_t4q10")
+texture = ExtResource("6_ian8r")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -235,7 +266,7 @@ centered = false
 [node name="@@48991" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-17.7, 2.85)
-texture = ExtResource("6_d6y0d")
+texture = ExtResource("7_4r51y")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -244,15 +275,24 @@ visible = false
 [node name="@@48992" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-17.7, 3.85)
-texture = ExtResource("6_d6y0d")
+texture = ExtResource("7_4r51y")
 centered = false
 
 [node name="Layer 5" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
+[node name="AS2" type="Node" parent="Layer 5/Frame 0"]
+script = SubResource("GDScript_syvwa")
+
 [node name="Frame 4" type="Node2D" parent="Layer 5"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 5/Frame 4"]
+script = SubResource("GDScript_vkhga")
+
 [node name="Frame 8" type="Node2D" parent="Layer 5"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 5/Frame 8"]
+script = SubResource("GDScript_0ptou")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Shell - 1.png" id="1_yhsrb"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_6ehvk"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_cjp0i"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_tbbv3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Koopa/Koopa - Green - Shell - 1.png" id="2_bg3l0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_q0i8f"]
 
-[sub_resource type="Animation" id="Animation_6w827"]
+[sub_resource type="Animation" id="Animation_v0347"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -20,16 +20,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7jt1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vowet"]
 _data = {
-"Default": SubResource("Animation_6w827")
+"Default": SubResource("Animation_v0347")
 }
 
 [node name="Mario Riding Shell" type="Node2D"]
+script = ExtResource("1_tbbv3")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Riding Shell.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_i7jt1")
+"Timeline": SubResource("AnimationLibrary_vowet")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,12 +44,12 @@ libraries = {
 [node name="@@15799" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-7.65, 14.5)
-texture = ExtResource("1_yhsrb")
+texture = ExtResource("2_bg3l0")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_6ehvk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-3, 12)
-script = ExtResource("3_cjp0i")
+script = ExtResource("3_q0i8f")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

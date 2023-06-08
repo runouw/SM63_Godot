@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
-[sub_resource type="Animation" id="Animation_qhf4h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hj0y3"]
+
+[sub_resource type="Animation" id="Animation_dvs4c"]
 length = 2.73333
 loop_mode = 1
 tracks/0/type = "value"
@@ -88,16 +90,38 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifrl7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mcefs"]
 _data = {
-"Default": SubResource("Animation_qhf4h")
+"Default": SubResource("Animation_dvs4c")
 }
 
+[sub_resource type="GDScript" id="GDScript_3xbut"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# 	//   
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_tpgs0"]
+script/source = "extends Node
+# this.removeMovieClip(this);
+# "
+
 [node name="Ground Shockwaves Front GFX" type="Node2D"]
+script = ExtResource("1_hj0y3")
+source_xml = "res://sm63/LIBRARY/Effects/Other/Ground Shockwaves Front GFX.xml"
+linkage = "GroundShockwaveFGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ifrl7")
+"Timeline": SubResource("AnimationLibrary_mcefs")
 }
 
 [node name="FrontGFX" type="Node2D" parent="."]
@@ -148,5 +172,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_3xbut")
+
 [node name="Frame 81" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 81"]
+script = SubResource("GDScript_tpgs0")

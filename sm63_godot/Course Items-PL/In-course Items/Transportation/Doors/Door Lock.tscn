@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Lock.png" id="1_bykst"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Catle Door Star (None) Transparent.png" id="2_nqflw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5a5cd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Lock.png" id="2_ba02s"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Catle Door Star (None) Transparent.png" id="3_fckmt"]
 
-[sub_resource type="Animation" id="Animation_mdwep"]
+[sub_resource type="Animation" id="Animation_uvau1"]
 length = 0.233333
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,16 +104,26 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5083c"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bedu4"]
 _data = {
-"Default": SubResource("Animation_mdwep")
+"Default": SubResource("Animation_uvau1")
 }
 
+[sub_resource type="GDScript" id="GDScript_64f7c"]
+script/source = "extends Node
+# gotoAndStop(_parent.keytype);
+# "
+
 [node name="Door Lock" type="Node2D"]
+script = ExtResource("1_5a5cd")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Transportation/Doors/Door Lock.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5083c")
+"Timeline": SubResource("AnimationLibrary_bedu4")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -126,14 +137,14 @@ texture_filter = 1
 position = Vector2(4.85, -10.95)
 rotation = 3.14159
 scale = Vector2(0.299988, -0.300003)
-texture = ExtResource("1_bykst")
+texture = ExtResource("2_ba02s")
 centered = false
 
 [node name="@@47701" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(-4.8, -10.95)
 scale = Vector2(0.300003, 0.300003)
-texture = ExtResource("1_bykst")
+texture = ExtResource("2_ba02s")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -148,7 +159,7 @@ texture_filter = 1
 position = Vector2(-1.4, -12.05)
 rotation = 3.14159
 scale = Vector2(0.368729, -0.368759)
-texture = ExtResource("1_bykst")
+texture = ExtResource("2_ba02s")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -158,7 +169,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-5.45, -11.8)
 scale = Vector2(0.375, 0.375)
-texture = ExtResource("2_nqflw")
+texture = ExtResource("3_fckmt")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -169,7 +180,7 @@ visible = false
 [node name="@@47704" type="Polygon2D" parent="Layer 1/Frame 3/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_nqflw")
+texture = ExtResource("3_fckmt")
 texture_offset = Vector2(14.7, 14.45)
 texture_scale = Vector2(2.22224, 2.22224)
 polygon = PackedVector2Array(-7.5, -14.45, -0.3, -14.45, -0.3, -0.05, -7.5, -0.05)
@@ -179,11 +190,12 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 visible = false
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 4"]
+position = Vector2(-0.75, 0)
 
 [node name="@@47705" type="Polygon2D" parent="Layer 1/Frame 4/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("2_nqflw")
+texture = ExtResource("3_fckmt")
 texture_offset = Vector2(0.399999, -14.45)
 texture_scale = Vector2(2.22224, -2.22224)
 texture_rotation = 3.14159
@@ -199,10 +211,13 @@ visible = false
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 6"]
 
 [node name="@@47706" type="Polygon2D" parent="Layer 1/Frame 6/Shape"]
-color = Color(1, 1, 1, 0.4)
+color = Color(0, 0, 0, 0.4)
 polygon = PackedVector2Array(-7.85, -15.45, -7.85, -15.45, 8, -15.4, 8, 16.1, 8, 16.1, -7.85, 16, -7.85, -15.4)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_64f7c")

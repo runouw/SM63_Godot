@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_mse5l"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8vcg6"]
+
+[sub_resource type="Animation" id="Animation_yo80u"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kvt8v"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q27f3"]
 _data = {
-"Default": SubResource("Animation_mse5l")
+"Default": SubResource("Animation_yo80u")
 }
 
 [node name="NG_TYPEFACE_HIGHLIGHT" type="Node2D"]
+script = ExtResource("1_8vcg6")
+source_xml = "res://sm63/LIBRARY/~NG_API_COMPONENTS/NG_TYPEFACE_HIGHLIGHT.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kvt8v")
+"Timeline": SubResource("AnimationLibrary_q27f3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_7lspy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_002wn"]
+
+[sub_resource type="Animation" id="Animation_mfyya"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,30 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjklu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8nlo7"]
 _data = {
-"Default": SubResource("Animation_7lspy")
+"Default": SubResource("Animation_mfyya")
 }
 
+[sub_resource type="GDScript" id="GDScript_4njan"]
+script/source = "extends Node
+# if (_root.TotalStarCoins>=5 || _root.CheatCastleUnlock == true) {
+# 	stop();
+# } else {
+# 	gotoAndStop(2);
+# }
+# "
+
 [node name="C-4 Camedge" type="Node2D"]
+script = ExtResource("1_002wn")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-4 Camedge.xml"
+linkage = "C-4CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bjklu")
+"Timeline": SubResource("AnimationLibrary_8nlo7")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +70,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_4njan")

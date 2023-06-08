@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_hiwrf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_r3h56"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_ch08a"]
 
-[sub_resource type="Animation" id="Animation_tk2sq"]
+[sub_resource type="Animation" id="Animation_rk3ra"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -54,16 +55,101 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vmw0r"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s0fv0"]
 _data = {
-"Default": SubResource("Animation_tk2sq")
+"Default": SubResource("Animation_rk3ra")
 }
 
+[sub_resource type="GDScript" id="GDScript_d4ufd"]
+script/source = "extends Node
+# function camControl():Void {
+# 	parentColor1.setTransform(camColor.getTransform());
+# 	parentColor2.setTransform(camColor.getTransform());
+# 	parentColor3.setTransform(camColor.getTransform());
+# 	parentColor4.setTransform(camColor.getTransform());
+# 	parentColor5.setTransform(camColor.getTransform());
+# 	var scaleX:Number = sX/((Width/100)*_xscale);
+# 	var scaleY:Number = sY/((Height/100)*_yscale);
+# 	if (_root.CreditsCamFirstFrame < 2) {
+# 		_root.CreditsCourseX = -this._x;
+# 		_root.CreditsCourseY = -this._y;
+# 		_root.CreditsCourseScaleX = 100*scaleX;
+# 		_root.CreditsCourseScaleY = 100*scaleY;
+# 	} else {
+# 		_root.CreditsCourseX += (-this._x-_root.CreditsCourseX)/5;
+# 		_root.CreditsCourseY += (-this._y-_root.CreditsCourseY)/5;
+# 		_root.CreditsCourseScaleX += (100*scaleX-_root.CreditsCourseScaleX)/5;
+# 		_root.CreditsCourseScaleY += (100*scaleY-_root.CreditsCourseScaleY)/5;
+# 	}
+# 	_root.CreditsCamFirstFrame++;
+# 	//
+# 	_root.CreditsCourseRot = -this._rotation;
+# 	//
+# }
+# /*
+# function resetStage():Void {
+# var resetTrans:Object = {ra:100, rb:0, ga:100, gb:0, ba:100, bb:0, aa:100, ab:0};
+# parentColor1.setTransform(resetTrans);
+# parentColor2.setTransform(resetTrans);
+# parentColor3.setTransform(resetTrans);
+# _parent._parent.Course._xscale = 100;
+# _parent._parent.Course._yscale = 100;
+# _parent._parent.Course._x = 0;
+# _parent._parent.Course._y = 0;
+# _parent._parent.BG._x = 0;
+# _parent._parent.BG._y = 0;
+# _parent._parent.BG._xscale = 100;
+# _parent._parent.BG._yscale = 100;
+# _root.QuakeX = 0;
+# _root.QuakeY = 0;
+# _root.BGSpeed = undefined;
+# }
+# */
+# // make frame invisible
+# this._visible = false;
+# // Capture stage parameters
+# var oldMode:String = Stage.scaleMode;
+# //Stage.scaleMode = \"exactFit\";
+# var cX:Number = Stage.width/2;
+# var cY:Number = Stage.height/2;
+# var sX:Number = Stage.width;
+# var sY:Number = Stage.height;
+# var Width:Number = 720;
+# var Height:Number = 480;
+# //Stage.scaleMode = oldMode;
+# // create color instances for color 
+# // transforms (if any).
+# var camColor:Color = new Color(this);
+# var parentColor1:Color = new Color(_root.FarBackground);
+# var parentColor2:Color = new Color(_root.Course);
+# var parentColor3:Color = new Color(_root.BGCourse);
+# var parentColor4:Color = new Color(_root.MidBackground);
+# var parentColor5:Color = new Color(_root.BGCloseCourse);
+# // Make the stage move so that the 
+# // v-cam is centered on the
+# // viewport every frame
+# _root.CreditsCamFirstFrame = 0;
+# this.onEnterFrame = camControl;
+# // Make an explicit call to the camControl
+# // function to make sure it also runs on the
+# // first frame.
+# camControl();
+# // If the v-cam is ever removed (unloaded)
+# // the stage, return the stage to the default
+# // settings.
+# //this.onUnload = resetStage;
+# "
+
 [node name="CreditsStageCam" type="Node2D"]
+script = ExtResource("1_r3h56")
+source_xml = "res://sm63/LIBRARY/CreditsStageCam.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vmw0r")
+"Timeline": SubResource("AnimationLibrary_s0fv0")
 }
 
 [node name="frame" type="Node2D" parent="."]
@@ -123,6 +209,7 @@ polygon = PackedVector2Array(242.8, 197.675, 256.2, 197.675, 256.2, 226.225, 242
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
 [node name="@@6102" type="Polygon2D" parent="color/Frame 0/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(336.55, 197.675, 349.95, 197.675, 349.95, 226.225, 336.55, 226.225)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 
@@ -159,12 +246,15 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="@@6109" type="Polygon2D" parent="color/Frame 0/Shape"]
 polygon = PackedVector2Array(242.75, 226.225, 349.8, 226.225, 349.8, 232.6, 242.75, 232.6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_hiwrf")
+script = ExtResource("2_ch08a")
 matrix = Transform2D(0.0653687, 0, 0, 0.00387573, 296.25, 229.4)
-entries_color = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+entries_color = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 entries_ratio = PackedFloat32Array(0, 1)
 spread_method_reflect = false
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_d4ufd")

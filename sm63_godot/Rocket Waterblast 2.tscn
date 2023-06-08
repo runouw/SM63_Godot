@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_qa40r"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_un7v7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_psc4n"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_s8b3o"]
 
-[sub_resource type="Animation" id="Animation_rjo8u"]
+[sub_resource type="Animation" id="Animation_y2yqm"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,30 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7e5a8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fkmpd"]
 _data = {
-"Default": SubResource("Animation_rjo8u")
+"Default": SubResource("Animation_y2yqm")
 }
 
 [node name="Rocket Waterblast 2" type="Node2D"]
+script = ExtResource("1_psc4n")
+source_xml = "res://sm63/LIBRARY/Rocket Waterblast 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7e5a8")
+"Timeline": SubResource("AnimationLibrary_fkmpd")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_qa40r")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(7.5, -10.4)
-script = ExtResource("2_un7v7")
+script = ExtResource("2_s8b3o")
 path = "res://sm63_godot/Char/Fludd CLIPS/Frontflip Rocket Fludd Water.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

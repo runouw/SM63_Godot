@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Hover) 2.png" id="1_krsv4"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_q0fkb"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_oqtwu"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1ne72"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Hover) 2.png" id="2_dceag"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_7osmc"]
 
-[sub_resource type="Animation" id="Animation_8n0iq"]
+[sub_resource type="Animation" id="Animation_jbv41"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mm8on"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6gays"]
 _data = {
-"Default": SubResource("Animation_8n0iq")
+"Default": SubResource("Animation_jbv41")
 }
 
 [node name="Mario (hover) air 2" type="Node2D"]
+script = ExtResource("1_1ne72")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (hover) air 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_mm8on")
+"Timeline": SubResource("AnimationLibrary_6gays")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,18 +56,18 @@ libraries = {
 [node name="@@15392" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-13, -20.5)
-texture = ExtResource("1_krsv4")
+texture = ExtResource("2_dceag")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_q0fkb")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(1.1, -6.55)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("3_oqtwu")
+script = ExtResource("3_7osmc")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

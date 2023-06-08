@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_wb3kw"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ypi0p"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ly03w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_c4tpi"]
 
-[sub_resource type="Animation" id="Animation_bmkqi"]
+[sub_resource type="Animation" id="Animation_lkukk"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,25 +103,65 @@ tracks/7/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ojn13"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c0b0y"]
 _data = {
-"Default": SubResource("Animation_bmkqi")
+"Default": SubResource("Animation_lkukk")
 }
 
+[sub_resource type="GDScript" id="GDScript_lsy0q"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 100;
+# 	polygons = 11;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_8qxex"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 220;
+# 	polygons = 25;
+# 	graphics = true;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_kl8iv"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	WaterLength = 800;
+# 	polygons = 88;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ked25"]
+script/source = "extends Node
+# //_visible = false;
+# "
+
+[sub_resource type="GDScript" id="GDScript_er5a4"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Castle - Water" type="Node2D"]
+script = ExtResource("1_ly03w")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle - Water.xml"
+linkage = "CastleWater"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ojn13")
+"Timeline": SubResource("AnimationLibrary_c0b0y")
 }
 
 [node name="Layer 7" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 7"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 0" instance=ExtResource("1_wb3kw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 0"]
 position = Vector2(2456.05, -51.25)
-script = ExtResource("2_ypi0p")
+script = ExtResource("2_c4tpi")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -139,11 +179,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 6(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6(Mask)/Frame 0" instance=ExtResource("1_wb3kw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6(Mask)/Frame 0"]
 position = Vector2(2122.5, -249.9)
 rotation = -0.0969697
 scale = Vector2(0.999676, 0.999676)
-script = ExtResource("2_ypi0p")
+script = ExtResource("2_c4tpi")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -156,13 +196,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 6(Mask)/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_lsy0q")
+
 [node name="Layer 5" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 5"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0" instance=ExtResource("1_wb3kw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 0"]
 position = Vector2(-449.85, 342.35)
-script = ExtResource("2_ypi0p")
+script = ExtResource("2_c4tpi")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -180,9 +223,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 4(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4(Mask)/Frame 0" instance=ExtResource("1_wb3kw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4(Mask)/Frame 0"]
 position = Vector2(-970, 163)
-script = ExtResource("2_ypi0p")
+script = ExtResource("2_c4tpi")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -195,13 +238,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 4(Mask)/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_8qxex")
+
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_wb3kw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(1528.9, 308.85)
-script = ExtResource("2_ypi0p")
+script = ExtResource("2_c4tpi")
 path = "res://sm63_godot/Effects/Water/Water Blocks/Giant Water Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -219,9 +265,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1(Mask)"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1(Mask)/Frame 0" instance=ExtResource("1_wb3kw")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1(Mask)/Frame 0"]
 position = Vector2(1154.6, 230.9)
-script = ExtResource("2_ypi0p")
+script = ExtResource("2_c4tpi")
 path = "res://sm63_godot/Effects/Water/Water Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -234,9 +280,18 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1(Mask)/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_kl8iv")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ked25")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_er5a4")

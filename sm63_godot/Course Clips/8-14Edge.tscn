@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_qftfv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ohhpp"]
+
+[sub_resource type="Animation" id="Animation_05a2f"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_oonpw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5vbru"]
 _data = {
-"Default": SubResource("Animation_qftfv")
+"Default": SubResource("Animation_05a2f")
 }
 
 [node name="8-14Edge" type="Node2D"]
+script = ExtResource("1_ohhpp")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-14Edge.xml"
+linkage = "8-14Edge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_oonpw")
+"Timeline": SubResource("AnimationLibrary_5vbru")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

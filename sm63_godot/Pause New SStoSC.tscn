@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_ovnpk"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_q1lr0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3o6s5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_2ce68"]
 
-[sub_resource type="Animation" id="Animation_arjx6"]
+[sub_resource type="Animation" id="Animation_38jwj"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +55,52 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l3vyt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_adhvm"]
 _data = {
-"Default": SubResource("Animation_arjx6")
+"Default": SubResource("Animation_38jwj")
 }
 
+[sub_resource type="GDScript" id="GDScript_1bnj7"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false)) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	if (_parent.sm._currentframe == 2) {
+# 		al = 100;
+# 		gotoAndStop(2);
+# 	} else {
+# 		sc = 75;
+# 		al = 50;
+# 		gotoAndStop(3);
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# 	_alpha += (al-_alpha)/2;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		_xscale = 140;
+# 		_yscale = 140;
+# 		_parent.sm.gotoAndStop(\"blank\");
+# 		_parent.sm.gotoAndStop(3);
+# 	}
+# };
+# gotoAndStop(2);
+# "
+
 [node name="Pause New SStoSC" type="Node2D"]
+script = ExtResource("1_3o6s5")
+source_xml = "res://sm63/LIBRARY/Pause New SStoSC.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_l3vyt")
+"Timeline": SubResource("AnimationLibrary_adhvm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -86,9 +122,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_ovnpk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.5, -0.05)
-script = ExtResource("2_q1lr0")
+script = ExtResource("2_2ce68")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -119,9 +155,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_ovnpk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(0.5, -0.05)
-script = ExtResource("2_q1lr0")
+script = ExtResource("2_2ce68")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Coin&#058 Star Folder/Star Coin GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -137,6 +173,9 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_1bnj7")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

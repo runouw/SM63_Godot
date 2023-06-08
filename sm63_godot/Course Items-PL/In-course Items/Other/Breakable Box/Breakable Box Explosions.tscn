@@ -1,14 +1,14 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=14 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Switch Brick.png" id="1_m014d"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_rrsrf"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_e8qrs"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/YI Ice Cube.png" id="4_kkk2e"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Grey Stone Textrue.png" id="5_ffty8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Grey Brick Pattern 2.png" id="6_s24n1"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Blue Stone.png" id="7_4nwv5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dsrnc"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Switch Brick.png" id="2_hnw3a"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_uqdwm"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/YI Ice Cube.png" id="4_hcx7c"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Other Tiles/Grey Stone Textrue.png" id="5_qairt"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Grey Brick Pattern 2.png" id="6_yh6rv"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Blue Stone.png" id="7_caa03"]
 
-[sub_resource type="Animation" id="Animation_2gk3j"]
+[sub_resource type="Animation" id="Animation_i453e"]
 length = 5.0
 loop_mode = 1
 tracks/0/type = "value"
@@ -1584,16 +1584,59 @@ tracks/130/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gupxv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wr8am"]
 _data = {
-"Default": SubResource("Animation_2gk3j")
+"Default": SubResource("Animation_i453e")
 }
 
+[sub_resource type="GDScript" id="GDScript_4jb57"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	sind = 0;
+# }
+# onClipEvent (enterFrame) {
+# 	sind += 0.1;
+# 	_alpha = Math.abs(Math.sin(sind)*50);
+# 	this._xscale = Math.abs(Math.sin(sind)*50)+90;
+# 	this._yscale = this._xscale;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_xgq4p"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_vah10"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	sind = 0;
+# }
+# onClipEvent (enterFrame) {
+# 	sind++;
+# 	_alpha = Math.abs(Math.sin(sind)*50);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_7uw4e"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	this.gotoAndStop(_parent._currentframe+((_parent.blocknum-1)*25));
+# };
+# "
+
 [node name="Breakable Box Explosions" type="Node2D"]
+script = ExtResource("1_dsrnc")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Box Explosions.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gupxv")
+"Timeline": SubResource("AnimationLibrary_wr8am")
 }
 
 [node name="Layer 7" type="Node2D" parent="."]
@@ -1605,7 +1648,7 @@ libraries = {
 [node name="@@47350" type="Polygon2D" parent="Layer 7/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_m014d")
+texture = ExtResource("2_hnw3a")
 texture_offset = Vector2(16, 32)
 polygon = PackedVector2Array(-16, -32, 16, -32, 16, 0, -16, 0)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -1621,8 +1664,8 @@ end_cap_mode = 2
 [node name="Frame 3" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 3" instance=ExtResource("2_rrsrf")]
-script = ExtResource("3_e8qrs")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 3"]
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Orange Box Explode.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1638,8 +1681,8 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 19" instance=ExtResource("2_rrsrf")]
-script = ExtResource("3_e8qrs")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 19"]
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Orange Box Explode.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1655,8 +1698,8 @@ brightness = 0.0
 [node name="Frame 24" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 24" instance=ExtResource("2_rrsrf")]
-script = ExtResource("3_e8qrs")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 24"]
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Orange Box Explode.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1675,14 +1718,14 @@ visible = false
 [node name="@@47352" type="Sprite2D" parent="Layer 7/Frame 25"]
 texture_filter = 1
 position = Vector2(-16, -32)
-texture = ExtResource("4_kkk2e")
+texture = ExtResource("4_hcx7c")
 centered = false
 
 [node name="Frame 28" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 28" instance=ExtResource("2_rrsrf")]
-script = ExtResource("3_e8qrs")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 28"]
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Ice Block Explode.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1698,8 +1741,8 @@ brightness = 0.0
 [node name="Frame 44" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 44" instance=ExtResource("2_rrsrf")]
-script = ExtResource("3_e8qrs")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 44"]
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Ice Block Explode.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1715,8 +1758,8 @@ brightness = 0.0
 [node name="Frame 49" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 49" instance=ExtResource("2_rrsrf")]
-script = ExtResource("3_e8qrs")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 49"]
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Ice Block Explode.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1732,10 +1775,10 @@ brightness = 0.0
 [node name="Frame 50" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 50" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 50"]
 position = Vector2(0, -16)
 scale = Vector2(1.32941, 1.32941)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Box Purple Force Field.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1748,13 +1791,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 7/Frame 50/DOMSymbolInstance"]
+script = SubResource("GDScript_4jb57")
+
 [node name="Frame 53" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 53" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 53"]
 position = Vector2(0, -16)
 scale = Vector2(1.32941, 1.32941)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Box Purple Force Field.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1767,13 +1813,16 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 7/Frame 53/DOMSymbolInstance"]
+script = SubResource("GDScript_xgq4p")
+
 [node name="Frame 73" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 73" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 73"]
 position = Vector2(0, -16)
 scale = Vector2(0.250244, 0.250244)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Box Purple Force Field.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1785,6 +1834,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 7/Frame 73/DOMSymbolInstance"]
+script = SubResource("GDScript_vah10")
 
 [node name="Frame 74" type="Node2D" parent="Layer 7"]
 visible = false
@@ -1799,7 +1851,7 @@ visible = false
 [node name="@@47353" type="Polygon2D" parent="Layer 7/Frame 75/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_ffty8")
+texture = ExtResource("5_qairt")
 texture_offset = Vector2(16, 32)
 polygon = PackedVector2Array(-16, -32, 16, -32, 16, 0, -16, 0)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -1815,9 +1867,9 @@ end_cap_mode = 2
 [node name="Frame 78" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 78" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 78"]
 position = Vector2(0, -16)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Stone Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1833,9 +1885,9 @@ brightness = 0.0
 [node name="Frame 96" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 96" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 96"]
 position = Vector2(0, -16)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Stone Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1851,9 +1903,9 @@ brightness = 0.0
 [node name="Frame 99" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 99" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 99"]
 position = Vector2(0, -16)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Stone Block.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1874,7 +1926,7 @@ visible = false
 [node name="@@47355" type="Polygon2D" parent="Layer 7/Frame 100/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("6_s24n1")
+texture = ExtResource("6_yh6rv")
 texture_offset = Vector2(16, 32.5)
 polygon = PackedVector2Array(-16, -32.5, 16, -32.5, 16, -0.5, -16, -0.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -1890,9 +1942,9 @@ end_cap_mode = 2
 [node name="Frame 103" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 103" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 103"]
 position = Vector2(0, -17)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Grey Brick.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1908,9 +1960,9 @@ brightness = 0.0
 [node name="Frame 121" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 121" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 121"]
 position = Vector2(0, -17)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Grey Brick.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1926,9 +1978,9 @@ brightness = 0.0
 [node name="Frame 124" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 124" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 124"]
 position = Vector2(0, -17)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Grey Brick.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1947,15 +1999,15 @@ visible = false
 [node name="@@47357" type="Sprite2D" parent="Layer 7/Frame 125"]
 texture_filter = 1
 position = Vector2(-16, -32)
-texture = ExtResource("7_4nwv5")
+texture = ExtResource("7_caa03")
 centered = false
 
 [node name="Frame 128" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 128" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 128"]
 position = Vector2(0, -16)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Blue Brick.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1971,9 +2023,9 @@ brightness = 0.0
 [node name="Frame 146" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 146" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 146"]
 position = Vector2(0, -16)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Blue Brick.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -1989,9 +2041,9 @@ brightness = 0.0
 [node name="Frame 149" type="Node2D" parent="Layer 7"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 149" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 7/Frame 149"]
 position = Vector2(0, -16)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Blue Brick.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2011,9 +2063,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Dust"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 5" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 5"]
 position = Vector2(-8.65, -21.9)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.898438
 green_multiplier = 0.898438
@@ -2029,9 +2081,9 @@ brightness = 0.0
 [node name="Frame 21" type="Node2D" parent="Dust"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 21" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 21"]
 position = Vector2(8.6, -9.15)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.800781
 green_multiplier = 0.800781
@@ -2050,11 +2102,11 @@ visible = false
 [node name="Frame 28" type="Node2D" parent="Dust"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 28" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 28"]
 position = Vector2(0.65, -17.4)
 rotation = 0.523602
 scale = Vector2(1.76683, 1.7931)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.679688
 green_multiplier = 0.679688
@@ -2117,10 +2169,10 @@ visible = false
 [node name="Frame 78" type="Node2D" parent="Dust"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 78" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 78"]
 position = Vector2(-2.15, -13)
 scale = Vector2(1.4818, 1.39244)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2136,12 +2188,12 @@ brightness = 0.0
 [node name="Frame 91" type="Node2D" parent="Dust"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 91" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 91"]
 position = Vector2(2.85, 0.25)
 rotation = 0.261789
 scale = Vector2(1.20645, 1.23369)
 skew = 1.27554e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2160,10 +2212,10 @@ visible = false
 [node name="Frame 103" type="Node2D" parent="Dust"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 103" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 103"]
 position = Vector2(-2.15, -13)
 scale = Vector2(1.4818, 1.39244)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2179,12 +2231,12 @@ brightness = 0.0
 [node name="Frame 116" type="Node2D" parent="Dust"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 116" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 116"]
 position = Vector2(2.85, 0.25)
 rotation = 0.261789
 scale = Vector2(1.20645, 1.23369)
 skew = 1.27554e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2203,10 +2255,10 @@ visible = false
 [node name="Frame 128" type="Node2D" parent="Dust"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 128" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 128"]
 position = Vector2(-2.15, -13)
 scale = Vector2(1.4818, 1.39244)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2222,12 +2274,12 @@ brightness = 0.0
 [node name="Frame 141" type="Node2D" parent="Dust"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 141" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Dust/Frame 141"]
 position = Vector2(2.85, 0.25)
 rotation = 0.261789
 scale = Vector2(1.20645, 1.23369)
 skew = 1.27554e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2247,11 +2299,11 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 3"]
 position = Vector2(0.65, -17.4)
 rotation = 0.523602
 scale = Vector2(1.76683, 1.7931)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.609375
 green_multiplier = 0.609375
@@ -2267,11 +2319,11 @@ brightness = 0.0
 [node name="Frame 15" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 15" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 15"]
 position = Vector2(-10.25, -9.5)
 rotation = -1.8326
 scale = Vector2(1, -1)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.898438
 green_multiplier = 0.898438
@@ -2290,11 +2342,11 @@ visible = false
 [node name="Frame 29" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 29" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 29"]
 position = Vector2(0.65, -17.4)
 rotation = 0.655277
 scale = Vector2(1.5347, 1.60692)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.679688
 green_multiplier = 0.679688
@@ -2319,11 +2371,11 @@ visible = false
 [node name="Frame 79" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 79" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 79"]
 position = Vector2(7.6, -20.2)
 rotation = 0.261797
 scale = Vector2(1.1599, 1.13317)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2336,11 +2388,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47342" type="Node2D" parent="Layer 5/Frame 79" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47342" type="Node2D" parent="Layer 5/Frame 79"]
 position = Vector2(-7.65, -9.25)
 rotation = -1.04719
 scale = Vector2(1.1599, 1.13317)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2356,12 +2408,12 @@ brightness = 0.0
 [node name="Frame 93" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 93" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 93"]
 position = Vector2(13.85, -24.25)
 rotation = 0.261789
 scale = Vector2(1.20645, 1.23369)
 skew = 1.27554e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2380,11 +2432,11 @@ visible = false
 [node name="Frame 104" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 104" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 104"]
 position = Vector2(7.6, -20.2)
 rotation = 0.261797
 scale = Vector2(1.1599, 1.13317)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2397,11 +2449,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47343" type="Node2D" parent="Layer 5/Frame 104" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47343" type="Node2D" parent="Layer 5/Frame 104"]
 position = Vector2(-7.65, -9.25)
 rotation = -1.04719
 scale = Vector2(1.1599, 1.13317)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2417,12 +2469,12 @@ brightness = 0.0
 [node name="Frame 118" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 118" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 118"]
 position = Vector2(13.85, -24.25)
 rotation = 0.261789
 scale = Vector2(1.20645, 1.23369)
 skew = 1.27554e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2441,11 +2493,11 @@ visible = false
 [node name="Frame 129" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 129" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 129"]
 position = Vector2(7.6, -20.2)
 rotation = 0.261797
 scale = Vector2(1.1599, 1.13317)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2458,11 +2510,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47344" type="Node2D" parent="Layer 5/Frame 129" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47344" type="Node2D" parent="Layer 5/Frame 129"]
 position = Vector2(-7.65, -9.25)
 rotation = -1.04719
 scale = Vector2(1.1599, 1.13317)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2478,12 +2530,12 @@ brightness = 0.0
 [node name="Frame 143" type="Node2D" parent="Layer 5"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 143" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 5/Frame 143"]
 position = Vector2(13.85, -24.25)
 rotation = 0.261789
 scale = Vector2(1.20645, 1.23369)
 skew = 1.27554e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2503,11 +2555,11 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 4"]
 position = Vector2(0.65, -17.4)
 rotation = 0.63288
 scale = Vector2(1.67453, 1.66843)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.898438
 green_multiplier = 0.898438
@@ -2520,11 +2572,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47338" type="Node2D" parent="Layer 4/Frame 4" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47338" type="Node2D" parent="Layer 4/Frame 4"]
 position = Vector2(3.25, -12.25)
 rotation = -1.8326
 scale = Vector2(1, -1)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.800781
 green_multiplier = 0.800781
@@ -2546,11 +2598,11 @@ visible = false
 [node name="Frame 30" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 30" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 30"]
 position = Vector2(0.65, -17.4)
 rotation = 0.803783
 scale = Vector2(1.24832, 1.33381)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.679688
 green_multiplier = 0.679688
@@ -2575,11 +2627,11 @@ visible = false
 [node name="Frame 81" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 81" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 81"]
 position = Vector2(-8.15, -23.75)
 rotation = 0.261793
 scale = Vector2(0.955926, 0.90574)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2592,12 +2644,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47339" type="Node2D" parent="Layer 4/Frame 81" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47339" type="Node2D" parent="Layer 4/Frame 81"]
 position = Vector2(8.6, -8.95)
 rotation = 0.261787
 scale = Vector2(1.45367, 1.30863)
 skew = 1.33514e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2613,12 +2665,12 @@ brightness = 0.0
 [node name="Frame 96" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 96" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 96"]
 position = Vector2(-2.65, -20.25)
 rotation = 0.261789
 scale = Vector2(1.20645, 1.23369)
 skew = 1.27554e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2637,11 +2689,11 @@ visible = false
 [node name="Frame 106" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 106" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 106"]
 position = Vector2(-8.15, -23.75)
 rotation = 0.261793
 scale = Vector2(0.955926, 0.90574)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2654,12 +2706,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47340" type="Node2D" parent="Layer 4/Frame 106" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47340" type="Node2D" parent="Layer 4/Frame 106"]
 position = Vector2(8.6, -8.95)
 rotation = 0.261787
 scale = Vector2(1.45367, 1.30863)
 skew = 1.33514e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2675,12 +2727,12 @@ brightness = 0.0
 [node name="Frame 121" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 121" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 121"]
 position = Vector2(-2.65, -20.25)
 rotation = 0.261789
 scale = Vector2(1.20645, 1.23369)
 skew = 1.27554e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2699,11 +2751,11 @@ visible = false
 [node name="Frame 131" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 131" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 131"]
 position = Vector2(-8.15, -23.75)
 rotation = 0.261793
 scale = Vector2(0.955926, 0.90574)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2716,12 +2768,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47341" type="Node2D" parent="Layer 4/Frame 131" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47341" type="Node2D" parent="Layer 4/Frame 131"]
 position = Vector2(8.6, -8.95)
 rotation = 0.261787
 scale = Vector2(1.45367, 1.30863)
 skew = 1.33514e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2737,12 +2789,12 @@ brightness = 0.0
 [node name="Frame 146" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 146" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 146"]
 position = Vector2(-2.65, -20.25)
 rotation = 0.261789
 scale = Vector2(1.20645, 1.23369)
 skew = 1.27554e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2762,11 +2814,11 @@ brightness = 0.0
 [node name="Frame 8" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 8" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 8"]
 position = Vector2(3.25, -17.75)
 rotation = 2.35619
 scale = Vector2(1.4276, -1.4276)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.800781
 green_multiplier = 0.800781
@@ -2782,11 +2834,11 @@ brightness = 0.0
 [node name="Frame 24" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 24" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 24"]
 position = Vector2(-3.65, -14.25)
 rotation = -0.2618
 scale = Vector2(1, 1)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.800781
 green_multiplier = 0.800781
@@ -2805,12 +2857,12 @@ visible = false
 [node name="Frame 31" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 31" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 31"]
 position = Vector2(0.65, -17.4)
 rotation = 1.06556
 scale = Vector2(1.11875, 1.2048)
 skew = 2.41995e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.679688
 green_multiplier = 0.679688
@@ -2829,9 +2881,9 @@ visible = false
 [node name="Frame 50" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 50" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 50"]
 position = Vector2(0, -16)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Box Purple Force Field.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2850,9 +2902,9 @@ visible = false
 [node name="Frame 54" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 54" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 54"]
 position = Vector2(0, -16)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Box Purple Force Field.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2868,12 +2920,12 @@ brightness = 0.0
 [node name="Frame 69" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 69" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 69"]
 position = Vector2(0, -16)
 rotation = 2.09196
 scale = Vector2(0.343095, -0.446977)
 skew = -1.12041
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Box Purple Force Field.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2889,12 +2941,12 @@ brightness = 0.0
 [node name="Frame 73" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 73" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 73"]
 position = Vector2(0, -16)
 rotation = 2.61795
 scale = Vector2(0.179492, 0.30958)
 skew = 0.952297
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Other/Breakable Box/Breakable Box Purple Force Field.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2935,11 +2987,11 @@ visible = false
 [node name="Frame 83" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 83" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 83"]
 position = Vector2(-0.9, -14.75)
 rotation = 0.261796
 scale = Vector2(2.26008, 2.1644)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -2977,11 +3029,11 @@ visible = false
 [node name="Frame 108" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 108" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 108"]
 position = Vector2(-0.9, -14.75)
 rotation = 0.261796
 scale = Vector2(2.26008, 2.1644)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3019,11 +3071,11 @@ visible = false
 [node name="Frame 133" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 133" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 133"]
 position = Vector2(-0.9, -14.75)
 rotation = 0.261796
 scale = Vector2(2.26008, 2.1644)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3043,11 +3095,11 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9"]
 position = Vector2(3.25, -17.75)
 rotation = 2.52294
 scale = Vector2(1.34811, -1.31327)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.601563
 green_multiplier = 0.601563
@@ -3066,11 +3118,11 @@ visible = false
 [node name="Frame 32" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 32" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 32"]
 position = Vector2(0.65, -17.4)
 rotation = 1.32736
 scale = Vector2(0.893988, 0.995631)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.679688
 green_multiplier = 0.679688
@@ -3095,12 +3147,12 @@ visible = false
 [node name="Frame 85" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 85" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 85"]
 position = Vector2(-2.45, -16.25)
 rotation = -0.785412
 scale = Vector2(1.53279, 1.44606)
 skew = 1.40667e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3119,12 +3171,12 @@ visible = false
 [node name="Frame 110" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 110" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 110"]
 position = Vector2(-2.45, -16.25)
 rotation = -0.785412
 scale = Vector2(1.53279, 1.44606)
 skew = 1.40667e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3143,12 +3195,12 @@ visible = false
 [node name="Frame 135" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 135" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 135"]
 position = Vector2(-2.45, -16.25)
 rotation = -0.785412
 scale = Vector2(1.53279, 1.44606)
 skew = 1.40667e-05
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3168,11 +3220,11 @@ brightness = 0.0
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 7" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 7"]
 position = Vector2(13, -28.9)
 rotation = -0.2618
 scale = Vector2(1, 1)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.800781
 green_multiplier = 0.800781
@@ -3230,11 +3282,11 @@ visible = false
 [node name="Frame 33" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 33" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 33"]
 position = Vector2(0.65, -17.4)
 rotation = 1.58917
 scale = Vector2(0.890134, 0.83556)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 0.679688
 green_multiplier = 0.679688
@@ -3262,11 +3314,11 @@ visible = false
 [node name="Frame 88" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 88" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 88"]
 position = Vector2(10.6, -27.5)
 rotation = 0.261793
 scale = Vector2(0.955926, 0.90574)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3279,11 +3331,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47329" type="Node2D" parent="Layer 2/Frame 88" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47329" type="Node2D" parent="Layer 2/Frame 88"]
 position = Vector2(-13.65, -5.65)
 rotation = -1.5708
 scale = Vector2(0.955933, 0.905731)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3302,11 +3354,11 @@ visible = false
 [node name="Frame 113" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 113" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 113"]
 position = Vector2(10.6, -27.5)
 rotation = 0.261793
 scale = Vector2(0.955926, 0.90574)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3319,11 +3371,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47330" type="Node2D" parent="Layer 2/Frame 113" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47330" type="Node2D" parent="Layer 2/Frame 113"]
 position = Vector2(-13.65, -5.65)
 rotation = -1.5708
 scale = Vector2(0.955933, 0.905731)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3342,11 +3394,11 @@ visible = false
 [node name="Frame 138" type="Node2D" parent="Layer 2"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 138" instance=ExtResource("2_rrsrf")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 138"]
 position = Vector2(10.6, -27.5)
 rotation = 0.261793
 scale = Vector2(0.955926, 0.90574)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3359,11 +3411,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47331" type="Node2D" parent="Layer 2/Frame 138" instance=ExtResource("2_rrsrf")]
+[node name="@DOMSymbolInstance@47331" type="Node2D" parent="Layer 2/Frame 138"]
 position = Vector2(-13.65, -5.65)
 rotation = -1.5708
 scale = Vector2(0.955933, 0.905731)
-script = ExtResource("3_e8qrs")
+script = ExtResource("3_uqdwm")
 path = "res://sm63_godot/Effects/Other/Smoke Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -3379,6 +3431,9 @@ brightness = 0.0
 [node name="Layer 8" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 8"]
+
+[node name="AS2" type="Node" parent="Layer 8/Frame 0"]
+script = SubResource("GDScript_7uw4e")
 
 [node name="Frame 25" type="Node2D" parent="Layer 8"]
 visible = false

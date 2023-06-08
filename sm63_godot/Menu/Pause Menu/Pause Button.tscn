@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_s04wo"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_lw6ao"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_p4jbd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_x8drb"]
 
-[sub_resource type="Animation" id="Animation_ih3i3"]
+[sub_resource type="Animation" id="Animation_oapip"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
@@ -139,16 +139,76 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yartg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s0sbh"]
 _data = {
-"Default": SubResource("Animation_ih3i3")
+"Default": SubResource("Animation_oapip")
 }
 
+[sub_resource type="GDScript" id="GDScript_q5md3"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_vl4mf"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# 	onMouseDown = function () {
+# 		if (this.hitTest(_root._xmouse, _root._ymouse, true)) {
+# 			_parent.rewind = true;
+# 		}
+# 	};
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_r0mgp"]
+script/source = "extends Node
+# stop();
+# _root.PauseGame = false;
+# rewind = false;
+# presskey = false;
+# onEnterFrame = function () {
+# 	if (presskey == false) {
+# 		if (_root.KeyHome() && _root.PauseGame !== true) {
+# 			_root.PauseGame = true;
+# 			rewind = false;
+# 			play();
+# 			presskey = true;
+# 		} else if (_root.KeyHome() && _root.PauseGame !== false) {
+# 			rewind = true;
+# 			presskey = true;
+# 		}
+# 	}
+# 	if (!_root.KeyHome()) {
+# 		presskey = false;
+# 	}
+# 	//                
+# 	if (_currentframe>1 && _root.PauseGame !== true) {
+# 		rewind = true;
+# 	}
+# 	if (rewind == true) {
+# 		prevFrame();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_hthwr"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Pause Button" type="Node2D"]
+script = ExtResource("1_p4jbd")
+source_xml = "res://sm63/LIBRARY/Menu/Pause Menu/Pause Button.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_yartg")
+"Timeline": SubResource("AnimationLibrary_s0sbh")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -158,8 +218,8 @@ libraries = {
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1" instance=ExtResource("1_s04wo")]
-script = ExtResource("2_lw6ao")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 1"]
+script = ExtResource("2_x8drb")
 path = "res://sm63_godot/Menu/Pause Menu/Pause Menu.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -175,9 +235,9 @@ brightness = 0.0
 [node name="Frame 14" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 14" instance=ExtResource("1_s04wo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 14"]
 position = Vector2(0, -25)
-script = ExtResource("2_lw6ao")
+script = ExtResource("2_x8drb")
 path = "res://sm63_godot/Menu/Pause Menu/Pause Menu.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -201,6 +261,7 @@ polygon = PackedVector2Array(407, 200.35, 407, 200.35, 408.2, 201.125, 409.25, 2
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21, 22), PackedInt32Array(23, 24, 25, 26, 27, 28), PackedInt32Array(29, 30, 31, 32, 33, 34, 35, 36, 37, 38), PackedInt32Array(39, 40, 41, 42, 43, 44, 45), PackedInt32Array(46, 47, 48, 49, 50, 51, 52, 53), PackedInt32Array(54, 55, 56, 57, 58, 59), PackedInt32Array(60, 61, 62, 63, 64), PackedInt32Array(65, 66, 67, 68, 69, 70, 71, 72, 73, 74), PackedInt32Array(75, 76, 77, 78, 79, 80), PackedInt32Array(81, 82, 83, 84, 85, 86, 87), PackedInt32Array(88, 89, 90, 91, 92, 93), PackedInt32Array(94, 95, 96, 97, 98, 99, 100, 101), PackedInt32Array(102, 103, 104, 105, 106, 107), PackedInt32Array(108, 109, 110, 111, 112, 113, 114, 115, 116), PackedInt32Array(117, 118, 119, 120, 121), PackedInt32Array(122, 123, 124, 125, 126), PackedInt32Array(127, 128, 129, 130), PackedInt32Array(131, 132, 133, 134, 135, 136, 137, 138, 139), PackedInt32Array(140, 141, 142, 143, 144, 145), PackedInt32Array(146, 147, 148, 149, 150, 151), PackedInt32Array(152, 153, 154, 155, 156), PackedInt32Array(157, 158, 159, 160, 161, 162, 163), PackedInt32Array(164, 165, 166, 167, 168), PackedInt32Array(169, 170, 171, 172, 173), PackedInt32Array(174, 175, 176, 177, 178, 179), PackedInt32Array(180, 181, 182, 183, 184, 185, 186, 187), PackedInt32Array(188, 189, 190, 191, 192), PackedInt32Array(193, 194, 195, 196, 197, 198), PackedInt32Array(199, 200, 201, 202, 203), PackedInt32Array(204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214), PackedInt32Array(215, 216, 217, 218, 219), PackedInt32Array(220, 221, 222, 223, 224, 225, 226), PackedInt32Array(227, 228, 229, 230, 231), PackedInt32Array(232, 233, 234, 235, 236), PackedInt32Array(237, 238, 239, 240, 241, 242, 243), PackedInt32Array(244, 245, 246, 247, 248, 249, 250, 251, 252, 253), PackedInt32Array(254, 255, 256, 257, 258), PackedInt32Array(259, 260, 261, 262, 263), PackedInt32Array(264, 265, 266, 267, 268, 269, 270), PackedInt32Array(271, 272, 273, 274, 275, 276, 277), PackedInt32Array(278, 279, 280, 281, 282), PackedInt32Array(283, 284, 285, 286, 287, 288, 289), PackedInt32Array(290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300), PackedInt32Array(301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311), PackedInt32Array(312, 313, 314, 315, 316, 317, 318, 319, 320, 321), PackedInt32Array(322, 323, 324, 325, 326, 327, 328, 329), PackedInt32Array(330, 331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344), PackedInt32Array(345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355), PackedInt32Array(356, 357, 358, 359, 360, 361, 362, 363, 364, 365), PackedInt32Array(366, 367, 368, 369, 370, 371, 372, 373, 374), PackedInt32Array(375, 376, 377, 378, 379, 380, 381, 382), PackedInt32Array(383, 384, 385, 386, 387, 388), PackedInt32Array(389, 390, 391, 392, 393), PackedInt32Array(394, 395, 396, 397, 398, 399), PackedInt32Array(400, 401, 402, 403, 404, 405)])
 
 [node name="@@52735" type="Polygon2D" parent="Layer 3/Frame 14/Group/Shape"]
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(430.5, 202.8, 430.5, 202.8, 431.225, 202.85, 434.857, 204.8, 429.955, 204.8, 430.486, 202.85, 438.3, 202.8, 438.3, 202.8, 438.95, 203.175, 439.25, 204.7, 438.748, 206.55, 437.981, 206.55, 438.296, 202.85, 409.1, 203.05, 409.1, 203.05, 410.25, 203.8, 409.88, 206.7, 408.632, 206.7, 408.661, 206.475, 408.664, 206.45, 409.081, 203.2, 409.084, 203.175, 426.65, 203.35, 426.65, 203.35, 426.65, 203.7, 426.6, 203.85, 426.25, 205.25, 424.5, 205.3, 424.55, 206.05, 424.65, 206.7, 424.656, 206.75, 423.911, 206.75, 423.65, 204.7, 423.55, 204.05, 423.525, 203.725, 425.4, 203.5, 400.4, 203.55, 400.4, 203.55, 400.8, 206.475, 400.712, 207.175, 400.168, 207.175, 399.7, 203.725, 400.1, 203.625, 420.625, 204.175, 420.625, 204.175, 420.55, 205.775, 419, 205.95, 419, 205.95, 418.75, 204.5, 416.275, 204.525, 416.275, 204.525, 417.411, 207.175, 416.984, 207.175, 416.85, 206.2, 416.284, 204.55, 442.55, 204.65, 442.55, 204.65, 443.307, 206.75, 442.348, 206.75, 442.65, 205.7, 442.555, 204.7, 429.955, 204.8, 431.5, 204.8, 431.313, 205.45, 429.825, 205.45, 429.9, 205, 429.941, 204.85, 431.5, 204.8, 434.857, 204.8, 434.95, 204.85, 434.4, 204.9, 432.7, 204.9, 432.1, 204.85, 403.35, 205.2, 403.35, 205.2, 404.256, 207.75, 403.955, 207.75, 403.275, 205.825, 403.344, 205.25, 430.5, 205.45, 431.313, 205.45, 431.025, 206.45, 429.87, 206.45, 429.95, 206.4, 431.25, 205.55, 413.875, 206.275, 413.875, 206.275, 413.938, 206.525, 413.945, 206.55, 414.3, 207.95, 414.3, 207.95, 413.425, 207.825, 413.839, 206.4, 429.87, 206.45, 430.5, 206.45, 429.75, 206.55, 429.75, 206.55, 429.75, 206.525, 429.83, 206.475, 437.981, 206.55, 438.748, 206.55, 438.45, 207.65, 437.8, 208.675, 437.8, 208.675, 437.968, 206.7, 408.632, 206.7, 409.88, 206.7, 409.556, 209.25, 408.305, 209.25, 408.378, 208.675, 408.382, 208.65, 408.625, 206.75, 423.911, 206.75, 424.656, 206.75, 425.048, 209.825, 424.302, 209.825, 423.965, 207.175, 442.348, 206.75, 443.307, 206.75, 443.65, 207.7, 443.039, 209.825, 441.205, 209.825, 441.6, 209.35, 442.226, 207.175, 400.168, 207.175, 400.712, 207.175, 400.45, 209.25, 400.45, 209.25, 400.172, 207.2, 416.984, 207.175, 417.411, 207.175, 417.85, 208.2, 418.105, 210.05, 417.381, 210.05, 416.988, 207.2, 430.825, 207.475, 430.825, 207.475, 430.75, 208.55, 429.829, 208.55, 429.8, 208.3, 429.8, 208.1, 430.538, 207.65, 403.955, 207.75, 404.256, 207.75, 404.975, 209.775, 404.9, 210.425, 404.9, 210.425, 403.982, 207.825, 431.5, 208.45, 432.5, 208.45, 433.25, 208.55, 430.75, 208.55, 429.829, 208.55, 433.25, 208.55, 431.95, 209.4, 430.8, 210.1, 430.8, 210.3, 431.037, 213.1, 430.648, 213.1, 430.2, 211.8, 429.84, 208.65, 408.305, 209.25, 409.556, 209.25, 409.046, 213.25, 407.792, 213.25, 408.292, 209.35, 402.775, 209.825, 402.775, 209.825, 403.525, 211.95, 403.403, 213.4, 402.318, 213.4, 402.746, 210.05, 424.302, 209.825, 425.048, 209.825, 425.528, 213.6, 424.783, 213.6, 424.331, 210.05, 441.205, 209.825, 443.039, 209.825, 442.6, 211.35, 440.95, 213, 438.6, 213, 440.25, 210.975, 441.018, 210.05, 413.05, 210.05, 413.05, 210.05, 414.05, 210.15, 414.325, 210.2, 414.3, 210.45, 414.55, 210.575, 414.901, 212.05, 412.33, 212.05, 412.85, 210.45, 413.025, 210.1, 417.381, 210.05, 418.105, 210.05, 418.602, 213.65, 418.605, 213.675, 417.837, 213.675, 417.85, 213.45, 417.388, 210.1, 401.375, 210.65, 401.375, 210.65, 401.4, 210.8, 401.3, 211.575, 401.3, 211.575, 401.363, 210.8, 412.33, 212.05, 414.05, 212.05, 413.85, 212.45, 413.2, 214.45, 413.155, 214.6, 411.561, 214.6, 412.2, 212.45, 412.298, 212.15, 414.05, 212.05, 414.901, 212.05, 414.925, 212.15, 414.925, 212.15, 438.65, 212.35, 438.65, 212.35, 438.6, 213, 438.578, 213, 438.3, 212.6, 438.51, 212.45, 438.578, 213, 440.95, 213, 439.55, 214.4, 439.55, 214.4, 438.647, 213.1, 430.648, 213.1, 431.037, 213.1, 431.05, 213.25, 430.725, 213.325, 430.725, 213.325, 430.699, 213.25, 407.792, 213.25, 409.046, 213.25, 408.453, 217.9, 407.195, 217.9, 407.32, 216.925, 407.323, 216.9, 407.461, 215.825, 407.464, 215.8, 407.782, 213.325, 402.318, 213.4, 403.403, 213.4, 403.146, 216.45, 403.144, 216.475, 403.142, 216.5, 403.024, 217.9, 401.86, 217.9, 402.024, 215.825, 402.026, 215.8, 402.05, 215.5, 402.312, 213.45, 424.783, 213.6, 425.528, 213.6, 426.05, 217.7, 426.071, 217.85, 425.3, 217.85, 425.15, 216.4, 425.05, 215.7, 424.789, 213.65, 417.837, 213.675, 418.605, 213.675, 418.85, 215.45, 418.7, 218.15, 418.536, 219.15, 417.667, 219.15, 417.475, 217.975, 417.7, 216.15, 417.828, 213.85, 411.561, 214.6, 413.155, 214.6, 411.641, 219.6, 411.518, 219.6, 411.4, 218.5, 411.399, 218.475, 411.35, 216.6, 411.352, 216.5, 411.352, 216.475, 411.356, 216.275, 411.356, 216.25, 411.375, 215.225, 437.65, 215.525, 437.65, 215.525, 438.675, 218.125, 438.726, 219.5, 437.8, 219.5, 437.657, 215.7, 435.1, 215.825, 435.1, 215.825, 435.072, 216.45, 432.3, 216.45, 434.15, 216, 432.2, 216.275, 432.2, 216.275, 432.3, 216.45, 431.894, 216.45, 431.982, 216.4, 431.894, 216.45, 435.072, 216.45, 435.07, 216.475, 435.05, 216.925, 433.9, 217.8, 433.816, 217.85, 429.45, 217.85, 431.851, 216.475, 428.95, 217.175, 428.95, 217.175, 429.45, 217.85, 429.329, 217.85, 429.132, 217.5, 422.1, 217.625, 422.1, 217.625, 423, 217.65, 425.3, 217.85, 422.089, 217.85, 422.099, 217.65, 422.089, 217.85, 426.071, 217.85, 426.15, 218.4, 426.3, 219.85, 426.3, 219.85, 424, 219.65, 422, 219.6, 422.086, 217.9, 429.329, 217.85, 433.816, 217.85, 430.45, 219.85, 430.45, 219.85, 429.357, 217.9, 401.86, 217.9, 403.024, 217.9, 402.826, 220.25, 402.491, 220.25, 401.85, 218.025, 401.854, 217.975, 407.195, 217.9, 408.453, 217.9, 408.154, 220.25, 407.386, 220.25, 407.025, 219.225, 407.185, 217.975, 442.025, 218.45, 442.025, 218.45, 443.4, 220.25, 441.046, 221.45, 440.811, 221.45, 440.025, 219.45, 441.975, 218.475, 417.667, 219.15, 418.536, 219.15, 418.149, 221.5, 418.051, 221.5, 417.679, 219.225, 437.075, 219.475, 437.075, 219.475, 437.8, 219.5, 437.074, 219.5, 437.074, 219.5, 438.726, 219.5, 438.8, 221.5, 438.8, 221.5, 437, 221.45, 437.072, 219.55, 411.518, 219.6, 411.641, 219.6, 411.55, 219.9, 411.55, 219.9, 411.523, 219.65, 402.491, 220.25, 402.826, 220.25, 402.75, 221.15, 402.75, 221.15, 407.386, 220.25, 408.154, 220.25, 407.95, 221.85, 407.95, 221.85, 407.703, 221.15, 440.811, 221.45, 441.046, 221.45, 440.85, 221.55, 440.85, 221.55, 440.83, 221.5, 418.051, 221.5, 418.149, 221.5, 418.1, 221.8, 418.1, 221.8, 418.059, 221.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16, 17, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35), PackedInt32Array(36, 37, 38, 39, 40, 41, 42), PackedInt32Array(43, 44, 45, 46, 47, 48), PackedInt32Array(49, 50, 51, 52, 53, 54), PackedInt32Array(55, 56, 57, 58, 59, 60), PackedInt32Array(61, 62, 63, 64, 65, 66), PackedInt32Array(67, 68, 69, 70, 71, 72), PackedInt32Array(73, 74, 75, 76, 77, 78), PackedInt32Array(79, 80, 81, 82, 83, 84), PackedInt32Array(85, 86, 87, 88, 89, 90, 91, 92), PackedInt32Array(93, 94, 95, 96, 97, 98), PackedInt32Array(99, 100, 101, 102, 103, 104), PackedInt32Array(105, 106, 107, 108, 109, 110, 111), PackedInt32Array(112, 113, 114, 115, 116), PackedInt32Array(117, 118, 119, 120, 121, 122, 123), PackedInt32Array(124, 125, 126, 127, 128), PackedInt32Array(129, 130, 131, 132, 133, 134), PackedInt32Array(135, 136, 137, 138, 139, 140, 141), PackedInt32Array(142, 143, 144, 145, 146, 147), PackedInt32Array(148, 149, 150, 151), PackedInt32Array(152, 153, 154, 155, 156, 157, 158, 159, 160), PackedInt32Array(161, 162, 163, 164, 165), PackedInt32Array(166, 167, 168, 169, 170, 171), PackedInt32Array(172, 173, 174, 175, 176), PackedInt32Array(177, 178, 179, 180, 181, 182, 183), PackedInt32Array(184, 185, 186, 187, 188, 189, 190, 191, 192, 193), PackedInt32Array(194, 195, 196, 197, 198, 199, 200), PackedInt32Array(201, 202, 203, 204, 205, 206), PackedInt32Array(207, 208, 209, 210, 211, 212, 213, 214), PackedInt32Array(215, 216, 217, 218), PackedInt32Array(219, 220, 221, 222, 223, 224), PackedInt32Array(225, 226, 227, 228, 229), PackedInt32Array(230, 231, 232, 233, 234, 235), PackedInt32Array(236, 237, 238, 239, 240, 241, 242, 243, 244), PackedInt32Array(245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255), PackedInt32Array(256, 257, 258, 259, 260, 261, 262, 263), PackedInt32Array(264, 265, 266, 267, 268, 269, 270, 271, 272), PackedInt32Array(273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284), PackedInt32Array(285, 286, 287, 288, 289, 290), PackedInt32Array(291, 292, 293, 294, 295), PackedInt32Array(296, 297, 298, 299, 300), PackedInt32Array(301, 302, 303, 304, 305, 306, 307, 308), PackedInt32Array(309, 310, 311, 312, 313), PackedInt32Array(314, 315, 316, 317, 318, 319), PackedInt32Array(320, 321, 322, 323, 324, 325, 326, 327), PackedInt32Array(328, 329, 330, 331, 332), PackedInt32Array(333, 334, 335, 336, 337, 338), PackedInt32Array(339, 340, 341, 342, 343, 344), PackedInt32Array(345, 346, 347, 348, 349, 350, 351), PackedInt32Array(352, 353, 354, 355, 356), PackedInt32Array(357, 358, 359, 360), PackedInt32Array(361, 362, 363, 364, 365, 366), PackedInt32Array(367, 368, 369, 370, 371), PackedInt32Array(372, 373, 374, 375), PackedInt32Array(376, 377, 378, 379, 380), PackedInt32Array(381, 382, 383, 384, 385), PackedInt32Array(386, 387, 388, 389, 390)])
 
@@ -305,10 +366,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), Packe
 [node name="Frame 1" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1" instance=ExtResource("1_s04wo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 1"]
 position = Vector2(0.05, 134.95)
 scale = Vector2(2.29132, 0.66452)
-script = ExtResource("2_lw6ao")
+script = ExtResource("2_x8drb")
 path = "res://sm63_godot/Xtra/Xtra Box 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -320,14 +381,17 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 1/DOMSymbolInstance"]
+script = SubResource("GDScript_q5md3")
 
 [node name="Frame 14" type="Node2D" parent="Layer 4"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 14" instance=ExtResource("1_s04wo")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 14"]
 position = Vector2(0.05, 89.95)
 scale = Vector2(2.29132, 0.66452)
-script = ExtResource("2_lw6ao")
+script = ExtResource("2_x8drb")
 path = "res://sm63_godot/Xtra/Xtra Box 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -339,10 +403,19 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 14/DOMSymbolInstance"]
+script = SubResource("GDScript_vl4mf")
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_r0mgp")
+
 [node name="Frame 14" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 14"]
+script = SubResource("GDScript_hthwr")

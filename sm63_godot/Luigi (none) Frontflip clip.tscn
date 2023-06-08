@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Flipping.png" id="1_1k1fh"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_hc3x4"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_neaab"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_0ojk6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Flipping.png" id="2_bfonr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_ndh6d"]
 
-[sub_resource type="Animation" id="Animation_3only"]
+[sub_resource type="Animation" id="Animation_uuw2t"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lg0x5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2sti6"]
 _data = {
-"Default": SubResource("Animation_3only")
+"Default": SubResource("Animation_uuw2t")
 }
 
 [node name="Luigi (none) Frontflip clip" type="Node2D"]
+script = ExtResource("1_0ojk6")
+source_xml = "res://sm63/LIBRARY/Luigi (none) Frontflip clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lg0x5")
+"Timeline": SubResource("AnimationLibrary_2sti6")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,18 +56,18 @@ libraries = {
 [node name="@@12658" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -15.5)
-texture = ExtResource("1_1k1fh")
+texture = ExtResource("2_bfonr")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_hc3x4")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(4.35, -10.9)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("3_neaab")
+script = ExtResource("3_ndh6d")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

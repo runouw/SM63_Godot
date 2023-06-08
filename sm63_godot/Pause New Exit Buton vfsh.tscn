@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_3dd27"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_ngu2n"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_5eluw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8evrp"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_6mig7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_6tpqn"]
 
-[sub_resource type="Animation" id="Animation_7l8ik"]
+[sub_resource type="Animation" id="Animation_0xdxv"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -44,16 +44,42 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iqj64"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ousp"]
 _data = {
-"Default": SubResource("Animation_7l8ik")
+"Default": SubResource("Animation_0xdxv")
 }
 
+[sub_resource type="GDScript" id="GDScript_3ssv0"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, true) && _parent.clicked !== true) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	_xscale += (sc-_xscale)/2;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120 && _parent.clicked !== true) {
+# 		_xscale = 140;
+# 		_yscale = 140;
+# 		_parent.clicked = true;
+# 		_parent.Trans(\"exit\");
+# 	}
+# };
+# "
+
 [node name="Pause New Exit Buton vfsh" type="Node2D"]
+script = ExtResource("1_8evrp")
+source_xml = "res://sm63/LIBRARY/Pause New Exit Buton vfsh.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_iqj64")
+"Timeline": SubResource("AnimationLibrary_5ousp")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -65,7 +91,7 @@ libraries = {
 [node name="@@13367" type="Polygon2D" parent="Layer 2/Frame 0/Shape"]
 polygon = PackedVector2Array(-60.075, -17.975, 59.9, -17.975, 59.9, 17.025, -60.075, 17.025)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_3dd27")
+script = ExtResource("2_6mig7")
 matrix = Transform2D(0.0766296, 0, 0, 0.0731049, -0.1, -0.5)
 entries_color = PackedColorArray(1, 1, 1, 1, 0.890196, 0.00784314, 0.00784314, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -83,8 +109,8 @@ end_cap_mode = 2
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_ngu2n")]
-script = ExtResource("3_5eluw")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("3_6tpqn")
 path = "res://sm63_godot/Pause New &#034Exit&#034.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -100,3 +126,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_3ssv0")

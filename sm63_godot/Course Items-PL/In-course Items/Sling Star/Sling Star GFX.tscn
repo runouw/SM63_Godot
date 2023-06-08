@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_n6p2l"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_x78jp"]
+
+[sub_resource type="Animation" id="Animation_ifgq7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pg28c"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1g3y"]
 _data = {
-"Default": SubResource("Animation_n6p2l")
+"Default": SubResource("Animation_ifgq7")
 }
 
 [node name="Sling Star GFX" type="Node2D"]
+script = ExtResource("1_x78jp")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Sling Star/Sling Star GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pg28c")
+"Timeline": SubResource("AnimationLibrary_s1g3y")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

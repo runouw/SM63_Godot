@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_gpvdd"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8v588"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_hhxfb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_saul8"]
 
-[sub_resource type="Animation" id="Animation_1o4ly"]
+[sub_resource type="Animation" id="Animation_8p3sx"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,29 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gb2os"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hh4lp"]
 _data = {
-"Default": SubResource("Animation_1o4ly")
+"Default": SubResource("Animation_8p3sx")
 }
 
 [node name="Bowser Battle 3 End Cinema Course" type="Node2D"]
+script = ExtResource("1_hhxfb")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 3 End Cinema Course.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gb2os")
+"Timeline": SubResource("AnimationLibrary_hh4lp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_gpvdd")]
-script = ExtResource("2_8v588")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_saul8")
 path = "res://sm63_godot/Bowser Battle 3 End Stuff.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

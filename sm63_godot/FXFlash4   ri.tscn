@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_efr8u"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_cxkv5"]
+
+[sub_resource type="Animation" id="Animation_k8dn2"]
 length = 0.366667
 loop_mode = 1
 tracks/0/type = "value"
@@ -148,16 +150,25 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xv24y"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ckiw5"]
 _data = {
-"Default": SubResource("Animation_efr8u")
+"Default": SubResource("Animation_k8dn2")
 }
 
+[sub_resource type="GDScript" id="GDScript_72obx"]
+script/source = "extends Node
+# stop()"
+
 [node name="FXFlash4   ri" type="Node2D"]
+script = ExtResource("1_cxkv5")
+source_xml = "res://sm63/LIBRARY/FXFlash4   ri.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xv24y")
+"Timeline": SubResource("AnimationLibrary_ckiw5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -251,3 +262,6 @@ visible = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 10"]
+script = SubResource("GDScript_72obx")

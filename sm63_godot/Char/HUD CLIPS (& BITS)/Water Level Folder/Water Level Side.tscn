@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_2vjhp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_s4s2w"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_x73x7"]
 
-[sub_resource type="Animation" id="Animation_32m1k"]
+[sub_resource type="Animation" id="Animation_oumd7"]
 length = 13.3333
 loop_mode = 1
 tracks/0/type = "value"
@@ -102,16 +103,31 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_aemwg"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cdgiq"]
 _data = {
-"Default": SubResource("Animation_32m1k")
+"Default": SubResource("Animation_oumd7")
 }
 
+[sub_resource type="GDScript" id="GDScript_xh26o"]
+script/source = "extends Node
+# gotoAndPlay(random(399)+1);
+# "
+
+[sub_resource type="GDScript" id="GDScript_h2jq5"]
+script/source = "extends Node
+# gotoAndPlay(2);
+# "
+
 [node name="Water Level Side" type="Node2D"]
+script = ExtResource("1_s4s2w")
+source_xml = "res://sm63/LIBRARY/Char/HUD CLIPS (& BITS)/Water Level Folder/Water Level Side.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_aemwg")
+"Timeline": SubResource("AnimationLibrary_cdgiq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -123,7 +139,7 @@ libraries = {
 [node name="@@14766" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(-79.75, -88.05, -79.75, -88.05, 79.75, -6.075, 79.75, 105.75, 57.225, 105.75, -79.75, 35.05, -79.75, -6.075)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
-script = ExtResource("1_2vjhp")
+script = ExtResource("2_x73x7")
 matrix = Transform2D(0.185562, 0, 0, 0.108749, 0, 0)
 entries_color = PackedColorArray(0.152941, 0.878431, 0.878431, 0.45098, 0.2, 0.866667, 0.866667, 0.4, 0.313726, 0.545098, 0.886275, 0.45098)
 entries_ratio = PackedFloat32Array(0, 0.486275, 1)
@@ -137,7 +153,7 @@ visible = false
 [node name="@@14767" type="Polygon2D" parent="Layer 1/Frame 100/Shape"]
 polygon = PackedVector2Array(-79.75, -88.05, -79.75, -88.05, 79.75, -6.075, 79.75, 105.75, 57.225, 105.75, -79.75, 35.05, -79.75, -6.075)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
-script = ExtResource("1_2vjhp")
+script = ExtResource("2_x73x7")
 matrix = Transform2D(0.185303, 0.0261536, -0.0153198, 0.108597, -16, -25)
 entries_color = PackedColorArray(0.301961, 0.901961, 0.901961, 0.25098, 0.14902, 0.85098, 0.85098, 0.2, 0.172549, 0.45098, 0.862745, 0.45098)
 entries_ratio = PackedFloat32Array(0, 0.486275, 1)
@@ -151,7 +167,7 @@ visible = false
 [node name="@@14768" type="Polygon2D" parent="Layer 1/Frame 201/Shape"]
 polygon = PackedVector2Array(-79.75, -88.05, -79.75, -88.05, 79.75, -6.075, 79.75, 105.75, 57.225, 105.75, -79.75, 35.05, -79.75, -6.075)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
-script = ExtResource("1_2vjhp")
+script = ExtResource("2_x73x7")
 matrix = Transform2D(-0.0269165, 0.112015, -0.0656433, -0.0157776, 0, 0)
 entries_color = PackedColorArray(0.172549, 0.384314, 0.862745, 0.45098, 0.2, 0.866667, 0.866667, 0.4, 0.286275, 0.792157, 0.913725, 0.45098)
 entries_ratio = PackedFloat32Array(0, 0.486275, 1)
@@ -165,7 +181,7 @@ visible = false
 [node name="@@14769" type="Polygon2D" parent="Layer 1/Frame 300/Shape"]
 polygon = PackedVector2Array(-79.75, -88.05, -79.75, -88.05, 79.75, -6.075, 79.75, 105.75, 57.225, 105.75, -79.75, 35.05, -79.75, -6.075)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
-script = ExtResource("1_2vjhp")
+script = ExtResource("2_x73x7")
 matrix = Transform2D(0.09375, -0.00492859, 0.0109711, 0.208801, 0, 0)
 entries_color = PackedColorArray(0.152941, 0.878431, 0.878431, 0.45098, 0.211765, 0.407843, 0.854902, 0.4, 0.313726, 0.545098, 0.886275, 0.45098)
 entries_ratio = PackedFloat32Array(0, 0.117647, 1)
@@ -179,7 +195,7 @@ visible = false
 [node name="@@14770" type="Polygon2D" parent="Layer 1/Frame 399/Shape"]
 polygon = PackedVector2Array(-79.75, -88.05, -79.75, -88.05, 79.75, -6.075, 79.75, 105.75, 57.225, 105.75, -79.75, 35.05, -79.75, -6.075)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
-script = ExtResource("1_2vjhp")
+script = ExtResource("2_x73x7")
 matrix = Transform2D(0.185562, 0, 0, 0.108749, 0, 0)
 entries_color = PackedColorArray(0.152941, 0.878431, 0.878431, 0.45098, 0.2, 0.866667, 0.866667, 0.4, 0.313726, 0.545098, 0.886275, 0.552941)
 entries_ratio = PackedFloat32Array(0, 0.486275, 1)
@@ -193,5 +209,11 @@ focal_point_ratio = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_xh26o")
+
 [node name="Frame 399" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 399"]
+script = SubResource("GDScript_h2jq5")

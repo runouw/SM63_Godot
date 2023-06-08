@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_l6jhv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fs3hd"]
+
+[sub_resource type="Animation" id="Animation_08pph"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_g1jkt"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ocvvo"]
 _data = {
-"Default": SubResource("Animation_l6jhv")
+"Default": SubResource("Animation_08pph")
 }
 
 [node name="Castle Color Clip" type="Node2D"]
+script = ExtResource("1_fs3hd")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Color Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_g1jkt")
+"Timeline": SubResource("AnimationLibrary_ocvvo")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]

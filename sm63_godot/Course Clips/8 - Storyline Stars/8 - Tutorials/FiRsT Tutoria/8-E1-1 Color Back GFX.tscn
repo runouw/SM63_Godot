@@ -1,20 +1,20 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_7k2e5"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3d54j"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 2.png" id="3_mgee5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 1.png" id="4_m6c67"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Mossy Rock 2.png" id="5_e8pfc"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 3.png" id="6_imqqk"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/Log Bit.png" id="7_qm5ie"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Tree 64.png" id="8_owmjn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Mario Hedge 1.png" id="9_n4tct"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Mario Hedge 2.png" id="10_vw14k"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Rocks/Small Rock YI.png" id="11_8y2rk"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Rocks/Large Rock (YI).png" id="12_noytt"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Signs & Fences/YI Arrow.png" id="13_k21ga"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gch5l"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_rbd0b"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 2.png" id="3_o4031"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 1.png" id="4_rygcs"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Mossy Rock 2.png" id="5_qsxmx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Jungle/YI Jungle Tree 3.png" id="6_0qes5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Various Platforms/Non-Coded PL/Coded PL Bits/Log Bit.png" id="7_vqw2o"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Tree 64.png" id="8_doohe"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Mario Hedge 1.png" id="9_s3bgq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Vegetation/Regular/Mario Hedge 2.png" id="10_qaud5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Rocks/Small Rock YI.png" id="11_0ifrb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Rocks/Large Rock (YI).png" id="12_12skn"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Decoration/Signs & Fences/YI Arrow.png" id="13_nrxy4"]
 
-[sub_resource type="Animation" id="Animation_gn63g"]
+[sub_resource type="Animation" id="Animation_vn4fp"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -54,25 +54,60 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wx4gy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xct1q"]
 _data = {
-"Default": SubResource("Animation_gn63g")
+"Default": SubResource("Animation_vn4fp")
 }
 
+[sub_resource type="GDScript" id="GDScript_2npmt"]
+script/source = "extends Node
+# color = Math.round(_root.TotalStars*1.5)+25;
+# color2 = Math.abs(100-color);
+# myColor = new Color(this);
+# colorTrans = new Object();
+# colorTrans = {ra:(color*0.5)+50-(color2/3), rb:0, ga:(color*0.5)+50-(color2/3), gb:0, ba:(color*0.5)+50-(color2/3), bb:0, aa:100, ab:0};
+# myColor.setTransform(colorTrans);
+# onEnterFrame = function () {
+# 	color += Math.round(((_root.TotalStars*1.5)+25)-color)/7;
+# 	if (_root.CheatCastleRestore == true) {
+# 		color = 100;
+# 	}
+# 	//color = Math.max(color, 0);          
+# 	//color = Math.min(color, 100);
+# 	if (color>100) {
+# 		oldcolor = color;
+# 		color += Math.abs(100-color)*2.5;
+# 	}
+# 	color2 = Math.abs(100-color);
+# 	// color = percent of stars obained
+# 	// color 2  = percent of stars not yet obtained
+# 	colorTrans = {ra:(color*0.5)+50-(color2/3), rb:0, ga:(color*0.5)+50-(color2/3), gb:0, ba:(color*0.5)+50-(color2/3), bb:0, aa:100, ab:0};
+# 	myColor.setTransform(colorTrans);
+# 	if (color>100) {
+# 		color = oldcolor;
+# 	}
+# };
+# "
+
 [node name="8-E1-1 Color Back GFX" type="Node2D"]
+script = ExtResource("1_gch5l")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Color Back GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wx4gy")
+"Timeline": SubResource("AnimationLibrary_xct1q")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_7k2e5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(-160.95, -29.75)
-script = ExtResource("2_3d54j")
+script = ExtResource("2_rbd0b")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 BG Quality Items.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -88,13 +123,13 @@ brightness = 0.0
 [node name="@@38284" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(203.9, -237.15)
-texture = ExtResource("3_mgee5")
+texture = ExtResource("3_o4031")
 centered = false
 
 [node name="@@38285" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(121.9, -199)
-texture = ExtResource("4_m6c67")
+texture = ExtResource("4_rygcs")
 centered = false
 
 [node name="@@38286" type="Sprite2D" parent="Layer 3/Frame 0"]
@@ -102,19 +137,19 @@ texture_filter = 1
 position = Vector2(106.3, -87.85)
 rotation = -0.0956233
 scale = Vector2(0.999485, 0.999485)
-texture = ExtResource("5_e8pfc")
+texture = ExtResource("5_qsxmx")
 centered = false
 
 [node name="@@38287" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-231.05, -182.15)
-texture = ExtResource("3_mgee5")
+texture = ExtResource("3_o4031")
 centered = false
 
 [node name="@@38288" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-8.2, -161)
-texture = ExtResource("6_imqqk")
+texture = ExtResource("6_0qes5")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -124,211 +159,211 @@ centered = false
 [node name="@@38237" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1295.55, -8.1)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38238" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1280.55, -8.1)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38239" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1266.15, -9.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38240" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1252.15, -10.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38241" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1238.15, -11.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38242" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1224.15, -13.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38243" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1210.15, -16.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38244" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1196.15, -19.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38245" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1010.15, -39.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38246" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-996.15, -35.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38247" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-982.15, -32.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38248" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-968.15, -29.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38249" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-954.15, -26.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38250" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-940.15, -23.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38251" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-926.15, -21.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38252" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-912.15, -19.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38253" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-898.15, -17.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38254" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-884.15, -16.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38255" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-870.15, -15.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38256" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-856.15, -15.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38257" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-842.15, -15.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38258" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-828.15, -16.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38259" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-814.15, -17.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38260" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-547.1, -78.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38261" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-447.2, -31.1)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38262" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-445.2, -44.3)
-texture = ExtResource("7_qm5ie")
+texture = ExtResource("7_vqw2o")
 centered = false
 
 [node name="@@38263" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1402.2, -53.05)
-texture = ExtResource("8_owmjn")
+texture = ExtResource("8_doohe")
 centered = false
 
 [node name="@@38264" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-317.7, -163.25)
-texture = ExtResource("8_owmjn")
+texture = ExtResource("8_doohe")
 centered = false
 
 [node name="@@38265" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1360.15, -54.3)
-texture = ExtResource("9_n4tct")
+texture = ExtResource("9_s3bgq")
 centered = false
 
 [node name="@@38266" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1175.85, -110.95)
-texture = ExtResource("10_vw14k")
+texture = ExtResource("10_qaud5")
 centered = false
 
 [node name="@@38267" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-420.35, -87.3)
-texture = ExtResource("9_n4tct")
+texture = ExtResource("9_s3bgq")
 centered = false
 
 [node name="@@38268" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-756.15, -112.3)
-texture = ExtResource("10_vw14k")
+texture = ExtResource("10_qaud5")
 centered = false
 
 [node name="@@38269" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-150.75, -167.8)
-texture = ExtResource("10_vw14k")
+texture = ExtResource("10_qaud5")
 centered = false
 
 [node name="@@38270" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-500.2, 159)
-texture = ExtResource("11_8y2rk")
+texture = ExtResource("11_0ifrb")
 centered = false
 
 [node name="@@38271" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-910.8, 173.5)
-texture = ExtResource("12_noytt")
+texture = ExtResource("12_12skn")
 centered = false
 
 [node name="@@38272" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -336,7 +371,7 @@ texture_filter = 1
 position = Vector2(-827.65, 42.55)
 rotation = 1.5708
 scale = Vector2(1, -1)
-texture = ExtResource("11_8y2rk")
+texture = ExtResource("11_0ifrb")
 centered = false
 
 [node name="@@38273" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -344,19 +379,19 @@ texture_filter = 1
 position = Vector2(-965.6, 4.7)
 rotation = 1.309
 scale = Vector2(1, 1)
-texture = ExtResource("12_noytt")
+texture = ExtResource("12_12skn")
 centered = false
 
 [node name="@@38274" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1275.15, 115.55)
-texture = ExtResource("12_noytt")
+texture = ExtResource("12_12skn")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_7k2e5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-802.65, 145.7)
 scale = Vector2(0.999847, 1)
-script = ExtResource("2_3d54j")
+script = ExtResource("2_rbd0b")
 path = "res://sm63_godot/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Transparent Ground.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -372,7 +407,7 @@ brightness = 0.0
 [node name="@@38275" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1586.8, -102.3)
-texture = ExtResource("10_vw14k")
+texture = ExtResource("10_qaud5")
 centered = false
 
 [node name="@@38276" type="Sprite2D" parent="Layer 1/Frame 0"]
@@ -380,39 +415,39 @@ texture_filter = 1
 position = Vector2(-1564.1, -68.3)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_owmjn")
+texture = ExtResource("8_doohe")
 centered = false
 
 [node name="@@38277" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-1378.7, -84.8)
 rotation = 1.5708
-texture = ExtResource("13_k21ga")
+texture = ExtResource("13_nrxy4")
 centered = false
 
 [node name="@@38278" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-492.1, 139.55)
 rotation = -1.5708
-texture = ExtResource("13_k21ga")
+texture = ExtResource("13_nrxy4")
 centered = false
 
 [node name="@@38279" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-632.7, 163.65)
 rotation = -1.5708
-texture = ExtResource("13_k21ga")
+texture = ExtResource("13_nrxy4")
 centered = false
 
 [node name="@@38280" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-892.15, 117.65)
-texture = ExtResource("13_k21ga")
+texture = ExtResource("13_nrxy4")
 centered = false
 
-[node name="@DOMSymbolInstance@38281" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_7k2e5")]
+[node name="@DOMSymbolInstance@38281" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-1480.9, -47.15)
-script = ExtResource("2_3d54j")
+script = ExtResource("2_rbd0b")
 path = "res://sm63_godot/Course Clips/8-E1-1 Warppipe Remove.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -429,16 +464,19 @@ brightness = 0.0
 texture_filter = 1
 position = Vector2(334.9, -182.15)
 rotation = 1.5708
-texture = ExtResource("13_k21ga")
+texture = ExtResource("13_nrxy4")
 centered = false
 
 [node name="@@38283" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(308.9, -182.15)
 rotation = 1.5708
-texture = ExtResource("13_k21ga")
+texture = ExtResource("13_nrxy4")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_2npmt")

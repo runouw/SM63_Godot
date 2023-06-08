@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_7m5e8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1jxm5"]
+
+[sub_resource type="Animation" id="Animation_lj5ln"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vptac"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ci0hj"]
 _data = {
-"Default": SubResource("Animation_7m5e8")
+"Default": SubResource("Animation_lj5ln")
 }
 
 [node name="9-05 Ground" type="Node2D"]
+script = ExtResource("1_1jxm5")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-05 Blast to the Stratosphere/9-05 Ground.xml"
+linkage = "9-05Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_vptac")
+"Timeline": SubResource("AnimationLibrary_ci0hj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

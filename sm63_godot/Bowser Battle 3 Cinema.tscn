@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_qprms"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ql4do"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ieya8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0khsm"]
 
-[sub_resource type="Animation" id="Animation_5myit"]
+[sub_resource type="Animation" id="Animation_7yq1e"]
 length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -91,25 +91,57 @@ tracks/6/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5gvfj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q8tfi"]
 _data = {
-"Default": SubResource("Animation_5myit")
+"Default": SubResource("Animation_7yq1e")
 }
 
+[sub_resource type="GDScript" id="GDScript_8c4j4"]
+script/source = "extends Node
+# _root.CinemaMessageFrame = 1;
+# _root.CinemaMessage = \"\";"
+
+[sub_resource type="GDScript" id="GDScript_rvbpq"]
+script/source = "extends Node
+# rex = 0
+# rey = -300"
+
+[sub_resource type="GDScript" id="GDScript_gvgua"]
+script/source = "extends Node
+# stop();
+# 
+# "
+
+[sub_resource type="GDScript" id="GDScript_gmyhc"]
+script/source = "extends Node
+# _root.Fluddpow = \"\";
+# _root.CharHP = 8;
+# _root.StartChar(\"8-16\", 0, -250, 0, -350, 100, _root.CurrentPlayer, _root.Fluddpow, \"Fromwhite\");
+# _root.onEnterFrame = function () {
+# 	CharCode();
+# };
+# _root.gotoAndStop(\"Courseframe\");
+# "
+
 [node name="Bowser Battle 3 Cinema" type="Node2D"]
+script = ExtResource("1_ieya8")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 3 Cinema.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_5gvfj")
+"Timeline": SubResource("AnimationLibrary_q8tfi")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_qprms")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(2.85, 7.15)
-script = ExtResource("2_ql4do")
+script = ExtResource("2_0khsm")
 path = "res://sm63_godot/Course Items-PL/Backgrounds/Space Far BG.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -130,9 +162,9 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0" instance=ExtResource("1_qprms")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 4/Frame 0"]
 scale = Vector2(1, 0.999939)
-script = ExtResource("2_ql4do")
+script = ExtResource("2_0khsm")
 path = "res://sm63_godot/Bowser Battle 3 Cinema Course.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -149,9 +181,12 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 6"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0" instance=ExtResource("1_qprms")]
+[node name="AS2" type="Node" parent="Layer 6/Frame 0"]
+script = SubResource("GDScript_8c4j4")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 6/Frame 0"]
 position = Vector2(9, 101.95)
-script = ExtResource("2_ql4do")
+script = ExtResource("2_0khsm")
 path = "res://sm63_godot/Cinema Message Clip (Press Z).tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -168,9 +203,12 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_qprms")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_rvbpq")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.05, 0)
-script = ExtResource("2_ql4do")
+script = ExtResource("2_0khsm")
 path = "res://sm63_godot/Effects/Transitions/transition from up.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -186,5 +224,11 @@ brightness = 0.0
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 10"]
+script = SubResource("GDScript_gvgua")
+
 [node name="Frame 11" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 11"]
+script = SubResource("GDScript_gmyhc")

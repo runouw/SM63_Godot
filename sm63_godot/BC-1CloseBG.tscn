@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=16 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_58eas"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ph7yp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_x0a5h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_wht46"]
 
-[sub_resource type="Animation" id="Animation_i6jo1"]
+[sub_resource type="Animation" id="Animation_gs647"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,26 +19,207 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifmgw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n1yhp"]
 _data = {
-"Default": SubResource("Animation_i6jo1")
+"Default": SubResource("Animation_gs647")
 }
 
+[sub_resource type="GDScript" id="GDScript_sglv2"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -2.5;
+# 	fallspeed = -0.2;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_rxx54"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -1
+# 	fallspeed = 0.1
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_ys17f"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 4
+# 	fallspeed = 0
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_14fn1"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 1.5;
+# 	fallspeed = -0.1;
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_cufrk"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 2.2
+# 	fallspeed = 0.2
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_1ka0n"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 1.6
+# 	fallspeed = -.1
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_4u344"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 0.5
+# 	fallspeed = 0
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_75xe7"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 2.8
+# 	fallspeed = -0.1
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_18211"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 2
+# 	fallspeed = 0
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_0be8c"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = 3.5
+# 	fallspeed = -0.1
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
+[sub_resource type="GDScript" id="GDScript_duymq"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	count = 0;
+# 	landedon = false;
+# 	speed = -1
+# 	fallspeed = 0
+# }
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation += speed;
+# 		_y += fallspeed;
+# 		//
+# 	}
+# }"
+
 [node name="BC-1CloseBG" type="Node2D"]
+script = ExtResource("1_x0a5h")
+source_xml = "res://sm63/LIBRARY/BC-1CloseBG.xml"
+linkage = "BC-1CloseBG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ifmgw")
+"Timeline": SubResource("AnimationLibrary_n1yhp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(19, 82.55)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC - Falling PL Small.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -51,11 +232,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@431" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_sglv2")
+
+[node name="@DOMSymbolInstance@431" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-230.95, -44)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC - Falling PL Small.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -68,11 +252,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@432" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@431"]
+script = SubResource("GDScript_rxx54")
+
+[node name="@DOMSymbolInstance@432" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-90, -109)
 rotation = -1.5708
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC - Falling PL Small.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -85,11 +272,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@433" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@432"]
+script = SubResource("GDScript_ys17f")
+
+[node name="@DOMSymbolInstance@433" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(207, -64.55)
 rotation = 0.261796
 scale = Vector2(0.500008, 0.500008)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC - Falling PL Small.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -102,10 +292,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@434" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@433"]
+script = SubResource("GDScript_14fn1")
+
+[node name="@DOMSymbolInstance@434" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-290.5, -102.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC-SmallFaling PL hgud.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -118,10 +311,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@435" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@434"]
+script = SubResource("GDScript_cufrk")
+
+[node name="@DOMSymbolInstance@435" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(102.3, 22.4)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC-SmallFaling PL hgud.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -134,10 +330,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@436" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@435"]
+script = SubResource("GDScript_1ka0n")
+
+[node name="@DOMSymbolInstance@436" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-167.65, 110.8)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC-SmallFaling PL hgud.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -150,10 +349,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@437" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@436"]
+script = SubResource("GDScript_4u344")
+
+[node name="@DOMSymbolInstance@437" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-482.65, 45.75)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC-SmallFaling PL hgud.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -166,11 +368,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@438" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@437"]
+script = SubResource("GDScript_75xe7")
+
+[node name="@DOMSymbolInstance@438" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-614.95, 5.95)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC - Falling PL Small.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -183,11 +388,14 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@439" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@438"]
+script = SubResource("GDScript_18211")
+
+[node name="@DOMSymbolInstance@439" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-833.95, 167)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC - Falling PL Small.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -200,10 +408,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@440" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_58eas")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@439"]
+script = SubResource("GDScript_0be8c")
+
+[node name="@DOMSymbolInstance@440" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-721.65, 69.1)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("2_ph7yp")
+script = ExtResource("2_wht46")
 path = "res://sm63_godot/BC-SmallFaling PL hgud.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -215,3 +426,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@440"]
+script = SubResource("GDScript_duymq")

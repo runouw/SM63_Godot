@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Dive.png" id="1_htqxg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 2.png" id="2_2y1pn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 3.png" id="3_5likr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_a3b8u"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Dive.png" id="2_ssv2e"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 2.png" id="3_hqpwg"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Fly - 3.png" id="4_6sj5s"]
 
-[sub_resource type="Animation" id="Animation_pclj0"]
+[sub_resource type="Animation" id="Animation_4tpv6"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -68,16 +69,31 @@ tracks/4/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eqndk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_feqq3"]
 _data = {
-"Default": SubResource("Animation_pclj0")
+"Default": SubResource("Animation_4tpv6")
 }
 
+[sub_resource type="GDScript" id="GDScript_xpyec"]
+script/source = "extends Node
+# stop();
+# "
+
+[sub_resource type="GDScript" id="GDScript_oi4fq"]
+script/source = "extends Node
+# _parent.frame = \"fly\";
+# "
+
 [node name="Goonie Diving" type="Node2D"]
+script = ExtResource("1_a3b8u")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Goonie/Goonie Diving.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_eqndk")
+"Timeline": SubResource("AnimationLibrary_feqq3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -87,7 +103,7 @@ libraries = {
 [node name="@@50650" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-32.5, -7)
-texture = ExtResource("1_htqxg")
+texture = ExtResource("2_ssv2e")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -96,7 +112,7 @@ visible = false
 [node name="@@50651" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-19, -7)
-texture = ExtResource("2_2y1pn")
+texture = ExtResource("3_hqpwg")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -105,12 +121,18 @@ visible = false
 [node name="@@50652" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-18, -14.5)
-texture = ExtResource("3_5likr")
+texture = ExtResource("4_6sj5s")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_xpyec")
+
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 3"]
+script = SubResource("GDScript_oi4fq")

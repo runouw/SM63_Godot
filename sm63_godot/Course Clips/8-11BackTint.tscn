@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="1_uw1x5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_f648q"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="2_4wwq6"]
 
-[sub_resource type="Animation" id="Animation_0kq5d"]
+[sub_resource type="Animation" id="Animation_f3ro2"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_oelsc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_icneq"]
 _data = {
-"Default": SubResource("Animation_0kq5d")
+"Default": SubResource("Animation_f3ro2")
 }
 
 [node name="8-11BackTint" type="Node2D"]
+script = ExtResource("1_f648q")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-11BackTint.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_oelsc")
+"Timeline": SubResource("AnimationLibrary_icneq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -42,7 +48,7 @@ position = Vector2(8.15, -550)
 [node name="@@18078" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_uw1x5")
+texture = ExtResource("2_4wwq6")
 texture_offset = Vector2(16, 16)
 polygon = PackedVector2Array(-96.15, -16, 79.85, -16, 79.85, 537.9, -96.15, 537.9)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])

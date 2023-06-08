@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_twd41"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ijipi"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_jhgjn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ltbg0"]
 
-[sub_resource type="Animation" id="Animation_1x2rq"]
+[sub_resource type="Animation" id="Animation_m048p"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,26 +19,31 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h1q3x"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y5c0p"]
 _data = {
-"Default": SubResource("Animation_1x2rq")
+"Default": SubResource("Animation_m048p")
 }
 
 [node name="Kamek Battle 2 Cinema Course" type="Node2D"]
+script = ExtResource("1_jhgjn")
+source_xml = "res://sm63/LIBRARY/Kamek Battle 2 Cinema Course.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_h1q3x")
+"Timeline": SubResource("AnimationLibrary_y5c0p")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_twd41")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0, -0.45)
 scale = Vector2(1, 1.00008)
-script = ExtResource("2_ijipi")
+script = ExtResource("2_ltbg0")
 path = "res://sm63_godot/Kamek Battle 2 Cinema Course Stuff.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

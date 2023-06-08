@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_osphk"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_dms0c"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_su61o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ayslo"]
 
-[sub_resource type="Animation" id="Animation_pr7eu"]
+[sub_resource type="Animation" id="Animation_v12tl"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3q5u"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmynp"]
 _data = {
-"Default": SubResource("Animation_pr7eu")
+"Default": SubResource("Animation_v12tl")
 }
 
 [node name="3-2 Ground" type="Node2D"]
+script = ExtResource("1_su61o")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-1 & 3-2/3-2 Ground.xml"
+linkage = "3-2Platforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_x3q5u")
+"Timeline": SubResource("AnimationLibrary_kmynp")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,9 +56,9 @@ color = Color(0, 0.6, 0, 1)
 polygon = PackedVector2Array(743.4, 1320.85, 769.7, 1320.85, 769.7, 1445.85, 743.4, 1445.85, 743.4, 1690.85, 769.7, 1690.85, 769.7, 1805.8, 743.4, 1805.8, 743.4, 1711.85, -98.65, 1711.85, -72.35, 1711.85, -72.35, 1925.8, -98.65, 1925.8, -98.65, 1805.8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13)])
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_osphk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(693.35, 2056.25)
-script = ExtResource("2_dms0c")
+script = ExtResource("2_ayslo")
 path = "res://sm63_godot/Course Clips/3 - Hazy Maze Cave/Areas 3-1 & 3-2/3-2 Cave in ground.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

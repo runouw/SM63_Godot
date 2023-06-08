@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_23uh0"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_73tfy"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_r4ka6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_tbmwb"]
 
-[sub_resource type="Animation" id="Animation_u2r07"]
+[sub_resource type="Animation" id="Animation_y7rvy"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -151,24 +151,34 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f2mf1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bunru"]
 _data = {
-"Default": SubResource("Animation_u2r07")
+"Default": SubResource("Animation_y7rvy")
 }
 
+[sub_resource type="GDScript" id="GDScript_m7pnn"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Shy Guy Clip" type="Node2D"]
+script = ExtResource("1_r4ka6")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_f2mf1")
+"Timeline": SubResource("AnimationLibrary_bunru")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_23uh0")]
-script = ExtResource("2_73tfy")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_tbmwb")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Idle.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -184,8 +194,8 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_23uh0")]
-script = ExtResource("2_73tfy")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("2_tbmwb")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Walking.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -201,8 +211,8 @@ brightness = 0.0
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_23uh0")]
-script = ExtResource("2_73tfy")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
+script = ExtResource("2_tbmwb")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Jump.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -218,8 +228,8 @@ brightness = 0.0
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3" instance=ExtResource("1_23uh0")]
-script = ExtResource("2_73tfy")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 3"]
+script = ExtResource("2_tbmwb")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Tumbling.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -235,9 +245,9 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_23uh0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0, 3)
-script = ExtResource("2_73tfy")
+script = ExtResource("2_tbmwb")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/ShyGuy Flying.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -253,9 +263,9 @@ brightness = 0.0
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5" instance=ExtResource("1_23uh0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 5"]
 position = Vector2(0, 9)
-script = ExtResource("2_73tfy")
+script = ExtResource("2_tbmwb")
 path = "res://sm63_godot/Enemies/Normal/G-Z/Shy-Guy/Shy Guy Squish.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -271,6 +281,9 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_m7pnn")
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false

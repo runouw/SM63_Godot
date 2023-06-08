@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="1_11aie"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_c0gft"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) Spinning - 1.png" id="2_evu8w"]
 
-[sub_resource type="Animation" id="Animation_mo262"]
+[sub_resource type="Animation" id="Animation_p6u84"]
 length = 0.666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gqvva"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ao10m"]
 _data = {
-"Default": SubResource("Animation_mo262")
+"Default": SubResource("Animation_p6u84")
 }
 
 [node name="Bowser Battle 3 Cinema Mario Jump Arc" type="Node2D"]
+script = ExtResource("1_c0gft")
+source_xml = "res://sm63/LIBRARY/Bowser Battle 3 Cinema Mario Jump Arc.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_gqvva")
+"Timeline": SubResource("AnimationLibrary_ao10m")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,7 +57,7 @@ texture_filter = 1
 position = Vector2(16.55, 0.35)
 rotation = 2.09439
 scale = Vector2(1, 1)
-texture = ExtResource("1_11aie")
+texture = ExtResource("2_evu8w")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
@@ -60,5 +66,5 @@ visible = false
 [node name="@@2730" type="Sprite2D" parent="Layer 1/Frame 19"]
 texture_filter = 1
 position = Vector2(-8.05, -14.45)
-texture = ExtResource("1_11aie")
+texture = ExtResource("2_evu8w")
 centered = false

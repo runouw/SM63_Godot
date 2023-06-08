@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Running Backwards - 1.png" id="1_nbni0"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Running Backwards - 2.png" id="2_tidh2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ei8rl"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Running Backwards - 1.png" id="2_10idw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario (none) - Running Backwards - 2.png" id="3_2tmmf"]
 
-[sub_resource type="Animation" id="Animation_lkg1v"]
+[sub_resource type="Animation" id="Animation_f3jx5"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,16 +32,21 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_os6yh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hhrph"]
 _data = {
-"Default": SubResource("Animation_lkg1v")
+"Default": SubResource("Animation_f3jx5")
 }
 
 [node name="Cinema Mario Shocked" type="Node2D"]
+script = ExtResource("1_ei8rl")
+source_xml = "res://sm63/LIBRARY/Cinema Mario Shocked.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_os6yh")
+"Timeline": SubResource("AnimationLibrary_hhrph")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -50,7 +56,7 @@ libraries = {
 [node name="@@5363" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-17.5, -17)
-texture = ExtResource("1_nbni0")
+texture = ExtResource("2_10idw")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -59,5 +65,5 @@ visible = false
 [node name="@@5364" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-17.5, -21)
-texture = ExtResource("2_tidh2")
+texture = ExtResource("3_2tmmf")
 centered = false

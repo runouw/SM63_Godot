@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Volcano Rock 1.png" id="1_1evjq"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_epme3"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Volcano Rock 1.png" id="2_wr6h8"]
 
-[sub_resource type="Animation" id="Animation_ajv5b"]
+[sub_resource type="Animation" id="Animation_lp8os"]
 length = 3.26667
 loop_mode = 1
 tracks/0/type = "value"
@@ -306,16 +307,89 @@ tracks/24/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f8vu3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wu23a"]
 _data = {
-"Default": SubResource("Animation_ajv5b")
+"Default": SubResource("Animation_lp8os")
 }
 
+[sub_resource type="GDScript" id="GDScript_muqd0"]
+script/source = "extends Node
+# stop();
+# if (_root.L5VolErupt == true) {
+# 	_root.L5VolStar = false;
+# 	play();
+# } else {
+# 	_root.L5VolErupt = false;
+# 	if (_root.L5VolStar == true) {
+# 		gotoAndStop(\"End\");
+# 	} else {
+# 		stop();
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ntjc5"]
+script/source = "extends Node
+# //
+# vcount = 0;
+# _root.Course.FrontGFX.nextFrame();
+# Volcano = function () {
+# 	if (vcount>5) {
+# 		vcount = 0;
+# 		ty = random(4)+1;
+# 		_root.Course.FrontGFX.attachMovie(\"5-4VolFire\"+ty, \"5-4VolFire\"+ty+_root.Course.FrontGFX.getNextHighestDepth(), _root.Course.FrontGFX.getNextHighestDepth(), {_x:-100+random(250), _y:-730-random(25)});
+# 	} else if (vcount == 0) {
+# 		ty = random(2)+1;
+# 		_root.Course.FrontGFX.attachMovie(\"5-4VolFire\"+ty, \"5-4VolFire\"+ty+_root.Course.FrontGFX.getNextHighestDepth(), _root.Course.FrontGFX.getNextHighestDepth(), {_x:-100+random(250), _y:-730-random(25)});
+# 	}
+# 	if (_root._quality == \"HIGH\" || _root._quality == \"BEST\") {
+# 		vcount += 3;
+# 	} else if (_root._quality == \"MEDIUM\") {
+# 		vcount += 2;
+# 	} else {
+# 		vcount += 1;
+# 	}
+# };
+# //_root.Char.attackFrame = \"StarGet\"
+# _root.Course.Char.yspeed = -17;
+# onEnterFrame = function () {
+# 	Volcano();
+# 	_root.PauseGame = false;
+# 	_root.Controll = false;
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_y5evp"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	Volcano();
+# 	_root.PauseGame = false;
+# 	_root.Controll = false;
+# 	if (_root.Course.Char.air == false) {
+# 		_root.L5VolStar = true;
+# 		_root.L5VolErupt = false;
+# 		onEnterFrame = function () {
+# 			Volcano();
+# 		};
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_lqtk4"]
+script/source = "extends Node
+# stop()
+# "
+
 [node name="5-4 Volcano Eruption FGFX" type="Node2D"]
+script = ExtResource("1_epme3")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-4 Volcano Eruption FGFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_f8vu3")
+"Timeline": SubResource("AnimationLibrary_wu23a")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -346,7 +420,7 @@ position = Vector2(-102.95, -393.95)
 [node name="@@31421" type="Polygon2D" parent="Layer 4/Frame 1/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -371,7 +445,7 @@ position = Vector2(-95.15, -447.75)
 [node name="@@31423" type="Polygon2D" parent="Layer 4/Frame 20/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -396,7 +470,7 @@ position = Vector2(-70.95, 1)
 [node name="@@31425" type="Polygon2D" parent="Layer 4/Frame 88/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -421,7 +495,7 @@ position = Vector2(-70.95, -3)
 [node name="@@31427" type="Polygon2D" parent="Layer 4/Frame 89/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -446,7 +520,7 @@ position = Vector2(-65.95, 1)
 [node name="@@31429" type="Polygon2D" parent="Layer 4/Frame 90/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -471,7 +545,7 @@ position = Vector2(-70.95, -3)
 [node name="@@31431" type="Polygon2D" parent="Layer 4/Frame 91/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -496,7 +570,7 @@ position = Vector2(-76.95, 4)
 [node name="@@31433" type="Polygon2D" parent="Layer 4/Frame 92/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -521,7 +595,7 @@ position = Vector2(-70.95, 2)
 [node name="@@31435" type="Polygon2D" parent="Layer 4/Frame 93/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -546,7 +620,7 @@ position = Vector2(-70.95, 1)
 [node name="@@31437" type="Polygon2D" parent="Layer 4/Frame 94/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -571,7 +645,7 @@ position = Vector2(-76.95, 5)
 [node name="@@31439" type="Polygon2D" parent="Layer 4/Frame 95/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -596,7 +670,7 @@ position = Vector2(-70.95, 1)
 [node name="@@31441" type="Polygon2D" parent="Layer 4/Frame 96/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_1evjq")
+texture = ExtResource("2_wr6h8")
 texture_offset = Vector2(-1428.55, 998.85)
 texture_scale = Vector2(1.52381, 1.42679)
 polygon = PackedVector2Array(689, -757.1, 689, -757.1, 699.112, -755.713, 707.75, -749.75, 712.55, -746.4, 715.9, -745.6, 719.15, -744.3, 723.7, -739.8, 726.7, -725, 725.55, -722.25, 722.4, -718.6, 716.85, -712.15, 713.95, -711.4, 702.3, -710.313, 690.95, -707.95, 690.95, -707.95, 686.85, -708.6, 681.9, -709.7, 678.9, -711, 674.55, -714.75, 673.05, -722.95, 670.65, -730.7, 668.2, -736, 672.05, -747.8, 684.9, -756.05)
@@ -627,6 +701,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Cody"]
 
+[node name="AS2" type="Node" parent="Cody/Frame 0"]
+script = SubResource("GDScript_muqd0")
+
 [node name="Shape" type="Node2D" parent="Cody/Frame 0"]
 
 [node name="@@31420" type="Polygon2D" parent="Cody/Frame 0/Shape"]
@@ -637,11 +714,20 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 [node name="Frame 1" type="Node2D" parent="Cody"]
 visible = false
 
+[node name="AS2" type="Node" parent="Cody/Frame 1"]
+script = SubResource("GDScript_ntjc5")
+
 [node name="Frame 2" type="Node2D" parent="Cody"]
 visible = false
 
 [node name="Frame 96" type="Node2D" parent="Cody"]
 visible = false
 
+[node name="AS2" type="Node" parent="Cody/Frame 96"]
+script = SubResource("GDScript_y5evp")
+
 [node name="Frame 97" type="Node2D" parent="Cody"]
 visible = false
+
+[node name="AS2" type="Node" parent="Cody/Frame 97"]
+script = SubResource("GDScript_lqtk4")

@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_1xocj"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_pwnmg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="3_g0c11"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/YI Brown Brick Repeat.png" id="4_5edql"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="5_i540a"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Lava Rocks.png" id="6_vudgk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_5gkyk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_rl5ey"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Brick.png" id="3_ibg25"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/YI Brown Brick Repeat.png" id="4_85cym"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Large Red Brick.png" id="5_elscd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Rocks & Blocks (Tiled)/Lava Rocks.png" id="6_i14gp"]
 
-[sub_resource type="Animation" id="Animation_cw4tu"]
+[sub_resource type="Animation" id="Animation_2hubr"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -59,16 +59,39 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xsrpn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c1srh"]
 _data = {
-"Default": SubResource("Animation_cw4tu")
+"Default": SubResource("Animation_2hubr")
 }
 
+[sub_resource type="GDScript" id="GDScript_3coas"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation -= 0.2;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ow8ky"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		_rotation -= 0.1;
+# 	}
+# }
+# "
+
 [node name="5-2 Spinning Ground GFX" type="Node2D"]
+script = ExtResource("1_5gkyk")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Sides (2&#0443)/5-2 Spinning Ground GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xsrpn")
+"Timeline": SubResource("AnimationLibrary_c1srh")
 }
 
 [node name="Base" type="Node2D" parent="."]
@@ -84,8 +107,8 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Base/Frame 0" instance=ExtResource("1_1xocj")]
-script = ExtResource("2_pwnmg")
+[node name="DOMSymbolInstance" type="Node2D" parent="Base/Frame 0"]
+script = ExtResource("2_rl5ey")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Sides (2&#0443)/5-2 Wheel Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -98,12 +121,15 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.25
 
+[node name="AS2" type="Node" parent="Base/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_3coas")
+
 [node name="Major Poles" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Major Poles"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Major Poles/Frame 0" instance=ExtResource("1_1xocj")]
-script = ExtResource("2_pwnmg")
+[node name="DOMSymbolInstance" type="Node2D" parent="Major Poles/Frame 0"]
+script = ExtResource("2_rl5ey")
 path = "res://sm63_godot/Course Clips/5 - Lethal Lava Land/Sides (2&#0443)/5-2 Wheels Pole Tint.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -115,6 +141,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = -0.35
+
+[node name="AS2" type="Node" parent="Major Poles/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_ow8ky")
 
 [node name="Layer 5" type="Node2D" parent="."]
 
@@ -147,7 +176,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 [node name="@@31555" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(547.548, 257.726)
 texture_scale = Vector2(1.0018, 1.0018)
 texture_rotation = -0.625937
@@ -157,7 +186,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), Pa
 [node name="@@31556" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(138.042, 916.418)
 texture_scale = Vector2(1.00403, 1.00403)
 texture_rotation = -1.16193
@@ -167,7 +196,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31557" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(462.355, 583.848)
 texture_scale = Vector2(1.00253, 1.00253)
 texture_rotation = -0.0916168
@@ -177,7 +206,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
 [node name="@@31558" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_5edql")
+texture = ExtResource("4_85cym")
 texture_offset = Vector2(379.059, 274.212)
 texture_scale = Vector2(1.00256, 1.00256)
 texture_rotation = -0.0309219
@@ -187,7 +216,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31559" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_5edql")
+texture = ExtResource("4_85cym")
 texture_offset = Vector2(468.791, 294.473)
 texture_scale = Vector2(1.00398, 1.00398)
 texture_rotation = -0.54685
@@ -197,7 +226,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31560" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_i540a")
+texture = ExtResource("5_elscd")
 texture_offset = Vector2(367.579, 424.111)
 texture_scale = Vector2(1.00198, 1.00198)
 texture_rotation = -1.08067
@@ -207,7 +236,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
 [node name="@@31561" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("6_vudgk")
+texture = ExtResource("6_i14gp")
 texture_offset = Vector2(368.6, 227.65)
 polygon = PackedVector2Array(0, -40, 0, -40, 7.825, -39.3, 15.35, -37.075, 22.275, -33.325, 28.275, -28.3, 28.3, -28.275, 33.325, -22.25, 35.26, -18.6896, 35.2611, -18.6875, 37.075, -15.35, 39.3, -7.825, 39.9978, -0.0250015, -39.9978, -0.0250015, -39.3, -7.825, -37.075, -15.35, -33.325, -22.275, -28.3, -28.3, -22.275, -33.325, -15.35, -37.075, -7.825, -39.3, -39.9978, -0.0250015, 39.9978, -0.0250015, 39.9978, -0.025, 40, 0, 39.3, 7.8, 37.05, 15.35, 33.3, 22.25, 28.275, 28.275, 22.25, 33.3, 15.35, 37.075, 7.825, 39.3, 0, 40, 0, 40, -7.825, 39.3, -15.35, 37.075, -22.25, 33.325, -28.275, 28.3, -28.3, 28.275, -33.325, 22.275, -37.075, 15.35, -39.3, 7.825, -40, 0, -39.9978, -0.025)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43)])
@@ -215,7 +244,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31562" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_i540a")
+texture = ExtResource("5_elscd")
 texture_offset = Vector2(427.164, 445.788)
 texture_scale = Vector2(1.00358, 1.00358)
 texture_rotation = -1.98686
@@ -225,7 +254,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31563" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_5edql")
+texture = ExtResource("4_85cym")
 texture_offset = Vector2(624.761, 345.836)
 texture_scale = Vector2(1.00556, 1.00556)
 texture_rotation = -1.18532
@@ -235,7 +264,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31564" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_5edql")
+texture = ExtResource("4_85cym")
 texture_offset = Vector2(699.568, 358.916)
 texture_scale = Vector2(1.0068, 1.0068)
 texture_rotation = -1.60926
@@ -245,7 +274,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31565" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(703.359, 258.67)
 texture_scale = Vector2(1.001, 1.001)
 texture_rotation = -1.74082
@@ -255,7 +284,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31566" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_5edql")
+texture = ExtResource("4_85cym")
 texture_offset = Vector2(893.46, 582.78)
 texture_scale = Vector2(1.0058, 1.0058)
 texture_rotation = -2.1794
@@ -265,7 +294,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31567" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_i540a")
+texture = ExtResource("5_elscd")
 texture_offset = Vector2(557.552, 477.363)
 texture_scale = Vector2(1.00585, 1.00585)
 texture_rotation = -2.79154
@@ -275,7 +304,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), Pa
 [node name="@@31568" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_5edql")
+texture = ExtResource("4_85cym")
 texture_offset = Vector2(-178.17, 582.105)
 texture_scale = Vector2(1.00293, 1.00293)
 texture_rotation = 2.94834
@@ -285,7 +314,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31569" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(826.315, 1024.02)
 texture_scale = Vector2(1.00388, 1.00388)
 texture_rotation = 2.89608
@@ -295,7 +324,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31570" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(805.476, 540.807)
 texture_scale = Vector2(1.00271, 1.00271)
 texture_rotation = -2.21047
@@ -305,7 +334,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31571" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(-2.7461, 531.75)
 texture_scale = Vector2(1.00414, 1.00414)
 texture_rotation = 1.53683
@@ -315,7 +344,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31572" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(-179.161, 595.329)
 texture_scale = Vector2(1.00373, 1.00373)
 texture_rotation = 0.320878
@@ -325,7 +354,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 [node name="@@31573" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(133.961, 373.355)
 texture_scale = Vector2(1.00135, 1.00135)
 texture_rotation = 1.08134
@@ -335,7 +364,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31574" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_i540a")
+texture = ExtResource("5_elscd")
 texture_offset = Vector2(268.384, 318.045)
 texture_scale = Vector2(1.00008, 1.00008)
 texture_rotation = 1.54888
@@ -345,7 +374,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 [node name="@@31575" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_5edql")
+texture = ExtResource("4_85cym")
 texture_offset = Vector2(-129.022, 582.922)
 texture_scale = Vector2(1.00414, 1.00414)
 texture_rotation = 2.537
@@ -355,7 +384,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31576" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_5edql")
+texture = ExtResource("4_85cym")
 texture_offset = Vector2(21.6939, 485.257)
 texture_scale = Vector2(1.00137, 1.00137)
 texture_rotation = 2.00344
@@ -365,7 +394,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31577" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(-126.454, 504.636)
 texture_scale = Vector2(1.00299, 1.00299)
 texture_rotation = 1.92176
@@ -375,7 +404,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31578" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_g0c11")
+texture = ExtResource("3_ibg25")
 texture_offset = Vector2(-226.684, 616.958)
 texture_scale = Vector2(1.00593, 1.00593)
 texture_rotation = 2.34998
@@ -385,7 +414,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31579" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_i540a")
+texture = ExtResource("5_elscd")
 texture_offset = Vector2(283.484, 269.075)
 texture_scale = Vector2(1.00164, 1.00164)
 texture_rotation = 0.756896
@@ -395,7 +424,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), Packe
 [node name="@@31580" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("5_i540a")
+texture = ExtResource("5_elscd")
 texture_offset = Vector2(322.694, 404.291)
 texture_scale = Vector2(1.00043, 1.00043)
 texture_rotation = -0.126973
@@ -405,7 +434,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@31581" type="Polygon2D" parent="Layer 4/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("4_5edql")
+texture = ExtResource("4_85cym")
 texture_offset = Vector2(274.077, 437.868)
 texture_scale = Vector2(1.00165, 1.00165)
 texture_rotation = 0.3651

@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
-[sub_resource type="Animation" id="Animation_3fqbg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qj304"]
+
+[sub_resource type="Animation" id="Animation_0gyih"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -52,16 +54,32 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fw17w"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jp5vq"]
 _data = {
-"Default": SubResource("Animation_3fqbg")
+"Default": SubResource("Animation_0gyih")
 }
 
+[sub_resource type="GDScript" id="GDScript_g7ye6"]
+script/source = "extends Node
+# if (_root.Star[41] == true) {
+# 	stop();
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_5ggcb"]
+script/source = "extends Node
+# stop();"
+
 [node name="Castle grounds Warpipe ground" type="Node2D"]
+script = ExtResource("1_qj304")
+source_xml = "res://sm63/LIBRARY/Castle grounds Warpipe ground.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fw17w")
+"Timeline": SubResource("AnimationLibrary_jp5vq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -82,5 +100,11 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_g7ye6")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_5ggcb")

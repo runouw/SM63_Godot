@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_cbcpq"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_v6r5j"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_kb6le"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_5gkxu"]
 
-[sub_resource type="Animation" id="Animation_ytil2"]
+[sub_resource type="Animation" id="Animation_4c34q"]
 length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -151,26 +151,143 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kb5m"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0fd0t"]
 _data = {
-"Default": SubResource("Animation_ytil2")
+"Default": SubResource("Animation_4c34q")
 }
 
+[sub_resource type="GDScript" id="GDScript_jpseo"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(40)+41);
+# 	movement = 0;
+# 	moved = \"right\";
+# }
+# onClipEvent (enterFrame) {
+# 	_x += movement;
+# 	if (movement>1) {
+# 		moved = \"left\";
+# 	}
+# 	if (movement<-1) {
+# 		moved = \"right\";
+# 	}
+# 	if (moved == \"right\") {
+# 		movement += 0.3;
+# 	} else {
+# 		movement -= 0.3;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_b621e"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	gotoAndPlay(random(40)+1);
+# 	movement = 0;
+# 	moved = \"right\";
+# }
+# onClipEvent (enterFrame) {
+# 	_x += movement;
+# 	if (movement>1) {
+# 		moved = \"left\";
+# 	}
+# 	if (movement<-1) {
+# 		moved = \"right\";
+# 	}
+# 	if (moved == \"right\") {
+# 		movement += 0.3;
+# 	} else {
+# 		movement -= 0.3;
+# 	}
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_l2658"]
+script/source = "extends Node
+# /*
+# if (_root.Course.coincountnum == undefined) {
+# _root.Course.coincountnum = 0;
+# } else {
+# _root.Course.coincountnum++;
+# }
+# if (_root[\"coindata\"+_root.playingcourse][0] == undefined) {
+# _root[\"coindata\"+_root.playingcourse] = [\"\"];
+# }
+# coinnum = _root.Course.coincountnum;
+# if (_root[\"coindata\"+_root.playingcourse][coinnum] == 1 && _root[\"coindata\"+_root.playingcourse][coinnum] !== undefined) {
+# gotoAndStop(\"end\");
+# }
+# */
+# "
+
+[sub_resource type="GDScript" id="GDScript_wxdap"]
+script/source = "extends Node
+# stop();
+# _visible = true;
+# onEnterFrame = function () {
+# 	if (Math.abs((_root.currentCamX)-(_x+_parent._x))<600 && Math.abs((_root.currentCamY)-(_y+_parent._y))<600) {
+# 		_visible = true;
+# 		if (this.hitTest(_root.Course.Char.charClip.body) || this.hitTest((_root.Course.Char._x*_root.coursescale/100)+_root.Course._x, ((_root.Course.Char._y-15)*_root.coursescale/100)+_root.Course._y, true)) {
+# 			play();
+# 			_root.WaterAmount += 5000;
+# 			onEnterFrame = null;
+# 		}
+# 	} else {
+# 		_visible = false;
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_6lfd7"]
+script/source = "extends Node
+# _root.bgsoundFX = new Sound(this);
+# _root.bgsoundFX.attachSound(\"Fludd Nozzle\");
+# _root.bgsoundFX.start(0, 1);
+# _root.bgsoundFX.setVolume(_root.BgVolume);
+# //
+# //_root[\"coindata\"+_root.playingcourse][coinnum] = 1;
+# //
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_8eqck"]
+script/source = "extends Node
+# stop();
+# count = 0;
+# onEnterFrame = function () {
+# 	if (Math.abs((_root.currentCamX)-(_x+_parent._x))>600 || Math.abs((_root.currentCamY)-(_y+_parent._y))>600 || count++>32*30) {
+# 		gotoAndPlay(1);
+# 		onEnterFrame = null;
+# 	}
+# };
+# "
+
 [node name="Water Bottle Clip" type="Node2D"]
+script = ExtResource("1_kb6le")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Water Bottle/Water Bottle Clip.xml"
+linkage = "WaterBottle"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_1kb5m")
+"Timeline": SubResource("AnimationLibrary_0fd0t")
 }
 
 [node name="Bubbles" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Bubbles"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Bubbles/Frame 0" instance=ExtResource("1_cbcpq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Bubbles/Frame 0"]
 position = Vector2(-2.55, 19.95)
 scale = Vector2(1.25752, 1.25752)
-script = ExtResource("2_v6r5j")
+script = ExtResource("2_5gkxu")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Water Bottle/Water Bottle Bubble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -183,10 +300,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@47056" type="Node2D" parent="Bubbles/Frame 0" instance=ExtResource("1_cbcpq")]
+[node name="AS2" type="Node" parent="Bubbles/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_jpseo")
+
+[node name="@DOMSymbolInstance@47056" type="Node2D" parent="Bubbles/Frame 0"]
 position = Vector2(2.45, 19.95)
 scale = Vector2(1.25752, 1.25752)
-script = ExtResource("2_v6r5j")
+script = ExtResource("2_5gkxu")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Water Bottle/Water Bottle Bubble.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -198,6 +318,9 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Bubbles/Frame 0/@DOMSymbolInstance@47056"]
+script = SubResource("GDScript_b621e")
 
 [node name="Frame 3" type="Node2D" parent="Bubbles"]
 visible = false
@@ -216,9 +339,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="Frame 3" type="Node2D" parent="Water"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Water/Frame 3" instance=ExtResource("1_cbcpq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Water/Frame 3"]
 position = Vector2(8, 31.8)
-script = ExtResource("2_v6r5j")
+script = ExtResource("2_5gkxu")
 path = "res://sm63_godot/Effects/Water/Water Splash.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -274,8 +397,8 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), Packe
 [node name="Frame 3" type="Node2D" parent="Frame"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Frame/Frame 3" instance=ExtResource("1_cbcpq")]
-script = ExtResource("2_v6r5j")
+[node name="DOMSymbolInstance" type="Node2D" parent="Frame/Frame 3"]
+script = ExtResource("2_5gkxu")
 path = "res://sm63_godot/Effects/Water/Runsplash 2.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -295,11 +418,23 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 4"]
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 0"]
+script = SubResource("GDScript_l2658")
+
 [node name="Frame 2" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 2"]
+script = SubResource("GDScript_wxdap")
 
 [node name="Frame 3" type="Node2D" parent="Layer 4"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 4/Frame 3"]
+script = SubResource("GDScript_6lfd7")
+
 [node name="Frame 17" type="Node2D" parent="Layer 4"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 4/Frame 17"]
+script = SubResource("GDScript_8eqck")

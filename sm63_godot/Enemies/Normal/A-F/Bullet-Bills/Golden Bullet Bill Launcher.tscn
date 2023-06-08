@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 1.png" id="1_xthrc"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 2.png" id="2_a66em"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 3.png" id="3_msj3h"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 4.png" id="4_l1lnn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 5.png" id="5_u8ux6"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 6.png" id="6_dypr3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dapr5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 1.png" id="2_kgjsf"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 2.png" id="3_6m2ys"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 3.png" id="4_vlb4s"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 4.png" id="5_3apyl"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 5.png" id="6_ggd61"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Base - 6.png" id="7_wf7jn"]
 
-[sub_resource type="Animation" id="Animation_ofijh"]
+[sub_resource type="Animation" id="Animation_tlu1u"]
 length = 0.866667
 loop_mode = 1
 tracks/0/type = "value"
@@ -107,16 +108,122 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_k7qsx"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xe8h8"]
 _data = {
-"Default": SubResource("Animation_ofijh")
+"Default": SubResource("Animation_tlu1u")
 }
 
+[sub_resource type="GDScript" id="GDScript_0pckg"]
+script/source = "extends Node
+# stop();
+# if (waittime == undefined) {
+# 	waittime = 92*9;
+# }
+# if (addrandomly == undefined) {
+# 	addrandomly = false
+# }
+# if (limit == undefined) {
+# 	if (chase == true) {
+# 		limit = 3;
+# 	} else {
+# 		limit = \"none\";
+# 	}
+# }
+# if (onlyright == undefined) {
+# 	onlyright = false;
+# 	// Only goes to the right side
+# }
+# if (onlyleft == undefined) {
+# 	onlyleft = false;
+# 	// Only goes to the left side
+# }
+# if (lockedside == undefined) {
+# 	lockedside = false;
+# 	// Checks for onlyright or onlyleft and (if true) will go even if mario is on the wrong side.
+# }
+# if(enemyhurt == undefined){
+# 	//enemyhurt = true;	
+# }
+# if (firstrun == undefined) {
+# 	total = 0;
+# 	if (offset !== undefined) {
+# 		count = offset;
+# 	} else {
+# 		count = 0;
+# 	}
+# 	firstrun = true;
+# } else {
+# 	count = 0;
+# }
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		if (Math.abs((_root.currentCamX)-(_x+_parent._x))<1000 && Math.abs((_root.currentCamY)-(_y+_parent._y))<1000) {
+# 			if (addrandomly == true) {
+# 				count += 2;
+# 				count += Math.random()*1;
+# 			} else {
+# 				count++;
+# 			}
+# 			if (count>waittime) {
+# 				count = 0;
+# 				if (rot == undefined) {
+# 					boolean = (_root.currentCamX)-(_x+_parent._x)>=0;
+# 				} else if (rot == 180) {
+# 					boolean = (_root.currentCamX)-(_x+_parent._x)<=0;
+# 				} else if (rot == 90) {
+# 					boolean = (_root.currentCamY)-(_y+_parent._y)>=0;
+# 				} else {
+# 					boolean = (_root.currentCamY)-(_y+_parent._y)<=0;
+# 				}
+# 				if (boolean) {
+# 					// Launch to the right
+# 					LD = \"right\";
+# 				} else {
+# 					LD = \"left\";
+# 					// Launch to the left
+# 				}
+# 				if (((!(onlyright == true && LD == \"left\") && !(onlyleft == true && LD == \"right\")) || lockedside == true) && (total<limit || limit == \"none\")) {
+# 					play();
+# 					onEnterFrame = function () {
+# 						if (_root.PauseGame == false) {
+# 							play();
+# 						} else {
+# 							stop();
+# 						}
+# 					};
+# 				}
+# 			}
+# 		}
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_vfkdy"]
+script/source = "extends Node
+# if (onlyright == true) {
+# 	LD = \"right\";
+# }
+# if (onlyleft == true) {
+# 	LD = \"left\";
+# }
+# if (LD == \"right\") {
+# 	_root.Course.FrontGFX.attachMovie(\"GoldBill\", \"GoldBill\"+_root.Course.FrontGFX.getNextHighestDepth(), _root.Course.FrontGFX.getNextHighestDepth(), {_x:_x+Math.cos(_root.angleToRadians(_rotation))*15, _y:_y+Math.sin(_root.angleToRadians(_rotation))*15, _xscale:100, rotation:_rotation, eat:eat, chase:chase, frame:frame, speed:speed, rotdiv:rotdiv, rotmaxspeed:rotmaxspeed, enemyhurt:enemyhurt, parent:this});
+# } else {
+# 	_root.Course.FrontGFX.attachMovie(\"GoldBill\", \"GoldBill\"+_root.Course.FrontGFX.getNextHighestDepth(), _root.Course.FrontGFX.getNextHighestDepth(), {_x:_x-Math.cos(_root.angleToRadians(_rotation))*15, _y:_y-Math.sin(_root.angleToRadians(_rotation))*15, _xscale:-100, rotation:_rotation, eat:eat, chase:chase, frame:frame, speed:speed, rotdiv:rotdiv, rotmaxspeed:rotmaxspeed, enemyhurt:enemyhurt, parent:this});
+# }
+# total++;
+# "
+
 [node name="Golden Bullet Bill Launcher" type="Node2D"]
+script = ExtResource("1_dapr5")
+source_xml = "res://sm63/LIBRARY/Enemies/Normal/A-F/Bullet-Bills/Golden Bullet Bill Launcher.xml"
+linkage = "BulletBillLauncher"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_k7qsx")
+"Timeline": SubResource("AnimationLibrary_xe8h8")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -126,7 +233,7 @@ libraries = {
 [node name="@@50558" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-8, -12)
-texture = ExtResource("1_xthrc")
+texture = ExtResource("2_kgjsf")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -135,7 +242,7 @@ visible = false
 [node name="@@50559" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-13, -16)
-texture = ExtResource("2_a66em")
+texture = ExtResource("3_6m2ys")
 centered = false
 
 [node name="Frame 5" type="Node2D" parent="Layer 1"]
@@ -144,7 +251,7 @@ visible = false
 [node name="@@50560" type="Sprite2D" parent="Layer 1/Frame 5"]
 texture_filter = 1
 position = Vector2(-14, -18)
-texture = ExtResource("3_msj3h")
+texture = ExtResource("4_vlb4s")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
@@ -153,7 +260,7 @@ visible = false
 [node name="@@50561" type="Sprite2D" parent="Layer 1/Frame 10"]
 texture_filter = 1
 position = Vector2(-15, -19)
-texture = ExtResource("4_l1lnn")
+texture = ExtResource("5_3apyl")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 1"]
@@ -162,7 +269,7 @@ visible = false
 [node name="@@50562" type="Sprite2D" parent="Layer 1/Frame 21"]
 texture_filter = 1
 position = Vector2(-15, -20)
-texture = ExtResource("5_u8ux6")
+texture = ExtResource("6_ggd61")
 centered = false
 
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
@@ -171,12 +278,18 @@ visible = false
 [node name="@@50563" type="Sprite2D" parent="Layer 1/Frame 23"]
 texture_filter = 1
 position = Vector2(-13.65, -18)
-texture = ExtResource("6_dypr3")
+texture = ExtResource("7_wf7jn")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_0pckg")
+
 [node name="Frame 21" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 21"]
+script = SubResource("GDScript_vfkdy")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_c5ti0"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_lrr5h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_nfap2"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7uuks"]
 
-[sub_resource type="Animation" id="Animation_rkjb1"]
+[sub_resource type="Animation" id="Animation_2h6it"]
 length = 3.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,25 +103,59 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3045r"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtqkn"]
 _data = {
-"Default": SubResource("Animation_rkjb1")
+"Default": SubResource("Animation_2h6it")
 }
 
+[sub_resource type="GDScript" id="GDScript_76mag"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_67ui2"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false && _root.KeyUP() && !_root.KeyLEFT() && !_root.KeyRIGHT()) {
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.xspeed = 0;
+# 		_root.Course.Char.attackFrame = \"Painting\";
+# 		onEnterFrame = function () {
+# 			_root.Camcenter = this;
+# 		};
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_huw0w"]
+script/source = "extends Node
+# _root.gotoMiniCourseSelect(2);
+# //_root.StartWetDryWorld();
+# "
+
 [node name="M2-Painting" type="Node2D"]
+script = ExtResource("1_nfap2")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-Painting.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3045r")
+"Timeline": SubResource("AnimationLibrary_rtqkn")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_c5ti0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, 20)
-script = ExtResource("2_lrr5h")
+script = ExtResource("2_7uuks")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -137,9 +171,9 @@ brightness = 0.0
 [node name="Frame 30" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 30" instance=ExtResource("1_c5ti0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 30"]
 position = Vector2(0, 20)
-script = ExtResource("2_lrr5h")
+script = ExtResource("2_7uuks")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -155,9 +189,9 @@ brightness = 0.0
 [node name="Frame 35" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 35" instance=ExtResource("1_c5ti0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 35"]
 position = Vector2(0, 20)
-script = ExtResource("2_lrr5h")
+script = ExtResource("2_7uuks")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -173,9 +207,9 @@ brightness = 0.75
 [node name="Frame 40" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 40" instance=ExtResource("1_c5ti0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 40"]
 position = Vector2(0, 20)
-script = ExtResource("2_lrr5h")
+script = ExtResource("2_7uuks")
 path = "res://sm63_godot/Course Clips/M - Mini Courses/M2 - Wet Dry World/M2-Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -192,10 +226,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_c5ti0")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-0.5, 67)
 scale = Vector2(0.944016, 0.637497)
-script = ExtResource("2_lrr5h")
+script = ExtResource("2_7uuks")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -208,10 +242,13 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@45969" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_c5ti0")]
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_76mag")
+
+[node name="@DOMSymbolInstance@45969" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0.5, 10.7)
 scale = Vector2(1.26154, 1.35536)
-script = ExtResource("2_lrr5h")
+script = ExtResource("2_7uuks")
 path = "res://sm63_godot/Frame Clip.tscn"
 red_multiplier = 0.5
 green_multiplier = 0.75
@@ -231,5 +268,11 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_67ui2")
+
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 99"]
+script = SubResource("GDScript_huw0w")

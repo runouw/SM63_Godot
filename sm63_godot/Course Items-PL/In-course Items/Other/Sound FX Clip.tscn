@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=6 format=3]
 
-[sub_resource type="Animation" id="Animation_x73q4"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fje6i"]
+
+[sub_resource type="Animation" id="Animation_ak65g"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,83 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uvudv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nlh8e"]
 _data = {
-"Default": SubResource("Animation_x73q4")
+"Default": SubResource("Animation_ak65g")
 }
 
+[sub_resource type="GDScript" id="GDScript_n45at"]
+script/source = "extends Node
+# _visible = false;
+# this.createEmptyMovieClip(\"soundclip\", _root.getNextHighestDepth());
+# if (sound == undefined) {
+# 	sound = \"waterfall\";
+# }
+# if (range == undefined) {
+# 	range = 15/100;
+# }
+# if (maxvolume == undefined) {
+# 	maxvolume = 100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_vymwh"]
+script/source = "extends Node
+# stop();
+# if (_root.CreditsQuiet !== true) {
+# 	started = false;
+# 	onEnterFrame = function () {
+# 		distancevolume = Math.sqrt(Math.pow((_root.currentCamX)-(_x+_parent._x), 2)+Math.pow((_root.currentCamY)-(_y+_parent._y), 2));
+# 		distancevolume *= range;
+# 		distancevolume = Math.min(100, distancevolume);
+# 		distancevolume = Math.max(100-maxvolume, distancevolume);
+# 		distancevolume -= 100;
+# 		distancevolume *= -1;
+# 		//
+# 		if (distancevolume>=1) {
+# 			if (started == false) {
+# 				soundclip = new Sound(this);
+# 				soundclip.attachSound(sound);
+# 				soundclip.start(0, 1);
+# 				soundclip.setVolume((_root.MarioVolume/100)*distancevolume);
+# 				soundclip.setPan(panX);
+# 				soundclip.onSoundComplete = function() {
+# 					//soundclip = new Sound(this);
+# 					soundclip.attachSound(sound);
+# 					soundclip.start(0, 1);
+# 					soundclip.setVolume((_root.MarioVolume/100)*distancevolume);
+# 					soundclip.setPan(panX);
+# 				};
+# 			}
+# 			started = true;
+# 			soundclip.setVolume((_root.MarioVolume/100)*distancevolume);
+# 			panX = (_root.currentCamX)-(_x+_parent._x);
+# 			panX /= -2;
+# 			panX = Math.min(100, panX);
+# 			panX = Math.max(-100, panX);
+# 			soundclip.setPan(panX);
+# 		} else {
+# 			panX = 0;
+# 			if (started == true) {
+# 				soundclip.stop();
+# 				soundclip.onSoundComplete = null;
+# 			}
+# 			started = false;
+# 		}
+# 	};
+# }
+# "
+
 [node name="Sound FX Clip" type="Node2D"]
+script = ExtResource("1_fje6i")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/In-course Items/Other/Sound FX Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_uvudv")
+"Timeline": SubResource("AnimationLibrary_nlh8e")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -60,5 +129,11 @@ libraries = {
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_n45at")
+
 [node name="Frame 2" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 2"]
+script = SubResource("GDScript_vymwh")

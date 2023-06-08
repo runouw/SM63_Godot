@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_mblah"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_8slhx"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_2edp3"]
 
-[sub_resource type="Animation" id="Animation_3djsa"]
+[sub_resource type="Animation" id="Animation_jid1d"]
 length = 0.1
 loop_mode = 1
 tracks/0/type = "value"
@@ -42,16 +43,55 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqvi2"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q0c0p"]
 _data = {
-"Default": SubResource("Animation_3djsa")
+"Default": SubResource("Animation_jid1d")
 }
 
+[sub_resource type="GDScript" id="GDScript_ondd7"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	gotoAndStop(2);
+# 	if (this.hitTest(_root._xmouse, _root._ymouse, false) && _root.MWindow1 == true) {
+# 		sc = 120;
+# 	} else {
+# 		sc = 100;
+# 	}
+# 	if ((_root.PlacingTile == _root.BlankTile && _root.sideframe == \"PlaceTiles\") || (_root.PlaceMode == \"ItemErase\" && _root.sideframe == \"PlaceItems\")) {
+# 		sc = Math.max(110, sc);
+# 		gotoAndStop(3);
+# 	}
+# 	_xscale += (sc-_xscale)/3;
+# 	_yscale = _xscale;
+# };
+# onMouseDown = function () {
+# 	if (sc == 120) {
+# 		_parent.moved.Selected = undefined;
+# 		if (_root.sideframe == \"PlaceTiles\") {
+# 			_root.PlaceMode = \"Tile\";
+# 			_root.PlacingTile = _root.BlankTile;
+# 		} else {
+# 			_root.PlaceMode = \"ItemErase\";
+# 		}
+# 		//
+# 		_root.M.Window1frame = undefined;
+# 		_root.M.Window1._y = 1000;
+# 		_root.M.Window1.gotoAndStop(\"blank\");
+# 		//
+# 	}
+# };
+# "
+
 [node name="LD - Side Bar Eraser" type="Node2D"]
+script = ExtResource("1_8slhx")
+source_xml = "res://sm63/LIBRARY/LD - Side Bar Eraser.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_bqvi2")
+"Timeline": SubResource("AnimationLibrary_q0c0p")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -80,7 +120,7 @@ end_cap_mode = 2
 [node name="@@8683" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(1.7, -9.8, 14.5, -9.8, 1.7, 0.7, -10.375, 1.2, -10.375, 1.2, -9.82614, 0.7)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
-script = ExtResource("1_mblah")
+script = ExtResource("2_2edp3")
 matrix = Transform2D(0.0196533, 0, 0, 0.0100708, -1.6, -1.55)
 entries_color = PackedColorArray(0.996078, 0.705882, 0.972549, 1, 1, 0.133333, 0.917647, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -89,7 +129,7 @@ spread_method_reflect = false
 [node name="@@8684" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(14.5, -9.8, 14.5, -9.8, 7.55, 2.7, -2.7, 11.2, -2.7, 11.2, 1.7, 0.7, 1.7, 0.7, 1.7, 0.7, -2.7, 11.2, -14.775, 11.2, -10.375, 1.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10)])
-script = ExtResource("1_mblah")
+script = ExtResource("2_2edp3")
 matrix = Transform2D(0.0231934, 0.0183105, -0.00367737, 0.00872803, -15.3, 11.55)
 entries_color = PackedColorArray(0.996078, 0.705882, 0.972549, 1, 1, 0.133333, 0.917647, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -136,7 +176,7 @@ end_cap_mode = 2
 [node name="@@8689" type="Polygon2D" parent="Layer 1/Frame 2/Group/Shape"]
 polygon = PackedVector2Array(1.7, -9.8, 14.5, -9.8, 1.7, 0.7, -10.375, 1.2, -10.375, 1.2, -9.82614, 0.7)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
-script = ExtResource("1_mblah")
+script = ExtResource("2_2edp3")
 matrix = Transform2D(0.0196533, 0, 0, 0.0100708, -1.6, -1.55)
 entries_color = PackedColorArray(0.996078, 0.705882, 0.972549, 1, 1, 0.133333, 0.917647, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -145,7 +185,7 @@ spread_method_reflect = false
 [node name="@@8690" type="Polygon2D" parent="Layer 1/Frame 2/Group/Shape"]
 polygon = PackedVector2Array(14.5, -9.8, 14.5, -9.8, 7.55, 2.7, -2.7, 11.2, -2.7, 11.2, 1.7, 0.7, 1.7, 0.7, 1.7, 0.7, -2.7, 11.2, -14.775, 11.2, -10.375, 1.2)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10)])
-script = ExtResource("1_mblah")
+script = ExtResource("2_2edp3")
 matrix = Transform2D(0.0231934, 0.0183105, -0.00367737, 0.00872803, -15.3, 11.55)
 entries_color = PackedColorArray(0.996078, 0.705882, 0.972549, 1, 1, 0.133333, 0.917647, 1)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -170,3 +210,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ondd7")

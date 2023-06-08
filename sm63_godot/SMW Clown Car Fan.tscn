@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMW Bowser Clown Car Fan - 2.png" id="1_8ekfs"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMW Bowser Clown Car Fan - 3.png" id="2_f34v5"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMW Bowser Clown Car Fan - 1.png" id="3_flm6v"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4vog5"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMW Bowser Clown Car Fan - 2.png" id="2_5w0l1"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMW Bowser Clown Car Fan - 3.png" id="3_k2mf2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/SMW Bowser Clown Car Fan - 1.png" id="4_rfe7x"]
 
-[sub_resource type="Animation" id="Animation_oohpx"]
+[sub_resource type="Animation" id="Animation_7tnwk"]
 length = 0.133333
 loop_mode = 1
 tracks/0/type = "value"
@@ -56,16 +57,21 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ctrh6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aygin"]
 _data = {
-"Default": SubResource("Animation_oohpx")
+"Default": SubResource("Animation_7tnwk")
 }
 
 [node name="SMW Clown Car Fan" type="Node2D"]
+script = ExtResource("1_4vog5")
+source_xml = "res://sm63/LIBRARY/SMW Clown Car Fan.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ctrh6")
+"Timeline": SubResource("AnimationLibrary_aygin")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -75,7 +81,7 @@ libraries = {
 [node name="@@13843" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-20, -5.5)
-texture = ExtResource("1_8ekfs")
+texture = ExtResource("2_5w0l1")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
@@ -84,7 +90,7 @@ visible = false
 [node name="@@13844" type="Sprite2D" parent="Layer 1/Frame 1"]
 texture_filter = 1
 position = Vector2(-12, -5.5)
-texture = ExtResource("2_f34v5")
+texture = ExtResource("3_k2mf2")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -93,7 +99,7 @@ visible = false
 [node name="@@13845" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-12, -5.5)
-texture = ExtResource("3_flm6v")
+texture = ExtResource("4_rfe7x")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -102,5 +108,5 @@ visible = false
 [node name="@@13846" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-12, -5.5)
-texture = ExtResource("2_f34v5")
+texture = ExtResource("3_k2mf2")
 centered = false

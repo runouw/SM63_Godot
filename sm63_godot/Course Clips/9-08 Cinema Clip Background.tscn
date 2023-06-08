@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_2v7nk"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_xwubl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_x4j7g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_eonms"]
 
-[sub_resource type="Animation" id="Animation_56ire"]
+[sub_resource type="Animation" id="Animation_7kgvd"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,30 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u76gv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_227qs"]
 _data = {
-"Default": SubResource("Animation_56ire")
+"Default": SubResource("Animation_7kgvd")
 }
 
 [node name="9-08 Cinema Clip Background" type="Node2D"]
+script = ExtResource("1_x4j7g")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-08 Cinema Clip Background.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_u76gv")
+"Timeline": SubResource("AnimationLibrary_227qs")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_2v7nk")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 scale = Vector2(1.00002, 0.999924)
-script = ExtResource("2_xwubl")
+script = ExtResource("2_eonms")
 path = "res://sm63_godot/Course Clips/8 - Bowser's Castle/Main Clips/8-1 Close Background.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

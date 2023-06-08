@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_5xqps"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_4y8qu"]
+
+[sub_resource type="Animation" id="Animation_a2e5r"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,21 +18,77 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebpho"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jbl56"]
 _data = {
-"Default": SubResource("Animation_5xqps")
+"Default": SubResource("Animation_a2e5r")
 }
 
+[sub_resource type="GDScript" id="GDScript_vpiwf"]
+script/source = "extends Node
+# _y = _root._ymouse;
+# _x = _root._xmouse;
+# newY = _root._ymouse;
+# newX = _root._xmouse;
+# oldX = newX;
+# oldY = newY;
+# moveY = 0;
+# moveX = 0;
+# mousepress = false;
+# _root.MouseDown = false;
+# if (_root.WiiMode == false) {
+# 	_alpha = 0;
+# }
+# onEnterFrame = function () {
+# 	if (_root.WiiMode == true) {
+# 		newY = _root._ymouse;
+# 		newX = _root._xmouse;
+# 		moveY = newY-oldY;
+# 		moveX = newX-oldX;
+# 		oldX = newX;
+# 		oldY = newY;
+# 		repeats = Math.ceil((Math.abs(moveY)+Math.abs(moveX))/50);
+# 		for (i=0; i<repeats; i++) {
+# 			_x += moveX/repeats;
+# 			_y += moveY/repeats;
+# 			_root.attachMovie(\"trail\", \"trail\"+_root.getNextHighestDepth(), _root.getNextHighestDepth(), {_x:_x, _y:_y, _rotation:(Math.random()*12-Math.random()*12)+_root.radiansToAngle(Math.atan2(-moveX, moveY))});
+# 		}
+# 		_y = _root._ymouse;
+# 		_x = _root._xmouse;
+# 		_root.mousemoveY = moveY;
+# 		_root.mousemoveX = moveX;
+# 		_alpha = 100;
+# 	} else {
+# 		_x = 275;
+# 		_y = 200;
+# 		_alpha = 0;
+# 	}
+# };
+# onMouseDown = function () {
+# 	_root.MouseDown = true;
+# };
+# onMouseUp = function () {
+# 	_root.MouseDown = false;
+# };
+# "
+
 [node name="MousePointer" type="Node2D"]
+script = ExtResource("1_4y8qu")
+source_xml = "res://sm63/LIBRARY/Menu/Mouse/MousePointer.xml"
+linkage = "Pointer"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ebpho")
+"Timeline": SubResource("AnimationLibrary_jbl56")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_vpiwf")
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 

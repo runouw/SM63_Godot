@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=11 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_4sngr"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_fsrdq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 4 - 3.png" id="3_eplpf"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 5 - 3.png" id="4_lnpc7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_qfrbb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_nal2v"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 4 - 3.png" id="3_14ppb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario 5 - 3.png" id="4_qssrx"]
 
-[sub_resource type="Animation" id="Animation_2aysl"]
+[sub_resource type="Animation" id="Animation_osu4f"]
 length = 1.4
 loop_mode = 1
 tracks/0/type = "value"
@@ -141,25 +141,56 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tyx8y"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uq7wg"]
 _data = {
-"Default": SubResource("Animation_2aysl")
+"Default": SubResource("Animation_osu4f")
 }
 
+[sub_resource type="GDScript" id="GDScript_qylav"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	_root.Course.Char.yspeed = Math.max(0, _root.Course.Char.yspeed);
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_o6uql"]
+script/source = "extends Node
+# if (_root.Fluddpow !== \"\") {
+# 	gotoAndPlay(_currentframe+3);
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_gsmt4"]
+script/source = "extends Node
+# _root.Blackout();
+# "
+
+[sub_resource type="GDScript" id="GDScript_iiq2i"]
+script/source = "extends Node
+# _root.DoorTrasition(_root.door);
+# stop();
+# "
+
 [node name="Mario (none) Door Front" type="Node2D"]
+script = ExtResource("1_qfrbb")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (none) Door Front.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_tyx8y")
+"Timeline": SubResource("AnimationLibrary_uq7wg")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_4sngr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-1.5, 12.45)
-script = ExtResource("2_fsrdq")
+script = ExtResource("2_nal2v")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario (none) Standing Clips.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -180,15 +211,15 @@ texture_filter = 1
 position = Vector2(8.5, -15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_eplpf")
+texture = ExtResource("3_14ppb")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_4sngr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0.35, 1.35)
-script = ExtResource("2_fsrdq")
+script = ExtResource("2_nal2v")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Front Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -204,15 +235,15 @@ brightness = 0.0
 [node name="@@15401" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-7.65, -15.65)
-texture = ExtResource("4_lnpc7")
+texture = ExtResource("4_qssrx")
 centered = false
 
 [node name="Frame 6" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("1_4sngr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6"]
 position = Vector2(0.35, 0.35)
-script = ExtResource("2_fsrdq")
+script = ExtResource("2_nal2v")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario OVW Walking 5.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -228,10 +259,10 @@ brightness = 0.0
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19" instance=ExtResource("1_4sngr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 19"]
 position = Vector2(0.35, 0.35)
 scale = Vector2(1.28261, 1.28261)
-script = ExtResource("2_fsrdq")
+script = ExtResource("2_nal2v")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario OVW Walking 5.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -247,10 +278,10 @@ brightness = 0.0
 [node name="Frame 29" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29" instance=ExtResource("1_4sngr")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 29"]
 position = Vector2(0.35, 0.35)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("2_fsrdq")
+script = ExtResource("2_nal2v")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario OVW Walking 5.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -270,11 +301,23 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_qylav")
+
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_o6uql")
 
 [node name="Frame 29" type="Node2D" parent="Layer 2"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 29"]
+script = SubResource("GDScript_gsmt4")
+
 [node name="Frame 41" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 41"]
+script = SubResource("GDScript_iiq2i")

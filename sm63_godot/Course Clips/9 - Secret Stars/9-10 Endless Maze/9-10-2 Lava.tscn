@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_qoxpt"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_exw0t"]
+
+[sub_resource type="Animation" id="Animation_bdyca"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,21 +18,34 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3fsmy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8qkt1"]
 _data = {
-"Default": SubResource("Animation_qoxpt")
+"Default": SubResource("Animation_bdyca")
 }
 
+[sub_resource type="GDScript" id="GDScript_8kcmq"]
+script/source = "extends Node
+# _visible = false;
+# "
+
 [node name="9-10-2 Lava" type="Node2D"]
+script = ExtResource("1_exw0t")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Lava.xml"
+linkage = "9-10-2Lava"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_3fsmy")
+"Timeline": SubResource("AnimationLibrary_8qkt1")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_8kcmq")
 
 [node name="Shape" type="Node2D" parent="Layer 1/Frame 0"]
 

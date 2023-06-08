@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_4nslt"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_pl3ke"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_bdqee"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ofcj4"]
 
-[sub_resource type="Animation" id="Animation_cx4pw"]
+[sub_resource type="Animation" id="Animation_offgo"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,30 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xwvwn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mk3ay"]
 _data = {
-"Default": SubResource("Animation_cx4pw")
+"Default": SubResource("Animation_offgo")
 }
 
 [node name="9-02 FrontGFX" type="Node2D"]
+script = ExtResource("1_bdqee")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 FrontGFX.xml"
+linkage = "9-02FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_xwvwn")
+"Timeline": SubResource("AnimationLibrary_mk3ay")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_4nslt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(925.1, 301.3)
-script = ExtResource("2_pl3ke")
+script = ExtResource("2_ofcj4")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Front Trans.tscn"
 red_multiplier = 0.800781
 green_multiplier = 0.800781

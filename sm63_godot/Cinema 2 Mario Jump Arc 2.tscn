@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 3.png" id="1_52s4c"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Fall - 3.png" id="2_veue0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ad5ig"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Jump - 3.png" id="2_nfxtd"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Overworld - Mario Fall - 3.png" id="3_kjdxn"]
 
-[sub_resource type="Animation" id="Animation_g3sb6"]
+[sub_resource type="Animation" id="Animation_rvs0j"]
 length = 2.83333
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,16 +56,21 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w8hky"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ow1jq"]
 _data = {
-"Default": SubResource("Animation_g3sb6")
+"Default": SubResource("Animation_rvs0j")
 }
 
 [node name="Cinema 2 Mario Jump Arc 2" type="Node2D"]
+script = ExtResource("1_ad5ig")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Mario Jump Arc 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_w8hky")
+"Timeline": SubResource("AnimationLibrary_ow1jq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -76,7 +82,7 @@ texture_filter = 1
 position = Vector2(9.5, -16)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_52s4c")
+texture = ExtResource("2_nfxtd")
 centered = false
 
 [node name="Frame 19" type="Node2D" parent="Layer 1"]
@@ -87,7 +93,7 @@ texture_filter = 1
 position = Vector2(41.15, -16)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_52s4c")
+texture = ExtResource("2_nfxtd")
 centered = false
 
 [node name="Frame 20" type="Node2D" parent="Layer 1"]
@@ -98,7 +104,7 @@ texture_filter = 1
 position = Vector2(42.8, -15.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_veue0")
+texture = ExtResource("3_kjdxn")
 centered = false
 
 [node name="Frame 84" type="Node2D" parent="Layer 1"]
@@ -109,5 +115,5 @@ texture_filter = 1
 position = Vector2(147.8, -15.15)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_veue0")
+texture = ExtResource("3_kjdxn")
 centered = false

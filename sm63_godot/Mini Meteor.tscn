@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_2kada"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3a6rn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1qugr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_7p6b7"]
 
-[sub_resource type="Animation" id="Animation_pgfsd"]
+[sub_resource type="Animation" id="Animation_jjfyl"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,24 +19,95 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lkpam"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ngdmm"]
 _data = {
-"Default": SubResource("Animation_pgfsd")
+"Default": SubResource("Animation_jjfyl")
 }
 
+[sub_resource type="GDScript" id="GDScript_diu5n"]
+script/source = "extends Node
+# Re = function () {
+# 	_alpha = 100;
+# 	_xscale = random(40)+80;
+# 	_yscale = random(40)+80;
+# 	_x = _parent.Meteor._x+random(50)-25;
+# 	_y = _parent.Meteor._y+random(50)-25;
+# 	//
+# 	rot = random(360);
+# 	//
+# 	rotspeed = random(15)/2;
+# 	speed = (random(5)+5)/2;
+# 	//
+# 	xspeed = Math.sin(rot)*speed;
+# 	yspeed = Math.cos(rot)*speed;
+# 	count = 0;
+# 	Break = random(3);
+# 	//Break = true
+# 	if (Break == true) {
+# 		breakcount = 60+random(40);
+# 	} else {
+# 		breakcount = 0;
+# 	}
+# 	//
+# 	onEnterFrame = function () {
+# 		_rotation += rotspeed;
+# 		_x += xspeed;
+# 		_y += yspeed;
+# 		count++;
+# 		if (Break == true) {
+# 			if (count>breakcount) {
+# 				_parent.attachMovie(\"MiniMiniMeteor\", \"MiniMiniMeteor\"+_parent.getNextHighestDepth(), _parent.getNextHighestDepth(), {_x:_x, _y:_y});
+# 				_parent.attachMovie(\"MiniMiniMeteor\", \"MiniMiniMeteor\"+_parent.getNextHighestDepth(), _parent.getNextHighestDepth(), {_x:_x, _y:_y});
+# 				_parent.attachMovie(\"MiniMiniMeteor\", \"MiniMiniMeteor\"+_parent.getNextHighestDepth(), _parent.getNextHighestDepth(), {_x:_x, _y:_y});
+# 				xspeed = 0;
+# 				yspeed = 0;
+# 				onEnterFrame = function () {
+# 					_alpha -= 15;
+# 					if (_alpha<=0) {
+# 						Re();
+# 					}
+# 				};
+# 			}
+# 		}
+# 		if (count>170) {
+# 			onEnterFrame = function () {
+# 					_alpha -= 15;
+# 					if (_alpha<=0) {
+# 						Re();
+# 					}
+# 				};
+# 		}
+# 	};
+# };
+# Re();
+# count = random(150);
+# for (i=0; i<count; i++) {
+# 	_x += xspeed;
+# 	_y += yspeed;
+# }
+# "
+
 [node name="Mini Meteor" type="Node2D"]
+script = ExtResource("1_1qugr")
+source_xml = "res://sm63/LIBRARY/Mini Meteor.xml"
+linkage = "MiniMeteor"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_lkpam")
+"Timeline": SubResource("AnimationLibrary_ngdmm")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_2kada")]
-script = ExtResource("2_3a6rn")
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_diu5n")
+
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
+script = ExtResource("2_7p6b7")
 path = "res://sm63_godot/Mini Meteor Clip Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

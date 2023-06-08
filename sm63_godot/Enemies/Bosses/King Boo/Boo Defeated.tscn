@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_c67v5"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0dqlm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_w0vng"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_oasxc"]
 
-[sub_resource type="Animation" id="Animation_2ewm0"]
+[sub_resource type="Animation" id="Animation_xktru"]
 length = 2.66667
 loop_mode = 1
 tracks/0/type = "value"
@@ -235,16 +235,94 @@ tracks/18/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2mubp"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pt5tw"]
 _data = {
-"Default": SubResource("Animation_2ewm0")
+"Default": SubResource("Animation_xktru")
 }
 
+[sub_resource type="GDScript" id="GDScript_t7s6s"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == true) {
+# 		stop();
+# 	} else {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_4ngba"]
+script/source = "extends Node
+# _root.Course.FrontGFX.gotoAndStop(1);
+# _root.playpause = true;
+# _root.StopBGsong();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == true) {
+# 		stop();
+# 	} else {
+# 		_root.Camcenter = _parent._parent;
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_0snnx"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Boo\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_6frps"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Boo\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_fs83q"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Boo\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_h73hv"]
+script/source = "extends Node
+# _root.Mariosound = new Sound(this);
+# _root.Mariosound.attachSound(\"Boo\");
+# _root.Mariosound.start(0, 1);
+# _root.Mariosound.setVolume(_root.MarioVolume);
+# "
+
+[sub_resource type="GDScript" id="GDScript_7021w"]
+script/source = "extends Node
+# _root.StopBGsong();
+# _root.PlayBGSong(_root[\"4-1Music\"]);
+# _root.SongRepeat = _root[\"4-1Music\"];
+# "
+
+[sub_resource type="GDScript" id="GDScript_nby3i"]
+script/source = "extends Node
+# _root.kingBoodefeated = true;
+# _root.Course.Char.attack = false;
+# onEnterFrame = null;
+# stop();
+# "
+
 [node name="Boo Defeated" type="Node2D"]
+script = ExtResource("1_w0vng")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Boo/Boo Defeated.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_2mubp")
+"Timeline": SubResource("AnimationLibrary_pt5tw")
 }
 
 [node name="Layer 4" type="Node2D" parent="."]
@@ -255,8 +333,8 @@ libraries = {
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_c67v5")]
-script = ExtResource("2_0dqlm")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
+script = ExtResource("2_oasxc")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/King Boo Blinking.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -272,9 +350,9 @@ brightness = 0.0
 [node name="Frame 6" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 6" instance=ExtResource("1_c67v5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 6"]
 scale = Vector2(1.09999, 1.09999)
-script = ExtResource("2_0dqlm")
+script = ExtResource("2_oasxc")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/King Boo Blinking.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -290,8 +368,8 @@ brightness = 0.5
 [node name="Frame 10" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 10" instance=ExtResource("1_c67v5")]
-script = ExtResource("2_0dqlm")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 10"]
+script = ExtResource("2_oasxc")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/King Boo Blinking.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -307,9 +385,9 @@ brightness = -0.5
 [node name="Frame 25" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 25" instance=ExtResource("1_c67v5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 25"]
 scale = Vector2(1.2, 1.2)
-script = ExtResource("2_0dqlm")
+script = ExtResource("2_oasxc")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/King Boo Blinking.tscn"
 red_multiplier = 0.5
 green_multiplier = 0.5
@@ -328,9 +406,9 @@ visible = false
 [node name="Frame 45" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 45" instance=ExtResource("1_c67v5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 45"]
 position = Vector2(0, -19)
-script = ExtResource("2_0dqlm")
+script = ExtResource("2_oasxc")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/King Boo power GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -346,10 +424,10 @@ brightness = 0.0
 [node name="Frame 68" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 68" instance=ExtResource("1_c67v5")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 68"]
 position = Vector2(0, -18.95)
 scale = Vector2(2, 2)
-script = ExtResource("2_0dqlm")
+script = ExtResource("2_oasxc")
 path = "res://sm63_godot/Enemies/Bosses/King Boo/King Boo power GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -373,20 +451,38 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_t7s6s")
+
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 10"]
+script = SubResource("GDScript_4ngba")
 
 [node name="Frame 23" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 23"]
+script = SubResource("GDScript_0snnx")
+
 [node name="Frame 45" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 45"]
+script = SubResource("GDScript_6frps")
 
 [node name="Frame 47" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 47"]
+script = SubResource("GDScript_fs83q")
+
 [node name="Frame 51" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 51"]
+script = SubResource("GDScript_h73hv")
 
 [node name="Frame 69" type="Node2D" parent="Layer 1"]
 visible = false
@@ -394,5 +490,11 @@ visible = false
 [node name="Frame 76" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 76"]
+script = SubResource("GDScript_7021w")
+
 [node name="Frame 79" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 79"]
+script = SubResource("GDScript_nby3i")

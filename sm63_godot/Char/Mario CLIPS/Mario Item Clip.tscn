@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_g04va"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_lewbw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rqsd1"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_sp58g"]
 
-[sub_resource type="Animation" id="Animation_b3x81"]
+[sub_resource type="Animation" id="Animation_lt66n"]
 length = 0.366667
 loop_mode = 1
 tracks/0/type = "value"
@@ -319,16 +319,68 @@ tracks/25/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_384y0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vf5iv"]
 _data = {
-"Default": SubResource("Animation_b3x81")
+"Default": SubResource("Animation_lt66n")
 }
 
+[sub_resource type="GDScript" id="GDScript_2ioib"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 2;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_k4e5v"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation -= 1.5
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_1mq5b"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 2;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_24x51"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation -= 1.5
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_686ba"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation += 2;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_4tgk6"]
+script/source = "extends Node
+# onClipEvent (enterFrame) {
+# 	_rotation -= 1.5
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_fv5vp"]
+script/source = "extends Node
+# gotoAndStop(_root.heldItemObtained);
+# "
+
 [node name="Mario Item Clip" type="Node2D"]
+script = ExtResource("1_rqsd1")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Item Clip.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_384y0")
+"Timeline": SubResource("AnimationLibrary_vf5iv")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -545,9 +597,9 @@ visible = false
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_g04va")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 scale = Vector2(0.999603, 1)
-script = ExtResource("2_lewbw")
+script = ExtResource("2_sp58g")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -557,14 +609,17 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 0.6, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15678" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_g04va")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_2ioib")
+
+[node name="@DOMSymbolInstance@15678" type="Node2D" parent="Layer 1/Frame 0"]
 rotation = 0.785398
 scale = Vector2(1.73741, 1.74011)
 skew = -1.87159e-05
-script = ExtResource("2_lewbw")
+script = ExtResource("2_sp58g")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -574,15 +629,38 @@ red_offset = 0.0
 green_offset = 0.0
 blue_offset = 0.0
 tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
+tint_color = Color(1, 1, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@15678"]
+script = SubResource("GDScript_k4e5v")
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_g04va")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 scale = Vector2(0.999603, 1)
-script = ExtResource("2_lewbw")
+script = ExtResource("2_sp58g")
+path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 1.0
+tint_color = Color(0.6, 0, 1, 1)
+brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 2/DOMSymbolInstance"]
+script = SubResource("GDScript_1mq5b")
+
+[node name="@DOMSymbolInstance@15679" type="Node2D" parent="Layer 1/Frame 2"]
+rotation = 0.785398
+scale = Vector2(1.73741, 1.74011)
+skew = -1.87159e-05
+script = ExtResource("2_sp58g")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -595,29 +673,35 @@ tint_multiplier = 1.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15679" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("1_g04va")]
-rotation = 0.785398
-scale = Vector2(1.73741, 1.74011)
-skew = -1.87159e-05
-script = ExtResource("2_lewbw")
-path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
-red_multiplier = 1.0
-green_multiplier = 1.0
-blue_multiplier = 1.0
-alpha_multiplier = 1.0
-red_offset = 0.0
-green_offset = 0.0
-blue_offset = 0.0
-tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
-brightness = 0.0
+[node name="AS2" type="Node" parent="Layer 1/Frame 2/@DOMSymbolInstance@15679"]
+script = SubResource("GDScript_24x51")
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_g04va")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 scale = Vector2(0.999603, 1)
-script = ExtResource("2_lewbw")
+script = ExtResource("2_sp58g")
+path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
+red_multiplier = 1.0
+green_multiplier = 1.0
+blue_multiplier = 1.0
+alpha_multiplier = 1.0
+red_offset = 0.0
+green_offset = 0.0
+blue_offset = 0.0
+tint_multiplier = 1.0
+tint_color = Color(1, 0, 0, 1)
+brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 4/DOMSymbolInstance"]
+script = SubResource("GDScript_686ba")
+
+[node name="@DOMSymbolInstance@15680" type="Node2D" parent="Layer 1/Frame 4"]
+rotation = 0.785398
+scale = Vector2(1.73741, 1.74011)
+skew = -1.87159e-05
+script = ExtResource("2_sp58g")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -630,29 +714,15 @@ tint_multiplier = 1.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@15680" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_g04va")]
-rotation = 0.785398
-scale = Vector2(1.73741, 1.74011)
-skew = -1.87159e-05
-script = ExtResource("2_lewbw")
-path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
-red_multiplier = 1.0
-green_multiplier = 1.0
-blue_multiplier = 1.0
-alpha_multiplier = 1.0
-red_offset = 0.0
-green_offset = 0.0
-blue_offset = 0.0
-tint_multiplier = 1.0
-tint_color = Color(0, 0, 0, 1)
-brightness = 0.0
+[node name="AS2" type="Node" parent="Layer 1/Frame 4/@DOMSymbolInstance@15680"]
+script = SubResource("GDScript_4tgk6")
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8" instance=ExtResource("1_g04va")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8"]
 position = Vector2(-1, 0)
-script = ExtResource("2_lewbw")
+script = ExtResource("2_sp58g")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Image.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -668,9 +738,9 @@ brightness = 0.0
 [node name="Frame 9" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9" instance=ExtResource("1_g04va")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 9"]
 position = Vector2(-1, 0)
-script = ExtResource("2_lewbw")
+script = ExtResource("2_sp58g")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Image.tscn"
 red_multiplier = 1.0
 green_multiplier = 0.300781
@@ -686,9 +756,9 @@ brightness = 0.0
 [node name="Frame 10" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 10" instance=ExtResource("1_g04va")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 10"]
 position = Vector2(-1, 0)
-script = ExtResource("2_lewbw")
+script = ExtResource("2_sp58g")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Image.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -704,6 +774,9 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_fv5vp")
 
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
 visible = false

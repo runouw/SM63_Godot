@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_bbqkm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_as1fe"]
+
+[sub_resource type="Animation" id="Animation_dxuvg"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sloe8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_48ttk"]
 _data = {
-"Default": SubResource("Animation_bbqkm")
+"Default": SubResource("Animation_dxuvg")
 }
 
 [node name="K-1BPlatforms" type="Node2D"]
+script = ExtResource("1_as1fe")
+source_xml = "res://sm63/LIBRARY/K-1BPlatforms.xml"
+linkage = "K-1BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_sloe8")
+"Timeline": SubResource("AnimationLibrary_48ttk")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

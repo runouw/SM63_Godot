@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_0ro17"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_mnlwf"]
+
+[sub_resource type="Animation" id="Animation_m7mpw"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_brnfc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_goau3"]
 _data = {
-"Default": SubResource("Animation_0ro17")
+"Default": SubResource("Animation_m7mpw")
 }
 
 [node name="Rotating Block Plat Code" type="Node2D"]
+script = ExtResource("1_mnlwf")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Common Coded PL/Rotating Block Plat Code.xml"
+linkage = "Rotating Block Plat Code"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_brnfc")
+"Timeline": SubResource("AnimationLibrary_goau3")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

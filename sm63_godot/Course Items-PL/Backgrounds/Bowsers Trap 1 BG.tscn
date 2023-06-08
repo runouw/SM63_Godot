@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Bowsers trap 1 background.png" id="1_day0g"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_j31u7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Backgrounds/Bowsers trap 1 background.png" id="2_u4e8g"]
 
-[sub_resource type="Animation" id="Animation_ogbr1"]
+[sub_resource type="Animation" id="Animation_1cxtw"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_s340r"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g7dyo"]
 _data = {
-"Default": SubResource("Animation_ogbr1")
+"Default": SubResource("Animation_1cxtw")
 }
 
 [node name="Bowsers Trap 1 BG" type="Node2D"]
+script = ExtResource("1_j31u7")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Bowsers Trap 1 BG.xml"
+linkage = "BowsersTrap1BG"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_s340r")
+"Timeline": SubResource("AnimationLibrary_g7dyo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -41,12 +47,12 @@ position = Vector2(-23.5, 0)
 texture_filter = 1
 position = Vector2(-249, -151)
 scale = Vector2(1, 1.17969)
-texture = ExtResource("1_day0g")
+texture = ExtResource("2_u4e8g")
 centered = false
 
 [node name="@@46493" type="Sprite2D" parent="Layer 1/Frame 0/Group"]
 texture_filter = 1
 position = Vector2(0, -151)
 scale = Vector2(1, 1.17969)
-texture = ExtResource("1_day0g")
+texture = ExtResource("2_u4e8g")
 centered = false

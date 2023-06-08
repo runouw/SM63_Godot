@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_6ar7h"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_3qvmr"]
+
+[sub_resource type="Animation" id="Animation_63yuf"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -40,16 +42,31 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7lnud"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tnqfj"]
 _data = {
-"Default": SubResource("Animation_6ar7h")
+"Default": SubResource("Animation_63yuf")
 }
 
+[sub_resource type="GDScript" id="GDScript_kx2mq"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		//_y -= 0.15;
+# 	}
+# };
+# "
+
 [node name="BC1 CamEdge Rise" type="Node2D"]
+script = ExtResource("1_3qvmr")
+source_xml = "res://sm63/LIBRARY/BC1 CamEdge Rise.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_7lnud")
+"Timeline": SubResource("AnimationLibrary_tnqfj")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -69,3 +86,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 1"]
+script = SubResource("GDScript_kx2mq")

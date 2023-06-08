@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="1_nt1nl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_c3ko8"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_mowpj"]
 
-[sub_resource type="Animation" id="Animation_lfq38"]
+[sub_resource type="Animation" id="Animation_lbgfr"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_s5q51"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o728r"]
 _data = {
-"Default": SubResource("Animation_lfq38")
+"Default": SubResource("Animation_lbgfr")
 }
 
 [node name="C-11FrontGFX" type="Node2D"]
+script = ExtResource("1_c3ko8")
+source_xml = "res://sm63/LIBRARY/C-11FrontGFX.xml"
+linkage = "C-11FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_s5q51")
+"Timeline": SubResource("AnimationLibrary_o728r")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -39,8 +45,8 @@ libraries = {
 [node name="@@3246" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 polygon = PackedVector2Array(272.85, -436, 540.85, -436, 540.85, -198, 272.85, -198)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-script = ExtResource("1_nt1nl")
+script = ExtResource("2_mowpj")
 matrix = Transform2D(-1.52588e-05, -0.0854492, 0.0799561, -1.52588e-05, 407.95, -276.95)
-entries_color = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.752941, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+entries_color = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.752941, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 entries_ratio = PackedFloat32Array(0, 0.517647, 0.815686, 0.862745, 1)
 spread_method_reflect = false

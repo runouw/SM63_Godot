@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_e2ke1"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_bghgc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_pntmb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_ntnhw"]
 
-[sub_resource type="Animation" id="Animation_hh1oq"]
+[sub_resource type="Animation" id="Animation_f7eim"]
 length = 3.33333
 loop_mode = 1
 tracks/0/type = "value"
@@ -103,25 +103,58 @@ tracks/7/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qx8kf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6kgxv"]
 _data = {
-"Default": SubResource("Animation_hh1oq")
+"Default": SubResource("Animation_f7eim")
 }
 
+[sub_resource type="GDScript" id="GDScript_5htc3"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_visible = false;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_5isop"]
+script/source = "extends Node
+# stop();
+# onEnterFrame = function () {
+# 	if (this.box.hitTest(_root.Course.Char.charClip.feet2) && _root.Course.Char.attack == false && _root.Course.Char.air == false && _root.KeyUP() && !_root.KeyLEFT() && !_root.KeyRIGHT()) {
+# 		_root.Course.Char.attack = true;
+# 		_root.Course.Char.xspeed = 0;
+# 		_root.Course.Char.attackFrame = \"Painting\";
+# 		onEnterFrame = function () {
+# 			_root.Camcenter = this;
+# 		};
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_uudms"]
+script/source = "extends Node
+# _root.gotoMiniCourseSelect(3);
+# "
+
 [node name="6-Painting" type="Node2D"]
+script = ExtResource("1_pntmb")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Paintings/6-Painting.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_qx8kf")
+"Timeline": SubResource("AnimationLibrary_6kgxv")
 }
 
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0" instance=ExtResource("1_e2ke1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 0"]
 position = Vector2(0, 5.35)
-script = ExtResource("2_bghgc")
+script = ExtResource("2_ntnhw")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/6- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -137,9 +170,9 @@ brightness = 0.0
 [node name="Frame 30" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 30" instance=ExtResource("1_e2ke1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 30"]
 position = Vector2(0, 5.35)
-script = ExtResource("2_bghgc")
+script = ExtResource("2_ntnhw")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/6- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -155,9 +188,9 @@ brightness = 0.0
 [node name="Frame 35" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 35" instance=ExtResource("1_e2ke1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 35"]
 position = Vector2(0, 5.35)
-script = ExtResource("2_bghgc")
+script = ExtResource("2_ntnhw")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/6- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -173,9 +206,9 @@ brightness = 0.75
 [node name="Frame 40" type="Node2D" parent="Layer 3"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 40" instance=ExtResource("1_e2ke1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 3/Frame 40"]
 position = Vector2(0, 5.35)
-script = ExtResource("2_bghgc")
+script = ExtResource("2_ntnhw")
 path = "res://sm63_godot/Course Clips/C - Castle/Paintings/6- Picture.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -192,10 +225,10 @@ brightness = 0.0
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_e2ke1")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(-0.5, 42)
 scale = Vector2(0.944016, 0.637497)
-script = ExtResource("2_bghgc")
+script = ExtResource("2_ntnhw")
 path = "res://sm63_godot/Xtra/Blank Movieclip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -208,6 +241,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_5htc3")
+
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
@@ -215,5 +251,11 @@ brightness = 0.0
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_5isop")
+
 [node name="Frame 99" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 99"]
+script = SubResource("GDScript_uudms")

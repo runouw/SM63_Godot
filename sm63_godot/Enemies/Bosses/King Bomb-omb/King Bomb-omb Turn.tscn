@@ -1,15 +1,15 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Arm.png" id="1_06obc"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Hand.png" id="2_pv86p"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Leg.png" id="3_aqgrn"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Foot.png" id="4_tos1t"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="5_7glqe"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_lxbtc"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Mustache.png" id="7_jd58i"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Eye.png" id="8_l0bub"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_gmcjq"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Arm.png" id="2_7ax67"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Hand.png" id="3_k4nhk"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Leg.png" id="4_6h073"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Foot.png" id="5_hgykf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="6_f6xi6"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Mustache.png" id="7_f0p2r"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb - Eye.png" id="8_62qiq"]
 
-[sub_resource type="Animation" id="Animation_ymyjg"]
+[sub_resource type="Animation" id="Animation_8jbju"]
 length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
@@ -97,16 +97,40 @@ tracks/6/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8b5l"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5r6ch"]
 _data = {
-"Default": SubResource("Animation_ymyjg")
+"Default": SubResource("Animation_8jbju")
 }
 
+[sub_resource type="GDScript" id="GDScript_distr"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 		//
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_nkky4"]
+script/source = "extends Node
+# _parent._parent.attack = false;
+# _parent._parent._xscale *= -1;
+# _parent.gotoAndStop(1);
+# "
+
 [node name="King Bomb-omb Turn" type="Node2D"]
+script = ExtResource("1_gmcjq")
+source_xml = "res://sm63/LIBRARY/Enemies/Bosses/King Bomb-omb/King Bomb-omb Turn.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_y8b5l")
+"Timeline": SubResource("AnimationLibrary_5r6ch")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -116,36 +140,36 @@ libraries = {
 [node name="@@49928" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-21.7, -3.25)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
 [node name="@@49929" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-25.7, 4.75)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="@@49930" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(2.3, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
 [node name="@@49931" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-0.2, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
 [node name="@@49932" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-11.95, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("5_7glqe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.35, -4.65)
-script = ExtResource("6_lxbtc")
+script = ExtResource("6_f6xi6")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -161,37 +185,37 @@ brightness = 0.0
 [node name="@@49933" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-16.45, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
 [node name="@@49934" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-19.7, -6.6)
-texture = ExtResource("7_jd58i")
+texture = ExtResource("7_f0p2r")
 centered = false
 
 [node name="@@49935" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-12.7, -11.75)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="@@49936" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-5.7, -11.75)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="@@49937" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(7.8, -0.75)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
 [node name="@@49938" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(9.75, 5.75)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
@@ -200,36 +224,36 @@ visible = false
 [node name="@@49939" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(1.8, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
 [node name="@@49940" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-0.7, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
 [node name="@@49941" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-11.2, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
 [node name="@@49942" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-15.7, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
 [node name="@@49943" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-21.7, -2.75)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2" instance=ExtResource("5_7glqe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 2"]
 position = Vector2(0.35, -4.65)
-script = ExtResource("6_lxbtc")
+script = ExtResource("6_f6xi6")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -245,38 +269,38 @@ brightness = 0.0
 [node name="@@49944" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-25.2, 5.25)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="@@49945" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-19.45, -6.6)
 scale = Vector2(1.16072, 1)
-texture = ExtResource("7_jd58i")
+texture = ExtResource("7_f0p2r")
 centered = false
 
 [node name="@@49946" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-10.95, -11.75)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="@@49947" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(-3.2, -11.75)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="@@49948" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(10.3, -0.75)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
 [node name="@@49949" type="Sprite2D" parent="Layer 1/Frame 2"]
 texture_filter = 1
 position = Vector2(12.25, 5.75)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
@@ -285,54 +309,54 @@ visible = false
 [node name="@@49950" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(10.8, -0.75)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
 [node name="@@49951" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(11.8, 5.25)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="@@49952" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-21.2, -2.75)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
 [node name="@@49953" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-25.2, 5.25)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="@@49954" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-0.2, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
 [node name="@@49955" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-2.7, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
 [node name="@@49956" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-7.7, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
 [node name="@@49957" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-12.2, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("5_7glqe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
 position = Vector2(0.35, -4.65)
-script = ExtResource("6_lxbtc")
+script = ExtResource("6_f6xi6")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -348,13 +372,13 @@ brightness = 0.0
 [node name="@@49958" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(-7.7, -11.75)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="@@49959" type="Sprite2D" parent="Layer 1/Frame 4"]
 texture_filter = 1
 position = Vector2(1.8, -11.75)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="Group" type="Node2D" parent="Layer 1/Frame 4"]
@@ -368,7 +392,7 @@ position = Vector2(-49.3, -25.75)
 [node name="@@49960" type="Polygon2D" parent="Layer 1/Frame 4/Group/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("7_jd58i")
+texture = ExtResource("7_f0p2r")
 texture_offset = Vector2(-38.6, -19.5)
 polygon = PackedVector2Array(48.95, 19.5, 66.6, 19.5, 66.6, 37.5, 48.95, 37.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -383,7 +407,7 @@ scale = Vector2(1, -1)
 [node name="@@49962" type="Polygon2D" parent="Layer 1/Frame 4/Group/@Group@49961/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("7_jd58i")
+texture = ExtResource("7_f0p2r")
 texture_offset = Vector2(-38.6, -19.5)
 polygon = PackedVector2Array(48.95, 19.5, 66.6, 19.5, 66.6, 37.5, 48.95, 37.5)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -394,24 +418,24 @@ visible = false
 [node name="@@49963" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(1.8, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
 [node name="@@49964" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-0.7, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
 [node name="@@49965" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-11.2, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6" instance=ExtResource("5_7glqe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 6"]
 position = Vector2(0.35, -4.65)
-script = ExtResource("6_lxbtc")
+script = ExtResource("6_f6xi6")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -427,7 +451,7 @@ brightness = 0.0
 [node name="@@49966" type="Sprite2D" parent="Layer 1/Frame 6"]
 texture_filter = 1
 position = Vector2(-15.7, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
 [node name="@@49967" type="Sprite2D" parent="Layer 1/Frame 6"]
@@ -435,7 +459,7 @@ texture_filter = 1
 position = Vector2(21.7, -2.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
 [node name="@@49968" type="Sprite2D" parent="Layer 1/Frame 6"]
@@ -443,7 +467,7 @@ texture_filter = 1
 position = Vector2(27.2, 5.25)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="@@49969" type="Sprite2D" parent="Layer 1/Frame 6"]
@@ -451,7 +475,7 @@ texture_filter = 1
 position = Vector2(20.45, -6.6)
 rotation = 3.14159
 scale = Vector2(1.16072, -1)
-texture = ExtResource("7_jd58i")
+texture = ExtResource("7_f0p2r")
 centered = false
 
 [node name="@@49970" type="Sprite2D" parent="Layer 1/Frame 6"]
@@ -459,7 +483,7 @@ texture_filter = 1
 position = Vector2(11.95, -11.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="@@49971" type="Sprite2D" parent="Layer 1/Frame 6"]
@@ -467,7 +491,7 @@ texture_filter = 1
 position = Vector2(4.2, -11.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="@@49972" type="Sprite2D" parent="Layer 1/Frame 6"]
@@ -475,7 +499,7 @@ texture_filter = 1
 position = Vector2(-9.3, -0.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
 [node name="@@49973" type="Sprite2D" parent="Layer 1/Frame 6"]
@@ -483,7 +507,7 @@ texture_filter = 1
 position = Vector2(-11.25, 5.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="Frame 8" type="Node2D" parent="Layer 1"]
@@ -494,7 +518,7 @@ texture_filter = 1
 position = Vector2(22.3, -3.25)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
 [node name="@@49975" type="Sprite2D" parent="Layer 1/Frame 8"]
@@ -502,36 +526,36 @@ texture_filter = 1
 position = Vector2(26.3, 4.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="@@49976" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(2.3, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
 [node name="@@49977" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(-0.2, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
 [node name="@@49978" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(-11.95, 14.25)
-texture = ExtResource("3_aqgrn")
+texture = ExtResource("4_6h073")
 centered = false
 
 [node name="@@49979" type="Sprite2D" parent="Layer 1/Frame 8"]
 texture_filter = 1
 position = Vector2(-16.45, 20.75)
-texture = ExtResource("4_tos1t")
+texture = ExtResource("5_hgykf")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8" instance=ExtResource("5_7glqe")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 8"]
 position = Vector2(0.35, -4.65)
-script = ExtResource("6_lxbtc")
+script = ExtResource("6_f6xi6")
 path = "res://sm63_godot/Enemies/Bosses/King Bomb-omb/King Bomb-omb Body.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -549,7 +573,7 @@ texture_filter = 1
 position = Vector2(19.7, -6.6)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("7_jd58i")
+texture = ExtResource("7_f0p2r")
 centered = false
 
 [node name="@@49981" type="Sprite2D" parent="Layer 1/Frame 8"]
@@ -557,7 +581,7 @@ texture_filter = 1
 position = Vector2(12.7, -11.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="@@49982" type="Sprite2D" parent="Layer 1/Frame 8"]
@@ -565,7 +589,7 @@ texture_filter = 1
 position = Vector2(5.7, -11.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_l0bub")
+texture = ExtResource("8_62qiq")
 centered = false
 
 [node name="@@49983" type="Sprite2D" parent="Layer 1/Frame 8"]
@@ -573,7 +597,7 @@ texture_filter = 1
 position = Vector2(-7.8, -0.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_06obc")
+texture = ExtResource("2_7ax67")
 centered = false
 
 [node name="@@49984" type="Sprite2D" parent="Layer 1/Frame 8"]
@@ -581,12 +605,18 @@ texture_filter = 1
 position = Vector2(-9.75, 5.75)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_pv86p")
+texture = ExtResource("3_k4nhk")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_distr")
+
 [node name="Frame 8" type="Node2D" parent="Layer 2"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 8"]
+script = SubResource("GDScript_nkky4")

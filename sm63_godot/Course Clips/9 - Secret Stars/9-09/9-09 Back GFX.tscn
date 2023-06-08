@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Blue Stone.png" id="1_dvs5k"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_g03l2"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_q5dy0"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_67w4a"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Blue Stone.png" id="2_eyk2w"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_5twbn"]
 
-[sub_resource type="Animation" id="Animation_dnxcy"]
+[sub_resource type="Animation" id="Animation_8qbwu"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,34 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4syyu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h6y8j"]
 _data = {
-"Default": SubResource("Animation_dnxcy")
+"Default": SubResource("Animation_8qbwu")
 }
 
+[sub_resource type="GDScript" id="GDScript_6au0d"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	starnum = 52;
+# 	//
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_vi4bt"]
+script/source = "extends Node
+# _root.Starnamenum = 52
+# _root.AreaTextClipF(\"Castle Secret Star\", 60);"
+
 [node name="9-09 Back GFX" type="Node2D"]
+script = ExtResource("1_67w4a")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-09/9-09 Back GFX.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4syyu")
+"Timeline": SubResource("AnimationLibrary_h6y8j")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -53,7 +71,7 @@ libraries = {
 [node name="@@41596" type="Polygon2D" parent="Layer 1/Frame 0/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_dvs5k")
+texture = ExtResource("2_eyk2w")
 texture_offset = Vector2(-523, 229)
 polygon = PackedVector2Array(190.1, -96.5, 382.6, -96.5, 382.6, -68.45, 384.25, -65.45, 190.1, -65.45, 190.1, -68.45, 190.1, -65.45, 446.25, -65.45, 446.25, -32.5, 190.1, -32.5, -84.575, -4.5, -36.575, -4.5, -36.575, 682.9, -84.575, 682.9, 37.4, -4.5, 85.4, -4.5, 85.4, 682.9, 37.4, 682.9)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17)])
@@ -66,9 +84,9 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_g03l2")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-1.95, 668.35)
-script = ExtResource("3_q5dy0")
+script = ExtResource("3_5twbn")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-09/9-09 Carpet.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -81,9 +99,9 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@41598" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("2_g03l2")]
+[node name="@DOMSymbolInstance@41598" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.45, 186.9)
-script = ExtResource("3_q5dy0")
+script = ExtResource("3_5twbn")
 path = "res://sm63_godot/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -96,6 +114,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@41598"]
+script = SubResource("GDScript_6au0d")
+
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_vi4bt")

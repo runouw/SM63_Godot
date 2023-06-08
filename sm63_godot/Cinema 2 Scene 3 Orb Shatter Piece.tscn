@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="1_wsxb7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_ltvnd"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_klk34"]
 
-[sub_resource type="Animation" id="Animation_iiulc"]
+[sub_resource type="Animation" id="Animation_0ik7h"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,29 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ayfck"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wun88"]
 _data = {
-"Default": SubResource("Animation_iiulc")
+"Default": SubResource("Animation_0ik7h")
 }
 
+[sub_resource type="GDScript" id="GDScript_jyd0p"]
+script/source = "extends Node
+# _parent.I(_name);
+# onEnterFrame = function () {
+# 	_parent.OEF(_name);
+# };
+# "
+
 [node name="Cinema 2 Scene 3 Orb Shatter Piece" type="Node2D"]
+script = ExtResource("1_ltvnd")
+source_xml = "res://sm63/LIBRARY/Cinema 2 Scene 3 Orb Shatter Piece.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ayfck")
+"Timeline": SubResource("AnimationLibrary_wun88")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,7 +68,7 @@ position = Vector2(10.25, 26.25)
 [node name="@@4197" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 polygon = PackedVector2Array(-2.225, -35.275, -2.225, -35.275, 1.76593, -26.75, -22.0788, -26.75, -22.575, -27.225, -21.8, -27.875, -12.6, -33.125, -22.0788, -26.75, -10.25, -26.75, -10.2, -26.55, -9.8, -26.2, -9.25, -25.75, -8.5, -25.5, -5.6, -23.25, -3.75, -21, -6, -19, -8.5, -18, -11.5, -17.25, -14.475, -17.25, -14.4, -17.55, -14.25, -19.225, -14.25, -19.5, -14.975, -19.95, -21.8698, -26.55, -10.25, -26.75, 1.76593, -26.75, 2, -26.25, 2, -26.25, -5.34998, -26.55)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23), PackedInt32Array(24, 25, 26, 27, 28)])
-script = ExtResource("1_wsxb7")
+script = ExtResource("2_klk34")
 matrix = Transform2D(0.0443726, 0, 0, 0.0443726, 0, 0)
 entries_color = PackedColorArray(0.972549, 0.94902, 0.760784, 0.0823529, 0.996078, 0.968627, 0.737255, 0.623529)
 entries_ratio = PackedFloat32Array(0, 1)
@@ -71,3 +85,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_jyd0p")

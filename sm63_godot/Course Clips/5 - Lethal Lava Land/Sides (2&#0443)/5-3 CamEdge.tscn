@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_psqki"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_c40x7"]
+
+[sub_resource type="Animation" id="Animation_1r84i"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ekhk8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xpvjn"]
 _data = {
-"Default": SubResource("Animation_psqki")
+"Default": SubResource("Animation_1r84i")
 }
 
 [node name="5-3 CamEdge" type="Node2D"]
+script = ExtResource("1_c40x7")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Sides (2&#0443)/5-3 CamEdge.xml"
+linkage = "5-3CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ekhk8")
+"Timeline": SubResource("AnimationLibrary_xpvjn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

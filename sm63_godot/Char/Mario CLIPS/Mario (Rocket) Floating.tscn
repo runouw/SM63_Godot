@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Handle - Side.png" id="1_nnpq7"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Base.png" id="2_36c6m"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="3_0gufp"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_r8243"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Rocket Nozzle.png" id="5_v3ywe"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2bqku"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Handle - Side.png" id="2_aqx1r"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Fludd Base.png" id="3_2ukxx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="4_6dtq7"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Fludd/Rocket Nozzle.png" id="5_paixd"]
 
-[sub_resource type="Animation" id="Animation_onu3k"]
+[sub_resource type="Animation" id="Animation_3pfx7"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -22,16 +22,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0dflq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jfwqo"]
 _data = {
-"Default": SubResource("Animation_onu3k")
+"Default": SubResource("Animation_3pfx7")
 }
 
 [node name="Mario (Rocket) Floating" type="Node2D"]
+script = ExtResource("1_2bqku")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (Rocket) Floating.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_0dflq")
+"Timeline": SubResource("AnimationLibrary_jfwqo")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -43,18 +48,18 @@ texture_filter = 1
 position = Vector2(8.4, 0.9)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_nnpq7")
+texture = ExtResource("2_aqx1r")
 centered = false
 
 [node name="@@15343" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-2.35, -9.2)
-texture = ExtResource("2_36c6m")
+texture = ExtResource("3_2ukxx")
 centered = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("3_0gufp")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-2.35, 7.9)
-script = ExtResource("4_r8243")
+script = ExtResource("4_6dtq7")
 path = "res://sm63_godot/Char/Mario CLIPS/Mario Floating.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -72,11 +77,11 @@ texture_filter = 1
 position = Vector2(10.65, 7.4)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_nnpq7")
+texture = ExtResource("2_aqx1r")
 centered = false
 
 [node name="@@15345" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-0.75, -22.45)
-texture = ExtResource("5_v3ywe")
+texture = ExtResource("5_paixd")
 centered = false

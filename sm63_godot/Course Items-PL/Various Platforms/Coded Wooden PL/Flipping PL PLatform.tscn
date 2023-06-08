@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="1_whws7"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_jg18r"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Bricks & Woods/Wood Block.png" id="2_v55k2"]
 
-[sub_resource type="Animation" id="Animation_7gjh8"]
+[sub_resource type="Animation" id="Animation_64vi8"]
 length = 0.0666667
 loop_mode = 1
 tracks/0/type = "value"
@@ -42,16 +43,21 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wxadv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h8j7c"]
 _data = {
-"Default": SubResource("Animation_7gjh8")
+"Default": SubResource("Animation_64vi8")
 }
 
 [node name="Flipping PL PLatform" type="Node2D"]
+script = ExtResource("1_jg18r")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Various Platforms/Coded Wooden PL/Flipping PL PLatform.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_wxadv")
+"Timeline": SubResource("AnimationLibrary_h8j7c")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -65,7 +71,7 @@ libraries = {
 [node name="@@47748" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_whws7")
+texture = ExtResource("2_v55k2")
 texture_offset = Vector2(-37.6, 28.6)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(0, -10.025, 0, -10.025, 7.075, -7.1, 8.05, -6, -8.05, -6, -7.075, -7.1, -48.025, -6, -0.175, -6, -4.275, -4.225, -6.025, 0, -4.275, 4.25, -0.175, 6, -48.025, 6, -48.025, -4.225, 0.125, -6, 47.975, -6, 47.975, 6, 0.125, 6, 4.225, 4.25, 5.975, 0, 4.225, -4.225, -8, 6, 8, 6, 7.075, 7.05, 0, 9.975, 0, 9.975, -7.075, 7.05)
@@ -104,7 +110,7 @@ visible = false
 [node name="@@47753" type="Polygon2D" parent="Layer 1/Frame 1/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_whws7")
+texture = ExtResource("2_v55k2")
 texture_offset = Vector2(-37.6, 28.6)
 texture_rotation = -1.5708
 polygon = PackedVector2Array(0, -15.025, 0, -15.025, 10.625, -10.65, 12.075, -9, -12.075, -9, -10.6, -10.65, -91.95, -9, -0.25, -9, -6.4, -6.325, -9.025, 0, -6.4, 6.375, -0.25, 9, -91.95, 9, -91.95, -6.325, 0.2, -9, 92, -9, 92, 9, 0.2, 9, 6.35, 6.375, 8.975, 0, 6.35, -6.325, -12, 9, 12, 9, 10.625, 10.575, 0, 14.975, 0, 14.975, -10.6, 10.575)

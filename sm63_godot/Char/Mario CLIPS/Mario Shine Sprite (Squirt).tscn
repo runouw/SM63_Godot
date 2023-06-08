@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Spray) 1.png" id="1_7g1cu"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Item (Spray) 1.png" id="2_a4lqs"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="3_4xtox"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Item (Spray) 2.png" id="4_d5378"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_j8haw"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Spray) 1.png" id="2_4qtdk"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Item (Spray) 1.png" id="3_88w44"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/In-course Items/Collectables/Starry Stuff/Shine Sprite.png" id="4_hp8dx"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Item (Spray) 2.png" id="5_p0k5q"]
 
-[sub_resource type="Animation" id="Animation_k6uhw"]
+[sub_resource type="Animation" id="Animation_6dftf"]
 length = 3.06667
 loop_mode = 1
 tracks/0/type = "value"
@@ -141,16 +142,60 @@ tracks/10/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kvha5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jjj5j"]
 _data = {
-"Default": SubResource("Animation_k6uhw")
+"Default": SubResource("Animation_6dftf")
 }
 
+[sub_resource type="GDScript" id="GDScript_6psrj"]
+script/source = "extends Node
+# stop();
+# _root.GetStarMusic1();
+# onEnterFrame = function () {
+# 	if (_root.Course.Char.air == false) {
+# 		play();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_ow7my"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# };
+# _root.GetStarMusic2();
+# "
+
+[sub_resource type="GDScript" id="GDScript_enkv2"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	_root.PauseGame = false;
+# 	_root.ZoomoutCam();
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_uph1w"]
+script/source = "extends Node
+# _root.Blackout();
+# "
+
+[sub_resource type="GDScript" id="GDScript_g8y6w"]
+script/source = "extends Node
+# _root.ReturnToCastle();
+# onEnterFrame = null;
+# stop();
+# "
+
 [node name="Mario Shine Sprite (Squirt)" type="Node2D"]
+script = ExtResource("1_j8haw")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Shine Sprite (Squirt).xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_kvha5")
+"Timeline": SubResource("AnimationLibrary_jjj5j")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -160,7 +205,7 @@ libraries = {
 [node name="@@15835" type="Sprite2D" parent="Layer 2/Frame 0"]
 texture_filter = 1
 position = Vector2(-10, -40)
-texture = ExtResource("1_7g1cu")
+texture = ExtResource("2_4qtdk")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 2"]
@@ -169,14 +214,14 @@ visible = false
 [node name="@@15836" type="Sprite2D" parent="Layer 2/Frame 1"]
 texture_filter = 1
 position = Vector2(-12, -40.65)
-texture = ExtResource("2_a4lqs")
+texture = ExtResource("3_88w44")
 centered = false
 
 [node name="@@15837" type="Sprite2D" parent="Layer 2/Frame 1"]
 texture_filter = 1
 position = Vector2(-0.25, -26.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_4xtox")
+texture = ExtResource("4_hp8dx")
 centered = false
 
 [node name="Frame 42" type="Node2D" parent="Layer 2"]
@@ -185,7 +230,7 @@ visible = false
 [node name="@@15838" type="Sprite2D" parent="Layer 2/Frame 42"]
 texture_filter = 1
 position = Vector2(-11.15, -34.15)
-texture = ExtResource("4_d5378")
+texture = ExtResource("5_p0k5q")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -196,7 +241,7 @@ centered = false
 texture_filter = 1
 position = Vector2(-16.25, -32.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_4xtox")
+texture = ExtResource("4_hp8dx")
 centered = false
 
 [node name="Frame 1" type="Node2D" parent="Layer 3"]
@@ -206,7 +251,7 @@ visible = false
 texture_filter = 1
 position = Vector2(-0.25, -26.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_4xtox")
+texture = ExtResource("4_hp8dx")
 centered = false
 
 [node name="Frame 42" type="Node2D" parent="Layer 3"]
@@ -215,21 +260,36 @@ visible = false
 [node name="@@15834" type="Sprite2D" parent="Layer 3/Frame 42"]
 texture_filter = 1
 position = Vector2(-6.15, -43.65)
-texture = ExtResource("3_4xtox")
+texture = ExtResource("4_hp8dx")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_6psrj")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 1"]
+script = SubResource("GDScript_ow7my")
 
 [node name="Frame 42" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 42"]
+script = SubResource("GDScript_enkv2")
+
 [node name="Frame 79" type="Node2D" parent="Layer 1"]
 visible = false
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 79"]
+script = SubResource("GDScript_uph1w")
+
 [node name="Frame 91" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 91"]
+script = SubResource("GDScript_g8y6w")

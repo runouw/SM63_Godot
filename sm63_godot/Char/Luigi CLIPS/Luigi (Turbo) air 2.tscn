@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Turbo) - 2.png" id="1_snkl8"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rio0l"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Delete Soon Frames/Luigi Air (Turbo) - 2.png" id="2_7uh3q"]
 
-[sub_resource type="Animation" id="Animation_lfsfj"]
+[sub_resource type="Animation" id="Animation_ibl5v"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -18,16 +19,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pwbuy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_flyrq"]
 _data = {
-"Default": SubResource("Animation_lfsfj")
+"Default": SubResource("Animation_ibl5v")
 }
 
 [node name="Luigi (Turbo) air 2" type="Node2D"]
+script = ExtResource("1_rio0l")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi (Turbo) air 2.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_pwbuy")
+"Timeline": SubResource("AnimationLibrary_flyrq")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -37,5 +43,5 @@ libraries = {
 [node name="@@14901" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-16, -22)
-texture = ExtResource("1_snkl8")
+texture = ExtResource("2_7uh3q")
 centered = false

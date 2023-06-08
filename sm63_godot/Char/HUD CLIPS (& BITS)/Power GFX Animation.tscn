@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_jqyie"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_8s1nr"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_n7ffn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_nl17b"]
 
-[sub_resource type="Animation" id="Animation_g2wd3"]
+[sub_resource type="Animation" id="Animation_te6lm"]
 length = 0.266667
 loop_mode = 1
 tracks/0/type = "value"
@@ -55,27 +55,40 @@ tracks/3/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_35bv0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8n5g"]
 _data = {
-"Default": SubResource("Animation_g2wd3")
+"Default": SubResource("Animation_te6lm")
 }
 
+[sub_resource type="GDScript" id="GDScript_wwx63"]
+script/source = "extends Node
+# stop();
+# "
+
 [node name="Power GFX Animation" type="Node2D"]
+script = ExtResource("1_n7ffn")
+source_xml = "res://sm63/LIBRARY/Char/HUD CLIPS (& BITS)/Power GFX Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_35bv0")
+"Timeline": SubResource("AnimationLibrary_e8n5g")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_wwx63")
+
 [node name="Frame 1" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1" instance=ExtResource("1_jqyie")]
-script = ExtResource("2_8s1nr")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 1"]
+script = ExtResource("2_nl17b")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Power GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -91,8 +104,8 @@ brightness = 0.0
 [node name="Frame 4" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4" instance=ExtResource("1_jqyie")]
-script = ExtResource("2_8s1nr")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 4"]
+script = ExtResource("2_nl17b")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Power GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -108,8 +121,8 @@ brightness = 0.5
 [node name="Frame 7" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7" instance=ExtResource("1_jqyie")]
-script = ExtResource("2_8s1nr")
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 7"]
+script = ExtResource("2_nl17b")
 path = "res://sm63_godot/Char/HUD CLIPS (& BITS)/Power GFX.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

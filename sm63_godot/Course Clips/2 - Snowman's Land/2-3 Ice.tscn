@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
-[sub_resource type="Animation" id="Animation_qelwi"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_fah2h"]
+
+[sub_resource type="Animation" id="Animation_wt8wc"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -28,16 +30,26 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e6fyd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1ooe"]
 _data = {
-"Default": SubResource("Animation_qelwi")
+"Default": SubResource("Animation_wt8wc")
 }
 
+[sub_resource type="GDScript" id="GDScript_hej5j"]
+script/source = "extends Node
+# _visible = false;
+# "
+
 [node name="2-3 Ice" type="Node2D"]
+script = ExtResource("1_fah2h")
+source_xml = "res://sm63/LIBRARY/Course Clips/2 - Snowman's Land/2-3 Ice.xml"
+linkage = "2-3Ice"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_e6fyd")
+"Timeline": SubResource("AnimationLibrary_l1ooe")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,3 +66,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_hej5j")

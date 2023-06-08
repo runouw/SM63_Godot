@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_5bm8o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_7cdnh"]
+
+[sub_resource type="Animation" id="Animation_xke8m"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fuwnc"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nbh4g"]
 _data = {
-"Default": SubResource("Animation_5bm8o")
+"Default": SubResource("Animation_xke8m")
 }
 
 [node name="Options High Text" type="Node2D"]
+script = ExtResource("1_7cdnh")
+source_xml = "res://sm63/LIBRARY/Menu/Menu Folder/Options/Options High Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fuwnc")
+"Timeline": SubResource("AnimationLibrary_nbh4g")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

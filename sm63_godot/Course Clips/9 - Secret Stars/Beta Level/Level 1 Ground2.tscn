@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_tke7s"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_421ch"]
+
+[sub_resource type="Animation" id="Animation_sep2w"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h73bb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xiiyk"]
 _data = {
-"Default": SubResource("Animation_tke7s")
+"Default": SubResource("Animation_sep2w")
 }
 
 [node name="Level 1 Ground2" type="Node2D"]
+script = ExtResource("1_421ch")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/Beta Level/Level 1 Ground2.xml"
+linkage = "Level1BPlatforms"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_h73bb")
+"Timeline": SubResource("AnimationLibrary_xiiyk")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

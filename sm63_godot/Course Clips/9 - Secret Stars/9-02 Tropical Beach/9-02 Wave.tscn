@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_dtktt"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_4bcwk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_2x6nb"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_g8e7y"]
 
-[sub_resource type="Animation" id="Animation_i2tnt"]
+[sub_resource type="Animation" id="Animation_jh2a7"]
 length = 10.0333
 loop_mode = 1
 tracks/0/type = "value"
@@ -43,25 +43,41 @@ tracks/2/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dlw6d"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_533qf"]
 _data = {
-"Default": SubResource("Animation_i2tnt")
+"Default": SubResource("Animation_jh2a7")
 }
 
+[sub_resource type="GDScript" id="GDScript_c2gj0"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false && _root.playpause == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
 [node name="9-02 Wave" type="Node2D"]
+script = ExtResource("1_2x6nb")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Wave.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_dlw6d")
+"Timeline": SubResource("AnimationLibrary_533qf")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_dtktt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(3181.15, 153.65)
-script = ExtResource("2_4bcwk")
+script = ExtResource("2_g8e7y")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Wave Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -77,10 +93,10 @@ brightness = 0.0
 [node name="Frame 300" type="Node2D" parent="Layer 1"]
 visible = false
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 300" instance=ExtResource("1_dtktt")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 300"]
 position = Vector2(-446, 155.65)
 scale = Vector2(0.647552, 0.647552)
-script = ExtResource("2_4bcwk")
+script = ExtResource("2_g8e7y")
 path = "res://sm63_godot/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Wave Clip.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -96,3 +112,6 @@ brightness = 0.0
 [node name="Layer 3" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 3"]
+
+[node name="AS2" type="Node" parent="Layer 3/Frame 0"]
+script = SubResource("GDScript_c2gj0")

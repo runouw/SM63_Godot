@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Rocket) 1.png" id="1_w0ubw"]
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="2_k8dmp"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_ay2rw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1k8l2"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Air (Rocket) 1.png" id="2_ne0gm"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="3_ko6gp"]
 
-[sub_resource type="Animation" id="Animation_syqik"]
+[sub_resource type="Animation" id="Animation_2nwqb"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -32,16 +32,21 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ntki3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_khvy5"]
 _data = {
-"Default": SubResource("Animation_syqik")
+"Default": SubResource("Animation_2nwqb")
 }
 
 [node name="Mario (rocket) air 1" type="Node2D"]
+script = ExtResource("1_1k8l2")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario (rocket) air 1.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_ntki3")
+"Timeline": SubResource("AnimationLibrary_khvy5")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -51,18 +56,18 @@ libraries = {
 [node name="@@15459" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-13.5, -20.5)
-texture = ExtResource("1_w0ubw")
+texture = ExtResource("2_ne0gm")
 centered = false
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("2_k8dmp")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(1.6, -3.6)
 rotation = 3.14159
 scale = Vector2(1, -1)
-script = ExtResource("3_ay2rw")
+script = ExtResource("3_ko6gp")
 path = "res://sm63_godot/Wing Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0

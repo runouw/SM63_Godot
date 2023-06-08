@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_w4ije"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_lo5yk"]
+
+[sub_resource type="Animation" id="Animation_23w1f"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5wue"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sa4oa"]
 _data = {
-"Default": SubResource("Animation_w4ije")
+"Default": SubResource("Animation_23w1f")
 }
 
 [node name="4-6 Cam Edge" type="Node2D"]
+script = ExtResource("1_lo5yk")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Right (4-3&#044 4-6)/4-6 Cam Edge.xml"
+linkage = "4-6CamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_v5wue")
+"Timeline": SubResource("AnimationLibrary_sa4oa")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

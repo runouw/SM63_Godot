@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 1.png" id="1_xlmoj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 2.png" id="2_w6siu"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 9.png" id="3_tmaby"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 10.png" id="4_6gglc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_uff3b"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 1.png" id="2_2yuyk"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Body - 2.png" id="3_5ucs4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 9.png" id="4_55o3p"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Enemies/Normal/G-Z/Toad Stuff/Toad Head - 10.png" id="5_oje75"]
 
-[sub_resource type="Animation" id="Animation_dtge0"]
+[sub_resource type="Animation" id="Animation_r3ct8"]
 length = 6.26667
 loop_mode = 1
 tracks/0/type = "value"
@@ -153,35 +154,55 @@ tracks/11/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nevy8"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxf6f"]
 _data = {
-"Default": SubResource("Animation_dtge0")
+"Default": SubResource("Animation_r3ct8")
 }
 
+[sub_resource type="GDScript" id="GDScript_f56ks"]
+script/source = "extends Node
+# gotoAndPlay(random(40)+_currentframe);
+# "
+
+[sub_resource type="GDScript" id="GDScript_3ilgr"]
+script/source = "extends Node
+# gotoAndPlay(random(40)+_currentframe);"
+
 [node name="Cinema Toad Shocked" type="Node2D"]
+script = ExtResource("1_uff3b")
+source_xml = "res://sm63/LIBRARY/Cinema Toad Shocked.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_nevy8")
+"Timeline": SubResource("AnimationLibrary_rxf6f")
 }
 
 [node name="Body" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Body"]
 
+[node name="AS2" type="Node" parent="Body/Frame 0"]
+script = SubResource("GDScript_f56ks")
+
 [node name="@@5418" type="Sprite2D" parent="Body/Frame 0"]
 texture_filter = 1
 position = Vector2(-6.5, -10)
-texture = ExtResource("1_xlmoj")
+texture = ExtResource("2_2yuyk")
 centered = false
 
 [node name="Frame 94" type="Node2D" parent="Body"]
 visible = false
 
+[node name="AS2" type="Node" parent="Body/Frame 94"]
+script = SubResource("GDScript_3ilgr")
+
 [node name="@@5419" type="Sprite2D" parent="Body/Frame 94"]
 texture_filter = 1
 position = Vector2(-6.5, -11)
-texture = ExtResource("2_w6siu")
+texture = ExtResource("3_5ucs4")
 centered = false
 
 [node name="Layer 3" type="Node2D" parent="."]
@@ -191,7 +212,7 @@ centered = false
 [node name="@@5408" type="Sprite2D" parent="Layer 3/Frame 0"]
 texture_filter = 1
 position = Vector2(-9.5, -28)
-texture = ExtResource("3_tmaby")
+texture = ExtResource("4_55o3p")
 centered = false
 
 [node name="Frame 59" type="Node2D" parent="Layer 3"]
@@ -200,7 +221,7 @@ visible = false
 [node name="@@5409" type="Sprite2D" parent="Layer 3/Frame 59"]
 texture_filter = 1
 position = Vector2(-9.5, -28)
-texture = ExtResource("4_6gglc")
+texture = ExtResource("5_oje75")
 centered = false
 
 [node name="Frame 64" type="Node2D" parent="Layer 3"]
@@ -209,7 +230,7 @@ visible = false
 [node name="@@5410" type="Sprite2D" parent="Layer 3/Frame 64"]
 texture_filter = 1
 position = Vector2(-9.5, -28)
-texture = ExtResource("3_tmaby")
+texture = ExtResource("4_55o3p")
 centered = false
 
 [node name="Frame 75" type="Node2D" parent="Layer 3"]
@@ -218,7 +239,7 @@ visible = false
 [node name="@@5411" type="Sprite2D" parent="Layer 3/Frame 75"]
 texture_filter = 1
 position = Vector2(-9.5, -28)
-texture = ExtResource("4_6gglc")
+texture = ExtResource("5_oje75")
 centered = false
 
 [node name="Frame 78" type="Node2D" parent="Layer 3"]
@@ -227,7 +248,7 @@ visible = false
 [node name="@@5412" type="Sprite2D" parent="Layer 3/Frame 78"]
 texture_filter = 1
 position = Vector2(-9.5, -28.25)
-texture = ExtResource("3_tmaby")
+texture = ExtResource("4_55o3p")
 centered = false
 
 [node name="Frame 94" type="Node2D" parent="Layer 3"]
@@ -236,7 +257,7 @@ visible = false
 [node name="@@5413" type="Sprite2D" parent="Layer 3/Frame 94"]
 texture_filter = 1
 position = Vector2(-9.5, -29)
-texture = ExtResource("3_tmaby")
+texture = ExtResource("4_55o3p")
 centered = false
 
 [node name="Frame 153" type="Node2D" parent="Layer 3"]
@@ -245,7 +266,7 @@ visible = false
 [node name="@@5414" type="Sprite2D" parent="Layer 3/Frame 153"]
 texture_filter = 1
 position = Vector2(-9.5, -29)
-texture = ExtResource("4_6gglc")
+texture = ExtResource("5_oje75")
 centered = false
 
 [node name="Frame 158" type="Node2D" parent="Layer 3"]
@@ -254,7 +275,7 @@ visible = false
 [node name="@@5415" type="Sprite2D" parent="Layer 3/Frame 158"]
 texture_filter = 1
 position = Vector2(-9.5, -29)
-texture = ExtResource("3_tmaby")
+texture = ExtResource("4_55o3p")
 centered = false
 
 [node name="Frame 169" type="Node2D" parent="Layer 3"]
@@ -263,7 +284,7 @@ visible = false
 [node name="@@5416" type="Sprite2D" parent="Layer 3/Frame 169"]
 texture_filter = 1
 position = Vector2(-9.5, -29)
-texture = ExtResource("4_6gglc")
+texture = ExtResource("5_oje75")
 centered = false
 
 [node name="Frame 172" type="Node2D" parent="Layer 3"]
@@ -272,5 +293,5 @@ visible = false
 [node name="@@5417" type="Sprite2D" parent="Layer 3/Frame 172"]
 texture_filter = 1
 position = Vector2(-9.5, -29)
-texture = ExtResource("3_tmaby")
+texture = ExtResource("4_55o3p")
 centered = false

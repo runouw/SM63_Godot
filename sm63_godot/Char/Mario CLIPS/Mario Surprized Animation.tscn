@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_f0uqg"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_u3bnf"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 1.png" id="3_k713u"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 2.png" id="4_scq8a"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_w2kyd"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_3mm6j"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 1.png" id="3_auvdo"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/BITS Mario/Mario Surprized - 2.png" id="4_j10k7"]
 
-[sub_resource type="Animation" id="Animation_7o47n"]
+[sub_resource type="Animation" id="Animation_2icv3"]
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -45,25 +45,30 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_j1xr4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_upi1n"]
 _data = {
-"Default": SubResource("Animation_7o47n")
+"Default": SubResource("Animation_2icv3")
 }
 
 [node name="Mario Surprized Animation" type="Node2D"]
+script = ExtResource("1_w2kyd")
+source_xml = "res://sm63/LIBRARY/Char/Mario CLIPS/Mario Surprized Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_j1xr4")
+"Timeline": SubResource("AnimationLibrary_upi1n")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0" instance=ExtResource("1_f0uqg")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 2/Frame 0"]
 position = Vector2(0, -0.2)
-script = ExtResource("2_u3bnf")
+script = ExtResource("2_3mm6j")
 path = "res://sm63_godot/Char/Fludd CLIPS/Fludd Front Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -83,7 +88,7 @@ brightness = 0.0
 [node name="@@15907" type="Sprite2D" parent="Layer 1/Frame 0"]
 texture_filter = 1
 position = Vector2(-12, -16)
-texture = ExtResource("3_k713u")
+texture = ExtResource("3_auvdo")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
@@ -92,5 +97,5 @@ visible = false
 [node name="@@15908" type="Sprite2D" parent="Layer 1/Frame 3"]
 texture_filter = 1
 position = Vector2(-11, -15.5)
-texture = ExtResource("4_scq8a")
+texture = ExtResource("4_j10k7")
 centered = false

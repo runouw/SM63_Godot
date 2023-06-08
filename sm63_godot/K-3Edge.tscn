@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_b2qvx"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_rg6hb"]
+
+[sub_resource type="Animation" id="Animation_xpg6n"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_v4q8c"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xkbpx"]
 _data = {
-"Default": SubResource("Animation_b2qvx")
+"Default": SubResource("Animation_xpg6n")
 }
 
 [node name="K-3Edge" type="Node2D"]
+script = ExtResource("1_rg6hb")
+source_xml = "res://sm63/LIBRARY/K-3Edge.xml"
+linkage = "K-3Edge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_v4q8c")
+"Timeline": SubResource("AnimationLibrary_xkbpx")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

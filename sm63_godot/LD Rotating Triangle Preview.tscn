@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Tick Battery 2.png" id="1_xeyjp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_d7ako"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Course Items-PL/Blocks&#044 Tiles & Other Textures/Ancient & Clock & Haunted/Tick Battery 2.png" id="2_1s1w8"]
 
-[sub_resource type="Animation" id="Animation_gnwqa"]
+[sub_resource type="Animation" id="Animation_dn2dw"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -30,16 +31,126 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_y4rrv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o4x1o"]
 _data = {
-"Default": SubResource("Animation_gnwqa")
+"Default": SubResource("Animation_dn2dw")
 }
 
+[sub_resource type="GDScript" id="GDScript_ea5ns"]
+script/source = "extends Node
+# stop();
+# //
+# if (DirectionX == undefined) {
+# 	DirectionX = \"Right\";
+# }
+# if (DirectionY == undefined) {
+# 	DirectionY = \"Up\";
+# }
+# if (distanceX == undefined) {
+# 	distanceX = 0;
+# }
+# if (distanceY == undefined) {
+# 	distanceY = 0;
+# }
+# if (accelX == undefined) {
+# 	accelX = 0;
+# }
+# if (accelY == undefined) {
+# 	accelY = 0;
+# }
+# if (speedX == undefined) {
+# 	speedX = 0;
+# }
+# if (speedY == undefined) {
+# 	speedY = 0;
+# }
+# if (Xoffstart == undefined) {
+# 	Xoffstart = 0;
+# }
+# if (Yoffstart == undefined) {
+# 	Yoffstart = 0;
+# }
+# if (DirectionY == \"Up\") {
+# 	_y -= speedY;
+# } else {
+# 	_y += speedY;
+# }
+# if (DirectionY == \"Right\") {
+# 	_x -= speedX;
+# } else {
+# 	_x += speedX;
+# }
+# if (scale == undefined) {
+# 	scale = 100;
+# }
+# if (blocktype == undefined) {
+# 	blocktype = 1;
+# }
+# if (angleoffset == undefined) {
+# 	angleoffset = 0;
+# }
+# if (rotamount == undefined) {
+# 	rotamount = 120;
+# }
+# //                           
+# if (rotdirection == undefined) {
+# 	rotdirection = \"Left\";
+# }
+# if (rotspeed == undefined) {
+# 	rotspeed = 3;
+# }
+# if (rotwait == undefined) {
+# 	rotwait = 92;
+# }
+# if (quake == undefined && rotwait>20) {
+# 	quake = true;
+# } else {
+# 	quake = true;
+# }
+# _yscale = scale;
+# _xscale = scale;
+# gotoAndStop(blocktype);
+# _rotation = angleoffset;
+# count = 0;
+# spincount = 0;
+# onEnterFrame = function () {
+# 	count++;
+# 	if (count>rotwait) {
+# 		spincount++;
+# 		if ((spincount*rotspeed)<=rotamount) {
+# 			if (this.rotdirection == \"Right\") {
+# 				_rotation += this.rotspeed;
+# 			}
+# 			if (this.rotdirection == \"Left\") {
+# 				_rotation -= this.rotspeed;
+# 			}
+# 		} else {
+# 			count = 0;
+# 			spincount = 0;
+# 			_rotation -= this.angleoffset;
+# 			_rotation = (Math.round(_rotation/rotamount)*rotamount)+angleoffset;
+# 		}
+# 	}
+# 	//                                              
+# 	//if (this.quake == true) {
+# 	if (count+20>this.rotwait && count<this.rotwait) {
+# 		_rotation -= this.angleoffset;
+# 		_rotation = (Math.round(_rotation/this.rotamount)*this.rotamount)+this.angleoffset;
+# 		_rotation += Math.random()*5-2.5;
+# 	}
+# };
+# "
+
 [node name="LD Rotating Triangle Preview" type="Node2D"]
+script = ExtResource("1_d7ako")
+source_xml = "res://sm63/LIBRARY/LD Rotating Triangle Preview.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_y4rrv")
+"Timeline": SubResource("AnimationLibrary_o4x1o")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
@@ -54,7 +165,7 @@ position = Vector2(0.05, -0.3)
 [node name="@@8755" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xeyjp")
+texture = ExtResource("2_1s1w8")
 texture_offset = Vector2(-36.0137, -79.3778)
 texture_scale = Vector2(1.33333, 1.33333)
 texture_rotation = -2.09439
@@ -64,7 +175,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedIn
 [node name="@@8756" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xeyjp")
+texture = ExtResource("2_1s1w8")
 texture_offset = Vector2(107.75, 16.75)
 texture_scale = Vector2(1.33333, 1.33333)
 polygon = PackedVector2Array(-30.05, -17.7, 29.775, -17.7, 6.09387, -3.2, -5.87666, -3.2, -29.775, -17.25, -29.975, -17.575, -30.005, -17.625, -5.87666, -3.2, 0, -3.2, -2.3, -2.3, -2.9, -1.45, -2.9, -1.45, -4.34581, -2.3, 0, -3.2, 6.09387, -3.2, 2.95, -1.275, 2.95, -1.275, 2.25, -2.3)
@@ -78,7 +189,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 
 [node name="@@8758" type="Polygon2D" parent="Layer 1/Frame 0/Group/Shape"]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("1_xeyjp")
+texture = ExtResource("2_1s1w8")
 texture_offset = Vector2(-36.2725, 65.0255)
 texture_scale = Vector2(1.33333, 1.33333)
 texture_rotation = 2.0944
@@ -96,3 +207,6 @@ end_cap_mode = 2
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_ea5ns")

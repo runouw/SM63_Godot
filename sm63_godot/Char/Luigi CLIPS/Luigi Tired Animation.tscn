@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=16 format=3]
 
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 3 - 5.png" id="1_rrmbo"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 1.png" id="2_iq3x8"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 2.png" id="3_vr3eq"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 3.png" id="4_hwtkc"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 4.png" id="5_htg01"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 5.png" id="6_8l5oj"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 6.png" id="7_ig8qg"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 7.png" id="8_8n2se"]
-[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 8.png" id="9_idek6"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_dv5i4"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Overworld - Luigi 3 - 5.png" id="2_wjght"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 1.png" id="3_jwwea"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 2.png" id="4_c7kn8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 3.png" id="5_rueah"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 4.png" id="6_48y37"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 5.png" id="7_jflp8"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 6.png" id="8_0hgys"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 7.png" id="9_v2peb"]
+[ext_resource type="Texture2D" path="res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi BITs/Luigi (None) - Tired - 8.png" id="10_qhf4w"]
 
-[sub_resource type="Animation" id="Animation_c8ser"]
+[sub_resource type="Animation" id="Animation_jm75g"]
 length = 1.23333
 loop_mode = 1
 tracks/0/type = "value"
@@ -170,16 +171,48 @@ tracks/12/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4h766"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmqn5"]
 _data = {
-"Default": SubResource("Animation_c8ser")
+"Default": SubResource("Animation_jm75g")
 }
 
+[sub_resource type="GDScript" id="GDScript_g1yf6"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	if (_root.PauseGame == false) {
+# 		play();
+# 	} else {
+# 		stop();
+# 	}
+# };
+# "
+
+[sub_resource type="GDScript" id="GDScript_x21n5"]
+script/source = "extends Node
+# count = 0;
+# "
+
+[sub_resource type="GDScript" id="GDScript_ikecu"]
+script/source = "extends Node
+# count++;
+# if (count<12) {
+# 	gotoAndPlay(\"repeat\");
+# } else {
+# 	_root.Course.Char.attack = true;
+# 	_root.Course.Char.attackFrame = \"Sleep\";
+# }
+# "
+
 [node name="Luigi Tired Animation" type="Node2D"]
+script = ExtResource("1_dv5i4")
+source_xml = "res://sm63/LIBRARY/Char/Luigi CLIPS/Luigi Tired Animation.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4h766")
+"Timeline": SubResource("AnimationLibrary_wmqn5")
 }
 
 [node name="Layer 2" type="Node2D" parent="."]
@@ -191,7 +224,7 @@ texture_filter = 1
 position = Vector2(7.5, -19)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("1_rrmbo")
+texture = ExtResource("2_wjght")
 centered = false
 
 [node name="Frame 3" type="Node2D" parent="Layer 2"]
@@ -202,7 +235,7 @@ texture_filter = 1
 position = Vector2(9, -19)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("2_iq3x8")
+texture = ExtResource("3_jwwea")
 centered = false
 
 [node name="Frame 7" type="Node2D" parent="Layer 2"]
@@ -213,7 +246,7 @@ texture_filter = 1
 position = Vector2(9, -19)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("3_vr3eq")
+texture = ExtResource("4_c7kn8")
 centered = false
 
 [node name="Frame 10" type="Node2D" parent="Layer 2"]
@@ -224,7 +257,7 @@ texture_filter = 1
 position = Vector2(8.5, -18.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("4_hwtkc")
+texture = ExtResource("5_rueah")
 centered = false
 
 [node name="Frame 13" type="Node2D" parent="Layer 2"]
@@ -235,7 +268,7 @@ texture_filter = 1
 position = Vector2(9, -17)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("5_htg01")
+texture = ExtResource("6_48y37")
 centered = false
 
 [node name="Frame 16" type="Node2D" parent="Layer 2"]
@@ -246,7 +279,7 @@ texture_filter = 1
 position = Vector2(9, -17)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("6_8l5oj")
+texture = ExtResource("7_jflp8")
 centered = false
 
 [node name="Frame 21" type="Node2D" parent="Layer 2"]
@@ -257,7 +290,7 @@ texture_filter = 1
 position = Vector2(9, -17)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("7_ig8qg")
+texture = ExtResource("8_0hgys")
 centered = false
 
 [node name="Frame 24" type="Node2D" parent="Layer 2"]
@@ -268,7 +301,7 @@ texture_filter = 1
 position = Vector2(8.5, -17.5)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("8_8n2se")
+texture = ExtResource("9_v2peb")
 centered = false
 
 [node name="Frame 28" type="Node2D" parent="Layer 2"]
@@ -279,18 +312,27 @@ texture_filter = 1
 position = Vector2(9, -19)
 rotation = 3.14159
 scale = Vector2(1, -1)
-texture = ExtResource("9_idek6")
+texture = ExtResource("10_qhf4w")
 centered = false
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
+[node name="AS2" type="Node" parent="Layer 1/Frame 0"]
+script = SubResource("GDScript_g1yf6")
+
 [node name="Frame 2" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 2"]
+script = SubResource("GDScript_x21n5")
 
 [node name="Frame 3" type="Node2D" parent="Layer 1"]
 visible = false
 
 [node name="Frame 36" type="Node2D" parent="Layer 1"]
 visible = false
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 36"]
+script = SubResource("GDScript_ikecu")

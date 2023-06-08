@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_564hp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_a33c3"]
+
+[sub_resource type="Animation" id="Animation_khcfj"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ersu"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkolb"]
 _data = {
-"Default": SubResource("Animation_564hp")
+"Default": SubResource("Animation_khcfj")
 }
 
 [node name="9-03-DCamEdge" type="Node2D"]
+script = ExtResource("1_a33c3")
+source_xml = "res://sm63/LIBRARY/Course Clips/9-03-DCamEdge.xml"
+linkage = "9-03-DCamEdge"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_4ersu")
+"Timeline": SubResource("AnimationLibrary_jkolb")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

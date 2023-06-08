@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_6xenq"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_47fuw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_twkji"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_onvvk"]
 
-[sub_resource type="Animation" id="Animation_ctcc6"]
+[sub_resource type="Animation" id="Animation_ir3ps"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -19,25 +19,79 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b31v1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhikn"]
 _data = {
-"Default": SubResource("Animation_ctcc6")
+"Default": SubResource("Animation_ir3ps")
 }
 
+[sub_resource type="GDScript" id="GDScript_r3g7s"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = -100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_ygpx6"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = 100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_f1ed7"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = -100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_l6r8y"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = -100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_uqbp0"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = -100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_6g6ka"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = 100;
+# }
+# "
+
+[sub_resource type="GDScript" id="GDScript_esspe"]
+script/source = "extends Node
+# onClipEvent (load) {
+# 	_xscale = -100;
+# }
+# "
+
 [node name="4-11 FrontGFX" type="Node2D"]
+script = ExtResource("1_twkji")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/4-11 FrontGFX.xml"
+linkage = "4-11FrontGFX"
+linkage_export = true
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_b31v1")
+"Timeline": SubResource("AnimationLibrary_fhikn")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6xenq")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-500.15, -12)
-script = ExtResource("2_47fuw")
+script = ExtResource("2_onvvk")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -50,9 +104,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@28926" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6xenq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/DOMSymbolInstance"]
+script = SubResource("GDScript_r3g7s")
+
+[node name="@DOMSymbolInstance@28926" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(376.1, -1978.5)
-script = ExtResource("2_47fuw")
+script = ExtResource("2_onvvk")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -65,9 +122,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@28927" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6xenq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@28926"]
+script = SubResource("GDScript_ygpx6")
+
+[node name="@DOMSymbolInstance@28927" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-348.1, -546.15)
-script = ExtResource("2_47fuw")
+script = ExtResource("2_onvvk")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -80,9 +140,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@28928" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6xenq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@28927"]
+script = SubResource("GDScript_f1ed7")
+
+[node name="@DOMSymbolInstance@28928" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(604.15, -786.2)
-script = ExtResource("2_47fuw")
+script = ExtResource("2_onvvk")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -95,9 +158,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@28929" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6xenq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@28928"]
+script = SubResource("GDScript_l6r8y")
+
+[node name="@DOMSymbolInstance@28929" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(1336.1, -818.15)
-script = ExtResource("2_47fuw")
+script = ExtResource("2_onvvk")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -110,9 +176,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@28930" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6xenq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@28929"]
+script = SubResource("GDScript_uqbp0")
+
+[node name="@DOMSymbolInstance@28930" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(364.1, -1398.05)
-script = ExtResource("2_47fuw")
+script = ExtResource("2_onvvk")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -125,9 +194,12 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@28931" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_6xenq")]
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@28930"]
+script = SubResource("GDScript_6g6ka")
+
+[node name="@DOMSymbolInstance@28931" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(-223.9, -2058.15)
-script = ExtResource("2_47fuw")
+script = ExtResource("2_onvvk")
 path = "res://sm63_godot/Enemies/Normal/A-F/Boo/Ghost Code.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -139,3 +211,6 @@ blue_offset = 0.0
 tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
+
+[node name="AS2" type="Node" parent="Layer 1/Frame 0/@DOMSymbolInstance@28931"]
+script = SubResource("GDScript_esspe")

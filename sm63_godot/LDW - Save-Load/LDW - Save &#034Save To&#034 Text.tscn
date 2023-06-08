@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
-[sub_resource type="Animation" id="Animation_87cwp"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_1o546"]
+
+[sub_resource type="Animation" id="Animation_suk71"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -16,16 +18,21 @@ tracks/0/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h71hh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qhtql"]
 _data = {
-"Default": SubResource("Animation_87cwp")
+"Default": SubResource("Animation_suk71")
 }
 
 [node name="LDW - Save Save To Text" type="Node2D"]
+script = ExtResource("1_1o546")
+source_xml = "res://sm63/LIBRARY/LDW - Save-Load/LDW - Save &#034Save To&#034 Text.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_h71hh")
+"Timeline": SubResource("AnimationLibrary_qhtql")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]

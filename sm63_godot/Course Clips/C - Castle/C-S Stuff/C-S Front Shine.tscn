@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="PackedScene" path="res://xfl_parse/symbol/symbol_instance.tscn" id="1_c4uug"]
-[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_1nffn"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_oqwbl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol/symbol_instance.gd" id="2_0an5c"]
 
-[sub_resource type="Animation" id="Animation_2fwiw"]
+[sub_resource type="Animation" id="Animation_v2t77"]
 length = 0.0333333
 loop_mode = 1
 tracks/0/type = "value"
@@ -31,27 +31,40 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fmx1v"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bl16r"]
 _data = {
-"Default": SubResource("Animation_2fwiw")
+"Default": SubResource("Animation_v2t77")
 }
 
+[sub_resource type="GDScript" id="GDScript_so4fi"]
+script/source = "extends Node
+# onEnterFrame = function () {
+# 	c._rotation += 0.8;
+# 	d._rotation -= 0.8;
+# };
+# "
+
 [node name="C-S Front Shine" type="Node2D"]
+script = ExtResource("1_oqwbl")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/C-S Stuff/C-S Front Shine.xml"
+linkage = ""
+linkage_export = false
+regenerate = false
 
 [node name="Timeline" type="AnimationPlayer" parent="."]
 libraries = {
-"Timeline": SubResource("AnimationLibrary_fmx1v")
+"Timeline": SubResource("AnimationLibrary_bl16r")
 }
 
 [node name="Layer 1" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 1"]
 
-[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_c4uug")]
+[node name="DOMSymbolInstance" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.1, 0)
 rotation = 1.57079
 scale = Vector2(2.24826, 2.24823)
-script = ExtResource("2_1nffn")
+script = ExtResource("2_0an5c")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -64,11 +77,11 @@ tint_multiplier = 0.0
 tint_color = Color(0, 0, 0, 1)
 brightness = 0.0
 
-[node name="@DOMSymbolInstance@43325" type="Node2D" parent="Layer 1/Frame 0" instance=ExtResource("1_c4uug")]
+[node name="@DOMSymbolInstance@43325" type="Node2D" parent="Layer 1/Frame 0"]
 position = Vector2(0.1, 0)
 rotation = 2.35618
 scale = Vector2(1.5808, 1.58079)
-script = ExtResource("2_1nffn")
+script = ExtResource("2_0an5c")
 path = "res://sm63_godot/Effects/Light Effects Folder/Shine Light Effect.tscn"
 red_multiplier = 1.0
 green_multiplier = 1.0
@@ -84,3 +97,6 @@ brightness = 0.0
 [node name="Layer 2" type="Node2D" parent="."]
 
 [node name="Frame 0" type="Node2D" parent="Layer 2"]
+
+[node name="AS2" type="Node" parent="Layer 2/Frame 0"]
+script = SubResource("GDScript_so4fi")
