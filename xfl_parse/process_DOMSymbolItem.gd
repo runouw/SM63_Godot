@@ -411,7 +411,7 @@ func _read_edge_commands(edge_node: XMLNode, layer_node: Node2D) -> Array[DOMSha
 			
 			var desired_cuts: int = 1
 			
-			if not _mostly_same((p2 - p).normalized(), (p3 - p2).normalized()):
+			if not (p2 - p).normalized().is_equal_approx((p3 - p2).normalized()):
 				var length_estimate: float = (p2 - p).length() + (p3 - p2).length()
 				
 				desired_cuts = clamp(int(sqrt(length_estimate / bezier_pixels_per_cut)), 1, max_bezier_subdivide_cuts)
@@ -560,8 +560,8 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 					
 					var prev_polygon := generated_polygons[generated_polygons.size() - 1 - p]
 					
-					if _mostly_same(prev_polygon.points[prev_polygon.tl_i], tl) and _mostly_same(prev_polygon.points[prev_polygon.tr_i], tr):
-						if not _mostly_same(tl, tr): # pinch points will break Godot triangulation
+					if prev_polygon.points[prev_polygon.tl_i].is_equal_approx(tl) and prev_polygon.points[prev_polygon.tr_i].is_equal_approx(tr):
+						if not tl.is_equal_approx(tr): # pinch points will break Godot triangulation
 							matched = true
 							
 							prev_polygon.points.insert(prev_polygon.tl_i, br)
@@ -589,7 +589,7 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 			var ab = (b - a).normalized()
 			var bc = (c - b).normalized()
 			
-			if _mostly_same(ab, bc) or _mostly_same(ab, -bc):
+			if ab.is_equal_approx(bc) or ab.is_equal_approx(-bc):
 				generated_polygon.points.remove_at(i + 1)
 			else:
 				i += 1
@@ -649,10 +649,6 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 			
 		shape_node.add_child(line_node)
 		line_node.owner = root_node
-
-
-func _mostly_same(a: Vector2, b: Vector2):
-	return (a - b).length_squared() < 1e-6
 
 
 func line_intersect_x(edge: DOMShape_Edge, y_mid: float) -> float:
