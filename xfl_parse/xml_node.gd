@@ -6,6 +6,7 @@ var children: Array[XMLNode]
 var parent: XMLNode = null
 var text: String = ""
 var c_data: String = ""
+var path: String = ""
 
 func _init(
 	p_name: String
@@ -15,6 +16,7 @@ func _init(
 
 func first_child_with_tag(tag: String) -> XMLNode:
 	for child in children:
+		child.path = path
 		if child.name == tag:
 			return child
 	return null
@@ -23,6 +25,7 @@ func first_child_with_tag(tag: String) -> XMLNode:
 func all_children_with_tag(tag: String) -> Array[XMLNode]:
 	var ret: Array[XMLNode] = []
 	for child in children:
+		child.path = path
 		if child.name == tag:
 			ret.append(child)
 	return ret
@@ -30,6 +33,7 @@ func all_children_with_tag(tag: String) -> Array[XMLNode]:
 
 func recurse_callback_with_tag(tag: String, callback: Callable):
 	for child in children:
+		child.path = path
 		if child.name == tag:
 			callback.call(child)
 		
