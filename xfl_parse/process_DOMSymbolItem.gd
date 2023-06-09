@@ -48,6 +48,8 @@ func _init(path: String):
 	root_node.add_child(animation_player)
 	animation_player.owner = root_node
 	
+	# TODO: include proper output path replacement.
+	model.root.path = path.get_basename().replace("sm63/LIBRARY", "sm63_godot")
 	model.root.recurse_callback_with_tag("DOMLayer", _process_DOMLayer)
 	
 	animation_lib.add_animation("Default", animation)
@@ -96,7 +98,7 @@ func _process_DOMLayer(DOMLayer: XMLNode):
 		var elements_tag = DOMFrame.first_child_with_tag("elements")
 		
 		if elements_tag:
-			_process_elements(elements_tag.children, frame_node)
+			_process_elements(elements_tag.children, frame_node, DOMFrame.path)
 	)
 
 func _process_actionscript(Actionscript_tag: XMLNode, target: Node2D):
@@ -108,14 +110,24 @@ func _process_actionscript(Actionscript_tag: XMLNode, target: Node2D):
 		var script = GDScript.new()
 		var text_arr = script_tag.c_data.split("\n")
 		script.source_code = "extends Node\n# " + "\n# ".join(text_arr)
-		script_node.set_script(script)
+		# Does Godot have a better way to set file paths than hardcoding slashes into strings?
+		# This seems like it might cause issues on different OSes.
+		
+		var base_path = Actionscript_tag.path
+		assert(base_path != "")
+		var script_path = "%s_%d.gd" % [base_path, target.get_instance_id()]
+		ResourceSaver.save(script, script_path)
+		# Load from file to ensure the script is referenced correctly.
+		# This is probably slow.
+		script_node.set_script(load(script_path))
 		
 		target.add_child(script_node)
 		script_node.owner = root_node
 
 
-func _process_elements(elements: Array[XMLNode], parent_node: Node2D):
+func _process_elements(elements: Array[XMLNode], parent_node: Node2D, path: String):
 	for element in elements:
+		element.path = path
 		match(element.name):
 			"DOMGroup":
 				_process_DOMGroup(element, parent_node)
@@ -140,7 +152,7 @@ func _process_DOMGroup(DOMGroup: XMLNode, parent_node: Node2D):
 			group_node.transform = _matrix_to_Transform2D_Instances(xml_child)
 		
 		if xml_child.name == "members":
-			_process_elements(xml_child.children, group_node)
+			_process_elements(xml_child.children, group_node, DOMGroup.path)
 
 
 func _process_DOMSymbolInstance(DOMSymbolInstance: XMLNode, parent_node: Node2D):
@@ -152,6 +164,7 @@ func _process_DOMSymbolInstance(DOMSymbolInstance: XMLNode, parent_node: Node2D)
 	symbol_node.owner = root_node
 	
 	for xml_child in DOMSymbolInstance.children:
+		xml_child.path = DOMSymbolInstance.path
 		if xml_child.name == "matrix":
 			symbol_node.transform = _matrix_to_Transform2D_Instances(xml_child)
 		if xml_child.name == "Actionscript":
