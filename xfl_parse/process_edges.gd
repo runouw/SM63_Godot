@@ -51,14 +51,13 @@ func _next_number():
 	
 	var allowed = "0123456789-."
 	
-	var buf = ""
+	var mark = at
 	while _edges[at] in allowed:
-		buf += _edges[at]
 		at += 1
 		if at >= end:
 			break
 	
-	return float(buf) / 20.0
+	return float(_edges.substr(mark, at - mark)) / 20.0
 
 
 func _next_style() -> String:

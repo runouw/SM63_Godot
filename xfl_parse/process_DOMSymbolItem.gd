@@ -652,34 +652,18 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 
 
 func line_intersect_x(edge: DOMShape_Edge, y_mid: float) -> float:
-	# y = mx + b
-	# y - b = mx
-	# x = (y - b) / m
+	# y - y1 = m(x - x1)
 	
-	var p1: Vector2
-	var p2: Vector2
-	
-	if edge.a.x < edge.b.x:
-		p1 = edge.a
-		p2 = edge.b
-	else:
-		p1 = edge.b
-		p2 = edge.a
+	var p1: Vector2 = edge.a
+	var p2: Vector2 = edge.b
 	
 	var run = p2.x - p1.x
 	
-	if run < 1e-6: # vertical line
+	if abs(run) < 1e-6: # vertical line
 		return p1.x
 	
 	var m = (p2.y - p1.y) / run
 	
-	# y = mx + b
-	# b = y - mx
-	
-	# for point a:
-	var b = p1.y - m * p1.x
-	
 	# now get the x intersection for the mid_y value
-	# y = mx + b
-	# x = (y - b) / m
-	return (y_mid - b) / m
+	# x = (y - y1) / m + x1
+	return (y_mid - p1.y) / m + p1.x
