@@ -14,13 +14,13 @@ func _init(path: String):
 	
 	var error = parser.open(path)
 	if error != 0:
-		print("error ", error)
+		print_debug("error ", error)
 		return
 	
 	var model = XmlModel.new(parser)
 	
 	if model.root.name != "DOMSymbolItem":
-		print("NOT DOMSymbolItem!")
+		print_debug("NOT DOMSymbolItem!")
 		return
 	
 	root_node = Node2D.new()
@@ -126,7 +126,7 @@ func _process_elements(elements: Array[XMLNode], parent_node: Node2D):
 			"DOMSymbolInstance":
 				_process_DOMSymbolInstance(element, parent_node)
 			_:
-				print("Unhandled element ", element.name)
+				print_debug("Unhandled element ", element.name)
 
 
 func _process_DOMGroup(DOMGroup: XMLNode, parent_node: Node2D):
@@ -160,7 +160,7 @@ func _process_DOMSymbolInstance(DOMSymbolInstance: XMLNode, parent_node: Node2D)
 	var filters := DOMSymbolInstance.first_child_with_tag("filters")
 	if filters:
 		for filter in filters.children:
-			print("TODO filter: ", filter.name)
+			print_debug("Unhandled filter: ", filter.name)
 	
 	var color := DOMSymbolInstance.first_child_with_tag("color")
 	if color:
@@ -635,22 +635,28 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 	
 	# draw strokes
 	for strokeStyle_index in range(strokeStyles.size()):
-		var line_node = Line2D.new()
-		line_node.width = 1
-		
-		_apply_lineStyle(strokeStyles[strokeStyle_index], line_node)
-		
+		var styled_edges: Array[DOMShape_Edge] = []
 		for edge in raw_edges:
 			if edge.strokeStyle - 1 == strokeStyle_index:
-				
-				line_node.add_point(edge.a)
-				line_node.add_point(edge.b)
-				line_node.add_point(Vector2.ONE * NAN)
+				styled_edges.append(edge)
+		
+		var line_strips: Array[PackedVector2Array] = _weld_edges(styled_edges)
+		
+		for line_strip in line_strips:
+			var line_node = Line2D.new()
+			line_node.width = 1
 			
-		shape_node.add_child(line_node)
-		line_node.owner = root_node
+			_apply_lineStyle(strokeStyles[strokeStyle_index], line_node)
+			
+			for point in line_strip:
+				line_node.add_point(point)
+			
+			shape_node.add_child(line_node)
+			line_node.owner = root_node
 
 
+## Assuming that a horiztonal line at y_mid intersects the edge somewhere, this
+## finds and returns what x value the intersection occurs at
 func line_intersect_x(edge: DOMShape_Edge, y_mid: float) -> float:
 	# y - y1 = m(x - x1)
 	
@@ -664,6 +670,63 @@ func line_intersect_x(edge: DOMShape_Edge, y_mid: float) -> float:
 	
 	var m = (p2.y - p1.y) / run
 	
-	# now get the x intersection for the mid_y value
+	# now get the x intersection for the y_mid value
 	# x = (y - y1) / m + x1
 	return (y_mid - p1.y) / m + p1.x
+
+## Destructively modifies input raw_edges and returns list of line strips
+func _weld_edges(raw_edges: Array[DOMShape_Edge]) -> Array[PackedVector2Array]:
+	var r: Array[PackedVector2Array] = []
+	
+	while not raw_edges.is_empty():
+		var edge = raw_edges.pop_back()
+		
+		var list := PackedVector2Array()
+		list.append(edge.a)
+		list.append(edge.b)
+		
+		var list_backwards := PackedVector2Array()
+		
+		var start = edge.a
+		var end = edge.b
+		
+		var exausted_search: bool = false
+		while not exausted_search:
+			var found := false
+			for i in raw_edges.size():
+				if i >= raw_edges.size():
+					break
+				
+				var other_edge := raw_edges[i]
+				
+				if end.is_equal_approx(other_edge.a):
+					# connects in forwards order
+					list.append(other_edge.b)
+					end = other_edge.b
+					raw_edges.remove_at(i)
+					found = true
+				elif end.is_equal_approx(other_edge.b):
+					# connects in reverse order
+					list.append(other_edge.a)
+					end = other_edge.a
+					raw_edges.remove_at(i)
+					found = true
+				elif start.is_equal_approx(other_edge.a):
+					# preceding edge connected in reverse order
+					list_backwards.append(other_edge.b)
+					start = other_edge.b
+					raw_edges.remove_at(i)
+					found = true
+				elif start.is_equal_approx(other_edge.b):
+					# preceding edge connected in forwards order
+					list_backwards.append(other_edge.a)
+					start = other_edge.a
+					raw_edges.remove_at(i)
+					found = true
+			if not found:
+				exausted_search = true
+		
+		list_backwards.reverse()
+		r.append(list_backwards + list)
+	
+	return r
