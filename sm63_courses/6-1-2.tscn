@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_gxfoi"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Cloud Background 1 Part.tscn" id="2_lwevk"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_akmve"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn" id="4_du5m2"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2BackGFX.tscn" id="5_0nqd3"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2 FrontGFX.tscn" id="6_5todb"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2 Platfmrs.tscn" id="7_l4pbi"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2 Bplatforms.tscn" id="8_steta"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2 CamEdge.tscn" id="9_5s1w0"]
+
+[node name="6-1-2" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_gxfoi")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Cloud Background 1 Part" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_lwevk")]
+script = ExtResource("3_akmve")
+source_xml = "res://sm63/LIBRARY/Cloud Background 1 Part.xml"
+linkage = "CloudBackground"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_gxfoi")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Hills+Ground Background 1 Part" type="Node2D" parent="Background/Background" instance=ExtResource("4_du5m2")]
+script = ExtResource("3_akmve")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.xml"
+linkage = "GrassandHillsBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_0nqd3")]
+script = ExtResource("3_akmve")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2BackGFX.xml"
+linkage = "6-1-2BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("6_5todb")]
+script = ExtResource("3_akmve")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2 FrontGFX.xml"
+linkage = "6-1-2FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("7_l4pbi")]
+script = ExtResource("3_akmve")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2 Platfmrs.xml"
+linkage = "6-1-2Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("8_steta")]
+script = ExtResource("3_akmve")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2 Bplatforms.xml"
+linkage = "6-1-2BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("9_5s1w0")]
+script = ExtResource("3_akmve")
+source_xml = "res://sm63/LIBRARY/Course Clips/6 - Tall Tall Mountian/6-1-2 CamEdge.xml"
+linkage = "6-1-2CamEdge"
+linkage_export = true
+regenerate = false

@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Back GFX.tscn" id="1_7h6ck"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="2_63gu3"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Front GFX.tscn" id="3_0wcvq"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Ground.tscn" id="4_whsjo"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Bplatforms.tscn" id="5_n3fio"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Cam Edge.tscn" id="6_xtp1w"]
+
+[node name="Castle" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("1_7h6ck")]
+script = ExtResource("2_63gu3")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Back GFX.xml"
+linkage = "CastleBackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("3_0wcvq")]
+script = ExtResource("2_63gu3")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Front GFX.xml"
+linkage = "CastleFrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("4_whsjo")]
+script = ExtResource("2_63gu3")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Ground.xml"
+linkage = "CastlePlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("5_n3fio")]
+script = ExtResource("2_63gu3")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Bplatforms.xml"
+linkage = "CastleBPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("6_xtp1w")]
+script = ExtResource("2_63gu3")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Outside Castle/Castle Cam Edge.xml"
+linkage = "CastleCamEdge"
+linkage_export = true
+regenerate = false

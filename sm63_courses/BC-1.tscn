@@ -1,0 +1,105 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_mw67w"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/5-1 BG.tscn" id="2_krb1p"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_5ss2f"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/BC-1BG.tscn" id="4_jhdaa"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/BC-1CloseBG.tscn" id="5_o7huu"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/BC-1BackGFX.tscn" id="6_jmunv"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/BC-1FrontGFX.tscn" id="7_y3wr4"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/BC-1Platforms.tscn" id="8_iwyr5"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/BC-1BPlatforms.tscn" id="9_h38ng"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/BC-1CamEdge.tscn" id="10_55nkm"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/BC-1Edge.tscn" id="11_1brbe"]
+
+[node name="BC-1" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_mw67w")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="5-1 BG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_krb1p")]
+script = ExtResource("3_5ss2f")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/5-1 BG.xml"
+linkage = "4-farBG"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_mw67w")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="BC-1BG" type="Node2D" parent="Background/Background" instance=ExtResource("4_jhdaa")]
+script = ExtResource("3_5ss2f")
+source_xml = "res://sm63/LIBRARY/BC-1BG.xml"
+linkage = "BC-1BG"
+linkage_export = true
+regenerate = false
+
+[node name="CloseBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_mw67w")
+game_resolution = Vector2(450, 300)
+move_scale = 0.5
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="BC-1CloseBG" type="Node2D" parent="Background/CloseBackground" instance=ExtResource("5_o7huu")]
+script = ExtResource("3_5ss2f")
+source_xml = "res://sm63/LIBRARY/BC-1CloseBG.xml"
+linkage = "BC-1CloseBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("6_jmunv")]
+script = ExtResource("3_5ss2f")
+source_xml = "res://sm63/LIBRARY/BC-1BackGFX.xml"
+linkage = "BC-1BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("7_y3wr4")]
+script = ExtResource("3_5ss2f")
+source_xml = "res://sm63/LIBRARY/BC-1FrontGFX.xml"
+linkage = "BC-1FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("8_iwyr5")]
+script = ExtResource("3_5ss2f")
+source_xml = "res://sm63/LIBRARY/BC-1Platforms.xml"
+linkage = "BC-1Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("9_h38ng")]
+script = ExtResource("3_5ss2f")
+source_xml = "res://sm63/LIBRARY/BC-1BPlatforms.xml"
+linkage = "BC-1BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("10_55nkm")]
+script = ExtResource("3_5ss2f")
+source_xml = "res://sm63/LIBRARY/BC-1CamEdge.xml"
+linkage = "BC-1CamEdge"
+linkage_export = true
+regenerate = false
+
+[node name="Edge" type="Node2D" parent="Collisions" instance=ExtResource("11_1brbe")]
+script = ExtResource("3_5ss2f")
+source_xml = "res://sm63/LIBRARY/BC-1Edge.xml"
+linkage = "BC-1Edge"
+linkage_export = true
+regenerate = false

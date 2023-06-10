@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_nw6fi"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/3-Far BG.tscn" id="2_sxv7j"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_u4j6y"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/3-BG.tscn" id="4_2ko4o"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Back GFX.tscn" id="5_ohyoa"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Front GFX.tscn" id="6_6vmpl"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Ground.tscn" id="7_auah4"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Bplatforms.tscn" id="8_d1lh3"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Cam Edge.tscn" id="9_b10g0"]
+
+[node name="3-4" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_nw6fi")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="3-Far BG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_sxv7j")]
+script = ExtResource("3_u4j6y")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/3-Far BG.xml"
+linkage = "3-farBG"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_nw6fi")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="3-BG" type="Node2D" parent="Background/Background" instance=ExtResource("4_2ko4o")]
+script = ExtResource("3_u4j6y")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/3-BG.xml"
+linkage = "3-BG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_ohyoa")]
+script = ExtResource("3_u4j6y")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Back GFX.xml"
+linkage = "3-4BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("6_6vmpl")]
+script = ExtResource("3_u4j6y")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Front GFX.xml"
+linkage = "3-4FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("7_auah4")]
+script = ExtResource("3_u4j6y")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Ground.xml"
+linkage = "3-4Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("8_d1lh3")]
+script = ExtResource("3_u4j6y")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Bplatforms.xml"
+linkage = "3-4BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("9_b10g0")]
+script = ExtResource("3_u4j6y")
+source_xml = "res://sm63/LIBRARY/Course Clips/3 - Hazy Maze Cave/Areas 3-3&#044 3-4 & 3-5/3-4 Cam Edge.xml"
+linkage = "3-4CamEdge"
+linkage_export = true
+regenerate = false

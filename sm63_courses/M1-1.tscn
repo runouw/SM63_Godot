@@ -1,0 +1,105 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_ys2bv"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Desert Background Clip.tscn" id="2_bdq2f"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_o0cfu"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Mid BG.tscn" id="4_bid5u"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Close BG.tscn" id="5_qxwae"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Back GFX.tscn" id="6_aka83"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Front GFX.tscn" id="7_tbygb"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Ground.tscn" id="8_0y45o"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1BPlatforms.tscn" id="9_ykcyi"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Cam Edge.tscn" id="10_pabnb"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Edge.tscn" id="11_3li3p"]
+
+[node name="M1-1" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_ys2bv")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Desert Background Clip" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_bdq2f")]
+script = ExtResource("3_o0cfu")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Desert Background Clip.xml"
+linkage = "M1-Background"
+linkage_export = true
+regenerate = false
+
+[node name="MidBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_ys2bv")
+game_resolution = Vector2(450, 300)
+move_scale = 0.2
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="M1-1 Mid BG" type="Node2D" parent="Background/MidBackground" instance=ExtResource("4_bid5u")]
+script = ExtResource("3_o0cfu")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Mid BG.xml"
+linkage = "M1-1MidBG"
+linkage_export = true
+regenerate = false
+
+[node name="CloseBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_ys2bv")
+game_resolution = Vector2(450, 300)
+move_scale = 0.5
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="M1-1 Close BG" type="Node2D" parent="Background/CloseBackground" instance=ExtResource("5_qxwae")]
+script = ExtResource("3_o0cfu")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Close BG.xml"
+linkage = "M1-1CloseBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("6_aka83")]
+script = ExtResource("3_o0cfu")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Back GFX.xml"
+linkage = "M1-1BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("7_tbygb")]
+script = ExtResource("3_o0cfu")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Front GFX.xml"
+linkage = "M1-1FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("8_0y45o")]
+script = ExtResource("3_o0cfu")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Ground.xml"
+linkage = "M1-1Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("9_ykcyi")]
+script = ExtResource("3_o0cfu")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1BPlatforms.xml"
+linkage = "M1-1BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("10_pabnb")]
+script = ExtResource("3_o0cfu")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Cam Edge.xml"
+linkage = "M1-1CamEdge"
+linkage_export = true
+regenerate = false
+
+[node name="Edge" type="Node2D" parent="Collisions" instance=ExtResource("11_3li3p")]
+script = ExtResource("3_o0cfu")
+source_xml = "res://sm63/LIBRARY/Course Clips/M - Mini Courses/M1 - Sinking Sand Land/M1-1 Edge.xml"
+linkage = "M1-1Edge"
+linkage_export = true
+regenerate = false

@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Back GFX.tscn" id="1_6r37e"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="2_ys46x"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Front GFX.tscn" id="3_fc4jf"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Ground.tscn" id="4_jx305"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Bplatforms.tscn" id="5_jukdm"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Cam Edge.tscn" id="6_mmv65"]
+
+[node name="4-7" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("1_6r37e")]
+script = ExtResource("2_ys46x")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Back GFX.xml"
+linkage = "4-7BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("3_fc4jf")]
+script = ExtResource("2_ys46x")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Front GFX.xml"
+linkage = "4-7FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("4_jx305")]
+script = ExtResource("2_ys46x")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Ground.xml"
+linkage = "4-7Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("5_jukdm")]
+script = ExtResource("2_ys46x")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Bplatforms.xml"
+linkage = "4-7BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("6_mmv65")]
+script = ExtResource("2_ys46x")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Left (4-4&#044 4-7)/4-7 Cam Edge.xml"
+linkage = "4-7CamEdge"
+linkage_export = true
+regenerate = false

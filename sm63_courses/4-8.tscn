@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_fv4fb"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/4-1 Haunted Background.tscn" id="2_27eed"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_tpx7r"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 Back GFX.tscn" id="4_lv3ol"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 Front GFX.tscn" id="5_pum43"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 Ground.tscn" id="6_p3wc2"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 BPlatforms.tscn" id="7_viub1"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 Cam Edge.tscn" id="8_c5xex"]
+
+[node name="4-8" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_fv4fb")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="4-1 Haunted Background" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_27eed")]
+script = ExtResource("3_tpx7r")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/4-1 Haunted Background.xml"
+linkage = "4-1BG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("4_lv3ol")]
+script = ExtResource("3_tpx7r")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 Back GFX.xml"
+linkage = "4-8BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("5_pum43")]
+script = ExtResource("3_tpx7r")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 Front GFX.xml"
+linkage = "4-8FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("6_p3wc2")]
+script = ExtResource("3_tpx7r")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 Ground.xml"
+linkage = "4-8Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("7_viub1")]
+script = ExtResource("3_tpx7r")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 BPlatforms.xml"
+linkage = "4-8BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("8_c5xex")]
+script = ExtResource("3_tpx7r")
+source_xml = "res://sm63/LIBRARY/Course Clips/4 - Boo's Mansion/Mains (4-1&#044 4-2&#044 4-8&#044 & 4-10)/4-8 Cam Edge.xml"
+linkage = "4-8CamEdge"
+linkage_export = true
+regenerate = false

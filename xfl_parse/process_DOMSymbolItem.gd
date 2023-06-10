@@ -19,22 +19,34 @@ func _init(path: String):
 	
 	var model = XmlModel.new(parser)
 	
-	if model.root.name != "DOMSymbolItem":
-		print_debug("NOT DOMSymbolItem!")
-		return
-	
 	root_node = Node2D.new()
 	root_node.set_script(load("res://xfl_parse/symbol_item/symbol_item.gd"))
 	root_node.source_xml = path
 	
-	# name = model.root.attributes.get("name", "")
-	root_node.linkage_export = model.root.attributes.get("linkageExportForAS", "false") == "true"
-	root_node.linkage = model.root.attributes.get("linkageIdentifier", "")
-	
-	var timeline_tag = model.root.first_child_with_tag("timeline")
-	if timeline_tag:
-		var DOMTimeline_tag = timeline_tag.first_child_with_tag("DOMTimeline")
-		root_node.name = DOMTimeline_tag.attributes.get("name", "")
+	match(model.root.name):
+		"DOMDocument":
+			var timelines_tag = model.root.first_child_with_tag("timelines")
+			if timelines_tag:
+				# TODO: could handle multiple timeline nodes here (for Flash projects that have multiple scenes)
+				var DOMTimeline_tag = timelines_tag.first_child_with_tag("DOMTimeline")
+				root_node.name = DOMTimeline_tag.attributes.get("name", "")
+				
+				_process_DOMTimeline(DOMTimeline_tag)
+		"DOMSymbolItem":
+			root_node.linkage_export = model.root.attributes.get("linkageExportForAS", "false") == "true"
+			root_node.linkage = model.root.attributes.get("linkageIdentifier", "")
+			
+			var timeline_tag = model.root.first_child_with_tag("timeline")
+			if timeline_tag:
+				var DOMTimeline_tag = timeline_tag.first_child_with_tag("DOMTimeline")
+				root_node.name = DOMTimeline_tag.attributes.get("name", "")
+				
+				_process_DOMTimeline(DOMTimeline_tag)
+		_:
+			print_debug("Unknown root node tag ", model.root.name)
+
+
+func _process_DOMTimeline(DOMTimeline: XMLNode):
 	
 	var animation_lib = AnimationLibrary.new()
 	animation = Animation.new()
@@ -48,7 +60,11 @@ func _init(path: String):
 	root_node.add_child(animation_player)
 	animation_player.owner = root_node
 	
-	model.root.recurse_callback_with_tag("DOMLayer", _process_DOMLayer)
+	var layers_tag := DOMTimeline.first_child_with_tag("layers")
+	if layers_tag:
+		for child in layers_tag.children:
+			if child.name == "DOMLayer":
+				_process_DOMLayer(child)
 	
 	animation_lib.add_animation("Default", animation)
 	# animation_player.autoplay = "Timeline/Default"
@@ -98,6 +114,7 @@ func _process_DOMLayer(DOMLayer: XMLNode):
 		if elements_tag:
 			_process_elements(elements_tag.children, frame_node)
 	)
+
 
 func _process_actionscript(Actionscript_tag: XMLNode, target: Node2D):
 	var script_tag := Actionscript_tag.first_child_with_tag("script")

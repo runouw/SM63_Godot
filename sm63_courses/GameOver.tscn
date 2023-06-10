@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/Game Over/GameOver Front GFX.tscn" id="1_r0dbl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="2_tcorc"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/Game Over/Game Over Ground.tscn" id="3_hy6uj"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/GameOver CamEdge.tscn" id="4_r442h"]
+
+[node name="GameOver" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("1_r0dbl")]
+script = ExtResource("2_tcorc")
+source_xml = "res://sm63/LIBRARY/Course Clips/Game Over/GameOver Front GFX.xml"
+linkage = "GameOverFrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("3_hy6uj")]
+script = ExtResource("2_tcorc")
+source_xml = "res://sm63/LIBRARY/Course Clips/Game Over/Game Over Ground.xml"
+linkage = "GameOverPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("4_r442h")]
+script = ExtResource("2_tcorc")
+source_xml = "res://sm63/LIBRARY/GameOver CamEdge.xml"
+linkage = "GameOverCamEdge"
+linkage_export = true
+regenerate = false

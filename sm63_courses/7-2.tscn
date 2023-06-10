@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_r8hvy"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Moving Clouds Background Repeat.tscn" id="2_trniw"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_jdtfb"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7+Hills+Ground BackGround.tscn" id="4_8eqh3"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Back GFX.tscn" id="5_81wgv"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Front GFX.tscn" id="6_ce56n"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Ground.tscn" id="7_vpn7s"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 BPlatforms.tscn" id="8_qyoop"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 CamEdge.tscn" id="9_wblm0"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Edge.tscn" id="10_b222b"]
+
+[node name="7-2" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_r8hvy")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Moving Clouds Background Repeat" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_trniw")]
+script = ExtResource("3_jdtfb")
+source_xml = "res://sm63/LIBRARY/Moving Clouds Background Repeat.xml"
+linkage = "MovingCloudsBackground"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_r8hvy")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="7+Hills+Ground BackGround" type="Node2D" parent="Background/Background" instance=ExtResource("4_8eqh3")]
+script = ExtResource("3_jdtfb")
+source_xml = "res://sm63/LIBRARY/Course Clips/7+Hills+Ground BackGround.xml"
+linkage = "7-MountainsBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_81wgv")]
+script = ExtResource("3_jdtfb")
+source_xml = "res://sm63/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Back GFX.xml"
+linkage = "7-2BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("6_ce56n")]
+script = ExtResource("3_jdtfb")
+source_xml = "res://sm63/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Front GFX.xml"
+linkage = "7-2FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("7_vpn7s")]
+script = ExtResource("3_jdtfb")
+source_xml = "res://sm63/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Ground.xml"
+linkage = "7-2Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("8_qyoop")]
+script = ExtResource("3_jdtfb")
+source_xml = "res://sm63/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 BPlatforms.xml"
+linkage = "7-2BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("9_wblm0")]
+script = ExtResource("3_jdtfb")
+source_xml = "res://sm63/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 CamEdge.xml"
+linkage = "7-2CamEdge"
+linkage_export = true
+regenerate = false
+
+[node name="Edge" type="Node2D" parent="Collisions" instance=ExtResource("10_b222b")]
+script = ExtResource("3_jdtfb")
+source_xml = "res://sm63/LIBRARY/Course Clips/7 - Rainbow Ride/7-2 Edge.xml"
+linkage = "7-2Edge"
+linkage_export = true
+regenerate = false

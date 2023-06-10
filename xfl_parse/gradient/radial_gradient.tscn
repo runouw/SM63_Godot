@@ -3,25 +3,27 @@
 [ext_resource type="Shader" path="res://xfl_parse/gradient/radial_gradient.gdshader" id="1_hc3tt"]
 [ext_resource type="Script" path="res://xfl_parse/gradient/radial_gradient.gd" id="2_wa1ip"]
 
-[sub_resource type="Gradient" id="Gradient_j6njy"]
+[sub_resource type="Gradient" id="Gradient_xrb1w"]
 offsets = PackedFloat32Array(0.34, 1)
 colors = PackedColorArray(0.894118, 0.807843, 0.0392157, 0.396078, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_gb3rb"]
-gradient = SubResource("Gradient_j6njy")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kgcf2"]
+gradient = SubResource("Gradient_xrb1w")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4asvn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hhgv4"]
 resource_local_to_scene = true
 shader = ExtResource("1_hc3tt")
 shader_parameter/transformMatrix = Transform2D(20, 0, 0, 20, -1280, -1280)
 shader_parameter/focalPointRatio = 0.0
-shader_parameter/radius = 1000.0
-shader_parameter/gradientTexture = SubResource("GradientTexture1D_gb3rb")
+shader_parameter/radius = 820.0
+shader_parameter/spreadMethodReflect = false
+shader_parameter/spreadMethodRepeat = false
+shader_parameter/gradientTexture = SubResource("GradientTexture1D_kgcf2")
 
 [node name="gradient" type="Node2D"]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_4asvn")
+material = SubResource("ShaderMaterial_hhgv4")
 polygon = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
 script = ExtResource("2_wa1ip")
 matrix = Transform2D(0.05, 0, 0, 0.05, 64, 64)

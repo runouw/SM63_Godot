@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_by5mo"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Castle Colored Far BG.tscn" id="2_t24n3"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_8ph31"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Castle Colored BG.tscn" id="4_v15kf"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Background Hills.tscn" id="5_dbj4m"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Back GFX.tscn" id="6_3ebtc"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Front GFX.tscn" id="7_v2rsn"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Ground.tscn" id="8_ehqsx"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Bplatforms.tscn" id="9_j6rxe"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 CamEdge.tscn" id="10_grp4s"]
+
+[node name="8-E1-1" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_by5mo")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Castle Colored Far BG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_t24n3")]
+script = ExtResource("3_8ph31")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Castle Colored Far BG.xml"
+linkage = "CastleColoredFarBG"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_by5mo")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Castle Colored BG" type="Node2D" parent="Background/Background" instance=ExtResource("4_v15kf")]
+script = ExtResource("3_8ph31")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Castle Colored BG.xml"
+linkage = "CastleColoredBG"
+linkage_export = true
+regenerate = false
+
+[node name="CloseBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_by5mo")
+game_resolution = Vector2(450, 300)
+move_scale = 0.5
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="8-E1-1 Background Hills" type="Node2D" parent="Background/CloseBackground" instance=ExtResource("5_dbj4m")]
+script = ExtResource("3_8ph31")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Background Hills.xml"
+linkage = "8-E1-1CloseBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("6_3ebtc")]
+script = ExtResource("3_8ph31")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Back GFX.xml"
+linkage = "8-E1-1BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("7_v2rsn")]
+script = ExtResource("3_8ph31")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Front GFX.xml"
+linkage = "8-E1-1FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("8_ehqsx")]
+script = ExtResource("3_8ph31")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Ground.xml"
+linkage = "8-E1-1Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("9_j6rxe")]
+script = ExtResource("3_8ph31")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 Bplatforms.xml"
+linkage = "8-E1-1BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("10_grp4s")]
+script = ExtResource("3_8ph31")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8 - Tutorials/FiRsT Tutoria/8-E1-1 CamEdge.xml"
+linkage = "8-E1-1CamEdge"
+linkage_export = true
+regenerate = false

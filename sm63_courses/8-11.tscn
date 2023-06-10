@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_3q5vk"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/5-1 BG.tscn" id="2_id0jv"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_8fbiy"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8-11BackGFX.tscn" id="4_88dds"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8-11FrontGFX.tscn" id="5_4a858"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8-11Platforms.tscn" id="6_1pc26"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8-11CamEdge.tscn" id="7_5l5ew"]
+
+[node name="8-11" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_3q5vk")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="5-1 BG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_id0jv")]
+script = ExtResource("3_8fbiy")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/5-1 BG.xml"
+linkage = "4-farBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("4_88dds")]
+script = ExtResource("3_8fbiy")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-11BackGFX.xml"
+linkage = "8-11BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("5_4a858")]
+script = ExtResource("3_8fbiy")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-11FrontGFX.xml"
+linkage = "8-11FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("6_1pc26")]
+script = ExtResource("3_8fbiy")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-11Platforms.xml"
+linkage = "8-11Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("7_5l5ew")]
+script = ExtResource("3_8fbiy")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-11CamEdge.xml"
+linkage = "8-11CamEdge"
+linkage_export = true
+regenerate = false

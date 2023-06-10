@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://d3g33tuos83hg"]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_nnea4"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Moving Clouds Background.tscn" id="2_mdnud"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7+Hills+Ground BackGround.tscn" id="3_km66s"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-1 Back GFX.tscn" id="4_08si8"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-1 Front GFX.tscn" id="5_xe4fp"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-1 BPlatforms.tscn" id="6_bhtxw"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-1 CamEdge.tscn" id="7_xiimq"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/7 - Rainbow Ride/7-1 Platforms.tscn" id="8_b4h3p"]
+
+[sub_resource type="Animation" id="Animation_5gxdg"]
+resource_name = "CameraMotion"
+length = 16.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2, 0),
+"points": PackedFloat32Array(86.0001, 0, 0, 0.433333, 13.6666, 168, -0.433333, -48.6417, 2.23333, 250.692, 1882, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.6, 16)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 2, 2),
+"points": PackedFloat32Array(-69, 0, 0, 0.416667, 28.5, 92, -0.413572, -1.03393, 4.4, 11, -55, -2.25, 26.1667, 0, 0),
+"times": PackedFloat32Array(0, 4, 16)
+}
+
+[sub_resource type="Animation" id="Animation_w3ga6"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(86.0001, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-69, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7we0t"]
+_data = {
+"CameraMotion": SubResource("Animation_5gxdg"),
+"RESET": SubResource("Animation_w3ga6")
+}
+
+[node name="1_1" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBG" type="Node2D" parent="Background"]
+position = Vector2(51.75, 60.75)
+scale = Vector2(1.12167, 1.12167)
+script = ExtResource("1_nnea4")
+move_scale = 0.0
+
+[node name="Moving Clouds Background" parent="Background/FarBG" instance=ExtResource("2_mdnud")]
+position = Vector2(-200, -0.53067)
+
+[node name="MountainsBG" type="Node2D" parent="Background"]
+position = Vector2(41.737, 48.9956)
+scale = Vector2(1.28992, 1.28992)
+script = ExtResource("1_nnea4")
+move_scale = 0.15
+zoom_strength = 0.15
+
+[node name="7+Hills+Ground BackGround" parent="Background/MountainsBG" instance=ExtResource("3_km66s")]
+
+[node name="7-1 Back GFX" parent="." instance=ExtResource("4_08si8")]
+
+[node name="7-1 Front GFX" parent="." instance=ExtResource("5_xe4fp")]
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.372549)
+
+[node name="7-1 BPlatforms" parent="Collisions" instance=ExtResource("6_bhtxw")]
+
+[node name="7-1 CamEdge" parent="Collisions" instance=ExtResource("7_xiimq")]
+
+[node name="7-1 Platforms" parent="Collisions" instance=ExtResource("8_b4h3p")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(86.0001, -69)
+ignore_rotation = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "CameraMotion"
+libraries = {
+"": SubResource("AnimationLibrary_7we0t")
+}

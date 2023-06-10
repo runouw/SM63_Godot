@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_whwej"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5-5FarBG.tscn" id="2_fed6m"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_46qnr"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5BG.tscn" id="4_63jd1"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5MidBG.tscn" id="5_wv3ta"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5CloseBG.tscn" id="6_px74e"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5BackGFX.tscn" id="7_66j0v"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5FrontGFX.tscn" id="8_f7mi8"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5Ground.tscn" id="9_ag5gw"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5BPlatforms.tscn" id="10_0rjdd"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5CamEdge.tscn" id="11_p0jgh"]
+
+[node name="5-5" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_whwej")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="5-5FarBG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_fed6m")]
+script = ExtResource("3_46qnr")
+source_xml = "res://sm63/LIBRARY/Course Clips/5-5FarBG.xml"
+linkage = "5-5FarBG"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_whwej")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="5-5BG" type="Node2D" parent="Background/Background" instance=ExtResource("4_63jd1")]
+script = ExtResource("3_46qnr")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5BG.xml"
+linkage = "5-5BG"
+linkage_export = true
+regenerate = false
+
+[node name="MidBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_whwej")
+game_resolution = Vector2(450, 300)
+move_scale = 0.2
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="5-5MidBG" type="Node2D" parent="Background/MidBackground" instance=ExtResource("5_wv3ta")]
+script = ExtResource("3_46qnr")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5MidBG.xml"
+linkage = "5-5MidBG"
+linkage_export = true
+regenerate = false
+
+[node name="CloseBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_whwej")
+game_resolution = Vector2(450, 300)
+move_scale = 0.5
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="5-5CloseBG" type="Node2D" parent="Background/CloseBackground" instance=ExtResource("6_px74e")]
+script = ExtResource("3_46qnr")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5CloseBG.xml"
+linkage = "5-5CloseBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("7_66j0v")]
+script = ExtResource("3_46qnr")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5BackGFX.xml"
+linkage = "5-5BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("8_f7mi8")]
+script = ExtResource("3_46qnr")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5FrontGFX.xml"
+linkage = "5-5FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("9_ag5gw")]
+script = ExtResource("3_46qnr")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5Ground.xml"
+linkage = "5-5Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("10_0rjdd")]
+script = ExtResource("3_46qnr")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5BPlatforms.xml"
+linkage = "5-5BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("11_p0jgh")]
+script = ExtResource("3_46qnr")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Volcano (5&#0446)/5-5CamEdge.xml"
+linkage = "5-5CamEdge"
+linkage_export = true
+regenerate = false

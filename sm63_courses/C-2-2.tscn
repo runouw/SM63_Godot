@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_lwb8l"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Castle Colored Far BG.tscn" id="2_136yg"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_vdmxr"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Castle Colored BG.tscn" id="4_i67f7"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-2-2 Back GFX.tscn" id="5_68i22"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-2-2 Ground.tscn" id="6_t4qjc"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-2-2 Cam Edge.tscn" id="7_c7gfn"]
+
+[node name="C-2-2" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_lwb8l")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Castle Colored Far BG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_136yg")]
+script = ExtResource("3_vdmxr")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Castle Colored Far BG.xml"
+linkage = "CastleColoredFarBG"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_lwb8l")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Castle Colored BG" type="Node2D" parent="Background/Background" instance=ExtResource("4_i67f7")]
+script = ExtResource("3_vdmxr")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Castle Colored BG.xml"
+linkage = "CastleColoredBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_68i22")]
+script = ExtResource("3_vdmxr")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-2-2 Back GFX.xml"
+linkage = "C-2-2BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("6_t4qjc")]
+script = ExtResource("3_vdmxr")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-2-2 Ground.xml"
+linkage = "C-2-2Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("7_c7gfn")]
+script = ExtResource("3_vdmxr")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-2-2 Cam Edge.xml"
+linkage = "C-2-2CamEdge"
+linkage_export = true
+regenerate = false

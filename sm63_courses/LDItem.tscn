@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/LDItemPlatforms.tscn" id="1_dq6n5"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="2_jv1k6"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/LDItemBPlatforms.tscn" id="3_ex068"]
+
+[node name="LDItem" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("1_dq6n5")]
+script = ExtResource("2_jv1k6")
+source_xml = "res://sm63/LIBRARY/LDItemPlatforms.xml"
+linkage = "LDItemPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("3_ex068")]
+script = ExtResource("2_jv1k6")
+source_xml = "res://sm63/LIBRARY/LDItemBPlatforms.xml"
+linkage = "LDItemBPlatforms"
+linkage_export = true
+regenerate = false

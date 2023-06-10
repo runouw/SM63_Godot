@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_ccnoe"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/5-1 BG.tscn" id="2_u6wev"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_xmhm0"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8-E5-4CloseBG.tscn" id="4_v3o6q"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4 BackGFX.tscn" id="5_geklp"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4FrontGFX.tscn" id="6_qqqp7"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4Grouund.tscn" id="7_dhmch"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4BPlatforms.tscn" id="8_pqk62"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4 CamEdge.tscn" id="9_2nbn8"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4 Edge.tscn" id="10_kk5ti"]
+
+[node name="8-E5-4" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_ccnoe")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="5-1 BG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_u6wev")]
+script = ExtResource("3_xmhm0")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/5-1 BG.xml"
+linkage = "4-farBG"
+linkage_export = true
+regenerate = false
+
+[node name="CloseBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_ccnoe")
+game_resolution = Vector2(450, 300)
+move_scale = 0.5
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="8-E5-4CloseBG" type="Node2D" parent="Background/CloseBackground" instance=ExtResource("4_v3o6q")]
+script = ExtResource("3_xmhm0")
+source_xml = "res://sm63/LIBRARY/Course Clips/8-E5-4CloseBG.xml"
+linkage = "8-E5-4CloseBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_geklp")]
+script = ExtResource("3_xmhm0")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4 BackGFX.xml"
+linkage = "8-E5-4BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("6_qqqp7")]
+script = ExtResource("3_xmhm0")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4FrontGFX.xml"
+linkage = "8-E5-4FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("7_dhmch")]
+script = ExtResource("3_xmhm0")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4Grouund.xml"
+linkage = "8-E5-4Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("8_pqk62")]
+script = ExtResource("3_xmhm0")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4BPlatforms.xml"
+linkage = "8-E5-4BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("9_2nbn8")]
+script = ExtResource("3_xmhm0")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4 CamEdge.xml"
+linkage = "8-E5-4CamEdge"
+linkage_export = true
+regenerate = false
+
+[node name="Edge" type="Node2D" parent="Collisions" instance=ExtResource("10_kk5ti")]
+script = ExtResource("3_xmhm0")
+source_xml = "res://sm63/LIBRARY/Course Clips/8 - Storyline Stars/8-E5-4 Edge.xml"
+linkage = "8-E5-4Edge"
+linkage_export = true
+regenerate = false

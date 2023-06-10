@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 Back GFX.tscn" id="1_fimul"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="2_205nf"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 Front GFX.tscn" id="3_uk8ec"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 Ground.tscn" id="4_i5acn"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 Bplatforms.tscn" id="5_onny5"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 CamEdge.tscn" id="6_iitf4"]
+
+[node name="C-8" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("1_fimul")]
+script = ExtResource("2_205nf")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 Back GFX.xml"
+linkage = "C-8BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("3_uk8ec")]
+script = ExtResource("2_205nf")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 Front GFX.xml"
+linkage = "C-8FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("4_i5acn")]
+script = ExtResource("2_205nf")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 Ground.xml"
+linkage = "C-8Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("5_onny5")]
+script = ExtResource("2_205nf")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 Bplatforms.xml"
+linkage = "C-8BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("6_iitf4")]
+script = ExtResource("2_205nf")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section B/C-8 CamEdge.xml"
+linkage = "C-8CamEdge"
+linkage_export = true
+regenerate = false

@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_m8vpo"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/5-1 BG.tscn" id="2_uuf4o"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_lyrd0"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Close BG.tscn" id="4_486qj"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/5-7BackGFX.tscn" id="5_as7ih"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/5-7FrontGFX.tscn" id="6_8dthe"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Symbol 1.tscn" id="7_6110g"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/5-7BPlatforms.tscn" id="8_50b0q"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/5 - Lethal Lava Land/5-7CamEdge.tscn" id="9_r8ffw"]
+
+[node name="5-7" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_m8vpo")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="5-1 BG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_uuf4o")]
+script = ExtResource("3_lyrd0")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/5-1 BG.xml"
+linkage = "4-farBG"
+linkage_export = true
+regenerate = false
+
+[node name="CloseBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_m8vpo")
+game_resolution = Vector2(450, 300)
+move_scale = 0.5
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="5-1 Close BG" type="Node2D" parent="Background/CloseBackground" instance=ExtResource("4_486qj")]
+script = ExtResource("3_lyrd0")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/Front-Back (1&#0444)/5-1 Close BG.xml"
+linkage = "5-1CloseBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_as7ih")]
+script = ExtResource("3_lyrd0")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/5-7BackGFX.xml"
+linkage = "5-7BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("6_8dthe")]
+script = ExtResource("3_lyrd0")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/5-7FrontGFX.xml"
+linkage = "5-7FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("7_6110g")]
+script = ExtResource("3_lyrd0")
+source_xml = "res://sm63/LIBRARY/Symbol 1.xml"
+linkage = "5-7Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("8_50b0q")]
+script = ExtResource("3_lyrd0")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/5-7BPlatforms.xml"
+linkage = "5-7BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("9_r8ffw")]
+script = ExtResource("3_lyrd0")
+source_xml = "res://sm63/LIBRARY/Course Clips/5 - Lethal Lava Land/5-7CamEdge.xml"
+linkage = "5-7CamEdge"
+linkage_export = true
+regenerate = false

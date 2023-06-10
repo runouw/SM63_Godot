@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_yoc36"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/1-FarBG.tscn" id="2_040fc"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_iyylw"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Close BG.tscn" id="4_wg7y3"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 BackGFX.tscn" id="5_vhcxs"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 FrontGFX.tscn" id="6_66kd1"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Ground.tscn" id="7_6ir8u"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 BPlaftorms.tscn" id="8_mdh8h"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Cam Edge.tscn" id="9_bhcoa"]
+
+[node name="9-02" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_yoc36")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="1-FarBG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_040fc")]
+script = ExtResource("3_iyylw")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/1-FarBG.xml"
+linkage = "1-FarBG"
+linkage_export = true
+regenerate = false
+
+[node name="CloseBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_yoc36")
+game_resolution = Vector2(450, 300)
+move_scale = 0.5
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="9-02 Close BG" type="Node2D" parent="Background/CloseBackground" instance=ExtResource("4_wg7y3")]
+script = ExtResource("3_iyylw")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Close BG.xml"
+linkage = "9-02CloseBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_vhcxs")]
+script = ExtResource("3_iyylw")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 BackGFX.xml"
+linkage = "9-02BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("6_66kd1")]
+script = ExtResource("3_iyylw")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 FrontGFX.xml"
+linkage = "9-02FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("7_6ir8u")]
+script = ExtResource("3_iyylw")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Ground.xml"
+linkage = "9-02Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("8_mdh8h")]
+script = ExtResource("3_iyylw")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 BPlaftorms.xml"
+linkage = "9-02BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("9_bhcoa")]
+script = ExtResource("3_iyylw")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-02 Tropical Beach/9-02 Cam Edge.xml"
+linkage = "9-02CamEdge"
+linkage_export = true
+regenerate = false

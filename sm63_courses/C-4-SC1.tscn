@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_0spxg"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Castle Colored Far BG.tscn" id="2_2jypf"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_dt41r"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Castle Colored BG.tscn" id="4_qesow"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/C-4-SC1BackGFX.tscn" id="5_e22q6"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/C-4-SC1FrontGFX.tscn" id="6_j848n"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/C-4-SC1Platforms.tscn" id="7_6u7tm"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/C-4-SC1CamEdge.tscn" id="8_sfx7h"]
+
+[node name="C-4-SC1" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_0spxg")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Castle Colored Far BG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_2jypf")]
+script = ExtResource("3_dt41r")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Castle Colored Far BG.xml"
+linkage = "CastleColoredFarBG"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_0spxg")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Castle Colored BG" type="Node2D" parent="Background/Background" instance=ExtResource("4_qesow")]
+script = ExtResource("3_dt41r")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Castle Colored BG.xml"
+linkage = "CastleColoredBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_e22q6")]
+script = ExtResource("3_dt41r")
+source_xml = "res://sm63/LIBRARY/C-4-SC1BackGFX.xml"
+linkage = "C-4-SC1BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("6_j848n")]
+script = ExtResource("3_dt41r")
+source_xml = "res://sm63/LIBRARY/C-4-SC1FrontGFX.xml"
+linkage = "C-4-SC1FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("7_6u7tm")]
+script = ExtResource("3_dt41r")
+source_xml = "res://sm63/LIBRARY/C-4-SC1Platforms.xml"
+linkage = "C-4-SC1Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("8_sfx7h")]
+script = ExtResource("3_dt41r")
+source_xml = "res://sm63/LIBRARY/C-4-SC1CamEdge.xml"
+linkage = "C-4-SC1CamEdge"
+linkage_export = true
+regenerate = false

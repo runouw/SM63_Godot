@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/LevelDesignerBackGFX.tscn" id="1_l7hem"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="2_6icmd"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/LevelDesingerFrontGFX.tscn" id="3_1fiih"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/LevelDesignerPlatforms.tscn" id="4_mlamw"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/LevelDesignerBPlatforms.tscn" id="5_lplh4"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/LevelDesignerCamEdge.tscn" id="6_jaya7"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/LevelDesignerEdge.tscn" id="7_qs2p4"]
+
+[node name="LevelDesigner" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("1_l7hem")]
+script = ExtResource("2_6icmd")
+source_xml = "res://sm63/LIBRARY/LevelDesignerBackGFX.xml"
+linkage = "LevelDesignerBackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("3_1fiih")]
+script = ExtResource("2_6icmd")
+source_xml = "res://sm63/LIBRARY/LevelDesingerFrontGFX.xml"
+linkage = "LevelDesignerFrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("4_mlamw")]
+script = ExtResource("2_6icmd")
+source_xml = "res://sm63/LIBRARY/LevelDesignerPlatforms.xml"
+linkage = "LevelDesignerPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("5_lplh4")]
+script = ExtResource("2_6icmd")
+source_xml = "res://sm63/LIBRARY/LevelDesignerBPlatforms.xml"
+linkage = "LevelDesignerBPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("6_jaya7")]
+script = ExtResource("2_6icmd")
+source_xml = "res://sm63/LIBRARY/LevelDesignerCamEdge.xml"
+linkage = "LevelDesignerCamEdge"
+linkage_export = true
+regenerate = false
+
+[node name="Edge" type="Node2D" parent="Collisions" instance=ExtResource("7_qs2p4")]
+script = ExtResource("2_6icmd")
+source_xml = "res://sm63/LIBRARY/LevelDesignerEdge.xml"
+linkage = "LevelDesignerEdge"
+linkage_export = true
+regenerate = false

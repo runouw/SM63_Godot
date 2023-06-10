@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-3-2 Back GFX.tscn" id="1_dunyl"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="2_x0l7j"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-3-2 Ground.tscn" id="3_pt5ev"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-3-2 Cam Edge.tscn" id="4_5ag15"]
+
+[node name="C-3-2" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("1_dunyl")]
+script = ExtResource("2_x0l7j")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-3-2 Back GFX.xml"
+linkage = "C-3-2BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("3_pt5ev")]
+script = ExtResource("2_x0l7j")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-3-2 Ground.xml"
+linkage = "C-3-2Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("4_5ag15")]
+script = ExtResource("2_x0l7j")
+source_xml = "res://sm63/LIBRARY/Course Clips/C - Castle/Castle Inside/Section A/C-3-2 Cam Edge.xml"
+linkage = "C-3-2CamEdge"
+linkage_export = true
+regenerate = false

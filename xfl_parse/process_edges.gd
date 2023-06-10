@@ -76,16 +76,13 @@ func _parse_hex_number():
 	var allowed = "0123456789ABCDEF-."
 	
 	var buf = ""
-	var buf_raw = ""
 	while _edges[at] in allowed:
 		if _edges[at] == ".":
 			while buf.length() < 6:
 				buf = "0" + buf
-			buf_raw += "."
 			at += 1
 		
 		buf += _edges[at]
-		buf_raw += _edges[at]
 		
 		at += 1
 		if at >= end:
@@ -94,13 +91,13 @@ func _parse_hex_number():
 	while buf.length() < 8:
 		buf += "0"
 	
-	# looks like this is 64 bit int...
-	var bits: int = buf.hex_to_int()
+	var bits: int = buf.hex_to_int() & 0xFFFF_FFFF
 	
-	# weird way to force two's compliment to work...
-	if (bits & 0x80000000) == 0x80000000: # bit 31 means it's actually a negative number
-		bits = (~bits) & 0xFFFFFFFF
-		bits = -bits + 1
+	# Looks like Godot int is 64 and not 32.
+	# We have to be careful to handle 32-bit negative
+	if (bits & 0x8000_0000) == 0x8000_0000: # highest bit in 32-bit
+		# pad 1s
+		bits = bits | (~0xFFFF_FFFF)
 	
 	return float(bits) / 256.0
 

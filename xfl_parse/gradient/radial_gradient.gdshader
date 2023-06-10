@@ -3,7 +3,7 @@ render_mode blend_mix;
 
 uniform mat4 transformMatrix;
 uniform float focalPointRatio;
-uniform float radius = 820.0;
+uniform float radius = 824.0;
 uniform sampler2D gradientTexture: repeat_enable, filter_linear;
 
 uniform bool spreadMethodReflect = false;

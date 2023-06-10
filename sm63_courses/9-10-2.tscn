@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_perrd"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/3-Far BG.tscn" id="2_i2bri"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_1fkjl"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/3-BG.tscn" id="4_lm1jm"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Back GFX.tscn" id="5_ieohh"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Front GFX.tscn" id="6_xuwlp"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Ground.tscn" id="7_15cuf"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 BPlatforms.tscn" id="8_hcvs1"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Cam Edge.tscn" id="9_j135a"]
+
+[node name="9-10-2" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_perrd")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="3-Far BG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_i2bri")]
+script = ExtResource("3_1fkjl")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/3-Far BG.xml"
+linkage = "3-farBG"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_perrd")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="3-BG" type="Node2D" parent="Background/Background" instance=ExtResource("4_lm1jm")]
+script = ExtResource("3_1fkjl")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/3-BG.xml"
+linkage = "3-BG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_ieohh")]
+script = ExtResource("3_1fkjl")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Back GFX.xml"
+linkage = "9-10-2BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("6_xuwlp")]
+script = ExtResource("3_1fkjl")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Front GFX.xml"
+linkage = "9-10-2FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("7_15cuf")]
+script = ExtResource("3_1fkjl")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Ground.xml"
+linkage = "9-10-2Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("8_hcvs1")]
+script = ExtResource("3_1fkjl")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 BPlatforms.xml"
+linkage = "9-10-2BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("9_j135a")]
+script = ExtResource("3_1fkjl")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-10 Endless Maze/9-10-2 Cam Edge.xml"
+linkage = "9-10-2CamEdge"
+linkage_export = true
+regenerate = false

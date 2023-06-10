@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://team63/parallax/r_parallax.gd" id="1_o5g0m"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/1-FarBG.tscn" id="2_1mpww"]
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="3_fa5wp"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.tscn" id="4_iiqyj"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07BackGFX.tscn" id="5_8rf64"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07FrontGFX.tscn" id="6_brlta"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07Platforms.tscn" id="7_tou3c"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07BPlatforms.tscn" id="8_swntb"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07CamEdge.tscn" id="9_kfkv2"]
+[ext_resource type="PackedScene" path="res://sm63_converted/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Edge.tscn" id="10_d8ter"]
+
+[node name="9-07" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="FarBackground" type="Node2D" parent="Background"]
+script = ExtResource("1_o5g0m")
+game_resolution = Vector2(450, 300)
+move_scale = 0.0
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="1-FarBG" type="Node2D" parent="Background/FarBackground" instance=ExtResource("2_1mpww")]
+script = ExtResource("3_fa5wp")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/1-FarBG.xml"
+linkage = "1-FarBG"
+linkage_export = true
+regenerate = false
+
+[node name="Background" type="Node2D" parent="Background"]
+script = ExtResource("1_o5g0m")
+game_resolution = Vector2(450, 300)
+move_scale = 0.1
+start_scale = 1.0
+zoom_strength = 0.0
+
+[node name="Hills+Ground Background 1 Part" type="Node2D" parent="Background/Background" instance=ExtResource("4_iiqyj")]
+script = ExtResource("3_fa5wp")
+source_xml = "res://sm63/LIBRARY/Course Items-PL/Backgrounds/Hills+Ground Background 1 Part.xml"
+linkage = "GrassandHillsBG"
+linkage_export = true
+regenerate = false
+
+[node name="BackGFX" type="Node2D" parent="." instance=ExtResource("5_8rf64")]
+script = ExtResource("3_fa5wp")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07BackGFX.xml"
+linkage = "9-07BackGFX"
+linkage_export = true
+regenerate = false
+
+[node name="FrontGFX" type="Node2D" parent="." instance=ExtResource("6_brlta")]
+script = ExtResource("3_fa5wp")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07FrontGFX.xml"
+linkage = "9-07FrontGFX"
+linkage_export = true
+regenerate = false
+
+[node name="Collisions" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+
+[node name="Platforms" type="Node2D" parent="Collisions" instance=ExtResource("7_tou3c")]
+script = ExtResource("3_fa5wp")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07Platforms.xml"
+linkage = "9-07Platforms"
+linkage_export = true
+regenerate = false
+
+[node name="BPlatforms" type="Node2D" parent="Collisions" instance=ExtResource("8_swntb")]
+script = ExtResource("3_fa5wp")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07BPlatforms.xml"
+linkage = "9-07BPlatforms"
+linkage_export = true
+regenerate = false
+
+[node name="CamEdge" type="Node2D" parent="Collisions" instance=ExtResource("9_kfkv2")]
+script = ExtResource("3_fa5wp")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07CamEdge.xml"
+linkage = "9-07CamEdge"
+linkage_export = true
+regenerate = false
+
+[node name="Edge" type="Node2D" parent="Collisions" instance=ExtResource("10_d8ter")]
+script = ExtResource("3_fa5wp")
+source_xml = "res://sm63/LIBRARY/Course Clips/9 - Secret Stars/9-07 Kamek (Garden Battle)/9-07 Edge.xml"
+linkage = "9-07Edge"
+linkage_export = true
+regenerate = false
