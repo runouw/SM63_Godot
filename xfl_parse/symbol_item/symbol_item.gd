@@ -9,5 +9,5 @@ extends Node2D
 	set(to):
 		if to:
 			XFLUtils.convert_xfl_file(source_xml)
-			print("Renerated!")
+			print("Regenerated!")
 		regenerate = false

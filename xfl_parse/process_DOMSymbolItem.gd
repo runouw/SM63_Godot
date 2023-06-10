@@ -211,11 +211,13 @@ func _matrix_to_Transform2D_Fills(matrix_node: XMLNode) -> Transform2D:
 			)
 		
 		var sc = mat.get_scale() / 20.0
+		var skew = mat.get_skew()
 		
 		var r = Transform2D()
 		r = r.translated(-mat.get_origin() * sc)
 		r = r.scaled(Vector2(1.0 / sc.x, 1.0 / sc.y))
 		r = r.rotated(-mat.get_rotation())
+		r = r * Transform2D(0, Vector2.ONE, skew, Vector2.ZERO)
 		
 		return r
 	
@@ -317,11 +319,16 @@ func _apply_fillStyle(fills_node: XMLNode, target: Polygon2D):
 		target.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 		target.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		
-		var transform := _matrix_to_Transform2D_Fills(bitmap_fill.first_child_with_tag("matrix"))
+		var transform := _matrix_to_Transform2D_Instances(bitmap_fill.first_child_with_tag("matrix")).affine_inverse()
 		
-		target.texture_offset = transform.get_origin()
-		target.texture_rotation = transform.get_rotation()
-		target.texture_scale = transform.get_scale()
+		var uvs := PackedVector2Array()
+		for p in target.polygon:
+			uvs.append((transform * p) * 20.0)
+		target.uv = uvs
+		
+		#target.texture_offset = transform.get_origin()
+		#target.texture_rotation = transform.get_rotation()
+		#target.texture_scale = transform.get_scale()
 	
 	if solid_fill:
 		target.color = Color.from_string(solid_fill.attributes.get("color", "#000000"), Color.WHITE)
@@ -620,8 +627,8 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 			var polygon_node = Polygon2D.new()
 			
 			var fillStyle = generated_polygon.fillStyle - 1
-			_apply_fillStyle(fillStyles[fillStyle], polygon_node)
 			polygon_node.polygon = generated_polygon.points
+			_apply_fillStyle(fillStyles[fillStyle], polygon_node)
 			
 			shape_node.add_child(polygon_node)
 			polygon_node.owner = root_node
@@ -629,8 +636,6 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 		# group by fillStyle
 		for fillStyle in range(fillStyles.size()):
 			var polygon_node = Polygon2D.new()
-			
-			_apply_fillStyle(fillStyles[fillStyle], polygon_node)
 			
 			shape_node.add_child(polygon_node)
 			polygon_node.owner = root_node
@@ -652,6 +657,7 @@ func _create_polygon_from_edges(raw_edges: Array[DOMShape_Edge], shape_node: Nod
 			
 			polygon_node.polygon = polygon_verts
 			polygon_node.polygons = polygon_indices
+			_apply_fillStyle(fillStyles[fillStyle], polygon_node)
 	
 	# draw strokes
 	for strokeStyle_index in range(strokeStyles.size()):
