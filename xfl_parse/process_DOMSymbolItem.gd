@@ -330,6 +330,8 @@ func _apply_fillStyle(fills_node: XMLNode, target: Polygon2D):
 		
 		target.entries_color = entries_color
 		target.entries_ratio = entries_ratio
+		target.spread_method_reflect = radial_gradient.attributes.get("spreadMethod", "") == "reflect"
+		target.spread_method_repeat = radial_gradient.attributes.get("spreadMethod", "") == "repeat"
 	
 	if linear_gradient:
 		target.set_script(load("res://xfl_parse/gradient/linear_gradient.gd"))
@@ -350,6 +352,7 @@ func _apply_fillStyle(fills_node: XMLNode, target: Polygon2D):
 		target.entries_color = entries_color
 		target.entries_ratio = entries_ratio
 		target.spread_method_reflect = linear_gradient.attributes.get("spreadMethod", "") == "reflect"
+		target.spread_method_repeat = linear_gradient.attributes.get("spreadMethod", "") == "repeat"
 
 
 func _apply_lineStyle(fills_node: XMLNode, target: Line2D):

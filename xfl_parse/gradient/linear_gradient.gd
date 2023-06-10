@@ -6,6 +6,7 @@ extends Polygon2D
 @export var entries_ratio: PackedFloat32Array
 
 @export var spread_method_reflect: bool = false
+@export var spread_method_repeat: bool = false
 
 func _ready():
 	material = load("res://xfl_parse/gradient/linear_gradient_material.tres").duplicate()
@@ -22,3 +23,4 @@ func _ready():
 	material.set_shader_parameter("gradientTexture", gradientTexture)
 	
 	material.set_shader_parameter("spreadMethodReflect", spread_method_reflect)
+	material.set_shader_parameter("spreadMethodRepeat", spread_method_repeat)

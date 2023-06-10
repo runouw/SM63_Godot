@@ -5,6 +5,9 @@ extends Polygon2D
 @export var entries_color: PackedColorArray
 @export var entries_ratio: PackedFloat32Array
 
+@export var spread_method_reflect: bool = false
+@export var spread_method_repeat: bool = false
+
 # The value range is from -1.0 to 1.0, where -1.0 means the focal point is close to the left border of the radial
 # gradient circle, 0.0 means that the focal point is in the center of the radial gradient circle, and 1.0 means that
 # the focal point is close to the right border of the radial gradient circle.
@@ -24,3 +27,6 @@ func _ready():
 
 	material.set_shader_parameter("gradientTexture", gradientTexture)
 	material.set_shader_parameter("focalPointRatio", focal_point_ratio)
+	
+	material.set_shader_parameter("spreadMethodReflect", spread_method_reflect)
+	material.set_shader_parameter("spreadMethodRepeat", spread_method_repeat)

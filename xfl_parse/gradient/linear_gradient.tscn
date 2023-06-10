@@ -3,23 +3,24 @@
 [ext_resource type="Shader" path="res://xfl_parse/gradient/linear_gradient.gdshader" id="1_eg3uu"]
 [ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_vbcgb"]
 
-[sub_resource type="Gradient" id="Gradient_2xipk"]
+[sub_resource type="Gradient" id="Gradient_78d2n"]
 offsets = PackedFloat32Array()
 colors = PackedColorArray()
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_jtjed"]
-gradient = SubResource("Gradient_2xipk")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h31nj"]
+gradient = SubResource("Gradient_78d2n")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kh2qn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_au8y7"]
 resource_local_to_scene = true
 shader = ExtResource("1_eg3uu")
 shader_parameter/transformMatrix = Transform2D(1, 0, 0, 1, 0, 0)
 shader_parameter/spreadMethodReflect = false
-shader_parameter/gradientTexture = SubResource("GradientTexture1D_jtjed")
+shader_parameter/spreadMethodRepeat = false
+shader_parameter/gradientTexture = SubResource("GradientTexture1D_h31nj")
 
 [node name="LinearGradient" type="Node2D"]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_kh2qn")
+material = SubResource("ShaderMaterial_au8y7")
 polygon = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
 script = ExtResource("2_vbcgb")

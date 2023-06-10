@@ -1,0 +1,149 @@
+[gd_scene load_steps=15 format=3 uid="uid://c6fxb4l7ioxi0"]
+
+[ext_resource type="Script" path="res://xfl_parse/symbol_item/symbol_item.gd" id="1_71trh"]
+[ext_resource type="Shader" path="res://xfl_parse/gradient/linear_gradient.gdshader" id="2_08pjf"]
+[ext_resource type="Script" path="res://xfl_parse/gradient/linear_gradient.gd" id="2_ofjhr"]
+
+[sub_resource type="Animation" id="Animation_mb0s6"]
+length = 0.1
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Layer_1/Frame 0:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Layer_1/Frame 1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Layer_1/Frame 2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qnomy"]
+_data = {
+"Default": SubResource("Animation_mb0s6")
+}
+
+[sub_resource type="Gradient" id="Gradient_ayxsd"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3bhor"]
+gradient = SubResource("Gradient_ayxsd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0fgi6"]
+resource_local_to_scene = true
+shader = ExtResource("2_08pjf")
+shader_parameter/transformMatrix = Transform2D(16.3881, 0, 0, 16.3881, -819.405, -818.585)
+shader_parameter/spreadMethodReflect = false
+shader_parameter/spreadMethodRepeat = false
+shader_parameter/gradientTexture = SubResource("GradientTexture1D_3bhor")
+
+[sub_resource type="Gradient" id="Gradient_55mvp"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k7umy"]
+gradient = SubResource("Gradient_55mvp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nkwl8"]
+resource_local_to_scene = true
+shader = ExtResource("2_08pjf")
+shader_parameter/transformMatrix = Transform2D(16.3881, 0, 0, 16.3881, -819.405, -818.585)
+shader_parameter/spreadMethodReflect = true
+shader_parameter/spreadMethodRepeat = false
+shader_parameter/gradientTexture = SubResource("GradientTexture1D_k7umy")
+
+[sub_resource type="Gradient" id="Gradient_rtmmw"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_elsi0"]
+gradient = SubResource("Gradient_rtmmw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ty2dy"]
+resource_local_to_scene = true
+shader = ExtResource("2_08pjf")
+shader_parameter/transformMatrix = Transform2D(16.3881, 0, 0, 16.3881, -819.405, -818.585)
+shader_parameter/spreadMethodReflect = false
+shader_parameter/spreadMethodRepeat = false
+shader_parameter/gradientTexture = SubResource("GradientTexture1D_elsi0")
+
+[node name="Gradient" type="Node2D"]
+script = ExtResource("1_71trh")
+source_xml = "res://tests/special_cases/xml/Gradient.xml"
+
+[node name="Timeline" type="AnimationPlayer" parent="."]
+libraries = {
+"Timeline": SubResource("AnimationLibrary_qnomy")
+}
+
+[node name="Layer_1" type="Node2D" parent="."]
+
+[node name="Frame 0" type="Node2D" parent="Layer_1"]
+
+[node name="Shape" type="Node2D" parent="Layer_1/Frame 0"]
+
+[node name="@@192238" type="Polygon2D" parent="Layer_1/Frame 0/Shape"]
+material = SubResource("ShaderMaterial_0fgi6")
+polygon = PackedVector2Array(0, -0.05, 301.95, -0.05, 301.95, 99.95, 0, 99.95)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+script = ExtResource("2_ofjhr")
+matrix = Transform2D(0.0610199, 0, 0, 0.0610199, 50, 49.95)
+entries_color = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+entries_ratio = PackedFloat32Array(0, 1)
+spread_method_repeat = null
+
+[node name="Frame 1" type="Node2D" parent="Layer_1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer_1/Frame 1"]
+
+[node name="@@192239" type="Polygon2D" parent="Layer_1/Frame 1/Shape"]
+material = SubResource("ShaderMaterial_nkwl8")
+polygon = PackedVector2Array(0, -0.05, 301.95, -0.05, 301.95, 99.95, 0, 99.95)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+script = ExtResource("2_ofjhr")
+matrix = Transform2D(0.0610199, 0, 0, 0.0610199, 50, 49.95)
+entries_color = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+entries_ratio = PackedFloat32Array(0, 1)
+spread_method_reflect = true
+spread_method_repeat = null
+
+[node name="Frame 2" type="Node2D" parent="Layer_1"]
+visible = false
+
+[node name="Shape" type="Node2D" parent="Layer_1/Frame 2"]
+
+[node name="@@192240" type="Polygon2D" parent="Layer_1/Frame 2/Shape"]
+material = SubResource("ShaderMaterial_ty2dy")
+polygon = PackedVector2Array(0, -0.05, 301.95, -0.05, 301.95, 99.95, 0, 99.95)
+polygons = [PackedInt32Array(0, 1, 2, 3)]
+script = ExtResource("2_ofjhr")
+matrix = Transform2D(0.0610199, 0, 0, 0.0610199, 50, 49.95)
+entries_color = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+entries_ratio = PackedFloat32Array(0, 1)
+spread_method_repeat = null
